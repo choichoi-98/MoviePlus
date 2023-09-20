@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.hta.security.CustomAccessDeniedHandler;
-import com.hta.security.CustomUserDetailsService;
+//import com.hta.security.CustomUserDetailsService;
 import com.hta.security.LoginFailHandler;
 import com.hta.security.LoginSuccessHandler;
 
@@ -69,10 +69,10 @@ public class SecurityConfig {
 		return new LoginSuccessHandler(); // 패키지 com.naver.securiity에 존재하는 모든 클래스 파일에 @Service
 	}
 
-	@Bean
-	public UserDetailsService customUserService() {
-		return new CustomUserDetailsService();
-	}
+//	@Bean
+//	public UserDetailsService customUserService() {
+//		return new CustomUserDetailsService();
+//	}
 
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
