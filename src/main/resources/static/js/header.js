@@ -65,7 +65,23 @@ $(document).ready(function(){
         my_megabox_chk = !my_megabox_chk;
     })
 
-    
+    $('#header-login-btn').click(function() {
+        $('#layer_login_select').addClass('on');
+        $('.bg-modal').css('opacity', '1');
+    })
+
+    $('.btn-modal-close').click(function() {
+        $('#layer_login_select').removeClass('on');
+        $('.bg-modal').css('opacity', '0');
+    })
+
+
+    $('.gnb-depth1 > li').hover(function() {
+        $('.gnb-depth1 > li').removeClass('on');
+        $(this).addClass('on');
+        $('#gnb').addClass('on');
+    })
+
 
 
 });

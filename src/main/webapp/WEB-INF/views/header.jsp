@@ -6,7 +6,80 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<style>
+ #gnb>ul>li>a:after {
+ 	background: #792828;
+ 	}
+ 	
+ .modal-layer .wrap .layer-header{
+ 	background: #792828; 
+ }
+</style>
 
+
+<div class="bg-modal" style="opacity: 0;"></div>
+<section id="layer_login_select" class="modal-layer" style="z-index: 502;">
+	<div class="wrap" style="width: 850px; height: 484px; margin-left: -425px; margin-top: -242px;">
+		<header class="layer-header"header.js>
+			<h3 class="tit">로그인</h3>
+		</header>
+
+		<div class="layer-con" style="height: 439px;">
+			<!-- tab-cont-wrap -->
+			<div class="tab-cont-wrap">
+				<!-- tab 회원 로그인 -->
+				<div id="login_tab_01" class="tab-cont on">
+
+					<div class="login-member col-2 pt00">
+						<!-- col-wrap -->
+						<div class="col-wrap">
+							<div class="col left">
+								<div class="login-input-area">
+									<input autocomplete="off" id="ibxLoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
+									<input autocomplete="off" id="ibxLoginPwd" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
+									<div class="alert"></div>
+
+									<!-- chk-util -->
+									<div class="chk-util">
+										<div class="left">
+											<input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장<!--아이디 저장--></label>
+										</div>
+
+									</div>
+									<!--// chk-util -->
+
+									<button id="btnLogin" type="button" class="button purple large btn-login" disabled="disabled">로그인<!--로그인--></button>
+
+									<div class="link">
+										<a href="#" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a>
+										<a href="#" title="회원가입 선택">회원가입<!--회원가입--></a>
+									</div>
+
+									<div class="sns-login">
+										<!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
+										<a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="../../../static/pc/images/member/ico-naver.png" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
+										<a href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="../../../static/pc/images/member/ico-kakao.png" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
+										<a href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="../../../static/pc/images/member/ico-google.png" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
+									</div>
+								</div>
+							</div>
+							<div class="col right">
+									<div class="login-ad" id="" style="background-color: rgb(111, 111, 111);width: 380px;height: 380px;"></div>
+							</div>
+						</div>
+						<!--// col-wrap -->
+					</div>
+				</div>
+				<!--// tab 회원 로그인 -->
+
+			</div>
+			<!--// tab-cont-wrap -->
+		</div>
+		
+		
+		<button type="button" class="btn-modal-close">레이어 닫기<!--레이어 닫기--></button>
+	</div>
+</section>
 
 
 <head>
@@ -21,7 +94,7 @@
 			
 					<div class="right-link">
 						<div class="before" style="">
-							<a href="#" title="로그인">로그인</a>
+							<a id="header-login-btn" href="#" title="로그인">로그인</a>
 							<a href="#" title="회원가입">회원가입</a>
 						</div>
 			
@@ -42,9 +115,9 @@
 				</div>
 			
 			 
-				<nav id="gnb">
+				<nav id="gnb" style="background : #792828">
 					<ul class="gnb-depth1">
-						<li><a href="#" class="gnb-txt-movie" title="영화">영화</a>
+						<li><a href="#" class="gnb-txt-movie" title="영화" >영화</a>
 							<div class="gnb-depth2">
 								<ul>
 									<li><a href="#" title="전체영화">전체영화</a></li>
