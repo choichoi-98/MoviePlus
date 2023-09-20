@@ -68,11 +68,13 @@ $(document).ready(function(){
     $('#header-login-btn').click(function() {
         $('#layer_login_select').addClass('on');
         $('.bg-modal').css('opacity', '1');
+        $('body').addClass('no-scroll');
     })
 
     $('.btn-modal-close').click(function() {
         $('#layer_login_select').removeClass('on');
         $('.bg-modal').css('opacity', '0');
+        $('body').removeClass('no-scroll');
     })
 
 
@@ -81,6 +83,13 @@ $(document).ready(function(){
         $(this).addClass('on');
         $('#gnb').addClass('on');
     })
+    
+
+    $('#gnb').mouseleave(function () { 
+        $('.gnb-depth1 > li').removeClass('on');
+        $('#gnb').removeClass('on');
+    });
+    
 
 
 

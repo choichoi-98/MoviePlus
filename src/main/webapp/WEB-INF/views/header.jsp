@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon" href="https://www.megabox.co.kr/static/pc/images/favicon.ico">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
@@ -9,11 +10,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <style>
  #gnb>ul>li>a:after {
- 	background: #792828;
- 	}
- 	
+  	background: #792828;
+ }
+ 
  .modal-layer .wrap .layer-header{
  	background: #792828; 
+ }
+ 
+ #gnb>ul>li:nth-child(1) .gnb-depth2 ul {
+ 	padding-left: 115px;
+ }
+ 
+ #gnb>ul>li:nth-child(2) .gnb-depth2 ul {
+ 	padding-left: 206px;
  }
  
  #gnb>ul>li:nth-child(3) .gnb-depth2 ul {
@@ -70,9 +79,9 @@
 
 									<div class="sns-login">
 										<!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
-										<a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="../../../static/pc/images/member/ico-naver.png" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
-										<a href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="../../../static/pc/images/member/ico-kakao.png" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
-										<a href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="../../../static/pc/images/member/ico-google.png" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
+										<a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
+										<a href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
+										<a href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
 									</div>
 								</div>
 							</div>

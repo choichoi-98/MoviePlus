@@ -23,7 +23,6 @@
 			
 		3. 페이지 대부분이 <div class="container"> ~~~ </div> 긁어오면 전부 가져와져요
 			긁어온뒤에 동적으로 처리하는 부분 정리
-			-> 탭 메뉴들이 대부분 동적 페이지
 			
 			메인페이지는 <div class="container main-container area-ad">
 			
