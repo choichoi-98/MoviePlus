@@ -36,14 +36,7 @@ public class SecurityConfig {
 
 		http.authorizeRequests()
 				.antMatchers("/resources/**/**").permitAll()
-				.antMatchers("/member/login").permitAll()
-				.antMatchers("/member/join").permitAll()
-				.antMatchers("/member/idcheck").permitAll()
-				.antMatchers("/member/joinProcess").permitAll()
-				.antMatchers("/member/list").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/member/update").permitAll()
-				.antMatchers("/member/info").permitAll()
-				.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')");
+				.antMatchers("/**").permitAll();
 
 		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/loginProcess").usernameParameter("id")
 				.passwordParameter("password").successHandler(loginSuccessHandler()).failureHandler(loginFailHandler());
