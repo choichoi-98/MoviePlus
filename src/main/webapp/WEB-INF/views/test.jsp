@@ -21,10 +21,14 @@
 		2. main.css는 메인페이지에서만 사용하는 css 파일
 		   나머지 페이지는 헤더에 포함된 min.css만 사용해요
 			
-		3. 페이지 대부분이 <div class="container"> ~~~ </div> 긁어오면 전부 가져와져요
+		3. 페이지 대부분이 <div class="container"> ~~~ </div>부분 긁어오면 전부 가져와져요 
 			긁어온뒤에 동적으로 처리하는 부분 정리
 			
+			container가 없으면 contents
 			메인페이지는 <div class="container main-container area-ad">
+			
+		 	다 없으면 상위 div중에서 찾아보세여
+			
 			
 	 -->
 	
