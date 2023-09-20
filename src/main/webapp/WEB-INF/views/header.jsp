@@ -15,6 +15,18 @@
  .modal-layer .wrap .layer-header{
  	background: #792828; 
  }
+ 
+ #gnb>ul>li:nth-child(3) .gnb-depth2 ul {
+ 	padding-left: 333px;
+ }
+ 
+ #gnb>ul>li:nth-child(5) .gnb-depth2 ul {
+ 	padding-left: 816px;
+ }
+ 
+ #gnb>ul>li:nth-child(6) .gnb-depth2 ul {
+ 	padding-left: 888px;
+ }
 </style>
 
 
@@ -150,7 +162,13 @@
 								</ul>
 							</div>
 						</li>
-						<li><a href="#" class="gnb-txt-store" title="스토어">스토어</a></li>
+						<li><a href="#" class="gnb-txt-store" title="스토어">스토어</a>
+							<div class="gnb-depth2">
+								<ul>
+									<li><a href="#" title="스토어">스토어</a></li>
+								</ul>
+							</div>
+						</li>
 						<li><a href="#" class="gnb-txt-benefit" title="혜택">혜택</a>
 							<div class="gnb-depth2">
 								<ul>
