@@ -2305,10 +2305,10 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 </div>
-<img src="./img-door-left.png" alt="좌측 출입구"
+<img src="${pageContext.request.contextPath}/resources/image/booking/img-door-left.png" alt="좌측 출입구"
 	style="position: absolute; left: 131px; top: 30px; width: 16px; height: 16px;"
 	class="mCS_img_loaded">
-<img src="./img-door-top.png" alt="상단측좌측 출입구"
+<img src="${pageContext.request.contextPath}/resources/image/booking/img-door-top.png" alt="상단측좌측 출입구"
 	style="position: absolute; left: 191px; top: 330px; width: 16px; height: 16px;"
 	class="mCS_img_loaded">
 </div>

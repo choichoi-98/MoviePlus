@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookingController {
 	
 	@GetMapping("/")
-	public String booking() {
+	public String bookingMainView() {
 		return "booking/booking_main";
+	}
+	
+	@GetMapping("/seat")
+	public String bookingSeatView() {
+		return "booking/booking_seat";
 	}
 	
 

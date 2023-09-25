@@ -7,6 +7,7 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/booking.js"></script>
 <title></title>
 
 </head>
@@ -63,11 +64,7 @@
 										<div class="count">
 											<button type="button" class="down" title="성인 좌석 선택 감소">-</button>
 											<div class="number">
-												<button type="button" class="now" title="성인 현재 좌석 선택 수"
-													ticketgrpcd="TKA">0</button>
-												<ul class="num-choice">
-													<li><button type="button" class="btn on">0</button></li>
-												</ul>
+												<button type="button" class="now" title="성인 현재 좌석 선택 수">0</button>
 											</div>
 											<button type="button" class="up" title="성인 좌석 선택 증가">+</button>
 										</div>
@@ -77,11 +74,7 @@
 										<div class="count">
 											<button type="button" class="down" title="청소년 좌석 선택 감소">-</button>
 											<div class="number">
-												<button type="button" class="now" title="청소년 현재 좌석 선택 수"
-													ticketgrpcd="TKY">0</button>
-												<ul class="num-choice">
-													<li><button type="button" class="btn on">0</button></li>
-												</ul>
+												<button type="button" class="now" title="청소년 현재 좌석 선택 수">0</button>
 											</div>
 											<button type="button" class="up" title="청소년 좌석 선택 증가">+</button>
 										</div>
@@ -91,11 +84,7 @@
 										<div class="count">
 											<button type="button" class="down" title="우대 좌석 선택 감소">-</button>
 											<div class="number">
-												<button type="button" class="now" title="우대 현재 좌석 선택 수"
-													ticketgrpcd="TKS">0</button>
-												<ul class="num-choice">
-													<li><button type="button" class="btn on">0</button></li>
-												</ul>
+												<button type="button" class="now" title="우대 현재 좌석 선택 수">0</button>
 											</div>
 											<button type="button" class="up" title="우대 좌석 선택 증가">+</button>
 										</div>
@@ -115,10 +104,10 @@
 												style="position: relative; top: 0px; left: 0px; height: 350px;"
 												dir="ltr">
 												<div id="seatLayout" style="width: 100%; height: 350px;">
-													<img src="./img-theater-screen.png" alt="screen"
+													<img src="${pageContext.request.contextPath}/resources/image/booking/img-theater-screen.png" alt="screen"
 														style="position: absolute; left: 62px; top: 10px;"
 														class="mCS_img_loaded">
-													<jsp:include page="/WEB-INF/views/seats/seat-1.jsp" />
+													<jsp:include page="/WEB-INF/views/seats/seat-3.jsp" />
 													<!-- 좌석 인클루드, 1-3 순 크기 -->
 												</div>
 												<div id="mCSB_1_scrollbar_vertical"
@@ -178,8 +167,8 @@
 											</ul>
 										</div>
 										<p class="poster">
-											<img src="./PEbT2IGu2i6X3Q4UyYUU6hyMpHkcr2O5_150.jpg"
-												onerror="noImg(this);" alt="천박사 퇴마 연구소: 설경의 비밀">
+											<img src=""
+												alt="천박사 퇴마 연구소: 설경의 비밀">
 										</p>
 									</div>
 									<div class="choice-seat-area">
