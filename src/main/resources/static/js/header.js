@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var option;
+
     var search_btn_chk = true;
     var layer_sitemap_chk = true;
     var my_megabox_chk = true;
@@ -15,7 +15,12 @@ $(document).ready(function(){
         $('#header-search-btn').removeClass('target on');
         $('#header-sitemap-btn').removeClass('target on');
         $('#header-my-megabox-btn').removeClass('target on');
+    }
 
+    function openLoginModal() {
+        $('#layer_login_select').addClass('on');
+        $('.bg-modal').css('opacity', '1');
+        $('body').addClass('no-scroll');
     }
 
     $('#header-search-btn').click(function() {
@@ -66,13 +71,16 @@ $(document).ready(function(){
     })
 
     $('#header-login-btn').click(function() {
-        $('#layer_login_select').addClass('on');
-        $('.bg-modal').css('opacity', '1');
-        $('body').addClass('no-scroll');
+        openLoginModal();
     })
-
+    
+    $('#movelogin').click(function() {
+        openLoginModal();
+    })
+    
+    
     $('.btn-modal-close').click(function() {
-        $('#layer_login_select').removeClass('on');
+        $('.modal-layer').removeClass('on');
         $('.bg-modal').css('opacity', '0');
         $('body').removeClass('no-scroll');
     })
@@ -90,6 +98,27 @@ $(document).ready(function(){
         $('#gnb').removeClass('on');
     });
     
+
+    function login_alert_modal_close(){
+        $('.bg-modal').css('opacity', '0');
+        $('.alert-popup').css('display', 'none');
+        $('body').removeClass('no-scroll');
+    }
+
+    $('.btn-layer-close').click(function() {
+        login_alert_modal_close();
+    })
+
+    $('.lyclose').click(function(){
+        login_alert_modal_close();
+    })
+
+    $('#login-alert-modal-ok').click(function() {
+        login_alert_modal_close();
+        openLoginModal();
+    })
+
+
 
 
 
