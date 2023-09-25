@@ -38,14 +38,21 @@ public class SecurityConfig {
 				.antMatchers("/resources/**/**").permitAll()
 				.antMatchers("/**").permitAll();
 
-		http.formLogin().loginPage("/member/login").loginProcessingUrl("/member/loginProcess").usernameParameter("id")
-				.passwordParameter("password").successHandler(loginSuccessHandler()).failureHandler(loginFailHandler());
+		http.formLogin().loginPage("/member/login")
+						.loginProcessingUrl("/member/loginProcess")
+						.usernameParameter("MEMBER_ID")
+						.passwordParameter("MEMBER_PASS")
+						.successHandler(loginSuccessHandler())
+						.failureHandler(loginFailHandler());
 
-		http.logout().logoutSuccessUrl("/member/login").logoutUrl("/member/logout").invalidateHttpSession(true)
-				.deleteCookies("remember-me", "JSESSION_ID");
+		http.logout().logoutSuccessUrl("/member/login")
+					.logoutUrl("/member/logout")
+					.invalidateHttpSession(true)
+					.deleteCookies("remember-me", "JSESSION_ID");
 
-		http.rememberMe().rememberMeParameter("remember-me").rememberMeCookieName("remember-me")
-				.tokenValiditySeconds(2419200);
+		http.rememberMe().rememberMeParameter("remember-me")
+						.rememberMeCookieName("remember-me")
+						.tokenValiditySeconds(2419200);
 
 		http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 

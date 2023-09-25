@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.MemberMapper">
+	
+	<insert id="insert" parameterType="member">
+		INSERT INTO MEMBER
+		VALUES(<include refid="insert_Member_num" />, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL}, #{MEMBER_PHONENO}, #{MEMBER_BIRTH}, #{MEMBER_AUTH} )
+	</insert>	
+
+	<sql id="insert_Member_num">
+		select nvl(max(MEMBER_NUM),0)+1 from MEMBER
+	</sql>
+
+
+
+
+
+</mapper>
