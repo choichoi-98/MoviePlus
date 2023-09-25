@@ -6,6 +6,10 @@ public interface MemberService {
 	
 	public int insert(Member m);
 	
+	public int isId(String MEMBER_ID, String MEMBER_PASS);
+	
+	public int isId(String MEMBER_ID);
+	
 	
 
 }

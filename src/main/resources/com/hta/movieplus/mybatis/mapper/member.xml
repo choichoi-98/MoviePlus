@@ -8,11 +8,14 @@
 		VALUES(<include refid="insert_Member_num" />, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL}, #{MEMBER_PHONENO}, #{MEMBER_BIRTH}, #{MEMBER_AUTH} )
 	</insert>	
 
-	<sql id="insert_Member_num">
-		select nvl(max(MEMBER_NUM),0)+1 from MEMBER
-	</sql>
+		<sql id="insert_Member_num">
+			select nvl(max(MEMBER_NUM),0)+1 from MEMBER
+		</sql>
 
-
+	<select id="isId" resultType="member" parameterType="String">
+		select *
+		from MEMBER where MEMBER_ID = #{MEMBER_ID}
+	</select>
 
 
 

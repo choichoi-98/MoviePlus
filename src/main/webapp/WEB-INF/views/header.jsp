@@ -101,52 +101,41 @@ button.button.purple {
 						<div class="col-wrap">
 							<div class="col left">
 								<div class="login-input-area">
-									<input autocomplete="off" id="ibxLoginId" maxlength="20"
-										type="text" placeholder="아이디" title="아이디를 입력하세요"
-										class="input-text strTrim">
-									<!--아이디-->
-									<!--아이디를 입력하세요-->
-									<input autocomplete="off" id="ibxLoginPwd" maxlength="20"
-										type="password" placeholder="비밀번호" title="비밀번호를 입력하세요"
-										class="input-text mt15">
-									<!--비밀번호-->
-									<!--비밀번호를 입력하세요-->
-									<div class="alert"></div>
+                                    <form name="loginform" action="${pageContext.request.contextPath}/member/loginProcess" method="post">
+                                        <input autocomplete="off" name="MEMBER_ID" id="ibxLoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
+                                        <input autocomplete="off" name="MEMBER_PASS" id="ibxLoginPwd" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
+                                        <div class="alert"></div>
 
-									<!-- chk-util -->
-									<div class="chk-util">
-										<div class="left">
-											<input id="chkIdSave" type="checkbox"> <label
-												for="chkIdSave">아이디 저장<!--아이디 저장--></label>
-										</div>
+                                        <!-- chk-util -->
+                                        <div class="chk-util">
+                                            <div class="left">
+                                                <input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장<!--아이디 저장--></label>
+                                                <input type="checkbox" name="remember-me"> <label for="chkloginSave">로그인 유지하기<!--로그인 유지하기--></label>
+                                                
+                                            </div>
 
-									</div>
-									<!--// chk-util -->
+                                        </div>
+                                        <!--// chk-util -->
 
-									<button id="btnLogin" type="button"
-										class="button purple large btn-login" disabled="disabled">
-										로그인
-										<!--로그인-->
-									</button>
+                                        <button id="btnLogin" type="button" class="button purple large btn-login" disabled="disabled">로그인<!--로그인--></button>
 
-									<div class="link">
-										<a href="#" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a> <a
-											href="#" title="회원가입 선택">회원가입<!--회원가입--></a>
-									</div>
+                                        <div class="link">
+                                            <a href="#" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a>
+                                            <a href="#" title="회원가입 선택">회원가입<!--회원가입--></a>
+                                        </div>
 
-									<div class="sns-login">
-										<a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-naver.png"
-											alt="네이버"> <!--네이버--> 네이버로 로그인<!--네이버로 로그인--></a> <a
-											href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-kakao.png"
-											alt="카카오톡"> <!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a> <a
-											href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-google.png"
-											alt="구글"> 구글로 로그인<!--페이코로 로그인--></a>
-									</div>
+                                        <div class="sns-login">
+                                            <!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
+                                            <a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
+                                            <a href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
+                                            <a href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
+                                        </div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
+                                    </form>
 								</div>
 							</div>
 							<div class="col right">
-								<div class="login-ad" id=""
-									style="background-color: rgb(111, 111, 111); width: 380px; height: 380px;"></div>
+									<div class="login-ad" id="" style="background-color: rgb(111, 111, 111);width: 380px;height: 380px;"></div>
 							</div>
 						</div>
 						<!--// col-wrap -->
