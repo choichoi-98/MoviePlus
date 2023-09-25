@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 //일별 박스오피스
 @RestController
 public class RestApi {
+	
 
 	@GetMapping("movie")
     public List<Map<String, Object>> getAPI(HttpServletRequest request) {
