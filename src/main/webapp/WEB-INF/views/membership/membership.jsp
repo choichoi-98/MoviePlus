@@ -17,24 +17,22 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="#" title="혜택 메인 페이지로 이동">혜택</a> <a
-						href="#" title="멤버십 안내 페이지로 이동">메가박스 멤버십</a> <a href="#"
-						title="멤버십 안내 페이지로 이동">멤버십 안내</a>
+					<span>Home</span> <a href="#" title="혜택 메인 페이지로 이동">혜택</a> 
+					<a href="#" title="멤버십 안내 페이지로 이동">메가박스 멤버십</a> 
+					<a href="#" title="멤버십 안내 페이지로 이동">멤버십 안내</a>
 				</div>
 			</div>
 		</div>
 		<!-- contents -->
 		<div id="contents">
 			<div class="inner-wrap">
-
-				<!-- ---------------------------------------------------------------- -->
 				<h2 class="tit">메가박스 멤버십</h2>
 				<div class="tab-list">
 					<ul id="membership-tab-ul">
 						<li class="on"><a
-							href="#"
+							href="/movieplus/benefit/membership/"
 							title="멤버십 안내 탭으로 이동">멤버십 안내</a></li>
-						<li><a href="#"
+						<li><a href="/movieplus/benefit/viplounge/"
 							title="VIP LOUNGE 탭으로 이동">VIP LOUNGE</a></li>
 					</ul>
 				</div>

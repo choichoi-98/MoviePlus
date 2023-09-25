@@ -41,7 +41,7 @@
 
 								<div class="theater-list">
 									<ul>
-										<li data-brch-no="1372"><a href="#" title="강남 상세보기">강남</a>
+										<li data-brch-no="1372"><a href="detail" title="강남 상세보기">강남</a>
 
 										</li>
 

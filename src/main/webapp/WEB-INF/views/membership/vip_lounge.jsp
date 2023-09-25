@@ -27,15 +27,17 @@
 		</div>
 
 		<!-- contents -->
-		<div id="contents" class="location-fixed">
+		<div id="contents">
 			<div class="inner-wrap">
 				<h2 class="tit">메가박스 멤버십</h2>
 
-				<div class="tab-list mb40">
-					<ul>
-						<li><a href="#" title="멤버십 안내 탭으로 이동">멤버십 안내</a></li>
-						<li class="on"><a href="#" title="VIP LOUNGE 탭으로 이동">VIP
-								LOUNGE</a></li>
+				<div class="tab-list">
+					<ul id="membership-tab-ul">
+						<li><a
+							href="/movieplus/benefit/membership/"
+							title="멤버십 안내 탭으로 이동">멤버십 안내</a></li>
+						<li class="on"><a href="/movieplus/benefit/viplounge/"
+							title="VIP LOUNGE 탭으로 이동">VIP LOUNGE</a></li>
 					</ul>
 				</div>
 
