@@ -52,7 +52,7 @@ public class RestApi {
                 String prdtStatNm = (String) movie.get("prdtStatNm");
                 String genreAlt = (String) movie.get("genreAlt");
                 if(!"성인물(에로)".equals(genreAlt)) {
-                	if ("개봉".equals(prdtStatNm)) {
+                	if ("개봉".equals(prdtStatNm) || "개봉예정".equals(prdtStatNm)) {
                 		filteredMovieList.add(movie);
                 	}
                 }
