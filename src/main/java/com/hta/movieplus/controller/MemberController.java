@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,9 +44,25 @@ public class MemberController {
 	
 	//회원가입폼에서 아이디 검사
 	@ResponseBody
-	@RequestMapping(value="/idcheck", method=RequestMethod.GET)
+	@GetMapping("/idcheck")
 	public int idcheck(@RequestParam("MEMBER_ID") String MEMBER_ID) {
 		return memberservice.isId(MEMBER_ID);
+	}
+	
+	
+	@GetMapping("/findid")
+	public String findid() {
+		return "member/member_findid";
+	}
+	
+	@GetMapping("/findpass")
+	public String findpass() {
+		return "member/member_findpass";
+	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "member/mypage_main";
 	}
 	
 //	//로그인 처리
