@@ -15,6 +15,11 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <style>
+
+#header .ci a {
+background:url(${pageContext.request.contextPath}/resources/image/header-logo.png) center center no-repeat;
+background-size: cover
+}
 #gnb>ul>li>a:after {
 	background: #792828;
 }
@@ -50,7 +55,7 @@ button.button.purple {
 }
 
 #gnb>ul>li:nth-child(6) .gnb-depth2 ul {
-	padding-left: 888px;
+	padding-left: 833px;
 }
 
 .button {
@@ -126,9 +131,9 @@ button.button.purple {
 
                                         <div class="sns-login">
                                             <!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
-                                            <a href="#" lnkgty="NAVER" title="네이버로 로그인 선택"><img src="" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
-                                            <a href="#" lnkgty="KAKAO" title="카카오톡으로 로그인 선택"><img src="" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
-                                            <a href="#" lnkgty="PAYCO" title="구글로 로그인 선택"><img src="" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
+                                            <a href="#" title="네이버로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-naver.png" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
+                                            <a href="#" title="카카오톡으로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-kakao.png" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
+                                            <a href="#" title="구글로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-google.png" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
                                     </form>
@@ -164,21 +169,25 @@ button.button.purple {
 
 	<div class="util-area">
 		<div class="left-link">
-			<a href="#" title="멤버십">멤버십</a> <a href="#" title="고객센터">고객센터</a>
+			<a href="/movieplus/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
+			<a href="/movieplus/benefit/membership" title="멤버십">멤버십</a>
+			<a href="#" title="고객센터">고객센터</a>
 		</div>
 
 		<div class="right-link">
 			<div class="before" style="">
-				<a id="header-login-btn" href="#" title="로그인">로그인</a> <a href="#"
-					title="회원가입">회원가입</a>
+			    <a href="#" class="" title="관리자">로그인한 관리자만 보여요</a>
+				<a id="header-login-btn" href="#" title="로그인">로그인</a> 
+				<a href="#"	title="회원가입">회원가입</a>
 			</div>
 
 			<div class="after" style="display: none">
-				<a href="#" class="" title="로그아웃">로그아웃</a> <a href="#"
-					class="notice" title="알림">알림</a>
+				<a href="#" class="" title="관리자">로그인한 관리자만 보여요</a>
+				<a href="#" class="" title="로그아웃">로그아웃</a> 
+				<a href="#" class="notice" title="알림">알림</a>
 			</div>
 
-			<a href="#">빠른예매</a>
+			<a href="/movieplus/booking">빠른예매</a>
 		</div>
 	</div>
 
@@ -206,14 +215,14 @@ button.button.purple {
 			<li><a href="#" class="gnb-txt-reserve" title="예매">예매</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="빠른예매">빠른예매</a></li>
+						<li><a href="/movieplus/booking/" title="빠른예매">빠른예매</a></li>
 						<li><a href="#" title="상영시간표">상영시간표</a></li>
 					</ul>
 				</div></li>
-			<li><a href="#" class="gnb-txt-theater" title="극장">극장</a>
+			<li><a href="" class="gnb-txt-theater" title="극장">극장</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="전체극장">전체극장</a></li>
+						<li><a href="/movieplus/theater/" title="전체극장">전체극장</a></li>
 					</ul>
 				</div></li>
 			<li><a href="#" class="gnb-txt-event" title="이벤트">이벤트</a>
@@ -227,13 +236,14 @@ button.button.purple {
 			<li><a href="#" class="gnb-txt-store" title="스토어">스토어</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="스토어">스토어</a></li>
+						<li><a href="/movieplus/store" title="스토어">스토어</a></li>
 					</ul>
 				</div></li>
 			<li><a href="#" class="gnb-txt-benefit" title="혜택">혜택</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="메가박스 멤버십">메가박스 멤버십</a></li>
+						<li><a href="/movieplus/benefit/membership" title="메가박스 멤버십">메가박스 멤버십</a></li>
+						<li><a href="/movieplus/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a></li>
 					</ul>
 				</div></li>
 		</ul>
@@ -260,7 +270,7 @@ button.button.purple {
 				<p class="tit-depth">예매</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="빠른예매">빠른예매</a></li>
+					<li><a href="/movieplus/booking/" title="빠른예매">빠른예매</a></li>
 					<li><a href="#" title="상영시간표">상영시간표</a></li>
 				</ul>
 			</div>
@@ -269,7 +279,7 @@ button.button.purple {
 				<p class="tit-depth">극장</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="전체극장">전체극장</a></li>
+					<li><a href="/movieplus/theater/" title="전체극장">전체극장</a></li>
 				</ul>
 			</div>
 
@@ -287,9 +297,9 @@ button.button.purple {
 				<p class="tit-depth">스토어</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="메가티켓">메가티켓</a></li>
-					<li><a href="#" title="팝콘/음료/굿즈">팝콘/음료/금액권</a></li>
-					<li><a href="#" title="포인트몰">포인트몰</a></li>
+					<li><a href="/movieplus/store" title="메가티켓">메가티켓</a></li>
+					<li><a href="/movieplus/store_cp05" title="팝콘/음료/굿즈">팝콘/음료/금액권</a></li>
+					<li><a href="/movieplus/store_cp07" title="포인트몰">포인트몰</a></li>
 				</ul>
 			</div>
 			<div class="list position-6">
@@ -315,8 +325,8 @@ button.button.purple {
 				<p class="tit-depth">혜택</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="멤버십 안내">멤버십 안내</a></li>
-					<li><a href="#" title="제휴/할인">제휴/할인</a></li>
+					<li><a href="/movieplus/benefit/membership" title="멤버십 안내">멤버십 안내</a></li>
+					<li><a href="/movieplus/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a></li>
 				</ul>
 			</div>
 

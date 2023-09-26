@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<style>
+#footer .footer-bottom .ci {
+background-image:url(${pageContext.request.contextPath}/resources/image/header-logo.png);
+background-size:cover;}
+</style>
+
 <footer id="footer">
     <!-- footer-top -->
     <div class="footer-top">

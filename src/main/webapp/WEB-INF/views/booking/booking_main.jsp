@@ -25,7 +25,6 @@
 	</div>
 
 	<div class="container" style="padding-bottom: 240px;">
-		<input type="hidden" id="playDe" name="playDe" value="">
 		<div class="page-util fixed" style="">
 			<div class="inner-wrap">
 				<div class="location">
@@ -40,8 +39,6 @@
 		<div id="bokdMBooking" style="overflow: hidden; height: 760px;">
 			<div class="inner-wrap"
 				style="padding-top: 40px; padding-bottom: 100px;">
-				<input type="hidden" id="playDe" name="playDe" value="2023.09.28">
-				<input type="hidden" id="crtDe" name="crtDe" value="2023.09.25">
 
 				<!-- quick-reserve -->
 				<div class="quick-reserve">
@@ -240,7 +237,6 @@
 									<input type="hidden" id="datePicker" value="2023.09.28"
 										class="hasDatepicker">
 									<button type="button" id="calendar"
-										onclick="$(&#39;#datePicker&#39;).datepicker(&#39;show&#39;)"
 										class="btn-calendar-large" title="달력보기">달력보기</button>
 
 								</div>
@@ -717,9 +713,8 @@
 									<p class="tit">시간</p>
 
 									<div class="right legend">
-										<i class="iconset ico-sun" title="조조"></i> 조조 <i
-											class="iconset ico-brunch" title="브런치"></i> 브런치 <i
-											class="iconset ico-moon" title="심야"></i> 심야
+										<i class="iconset ico-sun" title="조조"></i> 조조
+										 <i	class="iconset ico-moon" title="심야"></i> 심야
 									</div>
 								</div>
 
