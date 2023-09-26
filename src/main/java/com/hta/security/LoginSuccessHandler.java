@@ -22,7 +22,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		// TODO Auto-generated method stub
 		
 		logger.info("로그인 성공 : LoginSuccessHandler ");
-		String url = request.getContextPath() +  "/board/list";
+		String url = request.getContextPath() +  "/main";
 		response.sendRedirect(url);
 		
 	}

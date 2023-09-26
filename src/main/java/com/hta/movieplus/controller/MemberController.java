@@ -1,8 +1,7 @@
 package com.hta.movieplus.controller;
 
-import java.security.Principal;
-
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,12 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hta.movieplus.service.MemberService;
 
@@ -36,20 +34,6 @@ public class MemberController {
 		//this.sendMail = sendMail;
 	}
 	
-//	//로그인 폼으로 이동
-//	@RequestMapping(value="/login", method = RequestMethod.GET)
-//	public ModelAndView login(ModelAndView mv, @CookieValue(value="remeber-me", required=false) Cookie readCookie,
-//							  HttpSession session, Principal userPrincipal) {
-//			if(readCookie != null) {
-//				logger.info("저장된 아이디 : " + userPrincipal.getName());	//로그인한 아이디 값 
-//				mv.setViewName("redirect:/board/list");
-//			} else {
-//				mv.setViewName("member/member_loginForm");
-//				mv.addObject("loginfail", session.getAttribute("loginfail"));
-//				session.removeAttribute("loginfail");
-//			}
-//			return mv;
-//	}
 	
 	//회원가입 폼 이동
 	@RequestMapping(value="/join", method = RequestMethod.GET)
@@ -63,6 +47,38 @@ public class MemberController {
 	public int idcheck(@RequestParam("MEMBER_ID") String MEMBER_ID) {
 		return memberservice.isId(MEMBER_ID);
 	}
+	
+//	//로그인 처리
+//	@RequestMapping(value="/loginProcess", method = RequestMethod.POST)
+//	public String loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID,
+//							   @RequestParam("MEMBER_PASS") String MEMBER_PASS,
+//							   @RequestParam(value="remember", defaultValue="", required=false) String remember,
+//							   HttpServletResponse response,
+//							   HttpSession session,
+//							   RedirectAttributes rattr) {
+//		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
+//		logger.info("결과 : " + result);
+//		
+//		if(result == 1) { 	//로그인 성공
+//			session.setAttribute("MEMBER_ID", MEMBER_ID);
+//			Cookie savecookie = new Cookie("chkIdSave", MEMBER_ID);
+//			if(!remember.equals("")) {
+//				savecookie.setMaxAge(60*60);
+//				logger.info("쿠키저장 : 60*60");
+//			} else {
+//				logger.info("쿠키저장 : 0");
+//				savecookie.setMaxAge(0);
+//			}
+//			response.addCookie(savecookie);
+//			
+//			return "";	//로그인 성공 후 메인페이지로 이동
+//		} else { 	//로그인 실패
+//			rattr.addFlashAttribute("result", result);
+//			return "";	//로그인 실패할 경우 로그인 페이지로 이동
+//		}
+//	}
+//	
+	
 	
 
 }
