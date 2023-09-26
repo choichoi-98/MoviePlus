@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.MovieMapper">
+
+	<insert id="insert" parameterType="movie">
+		INSERT INTO MOVIE
+		(movie_Code, movie_Title, movie_Director, 
+		  movie_Genre, movie_OpenDate, movie_Release)
+		VALUES (#{movie_Code}, #{movie_Title}, #{movie_Director}
+		      ,#{movie_Genre}, #{movie_OpenDate} , #{movie_Release} )
+	</insert>
+	
+	<select id="select" resultType="movie">
+		SELECT * FROM MOVIE
+		WHERE movie_code = #{movie_Code}
+	</select>
+</mapper>
