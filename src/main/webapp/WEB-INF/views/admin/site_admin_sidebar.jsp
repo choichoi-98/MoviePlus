@@ -59,9 +59,6 @@
 					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
 				
-	
-				<!-- end collapse -->
-
 				
 			</ul>
 			
