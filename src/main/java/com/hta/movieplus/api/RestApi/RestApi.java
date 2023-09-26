@@ -1,12 +1,14 @@
 package com.hta.movieplus.api.RestApi;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,15 +21,26 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.hta.movieplus.controller.MemberController;
+import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.service.MovieServiceImpl;
+
 //일별 박스오피스
 @RestController
 public class RestApi {
 	
+	private static final Logger logger = LoggerFactory.getLogger(RestApi.class);
 
+
+	@Autowired
+	private MovieServiceImpl movieServiceImpl;
+	
 	@GetMapping("movie")
     public List<Map<String, Object>> getAPI(HttpServletRequest request) {
         List<Map<String, Object>> filteredMovieList = new ArrayList<>();
-
+       
+        logger.info("getAPI");
+        
         try {
             RestTemplate restTemplate = new RestTemplate();
 
@@ -47,16 +60,34 @@ public class RestApi {
             Map<String, Object> movieListResult = (Map<String, Object>) responseBody.get("movieListResult");
             List<Map<String, Object>> movieList = (List<Map<String, Object>>) movieListResult.get("movieList");
 
-            // "prdtStatNm"이 "개봉"인 데이터만 선택
-            for (Map<String, Object> movie : movieList) {
-                String prdtStatNm = (String) movie.get("prdtStatNm");
-                String genreAlt = (String) movie.get("genreAlt");
+            // "prdtStatNm"이 "개봉", "개봉 예정"인 데이터만 선택 후 filteredMovieList에 저장
+            for (Map<String, Object> movieData : movieList) {
+                String prdtStatNm = (String) movieData.get("prdtStatNm");
+                String genreAlt = (String) movieData.get("genreAlt");
                 if(!"성인물(에로)".equals(genreAlt)) {
-                	if ("개봉".equals(prdtStatNm) || "개봉예정".equals(prdtStatNm)) {
-                		filteredMovieList.add(movie);
+                	if ("개봉".equals(prdtStatNm) || "개봉 예정".equals(prdtStatNm)) {
+                		Movie movie = new Movie();
+                		movie.setMovie_Code((String) movieData.get("movieCd")); 		//영화번호(코드)
+                		movie.setMovie_Title((String) movieData.get("movieNm"));		//영화제목
+                		movie.setMovie_Director((String) movieData.get("peopleNm"));	//영화감독
+                		movie.setMovie_Genre((String) movieData.get("repGenreNm"));	//대표장르
+                		movie.setMovie_OpenDate((String) movieData.get("openDt"));	//개봉일
+                		movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
+                		filteredMovieList.add(movieData);
+                		
+                		logger.info("for문");
+                		Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
+                		if(returnmovie == null) {
+                			movieServiceImpl.insert(movie);
+                		}
+                		
                 	}
                 }
             }
+            
+            
+            //filteredMovieList를 Movie 엔티티로 변환하고 저장
+            
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             // 오류 처리

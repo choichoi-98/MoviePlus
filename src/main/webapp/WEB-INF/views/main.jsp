@@ -100,8 +100,6 @@
 										<li name="li_boxoRankList" class="">
 											<a href="javascript:gfn_moveDetail(&#39;23066600&#39;)" class="movie-list-info" title="영화상세 보기">
 												<div class="screen-type2">
-													<p><img src="./MEET PLAY SHARE, 메가박스_files/mov_top_tag_db.png" alt="dolby"></p>
-													<p><img src="./MEET PLAY SHARE, 메가박스_files/mov_top_tag_mx.png" alt="mx"></p>
 													</div>
 												<p class="rank">2<span class="ir">위</span></p>
 												<!-- to 개발 : alt 값에 영화 제목 출력 -->
@@ -143,7 +141,6 @@
 										<li name="li_boxoRankList" class="">
 											<a href="javascript:gfn_moveDetail(&#39;23069400&#39;)" class="movie-list-info" title="영화상세 보기">
 												<div class="screen-type2">
-													<p><img src="./MEET PLAY SHARE, 메가박스_files/mov_top_tag_mx.png" alt="mx"></p>
 													</div>
 												<p class="rank">3<span class="ir">위</span></p>
 												<!-- to 개발 : alt 값에 영화 제목 출력 -->
@@ -185,8 +182,6 @@
 										<li name="li_boxoRankList" class="">
 											<a href="javascript:gfn_moveDetail(&#39;23059800&#39;)" class="movie-list-info" title="영화상세 보기">
 												<div class="screen-type2">
-													<p><img src="./MEET PLAY SHARE, 메가박스_files/mov_top_tag_db.png" alt="dolby"></p>
-													<p><img src="./MEET PLAY SHARE, 메가박스_files/mov_top_tag_mx.png" alt="mx"></p>
 													</div>
 												<p class="rank">4<span class="ir">위</span></p>
 												<!-- to 개발 : alt 값에 영화 제목 출력 -->
