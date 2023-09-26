@@ -44,7 +44,11 @@
 		<div class="sidebar__nav-wrap">
 			<ul class="sidebar__nav">
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link sidebar__nav-link--active"><span>극장 관리</span></a>
+					<a href="#" class="sidebar__nav-link sidebar__nav-link--active"><span>극장 현황</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>극장 관리</span></a>
 				</li>
 
 				<li class="sidebar__nav-item">
