@@ -4,15 +4,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MoviePlus: 모두를 위한 영화관 </title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" media="all">
 <style>
 #header.main-header{
 	top:0px;
 }
 </style>
+<script>
+	//document.ready를 사용하여 main페이지 로드 시 ajax 요청 보내기 
+	$(document).ready(function(){
+		$.ajax({
+			url:"http://localhost:9000/movieplus/movie", //영화목록 api 처리 주소
+			type:"GET",
+			success: function(response){
+				console.log("영화 데이터 가져오기 성공!");
+			},
+			error: function(){
+				consol.log("영화 데이터 가져오기 실패");
+			}
+		});
+	});
+</script>
 </head>
 <body>
+<!-- 
+document.ready
+-> ajax로 처리
+	url 주소를 http://localhost:9000/movieplus/movie로
+ -->
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	
 <div class="container main-container area-ad">

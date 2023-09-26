@@ -21,16 +21,14 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.hta.movieplus.controller.MemberController;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.service.MovieServiceImpl;
 
-//일별 박스오피스
+//영진위 영화목록 api
 @RestController
-public class RestApi {
+public class MovieListApi {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RestApi.class);
-
+	private static final Logger logger = LoggerFactory.getLogger(MovieListApi.class);
 
 	@Autowired
 	private MovieServiceImpl movieServiceImpl;
@@ -64,29 +62,30 @@ public class RestApi {
             for (Map<String, Object> movieData : movieList) {
                 String prdtStatNm = (String) movieData.get("prdtStatNm");
                 String genreAlt = (String) movieData.get("genreAlt");
+                String repGenreNm = (String) movieData.get("repGenreNm");
                 if(!"성인물(에로)".equals(genreAlt)) {
-                	if ("개봉".equals(prdtStatNm) || "개봉 예정".equals(prdtStatNm)) {
-                		Movie movie = new Movie();
-                		movie.setMovie_Code((String) movieData.get("movieCd")); 		//영화번호(코드)
-                		movie.setMovie_Title((String) movieData.get("movieNm"));		//영화제목
-                		movie.setMovie_Director((String) movieData.get("peopleNm"));	//영화감독
-                		movie.setMovie_Genre((String) movieData.get("repGenreNm"));	//대표장르
-                		movie.setMovie_OpenDate((String) movieData.get("openDt"));	//개봉일
-                		movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
-                		filteredMovieList.add(movieData);
+                	if(!"멜로/로맨스".equals(repGenreNm)) {
                 		
-                		logger.info("for문");
-                		Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
-                		if(returnmovie == null) {
-                			movieServiceImpl.insert(movie);
+                		if ("개봉".equals(prdtStatNm) || "개봉 예정".equals(prdtStatNm)) {
+                			Movie movie = new Movie();
+                			movie.setMovie_Code((String) movieData.get("movieCd")); 		//영화번호(코드)
+                			movie.setMovie_Title((String) movieData.get("movieNm"));		//영화제목
+                			movie.setMovie_Director((String) movieData.get("peopleNm"));	//영화감독
+                			movie.setMovie_Genre((String) movieData.get("repGenreNm"));		//대표장르
+                			movie.setMovie_OpenDate((String) movieData.get("openDt"));		//개봉일
+                			movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
+                			filteredMovieList.add(movieData);
+                			
+                			logger.info("for문");
+                			Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
+                			if(returnmovie == null) {
+                				movieServiceImpl.insert(movie);
+                			}
+                			
                 		}
-                		
                 	}
                 }
             }
-            
-            
-            //filteredMovieList를 Movie 엔티티로 변환하고 저장
             
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
