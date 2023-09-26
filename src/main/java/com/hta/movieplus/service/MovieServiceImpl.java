@@ -21,10 +21,11 @@ public class MovieServiceImpl implements MovieService{
 		return dao.insert(m);
 	}
 
-	
+	@Override
 	public Movie select(String movieCd) {
 		return dao.select(movieCd);
 	}
+	
 	
 
 }

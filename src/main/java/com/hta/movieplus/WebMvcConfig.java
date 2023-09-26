@@ -14,6 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				"classpath:/templates/",
 	};
 	
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("forward:/main"); // 페이지 설정

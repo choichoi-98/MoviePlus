@@ -6,5 +6,7 @@ public interface MovieService {
 
 	public int insert(Movie m);
 	
+	public Movie select(String movieCd);
+	
 	
 }

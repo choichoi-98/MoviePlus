@@ -79,6 +79,7 @@ public class Movie {
 	public void setMovie_Star(int movie_Star) {
 		this.movie_Star = movie_Star;
 	}
+	
 	public String getMovie_Release() {
 		return movie_Release;
 	}
