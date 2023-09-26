@@ -54,6 +54,7 @@ public class MovieListApi {
             // JSON 데이터를 Map으로 변환
             Map<String, Object> responseBody = resultMap.getBody();
 
+            
             // "movieListResult" 항목에서 "movieList" 데이터 추출
             Map<String, Object> movieListResult = (Map<String, Object>) responseBody.get("movieListResult");
             List<Map<String, Object>> movieList = (List<Map<String, Object>>) movieListResult.get("movieList");

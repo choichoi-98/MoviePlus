@@ -8,4 +8,5 @@ public interface MovieService {
 	
 	public Movie select(String movieCd);
 	
+	
 }

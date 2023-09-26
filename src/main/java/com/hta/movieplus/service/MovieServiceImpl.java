@@ -26,5 +26,6 @@ public class MovieServiceImpl implements MovieService{
 		return dao.select(movieCd);
 	}
 	
+	
 
 }

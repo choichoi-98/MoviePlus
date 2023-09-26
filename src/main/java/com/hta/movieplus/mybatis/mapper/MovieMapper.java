@@ -12,3 +12,4 @@ public interface MovieMapper {
 	public Movie select(String movieCd);
 	
 }
+

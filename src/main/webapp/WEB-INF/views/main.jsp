@@ -12,6 +12,7 @@
 	top:0px;
 }
 </style>
+
 <script>
 	//document.ready를 사용하여 main페이지 로드 시 ajax 요청 보내기 
 	$(document).ready(function(){

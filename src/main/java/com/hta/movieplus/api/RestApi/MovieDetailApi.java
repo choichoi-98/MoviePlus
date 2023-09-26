@@ -58,6 +58,7 @@ public class MovieDetailApi {
 			
             for(Map<String, Object> detailData: movieDetail) {
             	
+            	
             }
 			
 		} catch (HttpClientErrorException | HttpServerErrorException e) {
