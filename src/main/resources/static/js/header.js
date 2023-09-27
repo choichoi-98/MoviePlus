@@ -118,7 +118,9 @@ $(document).ready(function(){
         openLoginModal();
     })
 
-
+	$('.btn-modal-open').click(function(){
+		openLoginModal();	
+	})
 
 
 

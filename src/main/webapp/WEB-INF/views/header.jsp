@@ -115,8 +115,9 @@ button.button.purple {
                                         <div class="chk-util">
                                             <div class="left">
                                                 <input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장<!--아이디 저장--></label>
+                                            </div>
+                                            <div class="right">    
                                                 <input type="checkbox" name="remember-me"> <label for="chkloginSave">로그인 유지하기<!--로그인 유지하기--></label>
-                                                
                                             </div>
 
                                         </div>
@@ -125,8 +126,8 @@ button.button.purple {
                                         <button id="btnLogin" type="button" class="button purple large btn-login" disabled="disabled">로그인<!--로그인--></button>
 
                                         <div class="link">
-                                            <a href="#" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a>
-                                            <a href="#" title="회원가입 선택">회원가입<!--회원가입--></a>
+                                            <a href="/movieplus/member/findid" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a>
+                                            <a href="/movieplus/member/join" title="회원가입 선택">회원가입<!--회원가입--></a>
                                         </div>
 
                                         <div class="sns-login">
@@ -164,7 +165,7 @@ button.button.purple {
 <head>
 <header id="header" class="main-header">
 	<h1 class="ci">
-		<a href="#" title="MEGABOX 메인으로 가기">MEGABOX : Life Theater</a>
+		<a href="/movieplus/main" title="MoviePlus 메인으로 가기">MoviePlus</a>
 	</h1>
 
 	<div class="util-area">
@@ -225,10 +226,10 @@ button.button.purple {
 						<li><a href="/movieplus/theater/" title="전체극장">전체극장</a></li>
 					</ul>
 				</div></li>
-			<li><a href="#" class="gnb-txt-event" title="이벤트">이벤트</a>
+			<li><a href="/movieplus/event/" class="gnb-txt-event" title="이벤트">이벤트</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="진행중 이벤트">진행중 이벤트</a></li>
+						<li><a href="/movieplus/event/" title="진행중 이벤트">진행중 이벤트</a></li>
 						<li><a href="#" title="지난 이벤트">지난 이벤트</a></li>
 						<li><a href="#" title="당첨자발표">당첨자발표</a></li>
 					</ul>
@@ -287,7 +288,7 @@ button.button.purple {
 				<p class="tit-depth">이벤트</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="진행중 이벤트">진행중 이벤트</a></li>
+					<li><a href="/movieplus/event/" title="진행중 이벤트">진행중 이벤트</a></li>
 					<li><a href="#" title="지난 이벤트">지난 이벤트</a></li>
 					<li><a href="#" title="당첨자발표">당첨자발표</a></li>
 				</ul>

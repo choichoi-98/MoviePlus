@@ -33,18 +33,23 @@
 
 	<!-- member-wrap -->
 	<div class="member-wrap">
-		<h1 class="ci"><a href="https://www.megabox.co.kr/main" title="메인 페이지로 이동">MEGABOX : Life Theater</a></h1>
+		<h1 style="text-align:center;padding-bottom:30px;">
+			<a href="/movieplus/main" title="메인 페이지로 이동"><img src="${pageContext.request.contextPath}/image/header-logo.png" style="width: 140px; height: 47px;">
+			</a>
+		</h1>
+		
+		
 
 		<!-- col-wrap -->
 		<div class="col-wrap">
 			<!-- col -->
 			<div class="col">
 
-				<p class="tit-member">아이디/비밀번호 찾기<!--아이디/비밀번호 찾기--></p>
+				<p class="tit-member" style="color:#1a191f;">아이디/비밀번호 찾기<!--아이디/비밀번호 찾기--></p>
 
 				<div class="tab-list">
 					<ul>
-						<li><a href="" title="아이디찾기 선택">아이디찾기<!--아이디찾기--></a></li>
+						<li><a href="/movieplus/member/findid" title="아이디찾기 선택">아이디찾기<!--아이디찾기--></a></li>
 						<li class="on"><a href="javaScript:void(0);" title="비밀번호 찾기 선택">비밀번호 찾기<!--비밀번호 찾기--></a></li>
 					</ul>
 				</div>
