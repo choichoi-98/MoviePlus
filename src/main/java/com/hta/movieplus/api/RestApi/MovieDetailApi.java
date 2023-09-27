@@ -56,6 +56,8 @@ public class MovieDetailApi {
             Map<String, Object> movieDetailResult = (Map<String, Object>) responseBody.get("movieDetailResult");
             List<Map<String, Object>> movieDetail = (List<Map<String, Object>>) movieDetailResult.get("movieDetail");
 			
+            
+            
             for(Map<String, Object> detailData: movieDetail) {
             	
             	
