@@ -36,9 +36,9 @@ public class MemberController {
 	
 	
 	//회원가입 폼 이동
-	@RequestMapping(value="/join", method = RequestMethod.GET)
-	public String join() {
-		return "member/member_joinForm";
+	@GetMapping("/join")
+	public String memberjoin() {
+		return "member/member_join_step1";
 	}
 	
 	//회원가입폼에서 아이디 검사
@@ -48,17 +48,19 @@ public class MemberController {
 		return memberservice.isId(MEMBER_ID);
 	}
 	
-	
+	//아이디 찾기 이동
 	@GetMapping("/findid")
 	public String findid() {
 		return "member/member_findid";
 	}
 	
+	//비밀번호 찾기 이동
 	@GetMapping("/findpass")
 	public String findpass() {
 		return "member/member_findpass";
 	}
 	
+	//마이페이지 이동
 	@GetMapping("/mypage")
 	public String mypage() {
 		return "member/mypage_main";
