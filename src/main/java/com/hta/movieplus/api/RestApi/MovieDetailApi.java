@@ -31,8 +31,10 @@ public class MovieDetailApi {
 	private MovieServiceImpl movieServiceImpl;
 	
 	@GetMapping("movieDetail")
-	public void updateMovieActors(@RequestParam("movie_cd") String movieCd) {
-		
+	public Map<String, Object>  updateMovieActors(@RequestParam(value="movieCd",defaultValue="20233235", required=false) String movieCd) {
+	//public void updateMovieActors(String movieCd) {
+
+		Map<String, Object> movieDetailResult = null;
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			
@@ -42,7 +44,7 @@ public class MovieDetailApi {
 			
 			UriComponents uri = UriComponentsBuilder
 					.fromHttpUrl
-					(url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&&movieCd=" + movieCd)
+					(url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&&movieCd=" + movieCd) //
 					.build();
 			
 			ResponseEntity<Map> resultMap =
@@ -51,12 +53,23 @@ public class MovieDetailApi {
 			
 			//Json -> Map
 			Map<String, Object> responseBody = resultMap.getBody();
-			Map<String, Object> movieDetailResult 
-				= (Map<String, Object>) responseBody.get("movieDetailResult");
+			movieDetailResult 
+				= (Map<String, Object>) responseBody.get("movieInfoResult");
+			logger.info(movieDetailResult.toString());
+			
+			for(String key : responseBody.keySet()){
+                System.out.println("키 : " + key);
+            }
 			
 			//출연배우 정보를 가져와서 MovieServiceImpl를 사용하여 업데이트
+			Map<String,Object> movieInfoList 
+				= (Map<String, Object>)movieDetailResult.get("movieInfo");
+			logger.info(movieInfoList.toString());
+			
 			List<Map<String,Object>> actorsList 
-				= (List<Map<String, Object>>)movieDetailResult.get("actors");
+			= (List<Map<String, Object>>)movieInfoList.get("actors");
+			
+			logger.info(actorsList.toString());
 			if(actorsList != null && !actorsList.isEmpty()) {
 				StringBuilder actors = new StringBuilder();
 				for(Map<String, Object> actorData : actorsList) {
@@ -68,9 +81,13 @@ public class MovieDetailApi {
 					actors.delete(actors.length()-2, actors.length());
 				}
 				
+				logger.info(actors.toString());
+				
 				//MovieServiceImpl를 사용하셔 해당 영화의 출연배우 정보 업데이트
 				movieServiceImpl.updateMovieActors(movieCd, actors.toString());
-			}
+				
+	}
+			
 		}catch (HttpClientErrorException | HttpServerErrorException e) {
             // 오류 처리
             e.printStackTrace();
@@ -79,6 +96,7 @@ public class MovieDetailApi {
             e.printStackTrace();
         }
 		
+		return movieDetailResult;
 	}
 	
 }
