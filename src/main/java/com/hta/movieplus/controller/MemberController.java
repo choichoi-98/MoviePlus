@@ -1,21 +1,24 @@
 package com.hta.movieplus.controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hta.movieplus.domain.MailVO;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.service.MemberService;
+import com.hta.movieplus.task.SendMail;
 
 @Controller
 @RequestMapping(value="/member")
@@ -25,13 +28,13 @@ public class MemberController {
 	
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
-	//private SendMail sendMail;
+	private SendMail sendMail;
 	
 	@Autowired
-	public MemberController(MemberService memberservice, PasswordEncoder passwordEncoder) {
+	public MemberController(MemberService memberservice, PasswordEncoder passwordEncoder, SendMail sendMail) {
 		this.memberservice = memberservice;
 		this.passwordEncoder = passwordEncoder;
-		//this.sendMail = sendMail;
+		this.sendMail = sendMail;
 	}
 	
 	
@@ -66,37 +69,10 @@ public class MemberController {
 		return "member/mypage_main";
 	}
 	
-//	//로그인 처리
-//	@RequestMapping(value="/loginProcess", method = RequestMethod.POST)
-//	public String loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID,
-//							   @RequestParam("MEMBER_PASS") String MEMBER_PASS,
-//							   @RequestParam(value="remember", defaultValue="", required=false) String remember,
-//							   HttpServletResponse response,
-//							   HttpSession session,
-//							   RedirectAttributes rattr) {
-//		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
-//		logger.info("결과 : " + result);
-//		
-//		if(result == 1) { 	//로그인 성공
-//			session.setAttribute("MEMBER_ID", MEMBER_ID);
-//			Cookie savecookie = new Cookie("chkIdSave", MEMBER_ID);
-//			if(!remember.equals("")) {
-//				savecookie.setMaxAge(60*60);
-//				logger.info("쿠키저장 : 60*60");
-//			} else {
-//				logger.info("쿠키저장 : 0");
-//				savecookie.setMaxAge(0);
-//			}
-//			response.addCookie(savecookie);
-//			
-//			return "";	//로그인 성공 후 메인페이지로 이동
-//		} else { 	//로그인 실패
-//			rattr.addFlashAttribute("result", result);
-//			return "";	//로그인 실패할 경우 로그인 페이지로 이동
-//		}
-//	}
-//	
+	@GetMapping("/sendEmail")
+	public String sendEmail() {
+		return "member";
+	}
 	
 	
-
 }
