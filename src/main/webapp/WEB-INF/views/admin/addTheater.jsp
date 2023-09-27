@@ -25,37 +25,37 @@
 				<!-- form -->
 				<div class="col-12">
 					<form action="addTheaterAction" class="form" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value = "${_csrf.token}">
 						<div class="row row--form">
 
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="극장 명">
+										<input type="text" name="THEATER_NAME" class="form__input" placeholder="극장 명" required>
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" name="text" class="form__textarea"
-											placeholder="극장 소개(큰 글)"></textarea>
+										<textarea id="text" name="THEATER_INTRO1" class="form__textarea"
+											placeholder="극장 소개(큰 글)" required ></textarea>
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" name="text" class="form__textarea"
-											placeholder="극장 소개(작은 글)"></textarea>
+										<textarea id="text" name="THEATER_INTRO2" class="form__textarea"
+											placeholder="극장 소개(작은 글)" required></textarea>
 
 									</div>
 
 									<div class="col-12 col-sm-6">
 										<select class="js-example-basic-single" id="country"
-											placeholder="123">
-											<option value="">지역 선택</option>
-											<option value="1">서울</option>
-											<option value="2">경기</option>
-											<option value="3">인천</option>
+											name="THEATER_LOCATION" required>
+											<option value="서울">서울</option>
+											<option value="경기">경기</option>
+											<option value="인천">인천</option>
 										</select>
 									</div>
 									
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="주소">
+										<input type="text" name="THEATER_ADDRESS" class="form__input" placeholder="주소" required>
 									</div>
 
 								</div>
@@ -64,15 +64,15 @@
 							<div class="col-12">
 								<ul class="form__radio">
 									<li><span>보유 시설:</span></li>
-									<li><input id="type1" type="checkbox" name="type"
-										checked=""> <label for="type1">장애인석</label></li>
-									<li><input id="type2" type="checkbox" name="type">
+									<li><input id="type1" type="checkbox" name="THEATER_DISABLED_SEAT" value="CHECKED"> 
+										<label for="type1">장애인석</label></li>
+									<li><input id="type2" type="checkbox" name="THEATER_SPEICAL_SEAT" value="CHECKED">
 										<label for="type2">스페셜석</label></li>
 								</ul>
 							</div>
 
 							<div class="col-12">
-								<textarea id="text" name="text" class="form__textarea"
+								<textarea id="text" name="THEATER_PARKING" class="form__textarea"
 									placeholder="주차 안내"></textarea>
 							</div>
 
@@ -84,7 +84,7 @@
 
 
 						<div class="col-12">
-							<button type="button" class="form__btn">등록</button>
+							<button type="submit" class="form__btn">등록</button>
 						</div>
 
 
