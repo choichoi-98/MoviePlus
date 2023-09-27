@@ -12,7 +12,9 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
-
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 </head>
 <!-- SNS 라이브러리 -->
 
@@ -21,12 +23,6 @@
 <body class="bg-member">
     <div class="body-wrap">
         
-
-<!--// header -->
-<!-- 		<div id="bodyContent"> -->
-        
-
-
 	<!-- member-wrap -->
 	<div class="member-wrap">
 		<h1 style="text-align:center;padding-bottom:30px;">
@@ -37,7 +33,6 @@
 		<!-- col-wrap -->
 		<div class="col-wrap">
 			<div class="col">
-
 				<div class="step-member" title="step1 본인인증, step2 약관동의, step3 정보입력, step4 가입완료 단계 중 step1 본인인증 단계"><!--step1 본인인증, step2 약관동의, step3 정보입력, step4 가입완료 단계 중 step1 본인인증 단계-->
 					<ol>
 						<li>
@@ -61,48 +56,58 @@
 							</p>
 						</li>
 					</ol>
-				</div>
+				</div> <!-- class step-member end -->
 
 				<p class="page-info-txt">
 					<strong>회원가입을 위한 본인인증 단계입니다.<!--회원가입을 위한 본인인증 단계입니다.--></strong>
 					<span>이메일 주소를 입력해주세요.<!--이메일 주소를 입력해주세요.--></span>
 				</p>
 				
-					<div class="join-chk-me col-1">
-						<table>
-						<tbody>
-							<tr>
-								<th scope="row"><label for="ibxSchPwdMblpEmail">이메일 주소<!--이메일 주소--></label></th>
-								<td>
-									<input type="text" id="ibxSchPwdMblpEmail" maxlength="" placeholder="&#39;@&#39; 포함하여 입력" class="input-text w230px"><!--'-' 없이 입력-->
-									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08 disabled" disabled="disabled">인증요청<!--인증요청--></button>
-								</td>
-							</tr>
-							<tr id="schPwdMblpCertRow">
-								<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
-								<td>
-									<div class="chk-num">
-										<div class="line">
-											<input maxlength="4" type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
-
-											<div class="time-limit" id="schPwdtimer">
-												10:00
+				<div class="join-chk-me col-1">
+					  <div class="table-wrap"> 	<!-- 이메일 인증 테이블 -->
+					   <form action="" method="post">
+							<table class="board-form">
+								<caption>아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표<!--아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표--></caption>
+								<colgroup>
+									<col style="width:130px;"><col>
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row"><label for="ibxSchPwdMblpEmail">이메일 주소<!--이메일 주소--></label></th>
+										<td>
+											<input type="text" id="JoinEmail" maxlength="" placeholder="&#39;@&#39; 포함하여 입력" class="input-text w230px"><!--'-' 없이 입력-->
+											<button id="btnSendverify" type="button" class="button gray w75px ml08 disabled" >인증요청<!--인증요청--></button>
+										</td>
+									</tr>
+									<tr id="schPwdMblpCertRow">
+										<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
+										<td>
+											<div class="chk-num">
+												<div class="line">
+													<input maxlength="4" type="text" id="JoinVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
+		
+													<div class="time-limit" id="schPwdtimer">
+														10:00
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-
-									<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
-									<div id="schPwdMblpNo-error-text" class="alert"></div>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div> <!-- 이메일 인증 테이블 -->
-
-			</div>
-		</div>
-		<!--// col-wrap -->
-	</div>
-	<!--// member-wrap -->
-
+											<input type="hidden" class="authRadnum" id="authRandnum" name="authRandnum" />
+											<button id="btnCheckNo" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						<div class="btn-member-bottom v1" style="border-bottom: 0px;">
+							<button id="Submitbtn" type="submit" class="button purple large disabled" >다음<!--다음 단계로 이동--></button>
+						</div>
+					 </form>
+				   </div><!-- 이메일 인증 테이블 -->
+			</div> <!-- class="join-chk-me col-1" end -->
+			
+		</div> <!-- div clas="col" end -->
+		
+	</div><!--// col-wrap -->
+  </div><!-- <div class="member-wrap"> end  -->
+</div> <!-- <div class="body-wrap"> end -->
+</body>
 </html>
