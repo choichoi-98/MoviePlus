@@ -180,10 +180,9 @@
 
 					<div class="theater-info-text mt40">
 						<p class="big">
-							강남의 중심! 강남 소비문화의 중심지인 지하철 2호선 , 신분당선 - 강남역과 연결<br>로맨틱 멀티플렉스!
-							젊은 도시 강남이 한 눈에 보이는 최상의 View를 제공
+							간단 소개(큰 글)
 						</p>
-						<p>&lt;프라다&gt;가 선택한 수려한 디자인의 상영관 의자를 체험해보세요!</p>
+						<p>간단 소개(작은 글)</p>
 					</div>
 
 
@@ -195,75 +194,13 @@
 					<h3 class="tit small">보유시설</h3>
 
 					<div class="theater-facility">
-
-
-
 						<p>
 							<i class="iconset ico-facility-theater"></i>일반상영관
 						</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 						<p>
 							<i class="iconset ico-facility-disabled"></i>장애인석
 						</p>
-
-
-
-
-
-
-
 					</div>
-
-
-
-					<h3 class="tit small mt30">층별안내</h3>
-
-					<ul class="dot-list">
-
-						<li><span class="font-gblue">8층 : </span> 매표소, 매점, 에스컬레이터,
-							엘리베이터 , 남자 · 여자 화장실, 비상계단 3</li>
-
-						<li><span class="font-gblue">9층 : </span> 1관, 2관, 남자 · 여자
-							화장실, 엘리베이터, 비상계단3</li>
-
-						<li><span class="font-gblue">10층 : </span> 3관, 4관, 엘리베이터2, 남자
-							· 여자 화장실, 비상계단 3</li>
-
-						<li><span class="font-gblue">11층 : </span> 5관, 6관, 7관,
-							엘리베이터2, 남자 · 여자 화장실, 비상계단 3</li>
-
-					</ul>
-
 
 					<h2 class="tit small mt70">위치안내</h2>
 
@@ -314,53 +251,14 @@
 								길찾기</a>
 						</div>
 					</div>
+					
 
-
-
-					<h3 class="tit small mt30">주차</h3>
+					<h3 class="tit small mt30">주차 안내</h3>
 
 					<div class="parking-info">
-
-
 						<div class="parking-section">
 							<div class="icon-box">
 								<i class="iconset ico-parking" title="주차안내">주차안내</i>
-							</div>
-
-							<div class="info">
-								<p class="tit">주차안내</p>
-
-								<ul class="dot-list">
-
-									<li>아라타워 건물 內 지하 3층 ~ 지하 6층 주차장 이용</li>
-
-								</ul>
-							</div>
-						</div>
-
-
-
-						<div class="parking-section">
-							<div class="icon-box">
-								<i class="iconset ico-parking-confirm" title="주차확인">주차확인</i>
-							</div>
-
-							<div class="info">
-								<p class="tit">주차확인</p>
-
-								<ul class="dot-list">
-
-									<li>매표소에서 당일 관람 티켓 인증 후, 차량 번호 할인 등록하여 지하 정산소에서 결제</li>
-
-								</ul>
-							</div>
-						</div>
-
-
-
-						<div class="parking-section">
-							<div class="icon-box">
-								<i class="iconset ico-cash" title="주차요금">주차요금</i>
 							</div>
 
 							<div class="info">
@@ -388,72 +286,14 @@
 
 
 
-
-
-					<h3 class="tit small mt30">대중교통</h3>
-
-					<!-- location-info -->
-					<div class="public-transportation">
-
-						<!-- 버스 정보 -->
-
-						<div class="transportation-section">
-							<div class="icon-box">
-								<i class="iconset ico-bus" title="버스">버스</i>
-							</div>
-
-							<div class="info">
-								<p class="tit">버스</p>
-								<ul class="dot-list">
-
-									<li>140번, 144번, 145번, 146번, 360번, 402번, 420번, 440번, 441번,
-										452번, 470번, 741번</li>
-
-									<li>3412번, 4312번, 서초03번, 서초 09번</li>
-
-									<li>9404번, 9408번, 9409번, 9503번, 9711번, 9500번, 9501번,
-										9510번, 9800번, 9801번, 9802번, 9901번, M4403번, M7412번</li>
-
-								</ul>
-							</div>
-						</div>
-
-
-						<!-- 지하철 정보 -->
-
-						<div class="transportation-section">
-							<div class="icon-box">
-								<i class="iconset ico-metro" title="지하철">지하철</i>
-							</div>
-
-							<div class="info">
-								<p class="tit">지하철</p>
-								<ul class="dot-list">
-
-									<li>지하철 2호선 , 신분당선 ‘강남역 -&gt; 지하철 9번(구 5번) 출구 좌측 연결통로 이용</li>
-
-								</ul>
-							</div>
-						</div>
-
-
-						<!-- 대중교통 정보가 없는 경우 -->
-
-					</div>
-
-
-					<!--// location-info -->
-
-
 					<h2 class="tit small mt70">이벤트</h2>
 
 					<div class="event-box">
 						<ul>
 
-							<li><a href="#" class="eventBtn" data-no="12597"
-								data-netfunnel="N" title="[강남] 강남점 전용 관람권 패키지 특가 한정 판매! 상세보기">
-									<img src="" alt="[강남] 강남점 전용 관람권 패키지 특가 한정 판매!">
-							</a></li>
+							<li>
+								<div style="width:535px; height:250px; background:gray;"></div>
+							</li>
 
 						</ul>
 					</div>
@@ -599,168 +439,7 @@
 
 
 
-					<h2 class="tit small mt70">강남에서 이용할 수 있는 스토어 상품</h2>
 
-					<div class="store-list">
-						<ul class="list">
-
-							<li><a href="#" title="메가박스 스타벅스 숄더백 세트 상세보기">
-
-
-
-
-
-
-
-									<div class="label event">EVENT</div>
-
-
-
-
-
-									<div class="img">
-										<img src="" alt="">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 스타벅스 숄더백 세트</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">영화관람권 4매 + 영화초대권 1매 + 숄더백 1개</p>
-										</div>
-
-										<div class="price">
-
-											<p class="sale">
-												<em>48,000</em> <span>원</span>
-											</p>
-											<p class="ea">
-
-												<span>2,890</span>개 남음
-
-											</p>
-										</div>
-									</div>
-							</a></li>
-
-							<li><a href="#" title="러브콤보 상세보기">
-
-
-
-
-
-
-
-
-									<div class="label hot">대표상품</div>
-
-
-
-
-									<div class="img">
-										<img src="" alt="">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">러브콤보</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">팝콘(L) 1 + 탄산음료(R) 2</p>
-										</div>
-
-										<div class="price">
-
-											<p class="sale">
-												<em>10,000</em> <span>원</span>
-											</p>
-											<p class="ea"></p>
-										</div>
-									</div>
-							</a></li>
-
-							<li><a href="#" title="러브콤보패키지 상세보기">
-
-
-
-
-									<div class="label event">BEST</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img src="" alt="">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">러브콤보패키지</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">2D 일반관람권 2매 + 러브콤보 [팝콘(L)1 + 탄산음료(R)2]</p>
-										</div>
-
-										<div class="price">
-
-											<p class="original">36,000원</p>
-
-											<p class="sale">
-												<em>30,000</em> <span>원</span>
-											</p>
-											<p class="ea"></p>
-										</div>
-									</div>
-							</a></li>
-
-							<li><a href="#" title="더블콤보 상세보기">
-
-
-
-
-									<div class="label event">BEST</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img src="" alt="">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">더블콤보</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">팝콘(R) 2 + 탄산음료(R) 2</p>
-										</div>
-
-										<div class="price">
-
-											<p class="sale">
-												<em>13,000</em> <span>원</span>
-											</p>
-											<p class="ea"></p>
-										</div>
-									</div>
-							</a></li>
-
-
-						</ul>
-					</div>
 
 
 				</div>
@@ -1564,54 +1243,7 @@
 								</table>
 							</div>
 						</div>
-						<div class="fee-table">
-							<p class="fee-table-tit">3D</p>
-							<div class="table-wrap">
-								<table class="data-table a-c"
-									summary="가격표를 요일, 상영시간, 일반, 청소년 순서로 보여줍니다.">
-									<caption>가격표를 요일, 상영시간, 일반, 청소년 순서로 보여줍니다.</caption>
-									<colgroup>
-										<col>
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-										<col style="width: 25%;">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col">요일</th>
-											<th scope="col">상영시간</th>
-											<th scope="col">일반</th>
-											<th scope="col">청소년</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="rowgroup" rowspan="2">월~목</th>
-											<td>조조 (06:00~)</td>
-											<td>12,000</td>
-											<td>10,000</td>
-										</tr>
-										<tr>
-											<td>일반 (10:01~)</td>
-											<td>16,000</td>
-											<td>14,000</td>
-										</tr>
-										<tr>
-											<th scope="rowgroup" rowspan="2">금~일<br>공휴일
-											</th>
-											<td>조조 (06:00~)</td>
-											<td>13,000</td>
-											<td>11,000</td>
-										</tr>
-										<tr>
-											<td>일반 (10:01~)</td>
-											<td>17,000</td>
-											<td>15,000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
+						
 					</div>
 					<span style="color: #503396"> <span style="font-size: 22px">요금제</span>
 					</span> <br> <br> • <span style="color: #01738b">청소년 요금</span>&nbsp;

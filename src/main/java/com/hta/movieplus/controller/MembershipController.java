@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MembershipController {
 	
 	@GetMapping("/membership")
-	public String theaterMainView() {
+	public String MembershipMainView() {
 		return "membership/membership";
 	}
 	
 	@GetMapping("/viplounge")
-	public String theaterDetailView() {
+	public String vipLoungeView() {
 		return "membership/vip_lounge";
 	}
 }

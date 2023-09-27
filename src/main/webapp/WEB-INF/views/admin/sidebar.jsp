@@ -30,12 +30,12 @@
 			</div>
 
 			<div class="sidebar__user-title">
-				<span>강남</span>
-				<p>홍길동 님</p>
+				<span>사이트 관리자</span>
+				<p>어드민 님</p>
 			</div>
 
 			<button class="sidebar__user-btn" type="button" onclick="location='/movieplus/'">
-			ㅇ
+				<i class="icon ion-ios-log-out"></i>
 			</button>
 		</div>
 		<!-- end sidebar user -->
@@ -44,48 +44,30 @@
 		<div class="sidebar__nav-wrap">
 			<ul class="sidebar__nav">
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link sidebar__nav-link--active"><span>대쉬보드</span></a>
+					<a href="/movieplus/admin/" class="sidebar__nav-link"><span>대쉬보드</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="/movieplus/admin/managetheater" class="sidebar__nav-link"><span>극장 관리</span></a>
 				</li>
 
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>회원 관리</span></a>
+					<a href="#" class="sidebar__nav-link"><span>상영 영화 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>상영 스케줄 관리</span></a>
+					<a href="#" class="sidebar__nav-link"><span>이벤트 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>스토어 관리</span></a>
+					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
 				
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>무비포스트 관리</span></a>
-				</li>
-				
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>감상평 관리</span></a>
-				</li>
-				
-				<li class="sidebar__nav-item">
-					<a class="sidebar__nav-link" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu"><span>고객센터</span></a>
-
-					<ul class="collapse sidebar__menu" id="collapseMenu">
-						<li><a href="#">공지사항 등록</a></li>
-						<li><a href="#">1:1문의 답변</a></li>
-						<li><a href="#">자주 묻는 질문 관리</a></li>
-					</ul>
-				</li>
-				<!-- end collapse -->
-
 				
 			</ul>
+			
 		</div>
-		<!-- end sidebar nav -->
-		
-		<!-- sidebar copyright -->
-		<div class="sidebar__copyright"><a href="#" target="_blank">총 관리자 메뉴</a></div>
-		<!-- end sidebar copyright -->
+		<div class="sidebar__copyright">총 관리자 메뉴</div>
 	</div>
 	
 	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-3.5.1.min.js"></script>
