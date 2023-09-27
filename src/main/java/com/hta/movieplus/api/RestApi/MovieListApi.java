@@ -37,6 +37,7 @@ public class MovieListApi {
     public List<Map<String, Object>> getAPI(HttpServletRequest request) {
         List<Map<String, Object>> filteredMovieList = new ArrayList<>();
        
+        
         logger.info("getMovieAPI");
         
         try {
