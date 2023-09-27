@@ -14,5 +14,7 @@ public interface TheaterMapper {
 	public int getCountByTheater();
 
 	public List<Theater> getTheaterList();
+
+	public void deleteTheaterById(int num);
 	
 }

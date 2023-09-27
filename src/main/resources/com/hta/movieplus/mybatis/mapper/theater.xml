@@ -24,6 +24,11 @@
 		FROM THEATER
 	</select>
 
+	<delete id="deleteTheaterById" parameterType="int">
+		DELETE 
+		FROM THEATER
+		WHERE THEATER_ID = #{num}
+	</delete>
 	
 
 

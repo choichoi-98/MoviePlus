@@ -6,7 +6,8 @@ $(document).ready(function () {
        delete_id = $(this).find('.delete-selected-id').val();
     });
 
-    $('.modal__btn modal__btn--apply').click(function() {
-        
+    $('#delete-theater-modal-btn').click(function() {
+        console.log('tt');
+        location.href="deleteTheaterAction?num=" + delete_id;
     })
 });

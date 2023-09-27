@@ -42,4 +42,11 @@ public class TheaterServiceImpl implements TheaterService {
 		return mapper.getTheaterList();
 	}
 
+	@Override
+	public void deleteTheater(int num) {
+		// TODO Auto-generated method stub
+		mapper.deleteTheaterById(num);
+		
+	}
+
 }

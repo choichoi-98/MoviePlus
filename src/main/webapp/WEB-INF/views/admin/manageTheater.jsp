@@ -172,7 +172,7 @@
 		<p class="modal__text">정말로 삭제하시겠습니까?</p>
 
 		<div class="modal__btns">
-			<button class="modal__btn modal__btn--apply" type="button">삭제</button>
+			<button id="delete-theater-modal-btn" class="modal__btn modal__btn--apply" type="button">삭제</button>
 			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 		</div>
 	</div>
