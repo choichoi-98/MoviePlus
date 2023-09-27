@@ -67,7 +67,7 @@ $(document).ready(function () {
 	});
 
 	$('#country').select2({
-		placeholder: "Choose country / countries"
+		placeholder: "지역 선택"
 	});
 
 	$('#genre').select2({

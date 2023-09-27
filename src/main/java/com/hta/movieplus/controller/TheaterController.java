@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TheaterController {
 	
 	@GetMapping("/")
-	public String theaterMain() {
+	public String theaterMainView() {
 		return "theater/theater_main";
 	}
 	
 	@GetMapping("/detail")
-	public String theaterDetail() {
+	public String theaterDetailView() {
 		return "theater/theater_detail";
 	}
+
+
 }

@@ -5,11 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/admin/site")
-public class SiteAdminController {
+@RequestMapping(value = "/manager")
+public class ManagerController {
 
-	@GetMapping("/")
-	public String theaterDetailView() {
-		return "admin/site/main";
+	//메뉴바 이동 부분만
+	
+	@GetMapping("num") // 극장 넘버
+	public String theaterMainView() {
+		return "manager/main";
 	}
+
 }

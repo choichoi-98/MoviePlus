@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/admin/site/sidebar.jsp"/>
+	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp"/>
 </body>
 </html>
