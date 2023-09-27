@@ -26,7 +26,6 @@
 		<!-- sidebar user -->
 		<div class="sidebar__user">
 			<div class="sidebar__user-img">
-				<img src="img/user.svg" alt="">
 			</div>
 
 			<div class="sidebar__user-title">
@@ -84,7 +83,7 @@
 		<!-- end sidebar nav -->
 		
 		<!-- sidebar copyright -->
-		<div class="sidebar__copyright"><a href="#" target="_blank">총 관리자 메뉴</a></div>
+		<div class="sidebar__copyright"><a href="/	movieplus/admin/" target="_blank">총 관리자 메뉴</a></div>
 		<!-- end sidebar copyright -->
 	</div>
 	

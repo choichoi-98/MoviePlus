@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.TheaterMapper">
+
+
+	
+	<insert id="addTheater" parameterType="theater">
+	    <selectKey keyProperty="THEATER_ID" resultType="int" order="BEFORE">
+            SELECT THEATER_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO THEATER 
+		VALUES (#{THEATER_ID}, #{THEATER_NAME}, #{THEATER_INTRO1}, #{THEATER_INTRO2}, #{THEATER_ADDRESS},
+				#{THEATER_LOCATION}, #{THEATER_PARKING}, #{THEATER_MANAGER_ID}, #{THEATER_STATUS}, #{THEATER_DISABLED_SEAT}, #{THEATER_SPECIAL_SEAT}, SYSDATE)
+	</insert>	
+	
+	<select id="getCountByTheater" resultType="int">
+		SELECT COUNT(*) 
+		FROM THEATER
+	</select>
+	
+	<select id="getTheaterList" resultType="theater">
+		SELECT *
+		FROM THEATER
+	</select>
+
+	
+
+
+
+</mapper>

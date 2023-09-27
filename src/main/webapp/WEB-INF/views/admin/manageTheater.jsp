@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 
 	
 <head>	
@@ -10,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
+	<script src="${pageContext.request.contextPath}/resources/js/admin_theater.js"></script>
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row">
@@ -18,7 +21,7 @@
 					<div class="main__title">
 						<h2>극장 관리</h2>
 
-						<span class="main__title-stat">100개</span>
+						<span class="main__title-stat">${theaterCount}개</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
@@ -70,34 +73,35 @@
 							</thead>
 
 							<tbody>
+								<c:forEach var="theater" items="${theaterList}">
 								<tr>
 									<td>
-										<div class="main__table-text">1</div>
+										<div class="main__table-text">${theater.THEATER_ID}</div>
 									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>강남</h3>
+												<h3>${theater.THEATER_NAME}</h3>
 											</div>
 										</div>
 									</td>
 									<td>
-										<div class="main__table-text">gangnam</div>
+										<div class="main__table-text">${theater.THEATER_MANAGER_ID}</div>
 									</td>
 									<td>
-										<div class="main__table-text">서울</div>
+										<div class="main__table-text">${theater.THEATER_LOCATION}</div>
 									</td>
 									<td>
-										<div class="main__table-text">1</div>
+										<div class="main__table-text">임시</div>
 									</td>
 									<td>
-										<div class="main__table-text">2k</div>
+										<div class="main__table-text">임시</div>
 									</td>
 									<td>
-										<div class="main__table-text main__table-text--green">운영 중</div>
+										<div class="main__table-text main__table-text--green">${theater.THEATER_STATUS}</div>
 									</td>
 									<td>
-										<div class="main__table-text">24 Oct 2021</div>
+										<div class="main__table-text">${theater.THEATER_CREATED_DATE}</div>
 									</td>
 									<td>
 										<div class="main__table-btns">
@@ -111,58 +115,14 @@
 												<i class="icon ion-ios-create"></i>
 											</a>
 											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<input type="hidden" class="delete-selected-id" value="${theater.THEATER_ID}"/>
 												<i class="icon ion-ios-trash"></i>
 											</a>
 										</div>
 									</td>
 								</tr>
+								</c:forEach>
 								
-								<tr>
-									<td>
-										<div class="main__table-text">2</div>
-									</td>
-									<td>
-										<div class="main__user">
-											<div class="main__meta">
-												<h3>노원</h3>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div class="main__table-text">nowon123</div>
-									</td>
-									<td>
-										<div class="main__table-text">서울</div>
-									</td>
-									<td>
-										<div class="main__table-text">2</div>
-									</td>
-									<td>
-										<div class="main__table-text">3k</div>
-									</td>
-									<td>
-										<div class="main__table-text main__table-text--red">대기</div>
-									</td>
-									<td>
-										<div class="main__table-text">24 Oct 2021</div>
-									</td>
-									<td>
-										<div class="main__table-btns">
-											<a href="#" class="main__table-btn main__table-btn open-modal">
-												<i class="icon ion-ios-log-out"></i>
-											</a>
-											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-												<i class="icon ion-ios-lock"></i>
-											</a>
-											<a href="#" class="main__table-btn main__table-btn--edit">
-												<i class="icon ion-ios-create"></i>
-											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-												<i class="icon ion-ios-trash"></i>
-											</a>
-										</div>
-									</td>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -207,13 +167,13 @@
 
 	<!-- modal delete -->
 	<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-		<h6 class="modal__title">User delete</h6>
+		<h6 class="modal__title">극장 삭제</h6>
 
-		<p class="modal__text">Are you sure to permanently delete this user?</p>
+		<p class="modal__text">정말로 삭제하시겠습니까?</p>
 
 		<div class="modal__btns">
-			<button class="modal__btn modal__btn--apply" type="button">Delete</button>
-			<button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+			<button class="modal__btn modal__btn--apply" type="button">삭제</button>
+			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 		</div>
 	</div>
 	<!-- end modal delete -->
