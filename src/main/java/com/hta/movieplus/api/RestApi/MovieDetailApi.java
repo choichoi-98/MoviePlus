@@ -1,10 +1,7 @@
 package com.hta.movieplus.api.RestApi;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -33,37 +31,46 @@ public class MovieDetailApi {
 	private MovieServiceImpl movieServiceImpl;
 	
 	@GetMapping("movieDetail")
-	public List<Map<String, Object>> getDetailAPI(HttpServletRequest request){
-		List<Map<String, Object>> movieDetailList = new ArrayList<>();
-		
-		logger.info("getDetailAPI");
+	public void updateMovieActors(@RequestParam("movie_cd") String movieCd) {
 		
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			
 			HttpHeaders header = new HttpHeaders();
 			HttpEntity<?> entity = new HttpEntity<>(header);
-			String url = " http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml";
+			String url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json";
 			
 			UriComponents uri = UriComponentsBuilder
-					.fromHttpUrl(url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&movieCd=").build();
+					.fromHttpUrl
+					(url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&&movieCd=" + movieCd)
+					.build();
 			
-			ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+			ResponseEntity<Map> resultMap =
+					restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
 			
-			// JSON 데이터를 Map으로 변환
-            Map<String, Object> responseBody = resultMap.getBody();
-            
-            Map<String, Object> movieDetailResult = (Map<String, Object>) responseBody.get("movieDetailResult");
-            List<Map<String, Object>> movieDetail = (List<Map<String, Object>>) movieDetailResult.get("movieDetail");
+			//Json -> Map
+			Map<String, Object> responseBody = resultMap.getBody();
+			Map<String, Object> movieDetailResult 
+				= (Map<String, Object>) responseBody.get("movieDetailResult");
 			
-            
-            
-            for(Map<String, Object> detailData: movieDetail) {
-            	
-            	
-            }
-			
-		} catch (HttpClientErrorException | HttpServerErrorException e) {
+			//출연배우 정보를 가져와서 MovieServiceImpl를 사용하여 업데이트
+			List<Map<String,Object>> actorsList 
+				= (List<Map<String, Object>>)movieDetailResult.get("actors");
+			if(actorsList != null && !actorsList.isEmpty()) {
+				StringBuilder actors = new StringBuilder();
+				for(Map<String, Object> actorData : actorsList) {
+					String actorName = (String) actorData.get("peopleNm");
+					actors.append(actorName).append(", ");
+				}
+				//마지막 쉽표와 공백 제거
+				if(actors.length()>2) {
+					actors.delete(actors.length()-2, actors.length());
+				}
+				
+				//MovieServiceImpl를 사용하셔 해당 영화의 출연배우 정보 업데이트
+				movieServiceImpl.updateMovieActors(movieCd, actors.toString());
+			}
+		}catch (HttpClientErrorException | HttpServerErrorException e) {
             // 오류 처리
             e.printStackTrace();
         } catch (Exception e) {
@@ -71,7 +78,6 @@ public class MovieDetailApi {
             e.printStackTrace();
         }
 		
-		return null;
 	}
 	
 }

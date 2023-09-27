@@ -15,4 +15,15 @@
 		SELECT * FROM MOVIE
 		WHERE movie_code = #{movie_Code}
 	</select>
+	
+	<select id="selectMovieCode" resultType="java.lang.String">
+		SELECT movie_code FROM MOVIE
+	</select>
+	
+	<update id="updateActors">
+		UPDATE MOVIE
+		SET MOVIE_ACTORS = actors
+		WHERE
+		movie_code = #{movie_Code}
+	</update>
 </mapper>
