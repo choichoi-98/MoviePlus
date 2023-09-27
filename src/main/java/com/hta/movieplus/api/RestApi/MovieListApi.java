@@ -37,7 +37,7 @@ public class MovieListApi {
     public List<Map<String, Object>> getAPI(HttpServletRequest request) {
         List<Map<String, Object>> filteredMovieList = new ArrayList<>();
        
-        logger.info("getAPI");
+        logger.info("getMovieAPI");
         
         try {
             RestTemplate restTemplate = new RestTemplate();
@@ -47,23 +47,37 @@ public class MovieListApi {
             String url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
 
             UriComponents uri = UriComponentsBuilder
-                    .fromHttpUrl(url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&itemPerPage=100&openStartDt=2023").build();
+                    .fromHttpUrl
+                    (url + "?" + "key=1f350fefe347ef77d02d8539b0583cd6&itemPerPage=100&openStartDt=2023")
+                    .build();
 
-            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            ResponseEntity<Map> resultMap = 
+            		restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
 
             // JSON 데이터를 Map으로 변환
             Map<String, Object> responseBody = resultMap.getBody();
 
             
             // "movieListResult" 항목에서 "movieList" 데이터 추출
-            Map<String, Object> movieListResult = (Map<String, Object>) responseBody.get("movieListResult");
-            List<Map<String, Object>> movieList = (List<Map<String, Object>>) movieListResult.get("movieList");
+            Map<String, Object> movieListResult 
+            		= (Map<String, Object>) responseBody.get("movieListResult");
+            List<Map<String, Object>> movieList 
+            		= (List<Map<String, Object>>) movieListResult.get("movieList");
 
             // "prdtStatNm"이 "개봉", "개봉 예정"인 데이터만 선택 후 filteredMovieList에 저장
             for (Map<String, Object> movieData : movieList) {
                 String prdtStatNm = (String) movieData.get("prdtStatNm");
                 String genreAlt = (String) movieData.get("genreAlt");
                 String repGenreNm = (String) movieData.get("repGenreNm");
+                
+                //영화 감독 이름 가져오기
+                List<Map<String, Object>> directors = (List<Map<String, Object>>) movieData.get("directors");
+                if(!directors.isEmpty()) {
+                	Map<String, Object> firstDirector = directors.get(0);
+                	String directorName = (String) firstDirector.get("peopleNm");
+                	logger.info("감독 이름: "+ directorName);
+                }
+                
                 if(!"성인물(에로)".equals(genreAlt)) {
                 	if(!"멜로/로맨스".equals(repGenreNm)) {
                 		
@@ -71,7 +85,7 @@ public class MovieListApi {
                 			Movie movie = new Movie();
                 			movie.setMovie_Code((String) movieData.get("movieCd")); 		//영화번호(코드)
                 			movie.setMovie_Title((String) movieData.get("movieNm"));		//영화제목
-                			movie.setMovie_Director((String) movieData.get("peopleNm"));	//영화감독
+                			movie.setMovie_Director((String) movieData.get("directorName"));	//영화감독
                 			movie.setMovie_Genre((String) movieData.get("repGenreNm"));		//대표장르
                 			movie.setMovie_OpenDate((String) movieData.get("openDt"));		//개봉일
                 			movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
