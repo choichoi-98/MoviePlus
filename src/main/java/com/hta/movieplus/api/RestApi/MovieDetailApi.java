@@ -48,6 +48,7 @@ public class MovieDetailApi {
 			ResponseEntity<Map> resultMap =
 					restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
 			
+			
 			//Json -> Map
 			Map<String, Object> responseBody = resultMap.getBody();
 			Map<String, Object> movieDetailResult 

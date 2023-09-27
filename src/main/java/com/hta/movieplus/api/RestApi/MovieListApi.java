@@ -37,6 +37,7 @@ public class MovieListApi {
     public List<Map<String, Object>> getAPI(HttpServletRequest request) {
         List<Map<String, Object>> filteredMovieList = new ArrayList<>();
        
+        
         logger.info("getMovieAPI");
         
         try {
@@ -70,14 +71,6 @@ public class MovieListApi {
                 String genreAlt = (String) movieData.get("genreAlt");
                 String repGenreNm = (String) movieData.get("repGenreNm");
                 
-                //영화 감독 이름 가져오기
-                List<Map<String, Object>> directors = (List<Map<String, Object>>) movieData.get("directors");
-                if(!directors.isEmpty()) {
-                	Map<String, Object> firstDirector = directors.get(0);
-                	String directorName = (String) firstDirector.get("peopleNm");
-                	logger.info("감독 이름: "+ directorName);
-                }
-                
                 if(!"성인물(에로)".equals(genreAlt)) {
                 	if(!"멜로/로맨스".equals(repGenreNm)) {
                 		
@@ -85,18 +78,25 @@ public class MovieListApi {
                 			Movie movie = new Movie();
                 			movie.setMovie_Code((String) movieData.get("movieCd")); 		//영화번호(코드)
                 			movie.setMovie_Title((String) movieData.get("movieNm"));		//영화제목
-                			movie.setMovie_Director((String) movieData.get("directorName"));	//영화감독
+                			//영화 감독 이름 가져오기
+                            List<Map<String, Object>> directors = (List<Map<String, Object>>) movieData.get("directors");
+                            if(!directors.isEmpty()) {
+                            	Map<String, Object> firstDirector = directors.get(0);
+                            	String directorName = (String) firstDirector.get("peopleNm");
+                            	//logger.info("감독 이름: "+ directorName);
+                            	movie.setMovie_Director(directorName);	//영화감독
+                            }
                 			movie.setMovie_Genre((String) movieData.get("repGenreNm"));		//대표장르
                 			movie.setMovie_OpenDate((String) movieData.get("openDt"));		//개봉일
                 			movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
                 			filteredMovieList.add(movieData);
                 			
-                			logger.info("for문");
+                			//logger.info("for문");
                 			Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
                 			if(returnmovie == null) {
                 				movieServiceImpl.insert(movie);
+                				logger.info("영화 데이터 삽입 성공");
                 			}
-                			
                 			
                 		}
                 	}
