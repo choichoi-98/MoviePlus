@@ -87,7 +87,6 @@
 				</div>
 
 				<div class="mt20 font-size-14">
-					※(변경하기) 휴대폰 번호가 변경된 경우 본인인증 찾기를 통하여 아이디찾기를 진행해주시기 바랍니다.<!--※ 휴대폰 번호가 변경된 경우 본인인증 찾기를 통하여 아이디찾기를 진행해주시기 바랍니다.-->
 				</div>
 
 				<div class="btn-member-bottom v1" style="border-bottom: 0px;">

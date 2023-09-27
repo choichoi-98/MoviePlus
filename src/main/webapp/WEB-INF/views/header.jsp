@@ -86,9 +86,8 @@ button.button.purple {
 </section>
 
 <div class="bg-modal" style="opacity: 0;"></div>
-
-<section id="layer_login_select" class="modal-layer"
-	style="z-index: 5006;">
+<!-- 로그인 모달 -->
+<section id="layer_login_select" class="modal-layer" style="z-index: 5006;">
 	<div class="wrap"
 		style="width: 850px; height: 484px; margin-left: -425px; margin-top: -242px;">
 		<header class="layer-header" header.js>
@@ -98,7 +97,7 @@ button.button.purple {
 		<div class="layer-con" style="height: 439px;">
 			<!-- tab-cont-wrap -->
 			<div class="tab-cont-wrap">
-				<!-- tab 회원 로그인 -->
+				<!-- **** tab 회원 로그인 **** -->
 				<div id="login_tab_01" class="tab-cont on">
 
 					<div class="login-member col-2 pt00">
@@ -106,7 +105,7 @@ button.button.purple {
 						<div class="col-wrap">
 							<div class="col left">
 								<div class="login-input-area">
-                                    <form name="loginform" action="${pageContext.request.contextPath}/member/loginProcess" method="post">
+                                    <form name="loginform" action="${pageContext.request.contextPath}/loginProcess" method="post">
                                         <input autocomplete="off" name="MEMBER_ID" id="ibxLoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
                                         <input autocomplete="off" name="MEMBER_PASS" id="ibxLoginPwd" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
                                         <div class="alert"></div>
@@ -122,8 +121,9 @@ button.button.purple {
 
                                         </div>
                                         <!--// chk-util -->
-
-                                        <button id="btnLogin" type="button" class="button purple large btn-login" disabled="disabled">로그인<!--로그인--></button>
+										
+										<!-- 로그인 버튼 -->
+                                        <button id="btnLogin" type="submit" class="button purple large btn-login">로그인<!--로그인--></button>
 
                                         <div class="link">
                                             <a href="/movieplus/member/findid" title="ID/PW 찾기 선택">ID/PW 찾기<!--ID/PW 찾기--></a>
@@ -179,7 +179,7 @@ button.button.purple {
 			<div class="before" style="">
 			    <a href="#" class="" title="관리자">로그인한 관리자만 보여요</a>
 				<a id="header-login-btn" href="#" title="로그인">로그인</a> 
-				<a href="#"	title="회원가입">회원가입</a>
+				<a href="/movieplus/member/join" title="회원가입">회원가입</a>
 			</div>
 
 			<div class="after" style="display: none">
@@ -478,9 +478,8 @@ button.button.purple {
 				<div class="txt">영화를 사랑하는 당신을 위한 꼭 맞는 혜택까지 확인해 보세요!</div>
 
 				<div class="linkBox">
-					<a href="#" id="moveLogin" title="로그인" class="btn-modal-open"
-						w-data="850" h-data="484">로그인</a> <a href="#" class="link"
-						title="혹시 아직 회원이 아니신가요?">혹시 아직 회원이 아니신가요?</a>
+					<a href="#" id="moveLogin" title="로그인" class="btn-modal-open" w-data="850" h-data="484">로그인</a> 
+					<a href="/movieplus/member/join" class="link" title="혹시 아직 회원이 아니신가요?">혹시 아직 회원이 아니신가요?</a>
 				</div>
 
 			</div>

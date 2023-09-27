@@ -37,8 +37,7 @@
 			<a href="/movieplus/main" title="메인 페이지로 이동"><img src="${pageContext.request.contextPath}/image/header-logo.png" style="width: 140px; height: 47px;">
 			</a>
 		</h1>
-		
-		
+
 
 		<!-- col-wrap -->
 		<div class="col-wrap">
@@ -50,7 +49,7 @@
 				<div class="tab-list">
 					<ul>
 						<li><a href="/movieplus/member/findid" title="아이디찾기 선택">아이디찾기<!--아이디찾기--></a></li>
-						<li class="on"><a href="javaScript:void(0);" title="비밀번호 찾기 선택">비밀번호 찾기<!--비밀번호 찾기--></a></li>
+						<li class="on"><a href="javaScript:void(0);" title="비밀번호 찾기 선택" style="color:#1a191f;">비밀번호 찾기<!--비밀번호 찾기--></a></li>
 					</ul>
 				</div>
 
@@ -77,9 +76,9 @@
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="ibxSchPwdMblpTelno">휴대폰 번호<!--휴대폰 번호--></label></th>
+								<th scope="row"><label for="ibxSchPwdMblpEmail">이메일 주소<!--이메일 주소--></label></th>
 								<td>
-									<input type="text" id="ibxSchPwdMblpTelno" maxlength="11" placeholder="&#39;-&#39; 없이 입력" class="input-text w230px"><!--'-' 없이 입력-->
+									<input type="text" id="ibxSchPwdMblpEmail" maxlength="" placeholder="&#39;@&#39; 포함하여 입력" class="input-text w230px"><!--'-' 없이 입력-->
 									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08 disabled" disabled="disabled">인증요청<!--인증요청--></button>
 								</td>
 							</tr>
@@ -91,7 +90,7 @@
 											<input maxlength="4" type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
 
 											<div class="time-limit" id="schPwdtimer">
-												3:00
+												10:00
 											</div>
 										</div>
 									</div>
