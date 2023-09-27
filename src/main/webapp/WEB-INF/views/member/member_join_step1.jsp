@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,32 +65,40 @@
 
 				<p class="page-info-txt">
 					<strong>회원가입을 위한 본인인증 단계입니다.<!--회원가입을 위한 본인인증 단계입니다.--></strong>
-					<span>원하시는 인증방법을 선택해주세요.<!--원하시는 인증방법을 선택해주세요.--></span>
+					<span>이메일 주소를 입력해주세요.<!--이메일 주소를 입력해주세요.--></span>
 				</p>
 				
 					<div class="join-chk-me col-1">
-						<a href="javascript:fn_kakaoCertSubmit();" class="kakoBtn">
-							<div class="img"><img src="./1_files/kakaoBank.png" alt="카카오인증"></div>
-							<span>카카오뱅크 인증</span>
-						</a>
-					</div>
-				
-				<div class="join-chk-me col-2">
-					<a href="javaScript:fn_mblpCertSubmit()" title="휴대폰 인증 선택" id="btnMblpCert">
-						<i class="iconset ico-member-phone"></i>
-						<span>휴대폰 인증<!--휴대폰 인증--></span>
-					</a>
+						<table>
+						<tbody>
+							<tr>
+								<th scope="row"><label for="ibxSchPwdMblpEmail">이메일 주소<!--이메일 주소--></label></th>
+								<td>
+									<input type="text" id="ibxSchPwdMblpEmail" maxlength="" placeholder="&#39;@&#39; 포함하여 입력" class="input-text w230px"><!--'-' 없이 입력-->
+									<button id="btnSchPwdMbCertNoSend" type="button" class="button gray w75px ml08 disabled" disabled="disabled">인증요청<!--인증요청--></button>
+								</td>
+							</tr>
+							<tr id="schPwdMblpCertRow">
+								<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
+								<td>
+									<div class="chk-num">
+										<div class="line">
+											<input maxlength="4" type="text" id="ibxSchPwdMblpCharCertNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
 
-					<a href="javaScript:fn_IpinCertSubmit()" title="아이핀 인증 선택" id="btnIpinCert">
-						<i class="iconset ico-member-ipin"></i>
-						<span>아이핀 인증<!--아이핀 인증--></span>
-					</a>
-				</div>
+											<div class="time-limit" id="schPwdtimer">
+												10:00
+											</div>
+										</div>
+									</div>
 
-				<ul class="dot-list gray mt20">
-					<li>14세 미만 어린이는 보호자 인증을 추가로 완료한 후 가입이 가능합니다.</li><li>본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용  또는  저장되지 않습니다.</li><!--<li>14세 미만 어린이는 보호자 인증을 추가로 완료한 후 가입이 가능합니다.</li>
-											<li>본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용  또는  저장되지 않습니다.</li>-->
-				</ul>
+									<button id="btnSchPwdMblpCharCert" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
+									<div id="schPwdMblpNo-error-text" class="alert"></div>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div> <!-- 이메일 인증 테이블 -->
+
 			</div>
 		</div>
 		<!--// col-wrap -->

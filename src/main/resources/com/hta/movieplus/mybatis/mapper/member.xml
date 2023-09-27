@@ -14,7 +14,8 @@
 
 	<select id="isId" resultType="member" parameterType="String">
 		select *
-		from MEMBER where MEMBER_ID = #{MEMBER_ID}
+		from MEMBER 
+		where MEMBER_ID = #{MEMBER_ID}
 	</select>
 
 

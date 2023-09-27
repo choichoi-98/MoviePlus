@@ -23,12 +23,18 @@ public class MemberServiceImpl implements MemberService{
 	public int insert(Member m) {
 		return dao.insert(m);
 	}
+	
+	@Override	//아이디 존재여부 확인
+	public int isId(String MEMBER_ID) {
+		Member rmember = dao.isId(MEMBER_ID);
+		return (rmember==null)? -1 : 1;		//아이디가 존재하는 경우 1, 존재하지 않는 경우 -1 리턴
+	}
 
 	@Override   //로그인
 	public int isId(String MEMBER_ID, String MEMBER_PASS) {
 		Member dbmember = dao.isId(MEMBER_ID);
 		int result = -1; 	//아이디가 존재하지 않는 경우 - null인 경우
-		if(dbmember != null) {	//아이디가 존재하지 않는경우
+		if(dbmember != null) {	//아이디가 존재하는경우
 			
 			if(passwordEncoder.matches(MEMBER_PASS, dbmember.getMEMBER_PASS())) {
 				result = 1;	//아이디와 비밀번호가 일치하는 경우
@@ -38,11 +44,6 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
-	@Override	//로그인 아이디 존재여부 확인
-	public int isId(String MEMBER_ID) {
-		Member rmember = dao.isId(MEMBER_ID);
-		return (rmember==null)? -1 : 1;		//아이디가 존재하는 경우 1, 존재하지 않는 경우 -1 리턴
-	}
 	
 	
 
