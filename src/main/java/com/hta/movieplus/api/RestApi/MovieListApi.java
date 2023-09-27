@@ -41,6 +41,7 @@ public class MovieListApi {
         logger.info("getMovieAPI");
         
         try {
+        	logger.info("try문");
             RestTemplate restTemplate = new RestTemplate();
 
             HttpHeaders header = new HttpHeaders();
@@ -62,9 +63,11 @@ public class MovieListApi {
             // "movieListResult" 항목에서 "movieList" 데이터 추출
             Map<String, Object> movieListResult 
             		= (Map<String, Object>) responseBody.get("movieListResult");
+            logger.info(movieListResult.toString());
             List<Map<String, Object>> movieList 
             		= (List<Map<String, Object>>) movieListResult.get("movieList");
-
+            logger.info(movieList.toString());
+            
             // "prdtStatNm"이 "개봉", "개봉 예정"인 데이터만 선택 후 filteredMovieList에 저장
             for (Map<String, Object> movieData : movieList) {
                 String prdtStatNm = (String) movieData.get("prdtStatNm");
@@ -84,18 +87,18 @@ public class MovieListApi {
                             	Map<String, Object> firstDirector = directors.get(0);
                             	String directorName = (String) firstDirector.get("peopleNm");
                             	//logger.info("감독 이름: "+ directorName);
-                            	movie.setMovie_Director(directorName);	//영화감독
+                            	movie.setMovie_Director(directorName);						//영화감독
                             }
                 			movie.setMovie_Genre((String) movieData.get("repGenreNm"));		//대표장르
                 			movie.setMovie_OpenDate((String) movieData.get("openDt"));		//개봉일
-                			movie.setMovie_Release((String) movieData.get("prdtStatNm"));//개봉상태(개봉, 개봉예정)
+                			movie.setMovie_Release((String) movieData.get("prdtStatNm"));	//개봉상태(개봉, 개봉예정)
                 			filteredMovieList.add(movieData);
                 			
                 			//logger.info("for문");
                 			Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
                 			if(returnmovie == null) {
                 				movieServiceImpl.insert(movie);
-                				logger.info("영화 데이터 삽입 성공");
+                				logger.info("for문 : 영화 데이터 삽입 성공");
                 			}
                 			
                 		}

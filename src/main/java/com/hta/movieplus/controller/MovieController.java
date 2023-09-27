@@ -31,6 +31,11 @@ public class MovieController {
     	return "movie/movie_list";
     }
     
+    @GetMapping("/movieAdd")
+    public String movieAdd() {
+    	return "admin/movie_add";
+    }
+    
 	@GetMapping("/updateActors")
 	public void updateActors(HttpServletRequest request, Model model) {
 		//MovieServieImpl을 사용해서 DB에 저장된 모든 MOVIE_CODE 값 가져옴
