@@ -19,9 +19,17 @@
 		FROM THEATER
 	</select>
 	
-	<select id="getTheaterList" resultType="theater">
-		SELECT *
-		FROM THEATER
+	<select id="getTheaterList" parameterType="map" resultType="theater">
+		<![CDATA[ 
+	 	SELECT * FROM
+	 		( SELECT ROWNUM RNUM, THEATER.*
+	 		  FROM 
+	 		  		( SELECT * 
+	 		  		  FROM THEATER) THEATER
+	 		  WHERE ROWNUM <= #{end} 
+	 		  )
+	 	WHERE RNUM >= #{start} AND RNUM <= #{end}
+	 	 ]]>
 	</select>
 
 	<delete id="deleteTheaterById" parameterType="int">

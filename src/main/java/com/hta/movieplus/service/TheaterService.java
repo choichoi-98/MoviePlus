@@ -1,6 +1,7 @@
 package com.hta.movieplus.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hta.movieplus.domain.Theater;
 
@@ -10,7 +11,7 @@ public interface TheaterService {
 
 	public int getCountByTheater();
 
-	public List<Theater> getTheaterList();
+	public List<Theater> getTheaterList(int page, int limit);
 
 	public void deleteTheater(int num);
 
@@ -19,6 +20,8 @@ public interface TheaterService {
 	public void changeStatusTheater(int num, String status);
 
 	public void modifyTheater(Theater theater);
+
+	public Map<String, Object> pagination(int page);
 	
 	
 

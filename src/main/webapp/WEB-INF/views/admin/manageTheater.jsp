@@ -139,15 +139,21 @@
 						<span>${theaterCount} 중 10개씩</span>
 
 						<ul class="paginator">
-							<li class="paginator__item paginator__item--prev">
-								<a href="#"><i class="icon ion-ios-arrow-back"></i></a>
+							<li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
+							    <a href="managetheater?page=${page-1}"><i class="icon ion-ios-arrow-back"></i></a>
 							</li>
-							<li class="paginator__item"><a href="#">1</a></li>
-							<li class="paginator__item paginator__item--active"><a href="#">2</a></li>
-							<li class="paginator__item"><a href="#">3</a></li>
-							<li class="paginator__item"><a href="#">4</a></li>
-							<li class="paginator__item paginator__item--next">
-								<a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
+			
+							<c:forEach var="a" begin="${startpage}" end="${endpage}">
+									<c:if test="${a == page }">
+										<li class="paginator__item paginator__item--active" ><a href="#">${a }</a></li>
+									</c:if>
+								<c:if test="${a != page }">
+									<li class="paginator__item"><a href="managetheater?page=${a }">${a}</a></li>
+								</c:if>
+							</c:forEach>
+							
+							<li class="paginator__item paginator__item--next" ${page >= maxpage ? 'style="pointer-events: none;"' : ''}>
+								<a href="managetheater?page=${page+1}"><i class="icon ion-ios-arrow-forward"></i></a>
 							</li>
 						</ul>
 					</div>

@@ -1,6 +1,7 @@
 package com.hta.movieplus.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,14 @@ public class TheaterController {
 		
 		int theaterCount = theaterservice.getCountByTheater();
 		
-		List<Theater> theaterList = theaterservice.getTheaterList();
+		Map<String, Object> paginationDataMap = theaterservice.pagination(page);
+		List<Theater> theaterList = theaterservice.getTheaterList(page, (int) paginationDataMap.get("limit"));
 
 		mv.setViewName("admin/manageTheater");
+		
+		//페이지네이션
+		mv.addAllObjects(paginationDataMap);
+		
 		mv.addObject("theaterCount", theaterCount);
 		mv.addObject("theaterList", theaterList);
 		
