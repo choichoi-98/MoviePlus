@@ -43,7 +43,7 @@
 		<div class="sidebar__nav-wrap">
 			<ul class="sidebar__nav">
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>대쉬보드</span></a>
+					<a href="/movieplus/manager/" class="sidebar__nav-link"><span>대쉬보드</span></a>
 				</li>
 
 				<li class="sidebar__nav-item">
@@ -51,7 +51,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>상영 스케줄 관리</span></a>
+					<a href="/movieplus/manager/scheduling" class="sidebar__nav-link"><span>상영 스케줄 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
