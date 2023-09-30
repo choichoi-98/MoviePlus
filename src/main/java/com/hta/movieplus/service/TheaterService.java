@@ -13,6 +13,12 @@ public interface TheaterService {
 	public List<Theater> getTheaterList();
 
 	public void deleteTheater(int num);
+
+	public Theater getTheaterById(int num);
+
+	public void changeStatusTheater(int num, String status);
+
+	public void modifyTheater(Theater theater);
 	
 	
 

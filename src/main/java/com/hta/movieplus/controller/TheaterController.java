@@ -70,6 +70,34 @@ public class TheaterController {
 		
 		return "redirect:/admin/managetheater";
 	}
+	
+	@GetMapping("/admin/modifytheater")
+	public ModelAndView modifyTheaterAction(@RequestParam(value = "num") int num,
+			ModelAndView mv) {
+		
+		Theater theater = theaterservice.getTheaterById(num);
+		
+		mv.addObject(theater);
+		mv.setViewName("/admin/modifyTheater");
+		
+		return mv;
+	}
+	
+	@PostMapping("/admin/modifyTheaterAction")
+	public String modifyTheaterAction(Theater theater) {
+		theaterservice.modifyTheater(theater);
+		
+		return "redirect:/admin/managetheater";
+	}
+	
+	@GetMapping("/admin/changeStatusTheaterAction")
+	public String changeStatusTheaterAction(int num, String status) {
+		theaterservice.changeStatusTheater(num, status);
+		
+		
+		return "redirect:/admin/managetheater";
+	}
+	
 	//어드민 극장 관리
 
 

@@ -1,6 +1,8 @@
 package com.hta.movieplus.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,30 @@ public class TheaterServiceImpl implements TheaterService {
 	public void deleteTheater(int num) {
 		// TODO Auto-generated method stub
 		mapper.deleteTheaterById(num);
+		
+	}
+
+	@Override
+	public Theater getTheaterById(int num) {
+		// TODO Auto-generated method stub
+		return mapper.getTheaterById(num);
+		
+	}
+
+	@Override
+	public void changeStatusTheater(int num, String status) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("num", num);
+		dataMap.put("status", status);
+		
+		mapper.changeStatusTheaterById(dataMap);
+	}
+
+	@Override
+	public void modifyTheater(Theater theater) {
+		// TODO Auto-generated method stub
+		mapper.updateTheaterById(theater);
 		
 	}
 

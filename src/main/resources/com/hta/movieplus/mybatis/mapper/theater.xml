@@ -10,7 +10,7 @@
             SELECT THEATER_SEQ.NEXTVAL FROM DUAL
         </selectKey>
 		INSERT INTO THEATER 
-		VALUES (#{THEATER_ID}, #{THEATER_NAME}, #{THEATER_INTRO1}, #{THEATER_INTRO2}, #{THEATER_ADDRESS},
+		VALUES (#{THEATER_ID}, #{THEATER_NAME}, #{THEATER_INTRO1}, #{THEATER_INTRO2}, #{THEATER_POST}, #{THEATER_ADDRESS1}, #{THEATER_ADDRESS2}, 
 				#{THEATER_LOCATION}, #{THEATER_PARKING}, #{THEATER_MANAGER_ID}, #{THEATER_STATUS}, #{THEATER_DISABLED_SEAT}, #{THEATER_SPECIAL_SEAT}, SYSDATE)
 	</insert>	
 	
@@ -30,6 +30,33 @@
 		WHERE THEATER_ID = #{num}
 	</delete>
 	
+	<select id="getTheaterById" resultType="theater">
+		SELECT *
+		FROM THEATER
+		WHERE THEATER_ID = #{num}
+	</select>
+	
+	<update id="changeStatusTheaterById" parameterType="map">
+		UPDATE THEATER
+		<choose>
+			<when test='status == "운영"'>
+				SET THEATER_STATUS = '대기'
+			</when>
+			<when test='status == "대기"'>
+				SET THEATER_STATUS = '운영'
+			</when>
+		</choose>
+		WHERE THEATER_ID = #{num}
+	</update>
+	
+	<update id="updateTheaterById" parameterType="theater">
+		UPDATE THEATER
+		SET THEATER_NAME = #{THEATER_NAME}, THEATER_INTRO1 =  #{THEATER_INTRO1}, THEATER_INTRO2 = #{THEATER_INTRO2},
+		THEATER_POST = #{THEATER_POST}, THEATER_ADDRESS1 = #{THEATER_ADDRESS1}, THEATER_ADDRESS2 = #{THEATER_ADDRESS2}, 
+		THEATER_LOCATION = #{THEATER_LOCATION}, THEATER_PARKING =  #{THEATER_PARKING}, THEATER_DISABLED_SEAT = #{THEATER_DISABLED_SEAT},
+		THEATER_SPECIAL_SEAT = #{THEATER_SPECIAL_SEAT}
+		WHERE THEATER_ID = #{THEATER_ID}
+	</update>
 
 
 
