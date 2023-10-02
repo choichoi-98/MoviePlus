@@ -59,16 +59,14 @@
 
 				<!-- users -->
 				<div class="col-12">
-					<div class="main__table-wrap">
 						<table class="main__table">
 							<thead>
 								<tr>
-									<th>ID</th>
 									<th>극장 명</th>
 									<th>관리자 ID</th>
 									<th>지역</th>
 									<th>매출 순위</th>
-									<th>관객 수(k)</th>
+									<th>상영관 수</th>
 									<th>상태</th>
 									<th>생성 날짜</th>
 									<th>관리</th>
@@ -78,9 +76,6 @@
 							<tbody>
 								<c:forEach var="theater" items="${theaterList}">
 								<tr>
-									<td>
-										<div class="main__table-text">${theater.THEATER_ID}</div>
-									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
@@ -98,7 +93,7 @@
 										<div class="main__table-text">임시</div>
 									</td>
 									<td>
-										<div class="main__table-text">임시</div>
+										<div class="main__table-text">${theater.THEATER_ROOM_CNT}</div>
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">${theater.THEATER_STATUS}</div>
@@ -112,6 +107,7 @@
 											<a href="#" class="main__table-btn main__table-btn open-modal">
 												<i class="icon ion-ios-log-out"></i>
 											</a>
+											
 											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
 												<i class="icon ion-ios-lock"></i>
 												<input type="hidden" class="selected-theater-status" value="${theater.THEATER_STATUS}"/>
@@ -129,7 +125,6 @@
 								
 							</tbody>
 						</table>
-					</div>
 				</div>
 				<!-- end users -->
 				<a href="/movieplus/admin/addtheater" class="main__title-link">극장 추가</a>

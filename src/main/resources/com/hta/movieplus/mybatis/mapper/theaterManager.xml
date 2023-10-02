@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.TheaterManagerMapper">
+
+	<select id="getRoomCountById" resultType="int">
+		SELECT COUNT(*)
+		FROM THEATER_ROOM
+		WHERE THEATER_ID = 1
+	</select>
+
+	<insert id="addTheaterRoom" parameterType="theaterRoom">
+		INSERT INTO THEATER_ROOM
+		VALUES(THEATER_ROOM_SEQ.NEXTVAL, #{THEATER_ROOM_NAME}, #{THEATER_ROOM_SEAT_TYPE}, 
+		#{THEATER_ROOM_STATUS}, SYSDATE, 1)
+	</insert>
+		
+	<select id="getRoomList" resultType="theaterRoom">
+		SELECT *
+		FROM THEATER_ROOM
+		WHERE THEATER_ID = 1
+	</select>
+
+</mapper>

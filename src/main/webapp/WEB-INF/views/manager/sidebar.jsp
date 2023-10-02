@@ -45,9 +45,9 @@
 				<li class="sidebar__nav-item">
 					<a href="/movieplus/manager/" class="sidebar__nav-link"><span>대쉬보드</span></a>
 				</li>
-
+				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>회원 관리</span></a>
+					<a href="/movieplus/manager/manageroom" class="sidebar__nav-link"><span>상영관 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

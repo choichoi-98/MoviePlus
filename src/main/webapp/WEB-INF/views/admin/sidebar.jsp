@@ -47,6 +47,10 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>회원 관리</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
 					<a href="/movieplus/admin/managetheater" class="sidebar__nav-link"><span>극장 관리</span></a>
 				</li>
 

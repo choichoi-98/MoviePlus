@@ -24,8 +24,14 @@
 	 	SELECT * FROM
 	 		( SELECT ROWNUM RNUM, THEATER.*
 	 		  FROM 
-	 		  		( SELECT * 
-	 		  		  FROM THEATER) THEATER
+	 		  		( SELECT T.*, TR.THEATER_ROOM_CNT
+						FROM THEATER T
+						LEFT JOIN (
+						    SELECT THEATER_ID, COUNT(*) AS THEATER_ROOM_CNT
+						    FROM THEATER_ROOM
+						    GROUP BY THEATER_ID
+						) TR ON T.THEATER_ID = TR.THEATER_ID
+						ORDER BY THEATER_CREATED_DATE desc ) THEATER
 	 		  WHERE ROWNUM <= #{end} 
 	 		  )
 	 	WHERE RNUM >= #{start} AND RNUM <= #{end}

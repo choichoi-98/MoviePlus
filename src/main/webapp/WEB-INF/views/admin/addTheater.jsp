@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/.js"></script>
 
 <head>
 <meta charset="UTF-8">

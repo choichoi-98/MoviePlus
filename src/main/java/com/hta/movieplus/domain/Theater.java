@@ -16,6 +16,8 @@ public class Theater {
 	private String THEATER_SPECIAL_SEAT = "UNCHECKED";
 	private String THEATER_CREATED_DATE;
 	
+	private int THEATER_ROOM_CNT;
+	
 	
 	public int getTHEATER_POST() {
 		return THEATER_POST;
@@ -101,6 +103,12 @@ public class Theater {
 	}
 	public void setTHEATER_CREATED_DATE(String tHEATER_CREATED_DATE) {
 		THEATER_CREATED_DATE = tHEATER_CREATED_DATE;
+	}
+	public int getTHEATER_ROOM_CNT() {
+		return THEATER_ROOM_CNT;
+	}
+	public void setTHEATER_ROOM_CNT(int tHEATER_ROOM_CNT) {
+		THEATER_ROOM_CNT = tHEATER_ROOM_CNT;
 	}
 	
 	

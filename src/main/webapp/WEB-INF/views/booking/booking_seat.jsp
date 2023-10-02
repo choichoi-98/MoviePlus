@@ -107,7 +107,7 @@
 													<img src="${pageContext.request.contextPath}/resources/image/booking/img-theater-screen.png" alt="screen"
 														style="position: absolute; left: 62px; top: 10px;"
 														class="mCS_img_loaded">
-													<jsp:include page="/WEB-INF/views/seats/seat-1.jsp" />
+													<jsp:include page="/WEB-INF/views/seats/seat-3.jsp" />
 													<!-- 좌석 인클루드, 1-3 순 크기 -->
 												</div>
 												<div id="mCSB_1_scrollbar_vertical"

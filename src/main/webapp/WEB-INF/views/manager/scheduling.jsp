@@ -7,21 +7,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp" />
 
+
 	<main class="main">
-		<div class="container-fluid">
-			<div class="row row--grid">
-				<!-- main title -->
-				<div class="col-12">
-					<div class="main__title">
-						<h2>상영 스케줄 관리</h2>
-					</div>
+		<div class="row row--grid">
+			<!-- main title -->
+			<div class="col-12">
+				<div class="main__title">
+					<h2>상영 스케줄 관리</h2>
 				</div>
-				<!-- end main title -->
-				<div class="col-24">
-					<table class="table" style="background: gray;">
+			</div>
+			<!-- end main title -->
+			<div class="main__table-wrap">
+				<div class="col-12">
+					<table id="theater-schedule-table">
 						<thead>
 							<tr>
 								<th>관</th>
@@ -72,4 +74,19 @@
 
 	</main>
 </body>
+
+<style>
+#theater-schedule-table {
+	background: gray;
+	text-align: center;
+}
+
+#theater-schedule-table th {
+	width: 200px;
+}
+
+#theater-schedule-table th:first-child {
+	width: 50px;
+}
+</style>
 </html>
