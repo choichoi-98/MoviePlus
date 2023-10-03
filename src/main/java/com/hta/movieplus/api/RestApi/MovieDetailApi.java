@@ -67,14 +67,47 @@ public class MovieDetailApi {
 			logger.info(movieInfoList.toString());
 			
 			List<Map<String,Object>> actorsList 
-			= (List<Map<String, Object>>)movieInfoList.get("actors");
+				= (List<Map<String, Object>>)movieInfoList.get("actors");
+			
+			//관람등급 정보 가져오기
+			List<Map<String, Object>> auditsList 
+				= (List<Map<String, Object>>) movieInfoList.get("audits");
+			String watchGradeNm = null;
+			
+			if(auditsList != null && !auditsList.isEmpty()) {
+				Map<String, Object> audits = auditsList.get(0);
+				watchGradeNm = (String) audits.get("watchGradeNm");
+				
+				logger.info(watchGradeNm.toString());
+			} else {
+				watchGradeNm = "제공정보없음";
+			}
+			
+			//상영시간 정보 가져오기
+			String showTm = (String) movieInfoList.get("showTm");
+			if(showTm == " " || showTm.isEmpty()) {
+				showTm = "제공정보없음";
+			}
+			logger.info(showTm.toString());
+			
 			
 			logger.info(actorsList.toString());
 			if(actorsList != null && !actorsList.isEmpty()) {
 				StringBuilder actors = new StringBuilder();
+				int count = 0;
+				
 				for(Map<String, Object> actorData : actorsList) {
+					if(count >= 5) {
+						break; 
+					}
 					String actorName = (String) actorData.get("peopleNm");
-					actors.append(actorName).append(", ");
+					actors.append(actorName);
+					
+					if(count < 4) {
+						actors.append(", ");
+					}
+					
+					count++;
 				}
 				//마지막 쉽표와 공백 제거
 				if(actors.length()>2) {
@@ -83,8 +116,8 @@ public class MovieDetailApi {
 				
 				logger.info(actors.toString());
 				
-				//MovieServiceImpl를 사용하셔 해당 영화의 출연배우 정보 업데이트
-				movieServiceImpl.updateMovieActors(movieCd, actors.toString());
+				//MovieServiceImpl를 사용하셔 해당 영화의 출연배우 정보, 상영시간, 관람등급 업데이트
+				movieServiceImpl.updateMovieActors(movieCd, actors.toString(), watchGradeNm, showTm );
 				
 	}
 			

@@ -23,7 +23,24 @@
 	<update id="updateActors">
 		UPDATE MOVIE
 		SET MOVIE_ACTORS = #{actors}
+		, MOVIE_RUNTIME = #{showTm}
+		, MOVIE_GRADE = #{watchGradeNm}
 		WHERE
 		movie_code = #{movieCd}
+	</update>
+	
+	<select id="selectMovieTitle" resultType="movie">
+		SELECT movie_Title, movie_Director
+		FROM MOVIE
+	</select>
+	
+	<update id="updatePoster">
+		UPDATE MOVIE
+		SET MOVIE_POSTER = #{posterUrl},
+		MOVIE_STILL = #{stillUrl},
+		MOVIE_PLOT = #{plotText}
+		WHERE
+		MOVIE_CODE = #{codeNo}
+		
 	</update>
 </mapper>

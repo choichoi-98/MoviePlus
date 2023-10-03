@@ -11,6 +11,10 @@ public interface MovieService {
 	public Movie select(String movieCd);
 	
 	public List<String> getAllMovieCodes();
+
+	public int updateMovieActors(String movieCd, String actors, String watchGradeNm, String showTm);
 	
-	public int updateMovieActors(String movieCd, String actors);
+	public List<Movie> getAllMovies();
+	
+	public int updatePoster(String codeNo, String posterUrl, String stillUrl, String plotText);
 }
