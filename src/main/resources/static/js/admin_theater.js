@@ -3,6 +3,7 @@ $(document).ready(function () {
 // 극장 리스트 시작
     let delete_id;
     let status_change_id;
+    let selected_theater_status;
     
     $('.main__table-btn--edit').click(function() {
         var modify_id = $(this).parent().find('.selected-theater-id').val();

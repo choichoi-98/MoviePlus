@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp" />
+	<script src="${pageContext.request.contextPath}/resources/js/manager_room.js"></script>
 
 	<main class="main">
 		<div class="container-fluid">
@@ -103,7 +104,7 @@
 			<p class="modal__text">정말로 삭제하시겠습니까?</p>
 
 			<div class="modal__btns">
-				<button id="delete-theater-modal-btn"
+				<button id="delete-room-modal-btn"
 					class="modal__btn modal__btn--apply" type="button">삭제</button>
 				<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 			</div>

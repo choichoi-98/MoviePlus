@@ -62,5 +62,36 @@ public class ManagerController {
 		
 		return "redirect:/manager/manageroom";
 	}
+	
+	@GetMapping("/modifyRoom")
+	public ModelAndView modifyRoomView(int room_id, ModelAndView mv) {
+		TheaterRoom theaterRoom = theaterManagerService.getTheaterRoomById(room_id);
+		
+		mv.addObject("theaterRoom", theaterRoom);
+		mv.setViewName("manager/modifyRoom");
+		return mv;
+	}
+	
+	@PostMapping("/modifyRoomAction")
+	public String modfiyRoomAction(TheaterRoom theaterRoom) {
+		
+		System.out.println(theaterRoom);
+		
+		theaterManagerService.modifyTheaterRoom(theaterRoom);
+		
+		return "redirect:/manager/manageroom";
+	}
+	
+	@GetMapping("/deleteRoomAction")
+	public String deleteRoomAction(int room_id) {
+		theaterManagerService.deleteRoomById(room_id);
+		return "redirect:/manager/manageroom";
+	}
+	
+	@GetMapping("/changeStatusRoomAction")
+	public String changeStatusRoomAction(int num, String status) {
+		theaterManagerService.changeStatusRoomById(num, status);
+		return "redirect:/manager/manageroom";
+	}
 
 }

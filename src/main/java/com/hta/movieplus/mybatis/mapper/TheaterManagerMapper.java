@@ -1,6 +1,7 @@
 package com.hta.movieplus.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,5 +15,13 @@ public interface TheaterManagerMapper {
 	public void addTheaterRoom(TheaterRoom theaterRoom);
 
 	public List<TheaterRoom> getRoomList();
+
+	public void deleteRoomById(int room_id);
+
+	public void changeStatusRoomById(Map<String, Object> dataMap);
+
+	public TheaterRoom getTheaterRoomById(int room_id);
+
+	public void modifyTheaterRoom(TheaterRoom theaterRoom);
 
 }

@@ -56,4 +56,11 @@ public class TheaterRoom {
 		THEATER_ID = tHEATER_ID;
 	}
 
+	@Override
+	public String toString() {
+		return "TheaterRoom [THEATER_ROOM_ID=" + THEATER_ROOM_ID + ", THEATER_ROOM_NAME=" + THEATER_ROOM_NAME
+				+ ", THEATER_ROOM_SEAT_TYPE=" + THEATER_ROOM_SEAT_TYPE + ", THEATER_ROOM_STATUS=" + THEATER_ROOM_STATUS
+				+ ", THEATER_ROOM_CREATED_DATE=" + THEATER_ROOM_CREATED_DATE + ", THEATER_ID=" + THEATER_ID + "]";
+	}
+
 }

@@ -14,4 +14,12 @@ public interface TheaterManagerService {
 
 	List<TheaterRoom> getRoomList();
 
+	void deleteRoomById(int room_id);
+
+	void changeStatusRoomById(int room_id, String status);
+
+	TheaterRoom getTheaterRoomById(int room_id);
+
+	void modifyTheaterRoom(TheaterRoom theaterRoom);
+
 }
