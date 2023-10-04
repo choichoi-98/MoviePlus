@@ -17,7 +17,14 @@
 		from MEMBER 
 		where MEMBER_ID = #{MEMBER_ID}
 	</select>
-
+	
+	<select id="findId" resultType="member" parameterType="String">
+		select MEMBER_NAME, MEMBER_ID
+		from MEMBER
+		WHERE MEMBER_NAME = #{MEMBER_NAME} 
+		AND MEMBER_BIRTH = #{MEMBER_BIRTH}
+		AND MEMBER_PHONENO = #{MEMBER_PHONENO}
+	</select>
 
 
 </mapper>

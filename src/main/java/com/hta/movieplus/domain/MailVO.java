@@ -6,13 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MailVO {
-	Random random = new Random();
+	private Random random = new Random(System.currentTimeMillis());
 	int verifycode = 100000 + random.nextInt(900000);
 	private String from="j2sunnn@naver.com";
 	private String to;
 	private String subject;
 	private String content;
-	
 	
 	public Random getRandom() {
 		return random;

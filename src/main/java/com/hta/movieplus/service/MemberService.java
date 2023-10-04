@@ -10,6 +10,6 @@ public interface MemberService {
 	
 	public int isId(String MEMBER_ID);
 	
-	
+	public Member findId(String MEMBER_NAME, String MEMBER_BIRTH, String MEMBER_PHONENO);
 
 }

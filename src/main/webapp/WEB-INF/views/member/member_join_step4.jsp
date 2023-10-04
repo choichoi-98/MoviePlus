@@ -11,11 +11,7 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
-
 </head>
-<!-- SNS 라이브러리 -->
-
-
 
 <body class="bg-member">
     <div class="body-wrap">
@@ -83,5 +79,6 @@
 		<!--// col-wrap -->
 	</div>
 	<!--// member-wrap -->
-
+ </div>
+</body>
 </html>
