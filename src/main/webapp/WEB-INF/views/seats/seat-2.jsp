@@ -46,6 +46,7 @@
 		<span class="num">9</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
+	
 	<button type="button" title="A12 (스탠다드/일반)"
 		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 481px; top: 50px; width: 20px;">

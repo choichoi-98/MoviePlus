@@ -1,6 +1,7 @@
 package com.hta.movieplus.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,14 @@ public class TheaterController {
 		
 		int theaterCount = theaterservice.getCountByTheater();
 		
-		List<Theater> theaterList = theaterservice.getTheaterList();
+		Map<String, Object> paginationDataMap = theaterservice.pagination(page);
+		List<Theater> theaterList = theaterservice.getTheaterList(page, (int) paginationDataMap.get("limit"));
 
 		mv.setViewName("admin/manageTheater");
+		
+		//페이지네이션
+		mv.addAllObjects(paginationDataMap);
+		
 		mv.addObject("theaterCount", theaterCount);
 		mv.addObject("theaterList", theaterList);
 		
@@ -70,6 +76,34 @@ public class TheaterController {
 		
 		return "redirect:/admin/managetheater";
 	}
+	
+	@GetMapping("/admin/modifytheater")
+	public ModelAndView modifyTheaterAction(@RequestParam(value = "num") int num,
+			ModelAndView mv) {
+		
+		Theater theater = theaterservice.getTheaterById(num);
+		
+		mv.addObject(theater);
+		mv.setViewName("/admin/modifyTheater");
+		
+		return mv;
+	}
+	
+	@PostMapping("/admin/modifyTheaterAction")
+	public String modifyTheaterAction(Theater theater) {
+		theaterservice.modifyTheater(theater);
+		
+		return "redirect:/admin/managetheater";
+	}
+	
+	@GetMapping("/admin/changeStatusTheaterAction")
+	public String changeStatusTheaterAction(int num, String status) {
+		theaterservice.changeStatusTheater(num, status);
+		
+		
+		return "redirect:/admin/managetheater";
+	}
+	
 	//어드민 극장 관리
 
 

@@ -5,7 +5,9 @@ public class Theater {
 	private String THEATER_NAME;
 	private String THEATER_INTRO1;
 	private String THEATER_INTRO2;
-	private String THEATER_ADDRESS;
+	private int THEATER_POST;
+	private String THEATER_ADDRESS1;
+	private String THEATER_ADDRESS2;
 	private String THEATER_LOCATION;
 	private String THEATER_PARKING;
 	private String THEATER_MANAGER_ID;
@@ -14,6 +16,27 @@ public class Theater {
 	private String THEATER_SPECIAL_SEAT = "UNCHECKED";
 	private String THEATER_CREATED_DATE;
 	
+	private int THEATER_ROOM_CNT;
+	
+	
+	public int getTHEATER_POST() {
+		return THEATER_POST;
+	}
+	public void setTHEATER_POST(int tHEATER_POST) {
+		THEATER_POST = tHEATER_POST;
+	}
+	public String getTHEATER_ADDRESS1() {
+		return THEATER_ADDRESS1;
+	}
+	public void setTHEATER_ADDRESS1(String tHEATER_ADDRESS1) {
+		THEATER_ADDRESS1 = tHEATER_ADDRESS1;
+	}
+	public String getTHEATER_ADDRESS2() {
+		return THEATER_ADDRESS2;
+	}
+	public void setTHEATER_ADDRESS2(String tHEATER_ADDRESS2) {
+		THEATER_ADDRESS2 = tHEATER_ADDRESS2;
+	}
 	public int getTHEATER_ID() {
 		return THEATER_ID;
 	}
@@ -37,12 +60,6 @@ public class Theater {
 	}
 	public void setTHEATER_INTRO2(String tHEATER_INTRO2) {
 		THEATER_INTRO2 = tHEATER_INTRO2;
-	}
-	public String getTHEATER_ADDRESS() {
-		return THEATER_ADDRESS;
-	}
-	public void setTHEATER_ADDRESS(String tHEATER_ADDRESS) {
-		THEATER_ADDRESS = tHEATER_ADDRESS;
 	}
 	public String getTHEATER_LOCATION() {
 		return THEATER_LOCATION;
@@ -86,6 +103,12 @@ public class Theater {
 	}
 	public void setTHEATER_CREATED_DATE(String tHEATER_CREATED_DATE) {
 		THEATER_CREATED_DATE = tHEATER_CREATED_DATE;
+	}
+	public int getTHEATER_ROOM_CNT() {
+		return THEATER_ROOM_CNT;
+	}
+	public void setTHEATER_ROOM_CNT(int tHEATER_ROOM_CNT) {
+		THEATER_ROOM_CNT = tHEATER_ROOM_CNT;
 	}
 	
 	
