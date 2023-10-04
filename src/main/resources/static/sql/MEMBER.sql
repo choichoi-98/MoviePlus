@@ -14,3 +14,12 @@ create table MEMBER(
 	MEMBER_POINT		NUMBER,							--적립 포인트
 	PRIMARY KEY(MEMBER_NUM)
 );
+
+
+
+insert into member
+values(2, '홍동동', 'kim123', '1', 'aaa@aaa.aaa','01012345678','19000101',null,'ROLE_ADMIN', null, null, null);
+
+
+insert into member
+values((select nvl(max(MEMBER_NUM),0)+1 from MEMBER), '관리자', 'kk1223', '1', 'aaa@aaa.aaa','01012345678','19000101',null,'ROLE_USER', null, null, null);

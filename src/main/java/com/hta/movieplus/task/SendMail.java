@@ -56,9 +56,9 @@ public class SendMail {
 				//String content = "<img src='cid:Home'>" + vo.getContent();
 				//helper.setText(content, true);
 				
-				FileSystemResource file = new FileSystemResource(new File(sendfile));
+				//FileSystemResource file = new FileSystemResource(new File(sendfile));
 				//addInline메서드의 첫번째 매개변수에는 cid(content id)를 지정합니다.
-				helper.addInline("Home", file);
+				//helper.addInline("Home", file);
 				
 				//3.파일을 첨부해서 보내는 경우
 				//첫번째 인자 : 첨부될 파일의 이름입니다.
@@ -69,6 +69,7 @@ public class SendMail {
 		
 		mailSender.send(mp);  // 메일 전송합니다.
 		logger.info("메일 전송했습니다.");
+		
 	}
 	
 }

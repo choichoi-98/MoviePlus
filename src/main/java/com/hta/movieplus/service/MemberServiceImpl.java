@@ -19,10 +19,6 @@ public class MemberServiceImpl implements MemberService{
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	@Override	//회원가입 
-	public int insert(Member m) {
-		return dao.insert(m);
-	}
 	
 	@Override	//아이디 존재여부 확인
 	public int isId(String MEMBER_ID) {
@@ -44,6 +40,11 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
+	@Override	//회원가입 
+	public int insert(Member m) {
+		int result = dao.insert(m);
+		return (result == 0)? -1 : 1;
+	}
 	
 	
 

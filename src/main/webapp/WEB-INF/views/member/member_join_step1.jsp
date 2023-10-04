@@ -12,9 +12,8 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_join.js"></script>
 </head>
 <!-- SNS 라이브러리 -->
 
@@ -65,9 +64,9 @@
 				
 				<div class="join-chk-me col-1">
 					  <div class="table-wrap"> 	<!-- 이메일 인증 테이블 -->
-					   <form action="" method="post">
+					   <form action="${pageContext.request.contextPath}/member/join2" method="post">
 							<table class="board-form">
-								<caption>아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표<!--아이디이름, 휴대폰 번호, 인증번호 항목을 가진 비밀번호 찾기 입력 표--></caption>
+								<caption>이메일 인증 입력 표<!--이메일 인증 입력 표--></caption>
 								<colgroup>
 									<col style="width:130px;"><col>
 								</colgroup>
@@ -76,7 +75,7 @@
 										<th scope="row"><label for="ibxSchPwdMblpEmail">이메일 주소<!--이메일 주소--></label></th>
 										<td>
 											<input type="text" id="JoinEmail" maxlength="" placeholder="&#39;@&#39; 포함하여 입력" class="input-text w230px"><!--'-' 없이 입력-->
-											<button id="btnSendverify" type="button" class="button gray w75px ml08 disabled" >인증요청<!--인증요청--></button>
+											<button id="btnSendverify" type="button" class="button gray w75px ml08 ">인증요청<!--인증요청--></button>
 										</td>
 									</tr>
 									<tr id="schPwdMblpCertRow">
@@ -84,22 +83,23 @@
 										<td>
 											<div class="chk-num">
 												<div class="line">
-													<input maxlength="4" type="text" id="JoinVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
+													<input maxlength="6" type="text" id="JoinVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
 		
 													<div class="time-limit" id="schPwdtimer">
 														10:00
 													</div>
 												</div>
 											</div>
-											<input type="hidden" class="authRadnum" id="authRandnum" name="authRandnum" />
-											<button id="btnCheckNo" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
+											<input type="hidden" class="verifycode" id="verifycode" name="verifycode" />
+											<button id="btnCheckNo" type="button" class="button gray-line w75px ml08 " >인증확인<!--인증확인--></button>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						<div class="btn-member-bottom v1" style="border-bottom: 0px;">
-							<button id="Submitbtn" type="submit" class="button purple large disabled" >다음<!--다음 단계로 이동--></button>
+							<button id="Submitbtn" type="submit" class="button purple large" style="background-color:#792828" >다음<!--다음 단계로 이동--></button>
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					 </form>
 				   </div><!-- 이메일 인증 테이블 -->
 			</div> <!-- class="join-chk-me col-1" end -->
