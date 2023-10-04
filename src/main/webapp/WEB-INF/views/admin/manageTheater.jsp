@@ -104,7 +104,8 @@
 									<td>
 										<div class="main__table-btns">
 											<input type="hidden" class="selected-theater-id" value="${theater.THEATER_ID}"/>
-											<a href="#" class="main__table-btn main__table-btn open-modal">
+											<input type="hidden" class="selected-theater-manager-id" value="${theater.THEATER_MANAGER_ID}"/>
+											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-log-out"></i>
 											</a>
 											

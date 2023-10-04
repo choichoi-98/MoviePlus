@@ -3,22 +3,22 @@
 
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.TheaterManagerMapper">
 
-	<select id="getRoomCountById" resultType="int">
+	<select id="getRoomCountById" resultType="int" parameterType="int">
 		SELECT COUNT(*)
 		FROM THEATER_ROOM
-		WHERE THEATER_ID = 1
+		WHERE THEATER_ID = #{theaterId}
 	</select>
 
 	<insert id="addTheaterRoom" parameterType="theaterRoom">
 		INSERT INTO THEATER_ROOM
 		VALUES(THEATER_ROOM_SEQ.NEXTVAL, #{THEATER_ROOM_NAME}, #{THEATER_ROOM_SEAT_TYPE}, 
-		#{THEATER_ROOM_STATUS}, SYSDATE, 1)
+		#{THEATER_ROOM_STATUS}, SYSDATE, #{THEATER_ID})
 	</insert>
 		
-	<select id="getRoomList" resultType="theaterRoom">
+	<select id="getRoomList" resultType="theaterRoom" parameterType="int" >
 		SELECT *
 		FROM THEATER_ROOM
-		WHERE THEATER_ID = 1
+		WHERE THEATER_ID = #{theaterId}
 	</select>
 	
 	<delete id="deleteRoomById" parameterType="int">
@@ -51,5 +51,11 @@
 		SET THEATER_ROOM_NAME = #{THEATER_ROOM_NAME}, THEATER_ROOM_SEAT_TYPE = #{THEATER_ROOM_SEAT_TYPE}
 		WHERE THEATER_ROOM_ID = #{THEATER_ROOM_ID}
 	</update>
+	
+	<select id="getTheaterIdByManagerId" parameterType="String" resultType="int">
+		SELECT THEATER_ID
+		FROM THEATER
+		WHERE THEATER_MANAGER_ID = #{managerId} 
+	</select>
 
 </mapper>

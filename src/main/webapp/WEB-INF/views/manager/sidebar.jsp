@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/bootstrap-reboot.min.css">
@@ -53,24 +54,15 @@
 				<li class="sidebar__nav-item">
 					<a href="/movieplus/manager/scheduling" class="sidebar__nav-link"><span>상영 스케줄 관리</span></a>
 				</li>
-				
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>무비포스트 관리</span></a>
-				</li>
-				
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>감상평 관리</span></a>
-				</li>
-				
-				<li class="sidebar__nav-item">
-					<a class="sidebar__nav-link" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu"><span>고객센터</span></a>
 
-					<ul class="collapse sidebar__menu" id="collapseMenu">
-						<li><a href="#">공지사항 등록</a></li>
-						<li><a href="#">1:1문의 답변</a></li>
-						<li><a href="#">자주 묻는 질문 관리</a></li>
-					</ul>
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>공지사항 등록</span></a>
 				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
+				</li>
+	
 				<!-- end collapse -->
 
 				
@@ -79,7 +71,14 @@
 		<!-- end sidebar nav -->
 		
 		<!-- sidebar copyright -->
-		<div class="sidebar__copyright"><a href="/	movieplus/admin/" target="_blank">총 관리자 메뉴</a></div>
+		
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<div class="sidebar__copyright"><a href="/	movieplus/admin/" target="_blank">총 관리자 메뉴</a></div>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_MANAGER')">
+			<div class="sidebar__copyright">상영관 관리자 메뉴</div>
+		</sec:authorize>
+			
 		<!-- end sidebar copyright -->
 	</div>
 	

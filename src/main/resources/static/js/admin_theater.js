@@ -27,6 +27,11 @@ $(document).ready(function () {
     $('#delete-theater-modal-btn').click(function() {
         location.href="deleteTheaterAction?num=" + delete_id;
     })
+
+    $('.move-to-manager-menu').click(function() {
+        var manager_id = $(this).parent().find('.selected-theater-manager-id').val();
+        location.href="/movieplus/manager?selectedId=" + manager_id;
+    })
 // 극장 리스트 끝
 
 

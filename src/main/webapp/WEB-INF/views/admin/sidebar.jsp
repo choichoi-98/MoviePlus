@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/bootstrap-reboot.min.css">
@@ -60,6 +61,26 @@
 				
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>스토어 관리</span></a>
+				</li>
+								
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>무비포스트 관리</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>감상평 관리</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>공지사항 등록</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>자주 묻는 질문 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

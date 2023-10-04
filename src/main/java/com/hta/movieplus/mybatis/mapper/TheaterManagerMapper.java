@@ -10,11 +10,11 @@ import com.hta.movieplus.domain.TheaterRoom;
 @Mapper
 public interface TheaterManagerMapper {
 
-	public int getRoomCountById();
+	public int getRoomCountById(int theaterId);
 
 	public void addTheaterRoom(TheaterRoom theaterRoom);
 
-	public List<TheaterRoom> getRoomList();
+	public List<TheaterRoom> getRoomList(int theaterId);
 
 	public void deleteRoomById(int room_id);
 
@@ -23,5 +23,7 @@ public interface TheaterManagerMapper {
 	public TheaterRoom getTheaterRoomById(int room_id);
 
 	public void modifyTheaterRoom(TheaterRoom theaterRoom);
+
+	public int getTheaterIdByManagerId(String managerId);
 
 }

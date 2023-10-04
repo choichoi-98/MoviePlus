@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/booking")
 public class BookingController {
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String bookingMainView() {
 		return "booking/booking_main";
 	}
@@ -16,6 +16,11 @@ public class BookingController {
 	@GetMapping("/seat")
 	public String bookingSeatView() {
 		return "booking/booking_seat";
+	}
+	
+	@GetMapping("/timetable")
+	public String bookingTimetableView() {
+		return "booking/booking_timetable";
 	}
 	
 
