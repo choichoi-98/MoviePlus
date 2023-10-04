@@ -10,7 +10,6 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String siteAdminMainView() {
 
-		//프린시펄로 manager, admin 주소 나눠주기
 		return "admin/main";
 	}
 

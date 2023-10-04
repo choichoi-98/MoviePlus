@@ -176,7 +176,7 @@ button.button.purple {
 		<div class="left-link">
 			<a href="/movieplus/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
 			<a href="/movieplus/benefit/membership" title="멤버십">멤버십</a>
-			<a href="#" title="고객센터">고객센터</a>
+			<a href="/movieplus/customer_service" title="고객센터">고객센터</a>
 		</div>
 
 		<div class="right-link">
@@ -192,10 +192,14 @@ button.button.purple {
 		    <sec:authorize access="isAuthenticated()">
 		      
 				<div class="after" style="">
-				  <sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a href="#" class="" title="관리자" >로그인한 관리자만 보여요</a>
+				  <sec:authorize access="hasRole('ROLE_MANAGER')">
+					<a href="/movieplus/manager" class="" title="관리자" >관리자 페이지</a>
 				  </sec:authorize>
-					<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout" id="logoutform" style="display:inline-block">
+				   <sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a href="/movieplus/admin" class="" title="관리자" >관리자 페이지</a>
+				  </sec:authorize>
+					<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout" id="logoutform" style="display:inline-block;     line-height: 1.3;
+    margin-left: 20px;">
 						<a href="" class="" id="logout" title="로그아웃">로그아웃</a>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
 					</form>
@@ -212,7 +216,7 @@ button.button.purple {
 			href="#" id="header-search-btn"
 			class="header-open-layer btn-layer-search" title="검색">검색</a>
 		<!-- target on // X 표시 -->
-		<a href="#" class="link-ticket" title="상영시간표">상영시간표</a> <a href="#"
+		<a href="/movieplus/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a> <a href="#"
 			id="header-my-megabox-btn" class="header-open-layer btn-layer-mymega"
 			title="나의 메가박스">나의 메가박스</a>
 	</div>
@@ -231,7 +235,7 @@ button.button.purple {
 				<div class="gnb-depth2">
 					<ul>
 						<li><a href="/movieplus/booking/" title="빠른예매">빠른예매</a></li>
-						<li><a href="#" title="상영시간표">상영시간표</a></li>
+						<li><a href="/movieplus/booking/timetable" title="상영시간표">상영시간표</a></li>
 					</ul>
 				</div></li>
 			<li><a href="" class="gnb-txt-theater" title="극장">극장</a>
@@ -286,7 +290,7 @@ button.button.purple {
 
 				<ul class="list-depth">
 					<li><a href="/movieplus/booking/" title="빠른예매">빠른예매</a></li>
-					<li><a href="#" title="상영시간표">상영시간표</a></li>
+					<li><a href="/movieplus/booking/timetable" title="상영시간표">상영시간표</a></li>
 				</ul>
 			</div>
 
@@ -349,11 +353,11 @@ button.button.purple {
 				<p class="tit-depth">고객센터</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="고객센터 홈">고객센터 홈</a></li>
-					<li><a href="#" title="자주묻는질문">자주묻는질문</a></li>
+					<li><a href="/movieplus/customer_service" title="고객센터 홈">고객센터 홈</a></li>
+					<li><a href="/movieplus/customer_service/question" title="자주묻는질문">자주묻는질문</a></li>
 					<li><a href="#" title="1:1문의">1:1문의</a></li>
 					<li><a href="#" title="단체/대관문의">단체/대관문의</a></li>
-					<li><a href="#" title="분실물문의">분실물문의</a></li>
+					<li><a href="/movieplus/customer_service/lostitem" title="분실물문의">분실물문의</a></li>
 				</ul>
 			</div>
 
@@ -417,7 +421,8 @@ button.button.purple {
 		<!-- wrap-->
 		<div class="wrap" style="display:;">
 
-			<div class="login-after" style="display: none;">
+			<sec:authorize access="isAuthenticated()">
+			<div class="login-after" style="display:;">
 				<!-- 로그인 이후 -->
 				<div class="inner">
 					<div class="box">
@@ -485,8 +490,9 @@ button.button.purple {
 					</div>
 				</div>
 			</div>
+			</sec:authorize>
 
-
+			<sec:authorize access="isAnonymous()">
 			<div class="login-before" style="">
 				<!-- 로그인 전 -->
 				<div class="txt">영화를 사랑하는 당신을 위한 꼭 맞는 혜택까지 확인해 보세요!</div>
@@ -497,6 +503,7 @@ button.button.purple {
 				</div>
 
 			</div>
+			</sec:authorize>
 		</div>
 	</div>
 </header>

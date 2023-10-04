@@ -6,13 +6,13 @@ import com.hta.movieplus.domain.TheaterRoom;
 
 public interface TheaterManagerService {
 
-	String getRoomName();
+	String getRoomName(int theaterId);
 
 	void addTheaterRoom(TheaterRoom theaterRoom);
 
-	int getRoomCountById();
+	int getRoomCountById(int theaterId);
 
-	List<TheaterRoom> getRoomList();
+	List<TheaterRoom> getRoomList(int theaterId);
 
 	void deleteRoomById(int room_id);
 
@@ -21,5 +21,7 @@ public interface TheaterManagerService {
 	TheaterRoom getTheaterRoomById(int room_id);
 
 	void modifyTheaterRoom(TheaterRoom theaterRoom);
+
+	int getTheaterIdByManagerId(String managerId);
 
 }

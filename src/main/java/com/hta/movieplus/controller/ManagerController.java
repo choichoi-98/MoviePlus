@@ -1,12 +1,16 @@
 package com.hta.movieplus.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.TheaterRoom;
@@ -14,6 +18,7 @@ import com.hta.movieplus.service.TheaterManagerService;
 
 @Controller
 @RequestMapping(value = "/manager")
+@SessionAttributes(value = "theaterId")
 public class ManagerController {
 	
 	TheaterManagerService theaterManagerService;
@@ -23,11 +28,23 @@ public class ManagerController {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
 	}
-	//메뉴바 이동 부분만
 	
 	@GetMapping("") 
-	public String theaterMainView() {
-		return "manager/main";
+	public ModelAndView theaterMainView(ModelAndView mv, Principal principal, Model model,
+									@RequestParam(value="selectedId", required=false) String selectedId) {
+		
+		
+		String managerId = principal.getName();
+
+		if(selectedId != null) {
+			managerId = selectedId;
+		}
+		if(!managerId.equals("admin")) {
+			model.addAttribute("theaterId", theaterManagerService.getTheaterIdByManagerId(managerId));
+		} // 대쉬보드 재 입장 오류
+		
+		mv.setViewName("manager/main");
+		return mv;
 	}
 	
 	@GetMapping("/scheduling")
@@ -36,9 +53,10 @@ public class ManagerController {
 	}
 
 	@GetMapping("/manageroom")
-	public ModelAndView manageRoomView(ModelAndView mv) {
-		int roomCount = theaterManagerService.getRoomCountById();
-		List<TheaterRoom> roomList = theaterManagerService.getRoomList();
+	public ModelAndView manageRoomView(ModelAndView mv, Model model) {
+		int theaterId = (int) model.asMap().get("theaterId");
+		int roomCount = theaterManagerService.getRoomCountById(theaterId);
+		List<TheaterRoom> roomList = theaterManagerService.getRoomList(theaterId);
 		
 		mv.addObject("roomCount", roomCount);
 		mv.addObject("roomList", roomList);
@@ -47,8 +65,9 @@ public class ManagerController {
 	}
 
 	@GetMapping("/addroom")
-	public ModelAndView addRoomView(ModelAndView mv) {
-		String roomName = theaterManagerService.getRoomName();
+	public ModelAndView addRoomView(ModelAndView mv, Model model) {
+		int theaterId = (int) model.asMap().get("theaterId");
+		String roomName = theaterManagerService.getRoomName(theaterId);
 		
 		mv.addObject("roomName", roomName);
 		mv.setViewName("manager/addRoom");
@@ -57,7 +76,9 @@ public class ManagerController {
 	}
 	
 	@PostMapping("/addRoomAction")
-	public String addRoomAction(TheaterRoom theaterRoom) {
+	public String addRoomAction(ModelAndView mv, TheaterRoom theaterRoom, Model model) {
+		int theaterId = (int) model.asMap().get("theaterId");
+		theaterRoom.setTHEATER_ID(theaterId);
 		theaterManagerService.addTheaterRoom(theaterRoom);
 		
 		return "redirect:/manager/manageroom";
