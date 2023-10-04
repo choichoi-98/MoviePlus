@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<head th:fragment="userHead">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -176,18 +180,28 @@ button.button.purple {
 		</div>
 
 		<div class="right-link">
-			<div class="before" style="">
-			    <a href="#" class="" title="관리자">로그인한 관리자만 보여요</a>
-				<a id="header-login-btn" href="#" title="로그인">로그인</a> 
-				<a href="/movieplus/member/join" title="회원가입">회원가입</a>
-			</div>
-
-			<div class="after" style="display: none">
-				<a href="#" class="" title="관리자">로그인한 관리자만 보여요</a>
-				<a href="#" class="" title="로그아웃">로그아웃</a> 
-				<a href="#" class="notice" title="알림">알림</a>
-			</div>
-
+			<!-- 로그인 전 -->
+			<sec:authorize access="isAnonymous()">
+				<div class="before" style="">
+					<a id="header-login-btn" href="#" href="${pageContext.request.contextPath}/member/login}" title="로그인">로그인</a> 
+					<a href="/movieplus/member/join" title="회원가입">회원가입</a>
+				</div>
+			</sec:authorize>
+		
+			<!-- 로그인 후 -->
+		    <sec:authorize access="isAuthenticated()">
+		      
+				<div class="after" style="">
+				  <sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a href="#" class="" title="관리자" >로그인한 관리자만 보여요</a>
+				  </sec:authorize>
+					<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout" id="logoutform" style="display:inline-block">
+						<a href="" class="" id="logout" title="로그아웃">로그아웃</a>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
+					</form>
+					<a href="#" class="notice" title="알림" >알림</a>
+				</div>
+		    </sec:authorize>
 			<a href="/movieplus/booking">빠른예매</a>
 		</div>
 	</div>

@@ -74,7 +74,7 @@
 							<tr>
 								<th scope="row"><label for="MEMBER_ID">아이디<!--아이디--></label></th>
 								<td>
-									<input name="MEMBER_ID" maxlength="12" id="MEMBER_ID" type="text" placeholder="영문,숫자 조합(6~12자)" class="input-text w260px" required><!--영문,숫자 조합(6~12자)-->
+									<input name="MEMBER_ID" maxlength="12" id="MEMBER_ID" type="text" placeholder="영문,숫자 조합(5~12자)" class="input-text w260px" required><!--영문,숫자 조합(6~12자)-->
 									<button id="btnIdCheck" type="button" class="button gray-line small w75px ml08 disabled">중복확인<!--중복확인--></button>
 									<div id="JoinInfoRegLoginId-error-text" class="alert"></div>
 								</td>
