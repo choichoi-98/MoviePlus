@@ -20,7 +20,7 @@ public class CustomerController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-	@GetMapping("/home")
+	@GetMapping("")
 	public String home() {
 		return "customer_service/customer_service_home";
 	}
