@@ -10,8 +10,8 @@ $(document).ready(function(){
 		
 		if(!pattern.test(email)){		//형식에 맞는 이메일 주소를 입력하지 않고 인증요청 버튼을 클릭하였을 때
 			alert('형식에 맞게 이메일 주소를 입력하세요');
-			email.focus();
-			
+			$('#JoinEmail').focus();
+			verifyemailcheck = false;
 		} else { 	//이메일 주소를 입력하였을 때
 		
 			$.ajax({
@@ -37,8 +37,8 @@ $(document).ready(function(){
 		
 		if(checkinput === ''){
 			alert('인증번호를 입력하세요.');
-			checkinput.focus();
-			return;
+			$('#JoinVerifyNo').focus();
+			verifyemailcheck = false;
 		} else {
 			if(checkinput == $("#verifycode").val()){
 				alert('인증에 성공하였습니다.');
@@ -52,8 +52,9 @@ $(document).ready(function(){
 	}) //인증번호 확인 end
 
 
+
 	//회원가입 step1 : 폼 제출
-	$('#Submitbtn').submit(function(){	
+	$('#joinstep1form').submit(function(){	
 		if(verifyemailcheck){	//verifyemailcheck가 true일 경우 폼 제출
 			return true;
 		} else {
@@ -159,17 +160,46 @@ $(document).ready(function(){
 		const pass = $('#MEMBER_PASS').val();
 		const passvalcheck = $('#MEMBER_PASS_Confirm').val();
 	
-		if(pass == passvalcheck){	//입력한 비밀번호와 비밀번호 확인이 일치할 때 
-			$('#JoinInfoRegLoginPwdConfirm-error-text').css('color', 'black')
-													   .html("비밀번호가 일치합니다.");
-			checkpass = true;
-		} else {					//일치하지 않을 때
-			$('#JoinInfoRegLoginPwdConfirm-error-text').html("비밀번호를 확인해주세요.");
+		if($.trim(pass) !== $.trim(passvalcheck)){	//입력한 비밀번호와 비밀번호 확인이 일치하지 않을 때  
+			$('#JoinInfoRegLoginPwdConfirm-error-text').html("비밀번호를 확인해주세요.")
+														.css('color', 'red');
 			checkpass = false;
+			
+		} else {					//일치할 때
+			$('#JoinInfoRegLoginPwdConfirm-error-text').html("비밀번호가 일치합니다.")
+													   .css('color', 'black');
+			checkpass = true;
 		}
 	
 	})//비밀번호 확인 일치 검사
 	
+	//회원가입 step3 : 폼 제출
+	$('#joinstep3form').submit(function(){
+	
+		if(!checkid){
+			alert('아이디 중복확인을 해주세요.');
+			$("#MEMBER_ID").focus();
+			return false;
+		}
+		
+		if(!checkbirth){
+			alert('생년월일을 확인해주세요.');
+			$('#MEMBER_BIRTH').focus();
+			return false;
+		}
+		
+		if(!checkphone){
+			alert('전화번호를 확인해주세요.');
+			$('#MEMBER_PHONENO').focus();
+			return false;
+		}
+		
+		if(!checkpass){	
+			alert('비밀번호가 일치하는지 확인해주세요.');
+			$('#MEMBER_PASS_Confirm').focus();
+			return false;
+		}
+	})//step3 폼 제출 end
 	
 
 }) //ready end

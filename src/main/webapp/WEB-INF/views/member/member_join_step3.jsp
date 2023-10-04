@@ -56,7 +56,7 @@
 				</p>
 
 				<div class="table-wrap">
-				<form action="${pageContext.request.contextPath}/member/joinProcess" method="post">
+				<form action="${pageContext.request.contextPath}/member/joinProcess" id="joinstep3form" method="post">
 					<table class="board-form">
 						<caption>생년월일, 휴대폰번호, 아이디, 비밀번호, 비밀번호 확인, 이메일 주소, 무인발권기 기능설정, 나만의 메가박스 항목을 가진 회원가입 정보입력 표<!--생년월일, 휴대폰번호, 아이디, 비밀번호, 비밀번호 확인, 이메일 주소, 무인발권기 기능설정, 나만의 메가박스 항목을 가진 회원가입 정보입력 표--></caption>
 						<colgroup>

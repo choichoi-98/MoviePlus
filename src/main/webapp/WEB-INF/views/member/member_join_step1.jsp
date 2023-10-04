@@ -64,7 +64,7 @@
 				
 				<div class="join-chk-me col-1">
 					  <div class="table-wrap"> 	<!-- 이메일 인증 테이블 -->
-					   <form action="${pageContext.request.contextPath}/member/join2" method="post">
+					   <form action="${pageContext.request.contextPath}/member/join2" id="joinstep1form" method="post">
 							<table class="board-form">
 								<caption>이메일 인증 입력 표<!--이메일 인증 입력 표--></caption>
 								<colgroup>
@@ -109,5 +109,8 @@
 	</div><!--// col-wrap -->
   </div><!-- <div class="member-wrap"> end  -->
 </div> <!-- <div class="body-wrap"> end -->
+<script>
+
+</script>
 </body>
 </html>
