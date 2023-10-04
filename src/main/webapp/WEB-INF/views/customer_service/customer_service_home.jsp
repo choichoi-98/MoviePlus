@@ -15,7 +15,6 @@
 			<div class="lnb-area addchat location-fixed">
 				<nav id="lnb" class="ty2">
 
-					
 					<p class="tit"><a href="고객센터 홈 주소" title="고객센터">고객센터</a></p>   
 					<ul>
 						<li class="on"><a href="고객센터 홈 이동 주소" title="고객센터 홈">고객센터 홈</a></li>
