@@ -25,7 +25,7 @@ public class ManagerController {
 	}
 	//메뉴바 이동 부분만
 	
-	@GetMapping("/") 
+	@GetMapping("") 
 	public String theaterMainView() {
 		return "manager/main";
 	}

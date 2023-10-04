@@ -72,6 +72,31 @@
 		WHERE THEATER_ID = #{THEATER_ID}
 	</update>
 
+	<select id="findManagerIdById" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{managerId}
+	</select>
 
+	<insert id="addTheaterManager" parameterType="manager">
+		INSERT INTO MEMBER
+		VALUES((select nvl(max(MEMBER_NUM),0)+1 from MEMBER), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL},
+				#{MEMBER_PHONENO}, #{MEMBER_BIRTH}, #{MEMBER_PROFILE}, #{MEMBER_AUTH}, #{MEMBER_LOGINTYPE},
+				#{MEMBER_MEMBERSHIP}, #{MEMBER_POINT})
+	</insert>
+	
+	<update id="resetManagerPasswordById" parameterType="map">
+		UPDATE MEMBER
+		SET MEMBER_PASS = #{RESET_PASSWORD}
+		WHERE MEMBER_ID = #{THEATER_MANAGER_ID}
+	</update>
+	
+	<delete id="deleteMemberById" parameterType="String">
+		DELETE
+		FROM MEMBER
+		WHERE MEMBER_ID = #{theater_MANAGER_ID}
+	</delete>
+
+	
 
 </mapper>

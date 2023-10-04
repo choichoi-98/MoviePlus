@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/admin")
 public class AdminController {
 	
-	@GetMapping("/")
+	@GetMapping("/admin")
 	public String siteAdminMainView() {
+
+		//프린시펄로 manager, admin 주소 나눠주기
 		return "admin/main";
 	}
 

@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.controller.TheaterController;
+import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.mybatis.mapper.TheaterMapper;
 
@@ -14,20 +19,32 @@ import com.hta.movieplus.mybatis.mapper.TheaterMapper;
 public class TheaterServiceImpl implements TheaterService {
 
 	private TheaterMapper mapper;
+	private PasswordEncoder passwordEncoder;
+	private static final Logger logger = LoggerFactory.getLogger(TheaterServiceImpl.class);
+
+	
 	
 	@Autowired
-	public TheaterServiceImpl(TheaterMapper mapper) {
+	public TheaterServiceImpl(TheaterMapper mapper, PasswordEncoder passwordEncoder) {
 		// TODO Auto-generated constructor stub
 		this.mapper = mapper;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	@Override
-	public void addTheater(Theater theater) {
+	public void addTheater(Theater theater, Manager manager) {
 		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+		sb.append(theater.getTHEATER_NAME());
+		sb.append("관 매니저");
 		
-		// 관리자 id, 비밀번호 생성 -> member에 추가하는 로직
-		theater.setTHEATER_MANAGER_ID("temp");
+		String managerName = sb.toString();
+		manager.setMEMBER_NAME(managerName);
+		manager.setMEMBER_PASS(passwordEncoder.encode(manager.getMEMBER_PASS()));
 		
+		theater.setTHEATER_MANAGER_ID(manager.getMEMBER_ID());
+		
+		mapper.addTheaterManager(manager);
 		mapper.addTheater(theater);
 		
 	}
@@ -42,7 +59,11 @@ public class TheaterServiceImpl implements TheaterService {
 	@Override
 	public void deleteTheater(int num) {
 		// TODO Auto-generated method stub
-		mapper.deleteTheaterById(num);
+		String managerId = mapper.getTheaterById(num).getTHEATER_MANAGER_ID();
+		if(mapper.deleteTheaterById(num) == 1) {
+			mapper.deleteMemberById(managerId);
+		}
+		
 		
 	}
 
@@ -109,6 +130,35 @@ public class TheaterServiceImpl implements TheaterService {
 		map.put("end", endrow);
 
 		return mapper.getTheaterList(map);
+	}
+
+	@Override
+	public String getManagerId() {
+		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+
+		while(true) {
+			sb.append("manager");
+			sb.append((int) (Math.random() * 9998 + 1));
+			
+			String managerId = sb.toString();
+			
+			if(mapper.findManagerIdById(managerId) == 0) {
+				return managerId;
+			}
+		}
+	}
+
+	@Override
+	public void resetManagerPassword(String theater_MANAGER_ID) {
+		// TODO Auto-generated method stub
+		String resetPassword = passwordEncoder.encode("movieplus0000");
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("THEATER_MANAGER_ID", theater_MANAGER_ID);
+		dataMap.put("RESET_PASSWORD", resetPassword);
+		
+		mapper.resetManagerPasswordById(dataMap);
 	}
 
 }
