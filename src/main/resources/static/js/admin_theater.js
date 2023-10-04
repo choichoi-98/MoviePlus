@@ -4,6 +4,7 @@ $(document).ready(function () {
     let delete_id;
     let status_change_id;
     let selected_theater_status;
+    let reset_pass_flag = true;
     
     $('.main__table-btn--edit').click(function() {
         var modify_id = $(this).parent().find('.selected-theater-id').val();
@@ -68,6 +69,23 @@ $(document).ready(function () {
 
     $("#post-id-btn").click(function() {
         sample4_execDaumPostcode();
+    })
+
+
+    $('#reset-password-btn').click(function() {
+        
+        if(reset_pass_flag){
+            $(this).css('background', 'skyblue');
+            $(this).text("선택됨");
+            $('#reset-pass-check').val('checked');
+        }else {
+            $(this).css('background', 'gray');
+            $(this).text("비밀번호 초기화");
+            $('#reset-pass-check').val('unchecked');
+        }
+
+        reset_pass_flag = !reset_pass_flag;
+        return;
     })
 // 극장 추가 끝
 

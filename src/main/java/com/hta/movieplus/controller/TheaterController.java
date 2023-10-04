@@ -3,13 +3,17 @@ package com.hta.movieplus.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.service.TheaterService;
 
@@ -18,7 +22,8 @@ import com.hta.movieplus.service.TheaterService;
 public class TheaterController {
 	
 	private TheaterService theaterservice;
-	
+	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
+
 	@Autowired
 	public TheaterController(TheaterService theaterService) {
 		// TODO Auto-generated constructor stub
@@ -57,14 +62,18 @@ public class TheaterController {
 	}	
 	
 	@GetMapping("/admin/addtheater")
-	public String addTheaterView() {
-		return "admin/addTheater";
+	public ModelAndView addTheaterView(ModelAndView mv) {
+		String managerId = theaterservice.getManagerId();
+		
+		mv.setViewName("admin/addTheater");
+		mv.addObject("managerId", managerId);
+		return mv;
 	}	
 	
 	@PostMapping("/admin/addTheaterAction")
-	public String addTheaterAction(Theater theater) {
-		theaterservice.addTheater(theater);
+	public String addTheaterAction(Theater theater, Manager manager) {
 		
+		theaterservice.addTheater(theater, manager);
 		
 		return "redirect:/admin/managetheater";
 	}
@@ -90,8 +99,13 @@ public class TheaterController {
 	}
 	
 	@PostMapping("/admin/modifyTheaterAction")
-	public String modifyTheaterAction(Theater theater) {
+	public String modifyTheaterAction(Theater theater, String resetPassCheck) {
 		theaterservice.modifyTheater(theater);
+		//비밀번호 초기화 관련 로직
+		if(resetPassCheck.equals("checked")) {
+			theaterservice.resetManagerPassword(theater.getTHEATER_MANAGER_ID());
+		}
+		
 		
 		return "redirect:/admin/managetheater";
 	}

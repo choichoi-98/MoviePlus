@@ -59,6 +59,10 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
+					<a href="#" class="sidebar__nav-link"><span>스토어 관리</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>이벤트 관리</span></a>
 				</li>
 				

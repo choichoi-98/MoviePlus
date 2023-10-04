@@ -95,9 +95,11 @@
 
 						</div>
 
-						<div class="col-12">
-							<span style="color: #999;">※ 극장 생성 시 관리자 아이디 및 비밀번호가 자동으로
-								생성되어 제공됩니다.</span>
+						<div class="col-6">
+							<input type="text" name="MEMBER_ID" class="form__input" placeholder="매니저 ID" value="${managerId}" readOnly>
+						</div>
+						<div class="col-6">
+							<input type="password" name="MEMBER_PASS" class="form__input" placeholder="비밀번호" required>
 						</div>
 
 

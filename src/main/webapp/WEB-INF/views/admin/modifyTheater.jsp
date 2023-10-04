@@ -98,14 +98,16 @@
 
 						</div>
 
-						<div class="col-12">
-							<span style="color: #999;">※ 극장 생성 시 관리자 아이디 및 비밀번호가 자동으로
-								생성되어 제공됩니다.</span>
+						<div class="col-6">
+							<input type="text" name="THEATER_MANAGER_ID" class="form__input" placeholder="매니저 ID" value="${theater.THEATER_MANAGER_ID}" readOnly>
+							<button id="reset-password-btn" type="button" style="background:gray; width:120px; height:30px;">비밀번호 초기화</button> <span style="color:#999;">movieplus0000으로 초기화</span>
+							<input id="reset-pass-check" type="hidden" value="unchecked" name="resetPassCheck">
 						</div>
+						
 
 
 						<div class="col-12">
-							<button type="submit" class="form__btn">등록</button>
+							<button type="submit" class="form__btn">수정</button>
 						</div>
 						
 

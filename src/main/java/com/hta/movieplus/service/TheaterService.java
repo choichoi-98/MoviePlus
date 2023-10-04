@@ -3,11 +3,12 @@ package com.hta.movieplus.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 
 public interface TheaterService {
 
-	public void addTheater(Theater theater);
+	public void addTheater(Theater theater, Manager manager);
 
 	public int getCountByTheater();
 
@@ -22,6 +23,11 @@ public interface TheaterService {
 	public void modifyTheater(Theater theater);
 
 	public Map<String, Object> pagination(int page);
+
+	public String getManagerId();
+
+	public void resetManagerPassword(String theater_MANAGER_ID);
+
 	
 	
 
