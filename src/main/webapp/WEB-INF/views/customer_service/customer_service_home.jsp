@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>고객센터</title>
-
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<div class="container has-lnb">
@@ -32,7 +32,7 @@
 
 					<div class="left-customer-info">
 						<p class="tit">
-						 어플명 고객센터
+							MoviePlus 고객센터
 							<span>Dream center</span>
 						</p>
 						<p class="time"><i class="iconset ico-clock"></i> 10:00~19:00</p>
@@ -209,6 +209,5 @@
 						</div>
 						</div>
 		</div></div>
-	<jsp:include page="/WEB-INF/views/footer.jsp"/>
-</body>
-</html>
+		</head>
+		</html>
