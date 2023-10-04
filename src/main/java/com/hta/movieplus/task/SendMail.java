@@ -46,13 +46,14 @@ public class SendMail {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom(vo.getFrom());
 			helper.setTo(vo.getTo());
-			helper.setSubject(vo.getSubject());
 				
-
+			String subject = "[MoviePlus] 가입 이메일 인증번호"; 
+			String content = "고객님의 인증번호는 다음과 같습니다. [ " + vo.getVerifycode() + " ]";
 				
 			//1. 문자로만 전송하는 경우
 			//true는 html을 사용하겠다는 뜻입니다.
-			//helper.setText(vo.getContent(), true);
+			helper.setSubject(subject);
+			helper.setText(content, true);
 				
 			//2. 이미지를 내장해서 보내는 경우
 			//cid(content id)

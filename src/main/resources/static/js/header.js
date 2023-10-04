@@ -121,9 +121,10 @@ $(document).ready(function(){
 	$('.btn-modal-open').click(function(){
 		openLoginModal();	
 	})
-
-
 	
+	$('#logout').click(function(event){
+		event.preventDefault();
+		$("form[name=logout]").submit();
+	})
 	
-
 });

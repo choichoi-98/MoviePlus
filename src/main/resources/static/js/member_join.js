@@ -75,11 +75,11 @@ $(document).ready(function(){
 	
 	//step3 아이디 중복검사
 	$('#btnIdCheck').on("click",function(){
-		const pattern = /^\w{6,12}$/;
+		const pattern = /^\w{5,12}$/;
 		const id = $("#MEMBER_ID").val();
 		
 		if(!pattern.test(id)){		//아이디 pattern 검사
-			$('#JoinInfoRegLoginId-error-text').html("영문자 숫자로 6~12자까지 가능합니다.");
+			$('#JoinInfoRegLoginId-error-text').html("영문자 숫자로 5~12자까지 가능합니다.");
 			checkid = false;
 			return;
 		}

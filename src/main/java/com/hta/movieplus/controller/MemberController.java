@@ -7,7 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,7 +110,7 @@ public class MemberController {
 		} else {
 			model.addAttribute("url", request.getRequestURL());
 			model.addAttribute("message", "회원 가입 실패");
-			return "/main";  //에러페이지
+			return "redirect:/main";  //에러페이지
 		}
 	}
 	
@@ -129,6 +132,12 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage_main";
 	}
-
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/main";
+	}
+	
 	
 }
