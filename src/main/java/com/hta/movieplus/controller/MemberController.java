@@ -1,6 +1,8 @@
 package com.hta.movieplus.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hta.movieplus.domain.MailVO;
@@ -29,12 +32,14 @@ public class MemberController {
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
 	private SendMail sendMail;
+	private MailVO mailVO;
 	
 	@Autowired
-	public MemberController(MemberService memberservice, PasswordEncoder passwordEncoder, SendMail sendMail) {
+	public MemberController(MemberService memberservice, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
 		this.memberservice = memberservice;
 		this.passwordEncoder = passwordEncoder;
 		this.sendMail = sendMail;
+		this.mailVO = mailVO;
 	}
 	
 	
@@ -44,12 +49,68 @@ public class MemberController {
 		return "member/member_join_step1";
 	}
 	
+	//회원가입 step1 인증메일 보내기
+	@GetMapping("/sendEmail")
+	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, ModelAndView mv, HttpSession session) throws Exception {
+		session.setAttribute("MEMBER_EMAIL", email);
+		
+		mailVO.setTo(email);
+		int verifycode = mailVO.getVerifycode();
+		sendMail.SendMail(mailVO);
+		resp.getWriter().write(Integer.toString(verifycode));
+		
+		logger.info("[join1] email 값 : " + email);
+	}
+
+	//회원가입 step2
+	@PostMapping("/join2")
+	public String memberjoin2() {
+		return "member/member_join_step2";
+	}
+	
+	@PostMapping("/join3")
+	public String memberjoin3(Model model, HttpSession session) {
+		String email = (String) session.getAttribute("MEMBER_EMAIL");
+		model.addAttribute("MEMBER_EMAIL", email); 
+		logger.info("[join3] email 값 : " + email);
+		return "member/member_join_step3";
+	}
+	
+	@PostMapping("/join4")
+	public String memberjoin4() {
+		return "member/member_join_step4";
+	}
+	
 	//회원가입폼에서 아이디 검사
 	@ResponseBody
 	@GetMapping("/idcheck")
-	public int idcheck(@RequestParam("MEMBER_ID") String MEMBER_ID) {
+	public int idcheck(@RequestParam("id") String MEMBER_ID) {
 		return memberservice.isId(MEMBER_ID);
 	}
+	
+	//회원가입 처리
+	@PostMapping("/joinProcess")
+	public String joinProcess(Member member, 
+							  RedirectAttributes rattr,
+							  Model model,
+							  HttpServletRequest request) {
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(member.getMEMBER_PASS());
+		logger.info(encPassword);
+		member.setMEMBER_PASS(encPassword);
+		
+		int result = memberservice.insert(member);
+		
+		if(result == 1) { 	//삽입이 된 경우
+			model.addAttribute("member", member);
+			return "/member/member_join_step4";  //step4 화면으로 이동
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "회원 가입 실패");
+			return "/main";  //에러페이지
+		}
+	}
+	
 	
 	//아이디 찾기 이동
 	@GetMapping("/findid")
@@ -68,11 +129,6 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage_main";
 	}
-	
-	@GetMapping("/sendEmail")
-	public String sendEmail() {
-		return "member";
-	}
-	
+
 	
 }

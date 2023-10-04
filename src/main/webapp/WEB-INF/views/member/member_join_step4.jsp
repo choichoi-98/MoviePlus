@@ -19,12 +19,6 @@
 
 <body class="bg-member">
     <div class="body-wrap">
-        
-
-<!--// header -->
-<!-- 		<div id="bodyContent"> -->
-        
-
 
 	<!-- member-wrap -->
 	<div class="member-wrap">
@@ -68,9 +62,9 @@
 				<div class="join-complete">
 					<i class="iconset ico-join-complete"></i>
 
-					<p class="name">홍길동님 메가박스 가입을 환영합니다.<!--님 메가박스 가입을 환영합니다.--></p>
+					<p class="name" style="color:black">${member.MEMBER_NAME}님 무비플러스 가입을 환영합니다.<!--님 메가박스 가입을 환영합니다.--></p>
 
-					<p class="txt">이제부터 메가박스에서 제공하는 다양한 멤버십 혜택을 이용하실 수 있습니다.<!--이제부터 메가박스에서 제공하는 다양한 멤버십 혜택을 이용하실 수 있습니다.--></p>
+					<p class="txt">이제부터 무비플러스에서 제공하는 다양한 멤버십 혜택을 이용하실 수 있습니다.<!--이제부터 메가박스에서 제공하는 다양한 멤버십 혜택을 이용하실 수 있습니다.--></p>
 
 					<!--
 					<div class="link">
@@ -81,7 +75,7 @@
 				<!--// join-complete -->
 
 				<div class="btn-member-bottom">
-					<a href="/movieplus/benefit/membership/" title="신규회원 혜택 확인 이동" class="button purple large">신규회원 혜택 확인</a>
+					<a href="/movieplus/benefit/membership/" title="신규회원 혜택 확인 이동" class="button purple large" style="background-color:#792828">신규회원 혜택 확인</a>
 				</div>
 			</div>
 			<!--// col -->
