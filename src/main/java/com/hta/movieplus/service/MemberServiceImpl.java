@@ -45,6 +45,14 @@ public class MemberServiceImpl implements MemberService{
 		int result = dao.insert(m);
 		return (result == 0)? -1 : 1;
 	}
+
+
+	@Override
+	public Member findId(String MEMBER_NAME, String MEMBER_BIRTH, String MEMBER_PHONENO) {
+		return  dao.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
+	}
+
+
 	
 	
 

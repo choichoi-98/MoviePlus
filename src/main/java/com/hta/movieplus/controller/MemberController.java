@@ -7,10 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -120,6 +117,25 @@ public class MemberController {
 	public String findid() {
 		return "member/member_findid";
 	}
+	
+	//아이디 찾기 처리
+	@PostMapping("/findidProcess")
+	public ModelAndView findidProcess(@RequestParam("MEMBER_ID") String MEMBER_ID,
+									  @RequestParam("MEMBER_BIRTH") String MEMBER_BIRTH,
+									  @RequestParam("MEMBER_PHONENO") String MEMBER_PHONENO,
+									  ModelAndView mv, HttpServletRequest request) {
+		Member m = memberservice.findId(MEMBER_ID, MEMBER_ID, MEMBER_ID);
+		
+		if(m!=null) {
+			mv.addObject("MEMBERINFO", m);
+		} else {
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "해당 정보가 없습니다.");
+			mv.setViewName("/member/findid");
+		}
+		return mv;
+	}
+	
 	
 	//비밀번호 찾기 이동
 	@GetMapping("/findpass")
