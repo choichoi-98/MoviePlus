@@ -37,6 +37,8 @@ public class SecurityConfig {
 
 		http.authorizeRequests()
 				.antMatchers("/resources/**/**").permitAll()
+				.antMatchers("/member/mypage").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+				.antMatchers("/member/info").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
 				.antMatchers("/**").permitAll();
 
 		http.formLogin().loginPage("/main")

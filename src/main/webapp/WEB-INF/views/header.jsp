@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<head th:fragment="userHead">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,7 +90,7 @@ button.button.purple {
 
 <div class="bg-modal" style="opacity: 0;"></div>
 <!-- 로그인 모달 -->
-<section id="layer_login_select" class="modal-layer" style="z-index: 5006;">
+<section id="layer_login_select" class="modal-layer" style="z-index: 5000;">
 	<div class="wrap"
 		style="width: 850px; height: 484px; margin-left: -425px; margin-top: -242px;">
 		<header class="layer-header" header.js>
@@ -110,8 +109,8 @@ button.button.purple {
 							<div class="col left">
 								<div class="login-input-area">
                                     <form name="loginform" action="${pageContext.request.contextPath}/loginProcess" method="post">
-                                        <input autocomplete="off" name="MEMBER_ID" id="ibxLoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
-                                        <input autocomplete="off" name="MEMBER_PASS" id="ibxLoginPwd" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
+                                        <input autocomplete="off" name="MEMBER_ID" id="LoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
+                                        <input autocomplete="off" name="MEMBER_PASS" id="LoginPass" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
                                         <div class="alert"></div>
 
                                         <!-- chk-util -->
@@ -167,7 +166,8 @@ button.button.purple {
 
 
 <!-- 로그인 실패 알림 모달 -->
-<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 1;" id="layerId_08342041777142197">
+<div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005; display: none;"></div>
+<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 0;">
 	<div class="wrap">
 		<header class="layer-header">
 			<h3 class="tit">알림</h3>

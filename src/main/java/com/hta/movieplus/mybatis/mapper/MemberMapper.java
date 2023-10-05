@@ -12,7 +12,7 @@ public interface MemberMapper {
 	public int insert(Member m);
 	
 	public Member findId(String MEMBER_NAME, String MEMBER_BIRTH, String MEMBER_PHONENO);
-	
+
 	
 }
 

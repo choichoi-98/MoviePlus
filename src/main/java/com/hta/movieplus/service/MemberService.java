@@ -12,4 +12,6 @@ public interface MemberService {
 	
 	public Member findId(String MEMBER_NAME, String MEMBER_BIRTH, String MEMBER_PHONENO);
 
+	public Member memberinfo(String MEMBER_ID);
+
 }

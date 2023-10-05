@@ -68,6 +68,7 @@ public class MemberController {
 		return "member/member_join_step2";
 	}
 	
+	//회원가입 step3
 	@PostMapping("/join3")
 	public String memberjoin3(Model model, HttpSession session) {
 		String email = (String) session.getAttribute("MEMBER_EMAIL");
@@ -76,6 +77,7 @@ public class MemberController {
 		return "member/member_join_step3";
 	}
 	
+	//회원가입 step4
 	@PostMapping("/join4")
 	public String memberjoin4() {
 		return "member/member_join_step4";
@@ -86,6 +88,11 @@ public class MemberController {
 	@GetMapping("/idcheck")
 	public int idcheck(@RequestParam("id") String MEMBER_ID) {
 		return memberservice.isId(MEMBER_ID);
+	}
+	
+	@GetMapping("/logincheck")
+	public int loginProcess(@RequestParam("id") String MEMBER_ID, @RequestParam("pass") String MEMBER_PASS) {
+		return memberservice.isId(MEMBER_ID, MEMBER_PASS);
 	}
 	
 	//회원가입 처리
@@ -110,7 +117,6 @@ public class MemberController {
 			return "redirect:/main";  //에러페이지
 		}
 	}
-	
 	
 	//아이디 찾기 이동
 	@GetMapping("/findid")
@@ -149,11 +155,28 @@ public class MemberController {
 		return "member/mypage_main";
 	}
 	
+	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main";
 	}
 	
+	//회원정보
+	@GetMapping("/info")
+	public ModelAndView memberInfo(@RequestParam("id") String MEMBER_ID,  
+	 		ModelAndView mv,  HttpServletRequest request ) {
+		Member m = memberservice.memberinfo(MEMBER_ID);
+		
+		if(m!=null) {
+			mv.setViewName("member/mypage");
+			mv.addObject("memberinfo", m);
+		} else {
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "해당 정보가 없습니다.");
+		}
+		return mv;
+	}
 	
-}
+	
+}	
