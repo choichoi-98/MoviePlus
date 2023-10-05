@@ -53,6 +53,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public Member memberinfo(String MEMBER_ID) {
+		return dao.isId(MEMBER_ID);
+	}
+
+
+
 	
 	
 

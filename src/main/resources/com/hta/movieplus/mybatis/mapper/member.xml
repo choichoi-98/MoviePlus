@@ -25,6 +25,7 @@
 		AND MEMBER_BIRTH = #{MEMBER_BIRTH}
 		AND MEMBER_PHONENO = #{MEMBER_PHONENO}
 	</select>
+	
 
 
 </mapper>

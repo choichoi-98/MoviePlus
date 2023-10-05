@@ -129,21 +129,33 @@ $(document).ready(function(){
 	})
 	
 	function openAlertPopup(){
-		$('#loginfailalert').addClass('on');
-		 $('.bg-modal').css('opacity', '1');
+		$('#loginfailalert').css('opacity', '1');
+		$('.alertStyle').css('opacity', '1');
         $('body').addClass('no-scroll');
 	}
 	
 	function closeAlertPopup(){
         $('.bg-modal').css('opacity', '0');
-        $('#loginfailalert').css('display', 'none');
+        $('#loginfailalert').css('opacity', '0');
         $('body').removeClass('no-scroll');
     }
 	
+	//로그인 확인 - 실패 시 알림창
+	$("#btnLogin").click(function(){
+		const id = $('#LoginId').val();
+		const pass = $('#LoginPass').val();
+		$.ajax({
+			url : "logincheck",
+			data : {"id" : id , "pass" : pass},
+			success : function(resp){
+				if(resp != 1) {
+					openAlertPopup();
+					console.log("아이디와 비밀번호가 일치하지 않는 경우");
+				}				
+			}
+		})//ajax end
+	})
 	
-	 if ("${loginfail}" == 'loginFailMsg') {
-	    	openAlertPopup();
-		}
 	
 	$("#loginfailok").click(function(){
 		closeAlertPopup();
