@@ -27,14 +27,7 @@ public class CustomerController {
  		model.addAttribute("message", "스프링");
 		return "customer_service/customer_service_home";
 	}
-
-	@GetMapping("/lostitem")
-	public String lostItem() {
-		
-		
-		return "customer_service/custommer_service_item";
-	}
-
+	
 	@GetMapping("/question")
 	public String question() {
 		return "customer_service/customer_service_question";
@@ -44,14 +37,27 @@ public class CustomerController {
 	public String notice() {
 		return "customer_service/customer_service_notice";
 	}
-
+	
 	@GetMapping("/oneonone")
 	public String oneOnOne() {
-		return "customer_service/customer_service_oneOnOne";
+		return "customer_service/customer_service_oneonone";
 	}
-
+	
 	@GetMapping("/group")
 	public String group() {
 		return "customer_service/customer_service_group";
 	}
+	
+	@GetMapping("/lostitem")
+	public String lostItem() {
+		return "customer_service/customer_service_lostitem";
+	}
+
+	
+
+	
+
+	
+
+	
 }

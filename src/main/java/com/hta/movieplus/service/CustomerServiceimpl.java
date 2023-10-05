@@ -1,5 +1,5 @@
 package com.hta.movieplus.service;
 
-public interface CustomerServiceimpl {
+public interface CustomerServiceimpl implements CustomerService {
 
 }
