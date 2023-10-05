@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/select2.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/ionicons.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
+
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 	
 	
 <head>
@@ -56,7 +59,7 @@
 				</li>
 
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>상영 영화 관리</span></a>
+					<a href="#" class="/movieplus/movie/movieAdd"><span>상영 영화 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
