@@ -48,7 +48,7 @@
 						<label for="search01" class="label">빠른검색</label>
 
 						<div class="board-search w460px">
-							<input type="search" id="searchTxt" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" maxlength="15">
+							<input type="search" id="searchTxt" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text" maxlength="15" value="${message}">
 							<button type="button" class="btn-search-input" id="searchBtn">검색</button>
 						</div>
 					</div>
