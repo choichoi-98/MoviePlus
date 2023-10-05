@@ -166,6 +166,26 @@ button.button.purple {
 </section>
 
 
+<!-- 로그인 실패 알림 모달 -->
+<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 1;" id="layerId_08342041777142197">
+	<div class="wrap">
+		<header class="layer-header">
+			<h3 class="tit">알림</h3>
+		</header>
+		<div class="layer-con" style="height:250px">
+			<p class="txt-common">아이디 또는 비밀번호가 맞지 않습니다.<br>로그인 정보를 다시 확인바랍니다.</p>
+			<div class="btn-group">
+				<button type="button" class="button lyclose" style="display: none;"></button>
+				<button id="loginfailok" type="button" class="button purple confirm">확인</button>
+			</div>
+		</div>
+		<button type="button" class="btn-layer-close">레이어 닫기</button>
+	</div>
+</section>
+
+
+
+
 <head>
 <header id="header" class="main-header">
 	<h1 class="ci">
@@ -183,7 +203,7 @@ button.button.purple {
 			<!-- 로그인 전 -->
 			<sec:authorize access="isAnonymous()">
 				<div class="before" style="">
-					<a id="header-login-btn" href="#" href="${pageContext.request.contextPath}/member/login}" title="로그인">로그인</a> 
+					<a id="header-login-btn" href="#" href="${pageContext.request.contextPath}/member/login" title="로그인">로그인</a> 
 					<a href="/movieplus/member/join" title="회원가입">회원가입</a>
 				</div>
 			</sec:authorize>
@@ -218,7 +238,7 @@ button.button.purple {
 		<!-- target on // X 표시 -->
 		<a href="/movieplus/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a> <a href="#"
 			id="header-my-megabox-btn" class="header-open-layer btn-layer-mymega"
-			title="나의 메가박스">나의 메가박스</a>
+			title="나의 무비플러스">나의 무비플러스</a>
 	</div>
 
 
@@ -261,7 +281,7 @@ button.button.purple {
 			<li><a href="#" class="gnb-txt-benefit" title="혜택">혜택</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="/movieplus/benefit/membership" title="메가박스 멤버십">메가박스 멤버십</a></li>
+						<li><a href="/movieplus/benefit/membership" title="무비플러스 멤버십">무비플러스 멤버십</a></li>
 						<li><a href="/movieplus/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a></li>
 					</ul>
 				</div></li>
@@ -322,11 +342,11 @@ button.button.purple {
 				</ul>
 			</div>
 			<div class="list position-6">
-				<p class="tit-depth">나의 메가박스</p>
+				<p class="tit-depth">나의 무비플러스</p>
 				<ul class="list-depth mymage">
 
 
-					<li><a href="#">나의 메가박스 홈</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/mypage">나의 무비플러스 홈</a></li>
 					<li><a href="#">예매/구매내역</a></li>
 					<li><a href="#">할인/제휴쿠폰</a></li>
 					<li><a href="#">멤버십포인트</a></li>
@@ -416,7 +436,7 @@ button.button.purple {
 
 	<div id="layer_mymega2" class="header-layer layer-mymege2">
 		<!-- on -->
-		<a href="#" class="ir" title="나의 메가박스 레이어 입니다.">나의 메가박스 레이어 입니다.</a>
+		<a href="#" class="ir" title="나의 무비플러스 레이어 입니다.">나의 무비플러스 레이어 입니다.</a>
 
 		<!-- wrap-->
 		<div class="wrap" style="display:;">
@@ -433,7 +453,7 @@ button.button.purple {
 							<span></span>임시님
 						</div>
 
-						<a href="#" class="linkBtn" title="나의  메가박스">나의 메가박스</a>
+						<a href="${pageContext.request.contextPath}/member/mypage" class="linkBtn" title="나의 무비플러스">마이페이지</a>
 					</div>
 
 					<div class="box">
