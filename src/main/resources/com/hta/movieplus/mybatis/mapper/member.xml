@@ -26,6 +26,10 @@
 		AND MEMBER_PHONENO = #{MEMBER_PHONENO}
 	</select>
 	
-
+	<select id="memberinfo" parameterType="String" resultType="member">
+		select *
+		from MEMBER 
+		where MEMBER_ID = #{MEMBER_ID}
+	</select>
 
 </mapper>

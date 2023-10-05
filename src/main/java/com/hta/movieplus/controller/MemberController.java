@@ -7,12 +7,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -149,11 +151,6 @@ public class MemberController {
 		return "member/member_findpass";
 	}
 	
-	//마이페이지 이동
-	@GetMapping("/mypage")
-	public String mypage() {
-		return "member/mypage_main";
-	}
 	
 	//로그아웃
 	@GetMapping("/logout")
@@ -163,14 +160,14 @@ public class MemberController {
 	}
 	
 	//회원정보
-	@GetMapping("/info")
-	public ModelAndView memberInfo(@RequestParam("id") String MEMBER_ID,  
+	@RequestMapping(value="/mypage", method = RequestMethod.GET)
+	public ModelAndView memberInfo(@AuthenticationPrincipal(expression = "username") String MEMBER_ID,
 	 		ModelAndView mv,  HttpServletRequest request ) {
 		Member m = memberservice.memberinfo(MEMBER_ID);
 		
 		if(m!=null) {
-			mv.setViewName("member/mypage");
-			mv.addObject("memberinfo", m);
+			mv.setViewName("member/mypage_main");
+			mv.addObject("memberInfo", m);
 		} else {
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "해당 정보가 없습니다.");
@@ -178,5 +175,5 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+
 }	

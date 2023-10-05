@@ -80,7 +80,7 @@
 			<div class="top2">
 
 				<div class="mbimg"><img src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png" alt="WELCOME"></div>
-				<div class="mb_name">안녕하세요!<p>${memberinfo.MEMBER_NAME}<span>님</span></p></div>
+				<div class="mb_name">안녕하세요!<p>${memberInfo.MEMBER_NAME}<span>님</span></p></div>
 
 				<div class="link">
 					<a href="#" title="개인정보수정 페이지로 이동">개인정보수정</a>
