@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper	namespace="com.hta.movieplus.mybatis.mapper.ScheduleMapper">
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.SchedulingMapper">
 	
-	<select id="getScheduleList" parameterType="int" resultType="theaterSchedule">
+	<select id="getScheduleList" parameterType="map" resultType="theaterSchedule">
 		SELECT *
 		FROM THEATER_SCHEDULE
 		WHERE THEATER_ROOM_ID IN ( SELECT THEATER_ROOM_ID
 									FROM THEATER_ROOM
 									WHERE THEATER_ID = #{theaterId} )
+		AND THEATER_SCHEDULE_DATE = #{todayDate}
+		<!-- selectedRoom -->
 	</select>
 	
 </mapper>
