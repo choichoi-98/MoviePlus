@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.service.MovieServiceImpl;
@@ -21,12 +22,23 @@ public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
 	@GetMapping("")
-	public String home() {
+	public String home(Model model) {
+		//db에서 가져오기 (mapper) 가 dao
+ 		model.addAttribute("message", "스프링");
+		return "customer_service/customer_service_home";
+	}
+	
+	@GetMapping("")
+	public ModelAndView home1(Model model) {
+		//db에서 가져오기 (mapper) 가 dao
+ 		model.addAttribute("message", "스프링");
 		return "customer_service/customer_service_home";
 	}
 
 	@GetMapping("/lostitem")
 	public String lostItem() {
+		
+		
 		return "customer_service/custommer_service_item";
 	}
 
