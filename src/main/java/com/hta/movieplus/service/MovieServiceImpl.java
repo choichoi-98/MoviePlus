@@ -48,7 +48,22 @@ public class MovieServiceImpl implements MovieService{
 		return dao.updatePoster(codeNo, posterUrl,stillUrl, plotText);
 		
 	}
-	
-	
+
+	@Override
+	public List<Movie> getMovieListAll() {
+		return dao.selectMovieList();
+	}
+
+	public List<Movie> getPlayingMovie() {
+		return dao.getPlayingMovieList();
+	}
+
+	public List<Movie> getUpcomingMovie() {
+		return dao.getUpcomingMovieList();
+	}
+
+	public List<Movie> getEndedMovie() {
+		return dao.getEndedMovieList();
+	}
 
 }

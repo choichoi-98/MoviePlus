@@ -32,7 +32,7 @@ public class MovieController {
 	
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
-    @GetMapping("/movieList")
+    @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public String movieList() {
     	return "movie/movie_list";
     }
@@ -72,6 +72,25 @@ public class MovieController {
 		
 	}
 	
+	@GetMapping("/movieListAll")
+	public List<Movie> getMovieListAll(){
+		return movieServiceImpl.getMovieListAll();
+	}
+	
+	@GetMapping("/now-playing")
+	public List<Movie> getPlayingMovie(){
+		return movieServiceImpl.getPlayingMovie();
+	}
+	
+	@GetMapping("/upcoming")
+	public List<Movie> getUpcomingMovie(){
+		return movieServiceImpl.getUpcomingMovie();
+	}
+	
+	@GetMapping("/ended")
+	public List<Movie> getEndedMovie(){
+		return movieServiceImpl.getEndedMovie();
+	}
 	
 }
 

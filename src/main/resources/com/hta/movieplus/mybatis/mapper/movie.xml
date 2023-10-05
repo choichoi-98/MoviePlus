@@ -43,4 +43,9 @@
 		MOVIE_CODE = #{codeNo}
 		
 	</update>
+	
+	<select id="selectMovieList">
+		SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		FROM MOVIE
+	</select>
 </mapper>

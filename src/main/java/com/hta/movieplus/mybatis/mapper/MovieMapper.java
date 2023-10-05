@@ -20,5 +20,13 @@ public interface MovieMapper {
 	public List<Movie> selectMovieTitle();
 
 	public int updatePoster(String codeNo, String posterUrl, String stillUrl, String plotText);
+
+	public List<Movie> selectMovieList();
+
+	public List<Movie> getPlayingMovieList();
+
+	public List<Movie> getUpcomingMovieList();
+
+	public List<Movie> getEndedMovieList();
 }
 
