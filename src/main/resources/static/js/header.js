@@ -129,7 +129,7 @@ $(document).ready(function(){
 	})
 	
 	function openAlertPopup(){
-		$('#loginfailalert').css('opacity', '1');
+		$('#loginfailalert').addClass('on');
 		$('.alertStyle').css('opacity', '1');
         $('body').addClass('no-scroll');
 	}
@@ -140,12 +140,14 @@ $(document).ready(function(){
         $('body').removeClass('no-scroll');
     }
 	
+	
+	/*
 	//로그인 확인 - 실패 시 알림창
 	$("#btnLogin").click(function(){
 		const id = $('#LoginId').val();
 		const pass = $('#LoginPass').val();
 		$.ajax({
-			url : "logincheck",
+			url : "logincheck"
 			data : {"id" : id , "pass" : pass},
 			success : function(resp){
 				if(resp != 1) {
@@ -155,7 +157,7 @@ $(document).ready(function(){
 			}
 		})//ajax end
 	})
-	
+	*/
 	
 	$("#loginfailok").click(function(){
 		closeAlertPopup();

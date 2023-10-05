@@ -135,7 +135,7 @@ public class MemberController {
 		Member m = memberservice.findId(MEMBER_ID, MEMBER_ID, MEMBER_ID);
 		
 		if(m!=null) {
-			mv.addObject("MEMBERINFO", m);
+			mv.addObject("MEMBERINFO2", m);
 		} else {
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "해당 정보가 없습니다.");
@@ -159,21 +159,26 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
+	
 	//회원정보
 	@RequestMapping(value="/mypage", method = RequestMethod.GET)
 	public ModelAndView memberInfo(@AuthenticationPrincipal(expression = "username") String MEMBER_ID,
-	 		ModelAndView mv,  HttpServletRequest request ) {
-		Member m = memberservice.memberinfo(MEMBER_ID);
+			ModelAndView mv,  HttpServletRequest request ) {
 		
-		if(m!=null) {
-			mv.setViewName("member/mypage_main");
-			mv.addObject("memberInfo", m);
-		} else {
-			mv.addObject("url", request.getRequestURL());
-			mv.addObject("message", "해당 정보가 없습니다.");
+		Member m = memberservice.memberinfo(MEMBER_ID);
+				
+			if(m!=null) {
+				mv.setViewName("member/mypage_main");
+				mv.addObject("memberInfo", m);
+				
+				HttpSession session = request.getSession();
+			    session.setAttribute("memberInfo", m);
+			} else {
+				mv.addObject("url", request.getRequestURL());
+				mv.addObject("message", "해당 정보가 없습니다.");
+			}
+			return mv;
 		}
-		return mv;
-	}
-	
 
+	
 }	
