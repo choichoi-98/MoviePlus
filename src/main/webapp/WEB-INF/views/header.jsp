@@ -118,10 +118,10 @@ button.button.purple {
                                         <!-- chk-util -->
                                         <div class="chk-util">
                                             <div class="left">
-                                                <input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장<!--아이디 저장--></label>
+                                                <input type="checkbox" name="remember-me"> <label for="chkloginSave">로그인 유지하기<!--로그인 유지하기--></label>
                                             </div>
                                             <div class="right">    
-                                                <input type="checkbox" name="remember-me"> <label for="chkloginSave">로그인 유지하기<!--로그인 유지하기--></label>
+                                                <!-- <input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장아이디 저장</label> -->
                                             </div>
 
                                         </div>
@@ -450,10 +450,10 @@ button.button.purple {
 				<div class="inner">
 					<div class="box">
 						<div class="mbimg">
-							<img src="" alt="프로필 사진">
+	<!-- ** 멤버십등급 사진 변경하기** --> <img src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png" alt="프로필 사진">
 						</div>
 						<div class="name">
-							<span>${sessionScope.memberInfo.MEMBER_NAME}</span>님
+							<span>${memberInfo.MEMBER_NAME}</span>님
 							<%-- <span>${memberInfo.MEMBER_NAME}</span>님 --%>
 						</div>
 
@@ -465,7 +465,7 @@ button.button.purple {
 							<span>멤버십 등급</span>
 						</div>
 						<ul class="membership">
-							<li class="txt">등급!!</li>
+							<li class="txt">${memberInfo.MEMBER_MEMBERSHIP}</li>
 						</ul>
 					</div>
 

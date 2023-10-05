@@ -9,28 +9,43 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.service.MemberService;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
 	
+	@Autowired
+	private MemberService memberservice;
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		
 		logger.info("로그인 성공 : LoginSuccessHandler ");
 		
-		//String MEMBER_ID = request.getParameter("id");
-		
 		HttpSession session = request.getSession();
 		//session.setAttribute("loginUser", authentication.getName());
 		//session.setAttribute("MEMBER_ID", MEMBER_ID);
 		session.removeAttribute("loginfail");
 		
+		String MEMBER_ID = authentication.getName();
+		Member m = memberservice.memberinfo(MEMBER_ID);
+		
+		if(m != null) {
+			session.setAttribute("memberInfo", m);
+		}
+		
 		String url = request.getContextPath() +  "/main";
 		response.sendRedirect(url);
+		
+		
+		
 	}
 
 }

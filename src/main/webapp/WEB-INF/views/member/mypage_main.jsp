@@ -95,7 +95,7 @@
 					<div class="inbox">
 						<div class="totalPoint">0 P</div>
 						<ul>
-							<li class="nowClass"><span>현재등급</span><em>WELCOME</em></li>
+							<li class="nowClass"><span>현재등급</span><em>${memberInfo.MEMBER_MEMBERSHIP}</em></li>
 							<li class="continue">
 							</li>
 							<li class="vipCoup">
