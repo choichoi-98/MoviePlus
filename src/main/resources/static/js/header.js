@@ -16,7 +16,8 @@ $(document).ready(function(){
         $('#header-sitemap-btn').removeClass('target on');
         $('#header-my-megabox-btn').removeClass('target on');
     }
-
+ 
+	
     function openLoginModal() {
         $('#layer_login_select').addClass('on');
         $('.bg-modal').css('opacity', '1');
@@ -98,7 +99,7 @@ $(document).ready(function(){
         $('#gnb').removeClass('on');
     });
     
-
+	
     function login_alert_modal_close(){
         $('.bg-modal').css('opacity', '0');
         $('.alert-popup').css('display', 'none');
@@ -126,5 +127,27 @@ $(document).ready(function(){
 		event.preventDefault();
 		$("form[name=logout]").submit();
 	})
+	
+	function openAlertPopup(){
+		$('#loginfailalert').addClass('on');
+		 $('.bg-modal').css('opacity', '1');
+        $('body').addClass('no-scroll');
+	}
+	
+	function closeAlertPopup(){
+        $('.bg-modal').css('opacity', '0');
+        $('#loginfailalert').css('display', 'none');
+        $('body').removeClass('no-scroll');
+    }
+	
+	
+	 if ("${loginfail}" == 'loginFailMsg') {
+	    	openAlertPopup();
+		}
+	
+	$("#loginfailok").click(function(){
+		closeAlertPopup();
+	})
+	
 	
 });
