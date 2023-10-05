@@ -14,6 +14,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script>
+
 </head>
 <body>
 	<!-- header -->
@@ -48,8 +50,9 @@
 					type="hidden" name="selectCard" id="ifrm_selectCard"> <input
 					type="hidden" name="pointDmode" id="ifrm_pointDmode">
 			</form>
-
-			<div id="contents" class="location-fixed">
+			
+			<!--  <div id="contents" class="location-fixed"> -->
+			<div id="contents" >
 				<div class="inner-wrap">
 					<!-- store-payment -->
 					<div class="store-payment">
@@ -105,7 +108,7 @@
 												<em id="prdtSumAmtView" class="price">12,000</em>원
 											</div>
 										</td>
-										<td><a href="https://www.megabox.co.kr/store#"
+										<td><a href="#"
 											class="a-link" name="brchList" title="삭제">삭제</a></td>
 									</tr>
 								</tbody>
@@ -130,14 +133,14 @@
 								<div class="cell sale">
 									<p class="txt">할인금액</p>
 									<p class="price">
-										<em id="totDcAmtView">0</em> <span>원</span>
+										<em id="totDcAmtView">2,000</em> <span>원</span>
 									</p>
 								</div>
 								<i class="iconset ico-circle-equal">등호</i>
 								<div class="cell real">
 									<p class="txt">최종 결제금액</p>
 									<p class="price">
-										<em id="lstPayAmtView">12,000</em> <span>원</span>
+										<em id="lstPayAmtView">10,000</em> <span>원</span>
 									</p>
 								</div>
 							</div>
@@ -237,13 +240,16 @@
 						<div class="btn-group pt40">
 							<a href="https://www.megabox.co.kr/store"
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
-							<a href="https://www.megabox.co.kr/store#"
-								class="button purple large w170px btn-modal-open"
-								id="btn_store_pay_adapter" title="결제">결제</a> <a
+								
+							<a href="javascript:void(0);" class="button purple large w170px btn-modal-open" 
+  							   id="btn-kakaopay" title="결제">결제</a>
+
+
+						<!-- <a
 								href="https://www.megabox.co.kr/store#"
 								class="button purple large w170px btn-modal-open"
 								id="btn_store_pay" title="결제" style="display: none;"
-								w-data="600" h-data="400">결제</a>
+								w-data="600" h-data="400">결제</a> -->
 							<!--
                 <a href="javascript:execStorePayment();" class="button purple large w170px">결제테스트</a>
                 <a href="javascript:execStoreCancelPayment();" class="button purple large w170px">결제취소테스트</a>
@@ -260,5 +266,6 @@
 		</div>
 	</div>
 	<!--// container -->
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>
