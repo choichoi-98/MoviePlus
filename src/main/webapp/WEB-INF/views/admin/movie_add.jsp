@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>MOVIEPLUS:관리자</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
-	<script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
+	
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row row--grid">
@@ -87,7 +89,14 @@
 									</tr>
 								</thead>
 								<tbody id="movieListAllTable">
-									
+									<c:forEach var="movie" items="${movieList}">
+										<tr>
+											<td> ${movie.movie_Code }</td>
+											<td> ${movie.movie_Title } </td>
+											<td> ${movie.movie_Screen }</td>
+											<td> 관리 이미지 삽입</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

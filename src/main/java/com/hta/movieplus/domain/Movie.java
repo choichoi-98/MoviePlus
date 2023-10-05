@@ -13,6 +13,13 @@ public class Movie {
     private String movie_Plot;		//줄거리
     private int movie_Star;			//평점
     private String movie_Release;	//개봉상태(개봉, 개봉예정)
+    private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
+	public String getMovie_Screen() {
+		return movie_Screen;
+	}
+	public void setMovie_Screen(String movie_Screen) {
+		this.movie_Screen = movie_Screen;
+	}
 	public String getMovie_Code() {
 		return movie_Code;
 	}

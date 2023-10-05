@@ -1,6 +1,8 @@
 package com.hta.movieplus.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
@@ -72,9 +76,14 @@ public class MovieController {
 		
 	}
 	
-	@GetMapping("/movieListAll")
-	public List<Movie> getMovieListAll(){
-		return movieServiceImpl.getMovieListAll();
+	@ResponseBody
+	@RequestMapping(value="/movieListAll")
+	public List<Movie> getMovieListAll( ){
+		 List<Movie> movieList = movieServiceImpl.getMovieListAll();
+		 Map<String,Object> map = new HashMap<String,Object>();
+		 map.put("movieList", movieList);
+		 logger.info(movieList.size() + "");
+		 return movieList;
 	}
 	
 	@GetMapping("/now-playing")
