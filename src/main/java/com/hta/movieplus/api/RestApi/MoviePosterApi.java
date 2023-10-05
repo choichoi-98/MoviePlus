@@ -52,6 +52,9 @@ public class MoviePosterApi {
 							+ "&title=" + movieTitle + "&director=" + movieDirector)
 					.build();
 			
+			logger.info("uri=" + uri.toString());
+			logger.info("uri.getUserInfo=" + uri.getUserInfo());
+			
 			ResponseEntity<Map> resultMap =
 					restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
 			
