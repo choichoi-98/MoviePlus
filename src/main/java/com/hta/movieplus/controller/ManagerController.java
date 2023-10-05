@@ -47,11 +47,6 @@ public class ManagerController {
 		return mv;
 	}
 	
-	@GetMapping("/scheduling")
-	public String theaterSchedulingView() {
-		return "manager/scheduling";
-	}
-
 	@GetMapping("/manageroom")
 	public ModelAndView manageRoomView(ModelAndView mv, Model model) {
 		int theaterId = (int) model.asMap().get("theaterId");
