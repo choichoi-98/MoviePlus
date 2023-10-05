@@ -15,14 +15,14 @@
 			<div class="lnb-area addchat location-fixed">
 				<nav id="lnb" class="ty2">
 
-					<p class="tit"><a href="고객센터 홈 주소" title="고객센터">고객센터</a></p>   
+					<p class="tit"><a href="http://localhost:9000/movieplus/customer_service" title="고객센터">고객센터</a></p>   
 					<ul>
-						<li class="on"><a href="고객센터 홈 이동 주소" title="고객센터 홈">고객센터 홈</a></li>
-						<li><a href="자주 묻는 질문 이동 주소" title="자주 묻는 질문">자주 묻는 질문</a></li>
-						<li><a href="공지사항 이동 주소" title="공지사항">공지사항</a></li>
-						<li><a href="1:1문의 이동 주소" title="1:1문의">1:1문의</a></li>
-						<li><a href="단체관람 및 대관문의 이동 주소" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
-						<li><a href="분실물 문의 이동 주소" title="분실물 문의">분실물 문의</a></li>
+						<li class="on"><a href="http://localhost:9000/movieplus/customer_service" title="고객센터 홈">고객센터 홈</a></li>
+						<li><a href="http://localhost:9000/movieplus/customer_service/question" title="자주 묻는 질문">자주 묻는 질문</a></li>
+						<li><a href="http://localhost:9000/movieplus/customer_service/notice" title="공지사항">공지사항</a></li>
+						<li><a href="http://localhost:9000/movieplus/customer_service/oneonone" title="1:1문의">1:1문의</a></li>
+						<li><a href="http://localhost:9000/movieplus/customer_service/group" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
+						<li><a href="http://localhost:9000/movieplus/customer_service/lostitem" title="분실물 문의">분실물 문의</a></li>
 					</ul>
 
 					<div class="left-customer-info">
@@ -57,16 +57,8 @@
 
 				<div class="custo-main">
 					<div class="main-block">
-						<div class="block-content" style="display: none">
-							<a href="https://megabox.co.kr/support#" id="channelTalk" title="상담톡 이용">
-								<p>
-									<strong>상담톡 이용</strong>
-									상담톡으로 편리하게 문의해주세요.
-								</p>
-							</a>
-						</div>
 						<div class="block-content">
-							<a href="https://megabox.co.kr/support/lost" title="분실물 문의 페이지로 이동">
+							<a href="http://localhost:9000/movieplus/customer_service/lostitem" title="분실물 문의 페이지로 이동">
 								<p>
 									<strong>분실물 문의</strong>
 									잃어버린 물건을 접수해 주시면<br>신속히 찾아드리겠습니다.
@@ -74,7 +66,7 @@
 							</a>
 						</div>
 						<div class="block-content">
-							<a href="https://megabox.co.kr/support/inquiry" title="1:1 문의 페이지로 이동">
+							<a href="http://localhost:9000/movieplus/customer_service/oneonone" title="1:1 문의 페이지로 이동">
 								<p>
 									<strong>1:1 문의</strong>
 									해결되지않은 문제가 있나요?<br>1:1문의로 문의주세요
@@ -82,7 +74,7 @@
 							</a>
 						</div>
 						<div class="block-content">
-							<a href="https://megabox.co.kr/support/rent" title="단체관람 및 대관문의 페이지로 이동">
+							<a href="http://localhost:9000/movieplus/customer_service/group" title="단체관람 및 대관문의 페이지로 이동">
 								<p>
 									<strong>단체관람 및 대관문의</strong>
 									단체관람 또는 대관을 원하시면<br>문의 해주세요.
@@ -98,7 +90,7 @@
 							</a>
 						</div>
 						<div class="block-content">
-							<a href="https://megabox.co.kr/support/faq" title="자주 묻는 질문 페이지로 이동">
+							<a href="http://localhost:9000/movieplus/customer_service/question" title="자주 묻는 질문 페이지로 이동">
 								<p>
 									<strong>자주 묻는 질문</strong>
 									자주 묻는 질문<br>빠르고 간편하게 검색하세요.
