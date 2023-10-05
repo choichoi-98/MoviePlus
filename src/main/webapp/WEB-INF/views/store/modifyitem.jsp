@@ -26,7 +26,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>상품 등록</h2>
+						<h2>상품 수정</h2>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -90,7 +90,7 @@
 							<div class="col-lg-1.5">
    	 							<div class="row row--form">
  	      							<div class="col-12">
-            							<button type="button" class="form__btn">상품 등록</button>
+            							<button type="button" class="form__btn">상품 수정</button>
         							</div>
     							</div>
 							</div>

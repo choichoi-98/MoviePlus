@@ -40,9 +40,20 @@ public class StoreController {
 		this.cartService = cartService;
 	}
 	
+	
 	@RequestMapping("/admin/additem")
 	public String additem() {
-		return "store/additem.jsp";
+		return "store/additem";
+	}
+	
+	@RequestMapping("/admin/itemlist")
+	public String itemlist() {
+		return "store/catalog";
+	}
+	
+	@RequestMapping("/admin/modifyitem")
+	public String itemdetail() {
+		return "store/modifyitem";
 	}
 	
 	@GetMapping("")
