@@ -1,10 +1,13 @@
-package com.hta.movieplus.service;
+package com.hta.movieplus.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.hta.movieplus.domain.TheaterSchedule;
 
-public interface SchedulingService {
+@Mapper
+public interface ScheduleMapper {
 
 	List<TheaterSchedule> getScheduleList(int theaterId);
 
