@@ -27,13 +27,6 @@ public class CustomerController {
  		model.addAttribute("message", "스프링");
 		return "customer_service/customer_service_home";
 	}
-	
-	@GetMapping("")
-	public ModelAndView home1(Model model) {
-		//db에서 가져오기 (mapper) 가 dao
- 		model.addAttribute("message", "스프링");
-		return "customer_service/customer_service_home";
-	}
 
 	@GetMapping("/lostitem")
 	public String lostItem() {
