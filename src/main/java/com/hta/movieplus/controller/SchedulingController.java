@@ -58,10 +58,10 @@ public class SchedulingController {
 	@ResponseBody
 	@PostMapping("/manager/getScheduleList")
 	public List<TheaterSchedule> getScheduleList(@ModelAttribute("theaterId") int theaterId, SessionStatus sessionStatus,
-			@RequestParam(value="todayDate", required=true) String todayDate,
-			@RequestParam(value="selectedRoom", required=true) String selectedRoom){
+			@RequestParam(value="todayDate", required=true) String todayDate
+			){
 		
-		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate, selectedRoom);
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate);
 		
 		return scheduleList;
 	}
