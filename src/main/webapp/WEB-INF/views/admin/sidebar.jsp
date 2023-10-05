@@ -59,7 +59,7 @@
 				</li>
 
 				<li class="sidebar__nav-item">
-					<a href="#" class="/movieplus/movie/movieAdd"><span>상영 영화 관리</span></a>
+					<a href="/movieplus/movie/movieAdd" class="sidebar__nav-link"><span>상영 영화 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

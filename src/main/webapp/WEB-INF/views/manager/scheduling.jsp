@@ -35,10 +35,10 @@
 		<div class="col-12">
 			<div class="main__title">
 				<h2>상영 스케줄 관리</h2>
-
+				
 				<div class="main__title-wrap">
 					<!-- filter sort -->
-					<input type="date" style="margin-right:50px; width:200px;" />
+					<input id="todayDateId" type="date" name="schedule-date" value="${todayDate}" style="margin-right:50px; width:200px;" />
 					<div class="filter" id="filter__sort">
 						<span class="filter__item-label">조회</span>
 
@@ -48,14 +48,17 @@
 							<input type="button" value="${theaterName}"> <span></span>
 						</div>
 
-						<ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
+						<ul id="selected-room-id" class="filter__item-menu dropdown-menu scrollbar-dropdown"
 							aria-labelledby="filter-sort">
-							<li>${theaterName}</li>
+							<li>${theaterName}<input type="hidden" name="schedule-room-id" value="all"></li>
 							<c:forEach var="room" items="${roomList}">
-								<li>${room.THEATER_ROOM_NAME}</li>
+								<li>${room.THEATER_ROOM_NAME}<input type="hidden" name="schedule-room-id" value="${room.THEATER_ROOM_ID}"></li>
 							</c:forEach>
 						</ul>
+						
+						
 					</div>
+					<a href="#" class="main__title-link">조회하기</a>
 					<!-- end filter sort -->
 				</div>
 			</div>
@@ -71,18 +74,7 @@
 						class="icon ion-ios-film feature__icon"></i>
 					</a>
 				</div>
-				<div class="main__table-text">상영 등록된 영화가 없습니다.</div>
-			</div>	
-		</c:forEach>
-
-
-		<div class="col-7">
-			<div class="theater-room-name">
-				1관 <a href="#" class="main__table-btn main__table-btn--banned">
-					<i class="icon ion-ios-film feature__icon"></i>
-				</a>
-			</div>
-			<table class="main__table">
+				<table class="main__table">
 				<thead>
 					<tr>
 						<th>상영 순서</th>
@@ -93,41 +85,14 @@
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>
-							<div class="main__table-text">1</div>
-						</td>
-						<td>
-							<div class="main__table-text">
-								<a href="#">I Dream in Another Language</a>
-							</div>
-						</td>
-						<td>
-							<div class="main__table-text main__table-text--rate">1/250
-							</div>
-						</td>
-						<td>
-							<div class="main__table-text">12:30 ~ 14:00</div>
-						</td>
-						<td>
-							<div class="main__table-btns">
-								<a href="#" class="main__table-btn main__table-btn--edit"> <i
-									class="icon ion-ios-create"></i>
-								</a> <a href="#modal-delete"
-									class="main__table-btn main__table-btn--delete open-modal">
-									<i class="icon ion-ios-trash"></i>
-								</a>
-							</div>
-						</td>
-					</tr>
+					
 
 
 				</tbody>
+				
 			</table>
-		</div>
-
-
-
+			</div>	
+		</c:forEach>
 
 
 	</main>

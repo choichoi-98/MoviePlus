@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -41,9 +42,13 @@ public class SchedulingController {
 	@GetMapping("/manager/scheduling")
 	public ModelAndView theaterSchedulingView(@ModelAttribute("theaterId") int theaterId, SessionStatus sessionStatus
 												,ModelAndView mv) {
+		
+		String todayDate = schedulingService.getTodayDate();
+		
 		List<TheaterRoom> roomList = managerService.getRoomList(theaterId);
 		String theaterName = theaterService.getTheaterById(theaterId).getTHEATER_NAME();
 		
+		mv.addObject("todayDate", todayDate);
 		mv.addObject("theaterName", theaterName);
 		mv.addObject("roomList", roomList);
 		mv.setViewName("manager/scheduling");
@@ -51,10 +56,12 @@ public class SchedulingController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/getScheduleList")
-	public List<TheaterSchedule> getScheduleList(@ModelAttribute("theaterId") int theaterId, SessionStatus sessionStatus){
+	@PostMapping("/manager/getScheduleList")
+	public List<TheaterSchedule> getScheduleList(@ModelAttribute("theaterId") int theaterId, SessionStatus sessionStatus,
+			@RequestParam(value="todayDate", required=true) String todayDate,
+			@RequestParam(value="selectedRoom", required=true) String selectedRoom){
 		
-		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId);
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate, selectedRoom);
 		
 		return scheduleList;
 	}
