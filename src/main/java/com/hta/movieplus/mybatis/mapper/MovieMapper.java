@@ -21,7 +21,7 @@ public interface MovieMapper {
 
 	public int updatePoster(String codeNo, String posterUrl, String stillUrl, String plotText);
 
-	public List<Movie> selectMovieList();
+	public List<Movie> getMovieListAll();
 
 	public List<Movie> getPlayingMovieList();
 

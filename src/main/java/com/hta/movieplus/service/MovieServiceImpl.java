@@ -51,7 +51,7 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public List<Movie> getMovieListAll() {
-		return dao.selectMovieList();
+		return dao.getMovieListAll();
 	}
 
 	public List<Movie> getPlayingMovie() {

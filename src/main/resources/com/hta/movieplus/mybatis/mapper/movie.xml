@@ -44,7 +44,7 @@
 		
 	</update>
 	
-	<select id="selectMovieList">
+	<select id="getMovieListAll" resultType="movie">
 		SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
 		FROM MOVIE
 	</select>
