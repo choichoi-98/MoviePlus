@@ -40,14 +40,14 @@
 				<div class="tab-list fixed">
 					<ul>
 						<li id="storeTab_CPC02" class=""><a
-							href="/movieplus/store_cp02" title="메가티켓 탭으로 이동">영화 티켓</a></li>
+							href="/movieplus/store/cp02" title="메가티켓 탭으로 이동">영화 티켓</a></li>
 						<li id="storeTab_CPC05" class=""><a
-							href="/movieplus/store_cp05" title="팝콘/음료/굿즈 탭으로 이동">팝콘/음료/굿즈</a>
+							href="/movieplus/store/cp05" title="팝콘/음료/굿즈 탭으로 이동">팝콘/음료/굿즈</a>
 						</li>
 						<li id="storeTab_CPC09" class="on"><a
-							href="/movieplus/store_cp09" title="금액권 탭으로 이동">금액권</a></li>
+							href="/movieplus/store/cp09" title="금액권 탭으로 이동">금액권</a></li>
 						<li id="storeTab_CPC07" class=""><a
-							href="/movieplus/store_cp07" title="포인트몰 탭으로 이동"> <span
+							href="/movieplus/store/cp07" title="포인트몰 탭으로 이동"> <span
 								class="pointmall">포인트몰</span>
 						</a></li>
 					</ul>
