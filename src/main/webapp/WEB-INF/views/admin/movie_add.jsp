@@ -89,14 +89,7 @@
 									</tr>
 								</thead>
 								<tbody id="movieListAllTable">
-									<c:forEach var="movie" items="${movieList}">
-										<tr>
-											<td> ${movie.movie_Code }</td>
-											<td> ${movie.movie_Title } </td>
-											<td> ${movie.movie_Screen }</td>
-											<td> 관리 이미지 삽입</td>
-										</tr>
-									</c:forEach>
+									
 								</tbody>
 							</table>
 						</div>
