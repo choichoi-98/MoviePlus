@@ -8,6 +8,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
+	<script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row row--grid">
@@ -16,7 +18,7 @@
 					<div class="main__title">
 						<h2>상영 영화 관리</h2>
 
-						<a href="add-item.html" class="main__title-link">DB 최신화</a>
+						<a href="#" class="main__title-link" id="updateDBButton">DB 최신화</a>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -80,28 +82,12 @@
 									<tr>
 										<th>영화코드</th>
 										<th>영화제목</th>
-										<th>감독</th>
+										<th>상영상태</th>
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="main__table-text">321</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate">
-											<i class="icon ion-ios-star">
-											</i> 9.2</div>
-										</td>
-									</tr>
-										
+								<tbody id="movieListAllTable">
+									
 								</tbody>
 							</table>
 						</div>
@@ -127,7 +113,7 @@
 									<tr>
 										<th>영화코드</th>
 										<th>영화제목</th>
-										<th>감독</th>
+										<th>상영상태</th>
 										<th>관리</th>
 									</tr>
 								</thead>
@@ -171,7 +157,7 @@
 									<tr>
 										<th>영화코드</th>
 										<th>영화제목</th>
-										<th>감독</th>
+										<th>상영상태</th>
 										<th>관리</th>
 									</tr>
 								</thead>
@@ -216,7 +202,7 @@
 									<tr>
 										<th>영화코드</th>
 										<th>영화제목</th>
-										<th>감독</th>
+										<th>상영상태</th>
 										<th>관리</th>
 									</tr>
 								</thead>

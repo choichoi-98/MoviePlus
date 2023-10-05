@@ -73,8 +73,10 @@ public class MovieListApi {
 					String repGenreNm = (String) movieData.get("repGenreNm");
 					logger.info("거르기 전 repGenreNm:" + repGenreNm);
 
-					if (!genreAlt.equals("성인물(에로)") && !repGenreNm.equals("성인물(에로)")) {
-						if (!genreAlt.equals("성인물(에로),멜로/로맨스")) {
+					if(!genreAlt.isEmpty()&& genreAlt != null) {
+						
+					if (!genreAlt.contains("성인물(에로)") && !repGenreNm.contains("성인물(에로)")) {
+						if (!genreAlt.contains("멜로/로맨스")) {
 
 						  if(!repGenreNm.isEmpty() && repGenreNm != null) {
 							if (!repGenreNm.equals("멜로/로맨스")) {
@@ -111,6 +113,7 @@ public class MovieListApi {
 							}
 						}
 					}
+				}
 				}
 				page++;
 				logger.info("page=" + page);

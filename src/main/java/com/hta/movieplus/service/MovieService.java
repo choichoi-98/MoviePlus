@@ -17,4 +17,7 @@ public interface MovieService {
 	public List<Movie> getAllMovies();
 	
 	public int updatePoster(String codeNo, String posterUrl, String stillUrl, String plotText);
+	
+	public List<Movie> getMovieListAll();
+	
 }
