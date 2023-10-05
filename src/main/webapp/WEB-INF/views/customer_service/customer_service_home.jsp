@@ -23,10 +23,6 @@
 						<li><a href="1:1문의 이동 주소" title="1:1문의">1:1문의</a></li>
 						<li><a href="단체관람 및 대관문의 이동 주소" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
 						<li><a href="분실물 문의 이동 주소" title="분실물 문의">분실물 문의</a></li>
-						<li><a href="이용약관 이동 주소" title="이용약관">이용약관</a></li>
-						<li><a href="위치기반서비스이용약관 이동 주소" title="위치기반서비스이용약관">위치기반서비스이용약관</a></li>
-						<li><a href="개인정보처리방침 이동 주소" title="개인정보처리방침">개인정보처리방침</a></li>
-						<li><a href="스크린배정수에관한기준 이동주소" style="border-radius: 0 0 10px 10px;" title="스크린배정수에관한기준">스크린배정수에관한기준</a></li>
 					</ul>
 
 					<div class="left-customer-info">
@@ -43,7 +39,7 @@
 				<h2 class="tit">고객센터 홈</h2>
 
 				<!-- input-search-area -->
-				<div class="input-search-area mb30">
+				<%-- <div class="input-search-area mb30">   빠른검색의 필요성을 느끼지못해 삭제
 					<div class="input-area">
 						<label for="search01" class="label">빠른검색</label>
 
@@ -56,7 +52,7 @@
 					<div class="btn-area">
 						
 					</div>
-				</div>
+				</div> --%>
 				<!--// input-search-area -->
 
 				<div class="custo-main">
