@@ -14,4 +14,6 @@ public interface MemberService {
 
 	public Member memberinfo(String MEMBER_ID);
 
+	
+	
 }

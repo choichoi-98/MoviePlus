@@ -19,14 +19,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		
 		logger.info("로그인 성공 : LoginSuccessHandler ");
+		
+		//String MEMBER_ID = request.getParameter("id");
+		
 		HttpSession session = request.getSession();
+		//session.setAttribute("loginUser", authentication.getName());
+		//session.setAttribute("MEMBER_ID", MEMBER_ID);
 		session.removeAttribute("loginfail");
+		
 		String url = request.getContextPath() +  "/main";
 		response.sendRedirect(url);
-		
 	}
 
 }
