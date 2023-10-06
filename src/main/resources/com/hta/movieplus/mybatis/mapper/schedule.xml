@@ -4,12 +4,31 @@
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.SchedulingMapper">
 	
 	<select id="getScheduleList" parameterType="map" resultType="theaterSchedule">
-		SELECT *
-		FROM THEATER_SCHEDULE
+		SELECT TS.*, M.MOVIE_TITLE
+		FROM THEATER_SCHEDULE TS
+		JOIN MOVIE M
+		ON TS.MOVIE_CODE = M.MOVIE_CODE
 		WHERE THEATER_ROOM_ID IN ( SELECT THEATER_ROOM_ID
 									FROM THEATER_ROOM
 									WHERE THEATER_ID = #{theaterId} )
 		AND THEATER_SCHEDULE_DATE = #{todayDate}
 	</select>
 	
+	<select id="getOpenMovieList" resultType="movie">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+	</select>
+	
+	<insert id="addSchedule" parameterType="theaterSchedule">
+		INSERT INTO THEATER_SCHEDULE
+		VALUES (THEATER_SCHEDULE_SEQ.NEXTVAL, #{THEATER_ID}, #{THEATER_ROOM_ID}, #{THEATER_SCHEDULE_START},
+				#{THEATER_SCHEDULE_END}, #{THEATER_SCHEDULE_DATE}, #{MOVIE_CODE}, #{THEATER_SCHEDULE_TYPE})
+	</insert>
+	
+	<select id="getMovieByID" resultType="movie" parameterType="String">
+		SELECT * 
+		FROM MOVIE
+		WHERE MOVIE_CODE = #{MOVIE_CODE}
+	</select>
 </mapper>

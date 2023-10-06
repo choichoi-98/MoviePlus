@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -65,6 +66,22 @@ public class SchedulingController {
 		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate);
 		
 		return scheduleList;
+	}
+	
+	@ResponseBody
+	@PostMapping("/manager/getOpenMovieList")
+	public List<Movie> getOpenMovieList(@RequestParam(value="keyword", required=true) String keyword){
+		
+		List<Movie> movieList = schedulingService.getOpenMovieList(keyword); 
+		
+		
+		return movieList;
+	}
+	
+	@ResponseBody
+	@PostMapping("/manager/addSchedule")
+	public int addSchedule(TheaterSchedule schedule) {
+		return schedulingService.addSchedule(schedule);
 	}
 
 }

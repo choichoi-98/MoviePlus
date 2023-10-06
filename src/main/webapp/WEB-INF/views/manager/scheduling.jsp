@@ -25,7 +25,12 @@
 }
 
 .modal-span-text{
+	display:block;
 	color:#999;
+}
+
+#text-container > span {
+	margin: 5px;
 }
 </style>
 
@@ -86,12 +91,12 @@
 						class="icon ion-ios-film feature__icon"></i>
 					</a>
 					<input type="hidden" name="THEATER_ROOM_NAME" value="${room.THEATER_ROOM_NAME}">
+					<input type="hidden" value="${room.THEATER_ROOM_ID}">
 				</div>
 				
 				<table class="main__table">
 					<thead>
 						<tr>
-							<th>상영 순서</th>
 							<th>영화 제목</th>
 							<th>좌석 수</th>
 							<th>상영 시간</th>
@@ -121,7 +126,7 @@
 							<i class="icon ion-ios-trophy"></i> 상영 영화 목록
 						</h3>
 
-						<input type="text" placeholder="영화 검색" style="width: 50%">
+						<input id="modal-keyword" name="modal-keyword" type="text" placeholder="영화 검색" style="width: 50%" value="">
 					</div>
 
 					<div style="width:100%; height:100%; overflow-x:hidden; overflow-y:auto ">
@@ -133,94 +138,8 @@
 							</tr>
 						</thead>
 						<tbody id="movieListAllTable">
-
 							<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-								<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-								<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
-							</tr>
-														<tr style="color: white;">
-								<td>20233014</td>
-								<td><a href="#">타겟</a></td>
-							</tr>
-							<tr style="color: white;">
-								<td>20233115</td>
-								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
+								<td>상영 등록 가능한 영화가 없습니다.</td>
 							</tr>
 						</tbody>
 					</table>
@@ -235,18 +154,15 @@
 					</div>
 					<div class="col-8">
 						<span class="modal-span-text">영화 명 : </span>
-						<input type="text" name="THEATER_ROOM_NAME" class="form__input"
+						<input type="text" id="modal-movie-title" class="form__input"
 								placeholder="선택한 영화 이름" value="" readOnly>
 					</div>
 					<div class="col-8">
 						<span class="modal-span-text">영화 시작 시간 : </span>
-						<input type="time" style="margin-left:10px;" />
+						<input id="movie-start" type="time" style="margin-left:10px;" />
 					</div>
-					<div class="col-12" style="margin-top:20px;">
-						<span class="modal-span-text">영화 상영 시간 : </span>
-						<input type="text" name="THEATER_ROOM_NAME" class="form__input"	placeholder="상영 시간" value="" readOnly>
-					</div>
-					<div class="col-12">
+	
+					<div class="col-12" style="margin-top: 20px"> 
 						<span class="modal-span-text">조조/심야 : </span>
 							<ul class="form__radio">
 								<li><input id="time-normal" type="radio"
@@ -259,6 +175,12 @@
 									class="time-sale-btn" name="jojosimya"
 									value="simya"> <label for="time-simya">심야</label></li>
 							</ul>
+							
+							<div id="text-container">
+							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span>
+							<span class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span>
+							<span class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -281,7 +203,7 @@
 
 			<div class="modal__btns">
 				<button id="delete-room-modal-btn"
-					class="modal__btn modal__btn--apply" type="button">삭제</button>
+					class="modal__btn modal__btn--apply	" type="button">삭제</button>
 				<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 			</div>
 		</div>
