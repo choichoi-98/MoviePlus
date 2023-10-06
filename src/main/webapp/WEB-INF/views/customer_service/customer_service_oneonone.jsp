@@ -63,10 +63,11 @@
 							고객의 언어폭력(비하, 욕설, 협박, 성희롱 등)으로부터 직원을 보호하기 위해<br>
 							관련 법에 따라 수사기관에 필요한 조치를 요구할 수 있으며, 형법에 의해 처벌 대상이 될 수 있습니다.<br>
 						</li>
-						<br>
 						<li>문의하시기 전 FAQ를 확인하시면 궁금증을 더욱 빠르게 해결하실 수 있습니다. </li>
 					</ul>
-					
+						<div class="btn-group right">
+							<a href="http://localhost:9000/movieplus/customer_service/myinjury" class="button purple" id="myQnaBtn" title="나의 문의내역 페이지로 이동">나의 문의내역</a><!-- btn-layer-open -->
+						</div>
 				</div>
 
 				<div class="agree-box">
@@ -100,12 +101,9 @@
 
 				<p class="reset mt30 a-r font-orange">* 필수</p>
 
-				<form name="regFrm" method="post" action="oneprcess">
-					<input type="hidden" name="inqLclCd" value="INQD01">
-					<input type="hidden" name="custInqStatCd" value="INQST1">
-					<input type="hidden" name="cdLvl" value="3">
-					<input type="hidden" name="fileNo" value="">
-
+				<!-- 폼 시작 시점 -->
+				<form name="regFrm" method="post" action="oneonone_process">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<div class="table-wrap mt10">
 						<table class="board-form va-m">
 							<colgroup>
@@ -119,49 +117,39 @@
 									<th scope="row"><label for="ask-type">문의유형</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
 										<div class="dropdown bootstrap-select small bs3 dropup">
-										<select name="C_TYPE" id="ask-type" class="small" tabindex="-98">
-											
-										<option value="">문의유형 선택</option><option value="QDET01">영화정보문의</option><option value="QDET02">회원 및 포인트문의</option><option value="QDET03">예매/결제관련문의</option><option value="QDET04">이벤트문의</option><option value="QDET05">일반문의</option><option value="QDET06">제안/건의</option></select><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="ask-type" title="문의유형 선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">문의유형 선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox" style="overflow: hidden;"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1" style="overflow-y: auto;"><ul class="dropdown-menu inner "><li class="selected active"><a role="option" aria-disabled="false" tabindex="0" class="selected active" aria-selected="true"><span class="text">문의유형 선택</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">영화정보문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">회원 및 포인트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">예매/결제관련문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">이벤트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">일반문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">제안/건의</span></a></li></ul></div></div></div>
+										<select name="CUSTOMER_TYPE" id="ask-type" class="small" tabindex="-98">
+										<option value="">문의유형 선택</option>
+										<option value="QDET01">영화정보문의</option>
+										<option value="QDET02">회원 및 포인트문의</option>
+										<option value="QDET03">예매/결제관련문의</option>
+										<option value="QDET04">이벤트문의</option>
+										<option value="QDET05">일반문의</option>
+										<option value="QDET06">제안/건의</option>
+										</select><button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="ask-type" title="문의유형 선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">문의유형 선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox" style="overflow: hidden;"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1" style="overflow-y: auto;"><ul class="dropdown-menu inner "><li class="selected active"><a role="option" aria-disabled="false" tabindex="0" class="selected active" aria-selected="true"><span class="text">문의유형 선택</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">영화정보문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">회원 및 포인트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">예매/결제관련문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">이벤트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">일반문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">제안/건의</span></a></li></ul></div></div></div>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="name">이름</label> <em class="font-orange">*</em></th>
 									<td>
-										
-											
-											
-												<input type="text" id="name" name="C_NAME" class="input-text w150px" value="" maxlength="30">
-											
-										
+												<input type="text" id="name" name="CUSTOMER_NAME" class="input-text w150px" value="" maxlength="30">
 									</td>
 									<th scope="row"><label for="qnaRpstEmail">이메일</label> <em class="font-orange">*</em></th>
 									<td>
-										
-											
-											
-											 	<input type="text" name="C_EMAIL" id="qnaRpstEmail" class="input-text" value="" maxlength="50">
-											
-										
+											 	<input type="text" name="CUSTOMER_EMAIL" id="qnaRpstEmail" class="input-text" value="" maxlength="50">
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="hpNum1">휴대전화</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										
-											
-											
-												<input type="text" name="hpNum1" id="hpNum1" class="input-text w60px numType" maxlength="3" title="핸드폰번호 첫자리 입력">
+												<input type="text" name="CUSTOMER_PHONNUM1" id="hpNum1" class="input-text w60px numType" maxlength="3" title="핸드폰번호 첫자리 입력">
 												<span>-</span>
-												<input type="text" name="hpNum2" id="hpNum2" class="input-text w70px numType" maxlength="4" title="핸드폰번호 중간자리 입력">
+												<input type="text" name="CUSTOMER_PHONNUM2" id="hpNum2" class="input-text w70px numType" maxlength="4" title="핸드폰번호 중간자리 입력">
 												<span>-</span>
-												<input type="text" name="hpNum3" id="hpNum3" class="input-text w70px numType" maxlength="4" title="핸드폰번호 마지막자리 입력">
+												<input type="text" name="CUSTOMER_PHONNUM3" id="hpNum3" class="input-text w70px numType" maxlength="4" title="핸드폰번호 마지막자리 입력">
 												<button id="btnQnaMblpCertNoSend" type="button" disabled="disabled" class="button gray w100px ml08 disabled">인증요청</button>
 												<div id="qnaMblpNo-error-text" class="alert"></div>
-											
-										
 									</td>
 								</tr>
-								
 								<tr id="qnaMblpCertRow" style="display: none;">
 									<th scope="row"><label for="ibxQnaMblpCharCertNo">인증번호</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
@@ -178,7 +166,7 @@
 								
 								<tr>
 									<th scope="row"><label for="qnaCustInqTitle">제목</label> <em class="font-orange">*</em></th>
-									<td colspan="3"><input type="text" name="C_TITLE" id="qnaCustInqTitle" class="input-text" maxlength="100"></td>
+									<td colspan="3"><input type="text" name="CUSTOMER_TITLE" id="qnaCustInqTitle" class="input-text" maxlength="100"></td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="textarea">내용</label> <em class="font-orange">*</em></th>
@@ -189,7 +177,7 @@
 												<ul style="font-weight: bold"> - 비회원 문의시 이메일로 답변내용이 발송되오니 정확하게 작성부탁드립니다.</ul>
 												<ul> - 회원로그인 후 문의작성시 나의 문의내역을 통해 답변을 확인하실 수 있습니다.</ul>
 											</div>
-											<textarea id="textarea" name="C_CONTENT" rows="5" cols="30" title="내용입력" class="input-textarea"></textarea>
+											<textarea id="textarea" name="CUSTOMER_CONTENT" rows="5" cols="30" title="내용입력" class="input-textarea"></textarea>
 											<div class="util">
 												<p class="count">
 													<span id="textareaCnt">0</span> / 2000
@@ -210,9 +198,6 @@
 		</div>
 	</div>
 	<!--// container -->
-<!-- 		</div> -->
-        
-
 
 
 <div class="quick-area">
