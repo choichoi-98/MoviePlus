@@ -34,7 +34,7 @@ public class MovieController {
 	@Autowired
 	private MoviePosterApi moviePosterApi;
 	
-    private static final Logger logger = LoggerFactory.getLogger(MovieController2.class);
+    private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public String movieList() {
