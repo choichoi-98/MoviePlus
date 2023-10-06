@@ -111,6 +111,7 @@ button.button.purple {
 							<div class="col left">
 								<div class="login-input-area">
                                     <form name="loginform" action="${pageContext.request.contextPath}/loginProcess" method="post">
+                                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
                                         <input autocomplete="off" name="MEMBER_ID" id="LoginId" maxlength="20" type="text" placeholder="아이디" title="아이디를 입력하세요" class="input-text strTrim"><!--아이디--><!--아이디를 입력하세요-->
                                         <input autocomplete="off" name="MEMBER_PASS" id="LoginPass" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15"><!--비밀번호--><!--비밀번호를 입력하세요-->
                                         <div class="alert"></div>
@@ -123,9 +124,7 @@ button.button.purple {
                                             <div class="right">    
                                                 <!-- <input id="chkIdSave" type="checkbox"> <label for="chkIdSave">아이디 저장아이디 저장</label> -->
                                             </div>
-
-                                        </div>
-                                        <!--// chk-util -->
+                                        </div> <!--// chk-util -->
 										
 										<!-- 로그인 버튼 -->
                                         <button id="btnLogin" type="submit" class="button purple large btn-login">로그인<!--로그인--></button>
@@ -141,7 +140,6 @@ button.button.purple {
                                             <a href="#" title="카카오톡으로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-kakao.png" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
                                             <a href="#" title="구글로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-google.png" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
                                         </div>
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
                                     </form>
 								</div>
 							</div>
@@ -169,7 +167,7 @@ button.button.purple {
 
 <!-- 로그인 실패 알림 모달 -->
 <div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005; display: none;"></div>
-<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; display: none; opacity: 0;">
+<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 0;">
 	<div class="wrap">
 		<header class="layer-header">
 			<h3 class="tit">알림</h3>
@@ -205,7 +203,7 @@ button.button.purple {
 			<!-- 로그인 전 -->
 			<sec:authorize access="isAnonymous()">
 				<div class="before" style="">
-					<a id="header-login-btn" href="#" href="${pageContext.request.contextPath}/member/login" title="로그인">로그인</a> 
+					<a id="header-login-btn" href="#" title="로그인">로그인</a> 
 					<a href="/movieplus/member/join" title="회원가입">회원가입</a>
 				</div>
 			</sec:authorize>
@@ -270,7 +268,7 @@ button.button.purple {
 				<div class="gnb-depth2">
 					<ul>
 						<li><a href="/movieplus/event/" title="진행중 이벤트">진행중 이벤트</a></li>
-						<li><a href="#" title="지난 이벤트">지난 이벤트</a></li>
+						<li><a id="" href="#" title="지난 이벤트">지난 이벤트</a></li>
 						<li><a href="#" title="당첨자발표">당첨자발표</a></li>
 					</ul>
 				</div></li>

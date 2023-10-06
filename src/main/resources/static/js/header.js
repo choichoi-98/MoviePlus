@@ -129,17 +129,49 @@ $(document).ready(function(){
 	})
 	
 	function openAlertPopup(){
-		$('#loginfailalert').addClass('on');
-		$('.alertStyle').css('opacity', '1');
+		$('#loginfailalert').css('opacity', '1');
+		$('.alertStyle').css('display', 'block');
         $('body').addClass('no-scroll');
 	}
 	
 	function closeAlertPopup(){
-        $('.bg-modal').css('opacity', '0');
-        $('#loginfailalert').css('opacity', '0');
+        $('#loginfailalert').css('opacity', '1');
+        $('#loginfailalert').css('display', 'none');
+        $('.alertStyle').css('display', 'none');
+        $('.alertStyle').css('opacity', '0');
         $('body').removeClass('no-scroll');
     }
+    
+    /*
+    var loginfailMsg = "${loginfail}"; 
+    if( loginfailMsg == 'loginFailMsg'){
+		openAlertPopup();
+	}
+	*/
 	
+	
+	$("#btnLogin").submit(function(event){
+		event.preventDefault();
+		
+		const id = $('#LoginId').val();
+		const pass = $('#LoginPass').val();
+		
+		$.ajax({
+			url : "loginProcess",
+			type: "POST",
+			data: { MEMBER_ID: id, MEMBER_PASS: pass},
+			success: function(response) {
+	            // 로그인 성공 처리
+	            console.log("로그인 성공")
+       		 },
+			error : function(resp){
+				 if (resp.responseText.includes('loginFailMsg')){
+					openAlertPopup();
+					console.log("아이디와 비밀번호가 일치하지 않는 경우");
+				}
+			}	
+		})//ajax end
+	})
 	
 	/*
 	//로그인 확인 - 실패 시 알림창
@@ -156,6 +188,26 @@ $(document).ready(function(){
 				}				
 			}
 		})//ajax end
+	})
+	*/
+	
+	/*
+	$("#btnLogin").click(function(){
+	   const id = $('#LoginId').val();
+	   const pass = $('#LoginPass').val();
+
+	    $.ajax({
+	    	url : "${pageContext.request.contextPath}/loginProcess",
+	    	type : 'POST',
+	    	data : {MEMBER_ID:id, MEMBER_PASS:pass},
+	    	error : function(resp){
+	    		if("${loginfail}" == 'loginFailMsg'){
+					openAlertPopup();
+					alert("아이디나 비밀번호 오류입니다");
+				}
+	    	}
+	    })//ajax end	
+		
 	})
 	*/
 	

@@ -32,7 +32,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession();
 		//session.setAttribute("loginUser", authentication.getName());
 		//session.setAttribute("MEMBER_ID", MEMBER_ID);
-		session.removeAttribute("loginfail");
 		
 		String MEMBER_ID = authentication.getName();
 		Member m = memberservice.memberinfo(MEMBER_ID);
@@ -41,6 +40,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			session.setAttribute("memberInfo", m);
 		}
 		
+		session.removeAttribute("loginfail");
 		String url = request.getContextPath() +  "/main";
 		response.sendRedirect(url);
 		
