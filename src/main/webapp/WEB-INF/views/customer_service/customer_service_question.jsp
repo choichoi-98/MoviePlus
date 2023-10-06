@@ -10,7 +10,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
 
-
 	<div id="layer_header_search" class="header-layer layer-header-search"></div>
 
 	<!-- container -->
@@ -18,12 +17,11 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="https://megabox.co.kr/support"
-						title="고객센터 페이지로 이동">고객센터</a> <a
-						href="https://megabox.co.kr/support/faq" title="자주 묻는 질문 페이지로 이동">자주
+					<span>Home</span> <a href="http://localhost:9000/movieplus/customer_service"
+						title="고객센터 페이지로 이동">고객센터</a> 
+						<a href="http://localhost:9000/movieplus/customer_question" title="자주 묻는 질문 페이지로 이동">자주
 						묻는 질문</a>
 				</div>
-
 			</div>
 		</div>
 
@@ -31,36 +29,27 @@
 			<div class="lnb-area addchat">
 				<nav id="lnb" class="ty2">
 					<p class="tit">
-						<a href="https://megabox.co.kr/support" title="고객센터">고객센터</a>
+						<a href="http://localhost:9000/movieplus/customer_service" title="고객센터">고객센터</a>
 					</p>
 					<ul>
-						<li><a href="https://megabox.co.kr/support" title="고객센터 홈">고객센터
+						<li><a href="http://localhost:9000/movieplus/customer_service" title="고객센터 홈">고객센터
 								홈</a></li>
-						<li class="on"><a href="https://megabox.co.kr/support/faq"
+						<li class="on"><a href="http://localhost:9000/movieplus/customer_service/question"
 							title="자주 묻는 질문">자주 묻는 질문</a></li>
-						<li><a href="https://megabox.co.kr/support/notice"
+						<li><a href="http://localhost:9000/movieplus/customer_service/notice"
 							title="공지사항">공지사항</a></li>
-						<li><a href="https://megabox.co.kr/support/inquiry"
+						<li><a href="http://localhost:9000/movieplus/customer_service/oneonone"
 							title="1:1문의">1:1문의</a></li>
-						<li><a href="https://megabox.co.kr/support/rent"
+						<li><a href="http://localhost:9000/movieplus/customer_service/group"
 							title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
-						<li><a href="https://megabox.co.kr/support/lost"
+						<li><a href="http://localhost:9000/movieplus/customer_service/lostitem"
 							title="분실물 문의">분실물 문의</a></li>
-
-						<li><a href="https://megabox.co.kr/support/terms"
-							title="이용약관">이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/lcinfo"
-							title="위치기반서비스이용약관">위치기반서비스이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/privacy"
-							title="개인정보처리방침">개인정보처리방침</a></li>
-						<li><a href="https://megabox.co.kr/support/screenrule"
-							style="border-radius: 0 0 10px 10px;" title="스크린배정수에관한기준">스크린배정수에관한기준</a></li>
 					</ul>
 
 					<!-- 고객센터 메뉴일때만 출력 -->
 					<div class="left-customer-info">
 						<p class="tit">
-							메가박스 고객센터 <span>Dream center</span>
+							MoviePlus 고객센터 <span>Dream center</span>
 						</p>
 						<p class="time">
 							<i class="iconset ico-clock"></i> 10:00~19:00
@@ -463,24 +452,7 @@
 									<a href="https://megabox.co.kr/support/faq#"><p class="tit">
 											<span class="font-green">[기프트카드]</span>
 										</p>
-										<p class="txt">
-											<span class="font-green"></span>선<span class="font-green"></span>물<span
-												class="font-green"></span>한<span class="font-green"></span>
-											<span class="font-green"></span>카<span class="font-green"></span>드<span
-												class="font-green"></span>가<span class="font-green"></span>
-											<span class="font-green"></span>취<span class="font-green"></span>소<span
-												class="font-green"></span>되<span class="font-green"></span>었<span
-												class="font-green"></span>는<span class="font-green"></span>지<span
-												class="font-green"></span> <span class="font-green"></span>어<span
-												class="font-green"></span>떻<span class="font-green"></span>게<span
-												class="font-green"></span> <span class="font-green"></span>확<span
-												class="font-green"></span>인<span class="font-green"></span>할<span
-												class="font-green"></span> <span class="font-green"></span>수<span
-												class="font-green"></span> <span class="font-green"></span>있<span
-												class="font-green"></span>을<span class="font-green"></span>까<span
-												class="font-green"></span>요<span class="font-green"></span>?<span
-												class="font-green"></span>
-										</p></a>
+										</a>
 								</div>
 								<div class="awn">
 									<p class="cont">
@@ -494,45 +466,7 @@
 									<a href="https://megabox.co.kr/support/faq#"><p class="tit">
 											<span class="font-green">[기프트카드]</span>
 										</p>
-										<p class="txt">
-											<span class="font-green"></span>선<span class="font-green"></span>물<span
-												class="font-green"></span>한<span class="font-green"></span>
-											<span class="font-green"></span>기<span class="font-green"></span>프<span
-												class="font-green"></span>트<span class="font-green"></span>카<span
-												class="font-green"></span>드<span class="font-green"></span>를<span
-												class="font-green"></span> <span class="font-green"></span>수<span
-												class="font-green"></span>신<span class="font-green"></span>자<span
-												class="font-green"></span>가<span class="font-green"></span>
-											<span class="font-green"></span>받<span class="font-green"></span>지<span
-												class="font-green"></span> <span class="font-green"></span>못<span
-												class="font-green"></span>했<span class="font-green"></span>을<span
-												class="font-green"></span> <span class="font-green"></span>경<span
-												class="font-green"></span>우<span class="font-green"></span>,<span
-												class="font-green"></span> <span class="font-green"></span>재<span
-												class="font-green"></span>전<span class="font-green"></span>송<span
-												class="font-green"></span>할<span class="font-green"></span>
-											<span class="font-green"></span>수<span class="font-green"></span>
-											<span class="font-green"></span>있<span class="font-green"></span>나<span
-												class="font-green"></span>요<span class="font-green"></span>?<span
-												class="font-green"></span>
-										</p></a>
 								</div>
-								<div class="awn">
-									<p class="cont">
-										<span style="font-size: 10pt"><span
-											style="line-height: normal"><span
-												style="text-autospace: ideograph-numeric ideograph-other"><span
-													style="vertical-align: baseline"><span
-														style="word-break: keep-all"><span
-															style="font-family:" 맑은="" 고딕""=""><span
-																style="font-family:" 메가박스="" 라이프="" light""="">재전송은
-																	기프트카드 선물 시 입력한 동일번호로 1회만 발송 가능합니다.</span></span></span></span></span></span></span><br> <span
-											style="font-size: 10.0pt"><span
-											style="line-height: 107%"><span style="font-family:"
-												메가박스="" 라이프="" light""="">재전송 방법 : 나의 메가박스 &gt; 예매/구매
-													내역 &gt; 구매내역 &gt; 선물내역 상세 &gt; 재전송 버튼 선택</span></span></span>
-									</p>
-								</div></li>
 						</ul>
 					</div>
 				</div>
@@ -552,62 +486,6 @@
 		</div>
 	</div>
 
-
-
-
-	<section id="saw_movie_regi" class="modal-layer">
-		<a href="https://megabox.co.kr/support/faq" class="focus">레이어로 포커스
-			이동 됨</a> <input type="hidden" id="isLogin" value="Y">
-		<div class="wrap">
-			<header class="layer-header">
-				<h3 class="tit">본 영화 등록</h3>
-			</header>
-
-			<div class="layer-con">
-				<p class="reset">발권하신 티켓 하단의 거래번호 또는 예매번호를 입력해주세요.</p>
-
-				<div class="pop-gray mt10 mb30">
-					<label for="movie_regi" class="mr10">거래번호 또는 예매번호</label> <input
-						type="text" id="movie_regi" class="input-text w280px numType"
-						maxlength="20" placeholder="숫자만 입력해 주세요" title="티켓 거래번호 입력">
-					<button class="button gray ml05" id="regBtn">등록</button>
-				</div>
-
-				<div class="box-border v1 mt30">
-					<p class="tit-box">이용안내</p>
-
-					<ul class="dot-list">
-						<li>극장에서 예매하신 내역을 본 영화(관람이력)로 등록하실 수 있습니다.</li>
-						<li>예매처를 통해 예매하신 고객님은 극장에서 발권하신 티켓 하단의 온라인 예매번호 <br>12자리를
-							입력해주세요.(Yes24, 네이버, 인터파크, SKT, KT, 다음)
-						</li>
-						<li>본 영화 등록은 관람인원수 만큼 등록가능하며, 동일 계정에 중복등록은 불가합니다.</li>
-						<li>상영시간 종료 이후 등록 가능합니다.</li>
-						<li>본 영화로 수동 등록한 내역은 이벤트 참여 및 포인트 추후 적립이 불가합니다.</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="btn-group-fixed">
-				<button type="button" class="button purple close-layer">닫기</button>
-			</div>
-
-			<button type="button" class="btn-modal-close">레이어 닫기</button>
-		</div>
-	</section>
-
-	<div class="quick-area" style="display: none;">
-		<a href="https://megabox.co.kr/support/faq" class="btn-go-top"
-			title="top" style="position: fixed;">top</a>
-	</div>
-
-	<div id="layer_looking_theater" class="layer-looking-theater"></div>
-
-
-	<div class="normalStyle"
-		style="display: none; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; text-indent: -9999px; width: 100%; height: 100%; z-index: 100;">닫기</div>
-	<div class="alertStyle"
-		style="display: none; position: fixed; top: 0px; left: 0px; background: #000; opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
 </body>
 </html>
 
