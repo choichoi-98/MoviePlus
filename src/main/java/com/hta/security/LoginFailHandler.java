@@ -20,17 +20,15 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 
-		HttpSession session = request.getSession();
-		logger.info(exception.getMessage());
-		logger.info("로그인 실패");
-
-		session.setAttribute("loginfail", "loginFailMsg");
-		String url = request.getContextPath() + "/main";
-		response.sendRedirect(url);
-		
-		//RequestDispatcher dispatcher = request.getRequestDispatcher(request.getRequestURI());
-        //dispatcher.forward(request, response);
+		  HttpSession session = request.getSession();
+		  logger.info(exception.getMessage());
+		  logger.info("로그인 실패");
+		  session.setAttribute("loginfail", "loginFailMsg");
+		  
+		  
+		  //RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/header.jsp");
+	     // dispatcher.forward(request, response);
+			
 	}
 }

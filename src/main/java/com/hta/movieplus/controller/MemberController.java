@@ -159,26 +159,10 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
-	
-	//회원정보
-	@RequestMapping(value="/mypage", method = RequestMethod.GET)
-	public ModelAndView memberInfo(@AuthenticationPrincipal(expression = "username") String MEMBER_ID,
-			ModelAndView mv,  HttpServletRequest request ) {
-		
-		Member m = memberservice.memberinfo(MEMBER_ID);
-				
-			if(m!=null) {
-				mv.setViewName("member/mypage_main");
-				mv.addObject("memberInfo", m);
-				
-				HttpSession session = request.getSession();
-			    session.setAttribute("memberInfo", m);
-			} else {
-				mv.addObject("url", request.getRequestURL());
-				mv.addObject("message", "해당 정보가 없습니다.");
-			}
-			return mv;
-		}
-
+	//마이페이지 이동
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "member/mypage_main";
+	}
 	
 }	
