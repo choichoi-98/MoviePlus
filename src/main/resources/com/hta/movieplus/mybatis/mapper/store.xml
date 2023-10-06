@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.StoreMapper">
+
+	<insert id="insertItem" parameterType="StoreVO">
+		insert into STORE_ITEM 
+		values(#{ITEM_CODE}, #{ITEM_NAME}, #{ITEM_PRICE})	
+	</insert>
+	
+	<select id="seleteItem" parameterType="StoreVO">
+		select * from STORE_ITEM
+		where ITEM_CODE = #{ITEM_CODE}
+	</select>
+	
+	<update id="updateItem" parameterType="StoreVO">
+		UPDATE STORE_ITEM
+		SET ITEM_NAME = #{ITEM_NAME}, ITEM_PRICE = #{ITEM_PRICE}
+		WHERE ITEM_CODE = #{ITEM_CODE}
+	</update>
+	
+	<delete id="deleteItem" parameterType="int">
+		DELETE 
+		FROM STORE_ITEM
+		WHERE ITEM_CODE = #{ITEM_CODE}
+	</delete>
+
+</mapper>
