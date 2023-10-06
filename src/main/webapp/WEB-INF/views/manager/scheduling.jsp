@@ -23,6 +23,10 @@
 .room-container {
 	margin-bottom: 50px;
 }
+
+.modal-span-text{
+	color:#999;
+}
 </style>
 
 <body>
@@ -35,8 +39,8 @@
 		<!-- main title -->
 		<div class="col-12">
 			<div class="main__title">
-				<h2>상영 스케줄 관리</h2>
-
+				<h2>상영 스케줄 관리 - ${theater.THEATER_NAME}</h2>
+				<input type="hidden" id="input-theater-id" value="${theater.THEATER_ID}">
 				<div class="main__title-wrap">
 					<!-- filter sort -->
 					<input id="todayDateId" type="date" name="schedule-date"
@@ -47,13 +51,13 @@
 						<div class="filter__item-btn dropdown-toggle" role="navigation"
 							id="filter-sort" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">
-							<input id="selected-room-id" type="button" value="${theaterName}">
+							<input id="selected-room-id" type="button" value="${theater.THEATER_NAME}">
 							<span></span>
 						</div>
 
 						<ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
 							aria-labelledby="filter-sort">
-							<li class="filter-li-room">${theaterName}<input
+							<li class="filter-li-room">${theater.THEATER_NAME}<input
 								type="hidden" name="schedule-room-id" value="all"></li>
 							<c:forEach var="room" items="${roomList}">
 								<li class="filter-li-room">${room.THEATER_ROOM_NAME}<input
@@ -81,7 +85,9 @@
 						class="main__table-btn main__table-btn--banned open-modal"> <i
 						class="icon ion-ios-film feature__icon"></i>
 					</a>
+					<input type="hidden" name="THEATER_ROOM_NAME" value="${room.THEATER_ROOM_NAME}">
 				</div>
+				
 				<table class="main__table">
 					<thead>
 						<tr>
@@ -112,13 +118,13 @@
 				<div class="dashbox" style="height: 100%;">
 					<div class="dashbox__title">
 						<h3>
-							<i class="icon ion-ios-trophy"></i> 전체 영화 목록
+							<i class="icon ion-ios-trophy"></i> 상영 영화 목록
 						</h3>
 
 						<input type="text" placeholder="영화 검색" style="width: 50%">
 					</div>
 
-<div style="width:100%; height:200px; overflow:auto">
+					<div style="width:100%; height:100%; overflow-x:hidden; overflow-y:auto ">
 					<table class="main__table main__table--dash">
 						<thead>
 							<tr>
@@ -192,13 +198,68 @@
 								<td>20233115</td>
 								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
 							</tr>
-							
+								<tr style="color: white;">
+								<td>20233115</td>
+								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
+							</tr>
+														<tr style="color: white;">
+								<td>20233014</td>
+								<td><a href="#">타겟</a></td>
+							</tr>
+							<tr style="color: white;">
+								<td>20233115</td>
+								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
+							</tr>
+								<tr style="color: white;">
+								<td>20233115</td>
+								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
+							</tr>
+														<tr style="color: white;">
+								<td>20233014</td>
+								<td><a href="#">타겟</a></td>
+							</tr>
+							<tr style="color: white;">
+								<td>20233115</td>
+								<td><a href="#">에릭 클랩튼: 어크로스 24 나이츠</a></td>
+							</tr>
 						</tbody>
 					</table>
 					</div>
 				</div>
+				
 				<div class="col-6">
-					<input type="time" />
+					<div class="col-6">
+						<span class="modal-span-text">상영관 : </span>
+						<input id="modal-room-name" type="text" name="THEATER_ROOM_NAME" class="form__input"
+								placeholder="상영관" value="" readOnly>
+					</div>
+					<div class="col-8">
+						<span class="modal-span-text">영화 명 : </span>
+						<input type="text" name="THEATER_ROOM_NAME" class="form__input"
+								placeholder="선택한 영화 이름" value="" readOnly>
+					</div>
+					<div class="col-8">
+						<span class="modal-span-text">영화 시작 시간 : </span>
+						<input type="time" style="margin-left:10px;" />
+					</div>
+					<div class="col-12" style="margin-top:20px;">
+						<span class="modal-span-text">영화 상영 시간 : </span>
+						<input type="text" name="THEATER_ROOM_NAME" class="form__input"	placeholder="상영 시간" value="" readOnly>
+					</div>
+					<div class="col-12">
+						<span class="modal-span-text">조조/심야 : </span>
+							<ul class="form__radio">
+								<li><input id="time-normal" type="radio"
+									class="time-sale-btn" name="jojosimya"
+									value="normal" checked> <label for="time-normal">일반</label></li>
+								<li><input id="time-jojo" type="radio"
+									class="time-sale-btn" name="jojosimya"
+									value="jojo"> <label for="time-jojo">조조</label></li>
+								<li><input id="time-simya" type="radio"
+									class="time-sale-btn" name="jojosimya"
+									value="simya"> <label for="time-simya">심야</label></li>
+							</ul>
+					</div>
 				</div>
 			</div>
 

@@ -1,9 +1,8 @@
 $(document).ready(function(){
-
-
-
+	let theaterId = $('#input-theater-id').val();
 	let todayDate = $('#todayDateId').val();
 	let theaterName = $('#selected-room-id').val();
+	let theater_room_id;
 
 	getScheduleList();
 
@@ -27,11 +26,22 @@ $(document).ready(function(){
 		
 	})
 
+	$('.main__table-btn--banned').click(function(){ // 추가 모달 클릭
+		
+		theater_room_id = $(this).next().val();
+		$('#modal-room-name').val(theater_room_id);
+
+
+		
+	})
+	
 
 });
 
 
-function getScheduleList() {
+
+
+function getScheduleList() { // 스케줄 전체 목록
 	todayDate = $('#todayDateId').val();
 	$('.no-schedule').remove();
 	$('.tbody-schedule').empty();
