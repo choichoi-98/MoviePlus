@@ -1,5 +1,6 @@
 package com.hta.movieplus.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
+import com.hta.movieplus.api.RestApi.TestMoviePosterApi;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.service.MovieServiceImpl;
 
@@ -32,6 +34,8 @@ public class MovieController {
 	
 	@Autowired
 	private MoviePosterApi moviePosterApi;
+	
+	
 	
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
@@ -58,8 +62,9 @@ public class MovieController {
 		
 	}
 	
-	@GetMapping("/updatePoster")
-	public void updatePoster(HttpServletRequest request, Model model) {
+	@ResponseBody
+	@RequestMapping("/updatePoster")
+	public void updatePoster(HttpServletRequest request, Model model) throws Exception {
 		//MovieServiceImpl을 사용하여 DB에 저장된 MOVIE_TITLE, MOVIE_DIRECTOR 값 가져옴
 		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
 	     logger.info("movies=" + movies.toString()); 
@@ -67,9 +72,11 @@ public class MovieController {
 		 for(Movie  movie : movies) {
 			 String movieTitle = movie.getMovie_Title();
 			 String movieDirector = movie.getMovie_Director();
-			 
-			 moviePosterApi.updateMoviePoster(movieTitle, movieDirector);
-			 logger.info("무비포스터 정보 업데이트 성공");
+			 if (movieDirector == null) {
+				 movieDirector = " ";
+			 }
+			 //TestMoviePosterApi.moviePosterApi(movieTitle, movieDirector);
+			 logger.info("여기는 MovieController의 updatePoster");
 		 }
 	      
 		

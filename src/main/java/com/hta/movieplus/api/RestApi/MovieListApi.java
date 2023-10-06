@@ -77,7 +77,8 @@ public class MovieListApi {
 						
 					if (!genreAlt.contains("성인물(에로)") && !repGenreNm.contains("성인물(에로)")) {
 						if (!genreAlt.contains("멜로/로맨스")) {
-
+							if(!genreAlt.contains("기타")) {
+							
 						  if(!repGenreNm.isEmpty() && repGenreNm != null) {
 							if (!repGenreNm.equals("멜로/로맨스")) {
 								logger.info("거른 후 genreAlt:" + genreAlt);
@@ -111,6 +112,7 @@ public class MovieListApi {
 								 }
 								}
 							}
+						}
 						}
 					}
 				}

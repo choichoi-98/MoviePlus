@@ -48,17 +48,6 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>상영 예정 영화</span>
-						<p>2 573</p>
-						<img src="${pageContext.request.contextPath}/resources/image/movie/movie_list.png"
-						style="width:35px;">
-					</div>
-				</div>
-				<!-- end stats -->
-
-				<!-- stats -->
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="stats">
 						<span>상영 종료 영화</span>
 						<p>1 021</p>
 						<i class="icon ion-ios-star-half"></i>
@@ -74,7 +63,7 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="catalog.html">View All</a>
+								<a class="dashbox__more" href="#">View All</a>
 							</div>
 						</div>
 
@@ -88,14 +77,27 @@
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody id="movieListAllTable">
-									
-								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
 				<!-- end dashbox -->
+				<!-- 전체 영화 목록 모달 -->
+				<div id="movieListAllModal" class="modal">
+					<div class="modal-content">
+					<span class="close">&times;</span>
+						<table class="movieListAllModalTable">
+							<thead>
+								<tr>
+									<th>영화코드</th>
+									<th>영화제목</th>
+									<th>상영상태</th>
+									<th>관리</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
 
 				<!-- dashbox -->
 				<div class="col-12 col-xl-6">
@@ -141,50 +143,6 @@
 				</div>
 				<!-- end dashbox -->
 
-				<!-- dashbox -->
-				<div class="col-12 col-xl-6">
-					<div class="dashbox">
-						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-contacts"></i> 상영 예정 영화</h3>
-
-							<div class="dashbox__wrap">
-								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="users.html">View All</a>
-							</div>
-						</div>
-
-						<div class="dashbox__table-wrap">
-							<table class="main__table main__table--dash">
-								<thead>
-									<tr>
-										<th>영화코드</th>
-										<th>영화제목</th>
-										<th>상영상태</th>
-										<th>관리</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="main__table-text">23</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Brian Cranston</a></div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--grey">bcxwz@email.com</div>
-										</td>
-										<td>
-											<div class="main__table-text">BrianXWZ</div>
-										</td>
-									</tr>
-									
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- end dashbox -->
 
 				<!-- dashbox -->
 				<div class="col-12 col-xl-6">

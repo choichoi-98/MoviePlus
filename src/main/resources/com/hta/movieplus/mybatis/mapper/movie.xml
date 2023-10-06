@@ -30,7 +30,7 @@
 	</update>
 	
 	<select id="selectMovieTitle" resultType="movie">
-		SELECT movie_Title, movie_Director
+		SELECT movie_Code, movie_Title, movie_Director
 		FROM MOVIE
 	</select>
 	
