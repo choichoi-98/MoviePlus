@@ -6,15 +6,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.service.MovieServiceImpl;
 
 @Controller
@@ -24,9 +27,13 @@ public class TestMoviePosterApi {
 	@Autowired
 	private MovieServiceImpl movieServiceImpl;
 	
+	@ResponseBody
 	@RequestMapping("/testView")
-	public String go() {
-		return "movie/apiTest";
+	public String go(Model md) {
+		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
+		 md.addAttribute("movies", movies);
+		 md.addAttribute("test", "test");
+		return "success/apiTest";
 	}
 	
 	@ResponseBody
@@ -41,16 +48,25 @@ public class TestMoviePosterApi {
 		(codeNo, posterUrl, stillUrl, plotText.toString());
 		
 		return "success";
-		
-		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getAllMovies")
+	public List<Movie> getMovie(){
+		 List<Movie> movies = movieServiceImpl.getAllMovies(); //movie_Code,movie_Title, movie_Director 갖고 옴
+		 
+		 return movies;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/apitest")
-    public String main( ) throws IOException {
+    public String main(String movieTitle,String movieDirector, String movieCode ) throws IOException {
+		 StringBuilder sb = new StringBuilder();
+		
+		 
         StringBuilder urlBuilder = new StringBuilder("https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?ServiceKey=0Z2PBI9JO3233XM11892&collection=kmdb_new2&detail=y&releaseDts=20230101"); /*URL*/
-        urlBuilder.append("&" + URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode("거미집", "UTF-8")); /*상영년도*/
-        urlBuilder.append("&" + URLEncoder.encode("director", "UTF-8") + "=" + URLEncoder.encode("김지운", "UTF-8")); /*상영 월*/
+        urlBuilder.append("&" + URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(movieTitle, "UTF-8")); /*상영년도*/
+        urlBuilder.append("&" + URLEncoder.encode("director", "UTF-8") + "=" + URLEncoder.encode(movieDirector, "UTF-8")); /*상영 월*/
 
         System.out.println(urlBuilder.toString());
         URL url = new URL(urlBuilder.toString());
@@ -67,7 +83,7 @@ public class TestMoviePosterApi {
             rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
         }
 
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
         String line;
         while ((line = rd.readLine()) != null) {
             sb.append(line);
@@ -78,7 +94,7 @@ public class TestMoviePosterApi {
         System.out.println("결과:" + sb.toString());
         
         
-        
-		return sb.toString();
+		 System.out.println("return 값 : " + sb.toString());
+		 return sb.toString();
     }
 }

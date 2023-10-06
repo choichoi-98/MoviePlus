@@ -42,12 +42,25 @@ $(document).ready(function() {
         $.ajax({
             url: 'http://localhost:9000/movieplus/movie',
             type: 'GET',
+            async: false,
             success: function() {
                 $.ajax({
                     url: 'http://localhost:9000/movieplus/movie/updateActors',
                     type: 'GET',
+                    async: false,
                     success: function(response) {
                         console.log("두 번째: updateActors 성공!");
+                        $.ajax({
+                        url: 'http://localhost:9000/movieplus/testView',
+                    	type: 'GET',
+                   		async: false,
+                   		success: function(response){
+                   			
+                   		},
+                   		error: function() {
+                            console.log("세 번째: testView 실패!");
+                        }
+                    });
                     },
                     error: function() {
                         console.log("두 번째: updateActors 실패!");
