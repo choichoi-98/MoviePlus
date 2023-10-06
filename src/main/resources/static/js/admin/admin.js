@@ -41,6 +41,7 @@ $(document).ready(function () {
 	/*==============================
 	Modal
 	==============================*/
+
 	$('.open-modal').magnificPopup({
 		fixedContentPos: true,
 		fixedBgPos: true,

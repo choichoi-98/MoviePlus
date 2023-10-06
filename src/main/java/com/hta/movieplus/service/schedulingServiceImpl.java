@@ -24,16 +24,12 @@ public class schedulingServiceImpl implements SchedulingService {
 	}
 
 	@Override
-	public List<TheaterSchedule> getScheduleList(int theaterId, String todayDate, String selectedRoom) {
+	public List<TheaterSchedule> getScheduleList(int theaterId, String todayDate) {
 		// TODO Auto-generated method stub
 		Map<String, Object> dataMap = new HashMap<>();
 		
 		dataMap.put("theaterId", theaterId);
 		dataMap.put("todayDate", todayDate);
-		dataMap.put("selectedRoom", selectedRoom);
-		
-		logger.info(todayDate);
-		
 		return mapper.getScheduleList(dataMap);
 	}
 

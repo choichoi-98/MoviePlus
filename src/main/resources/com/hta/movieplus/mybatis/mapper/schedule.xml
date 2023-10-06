@@ -10,7 +10,6 @@
 									FROM THEATER_ROOM
 									WHERE THEATER_ID = #{theaterId} )
 		AND THEATER_SCHEDULE_DATE = #{todayDate}
-		<!-- selectedRoom -->
 	</select>
 	
 </mapper>

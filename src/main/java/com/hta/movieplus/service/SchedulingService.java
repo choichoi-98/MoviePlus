@@ -6,7 +6,7 @@ import com.hta.movieplus.domain.TheaterSchedule;
 
 public interface SchedulingService {
 
-	List<TheaterSchedule> getScheduleList(int theaterId, String todayDate, String selectedRoom);
+	List<TheaterSchedule> getScheduleList(int theaterId, String todayDate);
 
 	String getTodayDate();
 

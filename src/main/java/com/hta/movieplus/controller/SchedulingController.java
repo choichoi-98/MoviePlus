@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.service.SchedulingService;
@@ -46,10 +47,10 @@ public class SchedulingController {
 		String todayDate = schedulingService.getTodayDate();
 		
 		List<TheaterRoom> roomList = managerService.getRoomList(theaterId);
-		String theaterName = theaterService.getTheaterById(theaterId).getTHEATER_NAME();
+		Theater theater = theaterService.getTheaterById(theaterId);
 		
 		mv.addObject("todayDate", todayDate);
-		mv.addObject("theaterName", theaterName);
+		mv.addObject("theater", theater);
 		mv.addObject("roomList", roomList);
 		mv.setViewName("manager/scheduling");
 		return mv;
@@ -58,10 +59,10 @@ public class SchedulingController {
 	@ResponseBody
 	@PostMapping("/manager/getScheduleList")
 	public List<TheaterSchedule> getScheduleList(@ModelAttribute("theaterId") int theaterId, SessionStatus sessionStatus,
-			@RequestParam(value="todayDate", required=true) String todayDate,
-			@RequestParam(value="selectedRoom", required=true) String selectedRoom){
+			@RequestParam(value="todayDate", required=true) String todayDate
+			){
 		
-		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate, selectedRoom);
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleList(theaterId, todayDate);
 		
 		return scheduleList;
 	}
