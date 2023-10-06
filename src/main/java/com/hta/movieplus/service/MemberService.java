@@ -14,6 +14,8 @@ public interface MemberService {
 
 	public Member memberinfo(String MEMBER_ID);
 
+	public void delete(String MEMBER_ID);
+
 	
 	
 }

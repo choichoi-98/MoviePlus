@@ -59,6 +59,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public void delete(String MEMBER_ID) {
+		dao.delete(MEMBER_ID);
+	}
+
+
+
 
 	
 	

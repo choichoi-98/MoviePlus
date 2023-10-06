@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
 <title>MoviePlus: 모두를 위한 영화관 </title>
 </head>
 <body>
@@ -14,7 +16,7 @@
             <div class="page-util">
                  <div class="inner-wrap" id="myLoaction"><div class="location">
 					<span>Home</span>
-					<a href="https://www.megabox.co.kr/mypage" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
+					<a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
 				</div></div>
 	        </div>
        <div class="inner-wrap">
@@ -23,7 +25,7 @@
 	<!--사이드바-->
 	<div class="lnb-area">
 		<nav id="lnb">
-			<p class="tit on"><a href="#" title="나의 무비플러스">나의 무비플러스</a></p>
+			<p class="tit on"><a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스">나의 무비플러스</a></p>
 
 			<ul>
 				<li class=""><a href="#" title="예매/구매내역">예매/구매내역</a></li>
@@ -51,7 +53,7 @@
 				<li>
 					<a href="#" title="회원정보">회원정보</a>
 					<ul class="depth3">
-						<li><a href="#" title="개인정보 수정">개인정보 수정</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/modifyinfo" title="개인정보 수정">개인정보 수정</a></li>
 						<li><a href="#" title="선택정보 수정">선택정보 수정</a></li>
 					</ul>
 				</li>
