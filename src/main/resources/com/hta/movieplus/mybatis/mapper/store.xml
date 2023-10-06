@@ -4,9 +4,32 @@
 <mapper namespace="com.hta.movieplus.mybatis.mapper.StoreMapper">
 
 	<insert id="insertItem" parameterType="StoreVO">
-		insert into STORE_ITEM 
+		insert into STORE_ITEM(ITEM_CODE, ITEM_NAME, ITEM_PRICE)
 		values(#{ITEM_CODE}, #{ITEM_NAME}, #{ITEM_PRICE})	
 	</insert>
+	
+	<select id="getItemListCount" resultType="int">
+		select count(*) 
+		from STORE_ITEM
+	</select>
+	
+	<select id="getItemList" parameterType="java.util.Map" resultType="StoreVO">
+		select * from 
+				(select rownum rnum, b.*
+				from
+					 ( select * from STORE_ITEM
+					 ) b
+				where rownum &lt; = #{end}	 
+				)
+		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
+	
+	<select id="get1item" parameterType="int" resultType="StoreVO">
+    	SELECT * FROM STORE_ITEM 
+    	WHERE ITEM_CODE = #{ITEM_CODE}
+	</select>
+
+
 	
 	<select id="seleteItem" parameterType="StoreVO">
 		select * from STORE_ITEM

@@ -12,6 +12,54 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(function(){
+		var itemlistcount = ${itemlistcount};
+	    var per1page = itemlistcount % 10;
+	    // per1page 값을 <span> 요소 내에 동적으로 삽입
+	    document.querySelector('div#per1page').textContent = per1page;
+	})
+	
+<%-- function deleteItem(ITEM_CODE) {
+    // AJAX 또는 폼을 사용하여 서버에 삭제 요청을 보냅니다.
+    $.ajax({
+        url: '/movieplus/store/admin/itemlist', // 삭제 요청을 처리할 서버의 URL
+        type: 'GET', // 또는 다른 HTTP 메서드를 사용할 수 있습니다.
+        data: { ITEM_CODE: ITEM_CODE }, // 삭제할 상품의 아이템 코드를 전달합니다.
+        success: function(response) {
+            // 서버에서의 응답을 처리합니다.
+            if (response.success) {
+                // 성공적으로 삭제되면 모달 창을 닫습니다.
+                $('#modal-delete').modal('hide');
+                // 페이지를 새로고침하거나 리스트에서 삭제된 상품을 갱신합니다.
+                location.reload(); // 예시로 페이지를 새로고침합니다.
+            } else {
+                // 삭제 실패 시 오류 메시지를 표시합니다.
+                alert('삭제 실패');
+            }
+        },
+        error: function() {
+            // AJAX 요청 실패 시 처리할 내용
+            alert('요청 실패');
+        }
+    });
+} --%>
+
+function deleteItem(ITEM_CODE) {
+    // 현재 페이지 URL을 가져옵니다.
+    var currentUrl = window.location.href;
+    
+    // 선택한 상품 번호를 URL에 추가합니다.
+    var updatedUrl = currentUrl + '?ITEM_CODE=' + ITEM_CODE;
+
+    // 업데이트된 URL로 페이지를 리로드하거나 서버로 요청을 보냅니다.
+    // 이 예제에서는 페이지를 리로드합니다.
+    window.location.href = updatedUrl;
+}
+
+</script>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
@@ -24,7 +72,7 @@
 					<div class="main__title">
 						<h2>상품 목록</h2>
 
-						<span class="main__title-stat">30 Total</span>
+						<span class="main__title-stat">${itemlistcount} Total</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
@@ -66,26 +114,30 @@
 									<th>상품 코드</th>
 									<th>상품 이름</th>
 									<th>상품 메뉴</th>
+									<th>상품 가격</th>
 									<th>수량</th>
 									<th>상품 표시</th>
-									<th>유효 기간</th>
 									<th>등록 날짜</th>
 									<th>옵션</th>
 								</tr>
 							</thead>
 
 							<tbody>
+								<c:forEach var="i" items="${itemlist}">
 								<tr>
 									<td>
-										<div class="main__table-text">1</div>
+										<div class="main__table-text">${i.ITEM_CODE}</div>
 									</td>
 									<td>
 										<div class="main__table-text">
-											<a href="#">팝콘</a>
+											<a href="modifyitem?ITEM_CODE=${i.ITEM_CODE}">${i.ITEM_NAME}</a>
 										</div>
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--rate">snack</div>
+									</td>
+									<td>
+										<div class="main__table-text">${i.ITEM_PRICE}</div>
 									</td>
 									<td>
 										<div class="main__table-text">1000</div>
@@ -94,9 +146,6 @@
 										<div class="main__table-text main__table-text--green">표시</div>
 									</td>
 									<td>
-										<div class="main__table-text">2023/12/31</div>
-									</td>
-									<td>
 										<div class="main__table-text">2023/10/05</div>
 									</td>
 									<td>
@@ -107,55 +156,17 @@
 											<a href="#" class="main__table-btn main__table-btn--view">
 												<i class="icon ion-ios-eye"></i>
 											</a>
-											<a href="#" class="main__table-btn main__table-btn--edit">
+											<a href="modifyitem?ITEM_CODE=${i.ITEM_CODE}" class="main__table-btn main__table-btn--edit">
 												<i class="icon ion-ios-create"></i>
 											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" 
+											onclick="deleteItem(${i.ITEM_CODE})">
 												<i class="icon ion-ios-trash"></i>
 											</a>
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td>
-										<div class="main__table-text">2</div>
-									</td>
-									<td>
-										<div class="main__table-text"><a href="#">일반관람권</a></div>
-									</td>
-									<td>
-										<div class="main__table-text">ticket</div>
-									</td>
-									<td>
-										<div class="main__table-text">1500</div>
-									</td>
-									<td>
-										<div class="main__table-text main__table-text--red">숨김</div>
-									</td>
-									<td>
-										<div class="main__table-text">2023/12/31</div>
-									</td>
-									<td>
-										<div class="main__table-text">2023/10/05</div>
-									</td>
-									
-									<td>
-										<div class="main__table-btns">
-											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-												<i class="icon ion-ios-lock"></i>
-											</a>
-											<a href="#" class="main__table-btn main__table-btn--view">
-												<i class="icon ion-ios-eye"></i>
-											</a>
-											<a href="modifyitem" class="main__table-btn main__table-btn--edit">
-												<i class="icon ion-ios-create"></i>
-											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-												<i class="icon ion-ios-trash"></i>
-											</a>
-										</div>
-									</td>
-								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -167,7 +178,8 @@
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
-						<span>2/10</span>
+						<span><div id="per1page">${per1page}</div>/10</span>
+
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev">
@@ -180,8 +192,8 @@
 							</li>
 						</ul>
 					</div>
-				</div>
-				<!-- end paginator -->
+				 </div>
+				 <!-- end paginator -->
 			</div>
 		</div>
 	</main>

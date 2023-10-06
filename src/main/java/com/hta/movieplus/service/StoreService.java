@@ -13,8 +13,12 @@ public interface StoreService {
 	
 	public void deleteItem(int itemCode);
 	
-//	public List<StoreVO> getItemList(int page, int limit);
-//
+	public int getItemListCount();
+	
+	public List<StoreVO> getItemList(int page, int limit);
+	
+	public StoreVO get1item(int ITEM_CODE);
+	
 //	public boolean isAdmin(int num, String pass);
 //	
 //	public List<String> DeleteItemFileList();

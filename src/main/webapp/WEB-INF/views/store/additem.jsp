@@ -12,7 +12,28 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <!-- <script>
+	$(function() {
+		// JavaScript with jQuery
+		$('#additem').click(function() {
+		    // AJAX 요청
+		    $.ajax({
+		        url: 'additempro', // 서버의 URL을 입력하세요.
+		        data: {
+		            'itemName': itemName,
+		            'itemPrice': itemPrice
+		        },
+		        success: function(response) {
+		            console.log('상품 등록 성공');
+		        },
+		        error: function() {
+		            console.log('상품 등록 실패');
+		        }
+		    });
+		});
+	});
+</script> -->
 </head>
 <body>
 	<!-- sidebar -->
@@ -33,7 +54,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form">
+					<form action="additempro" method="get" enctype="multipart/form-data" class="form" name="additemform">
 						<div class="row row--form">
 							<div class="col-12 col-md-5 form__cover">
 								<div class="row row--form">
@@ -50,11 +71,11 @@
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="상품 이름">
+										<input type="text" class="form__input" placeholder="상품 이름" name="ITEM_NAME">
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" name="text" class="form__textarea" placeholder="상품 설명"></textarea>
+										<textarea id="text" class="form__textarea" placeholder="상품 설명"></textarea>
 									</div>
 									
 									<div class="col-12 col-sm-6 col-lg-3">
@@ -65,17 +86,17 @@
 											<option value="point">point</option>
 										</select>
 									</div>
-
+									
+									<div class="col-12 col-sm-6 col-lg-3">
+										<input type="text" class="form__input" placeholder="가격" name="ITEM_PRICE">
+									</div>
+									
 									<div class="col-12 col-sm-6 col-lg-3">
 										<input type="text" class="form__input" placeholder="수량">
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="유효기간">
-									</div>
-
-									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="기타">
+										<input type="text" class="form__input" placeholder="상품 코드" name="ITEM_CODE">
 									</div>
 
 									<div class="col-12">
@@ -90,14 +111,14 @@
 							<div class="col-lg-1.5">
    	 							<div class="row row--form">
  	      							<div class="col-12">
-            							<button type="button" class="form__btn">상품 등록</button>
+            							<button id="additem" type="submit" class="form__btn">상품 등록</button>
         							</div>
     							</div>
 							</div>
 							<div class="col-lg-1">
     							<div class="row row--form">
        					 			<div class="col-12">
-            							<button type="button" class="form__btn">취소</button>
+            							<button type="button" class="form__btn" onClick="history.go(-1)">취소</button>
         							</div>
     							</div>
 							</div>
