@@ -9,14 +9,15 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,18 +39,57 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/admin/additem")
-	public String additem() {
+	public String additem(StoreVO storeVO, ModelAndView mv) {
 		return "store/additem";
 	}
 	
-	@RequestMapping("/admin/itemlist")
-	public String itemlist() {
-		return "store/catalog";
+//	@RequestMapping("/admin/additem")
+//	public ModelAndView additem(StoreVO storeVO, ModelAndView mv) {
+//		mv.setViewName("store/additem");
+//		mv.addObject("StoreVO", storeVO);
+//		return mv;
+//	}
+	
+	@RequestMapping("/admin/additempro")
+	public String additempro(StoreVO storeVO, ModelAndView mv) {
+		storeService.insertItem(storeVO);
+		return "store/additem";
 	}
 	
-	@RequestMapping("/admin/modifyitem")
-	public String itemdetail() {
-		return "store/modifyitem";
+	@GetMapping("/admin/itemlist")
+	public ModelAndView itemlist(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			ModelAndView mv) {
+		int limit = 10;
+		int itemlistcount = storeService.getItemListCount();
+		int maxpage = (itemlistcount + limit - 1)/limit;
+		int startpage = ((page - 1)/10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+		
+		if(endpage > maxpage) {
+			endpage = maxpage;
+		}
+		List<StoreVO> itemlist = storeService.getItemList(page, limit);
+		
+		mv.setViewName("store/catalog");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("itemlistcount", itemlistcount);
+		mv.addObject("itemlist", itemlist);
+		mv.addObject("limit", limit);
+		return mv;
+	}
+	
+	@GetMapping("/admin/modifyitem")
+	public ModelAndView itemdetail(
+			@RequestParam(value = "ITEM_CODE") int ITEM_CODE,
+			ModelAndView mv) {
+		StoreVO get1item = storeService.get1item(ITEM_CODE);
+		mv.setViewName("store/modifyitem");
+		mv.addObject("get1item", get1item);
+		return mv;
 	}
 	
 	@GetMapping("")
@@ -83,15 +123,8 @@ public class StoreController {
 	}
 	
 	@GetMapping("/cart")
-	public String addcart(StoreVO storeitem, Model model, HttpServletRequest request) {
-		
-		int result = cartService.additem(storeitem);
-		
-		if(result == 1) { // additem
-			
-		} else { // fail to additem
-			
-		}
+	public String addcart(StoreVO storeitem, ModelAndView mv, HttpServletRequest request) {
+		cartService.additem(storeitem);
 		return "store/store_cart";
 	}
 	

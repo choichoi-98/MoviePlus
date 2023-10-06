@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class StoreVO {
 
 	private int ITEM_CODE;
-	private int ITEM_NAME;
+	private String ITEM_NAME;
 	private int ITEM_PRICE;
 	private String ITEM_FILE;
 	private int ITEM_DETAIL;
@@ -24,10 +24,10 @@ public class StoreVO {
 	public void setITEM_CODE(int iTEM_CODE) {
 		ITEM_CODE = iTEM_CODE;
 	}
-	public int getITEM_NAME() {
+	public String getITEM_NAME() {
 		return ITEM_NAME;
 	}
-	public void setITEM_NAME(int iTEM_NAME) {
+	public void setITEM_NAME(String iTEM_NAME) {
 		ITEM_NAME = iTEM_NAME;
 	}
 	public int getITEM_PRICE() {

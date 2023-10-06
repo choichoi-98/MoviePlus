@@ -50,7 +50,7 @@
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="상품 이름">
+										<input type="text" class="form__input" value="${get1item.ITEM_NAME}" placeholder="상품 이름">
 									</div>
 
 									<div class="col-12">
@@ -67,15 +67,15 @@
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
+										<input type="text" class="form__input" value="${get1item.ITEM_PRICE}" placeholder="가격">
+									</div>
+
+									<div class="col-12 col-sm-6 col-lg-3">
 										<input type="text" class="form__input" placeholder="수량">
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="유효기간">
-									</div>
-
-									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="기타">
+										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드">
 									</div>
 
 									<div class="col-12">
@@ -97,7 +97,7 @@
 							<div class="col-lg-1">
     							<div class="row row--form">
        					 			<div class="col-12">
-            							<button type="button" class="form__btn">취소</button>
+            							<button type="button" class="form__btn" onClick="history.go(-1)">취소</button>
         							</div>
     							</div>
 							</div>

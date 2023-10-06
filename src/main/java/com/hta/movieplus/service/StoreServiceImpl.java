@@ -21,8 +21,7 @@ public class StoreServiceImpl implements StoreService {
 
 	@Override
 	public int insertItem(StoreVO StoreVO) {
-		int result = dao.insertItem(StoreVO);
-		return (result > 0) ? 1 : -1;
+		return dao.insertItem(StoreVO);
 	}
 	
 	@Override
@@ -40,6 +39,25 @@ public class StoreServiceImpl implements StoreService {
 		dao.deleteItem(itemCode);
 	}
 
+	@Override
+	public int getItemListCount() {
+		return dao.getItemListCount();
+	}
+
+	@Override
+	public List<StoreVO> getItemList(int page, int limit) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getItemList(map);
+	}
+
+	@Override
+	public StoreVO get1item(int ITEM_CODE) {
+		return dao.get1item(ITEM_CODE);
+	}
 
 
 //	@Override

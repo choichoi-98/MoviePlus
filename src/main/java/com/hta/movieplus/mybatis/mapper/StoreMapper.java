@@ -22,6 +22,12 @@ public interface StoreMapper {
 	
 	public void deleteItem(int itemCode);
 	
+	public List<StoreVO> getItemList(HashMap<String, Integer> map);
+
+	public int getItemListCount();
+
+	public StoreVO get1item(int iTEM_CODE);
+	
 //	public int getListCount();
 //	
 //	public List<StoreVO> getItemList(HashMap<String, Integer> map);
