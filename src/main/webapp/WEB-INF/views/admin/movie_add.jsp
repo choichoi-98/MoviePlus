@@ -8,6 +8,14 @@
 <title>MOVIEPLUS:관리자</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
+<style>
+#modal-view > div{
+width:100%;
+}
+#modal-view > div > div{
+width:100%;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
@@ -63,12 +71,12 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="#">View All</a>
+								<a id="movieListAllModal" class="main__table-btn main__table-btn--view open-modal" href="#modal-view">View All</a>
 							</div>
 						</div>
 
 						<div class="dashbox__table-wrap">
-							<table class="main__table main__table--dash">
+							<table class="main__table main__table--dash" id="movieListAllTable">
 								<thead>
 									<tr>
 										<th>영화코드</th>
@@ -82,25 +90,63 @@
 					</div>
 				</div>
 				<!-- end dashbox -->
-				<!-- 전체 영화 목록 모달 -->
-				<div id="movieListAllModal" class="modal">
-					<div class="modal-content">
-					<span class="close">&times;</span>
-						<table class="movieListAllModalTable">
-							<thead>
-								<tr>
-									<th>영화코드</th>
-									<th>영화제목</th>
-									<th>상영상태</th>
-									<th>관리</th>
-								</tr>
-							</thead>
-						</table>
+				<!-- 전체 영화 목록 모달 modal -->
+				<!-- modal view -->
+	<div id="modal-view" class="mfp-hide movieListAllModal" style="width:800px;margin-left: 450px;">
+		<div class="col-12 col-xl-6" style="width:800px">
+					<div class="dashbox" style="width:800px">
+						<div class="dashbox__title">
+							<h3><i class="icon ion-ios-trophy"></i> 전체 영화 목록</h3>
+
+							<div class="dashbox__wrap">
+							</div>
+						</div>
+
+						<div class="dashbox__table-wrap">
+							<table class="main__table main__table--dash" id="movieListAllTableModal">
+								<thead>
+									<tr>
+										<th>영화코드</th>
+										<th>영화제목</th>
+										<th>상영상태</th>
+										<th>관리</th>
+									</tr>
+								</thead>
+									
+							</table>
+						</div>
+				<!-- paginator -->
+				<div class="col-12">
+    <div class="paginator-wrap">
+        <span>${theaterCount} 중 20개씩</span>
+
+        <ul class="paginator">
+            <li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
+                <a href="#" onclick="changePage(${page-1})"><i class="icon ion-ios-arrow-back"></i></a>
+            </li>
+
+            <c:forEach var="a" begin="${startpage}" end="${endpage}">
+                <c:if test="${a == page }">
+                    <li class="paginator__item paginator__item--active" ><a href="#" onclick="changePage(${a })">${a }</a></li>
+                </c:if>
+                <c:if test="${a != page }">
+                    <li class="paginator__item"><a href="#" onclick="changePage(${a })">${a}</a></li>
+                </c:if>
+            </c:forEach>
+            
+            <li class="paginator__item paginator__item--next" ${page >= maxpage ? 'style="pointer-events: none;"' : ''}>
+                <a href="#" onclick="changePage(${page+1})"><i class="icon ion-ios-arrow-forward"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+				<!-- end paginator -->
 					</div>
 				</div>
-
+	</div>
+	<!-- end modal view -->
 				<!-- dashbox -->
-				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
 							<h3><i class="icon ion-ios-film"></i> 상영 중인 영화</h3>
@@ -138,7 +184,6 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
 					</div>
 				</div>
 				<!-- end dashbox -->
@@ -152,7 +197,7 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="reviews.html">View All</a>
+								<a class="dashbox__more" href="#">View All</a>
 							</div>
 						</div>
 

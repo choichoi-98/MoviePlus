@@ -18,6 +18,10 @@ public interface MovieService {
 	
 	public int updatePoster(String codeNo, String posterUrl, String stillUrl, String plotText);
 	
+	public int getListCount();
+
 	public List<Movie> getMovieListAll();
+	
+	public List<Movie> getMovieListByPage(int page, int pageSize);
 	
 }

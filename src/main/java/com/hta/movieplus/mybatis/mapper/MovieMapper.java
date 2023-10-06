@@ -1,5 +1,6 @@
 package com.hta.movieplus.mybatis.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -28,5 +29,9 @@ public interface MovieMapper {
 	public List<Movie> getUpcomingMovieList();
 
 	public List<Movie> getEndedMovieList();
+
+	public int getListcount();
+
+	public List<Movie> getMovieList(HashMap<String, Integer> map);
 }
 
