@@ -1,5 +1,6 @@
 package com.hta.movieplus.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,23 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> getEndedMovie() {
 		return dao.getEndedMovieList();
 	}
+
+	public int getListCount() {
+		return dao.getListcount();
+	}
+
+
+	public List<Movie> getMovieListByPage(int page, int pageSize) {
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	    int startrow = (page - 1) * pageSize + 1;
+	    int endrow = startrow + pageSize - 1;
+	    map.put("start", startrow);
+	    map.put("end", endrow);
+	    
+		return dao.getMovieList(map);
+	}
+
+	
 
 }
