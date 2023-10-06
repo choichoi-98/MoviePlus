@@ -24,9 +24,6 @@ import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.service.CartService;
 import com.hta.movieplus.service.StoreService;
 
-
-
-
 @Controller
 @RequestMapping(value = "store")
 public class StoreController {
@@ -39,7 +36,6 @@ public class StoreController {
 		this.storeService = storeService;
 		this.cartService = cartService;
 	}
-	
 	
 	@RequestMapping("/admin/additem")
 	public String additem() {
@@ -96,7 +92,6 @@ public class StoreController {
 		} else { // fail to additem
 			
 		}
-		
 		return "store/store_cart";
 	}
 	

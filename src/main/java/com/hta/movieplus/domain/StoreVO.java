@@ -4,36 +4,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StoreVO {
 
-	private int ITEM_NUM;
-	private String ITEM_CODE;
+	private int ITEM_CODE;
 	private int ITEM_NAME;
 	private int ITEM_PRICE;
 	private String ITEM_FILE;
 	private int ITEM_DETAIL;
 	private MultipartFile uploaditemfile;
 	
-	public MultipartFile getUploaditemfile() {
-		return uploaditemfile;
-	}
-	public void setUploaditemfile(MultipartFile uploaditemfile) {
-		this.uploaditemfile = uploaditemfile;
-	}
+	
 	public String getITEM_FILE() {
 		return ITEM_FILE;
 	}
 	public void setITEM_FILE(String iTEM_FILE) {
 		ITEM_FILE = iTEM_FILE;
 	}
-	public int getITEM_NUM() {
-		return ITEM_NUM;
-	}
-	public void setITEM_NUM(int iTEM_NUM) {
-		ITEM_NUM = iTEM_NUM;
-	}
-	public String getITEM_CODE() {
+	public int getITEM_CODE() {
 		return ITEM_CODE;
 	}
-	public void setITEM_CODE(String iTEM_CODE) {
+	public void setITEM_CODE(int iTEM_CODE) {
 		ITEM_CODE = iTEM_CODE;
 	}
 	public int getITEM_NAME() {
@@ -54,6 +42,12 @@ public class StoreVO {
 	}
 	public void setITEM_DETAIL(int iTEM_DETAIL) {
 		ITEM_DETAIL = iTEM_DETAIL;
+	}
+	public MultipartFile getUploaditemfile() {
+		return uploaditemfile;
+	}
+	public void setUploaditemfile(MultipartFile uploaditemfile) {
+		this.uploaditemfile = uploaditemfile;
 	}
 	
 }

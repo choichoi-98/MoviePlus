@@ -20,61 +20,60 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void insertItem(StoreVO StoreVO) {
-		dao.insertItem(StoreVO);
+	public int insertItem(StoreVO StoreVO) {
+		int result = dao.insertItem(StoreVO);
+		return (result > 0) ? 1 : -1;
+	}
+	
+	@Override
+	public StoreVO seleteitem(int itemCode) {
+		return null;
 	}
 
 	@Override
-	public StoreVO itemDetail(int num) {
-		return dao.itemDetail(num);
+	public int updateItem(StoreVO modifyitem) {
+		return dao.updateItem(modifyitem);
 	}
 
 	@Override
-	public int itemModify(StoreVO modifyitem) {
-		return dao.itemModify(modifyitem);
+	public void deleteItem(int itemCode) {
+		dao.deleteItem(itemCode);
 	}
 
-	@Override
-	public List<StoreVO> getItemList(int page, int limit) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		int startrow = (page-1) * limit + 1;
-		int endrow = startrow + limit - 1;
-		map.put("start", startrow);
-		map.put("end", endrow);
-		return dao.getItemList(map);
-	}
 
-	@Override
-	public int itemDelete(int num) {
-		int result = 0;
-		StoreVO store = dao.itemDetail(num);
-		if(store != null) {
-			result = dao.itemDelete(store);
-		}
-		return result;
-	}
 
-	@Override
-	public boolean isAdmin(int num, String pass) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("num", num);
-		map.put("pass", pass);
-		StoreVO store = dao.isAdmin(map);
-		
-		if(store == null) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+//	@Override
+//	public List<StoreVO> getItemList(int page, int limit) {
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		int startrow = (page-1) * limit + 1;
+//		int endrow = startrow + limit - 1;
+//		map.put("start", startrow);
+//		map.put("end", endrow);
+//		return dao.getItemList(map);
+//	}
 
-	@Override
-	public List<String> DeleteItemFileList() {
-		return dao.getDeleteItemFileList();
-	}
 
-	@Override
-	public void deleteItemFileList(String filename) {
-		dao.deleteItemFileList(filename);
-	}
+//	@Override
+//	public boolean isAdmin(int num, String pass) {
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("num", num);
+//		map.put("pass", pass);
+//		StoreVO store = dao.isAdmin(map);
+//		
+//		if(store == null) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+//	}
+//
+//	@Override
+//	public List<String> DeleteItemFileList() {
+//		return dao.getDeleteItemFileList();
+//	}
+//
+//	@Override
+//	public void deleteItemFileList(String filename) {
+//		dao.deleteItemFileList(filename);
+//	}
 }

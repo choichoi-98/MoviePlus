@@ -14,22 +14,22 @@ import com.hta.movieplus.domain.StoreVO;
 @Mapper
 public interface StoreMapper {
 	
-	public int getListCount();
+	public StoreVO seleteitem(int itemCode);
 	
-	public List<StoreVO> getItemList(HashMap<String, Integer> map);
+	public int insertItem(StoreVO StoreVO);
 	
-	public StoreVO itemDetail(int num);
+	public int updateItem(StoreVO modifyitem);
 	
-	public int itemModify(StoreVO modifyitem);
+	public void deleteItem(int itemCode);
 	
-	public int itemDelete(StoreVO StoreVO);
-	
-	public StoreVO isAdmin(Map<String, Object> map);
-	
-	public void insertItem(StoreVO StoreVO);
-	
-	public List<String> getDeleteItemFileList();
-
-	public void deleteItemFileList(String filename);
+//	public int getListCount();
+//	
+//	public List<StoreVO> getItemList(HashMap<String, Integer> map);
+//	
+//	public StoreVO isAdmin(Map<String, Object> map);
+//	
+//	public List<String> getDeleteItemFileList();
+//
+//	public void deleteItemFileList(String filename);
 	
 }

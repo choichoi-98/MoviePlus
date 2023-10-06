@@ -5,20 +5,20 @@ import com.hta.movieplus.domain.StoreVO;
 
 public interface StoreService {
 	
-	public void insertItem(StoreVO StoreVO);
+	public int insertItem(StoreVO StoreVO);
 	
-	public StoreVO itemDetail(int num);
+	public StoreVO seleteitem(int itemCode);
 	
-	public int itemModify(StoreVO modifyitem);
+	public int updateItem(StoreVO modifyitem);
 	
-	public List<StoreVO> getItemList(int page, int limit);
+	public void deleteItem(int itemCode);
 	
-	public int itemDelete(int num);
-
-	public boolean isAdmin(int num, String pass);
-	
-	public List<String> DeleteItemFileList();
-
-	public void deleteItemFileList(String filename);
+//	public List<StoreVO> getItemList(int page, int limit);
+//
+//	public boolean isAdmin(int num, String pass);
+//	
+//	public List<String> DeleteItemFileList();
+//
+//	public void deleteItemFileList(String filename);
 
 }
