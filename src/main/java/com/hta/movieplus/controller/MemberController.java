@@ -44,7 +44,6 @@ public class MemberController {
 		this.mailVO = mailVO;
 	}
 	
-	
 	//회원가입 폼 이동
 	@GetMapping("/join")
 	public String memberjoin() {
@@ -152,6 +151,18 @@ public class MemberController {
 	}
 	
 	
+	//마이페이지 이동
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "member/mypage_main";
+	}
+	
+	//마이페이지 - 개인정보 수정
+	@GetMapping("/modifyinfo")
+	public String testpage() {
+		return "member/mypage_modify";
+	}
+	
 	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -159,10 +170,12 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
-	//마이페이지 이동
-	@GetMapping("/mypage")
-	public String mypage() {
-		return "member/mypage_main";
+	//회원탈퇴
+	@GetMapping("/delete")
+	public String delete(String MEMBER_ID) {
+		memberservice.delete(MEMBER_ID);
+		return "redirect:/main";
 	}
+	
 	
 }	

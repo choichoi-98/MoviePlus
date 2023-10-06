@@ -31,5 +31,11 @@
 		from MEMBER 
 		where MEMBER_ID = #{MEMBER_ID}
 	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete MEMBER
+		where MEMBER_ID = #{MEMBER_ID}
+	</delete>
+	
 
 </mapper>
