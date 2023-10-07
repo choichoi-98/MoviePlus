@@ -172,8 +172,9 @@ public class MemberController {
 	
 	//회원탈퇴
 	@GetMapping("/delete")
-	public String delete(String MEMBER_ID) {
+	public String delete(String MEMBER_ID, HttpSession session) {
 		memberservice.delete(MEMBER_ID);
+		session.invalidate();
 		return "redirect:/main";
 	}
 	

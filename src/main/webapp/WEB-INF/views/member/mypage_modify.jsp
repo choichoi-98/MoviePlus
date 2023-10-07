@@ -105,7 +105,7 @@
 
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn">이미지 삭제</button>
                                       
-                                  <a href="" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
+                                  <a href="${pageContext.request.contextPath}/member/delete?MEMBER_ID=${memberInfo.MEMBER_ID}" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
                               </div>
                               <p style="font-size:0.8em; color:#999; margin-top:10px; padding:0; text-align:left; position:absolute; top:22px; left:194px;">
                                   ※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
