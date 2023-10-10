@@ -33,5 +33,10 @@ public interface MovieMapper {
 	public int getListcount();
 
 	public List<Movie> getMovieList(HashMap<String, Integer> map);
+
+	public String moviePlayUpdate(String movieCode);
+
+	public String movieEndedUpdate(String movieCode);
+
 }
 

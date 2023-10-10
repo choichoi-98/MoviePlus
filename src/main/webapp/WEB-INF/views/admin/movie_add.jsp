@@ -8,6 +8,10 @@
 <title>MOVIEPLUS:관리자</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
+<script>
+	var playImagePath="${pageContext.request.contextPath}/resources/image/movie/play.png";
+	var pauseImagePath="${pageContext.request.contextPath}/resources/image/movie/pause.png";
+</script>
 <style>
 #modal-view > div{
 width:100%;
@@ -124,7 +128,6 @@ width:100%;
             <li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
                 <a href="#" onclick="changePage(${page-1})"><i class="icon ion-ios-arrow-back"></i></a>
             </li>
-
             <c:forEach var="a" begin="${startpage}" end="${endpage}">
                 <c:if test="${a == page }">
                     <li class="paginator__item paginator__item--active" ><a href="#" onclick="changePage(${a })">${a }</a></li>
@@ -158,7 +161,7 @@ width:100%;
 						</div>
 
 						<div class="dashbox__table-wrap">
-							<table class="main__table main__table--dash">
+							<table class="main__table main__table--dash" id="movieListNowPlaying">
 								<thead>
 									<tr>
 										<th>영화코드</th>
@@ -167,22 +170,6 @@ width:100%;
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="main__table-text">26</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
-										</td>
-									</tr>
-								</tbody>
 							</table>
 					</div>
 				</div>
@@ -202,7 +189,7 @@ width:100%;
 						</div>
 
 						<div class="dashbox__table-wrap">
-							<table class="main__table main__table--dash">
+							<table class="main__table main__table--dash" id="movieListEnded">
 								<thead>
 									<tr>
 										<th>영화코드</th>
@@ -211,23 +198,6 @@ width:100%;
 										<th>관리</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="main__table-text">51</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Jonathan Banks</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 7.2</div>
-										</td>
-									</tr>
-									
-								</tbody>
 							</table>
 						</div>
 					</div>
