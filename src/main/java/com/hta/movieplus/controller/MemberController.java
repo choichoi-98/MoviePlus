@@ -50,6 +50,12 @@ public class MemberController {
 		return "member/member_join_step1";
 	}
 	
+	//test 폼 이동
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 	//회원가입 step1 인증메일 보내기
 	@GetMapping("/sendEmail")
 	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, ModelAndView mv, HttpSession session) throws Exception {
@@ -60,7 +66,7 @@ public class MemberController {
 		sendMail.SendMail(mailVO);
 		resp.getWriter().write(Integer.toString(verifycode));
 		
-		logger.info("[join1] email 값 : " + email);
+		logger.info("email 값 : " + email);
 	}
 
 	//회원가입 step2
@@ -126,21 +132,15 @@ public class MemberController {
 	}
 	
 	//아이디 찾기 처리
+	@ResponseBody
 	@PostMapping("/findidProcess")
-	public ModelAndView findidProcess(@RequestParam("MEMBER_ID") String MEMBER_ID,
-									  @RequestParam("MEMBER_BIRTH") String MEMBER_BIRTH,
-									  @RequestParam("MEMBER_PHONENO") String MEMBER_PHONENO,
-									  ModelAndView mv, HttpServletRequest request) {
-		Member m = memberservice.findId(MEMBER_ID, MEMBER_ID, MEMBER_ID);
-		
-		if(m!=null) {
-			mv.addObject("MEMBERINFO2", m);
-		} else {
-			mv.addObject("url", request.getRequestURL());
-			mv.addObject("message", "해당 정보가 없습니다.");
-			mv.setViewName("/member/findid");
-		}
-		return mv;
+	public Member findidProcess(@RequestParam("name") String MEMBER_NAME,
+	                            @RequestParam("birth") String MEMBER_BIRTH,
+	                            @RequestParam("phoneNo") String MEMBER_PHONENO
+	                            ) {
+	    
+	    Member member = memberservice.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
+	    return member;
 	}
 	
 	
@@ -163,6 +163,60 @@ public class MemberController {
 		return "member/mypage_modify";
 	}
 	
+	
+	//개인정보 수정처리(이메일, 핸드폰번호)
+	@PostMapping("/modifyProcess")
+	public String modifyProcess(Member member, Model model, 
+								HttpServletRequest request, 
+								RedirectAttributes rattr, HttpSession session)throws Exception{
+		
+		int result = memberservice.update(member);
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
+		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+		session.setAttribute("memberInfo", memberInfo);
+		
+		
+		if(result == 1) {
+			rattr.addFlashAttribute("result","updateSuccess");
+			return "member/mypage_main";
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "정보 수정 실패");
+			return "error/error";
+		}
+		
+	}
+	
+	//마이페이지 - 비밀번호 변경
+	@GetMapping("/passchg")
+	public String passchg() {
+		return "member/mypage_passchg";
+	}
+	
+	//
+	@PostMapping("/modifypass")
+	public String modifypass(Member member, Model model, 
+			HttpServletRequest request, 
+			RedirectAttributes rattr, HttpSession session) {
+		
+		String encPassword = passwordEncoder.encode(member.getMEMBER_PASS());
+		logger.info(encPassword);
+		member.setMEMBER_PASS(encPassword);
+		
+		int result = memberservice.updatepass(member);
+		
+		if(result == 1) { 	//삽입이 된 경우
+			session.setAttribute("memberInfo", member);
+			return "/member/member_join_step4";  //step4 화면으로 이동
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "회원 가입 실패");
+			return "redirect:/main";  //에러페이지
+		}
+	}
+	
+	
 	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -172,8 +226,9 @@ public class MemberController {
 	
 	//회원탈퇴
 	@GetMapping("/delete")
-	public String delete(String MEMBER_ID) {
+	public String delete(String MEMBER_ID, HttpSession session) {
 		memberservice.delete(MEMBER_ID);
+		session.invalidate();
 		return "redirect:/main";
 	}
 	

@@ -26,9 +26,22 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 		  logger.info("로그인 실패");
 		  session.setAttribute("loginfail", "loginFailMsg");
 		  
+		  //request.setAttribute("loginfail", "loginFailMsg");
 		  
-		  //RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/header.jsp");
-	     // dispatcher.forward(request, response);
+		  response.setContentType("text/html;charset=UTF-8");
+	      response.getWriter().print("<script>history.back(); </script>");
+//	        response.getWriter().flush();
+		  
+		  
+		  
+//		  	response.setContentType("text/html;charset=UTF-8");
+//	        response.getWriter().print("<script> alert('아이디 또는 비밀번호가 맞지 않습니다. 로그인 정보를 다시 확인하세요.'); "
+//	        		+ " history.back();</script>");
+//	        response.getWriter().flush();
+	        
+		  
+//		  RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
+//	      dispatcher.forward(request, response);
 			
 	}
 }

@@ -136,7 +136,7 @@ button.button.purple {
 
                                         <div class="sns-login">
                                             <!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
-                                            <a href="#" title="네이버로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-naver.png" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
+                                            <a href="#" id="test" title="네이버로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-naver.png" alt="네이버"><!--네이버-->   네이버로 로그인<!--네이버로 로그인--></a>
                                             <a href="#" title="카카오톡으로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-kakao.png" alt="카카오톡"><!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a>
                                             <a href="#" title="구글로 로그인 선택"><img src="${pageContext.request.contextPath}/resources/image/social_login/ico-google.png" alt="구글">   구글로 로그인<!--페이코로 로그인--></a>
                                         </div>
@@ -529,4 +529,22 @@ button.button.purple {
 		</div>
 	</div>
 </header>
+<script>
+
+var loginfail = "${loginfail}"; 
+if( loginfail === 'loginFailMsg'){
+	
+	$('#layer_login_select').addClass('on');
+    $('.bg-modal').css('opacity', '1');
+    $('body').addClass('no-scroll');
+	
+	/* openAlertPopup(); */
+	$('#loginfailalert').css('opacity', '1');
+	$('.alertStyle').css('display', 'block');
+    $('body').addClass('no-scroll');
+	
+}
+
+
+</script>
 </head>

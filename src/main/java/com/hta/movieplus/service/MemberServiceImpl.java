@@ -49,7 +49,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member findId(String MEMBER_NAME, String MEMBER_BIRTH, String MEMBER_PHONENO) {
-		return  dao.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
+		Member member = dao.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
+		return member;
 	}
 
 
@@ -62,6 +63,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void delete(String MEMBER_ID) {
 		dao.delete(MEMBER_ID);
+	}
+
+
+	@Override
+	public int update(Member m) {
+		return dao.update(m);
+	}
+
+
+	@Override
+	public int updatepass(Member m) {
+		return dao.updatepass(m);
 	}
 
 

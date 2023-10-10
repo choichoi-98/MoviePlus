@@ -16,6 +16,10 @@ public interface MemberService {
 
 	public void delete(String MEMBER_ID);
 
+	public int update(Member m);
+
+	public int updatepass(Member m);
+
 	
 	
 }

@@ -22,6 +22,8 @@ $(document).ready(function(){
         $('#layer_login_select').addClass('on');
         $('.bg-modal').css('opacity', '1');
         $('body').addClass('no-scroll');
+        $('#LoginId').val('');
+        $('#LoginPass').val('');
     }
 
     $('#header-search-btn').click(function() {
@@ -142,14 +144,47 @@ $(document).ready(function(){
         $('body').removeClass('no-scroll');
     }
     
-    /*
-    var loginfailMsg = "${loginfail}"; 
-    if( loginfailMsg == 'loginFailMsg'){
+    
+    $("#loginfailok").click(function(){
+		closeAlertPopup();
+	})
+	
+	$("#test").click(function(){
 		openAlertPopup();
-	}
-	*/
+	})
+    
+    
+    
+    /*
+    //로그인 실패
+  	$("#btnLogin").on(function(event){
+		event.preventDefault();
+		
+		const id = $('#LoginId').val();
+		const pass = $('#LoginPass').val();
+		
+		$.ajax({
+			url : "loginProcess",
+			type: "POST",
+			data: { MEMBER_ID: id, MEMBER_PASS: pass},
+			success: function(response) {
+	            // 로그인 성공 처리
+	            console.log("로그인 성공")
+       		 },
+			error : function(resp){
+				 if (resp.responseText.includes('loginFailMsg')){
+					openAlertPopup();
+					console.log("아이디와 비밀번호가 일치하지 않는 경우");
+				}
+			}	
+		})//ajax end
+	})
+    */
+    
+   
 	
 	
+	/*
 	$("#btnLogin").submit(function(event){
 		event.preventDefault();
 		
@@ -172,6 +207,7 @@ $(document).ready(function(){
 			}	
 		})//ajax end
 	})
+	*/
 	
 	/*
 	//로그인 확인 - 실패 시 알림창
@@ -191,29 +227,9 @@ $(document).ready(function(){
 	})
 	*/
 	
-	/*
-	$("#btnLogin").click(function(){
-	   const id = $('#LoginId').val();
-	   const pass = $('#LoginPass').val();
-
-	    $.ajax({
-	    	url : "${pageContext.request.contextPath}/loginProcess",
-	    	type : 'POST',
-	    	data : {MEMBER_ID:id, MEMBER_PASS:pass},
-	    	error : function(resp){
-	    		if("${loginfail}" == 'loginFailMsg'){
-					openAlertPopup();
-					alert("아이디나 비밀번호 오류입니다");
-				}
-	    	}
-	    })//ajax end	
-		
-	})
-	*/
 	
-	$("#loginfailok").click(function(){
-		closeAlertPopup();
-	})
+	
+	
 	
 	
 });
