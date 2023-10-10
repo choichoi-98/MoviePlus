@@ -46,6 +46,7 @@ public class MovieController {
     	return "admin/movie_add";
     }
     
+    @ResponseBody
 	@GetMapping("/updateActors")
 	public void updateActors(HttpServletRequest request, Model model) {
 		//MovieServieImpl을 사용해서 DB에 저장된 모든 MOVIE_CODE 값 가져옴
@@ -59,25 +60,25 @@ public class MovieController {
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping("/updatePoster")
-	public void updatePoster(HttpServletRequest request, Model model) throws Exception {
-		//MovieServiceImpl을 사용하여 DB에 저장된 MOVIE_TITLE, MOVIE_DIRECTOR 값 가져옴
-		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
-	     logger.info("movies=" + movies.toString()); 
-		 
-		 for(Movie  movie : movies) {
-			 String movieTitle = movie.getMovie_Title();
-			 String movieDirector = movie.getMovie_Director();
-			 if (movieDirector == null) {
-				 movieDirector = " ";
-			 }
-			 //TestMoviePosterApi.moviePosterApi(movieTitle, movieDirector);
-			 logger.info("여기는 MovieController의 updatePoster");
-		 }
-	      
-		
-	}
+//	@ResponseBody
+//	@RequestMapping("/updatePoster")
+//	public void updatePoster(HttpServletRequest request, Model model) throws Exception {
+//		//MovieServiceImpl을 사용하여 DB에 저장된 MOVIE_TITLE, MOVIE_DIRECTOR 값 가져옴
+//		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
+//	     logger.info("movies=" + movies.toString()); 
+//		 
+//		 for(Movie  movie : movies) {
+//			 String movieTitle = movie.getMovie_Title();
+//			 String movieDirector = movie.getMovie_Director();
+//			 if (movieDirector == null) {
+//				 movieDirector = " ";
+//			 }
+//			 //TestMoviePosterApi.moviePosterApi(movieTitle, movieDirector);
+//			 logger.info("여기는 MovieController의 updatePoster");
+//		 }
+//	      
+//		
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value="/movieListAll")
@@ -109,7 +110,9 @@ public class MovieController {
 	    int endpage = startpage + 20 - 1;
 	    if (endpage > maxpage)
 	         endpage = maxpage;
-	    
+	    System.out.println("startpage="+startpage);
+	    System.out.println("endpage="+endpage);
+
 	    response.put("movieList", movieList);
 	    response.put("page", page);
 	    response.put("maxpage", maxpage);
@@ -121,20 +124,28 @@ public class MovieController {
 	    return response;
 	}
 
-	
-	@GetMapping("/now-playing")
+	@ResponseBody
+	@RequestMapping(value="/now-playing")
 	public List<Movie> getPlayingMovie(){
 		return movieServiceImpl.getPlayingMovie();
 	}
 	
-	@GetMapping("/upcoming")
-	public List<Movie> getUpcomingMovie(){
-		return movieServiceImpl.getUpcomingMovie();
-	}
-	
-	@GetMapping("/ended")
+	@ResponseBody
+	@RequestMapping(value="/ended")
 	public List<Movie> getEndedMovie(){
 		return movieServiceImpl.getEndedMovie();
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/moviePlayUpdate")
+	public String moviePlayUpdate(@RequestParam("movieCode") String movieCode){
+		return movieServiceImpl.moviePlayUpdate(movieCode);
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/movieEndedUpdate")
+	public String movieEndedUpdate(@RequestParam("movieCode") String movieCode){
+		return movieServiceImpl.movieEndedUpdate(movieCode);
 	}
 	
 }

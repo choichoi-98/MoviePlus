@@ -29,12 +29,18 @@ public class TestMoviePosterApi {
 	
 	@ResponseBody
 	@RequestMapping("/testView")
-	public String go(Model md) {
+	public List<Movie> go(Model md) {
 		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
-		 md.addAttribute("movies", movies);
-		 md.addAttribute("test", "test");
-		return "success/apiTest";
+//		 md.addAttribute("movies", movies);
+//		 md.addAttribute("test", "test");
+		 return movies;
 	}
+	
+	
+//	@RequestMapping("/goApiTest")
+//	public String apiTest() {
+//		return "movie/apiTest";
+//	}
 	
 	@ResponseBody
 	@RequestMapping("/updatePosters")

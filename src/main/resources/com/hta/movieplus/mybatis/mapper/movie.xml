@@ -45,7 +45,7 @@
 	</update>
 	
 	<select id="getMovieListAll" resultType="movie">
-		SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		SELECT *
 		FROM MOVIE
 	</select>
 	
@@ -67,5 +67,30 @@ WHERE row_num &gt;= #{start}
 
 
     </select>
+    
+    <select id="getPlayingMovieList" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+    </select>
 
+    <select id="getEndedMovieList" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영종료'
+    </select>
+
+	<update id="moviePlayUpdate">
+		UPDATE MOVIE
+		SET MOVIE_SCREEN = '상영중'
+		WHERE MOVIE_CODE = ${movieCode}
+	</update>
+
+	<update id="movieEndedUpdate">
+		UPDATE MOVIE
+		SET MOVIE_SCREEN = '상영종료'
+		WHERE MOVIE_CODE = ${movieCode}
+	</update>
+	
+	
 </mapper>
