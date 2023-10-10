@@ -33,8 +33,8 @@
 			</div>
 
 			<div class="sidebar__user-title">
-				<span>강남</span>
-				<p>홍길동 님</p>
+				<span>${theaterName}관</span>
+				<p>${memberInfo.MEMBER_NAME}님</p>
 			</div>
 
 			<button class="sidebar__user-btn" type="button" onclick="location='/movieplus/'">

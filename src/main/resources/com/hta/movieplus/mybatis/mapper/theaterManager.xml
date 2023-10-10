@@ -19,6 +19,7 @@
 		SELECT *
 		FROM THEATER_ROOM
 		WHERE THEATER_ID = #{theaterId}
+		ORDER BY THEATER_ROOM_ID
 	</select>
 	
 	<delete id="deleteRoomById" parameterType="int">

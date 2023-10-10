@@ -15,4 +15,10 @@ public interface SchedulingService {
 
 	int addSchedule(TheaterSchedule schedule);
 
+	int deleteSchedule(int scheduleId);
+
+	TheaterSchedule getSchedule(int scheduleId);
+
+	int updateSchedule(TheaterSchedule schedule);
+
 }

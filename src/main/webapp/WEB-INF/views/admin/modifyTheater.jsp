@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -55,9 +56,17 @@
 									<div class="col-6">
 										<select class="js-example-basic-single" id="country"
 											name="THEATER_LOCATION" required>
-											<option value="서울">서울</option>
-											<option value="경기">경기</option>
-											<option value="인천">인천</option>
+											<c:forEach var="loc" items="${locationList}">
+											  <c:choose>
+											        <c:when test="${loc.value eq theater.THEATER_LOCATION}">
+											            <option value="${loc.value}" selected>${loc.value}</option>
+											        </c:when>
+											        <c:otherwise>
+											            <option value="${loc.value}">${loc.value}</option>
+											        </c:otherwise>
+											    </c:choose>
+											</c:forEach>
+																					
 										</select>
 									</div>
 

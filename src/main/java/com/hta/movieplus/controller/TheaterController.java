@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.service.TheaterService;
@@ -31,13 +32,27 @@ public class TheaterController {
 	}
 	
 	@GetMapping("/theater")
-	public String theaterMainView() {
-		return "theater/theater_main";
+	public ModelAndView theaterMainView(ModelAndView mv) {
+		List<Theater> theaterList = theaterservice.getAllTheaterList();
+		
+		mv.addObject("theaterList", theaterList);
+		mv.addObject("locationList", TheaterLocationEnum.values());
+		mv.setViewName("theater/theater_main");
+		return mv;
 	}
 	
 	@GetMapping("/theater/detail")
-	public String theaterDetailView() {
-		return "theater/theater_detail";
+	public ModelAndView theaterDetailView(@RequestParam(value="theaterId", required=true) int theaterId, ModelAndView mv) {
+		// 메뉴바 부분
+		List<Theater> theaterList = theaterservice.getAllTheaterList();
+		
+		mv.addObject("theaterList", theaterList);
+		mv.addObject("locationList", TheaterLocationEnum.values());
+		// 메뉴바 부분
+		
+		mv.setViewName("theater/theater_detail");
+		
+		return mv;
 	}
 		
 	//어드민 극장 관리
@@ -65,8 +80,9 @@ public class TheaterController {
 	public ModelAndView addTheaterView(ModelAndView mv) {
 		String managerId = theaterservice.getManagerId();
 		
-		mv.setViewName("admin/addTheater");
+		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.addObject("managerId", managerId);
+		mv.setViewName("admin/addTheater");
 		return mv;
 	}	
 	
@@ -92,6 +108,7 @@ public class TheaterController {
 		
 		Theater theater = theaterservice.getTheaterById(num);
 		
+		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.addObject(theater);
 		mv.setViewName("/admin/modifyTheater");
 		

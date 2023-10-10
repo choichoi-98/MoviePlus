@@ -19,4 +19,12 @@ public interface SchedulingMapper {
 
 	Movie getMovieByID(String movie_CODE);
 
+	int deleteScheduleById(int scheduleId);
+
+	TheaterSchedule getScheduleById(int scheduleId);
+
+	int updateSchedule(TheaterSchedule schedule);
+
+	List<TheaterSchedule> getScheduleListByTheaterRoomId(TheaterSchedule schedule);
+
 }

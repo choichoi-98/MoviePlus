@@ -28,6 +28,8 @@ public interface TheaterService {
 
 	public void resetManagerPassword(String theater_MANAGER_ID);
 
+	public List<Theater> getAllTheaterList();
+
 	
 	
 

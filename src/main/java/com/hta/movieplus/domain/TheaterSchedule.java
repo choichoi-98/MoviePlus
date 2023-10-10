@@ -1,5 +1,7 @@
 package com.hta.movieplus.domain;
 
+import java.time.LocalTime;
+
 public class TheaterSchedule {
 	private int THEATER_SCHEDULE_ID;
 	private int THEATER_ID;
@@ -16,10 +18,10 @@ public class TheaterSchedule {
 	
 	
 	
-	public String getTHEATER_NAME() {
+	public String getTHEATER_ROOM_NAME() {
 		return THEATER_ROOM_NAME;
 	}
-	public void setTHEATER_NAME(String tHEATER_ROOM_NAME) {
+	public void setTHEATER_ROOM_NAME(String tHEATER_ROOM_NAME) {
 		THEATER_ROOM_NAME = tHEATER_ROOM_NAME;
 	}
 	public String getMOVIE_TITLE() {
@@ -76,6 +78,7 @@ public class TheaterSchedule {
 	public void setTHEATER_SCHEDULE_TYPE(String tHEATER_SCHEDULE_TYPE) {
 		THEATER_SCHEDULE_TYPE = tHEATER_SCHEDULE_TYPE;
 	}
+	
 	
 	
 }

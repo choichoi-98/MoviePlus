@@ -15,18 +15,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.service.TheaterManagerService;
+import com.hta.movieplus.service.TheaterService;
 
 @Controller
 @RequestMapping(value = "/manager")
-@SessionAttributes(value = "theaterId")
+@SessionAttributes({"theaterId", "theaterName"})
 public class ManagerController {
 	
 	TheaterManagerService theaterManagerService;
+	TheaterService theaterService;
 
 	@Autowired
-	public ManagerController(TheaterManagerService theaterManagerService) {
+	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService) {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
+		this.theaterService = theaterService;
 	}
 	
 	@GetMapping("") 
@@ -40,8 +43,11 @@ public class ManagerController {
 			managerId = selectedId;
 		}
 		if(!managerId.equals("admin")) {
-			model.addAttribute("theaterId", theaterManagerService.getTheaterIdByManagerId(managerId));
+			int theaterId = theaterManagerService.getTheaterIdByManagerId(managerId);
+			model.addAttribute("theaterId", theaterId);
+			model.addAttribute("theaterName", theaterService.getTheaterById(theaterId).getTHEATER_NAME());
 		} // 대쉬보드 재 입장 오류
+		
 		
 		mv.setViewName("manager/main");
 		return mv;
