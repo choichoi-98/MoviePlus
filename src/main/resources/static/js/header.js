@@ -22,6 +22,8 @@ $(document).ready(function(){
         $('#layer_login_select').addClass('on');
         $('.bg-modal').css('opacity', '1');
         $('body').addClass('no-scroll');
+        $('#LoginId').val('');
+        $('#LoginPass').val('');
     }
 
     $('#header-search-btn').click(function() {
@@ -146,6 +148,12 @@ $(document).ready(function(){
     $("#loginfailok").click(function(){
 		closeAlertPopup();
 	})
+	
+	$("#test").click(function(){
+		openAlertPopup();
+	})
+    
+    
     
     /*
     //로그인 실패
@@ -173,12 +181,8 @@ $(document).ready(function(){
 	})
     */
     
-    /*
-    var loginfail = "${loginfail}"; 
-    if( loginfail === 'loginFailMsg'){
-		openAlertPopup();
-	}
-	*/
+   
+	
 	
 	/*
 	$("#btnLogin").submit(function(event){
@@ -223,25 +227,7 @@ $(document).ready(function(){
 	})
 	*/
 	
-	/*
-	$("#btnLogin").click(function(){
-	   const id = $('#LoginId').val();
-	   const pass = $('#LoginPass').val();
-
-	    $.ajax({
-	    	url : "${pageContext.request.contextPath}/loginProcess",
-	    	type : 'POST',
-	    	data : {MEMBER_ID:id, MEMBER_PASS:pass},
-	    	error : function(resp){
-	    		if("${loginfail}" == 'loginFailMsg'){
-					openAlertPopup();
-					alert("아이디나 비밀번호 오류입니다");
-				}
-	    	}
-	    })//ajax end	
-		
-	})
-	*/
+	
 	
 	
 	
