@@ -101,6 +101,16 @@
 		SELECT *
 		FROM THEATER
 	</select>
+	
+	<select id="getFavoriteTheaterListById" resultType="favoriteTheater">
+		SELECT *
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		JOIN THEATER T
+		ON FT.THEATER_ID = T.THEATER_ID
+		WHERE MEMBER_ID = #{name}
+	</select>
 
 	
 

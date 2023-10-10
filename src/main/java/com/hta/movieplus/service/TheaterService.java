@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 
@@ -29,6 +30,8 @@ public interface TheaterService {
 	public void resetManagerPassword(String theater_MANAGER_ID);
 
 	public List<Theater> getAllTheaterList();
+
+	public List<FavoriteTheater> getFavoriteTheaterListById(String name);
 
 	
 	

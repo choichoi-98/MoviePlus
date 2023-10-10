@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.controller.TheaterController;
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.mybatis.mapper.TheaterMapper;
@@ -166,6 +167,12 @@ public class TheaterServiceImpl implements TheaterService {
 		// TODO Auto-generated method stub
 		
 		return mapper.getAllTheaterList();
+	}
+
+	@Override
+	public List<FavoriteTheater> getFavoriteTheaterListById(String name) {
+		// TODO Auto-generated method stub
+		return mapper.getFavoriteTheaterListById(name);
 	}
 
 }

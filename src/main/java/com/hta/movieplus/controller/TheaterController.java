@@ -1,12 +1,12 @@
 package com.hta.movieplus.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
 
 
@@ -23,18 +25,22 @@ import com.hta.movieplus.service.TheaterService;
 public class TheaterController {
 	
 	private TheaterService theaterservice;
+	private TheaterManagerService theaterManagerService;
 	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
 
 	@Autowired
-	public TheaterController(TheaterService theaterService) {
+	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService) {
 		// TODO Auto-generated constructor stub
 		this.theaterservice = theaterService;
+		this.theaterManagerService = theaterManagerService;
 	}
 	
 	@GetMapping("/theater")
-	public ModelAndView theaterMainView(ModelAndView mv) {
+	public ModelAndView theaterMainView(ModelAndView mv, Principal principal) {
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
+		List<FavoriteTheater> favList = theaterservice.getFavoriteTheaterListById(principal.getName());
 		
+		mv.addObject("favList", favList);
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.setViewName("theater/theater_main");
@@ -136,6 +142,8 @@ public class TheaterController {
 	}
 	
 	//어드민 극장 관리
+	
+
 
 
 }

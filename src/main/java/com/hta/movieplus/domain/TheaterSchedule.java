@@ -1,7 +1,5 @@
 package com.hta.movieplus.domain;
 
-import java.time.LocalTime;
-
 public class TheaterSchedule {
 	private int THEATER_SCHEDULE_ID;
 	private int THEATER_ID;
