@@ -72,6 +72,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int updatepass(Member m) {
+		return dao.updatepass(m);
+	}
+
+
 
 
 	

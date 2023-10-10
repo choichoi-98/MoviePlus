@@ -18,6 +18,8 @@ public interface MemberService {
 
 	public int update(Member m);
 
+	public int updatepass(Member m);
+
 	
 	
 }

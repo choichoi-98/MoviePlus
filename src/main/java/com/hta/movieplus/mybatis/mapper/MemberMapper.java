@@ -18,6 +18,8 @@ public interface MemberMapper {
 	public void delete(String MEMBER_ID);
 	
 	public int update(Member m);
+
+	public int updatepass(Member m);
 	
 }
 

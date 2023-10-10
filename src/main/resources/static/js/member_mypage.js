@@ -76,7 +76,7 @@ $(document).ready(function(){
 	})
 	
 	
-	//인증번호 확인	
+	//마이페이지 이메일 변경 - 인증번호 확인	
 	$('#chgBtn').click( function(){
 		var checkinput = $('#chkNum').val(); //입력한 인증번호
 		
@@ -96,11 +96,17 @@ $(document).ready(function(){
 		} //checkinput === '' else end	
 	})
 	
-	$("modifyinfoform").submit(function(){
+	//마이페이지 개인정보 변경 제출
+	$("#modifyinfoform").submit(function(){
 		if(verifyemailcheck = false)
 		return false;
 	})
 	
+	//마이페이지 비밀번호 변경
+	$('#changepassform').submit(function(){
+		
+	
+	})
 	
 	
 	

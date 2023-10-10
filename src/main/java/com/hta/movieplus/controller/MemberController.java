@@ -140,12 +140,7 @@ public class MemberController {
 	                            ) {
 	    
 	    Member member = memberservice.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
-	    
-//	    if(member == null) {
-//	    	member.get
-//	    }
 	    return member;
-	    	
 	}
 	
 	
@@ -197,6 +192,28 @@ public class MemberController {
 	@GetMapping("/passchg")
 	public String passchg() {
 		return "member/mypage_passchg";
+	}
+	
+	//
+	@PostMapping("/modifypass")
+	public String modifypass(Member member, Model model, 
+			HttpServletRequest request, 
+			RedirectAttributes rattr, HttpSession session) {
+		
+		String encPassword = passwordEncoder.encode(member.getMEMBER_PASS());
+		logger.info(encPassword);
+		member.setMEMBER_PASS(encPassword);
+		
+		int result = memberservice.updatepass(member);
+		
+		if(result == 1) { 	//삽입이 된 경우
+			session.setAttribute("memberInfo", member);
+			return "/member/member_join_step4";  //step4 화면으로 이동
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "회원 가입 실패");
+			return "redirect:/main";  //에러페이지
+		}
 	}
 	
 	

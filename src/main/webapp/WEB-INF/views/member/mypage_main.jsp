@@ -26,7 +26,7 @@
 				<div class="mb_name">안녕하세요!<p>${memberInfo.MEMBER_NAME}<span>님</span></p></div>
 
 				<div class="link">
-					<a href="#" title="개인정보수정 페이지로 이동">개인정보수정</a>
+					<a href="${pageContext.request.contextPath}/member/modifyinfo" title="개인정보수정 페이지로 이동">개인정보수정</a>
 					<a href="#" id="bfrClassSearch" class="btn-modal-open" title="지난등급 상세보기">지난등급조회</a>
 				</div>
 
