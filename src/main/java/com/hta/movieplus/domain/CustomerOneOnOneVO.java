@@ -14,7 +14,7 @@ public class CustomerOneOnOneVO {
 	private String CUSTOMER_TITLE; // 제목
 	private String CUSTOMER_CONTENT; // 내용
 	private int CUSTOMER_PASSWARD; // 글 비밀번호
-	private String CUSTOMER_ANSWERSITUATION; // 답변 상태
+	private String CUSTOMER_ANSWERSITUATION = "x"; // 답변 상태
 	private String CUSTOMER_REGISTRATIONDATE;
 
 	public int getCUSTOMER_NUM() {

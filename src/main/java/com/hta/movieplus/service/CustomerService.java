@@ -6,8 +6,8 @@ import com.hta.movieplus.domain.CustomerOneOnOneVO;
 
 public interface CustomerService {
 
-	public void insertOneOnOne(CustomerOneOnOneVO customeroneonone);
-	
-	public List<CustomerOneOnOneVO> selectOneOnOne();
+	public void insertOneOnOne(CustomerOneOnOneVO oneonone);
+
+	/* public List<CustomerOneOnOneVO> selectOneOnOne(); */
 
 }

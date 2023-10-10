@@ -10,27 +10,18 @@ import com.hta.movieplus.mybatis.mapper.CustomerMapper;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-
-	CustomerMapper mapper;
-
+	
+	CustomerMapper dao; //매퍼와 연결하는 부분
+	
 	@Autowired
-	public CustomerServiceImpl(CustomerMapper mapper) { // 매개변수에 매퍼넣고
-		// TODO Auto-generated constructor stub
-		this.mapper = mapper;
+	public CustomerServiceImpl(CustomerMapper dao) {
+		this.dao = dao;
 	}
 	
-	@Override
-	public void insertOneOnOne(CustomerOneOnOneVO customeroneonone) {
-		// TODO Auto-generated method stub
-		mapper.insertCumtomerOneOnOneVO(customeroneonone);
+	@Override 
+	public void insertOneOnOne(CustomerOneOnOneVO oneonone) {
+		//얘가 해야하는 기능은 DB에 값을 보내주는 역할임
+		dao.insertCustomerOneOnOneVO(oneonone);
 	}
 
-	@Override
-	public List<CustomerOneOnOneVO> selectOneOnOne() {
-		// TODO Auto-generated method stub
-		List<CustomerOneOnOneVO> list = mapper.getCustomerOneOnOneVOList(); 
-		return list;
-	}
-
-	
 }
