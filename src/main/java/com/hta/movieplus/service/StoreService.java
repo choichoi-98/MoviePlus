@@ -7,15 +7,17 @@ public interface StoreService {
 	
 	public int insertItem(StoreVO StoreVO);
 	
-	public StoreVO seleteitem(int itemCode);
+	public StoreVO seleteItem(int ITEM_CODE);
 	
 	public int updateItem(StoreVO modifyitem);
 	
-	public void deleteItem(int itemCode);
+	public void deleteItem(int ITEM_CODE);
 	
 	public int getItemListCount();
 	
 	public List<StoreVO> getItemList(int page, int limit);
+	
+	public List<StoreVO> getItemListByKind(String ITEM_MENU);
 	
 	public StoreVO get1item(int ITEM_CODE);
 	

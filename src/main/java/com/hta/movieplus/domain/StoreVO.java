@@ -5,13 +5,19 @@ import org.springframework.web.multipart.MultipartFile;
 public class StoreVO {
 
 	private int ITEM_CODE;
+	private String ITEM_MENU;
 	private String ITEM_NAME;
 	private int ITEM_PRICE;
 	private String ITEM_FILE;
 	private int ITEM_DETAIL;
 	private MultipartFile uploaditemfile;
 	
-	
+	public String getITEM_MENU() {
+		return ITEM_MENU;
+	}
+	public void setITEM_MENU(String iTEM_MENU) {
+		ITEM_MENU = iTEM_MENU;
+	}
 	public String getITEM_FILE() {
 		return ITEM_FILE;
 	}
@@ -36,7 +42,6 @@ public class StoreVO {
 	public void setITEM_PRICE(int iTEM_PRICE) {
 		ITEM_PRICE = iTEM_PRICE;
 	}
-	
 	public int getITEM_DETAIL() {
 		return ITEM_DETAIL;
 	}

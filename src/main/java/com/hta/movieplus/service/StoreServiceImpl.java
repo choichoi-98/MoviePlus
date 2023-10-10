@@ -25,7 +25,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 	
 	@Override
-	public StoreVO seleteitem(int itemCode) {
+	public StoreVO seleteItem(int ITEM_CODE) {
 		return null;
 	}
 
@@ -35,13 +35,18 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void deleteItem(int itemCode) {
-		dao.deleteItem(itemCode);
+	public void deleteItem(int ITEM_CODE) {
+		dao.deleteItem(ITEM_CODE);
 	}
 
 	@Override
 	public int getItemListCount() {
 		return dao.getItemListCount();
+	}
+	
+	@Override
+	public StoreVO get1item(int ITEM_CODE) {
+		return dao.get1item(ITEM_CODE);
 	}
 
 	@Override
@@ -55,9 +60,10 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public StoreVO get1item(int ITEM_CODE) {
-		return dao.get1item(ITEM_CODE);
+	public List<StoreVO> getItemListByKind(String ITEM_MENU) {
+	    return dao.getItemListByKind(ITEM_MENU);
 	}
+
 
 
 //	@Override

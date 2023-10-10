@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
-<html lang="ko">
+<html>
 <!--<![endif]-->
 <head>
+	<meta charset="utf-8">
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -54,32 +56,13 @@
 				</div>
 
 				<!-- 카테고리 별 상품 -->
-				<div id="divCategoryPrdtArea_CPC02" style="display: none">
-					<!-- store-list -->
-					<div class="store-list mt30">
-						<ul class="list">
-						</ul>
-					</div>
-					<!--// store-list -->
-				</div>
-
-				<div id="divCategoryPrdtArea_CPC05" style="display: none">
-					<!-- store-list -->
-					<div class="store-list mt30">
-						<ul class="list">
-						</ul>
-					</div>
-					<!--// store-list -->
-				</div>
-
 				<div id="divCategoryPrdtArea_CPC09" style="">
 					<!-- store-list -->
 					<div class="store-list mt30">
+						<c:forEach var="i" items="${voucherlist}">
 						<ul class="list">
-						
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1764&#39;);"
-								title="메가박스 금액권(2만원권) 상세보기">
+							<li class="">
+								<a href="cart?ITEM_CODE=${i.ITEM_CODE}">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label new">NEW</div>
 									<div class="img">
@@ -90,131 +73,22 @@
 									<div class="info">
 										<div class="tit">
 											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 금액권(2만원권)</p>
-
+											<p class="name">${i.ITEM_NAME}</p>
 											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">메가박스 금액권(2만원권)</p>
+											<p class="bundle">무비플러스 금액권</p>
 										</div>
 										<div class="price">
 											<p class="original"></p>
 											<p class="sale">
-												<em>20,000</em> <span>원</span>
+												<em>${i.ITEM_PRICE}</em> <span>원</span>
 											</p>
 											<p class="ea"></p>
 										</div>
 									</div>
-							</a></li>
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1765&#39;);"
-								title="메가박스 금액권(3만원권) 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-									<div class="label new">NEW</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_cp9_files/UhUaGPc8CkaIn0wdjvdz6yhunnOzYdaP_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 금액권(3만원권)</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">메가박스 금액권(3만원권)</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>30,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1766&#39;);"
-								title="메가박스 금액권(5만원권) 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-									<div class="label new">NEW</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_cp9_files/SvDPUHovAC2t5VdkHNby25qYMYGNp3tN_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 금액권(5만원권)</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">메가박스 금액권(5만원권)</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>50,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
+								</a>
+							</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<!--// store-list -->
 				</div>

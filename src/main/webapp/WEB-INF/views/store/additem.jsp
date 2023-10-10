@@ -13,27 +13,24 @@
 
 	<title></title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <!-- <script>
-	$(function() {
-		// JavaScript with jQuery
-		$('#additem').click(function() {
-		    // AJAX 요청
-		    $.ajax({
-		        url: 'additempro', // 서버의 URL을 입력하세요.
-		        data: {
-		            'itemName': itemName,
-		            'itemPrice': itemPrice
-		        },
-		        success: function(response) {
-		            console.log('상품 등록 성공');
-		        },
-		        error: function() {
-		            console.log('상품 등록 실패');
-		        }
-		    });
-		});
-	});
-</script> -->
+<script>
+$(document).ready(function() {
+    $("#additem").click(function(e) {
+        e.preventDefault(); // 버튼의 기본 동작을 막습니다.
+        
+        // 선택된 값을 가져옵니다.
+        var selectedValue = $("#quality").val();
+        
+        // 폼 데이터에 선택된 값을 추가합니다.
+        $("#quality").attr("name", "ITEM_MENU"); // 선택된 값의 이름을 폼 요소의 name 속성으로 설정합니다.
+        $("#quality").val(selectedValue); // 선택된 값을 폼 요소의 값으로 설정합니다.
+
+        // 폼을 서버로 제출합니다.
+        document.additemform.submit();
+    });
+});
+</script> 
+
 </head>
 <body>
 	<!-- sidebar -->
@@ -79,13 +76,13 @@
 									</div>
 									
 									<div class="col-12 col-sm-6 col-lg-3">
-										<select class="js-example-basic-single" id="quality">
+										<select class="js-example-basic-single" id="quality" name="ITEM_MENU">
 											<option value="ticket">ticket</option>
 											<option value="snack">snack</option>
 											<option value="voucher">voucher</option>
 											<option value="point">point</option>
-										</select>
-									</div>
+										</select> 
+									</div> 
 									
 									<div class="col-12 col-sm-6 col-lg-3">
 										<input type="text" class="form__input" placeholder="가격" name="ITEM_PRICE">
@@ -111,14 +108,15 @@
 							<div class="col-lg-1.5">
    	 							<div class="row row--form">
  	      							<div class="col-12">
-            							<button id="additem" type="submit" class="form__btn">상품 등록</button>
+            							<button id="additem" type="submit" id="additem"class="form__btn">상품 등록</button>
+            							
         							</div>
     							</div>
 							</div>
 							<div class="col-lg-1">
     							<div class="row row--form">
        					 			<div class="col-12">
-            							<button type="button" class="form__btn" onClick="history.go(-1)">취소</button>
+            							<button type="button" class="form__btn" onClick="location.href='itemlist'">취소</button>
         							</div>
     							</div>
 							</div>

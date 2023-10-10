@@ -14,15 +14,17 @@ import com.hta.movieplus.domain.StoreVO;
 @Mapper
 public interface StoreMapper {
 	
-	public StoreVO seleteitem(int itemCode);
+	public StoreVO seleteItem(int ITEM_CODE);
 	
 	public int insertItem(StoreVO StoreVO);
 	
 	public int updateItem(StoreVO modifyitem);
 	
-	public void deleteItem(int itemCode);
+	public void deleteItem(int ITEM_CODE);
 	
 	public List<StoreVO> getItemList(HashMap<String, Integer> map);
+	
+	public List<StoreVO> getItemListByKind(String iTEM_MENU);
 
 	public int getItemListCount();
 

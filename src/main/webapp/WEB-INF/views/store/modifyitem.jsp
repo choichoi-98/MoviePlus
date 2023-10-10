@@ -12,6 +12,7 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <body>
@@ -33,7 +34,9 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form">
+					<form action="modifyitempro" method="post" class="form" enctype="multipart/form-data"
+						  name="modifyitemform">
+					<input type="hidden" name="${_csrf.parameterName}" value = "${_csrf.token}">
 						<div class="row row--form">
 							<div class="col-12 col-md-5 form__cover">
 								<div class="row row--form">
@@ -50,7 +53,7 @@
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									<div class="col-12">
-										<input type="text" class="form__input" value="${get1item.ITEM_NAME}" placeholder="상품 이름">
+										<input type="text" class="form__input" value="${get1item.ITEM_NAME}" placeholder="상품 이름" name="ITEM_NAME">
 									</div>
 
 									<div class="col-12">
@@ -67,7 +70,7 @@
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" value="${get1item.ITEM_PRICE}" placeholder="가격">
+										<input type="text" class="form__input" value="${get1item.ITEM_PRICE}" placeholder="가격" name="ITEM_PRICE">
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
@@ -75,7 +78,7 @@
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드">
+										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드" name="ITEM_CODE">
 									</div>
 
 									<div class="col-12">
@@ -90,14 +93,14 @@
 							<div class="col-lg-1.5">
    	 							<div class="row row--form">
  	      							<div class="col-12">
-            							<button type="button" class="form__btn">상품 수정</button>
+            							<button type="submit" class="form__btn" onClick="location.href='itemlist'">상품 수정</button>
         							</div>
     							</div>
 							</div>
 							<div class="col-lg-1">
     							<div class="row row--form">
        					 			<div class="col-12">
-            							<button type="button" class="form__btn" onClick="history.go(-1)">취소</button>
+            							<button type="button" class="form__btn" onClick="location.href='itemlist'">취소</button>
         							</div>
     							</div>
 							</div>
