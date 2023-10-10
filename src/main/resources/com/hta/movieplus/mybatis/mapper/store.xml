@@ -4,8 +4,8 @@
 <mapper namespace="com.hta.movieplus.mybatis.mapper.StoreMapper">
 
 	<insert id="insertItem" parameterType="StoreVO">
-		insert into STORE_ITEM(ITEM_CODE, ITEM_NAME, ITEM_PRICE)
-		values(#{ITEM_CODE}, #{ITEM_NAME}, #{ITEM_PRICE})	
+		insert into STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
+		values(#{ITEM_CODE}, #{ITEM_MENU}, #{ITEM_NAME}, #{ITEM_PRICE})	
 	</insert>
 	
 	<select id="getItemListCount" resultType="int">
@@ -24,12 +24,15 @@
 		where rnum &gt;=#{start} and rnum &lt;=#{end}
 	</select>
 	
+	<select id="getItemListByKind" parameterType="StoreVO" resultType="StoreVO">
+		select * from STORE_ITEM
+		where ITEM_MENU = #{ITEM_MENU}
+	</select>
+	
 	<select id="get1item" parameterType="int" resultType="StoreVO">
     	SELECT * FROM STORE_ITEM 
     	WHERE ITEM_CODE = #{ITEM_CODE}
 	</select>
-
-
 	
 	<select id="seleteItem" parameterType="StoreVO">
 		select * from STORE_ITEM

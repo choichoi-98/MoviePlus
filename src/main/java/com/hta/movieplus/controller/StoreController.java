@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,14 +83,27 @@ public class StoreController {
 		return mv;
 	}
 	
-	@GetMapping("/admin/modifyitem")
+	@RequestMapping("/admin/modifyitem")
 	public ModelAndView itemdetail(
-			@RequestParam(value = "ITEM_CODE") int ITEM_CODE,
+			@RequestParam("ITEM_CODE") int ITEM_CODE,
 			ModelAndView mv) {
 		StoreVO get1item = storeService.get1item(ITEM_CODE);
 		mv.setViewName("store/modifyitem");
 		mv.addObject("get1item", get1item);
 		return mv;
+	}
+	
+	@RequestMapping("/admin/modifyitempro")
+	public String modifyitempro(StoreVO storeVO) {
+		storeService.updateItem(storeVO);
+		return "store/modifyitem";
+	}
+	
+	@PostMapping("/admin/delitem")
+	@ResponseBody
+	public void delitem(
+		@RequestParam("ITEM_CODE") int ITEM_CODE) {
+		storeService.deleteItem(ITEM_CODE);
 	}
 	
 	@GetMapping("")
@@ -108,8 +122,11 @@ public class StoreController {
 	}
 	
 	@GetMapping("/cp09")
-	public String store9() {
-		return "store/store_cp09";
+	public ModelAndView store9(ModelAndView mv) {
+		List<StoreVO> voucherlist = storeService.getItemListByKind("voucher");
+		mv.setViewName("store/store_cp09");
+		mv.addObject("voucherlist", voucherlist);
+		return mv;
 	}
 	
 	@GetMapping("/cp07")
@@ -123,12 +140,6 @@ public class StoreController {
 	}
 	
 	@GetMapping("/cart")
-	public String addcart(StoreVO storeitem, ModelAndView mv, HttpServletRequest request) {
-		cartService.additem(storeitem);
-		return "store/store_cart";
-	}
-	
-	@GetMapping("/cart_prev")
 	public ModelAndView cart(ModelAndView mv) {
 		mv.setViewName("store/store_cart");
 		return mv;
