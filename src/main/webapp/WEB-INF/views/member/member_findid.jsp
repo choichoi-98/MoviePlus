@@ -8,12 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>MoviePlus</title>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/megabox.min.css" media="all">
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/member_find.js"></script>
 </head>
-
 
 <body class="bg-member">
     <div class="body-wrap">
@@ -21,26 +19,22 @@
 <!-- 알림 모달창 -->
 <div class="normalStyle" style="display:none;position:fixed;top:0;left:0;background:#000;opacity:0.7;text-indent:-9999px;width:100%;height:100%;z-index:100;">닫기</div>
 
-<div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
+<div class="alertStyle" style="display:none; position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
 
-<section class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 1;" id="layerId_011398976259940152">
+<section class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 1; display:none;">
 	<div class="wrap">
 		<header class="layer-header">
 			<h3 class="tit">알림</h3>
 		</header>
-		<div class="layer-con" style="height:250px"><p class="txt-common">회원님의 아이디는 [jeesun**] 입니다.</p>
+		<div class="layer-con" style="height:250px"><p class="txt-common">회원님의 아이디는 <span id="findIdresult"></span> 입니다.</p>
 			<div class="btn-group">
 				<button type="button" class="button lyclose" style="display: none;"></button>
-				<button type="button" class="button purple confirm">확인</button>
+				<button id="alertclose" type="button" class="button purple confirm">확인</button>
 			</div>
 		</div>
 		<button type="button" class="btn-layer-close">레이어 닫기</button>
 	</div>
 </section>
-
-<div class="wrap"><header class="layer-header"><h3 class="tit">알림</h3></header><div class="layer-con" style="height:250px"><p class="txt-common">회원님의 아이디는 [jeesun**] 입니다.<br>가입일 : 2023-09-16</p><div class="btn-group"><button type="button" class="button lyclose" style="display: none;"></button><button type="button" class="button purple confirm">확인</button></div></div><button type="button" class="btn-layer-close">레이어 닫기</button></div>
-</section>
-
 
 
 
@@ -69,6 +63,7 @@
 
 				<div class="table-wrap">
 				   <form action="${pageContext.request.contextPath}/member/findidProcess" id="findIdform" method="post">
+					 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<table class="board-form">
 						<caption>이름, 생년월일, 휴대폰 번호 항목을 가진 아이디 찾기 입력 표<!--이름, 생년월일, 휴대폰 번호 항목을 가진 아이디 찾기 입력 표--></caption>
 						<colgroup>
@@ -79,34 +74,34 @@
 							<tr>
 								<th scope="row"><label for="findIdName">이름<!--이름--></label></th>
 								<td>
-									<input name="MEMBER_NAME" id="findIdName" maxlength="20" type="text" placeholder="이름" class="input-text w230px" wfd-id="id3"><!--이름-->
+									<input name="MEMBER_NAME" id="findIdName" maxlength="20" type="text" placeholder="이름" class="input-text w230px"><!--이름-->
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="findIdBirth">생년월일<!--생년월일--></label></th>
 								<td>
-									<input name="MEMBER_BIRTH" id="findIdBirth" maxlength="8" type="text" placeholder="생년월일 앞8자리" class="input-text w230px" wfd-id="id4"><!--생년월일 8자리-->
+									<input name="MEMBER_BIRTH" id="findIdBirth" maxlength="8" type="text" placeholder="생년월일 앞8자리" class="input-text w230px" ><!--생년월일 8자리-->
 									<div id="schIdBirthDe-error-text" class="alert"></div>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="findIdPhoneno">휴대폰 번호<!--휴대폰 번호--></label></th>
 								<td>
-									<input name="MEMBER_PHONENO" id="findIdPhoneno" maxlength="11" type="text" placeholder="&#39;-&#39; 없이 입력" class="input-text w230px" wfd-id="id5"><!--'-' 없이 입력-->
+									<input name="MEMBER_PHONENO" id="findIdPhoneno" maxlength="11" type="text" placeholder="&#39;-&#39; 없이 입력" class="input-text w230px"><!--'-' 없이 입력-->
 									<div id="schIdMblpNo-error-text" class="alert"></div>
 								</td>
 							</tr>
 						 </tbody>
 					</table>
-				  </form>	
-				</div>
+				   <div class="mt20 font-size-14">
+				   </div>
+	
+				   <div class="btn-member-bottom v1" style="border-bottom: 0px;">
+						<button id="btnSchId" type="submit" class="button purple large">아이디 찾기<!--아이디 찾기--></button>
+				   </div>
+			     </form>	
+		     </div>
 
-				<div class="mt20 font-size-14">
-				</div>
-
-				<div class="btn-member-bottom v1" style="border-bottom: 0px;">
-					<button id="btnSchId" type="button" class="button purple large" disabled="disabled">아이디 찾기<!--아이디 찾기--></button>
-				</div>
 
 			</div>
 			<!--// col -->
@@ -115,5 +110,9 @@
 	</div>
 	<!--// member-wrap -->
   </div>
+  
+ <script>
+
+</script> 
 </body>
 </html>

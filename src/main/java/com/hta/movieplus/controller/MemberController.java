@@ -50,6 +50,12 @@ public class MemberController {
 		return "member/member_join_step1";
 	}
 	
+	//test 폼 이동
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 	//회원가입 step1 인증메일 보내기
 	@GetMapping("/sendEmail")
 	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, ModelAndView mv, HttpSession session) throws Exception {
@@ -126,21 +132,17 @@ public class MemberController {
 	}
 	
 	//아이디 찾기 처리
+	@ResponseBody
 	@PostMapping("/findidProcess")
-	public ModelAndView findidProcess(@RequestParam("MEMBER_ID") String MEMBER_ID,
-									  @RequestParam("MEMBER_BIRTH") String MEMBER_BIRTH,
-									  @RequestParam("MEMBER_PHONENO") String MEMBER_PHONENO,
-									  ModelAndView mv, HttpServletRequest request) {
-		Member m = memberservice.findId(MEMBER_ID, MEMBER_ID, MEMBER_ID);
-		
-		if(m!=null) {
-			mv.addObject("MEMBERINFO2", m);
-		} else {
-			mv.addObject("url", request.getRequestURL());
-			mv.addObject("message", "해당 정보가 없습니다.");
-			mv.setViewName("/member/findid");
-		}
-		return mv;
+	public Member findidProcess(@RequestParam("name") String MEMBER_NAME,
+	                            @RequestParam("birth") String MEMBER_BIRTH,
+	                            @RequestParam("phoneNo") String MEMBER_PHONENO
+	                            ) {
+	    
+	    Member member = memberservice.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
+	    
+	    return member;
+	    	
 	}
 	
 	

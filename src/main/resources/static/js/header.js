@@ -142,14 +142,45 @@ $(document).ready(function(){
         $('body').removeClass('no-scroll');
     }
     
+    
+    $("#loginfailok").click(function(){
+		closeAlertPopup();
+	})
+    
     /*
-    var loginfailMsg = "${loginfail}"; 
-    if( loginfailMsg == 'loginFailMsg'){
+    //로그인 실패
+  	$("#btnLogin").on(function(event){
+		event.preventDefault();
+		
+		const id = $('#LoginId').val();
+		const pass = $('#LoginPass').val();
+		
+		$.ajax({
+			url : "loginProcess",
+			type: "POST",
+			data: { MEMBER_ID: id, MEMBER_PASS: pass},
+			success: function(response) {
+	            // 로그인 성공 처리
+	            console.log("로그인 성공")
+       		 },
+			error : function(resp){
+				 if (resp.responseText.includes('loginFailMsg')){
+					openAlertPopup();
+					console.log("아이디와 비밀번호가 일치하지 않는 경우");
+				}
+			}	
+		})//ajax end
+	})
+    */
+    
+    /*
+    var loginfail = "${loginfail}"; 
+    if( loginfail === 'loginFailMsg'){
 		openAlertPopup();
 	}
 	*/
 	
-	
+	/*
 	$("#btnLogin").submit(function(event){
 		event.preventDefault();
 		
@@ -172,6 +203,7 @@ $(document).ready(function(){
 			}	
 		})//ajax end
 	})
+	*/
 	
 	/*
 	//로그인 확인 - 실패 시 알림창
@@ -211,9 +243,7 @@ $(document).ready(function(){
 	})
 	*/
 	
-	$("#loginfailok").click(function(){
-		closeAlertPopup();
-	})
+	
 	
 	
 });

@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="findId" resultType="member" parameterType="String">
-		select MEMBER_NAME, MEMBER_ID
+		select *
 		from MEMBER
 		WHERE MEMBER_NAME = #{MEMBER_NAME} 
 		AND MEMBER_BIRTH = #{MEMBER_BIRTH}

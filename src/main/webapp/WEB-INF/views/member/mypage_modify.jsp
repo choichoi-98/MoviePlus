@@ -75,6 +75,8 @@
 
 <!-- 컨텐츠 영역 -->
 <div id="contents"  class="">
+  <form id="modifyinfoform" action="" method="post">
+   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	  <h2 class="tit">개인정보 수정</h2>
 
         <ul class="dot-list mb10">
@@ -93,14 +95,11 @@
                           <th scope="row">프로필 사진</th>
                           <td>
                               <div class="profile-photo">
-                                  <form name="fileForm">
                                       <input type="file" id="profileTarget" name="file" style="display: none;">
-                                      
-                                  </form>
 
                                       
                                   <div class="profile-img">
-                                      <img src="./modify2_files/FkxX5WniUf1bRPiiKG9eZpHe5W4ZGvIo_640.png" alt="프로필 사진">
+                                      <img src="${pageContext.request.contextPath}/resources/image/member/profile1.png" alt="프로필 사진">
                                   </div>
 
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn">이미지 삭제</button>
@@ -127,14 +126,11 @@
               </div>
           </div>
 
-          <form name="mbInfoForm">
-              <input type="hidden" name="mbNo" value="14300923">
-              
-              <input type="hidden" name="phoneNo" value="010-7478-7481">
-              <input type="hidden" name="zipcd" value="">
-              <input type="hidden" name="mbAddr" value="">
-              <input type="hidden" name="mbProfilFileNo" value="1174805">
-              <input type="hidden" id="mbByymmdd" value="19940810">
+              <input type="hidden" name="MEMBER_ID" value="">
+              <input type="hidden" name="MEMBER_NAME" value="">
+              <input type="hidden" name="MEMBER_PHONENO" value="">
+              <input type="hidden" name="MEMBER_EMAIL" value="">
+              <input type="hidden" name="MEMBER_BIRTH" value="">
 
               <div class="table-wrap mb40">
                   <table class="board-form">
@@ -150,8 +146,6 @@
                               </th>
                               <td>
                                   <span class="mbNmClass">${memberInfo.MEMBER_NAME}</span>
-                                  <a href="https://www.megabox.co.kr/mypage/userinfo#layer_name" class="button small gray-line ml10 mr10 btn-modal-open" w-data="600" h-data="350" title="이름변경">이름변경</a>
-                                  ※ 개명으로 이름이 변경된 경우, 회원정보의 이름을 변경하실 수 있습니다.
 
                                   <section id="layer_name" class="modal-layer"><a href="${pageContext.request.contextPath}/member/mypage" class="focus">레이어로 포커스 이동 됨</a>
                                       <div class="wrap">
@@ -189,17 +183,25 @@
                                 <span id="birth">${memberInfo.MEMBER_BIRTH}</span>
                               </td>
                           </tr>
+                           <tr>
+                              <th scope="row">
+                                 <label for="num">휴대폰</label> <em class="font-orange">*</em>
+                              </th>
+                              <td>
+                                  <input type="text" id="phoneNo" class="input-text w500px" value="${memberInfo.MEMBER_PHONENO}">
+                              </td>
+                          </tr>
                           <tr>
                               <th scope="row">
-                                  <label for="num">휴대폰</label> <em class="font-orange">*</em>
+                                   <label for="email">이메일</label> <em class="font-orange">*</em>
                               </th>
                               <td>
                                   <div class="clearfix">
                                       <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">
-                                          <span id="phoneNo">${memberInfo.MEMBER_PHONENO}</span> <!-- 010-1234-5678 형식으로 바꾸기 -->
+                                       <span id="email" >${memberInfo.MEMBER_EMAIL}</span> 
                                       </p>
                                       <div class="float-l">
-                                          <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
+                                          <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">이메일 변경</button>
                                       </div>
                                   </div>
 
@@ -225,18 +227,11 @@
                                   </div>
                               </td>
                           </tr>
-                          <tr>
-                              <th scope="row">
-                                  <label for="email">이메일</label> <em class="font-orange">*</em>
-                              </th>
-                              <td>
-                                  <input type="text" id="email" name="mbEmail" class="input-text w500px" value="${memberInfo.MEMBER_EMAIL}">
-                              </td>
-                          </tr>
+           
                           <tr>
                               <th scope="row">비밀번호 <em class="font-orange">*</em></th>
                               <td>
-                                  <a href="https://www.megabox.co.kr/on/oh/ohh/Mypage/userPwdChangePage.do" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a>
+                                  <a href="" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a>
                               </td>
                           </tr>
                       </tbody>
@@ -265,33 +260,13 @@
                   <tbody id="lnkgInfoTbody">
                       <tr>
                           <th scope="row" class="a-c">네이버</th>
-                          
-                              
-                              
                                   <td class="a-l">연결된 계정정보가 없습니다.</td>
                                   <td><button type="button" class="button small gray" lnkgty="NAVER" connty="conn">연동</button></td>
-                              
-                          
                       </tr>
                       <tr>
                           <th scope="row" class="a-c">카카오</th>
-                          
-                              
-                              
                                   <td class="a-l">연결된 계정정보가 없습니다.</td>
                                   <td><button type="button" class="button small gray" lnkgty="KAKAO" connty="conn">연동</button></td>
-                              
-                          
-                      </tr>
-                      <tr>
-                          <th scope="row" class="a-c">페이코</th>
-                          
-                              
-                              
-                                  <td class="a-l">연결된 계정정보가 없습니다.</td>
-                                  <td><button type="button" class="button small gray" lnkgty="PAYCO" connty="conn">연동</button></td>
-                              
-                          
                       </tr>
                   </tbody>
               </table>
@@ -313,8 +288,6 @@
                       <tr>
                           <th scope="row">가입정보</th>
 
-                          
-                              
                                   <td>
                                       <div class="clearfix">
                                           <p class="float-l reset lh32">가입된 스페셜 멤버십이 없습니다.</p>
@@ -323,19 +296,14 @@
                                           </div>
                                       </div>
                                   </td>
-                              
-                              
-                          
                       </tr>
-
-                      
                   </tbody>
               </table>
           </div>
 
           <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
-              <button class="button purple large" id="updateBtn">등록</button>
+              <button type="submit" form="modifyinfoform" class="button purple large" id="updateBtn">등록</button>
           </div>
       </div>
 <!-- contents end -->
@@ -347,3 +315,4 @@
 	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>
+
