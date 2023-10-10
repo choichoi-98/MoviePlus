@@ -43,6 +43,66 @@ $(document).ready(function(){
 	
 	
 	
+	//이메일 변경
+	let verifyemailcheck = false;
+
+	$('#EmailChgBtn').on("click",function(){
+		$('.change-phone-num-area').addClass('target on');
+	})
+	
+	$('#sendNumberBtn').click(function(){
+		$('.position').css('display','inline-block');
+		
+		var email = $('#chEmail').val();
+		const pattern = /^\w+@\w+[.]\w{3}$/;
+		
+		if(!pattern.test(email)){		//형식에 맞는 이메일 주소를 입력하지 않고 인증요청 버튼을 클릭하였을 때
+			alert('형식에 맞게 이메일 주소를 입력하세요');
+			$('#chEmail').focus();
+		} else { 	//이메일 주소를 입력하였을 때
+		
+			$.ajax({
+				url : "sendEmail",
+				data : {"email" : email},
+				success : function(data){
+					$("#chverifycode").val(data);
+					alert('인증번호가 발송되었습니다.');
+				  }, 
+				error : function(){
+	           	 	console.log();
+	            }
+			}); //ajax end
+	   }//else end	
+	})
+	
+	
+	//인증번호 확인	
+	$('#chgBtn').click( function(){
+		var checkinput = $('#chkNum').val(); //입력한 인증번호
+		
+		if(checkinput === ''){
+			alert('인증번호를 입력하세요.');
+			$('#chkNum').focus();
+			verifyemailcheck = false;
+		} else {
+			if(checkinput == $("#chverifycode").val()){
+				alert('인증에 성공하였습니다.');
+				verifyemailcheck = true;
+			  } else {
+				alert('인증에 실패하였습니다.');
+				console.log();
+				verifyemailcheck = false;
+			  }	
+		} //checkinput === '' else end	
+	})
+	
+	$("modifyinfoform").submit(function(){
+		if(verifyemailcheck = false)
+		return false;
+	})
+	
+	
+	
 	
 
 }) //ready end

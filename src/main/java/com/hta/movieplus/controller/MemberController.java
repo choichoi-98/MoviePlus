@@ -66,7 +66,7 @@ public class MemberController {
 		sendMail.SendMail(mailVO);
 		resp.getWriter().write(Integer.toString(verifycode));
 		
-		logger.info("[join1] email 값 : " + email);
+		logger.info("email 값 : " + email);
 	}
 
 	//회원가입 step2
@@ -141,6 +141,9 @@ public class MemberController {
 	    
 	    Member member = memberservice.findId(MEMBER_NAME, MEMBER_BIRTH, MEMBER_PHONENO);
 	    
+//	    if(member == null) {
+//	    	member.get
+//	    }
 	    return member;
 	    	
 	}
@@ -164,6 +167,38 @@ public class MemberController {
 	public String testpage() {
 		return "member/mypage_modify";
 	}
+	
+	
+	//개인정보 수정처리(이메일, 핸드폰번호)
+	@PostMapping("/modifyProcess")
+	public String modifyProcess(Member member, Model model, 
+								HttpServletRequest request, 
+								RedirectAttributes rattr, HttpSession session)throws Exception{
+		
+		int result = memberservice.update(member);
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
+		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+		session.setAttribute("memberInfo", memberInfo);
+		
+		
+		if(result == 1) {
+			rattr.addFlashAttribute("result","updateSuccess");
+			return "member/mypage_main";
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "정보 수정 실패");
+			return "error/error";
+		}
+		
+	}
+	
+	//마이페이지 - 비밀번호 변경
+	@GetMapping("/passchg")
+	public String passchg() {
+		return "member/mypage_passchg";
+	}
+	
 	
 	//로그아웃
 	@GetMapping("/logout")

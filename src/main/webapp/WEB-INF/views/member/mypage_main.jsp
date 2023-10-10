@@ -10,66 +10,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
-
-	<!--상단의 홈 아이콘 > 나의 무비플러스-->
-       <div class="container has-lnb">
-            <div class="page-util">
-                 <div class="inner-wrap" id="myLoaction"><div class="location">
-					<span>Home</span>
-					<a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
-				</div></div>
-	        </div>
-       <div class="inner-wrap">
-                
-
-	<!--사이드바-->
-	<div class="lnb-area">
-		<nav id="lnb">
-			<p class="tit on"><a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스">나의 무비플러스</a></p>
-
-			<ul>
-				<li class=""><a href="#" title="예매/구매내역">예매/구매내역</a></li>
-                   <li>
-                   	<a href="#" title="영화/스토어 관람권">영화/스토어 관람권</a>
-					<ul class="depth3">
-						<li><a href="#" title="영화관람권">영화관람권</a></li>
-						<li><a href="#" title="스토어 교환권">스토어 교환권</a></li>
-					</ul>
-				</li>
-				<li><a id="discountCoupon" href="#" title="무비플러스/제휴쿠폰">무비플러스/제휴쿠폰</a></li>
-				<!-- <li><a href="/on/oh/ohh/Mvtckt/GiftCardL.do">무비플러스 기프트카드</a></li> -->
-				<li>
-					<a href="#" title="멤버십 포인트">멤버십 포인트</a>
-					<ul class="depth3">
-						<li><a href="#" title="포인트 이용내역">포인트 이용내역</a></li>
-						<li><a href="#" title="멤버십 카드관리">멤버십 카드관리</a></li>
-						<li><a href="#" title="MiL.k 제휴서비스">MiL.k 포인트</a></li>
-					</ul>
-				</li>
-				<li><a href="#" titel="나의 무비스토리">나의 무비스토리</a></li>
-				<li><a href="#" title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
-				<li><a href="#" title="나의 문의내역">나의 문의내역</a></li>
-				<li><a href="#" title="자주쓰는 할인카드">자주쓰는 카드 관리</a></li>
-				<li>
-					<a href="#" title="회원정보">회원정보</a>
-					<ul class="depth3">
-						<li><a href="${pageContext.request.contextPath}/member/modifyinfo" title="개인정보 수정">개인정보 수정</a></li>
-						<li><a href="#" title="선택정보 수정">선택정보 수정</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-
-
-
-
-	<div id="myLoactionInfo" style="display: none;">
-		<div class="location">
-			<span>Home</span>
-			<a href="" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
-		</div>
-	</div>
+	<jsp:include page="/WEB-INF/views/mypage_sidebar.jsp"/>
 
 <!-- 컨텐츠 영역 -->
 <div id="contents" class="">

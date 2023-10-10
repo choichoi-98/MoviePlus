@@ -10,72 +10,11 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
-
-	<!--상단의 홈 아이콘 > 나의 무비플러스-->
-       <div class="container has-lnb">
-            <div class="page-util">
-                 <div class="inner-wrap" id="myLoaction"><div class="location">
-					<span>Home</span>
-					<a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
-				</div></div>
-	        </div>
-       <div class="inner-wrap">
-                
-
-	<!--사이드바-->
-	<div class="lnb-area">
-		<nav id="lnb">
-			<p class="tit on"><a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스">나의 무비플러스</a></p>
-
-			<ul>
-				<li class=""><a href="#" title="예매/구매내역">예매/구매내역</a></li>
-                   <li>
-                   	<a href="#" title="영화/스토어 관람권">영화/스토어 관람권</a>
-					<ul class="depth3">
-						<li><a href="#" title="영화관람권">영화관람권</a></li>
-						<li><a href="#" title="스토어 교환권">스토어 교환권</a></li>
-					</ul>
-				</li>
-				<li><a id="discountCoupon" href="#" title="무비플러스/제휴쿠폰">무비플러스/제휴쿠폰</a></li>
-				<!-- <li><a href="/on/oh/ohh/Mvtckt/GiftCardL.do">무비플러스 기프트카드</a></li> -->
-				<li>
-					<a href="#" title="멤버십 포인트">멤버십 포인트</a>
-					<ul class="depth3">
-						<li><a href="#" title="포인트 이용내역">포인트 이용내역</a></li>
-						<li><a href="#" title="멤버십 카드관리">멤버십 카드관리</a></li>
-						<li><a href="#" title="MiL.k 제휴서비스">MiL.k 포인트</a></li>
-					</ul>
-				</li>
-				<li><a href="#" titel="나의 무비스토리">나의 무비스토리</a></li>
-				<li><a href="#" title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
-				<li><a href="#" title="나의 문의내역">나의 문의내역</a></li>
-				<li><a href="#" title="자주쓰는 할인카드">자주쓰는 카드 관리</a></li>
-				<li>
-					<a href="#" title="회원정보">회원정보</a>
-					<ul class="depth3">
-						<li><a href="${pageContext.request.contextPath}/member/modifyinfo" title="개인정보 수정">개인정보 수정</a></li>
-						<li><a href="#" title="선택정보 수정">선택정보 수정</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-
-
-
-
-	<div id="myLoactionInfo" style="display: none;">
-		<div class="location">
-			<span>Home</span>
-			<a href="${pageContext.request.contextPath}/member/mypage" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
-			<a href="" title="회원정보 페이지로 이동">회원정보</a>
-        	<a class="no-link">개인정보 수정</a>
-		</div>
-	</div>
+	<jsp:include page="/WEB-INF/views/mypage_sidebar.jsp"/>
 
 <!-- 컨텐츠 영역 -->
 <div id="contents"  class="">
-  <form id="modifyinfoform" action="" method="post">
+  <form id="modifyinfoform" action="${pageContext.request.contextPath}/member/modifyProcess" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	  <h2 class="tit">개인정보 수정</h2>
 
@@ -126,11 +65,7 @@
               </div>
           </div>
 
-              <input type="hidden" name="MEMBER_ID" value="">
-              <input type="hidden" name="MEMBER_NAME" value="">
-              <input type="hidden" name="MEMBER_PHONENO" value="">
-              <input type="hidden" name="MEMBER_EMAIL" value="">
-              <input type="hidden" name="MEMBER_BIRTH" value="">
+              <input type="hidden" name="MEMBER_ID" value="${memberInfo.MEMBER_ID}">
 
               <div class="table-wrap mb40">
                   <table class="board-form">
@@ -188,7 +123,7 @@
                                  <label for="num">휴대폰</label> <em class="font-orange">*</em>
                               </th>
                               <td>
-                                  <input type="text" id="phoneNo" class="input-text w500px" value="${memberInfo.MEMBER_PHONENO}">
+                                  <input type="text" name="MEMBER_PHONENO" id="phoneNo" class="input-text w500px" value="${memberInfo.MEMBER_PHONENO}" maxLength="11" placeholder="&#39;-&#39;제외하고 입력해 주세요">
                               </td>
                           </tr>
                           <tr>
@@ -197,28 +132,28 @@
                               </th>
                               <td>
                                   <div class="clearfix">
-                                      <p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">
+                                      <p class="reset float-l w170px lh32 changeVal" data-name="Email">
                                        <span id="email" >${memberInfo.MEMBER_EMAIL}</span> 
                                       </p>
                                       <div class="float-l">
-                                          <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">이메일 변경</button>
+                                          <button type="button" class="button small gray-line change-phone-num" id="EmailChgBtn" title="이메일 변경">이메일 변경</button>
                                       </div>
                                   </div>
 
                                   <div class="change-phone-num-area">
                                       <div class="position">
-                                          <label for="chPhone" class="label">변경할 휴대폰</label>
-                                          <input type="text" id="chPhone" class="input-text w160px numType" placeholder="&#39;-&#39;없이 입력해 주세요" title="변경할 휴대폰 번호 입력" maxlength="11">
+                                          <label for="chPhone" class="label">변경할 이메일</label>
+                                          <input type="text" name="MEMBER_EMAIL" value="${memberInfo.MEMBER_EMAIL}" id="chEmail" class="input-text w180px" placeholder="&#39;@&#39;포함하여 입력해 주세요" title="변경할 이메일 입력" style="width:220px; !important" >
                                           <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
+                                      	  <input type="hidden" class="verifycode" id="chverifycode" name="chverifycode" />
                                       </div>
 
                                       <div class="position" style="display: none;">
                                           <label for="chkNum" class="label">인증번호 입력</label>
-
+										
                                           <div class="chk-num small">
                                               <div class="line">
-                                                  <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4">
-
+                                                  <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="6">
                                                   <div class="time-limit" id="timeLimit">3:00</div>
                                               </div>
                                           </div>
@@ -231,7 +166,7 @@
                           <tr>
                               <th scope="row">비밀번호 <em class="font-orange">*</em></th>
                               <td>
-                                  <a href="" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a>
+                                  <a href="${pageContext.request.contextPath}/member/passchg" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a>
                               </td>
                           </tr>
                       </tbody>

@@ -37,5 +37,12 @@
 		where MEMBER_ID = #{MEMBER_ID}
 	</delete>
 	
-
+	<update id="update" parameterType="member">
+		update MEMBER
+		set    MEMBER_PHONENO = #{MEMBER_PHONENO} 
+		       , MEMBER_EMAIL = #{MEMBER_EMAIL}
+		where  MEMBER_ID = #{MEMBER_ID}
+	</update>
+	
+	
 </mapper>
