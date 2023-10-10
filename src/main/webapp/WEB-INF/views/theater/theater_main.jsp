@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,164 +36,28 @@
 				<div class="theater-box" style="height: 292px;">
 					<div class="theater-place">
 						<ul>
-
-							<li class="on">
-								<button type="button" class="sel-city">서울</button>
-
-								<div class="theater-list">
-									<ul>
-										<li data-brch-no="1372"><a href="detail" title="강남 상세보기">강남</a>
-
-										</li>
-
-										<li data-brch-no="0023"><a href="#" title="강남대로(씨티) 상세보기">강남대로(씨티)</a>
-
-
-										</li>
-
-										<li data-brch-no="1431"><a href="#" title="군자 상세보기">군자</a>
-
-
-										</li>
-
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">경기</button>
+							<c:forEach var="location" items="${locationList}" varStatus="status">
+							<c:choose>
+								<c:when test="${status.index == 0}">							
+									<li class="on">
+								</c:when>
+								<c:otherwise>
+									<li class="">
+								</c:otherwise>
+							</c:choose>
+								<button type="button" class="sel-city">${location.value}</button>
 
 								<div class="theater-list">
 									<ul>
-
-
-										<li data-brch-no="4131"><a
-											href="#"
-											title="파주출판도시 상세보기">파주출판도시</a></li>
-
-										<li data-brch-no="4651"><a
-											href="#"
-											title="하남스타필드 상세보기">하남스타필드</a></li>
-
+										<c:forEach var="theater" items="${theaterList}">
+											<c:if test="${location.value eq theater.THEATER_LOCATION }">
+												<li><a href="detail?theaterId=${theater.THEATER_ID}" title="${theater.THEATER_NAME} 상세보기">${theater.THEATER_NAME}</a></li>
+											</c:if>
+										</c:forEach>
 									</ul>
 								</div>
 							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">인천</button>
-
-								<div class="theater-list">
-									<ul>
-
-										<li data-brch-no="4041"><a
-											href="#"
-											title="검단 상세보기">검단</a></li>
-
-										<li data-brch-no="4062"><a
-											href="#"
-											title="송도 상세보기">송도</a></li>
-
-
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">대전/충청/세종</button>
-
-								<div class="theater-list">
-									<ul>
-
-										<li data-brch-no="3141"><a
-											href="#"
-											title="공주 상세보기">공주</a></li>
-
-										<li data-brch-no="0018"><a
-											href="#"
-											title="논산 상세보기">논산</a></li>
-
-										<li data-brch-no="3021"><a
-											href="#"
-											title="대전 상세보기">대전</a></li>
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">부산/대구/경상</button>
-
-								<div class="theater-list">
-									<ul>
-
-
-										<li data-brch-no="0038"><a
-											href="#"
-											title="포항 상세보기">포항</a></li>
-
-										<li data-brch-no="0046"><a
-											href="#"
-											title="해운대(장산) 상세보기">해운대(장산)</a></li>
-
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">광주/전라</button>
-
-								<div class="theater-list">
-									<ul>
-
-
-										<li data-brch-no="5612"><a
-											href="#"
-											title="전주송천 상세보기">전주송천</a></li>
-
-										<li data-brch-no="0021"><a
-											href="#"
-											title="전주혁신 상세보기">전주혁신</a></li>
-
-										<li data-brch-no="5064"><a
-											href="#"
-											title="첨단 상세보기">첨단</a></li>
-
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">강원</button>
-
-								<div class="theater-list">
-									<ul>
-
-
-										<li data-brch-no="2202"><a
-											href="#"
-											title="원주센트럴 상세보기">원주센트럴</a></li>
-
-										<li data-brch-no="0037"><a
-											href="#"
-											title="춘천석사 상세보기">춘천석사</a></li>
-
-									</ul>
-								</div>
-							</li>
-
-							<li class="">
-								<button type="button" class="sel-city">제주</button>
-
-								<div class="theater-list">
-									<ul>
-
-										<li data-brch-no="0054"><a
-											href="#"
-											title="제주서귀포 상세보기">제주서귀포</a></li>
-
-									</ul>
-								</div>
-							</li>
-
+							</c:forEach>
 						</ul>
 					</div>
 

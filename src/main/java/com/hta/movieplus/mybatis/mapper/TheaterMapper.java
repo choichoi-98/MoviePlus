@@ -33,6 +33,8 @@ public interface TheaterMapper {
 
 	public void deleteMemberById(String theater_MANAGER_ID);
 
+	public List<Theater> getAllTheaterList();
+
 
 	
 }

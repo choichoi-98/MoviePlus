@@ -12,6 +12,15 @@
 									FROM THEATER_ROOM
 									WHERE THEATER_ID = #{theaterId} )
 		AND THEATER_SCHEDULE_DATE = #{todayDate}
+		ORDER BY THEATER_SCHEDULE_START
+	</select>
+	
+	<select id="getScheduleListByTheaterRoomId" parameterType="theaterSchedule" resultType="theaterSchedule">
+		SELECT *
+		FROM THEATER_SCHEDULE
+		WHERE THEATER_ROOM_ID = #{THEATER_ROOM_ID}
+		AND THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		ORDER BY THEATER_SCHEDULE_START 
 	</select>
 	
 	<select id="getOpenMovieList" resultType="movie">
@@ -31,4 +40,27 @@
 		FROM MOVIE
 		WHERE MOVIE_CODE = #{MOVIE_CODE}
 	</select>
+	
+	<delete id="deleteScheduleById" parameterType="int">
+		DELETE
+		FROM THEATER_SCHEDULE
+		WHERE THEATER_SCHEDULE_ID = #{theaterId}
+	</delete>
+	
+	<select id="getScheduleById" resultType="theaterSchedule" parameterType="int">
+		SELECT TS.*, TR.THEATER_ROOM_NAME, M.MOVIE_TITLE
+		FROM THEATER_SCHEDULE TS
+		JOIN THEATER_ROOM TR
+		ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		JOIN MOVIE M
+		ON TS.MOVIE_CODE = M.MOVIE_CODE
+		WHERE TS.THEATER_SCHEDULE_ID = #{theaterId}
+	</select>
+	
+	<update id ="updateSchedule" parameterType="theaterSchedule">
+		UPDATE THEATER_SCHEDULE
+		SET MOVIE_CODE = #{MOVIE_CODE}, THEATER_SCHEDULE_TYPE = #{THEATER_SCHEDULE_TYPE}, THEATER_SCHEDULE_START = #{THEATER_SCHEDULE_START}
+		WHERE THEATER_SCHEDULE_ID = #{THEATER_SCHEDULE_ID}
+	</update>
+	
 </mapper>

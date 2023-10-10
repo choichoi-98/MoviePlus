@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,103 +40,21 @@
 				<div class="theater-area-list">
 					<ul class="area-depth1">
 
+						<c:forEach var="location" items="${locationList}">
+							<li class=""><a href="#" class="depth1" title="${location.value} 선택">${location.value}</a>
+								<div class="area-depth2">
+									<ul>
+										<c:forEach var="theater" items="${theaterList}">
+											<c:if test="${location.value eq theater.THEATER_LOCATION }">
+												<li class=""><a href="detail?theaterId=${theater.THEATER_ID}" title="${theater.THEATER_NAME} 상세보기">${theater.THEATER_NAME}</a></li>
+											</c:if>
+										</c:forEach>
+										
+									</ul>
+								</div>
+							</li>
+						</c:forEach>
 
-						<li class=""><a href="#" class="depth1" title="서울 선택">서울</a>
-							<div class="area-depth2">
-								<ul>
-									<li class="on"><a href="#" title="강남 상세보기">강남 </a></li>
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="경기 선택">경기</a>
-							<div class="area-depth2">
-								<ul>
-									<li><a href="#" title="고양스타필드 상세보기">고양스타필드 </a></li>
-
-									<li><a href="#" title="광명AK플라자 상세보기">광명AK플라자 </a></li>
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="인천 선택">인천</a>
-							<div class="area-depth2">
-								<ul>
-
-									<li><a href="#" title="검단 상세보기">검단 </a></li>
-
-									<li><a href="#" title="송도 상세보기">송도 </a></li>
-
-
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="대전/충청/세종 선택">대전/충청/세종</a>
-							<div class="area-depth2">
-								<ul>
-
-									<li><a href="#" title="공주 상세보기">공주 </a></li>
-
-									<li><a href="#" title="논산 상세보기">논산 </a></li>
-
-
-
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="부산/대구/경상 선택">부산/대구/경상</a>
-							<div class="area-depth2">
-								<ul>
-									<li><a href="#" title="경북도청 상세보기">경북도청 </a></li>
-
-									<li><a href="#" title="경산하양 상세보기">경산하양 </a></li>
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="광주/전라 선택">광주/전라</a>
-							<div class="area-depth2">
-								<ul>
-
-									<li><a href="#" title="광주상무 상세보기">광주상무 </a></li>
-
-									<li><a href="#" title="광주하남 상세보기">광주하남 </a></li>
-
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="강원 선택">강원</a>
-							<div class="area-depth2">
-								<ul>
-
-									<li><a href="#" title="남춘천 상세보기">남춘천 </a></li>
-
-									<li><a href="#" title="속초 상세보기">속초 </a></li>
-
-
-								</ul>
-							</div></li>
-
-
-						<li class=""><a href="#" class="depth1" title="제주 선택">제주</a>
-							<div class="area-depth2">
-								<ul>
-
-									<li><a href="#" title="제주서귀포 상세보기">제주서귀포 <i
-											class="iconset ico-theater-new"></i>
-
-
-
-
-
-
-									</a></li>
-
-								</ul>
-							</div></li>
 
 					</ul>
 				</div>

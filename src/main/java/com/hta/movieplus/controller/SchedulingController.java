@@ -83,5 +83,27 @@ public class SchedulingController {
 	public int addSchedule(TheaterSchedule schedule) {
 		return schedulingService.addSchedule(schedule);
 	}
+	
+	@ResponseBody
+	@PostMapping("/manager/deleteSchedule")
+	public int deleteSchedule(@RequestParam(value="scheduleId", required=true) int scheduleId) {
+		
+		return schedulingService.deleteSchedule(scheduleId);
+	}
+	
+	@ResponseBody
+	@PostMapping("/manager/getSchedule")
+	public TheaterSchedule getSchedule(@RequestParam(value="scheduleId", required=true) int scheduleId) {
+		
+		return schedulingService.getSchedule(scheduleId);
+	}
+	
+	@ResponseBody
+	@PostMapping("/manager/updateSchedule")
+	public int updateSchedule(TheaterSchedule schedule) {
+		
+		return schedulingService.updateSchedule(schedule);
+	}
+	
 
 }

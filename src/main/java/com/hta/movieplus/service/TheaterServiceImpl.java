@@ -161,4 +161,11 @@ public class TheaterServiceImpl implements TheaterService {
 		mapper.resetManagerPasswordById(dataMap);
 	}
 
+	@Override
+	public List<Theater> getAllTheaterList() {
+		// TODO Auto-generated method stub
+		
+		return mapper.getAllTheaterList();
+	}
+
 }

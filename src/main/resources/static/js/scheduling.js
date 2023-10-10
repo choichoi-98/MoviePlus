@@ -10,6 +10,8 @@ $(document).ready(function(){
 	let movie_title;
 	let movie_code;
 
+	let selected_schedule_id;
+
 	
 
 	getScheduleList(); // 리스트 불러오기
@@ -46,10 +48,13 @@ $(document).ready(function(){
 		movie_title = $(this).text();
 		movie_code = $(this).prev().text();
 
+		$('.modal-movie-code').val(movie_code);
+
 		$('#modal-movie-title').val(movie_title);
+		$('#update-modal-movie-title').val(movie_title);
 	})
 
-	$('#modal-keyword').keypress(function (){ 
+	$('.modal-keyword').keypress(function (){ 
 		getOpenMoiveList();
 	});
 
@@ -58,6 +63,25 @@ $(document).ready(function(){
 			
 	})
 
+	$('.main__table').on('click', '.main__table-btn--edit', function() { // 모달 수정 시작 버튼
+		selected_schedule_id = $(this).parent().find('#selected-schedule-id').val();
+		getOpenMoiveList();
+
+		getSchedule();
+	})
+
+	$('#update-schedule-modal-btn').click(function() { // 모달 수정 확인 버튼
+		updateSchedule();
+	})
+
+	$('.main__table').on('click', '.main__table-btn--delete', function() { // 삭제 시작 버튼
+		selected_schedule_id = $(this).parent().find('#selected-schedule-id').val();
+	})
+
+	$('#delete-schedule-modal-btn').click(function() { // 모달 삭제 확인 버튼
+		deleteSchedule();	
+	})
+	
 
 
 
@@ -90,7 +114,7 @@ function getScheduleList() { // 스케줄 전체 목록
 							output += '<td><div class="main__table-text"><a href="#">'+item.movie_TITLE+'</a></div></td>';
 							output += '<td><div class="main__table-text main__table-text--rate">1/250</div></td>';
 							output += '<td><div class="main__table-text">'+item.theater_SCHEDULE_START+' ~ '+item.theater_SCHEDULE_END +'</div></td>';
-							output += '<td><div class="main__table-btns"><a href="#" class="main__table-btn main__table-btn--edit"> <i class="icon ion-ios-create"></i></a>';
+							output += '<td><div class="main__table-btns"><input type="hidden" id="selected-schedule-id" value='+item.theater_SCHEDULE_ID+'><input type="hidden" id="selected-schedule-id" value='+item.theater_R+'><a href="#modal-update" class="main__table-btn main__table-btn--edit open-modal"> <i class="icon ion-ios-create"></i></a>';
 							output += '<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal"><i class="icon ion-ios-trash"></i></a>';
 							output += '</div></td></tr>'
 
@@ -134,10 +158,10 @@ function getScheduleList() { // 스케줄 전체 목록
 
 
 function getOpenMoiveList() {
-	$('#movieListAllTable').empty();
+	$('.movieListAllTable').empty();
 
 
-	var keyword = $('#modal-keyword').val();
+	var keyword = $('.modal-keyword').val();
 	const getMovie_data = {
 		keyword: keyword
 	}
@@ -154,7 +178,7 @@ function getOpenMoiveList() {
 			if(data.length > 0){
 				$(data).each(function(index, item) {
 					movieItem = '<tr style="color: white;"><td>'+item.movie_Code+'</td><td class="modal-movie-select"><a href="#">'+item.movie_Title+'</a></td></tr>';
-					$('#movieListAllTable').append(movieItem);
+					$('.movieListAllTable').append(movieItem);
 				})
 			}
 			
@@ -172,13 +196,12 @@ function addSchedule() {
 		THEATER_SCHEDULE_DATE : todayDate,
 		THEATER_ROOM_NAME : theater_room_name,
 		THEATER_ROOM_ID : Number(roomId),
-		MOVIE_CODE : Number(movie_code),
+		MOVIE_CODE : $('#modal-movie-code').val(),
 		MOVIE_TITLE : movie_title,
 		THEATER_SCHEDULE_START : $('#movie-start').val(),
 		THEATER_SCHEDULE_TYPE : $('input[name=jojosimya]:checked').val()
 	}
 
-	console.log(schedule_data);
 
 	$.ajax({
 		type : "POST",
@@ -189,8 +212,13 @@ function addSchedule() {
 			xhr.setRequestHeader(header, token);
 		},
 		success: function(data) {
-			getScheduleList();
-			$('.modal__btn--dismiss').click();
+			if(data > 0) {
+				getScheduleList();
+				$('.modal__btn--dismiss').click();
+			}else {
+				$('#text-container').empty().append("<span style='color:red'>중복된 시간 설정입니다.</span>");
+			}
+			
 		},
 		error: function() {
 			$('#text-container').empty().append("<span style='color:red'>빈 칸을 입력해주세요.</span>");
@@ -199,5 +227,88 @@ function addSchedule() {
 
 }
 
+
+function deleteSchedule() {
+
+	$.ajax({
+		type : "POST",
+		url: "deleteSchedule",
+		data: {
+			scheduleId : selected_schedule_id
+		},
+		cache: false,
+		beforeSend : function(xhr){
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(data) {
+			getScheduleList();
+			$('.modal__btn--dismiss').click();
+			
+		},
+		error: function() {
+			console.log('스케줄 삭제 실패');
+		} 
+	})
+}
+
+
+function getSchedule(){
+
+	$.ajax({
+		type : "POST",
+		url : "getSchedule",
+		data : { 
+			scheduleId : selected_schedule_id
+		},
+		cache: false,
+		beforeSend : function(xhr){
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(data) {
+			$('#update-modal-room-name').val(data.theater_ROOM_NAME);
+			$('#update-modal-movie-title').val(data.movie_TITLE);
+			$('#update-movie-start').val(data.theater_SCHEDULE_START);
+			$('#update-modal-movie-code').val(data.movie_CODE);
+
+			$('.update-time-sale-btn').each(function() {
+				if($(this).val() == data.theater_SCHEDULE_TYPE){
+					$(this).prop('checked', true);
+				}
+
+			})
+		},
+		error: function() {
+			console.log('스케줄 얻어오기 실패');
+		} 
+
+		
+	})
+}
+
+function updateSchedule(){
+
+	$.ajax({
+		type : "POST",
+		url : "updateSchedule",
+		data : { 
+			THEATER_SCHEDULE_ID : selected_schedule_id,
+			MOVIE_CODE : $('#update-modal-movie-code').val(),
+			THEATER_SCHEDULE_START : $('#update-movie-start').val()
+		},
+		cache: false,
+		beforeSend : function(xhr){
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(data) {
+			getScheduleList();
+			$('.modal__btn--dismiss').click();
+		},
+		error: function() {
+			console.log('스케줄 수정 실패');
+		} 
+
+		
+	})
+}
 
 });
