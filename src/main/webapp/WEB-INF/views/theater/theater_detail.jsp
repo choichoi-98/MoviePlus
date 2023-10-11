@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -41,18 +45,20 @@
 					<ul class="area-depth1">
 
 						<c:forEach var="location" items="${locationList}">
-							<li class=""><a href="#" class="depth1" title="${location.value} 선택">${location.value}</a>
+							<li class=""><a href="#" class="depth1"
+								title="${location.value} 선택">${location.value}</a>
 								<div class="area-depth2">
 									<ul>
 										<c:forEach var="theater" items="${theaterList}">
 											<c:if test="${location.value eq theater.THEATER_LOCATION }">
-												<li class=""><a href="detail?theaterId=${theater.THEATER_ID}" title="${theater.THEATER_NAME} 상세보기">${theater.THEATER_NAME}</a></li>
+												<li class=""><a
+													href="detail?theaterId=${theater.THEATER_ID}"
+													title="${theater.THEATER_NAME} 상세보기">${theater.THEATER_NAME}</a></li>
 											</c:if>
 										</c:forEach>
-										
+
 									</ul>
-								</div>
-							</li>
+								</div></li>
 						</c:forEach>
 
 
@@ -65,15 +71,25 @@
 				<div class="btn-util right">
 
 					<div class="block">
-						<button type="button" class="btn btn-like " id="favorBrch">
-							<i class="iconset ico-like-line"></i> <span>선호극장</span>
-							<!-- 로그인 전이라면 로그인 모달창 띄우기 -->
+
+						<sec:authorize access="isAnonymous()">
+							<button type="button" class="btn btn-like" id="non-login-favorBrch">
+								<i class="iconset ico-like-line"></i> <span>선호극장</span>
+							</button>
+						</sec:authorize>
+						
+						<sec:authorize access="isAuthenticated()">
+						<button type="button" class="btn btn-like" id="favorBrch">
+								<i class="iconset ico-like-line"></i> <span>선호극장</span>
+							</button>
+						</sec:authorize>
+						<!-- 로그인 전이라면 로그인 모달창 띄우기 -->
 
 
 
 
 
-						</button>
+
 					</div>
 				</div>
 			</div>
@@ -98,9 +114,7 @@
 
 
 					<div class="theater-info-text mt40">
-						<p class="big">
-							간단 소개(큰 글)
-						</p>
+						<p class="big">간단 소개(큰 글)</p>
 						<p>간단 소개(작은 글)</p>
 					</div>
 
@@ -124,38 +138,42 @@
 					<h2 class="tit small mt70">위치안내</h2>
 
 					<h3 class="tit small">지도</h3>
-				
-				<!-- 지도 api 적용 -->	
-				<div id="map" style="width: 500px; height: 400px;"></div>
-				<script type="text/javascript"
+
+					<!-- 지도 api 적용 -->
+					<div id="map" style="width: 500px; height: 400px;"></div>
+					<script type="text/javascript"
 						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5acfe6dd339afa29efececd8efe0373"></script>
-						
-				<script>
-					
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-				    mapOption = { 
-				    center: new kakao.maps.LatLng(37.57296, 126.9922), // 지도의 중심좌표
-				    level: 3 // 지도의 확대 레벨
-				    };
 
-				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center : new kakao.maps.LatLng(37.57296, 126.9922), // 지도의 중심좌표
+							level : 3
+						// 지도의 확대 레벨
+						};
 
-				var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-				    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-				    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-				      
-				// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-				    markerPosition = new kakao.maps.LatLng(37.57296, 126.9922); // 마커가 표시될 위치입니다
+						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-				    position: markerPosition, 
-				    image: markerImage // 마커이미지 설정 
-				});
+						var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+						imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+						imageOption = {
+							offset : new kakao.maps.Point(27, 69)
+						}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);  
+						// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+						var markerImage = new kakao.maps.MarkerImage(imageSrc,
+								imageSize, imageOption), markerPosition = new kakao.maps.LatLng(
+								37.57296, 126.9922); // 마커가 표시될 위치입니다
+
+						// 마커를 생성합니다
+						var marker = new kakao.maps.Marker({
+							position : markerPosition,
+							image : markerImage
+						// 마커이미지 설정 
+						});
+
+						// 마커가 지도 위에 표시되도록 설정합니다
+						marker.setMap(map);
 					</script>
 
 					<ul class="dot-list">
@@ -170,7 +188,7 @@
 								길찾기</a>
 						</div>
 					</div>
-					
+
 
 					<h3 class="tit small mt30">주차 안내</h3>
 
@@ -211,7 +229,7 @@
 						<ul>
 
 							<li>
-								<div style="width:535px; height:250px; background:gray;"></div>
+								<div style="width: 535px; height: 250px; background: gray;"></div>
 							</li>
 
 						</ul>
@@ -1162,7 +1180,7 @@
 								</table>
 							</div>
 						</div>
-						
+
 					</div>
 					<span style="color: #503396"> <span style="font-size: 22px">요금제</span>
 					</span> <br> <br> • <span style="color: #01738b">청소년 요금</span>&nbsp;

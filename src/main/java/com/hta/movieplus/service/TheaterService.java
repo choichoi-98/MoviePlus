@@ -33,6 +33,8 @@ public interface TheaterService {
 
 	public List<FavoriteTheater> getFavoriteTheaterListById(String name);
 
+	public int checkFavoriteTheater(int theaterId, String userId);
+
 	
 	
 

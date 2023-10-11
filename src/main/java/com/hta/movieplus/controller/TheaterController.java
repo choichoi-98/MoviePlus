@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
@@ -48,7 +49,7 @@ public class TheaterController {
 	}
 	
 	@GetMapping("/theater/detail")
-	public ModelAndView theaterDetailView(@RequestParam(value="theaterId", required=true) int theaterId, ModelAndView mv) {
+	public ModelAndView theaterDetailView(@RequestParam(value="theaterId", required=true) int theaterId, ModelAndView mv, Principal principal) {
 		// 메뉴바 부분
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
 		
@@ -142,6 +143,32 @@ public class TheaterController {
 	}
 	
 	//어드민 극장 관리
+	
+	
+	//자주 가는 영화관
+	@ResponseBody
+	@PostMapping("/checkFavoriteTheater")
+	public int checkFavoriteTheater(Principal principal, int theaterId) {
+		
+		String userId = principal.getName();
+		int favTheaterChk = theaterservice.checkFavoriteTheater(theaterId, userId);
+		
+		return favTheaterChk;
+	}
+	
+	@ResponseBody
+	@PostMapping("/addFavoriteTheater")
+	public int addFavoriteTheater() {
+		
+		return 1;
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteFavoriteTheater")
+	public int deleteFavoriteTheater() {
+		
+		return 1;
+	}
 	
 
 

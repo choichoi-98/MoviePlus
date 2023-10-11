@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.hta.movieplus.controller.TheaterController;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
@@ -173,6 +172,17 @@ public class TheaterServiceImpl implements TheaterService {
 	public List<FavoriteTheater> getFavoriteTheaterListById(String name) {
 		// TODO Auto-generated method stub
 		return mapper.getFavoriteTheaterListById(name);
+	}
+
+	@Override
+	public int checkFavoriteTheater(int theaterId, String userId) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		dataMap.put("theaterId", theaterId);
+		dataMap.put("userId", userId);
+		
+		return mapper.checkFavoriteTheater(dataMap);
 	}
 
 }

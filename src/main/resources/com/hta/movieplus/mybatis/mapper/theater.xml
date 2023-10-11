@@ -112,6 +112,13 @@
 		WHERE MEMBER_ID = #{name}
 	</select>
 
-	
+	<select id="checkFavoriteTheater" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		WHERE FT.THEATER_ID = ${theaterId}
+		AND M.MEMBER_ID = #{userId} 
+	</select>
 
 </mapper>

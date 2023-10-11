@@ -38,6 +38,8 @@ public interface TheaterMapper {
 
 	public List<FavoriteTheater> getFavoriteTheaterListById(String name);
 
+	public int checkFavoriteTheater(Map<String, Object> dataMap);
+
 
 	
 }

@@ -83,7 +83,7 @@
 							선호영화관
 							<ul class="theater-circle">
 								<c:forEach var="fav" items="${favList}">
-									<li><a href="#" title="${fav.THEATER_NAME} 상세보기">${fav.THEATER_NAME}</a></li>
+									<li><a href="detail?theaterId=${fav.THEATER_ID}" title="${fav.THEATER_NAME} 상세보기">${fav.THEATER_NAME}</a></li>
 								</c:forEach>
 							</ul>
 	
