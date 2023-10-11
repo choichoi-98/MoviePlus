@@ -32,7 +32,7 @@
 		
     	// "삭제" 버튼 클릭 이벤트 처리
     	$('#delitem').click(function() {
-        	// 해당 행에서 ITEM_CODE
+        	// 해당 행에서 ITEM_CODE 찾기
         	var secondTableRow = document.querySelector('table.main__table tbody tr');
 			// 첫 번째 td 요소 선택
 			var firstTableCell = secondTableRow.querySelector('td:first-child');
@@ -43,14 +43,13 @@
         	$.ajax({
     			url: 'delitem', // 서버의 삭제 요청 URL을 입력하세요.
     			method: 'POST', // 삭제 요청의 HTTP 메서드를 지정하세요.
-    			data: { "ITEM_CODE":ITEM_CODE }, // itemCode 값을 보냅니다.
+    			data: { "ITEM_CODE":ITEM_CODE }, // ITEM_CODE 값을 보내기
 //    			dataType: "json",
             	beforeSend : function(xhr){
                 	xhr.setRequestHeader(header, token);
             	},
     			success: function(response) {
-        			// 삭제 요청이 성공하면 페이지를 새로 고침하거나 필요한 작업을 수행하세요.
-        			location.reload(); // 예: 페이지 새로 고침
+        			location.reload(); // 페이지 새로 고침
     			},
     			error: function() {
      	   		console.log('삭제 실패');

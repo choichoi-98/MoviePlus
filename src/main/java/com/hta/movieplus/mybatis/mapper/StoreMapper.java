@@ -30,6 +30,8 @@ public interface StoreMapper {
 
 	public StoreVO get1item(int iTEM_CODE);
 
+	public List<StoreVO> getItemListByCodes(List<Integer> codelist);
+
 //	public int getListCount();
 //	
 //	public List<StoreVO> getItemList(HashMap<String, Integer> map);

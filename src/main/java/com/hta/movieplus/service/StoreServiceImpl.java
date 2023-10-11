@@ -64,6 +64,11 @@ public class StoreServiceImpl implements StoreService {
 	    return dao.getItemListByKind(ITEM_MENU);
 	}
 
+	@Override
+	public List<StoreVO> getItemListByCodes(List<Integer> codelist) {
+		return dao.getItemListByCodes(codelist);
+	}
+
 
 //	@Override
 //	public List<StoreVO> getItemList(int page, int limit) {

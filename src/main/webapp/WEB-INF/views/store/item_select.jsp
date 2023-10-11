@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
-<html lang="ko">
 <!--<![endif]-->
+<html>
 <head>
 <style>
 .container {
@@ -14,6 +15,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script>
+	$('#btnGift').click(function() {
+		var ITEM_CODE = $(this).data('item-code'); // ITEM_CODE 가져오기
+		  $.ajax({
+		        url: "cart",
+		        method: 'GET',
+		        data: { "ITEM_CODE": ITEM_CODE }, // 서버로 전송(ITEM_CODE)
+		        success: function(response) {
+		            alert("장바구니에 추가되었습니다.");
+		        },
+		        error: function(error) {
+		            alert("장바구니 추가 중 오류가 발생했습니다.");
+		        }
+		   });
+	});
+</script>  -->
+
 </head>
 <body>
 	<!-- header -->
@@ -25,173 +43,15 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="https://www.megabox.co.kr/store"
+					<span>Home</span> <a href="#"
 						title="스토어">스토어</a> <a
-						href="https://www.megabox.co.kr/store/detail?prdtClCd=CPC02&amp;prdtNo=1747#"
+						href="#"
 						title="스토어상세">스토어상세</a>
 				</div>
 			</div>
 		</div>
+		
 		<div id="storeDtl">
-			<script type="text/javascript">
-				var loginPopupCallScn = "StoreDtlV"; //로그인 레이어 팝업 띄울때 필요한 PARAM
-
-				$(function() {
-					var prdtPurc1OneLmtQty = 8; // 상품_구매_1_회당_제한_수량
-
-					$(".line .cont button")
-							.click(
-									function() {
-										var btn_name = $(this).attr("class");
-										var input_d = $(".line .cont input[type='text']");
-										var input_num = Number(input_d.val());
-
-										if (btn_name == "btn minus") {
-											if (input_num > 1) {
-												input_d.val(input_num - 1);
-											}
-										} else if (btn_name == "btn plus") {
-											if (input_num < prdtPurc1OneLmtQty)
-												input_d.val(input_num + 1);
-											else if (Number(prdtPurc1OneLmtQty) == -1)
-												input_d.val(input_num + 1);
-										}
-
-										var tot_amt2 = String(
-												Number($('#prdtExpoAmt').val())
-														* Number(input_d.val()))
-												.maskNumber();
-
-										$('#prdtSumAmt').html(tot_amt2);
-									});
-
-					//동적으로 변경되는 구매/선물등 버튼그룹 클릭핸들러
-					$("div.btn-group a")
-							.click(
-									function() {
-										var thisClass = $(this).attr("class");
-
-										var btnId = $(this).attr("id");
-
-										$('#btnId').val(btnId);
-
-										if (thisClass.indexOf("btn-modal-open") > -1) {
-											return;
-										}
-
-										$
-												.ajax({
-													url : "/on/oh/oha/Movie/loginChk.do",
-													type : "POST",
-													contentType : "application/json;charset=UTF-8",
-													dataType : "json",
-													success : function(data,
-															textStatus, jqXHR) {
-														var resultMap = data.resultMap;
-
-														if (resultMap.msg == "sessionFail") {
-															gfn_confirmMsgBox({
-																msg : '로그인 후 이용가능한 서비스입니다.\n로그인 하시겠습니까?',
-																confirmFn : fn_moveLoginPage
-															});
-
-															return;
-														}
-
-														//결제 처리 체크
-														if (!fn_payProcChk()) {
-															return;
-														}
-
-														// 제한 수량 체크
-														fn_LmtQtyChk();
-
-														//취소 불가 체크
-														//fn_cancelUnableChk();
-
-														//취소 불가 체크
-														//fn_cancelUnableChk();
-													},
-													error : function(xhr,
-															status, error) {
-														var err = JSON
-																.parse(xhr.responseText);
-														alert(xhr.status);
-														alert(err.message);
-													}
-												});
-									});
-					// 사용가능극장 팝업
-					$('#contents [name=brchList]').on('click', function(e) {
-						e.preventDefault();
-						gfn_storeBrchListPV('20002410');
-					});
-
-					//탭메뉴 설정
-					setTab();
-				});
-				//로그인 페이지 이동
-				function fn_moveLoginPage() {
-					/*
-					 $('[name=menuId]').val('StoreDtlV');
-					 $('[name=mappingId]').val(location.pathname);
-
-					 var form = $('#loginForm');
-					 form.attr('action', '/on/oh/ohg/MbLogin/viewMbLoginMainPage.rest');
-					 form.submit();
-					 */
-					//fn_viewLoginPopup('StoreDtlV','pc');
-					//fn_viewLoginPopup('default','pc');
-					fn_viewLoginPopup('default', 'pc', '', '', 'N');
-				}
-				//결제페이지 이동
-				function fn_storePay() {
-					// 뒤로가기 이후 결제페이지 이동시 배열로 잡혀서 수정
-					$('#storeDtlForm input').each(function() {
-						if ('btnId' != $(this).attr('name')) {
-							$(this).remove();
-						}
-					});
-					var contentUrl = "/store/payment";
-					$("#storeDtlForm")
-							.append(
-									"<input type='hidden' name='prdtNo' value='" + 1747 + "' />");
-					$("#storeDtlForm")
-							.append(
-									"<input type='hidden' name='cmbndKindNo' value='" + 20002410 + "' />");
-					$("#storeDtlForm").append(
-							"<input type='hidden' name='purcQty' value='"
-									+ $(".line .cont input[type='text']").val()
-									+ "' />");
-					$("#storeDtlForm").append(
-							"<input type='hidden' name='prdtSumAmt' value='"
-									+ $('#prdtSumAmt').html() + "' />");
-					// 2019.08.12 hjchoi 상품분류코드 & 상품명
-					$("#storeDtlForm")
-							.append(
-									"<input type='hidden' name='prdtClCd' value='CPC02' />");
-					$("#storeDtlForm")
-							.append(
-									"<input type='hidden' name='prdtNm' value='일반관람권&#40;2D&#41;' />");
-					$("#storeDtlForm")
-							.append(
-									"<input type='hidden' name='prdtCompsDesc' value='일반 관람권' />");
-
-					if ($("#acptBrchChoi").length > 0) {
-						$("#storeDtlForm").append(
-								"<input type='hidden' name='acptBrchChoiVal' value='"
-										+ $("#acptBrchChoi").val() + "' />");
-					} else {
-						$("#storeDtlForm")
-								.append(
-										"<input type='hidden' name='acptBrchChoiVal' value='' />");
-					}
-
-					$("#storeDtlForm").attr("method", "post");
-					$("#storeDtlForm").attr("action", contentUrl);
-					$("#storeDtlForm").submit();
-				}
-			</script>
 			<form id="loginForm" method="post">
 				<input type="hidden" name="menuId"> <input type="hidden"
 					name="mappingId"> <input type="hidden" name="rtnParam"
@@ -212,9 +72,9 @@
 				<div class="inner-wrap">
 					<!-- store-view -->
 					<div class="store-view">
-						<h2 class="tit">일반관람권(2D)</h2>
+						<h2 class="tit">${selecteditem.ITEM_NAME}</h2>
 						<div class="sub-info">
-							<p class="bundle">일반 관람권</p>
+							<p class="bundle">${selecteditem.ITEM_MENU}</p>
 						</div>
 						<!-- box-store-view -->
 						<div class="box-store-view">
@@ -222,8 +82,8 @@
 								<div class="img">
 									<p>
 										<img
-											src="./(일반관람권(2D)) 상세3 _ 스토어 _ MEET PLAY SHARE, 메가박스_files/OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png"
-											alt="일반관람권(2D)" onerror="noImg(this);">
+											src="./(일반관람권(2D))_스토어_files/OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png"
+											alt="${selecteditem.ITEM_NAME}" onerror="noImg(this);">
 									</p>
 								</div>
 								<p class="origin"></p>
@@ -238,7 +98,7 @@
 										</p>
 										<div class="cont">
 											<a
-												href="https://www.megabox.co.kr/store/detail?prdtClCd=CPC02&amp;prdtNo=1747#"
+												href="#"
 												class="a-link" name="brchList">사용가능극장</a>
 										</div>
 									</div>
@@ -286,20 +146,19 @@
 													<i class="iconset ico-plus"></i>
 												</button>
 												<div class="money">
-													<em id="prdtSumAmt">12,000</em> <span>원</span>
+													<em id="prdtSumAmt">${selecteditem.ITEM_PRICE}</em> <span>원</span>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="btn-group">
-									<a
-										href="https://www.megabox.co.kr/store/detail?prdtClCd=CPC02&amp;prdtNo=1747#"
-										id="btnGift" class="button large" w-data="500" h-data="410"
-										title="장바구니">장바구니</a> <a
-										href="https://www.megabox.co.kr/store/detail?prdtClCd=CPC02&amp;prdtNo=1747#"
-										id="btnPurc" class="button purple large" w-data="500"
-										h-data="410" title="구매">구매</a>
+									<a href="cartpro?ITEM_CODE=${selecteditem.ITEM_CODE}" id="btnGift" class="button large" 
+									   w-data="500" h-data="410" title="장바구니" >장바구니
+									</a> 
+									<a href="cartpro?ITEM_CODE=${selecteditem.ITEM_CODE}" id="btnPurc" class="button purple large" 
+									   w-data="500" h-data="410" title="구매">구매
+									</a>
 								</div>
 							</div>
 							<!--// right -->

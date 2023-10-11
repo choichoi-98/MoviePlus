@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -140,24 +141,24 @@ public class StoreController {
 	public ModelAndView store9(ModelAndView mv, HttpServletRequest request) {
 		List<StoreVO> voucherlist = storeService.getItemListByKind("voucher");
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("voucherlist", voucherlist);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("voucherlist", voucherlist);
 		
 		mv.setViewName("store/store_cp09");
 		mv.addObject("voucherlist", voucherlist);
 		return mv;
 	}
 	
-	@RequestMapping("/cp9cart")
-	public ModelAndView cp9cart(
-			@RequestParam("ITEM_CODE") int ITEM_CODE, 
-			ModelAndView mv) {
-		
-		CartVO itemincart = cartService.addItemToCart(ITEM_CODE);
-		mv.setViewName("store/store_cp09");
-		mv.addObject("itemincart", itemincart);
-		return mv;
-	}
+//	@RequestMapping("/cp9cart")
+//	public ModelAndView cp9cart(
+//			@RequestParam("ITEM_CODE") int ITEM_CODE, 
+//			ModelAndView mv) {
+//		
+//		CartVO itemincart = cartService.addItemToCart(ITEM_CODE);
+//		mv.setViewName("store/store_cp09");
+//		mv.addObject("itemincart", itemincart);
+//		return mv;
+//	}
 	
 	@GetMapping("/cp07")
 	public ModelAndView score7(ModelAndView mv) {
@@ -169,13 +170,37 @@ public class StoreController {
 	}
 	
 	@GetMapping("/item")
-	public String item() {
-		return "store/item_select";
+	public ModelAndView item( 
+		@RequestParam("ITEM_CODE") int ITEM_CODE,
+		ModelAndView mv) {
+		StoreVO selecteditem = storeService.get1item(ITEM_CODE);
+		
+		mv.setViewName("store/item_select");
+		mv.addObject("selecteditem", selecteditem);
+		return mv;
 	}
 	
-	@GetMapping("/cart")
-	public ModelAndView cart(ModelAndView mv) {
+	@RequestMapping("/cart")
+	public ModelAndView cart(
+		CartVO cartVO,
+		ModelAndView mv) {
 		mv.setViewName("store/store_cart");
+		return mv;
+	}
+	
+	@RequestMapping("/cartpro")
+	public ModelAndView cartpro(
+		CartVO cartVO,
+		ModelAndView mv) {
+		cartService.addItemToCart(cartVO);
+		List<StoreVO> codelist = cartService.getCodeList();
+//		List<StoreVO> cartlist = storeService.getItemListByCodes(codelist);
+		System.out.println(codelist);
+//		System.out.println(cartlist);
+		
+		mv.setViewName("store/store_cart");
+		mv.addObject("codelist", codelist);
+//		mv.addObject("cartlist", cartlist);
 		return mv;
 	}
 	

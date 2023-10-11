@@ -1,5 +1,6 @@
 package com.hta.movieplus.mybatis.mapper;
 
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,10 +12,9 @@ import com.hta.movieplus.domain.StoreVO;
 */
 @Mapper
 public interface CartMapper {
-	
-	public int insertCart(StoreVO StoreVO);
 
-	public CartVO addItemToCart(int ITEM_CODE);
+	public int addItemToCart(CartVO CartVO);
 
+	public List<StoreVO> getCodeList();
 	
 }

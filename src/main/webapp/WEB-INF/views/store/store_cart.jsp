@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html lang="ko">
@@ -14,7 +15,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script>
 
 </head>
 <body>
@@ -25,8 +27,7 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="#"
-						title="스토어">스토어</a> <a href="#"
+					<span>Home</span> <a href="#" title="스토어">스토어</a> <a href="#"
 						title="결제">결제</a>
 				</div>
 			</div>
@@ -50,9 +51,9 @@
 					type="hidden" name="selectCard" id="ifrm_selectCard"> <input
 					type="hidden" name="pointDmode" id="ifrm_pointDmode">
 			</form>
-			
+
 			<!--  <div id="contents" class="location-fixed"> -->
-			<div id="contents" >
+			<div id="contents">
 				<div class="inner-wrap">
 					<!-- store-payment -->
 					<div class="store-payment">
@@ -78,40 +79,46 @@
 										<th scope="col">기타</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="a-c">
-											<div class="goods-info">
-												<p class="img">
-												<a href="javascript:fn_storeDetail();" title="일반관람권(2D)"><img
-												src="./store_pay_MEET PLAY SHARE, 메가박스_files/OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png"
-												alt="" onerror="noImg(this);"></a>
-												</p>
-											</div>
-										</td>
-										<th scope="row">
-											<div class="goods-info">
-												<p class="name">
-													<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">일반관람권(2D)</a>
-												</p>
-												<p class="bundle">일반 관람권</p>
-											</div>
 
-											<div class="mt10">
-												<span id="acptBrchView" class="font-gblue"></span><em
-													id="acptBrchChoiValView"></em>
-											</div>
-										</th>
-										<td><em id="purcQtyView">1</em></td>
-										<td>
-											<div class="goods-info">
-												<em id="prdtSumAmtView" class="price">12,000</em>원
-											</div>
-										</td>
-										<td><a href="#"
-											class="a-link" name="brchList" title="삭제">삭제</a></td>
-									</tr>
+								<tbody>
+									<c:forEach var="c" items="${codelist}">
+										<tr>
+											<td class="a-c">
+												<div class="goods-info">
+													<p class="img">
+														<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">
+															<img
+															src="./store_pay_MEET PLAY SHARE, 메가박스_files/OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png"
+															alt="" onerror="noImg(this);">
+														</a>
+													</p>
+												</div>
+											</td>
+											<th scope="row">
+												<div class="goods-info">
+													<p class="name">
+														<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">${c.ITEM_NAME}</a>
+													</p>
+													<p class="bundle">${c}</p>
+												</div>
+
+												<div class="mt10">
+													<span id="acptBrchView" class="font-gblue"></span><em
+														id="acptBrchChoiValView"></em>
+												</div>
+											</th>
+											<td><em id="purcQtyView">1</em></td>
+											<td>
+												<div class="goods-info">
+													<em id="prdtSumAmtView" class="price">12,000</em>원
+												</div>
+											</td>
+											<td><a href="#" class="a-link" name="brchList"
+												title="삭제">삭제</a></td>
+										</tr>
+									</c:forEach>
 								</tbody>
+
 							</table>
 						</div>
 						<!-- 결제수단 포인트 시작 -->
@@ -149,7 +156,8 @@
 									<p class="txt">결제수단 선택</p>
 									<div class="cell">
 										<input type="radio" id="radio_choice01" name="radio_choice"
-											value="credit"> <label for="radio_choice01">일반 결제</label>
+											value="credit"> <label for="radio_choice01">일반
+											결제</label>
 									</div>
 									<div class="cell">
 										<input type="radio" id="radio_choice03" name="radio_choice"
@@ -240,12 +248,11 @@
 						<div class="btn-group pt40">
 							<a href="https://www.megabox.co.kr/store"
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
-								
-							<a href="javascript:void(0);" class="button purple large w170px btn-modal-open" 
-  							   id="btn-kakaopay" title="결제">결제</a>
 
-
-						<!-- <a
+							<a href="javascript:void(0);"
+								class="button purple large w170px btn-modal-open"
+								id="btn-kakaopay" title="결제">결제</a>
+							<!-- <a
 								href="https://www.megabox.co.kr/store#"
 								class="button purple large w170px btn-modal-open"
 								id="btn_store_pay" title="결제" style="display: none;"
