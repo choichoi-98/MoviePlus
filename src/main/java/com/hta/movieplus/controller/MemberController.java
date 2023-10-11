@@ -171,26 +171,37 @@ public class MemberController {
 	
 	//개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
-	public String modifyProcess(Member member, Model model, 
+	public String modifyProcess(Member member, Model model, String check,
 								HttpServletRequest request, 
 								RedirectAttributes rattr, HttpSession session)throws Exception{
 		
 		MultipartFile uploadfile = member.getUploadfile();
 		
-		if(!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename();	//원래 파일명
-			member.setPROFILE_ORIGINAL(fileName);				//원래 파일명 저장
-			
-			String fileDBName = fileDBName(fileName, saveFolder);
-			logger.info("fileDBName = " + fileDBName);
-			
-			//업로드한 파일을 매개변수의 경로에 저장
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-			logger.info("transferTo path = " + saveFolder + fileDBName);
-			//바뀐 파일명으로 저장
-			member.setMEMBER_PROFILE(fileDBName);
-		}
+		if(check != null && check.equals("")) {		//기존파일 그대로 사용하는 경우
+			logger.info("기존파일 그대로 사용");
+			member.setPROFILE_ORIGINAL(check);
+		} else {
 		
+			if(uploadfile != null && !uploadfile.isEmpty()) {
+				logger.info("파일 추가/변경되었습니다");
+				
+				String fileName = uploadfile.getOriginalFilename();	//원래 파일명
+				member.setPROFILE_ORIGINAL(fileName);				//원래 파일명 저장
+					
+				String fileDBName = fileDBName(fileName, saveFolder);
+				logger.info("fileDBName = " + fileDBName);
+					
+				//업로드한 파일을 매개변수의 경로에 저장
+				uploadfile.transferTo(new File(saveFolder + fileDBName));
+				logger.info("transferTo path = " + saveFolder + fileDBName);
+				//바뀐 파일명으로 저장
+				member.setMEMBER_PROFILE(fileDBName);
+			 } else {	//기존 파일이 없는데 파일 선택하지 않은 경우 또는 기존 파일이 있었는데 삭제한 경우
+					logger.info("선택 파일 없습니다.");
+					member.setMEMBER_PROFILE("");//""로 초기화
+					member.setPROFILE_ORIGINAL("");//""로 초기화
+			 }
+		}
 		
 		int result = memberservice.update(member);
 		Member memberInfo = (Member) session.getAttribute("memberInfo");

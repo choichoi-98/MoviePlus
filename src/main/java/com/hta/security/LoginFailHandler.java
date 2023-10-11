@@ -26,7 +26,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
 		  logger.info("로그인 실패");
 		  session.setAttribute("loginfail", "loginFailMsg");
 		  
-		  //request.setAttribute("loginfail", "loginFailMsg");
+		  session.invalidate();
 		  
 		  response.setContentType("text/html;charset=UTF-8");
 	      response.getWriter().print("<script>history.back(); </script>");

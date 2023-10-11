@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 
 <!-- 컨텐츠 영역 -->
 <div id="contents"  class="">
-  <form id="modifyinfoform" action="${pageContext.request.contextPath}/member/modifyProcess" method="post">
+  <form enctype="multipart/form-data" id="modifyinfoform" action="${pageContext.request.contextPath}/member/modifyProcess" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	  <h2 class="tit">개인정보 수정</h2>
 
@@ -34,14 +35,18 @@
                           <th scope="row">프로필 사진</th>
                           <td>
                               <div class="profile-photo">
-                                      <input type="file" id="profileTarget" name="file" style="display: none;">
-
-                                      
                                   <div class="profile-img">
-                                      <img src="${pageContext.request.contextPath}/resources/image/member/profile1.png" alt="프로필 사진">
+                                  	  <span id="filevalue" style="display:none;">${memberInfo.MEMBER_PROFILE}</span>
+                                  	  <c:if test="${empty memberInfo.MEMBER_PROFILE}">
+                                     	 <img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="프로필 사진">
+                                      </c:if>
+                                      <c:if test="${!empty memberInfo.MEMBER_PROFILE}">
+                                     	 <img src="${pageContext.request.contextPath}/upload${memberInfo.MEMBER_PROFILE}" alt="프로필 사진">
+                                      </c:if>
+                                      <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" >
                                   </div>
-									 <!-- <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  -->
-                                     <button type="button" class="button small gray-line" id="deleteProfileImgBtn">이미지 삭제</button>
+									 <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  
+                                     <button type="button" class="button small gray-line" id="deleteProfileImgBtn" style="display:none;">이미지 삭제</button> 
                                       
                                   <a href="${pageContext.request.contextPath}/member/delete?MEMBER_ID=${memberInfo.MEMBER_ID}" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
                               </div>
@@ -172,7 +177,7 @@
                       </tbody>
                   </table>
               </div>
-          </form>
+          
 
 
           <h3 class="tit">간편로그인 계정연동</h3>
@@ -238,8 +243,9 @@
 
           <div class="btn-group mt40">
               <button class="button large" id="cancelBtn">취소</button>
-              <button type="submit" form="modifyinfoform" class="button purple large" id="updateBtn">등록</button>
+              <button type="submit" class="button purple large" id="updateBtn">등록</button>
           </div>
+          </form>
       </div>
 <!-- contents end -->
 

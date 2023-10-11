@@ -41,6 +41,7 @@
 		update MEMBER
 		set    MEMBER_PHONENO = #{MEMBER_PHONENO} 
 		       , MEMBER_EMAIL = #{MEMBER_EMAIL}
+		       , MEMBER_PROFILE = #{MEMBER_PROFILE}
 		where  MEMBER_ID = #{MEMBER_ID}
 	</update>
 	
