@@ -21,10 +21,9 @@ import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
 
-
 @Controller
 public class TheaterController {
-	
+
 	private TheaterService theaterservice;
 	private TheaterManagerService theaterManagerService;
 	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
@@ -35,142 +34,152 @@ public class TheaterController {
 		this.theaterservice = theaterService;
 		this.theaterManagerService = theaterManagerService;
 	}
-	
+
 	@GetMapping("/theater")
-	public ModelAndView theaterMainView(ModelAndView mv, Principal principal) {
+	public ModelAndView theaterMainView(ModelAndView mv) {
+
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
-		List<FavoriteTheater> favList = theaterservice.getFavoriteTheaterListById(principal.getName());
-		
-		mv.addObject("favList", favList);
+
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.setViewName("theater/theater_main");
 		return mv;
 	}
-	
+
 	@GetMapping("/theater/detail")
-	public ModelAndView theaterDetailView(@RequestParam(value="theaterId", required=true) int theaterId, ModelAndView mv, Principal principal) {
+	public ModelAndView theaterDetailView(@RequestParam(value = "theaterId", required = true) int theaterId,
+			ModelAndView mv, Principal principal) {
 		// 메뉴바 부분
-		List<Theater> theaterList = theaterservice.getAllTheaterList();
 		
+		List<Theater> theaterList = theaterservice.getAllTheaterList();
+
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		// 메뉴바 부분
-		
+
+		mv.addObject("ajax_theaterId", theaterId);
 		mv.setViewName("theater/theater_detail");
-		
+
 		return mv;
 	}
-		
-	//어드민 극장 관리
+
+	// 어드민 극장 관리
 	@GetMapping("/admin/managetheater")
 	public ModelAndView manageTheaterView(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
-		
+
 		int theaterCount = theaterservice.getCountByTheater();
-		
+
 		Map<String, Object> paginationDataMap = theaterservice.pagination(page);
 		List<Theater> theaterList = theaterservice.getTheaterList(page, (int) paginationDataMap.get("limit"));
 
 		mv.setViewName("admin/manageTheater");
-		
-		//페이지네이션
+
+		// 페이지네이션
 		mv.addAllObjects(paginationDataMap);
-		
+
 		mv.addObject("theaterCount", theaterCount);
 		mv.addObject("theaterList", theaterList);
-		
+
 		return mv;
-	}	
-	
+	}
+
 	@GetMapping("/admin/addtheater")
 	public ModelAndView addTheaterView(ModelAndView mv) {
 		String managerId = theaterservice.getManagerId();
-		
+
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.addObject("managerId", managerId);
 		mv.setViewName("admin/addTheater");
 		return mv;
-	}	
-	
+	}
+
 	@PostMapping("/admin/addTheaterAction")
 	public String addTheaterAction(Theater theater, Manager manager) {
-		
+
 		theaterservice.addTheater(theater, manager);
-		
+
 		return "redirect:/admin/managetheater";
 	}
-	
+
 	@GetMapping("/admin/deleteTheaterAction")
 	public String deleteTheaterAction(int num) {
 		theaterservice.deleteTheater(num);
-		
-		
+
 		return "redirect:/admin/managetheater";
 	}
-	
+
 	@GetMapping("/admin/modifytheater")
-	public ModelAndView modifyTheaterAction(@RequestParam(value = "num") int num,
-			ModelAndView mv) {
-		
+	public ModelAndView modifyTheaterAction(@RequestParam(value = "num") int num, ModelAndView mv) {
+
 		Theater theater = theaterservice.getTheaterById(num);
-		
+
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.addObject(theater);
 		mv.setViewName("/admin/modifyTheater");
-		
+
 		return mv;
 	}
-	
+
 	@PostMapping("/admin/modifyTheaterAction")
 	public String modifyTheaterAction(Theater theater, String resetPassCheck) {
 		theaterservice.modifyTheater(theater);
-		//비밀번호 초기화 관련 로직
-		if(resetPassCheck.equals("checked")) {
+		// 비밀번호 초기화 관련 로직
+		if (resetPassCheck.equals("checked")) {
 			theaterservice.resetManagerPassword(theater.getTHEATER_MANAGER_ID());
 		}
-		
-		
+
 		return "redirect:/admin/managetheater";
 	}
-	
+
 	@GetMapping("/admin/changeStatusTheaterAction")
 	public String changeStatusTheaterAction(int num, String status) {
 		theaterservice.changeStatusTheater(num, status);
-		
-		
+
 		return "redirect:/admin/managetheater";
 	}
-	
-	//어드민 극장 관리
-	
-	
-	//자주 가는 영화관
+
+	// 어드민 극장 관리
+
+	// 자주 가는 영화관
+
 	@ResponseBody
-	@PostMapping("/checkFavoriteTheater")
-	public int checkFavoriteTheater(Principal principal, int theaterId) {
+	@PostMapping("theater/getFavoriteTheaterList")
+	public List<FavoriteTheater> getFavoriteTheaterList(Principal principal) {
+		List<FavoriteTheater> favList = null;
+		String userId = principal.getName();
 		
+		if (userId != null) {
+			favList = theaterservice.getFavoriteTheaterListById(userId);
+		}
+
+		return favList;
+	}
+
+	@ResponseBody
+	@PostMapping("theater/checkFavoriteTheater")
+	public int checkFavoriteTheater(Principal principal, int theaterId) {
+
 		String userId = principal.getName();
 		int favTheaterChk = theaterservice.checkFavoriteTheater(theaterId, userId);
-		
+
 		return favTheaterChk;
 	}
-	
-	@ResponseBody
-	@PostMapping("/addFavoriteTheater")
-	public int addFavoriteTheater() {
-		
-		return 1;
-	}
-	
-	@ResponseBody
-	@PostMapping("/deleteFavoriteTheater")
-	public int deleteFavoriteTheater() {
-		
-		return 1;
-	}
-	
 
+	@ResponseBody
+	@PostMapping("theater/addFavoriteTheater")
+	public int addFavoriteTheater(Principal principal, int theaterId) {
+		
+		String userId = principal.getName();
+		return theaterservice.addFavoriteTheater(theaterId, userId);
+	}
 
+	@ResponseBody
+	@PostMapping("theater/deleteFavoriteTheater")
+	public int deleteFavoriteTheater(Principal principal, int theaterId) {
+
+		String userId = principal.getName();
+		return theaterservice.deleteFavoriteTheater(theaterId, userId);
+	}
 
 }

@@ -35,6 +35,10 @@ public interface TheaterService {
 
 	public int checkFavoriteTheater(int theaterId, String userId);
 
+	public int deleteFavoriteTheater(int theaterId, String userId);
+
+	public int addFavoriteTheater(int theaterId, String userId);
+
 	
 	
 

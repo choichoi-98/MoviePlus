@@ -40,6 +40,10 @@ public interface TheaterMapper {
 
 	public int checkFavoriteTheater(Map<String, Object> dataMap);
 
+	public int deleteFavoriteTheater(Map<String, Object> dataMap);
+
+	public int addFavoriteTheater(Map<String, Object> dataMap);
+
 
 	
 }

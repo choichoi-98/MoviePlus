@@ -17,11 +17,5 @@ public class BookingController {
 	public String bookingSeatView() {
 		return "booking/booking_seat";
 	}
-	
-	@GetMapping("/timetable")
-	public String bookingTimetableView() {
-		return "booking/booking_timetable";
-	}
-	
 
 }

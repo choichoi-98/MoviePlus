@@ -12,6 +12,7 @@ public class TheaterSchedule {
 	// ---------------------------
 	private String THEATER_ROOM_NAME;
 	private String MOVIE_TITLE;
+	private String THEATER_NAME;
 	
 	
 	
@@ -75,6 +76,12 @@ public class TheaterSchedule {
 	}
 	public void setTHEATER_SCHEDULE_TYPE(String tHEATER_SCHEDULE_TYPE) {
 		THEATER_SCHEDULE_TYPE = tHEATER_SCHEDULE_TYPE;
+	}
+	public String getTHEATER_NAME() {
+		return THEATER_NAME;
+	}
+	public void setTHEATER_NAME(String tHEATER_NAME) {
+		THEATER_NAME = tHEATER_NAME;
 	}
 	
 	

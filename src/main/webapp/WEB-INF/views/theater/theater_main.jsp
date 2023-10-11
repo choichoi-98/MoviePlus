@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,16 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
+
 
 <title></title>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	
+	
 
 	<div class="container">
 
@@ -81,10 +86,8 @@
 						<div>
 							<i class="iconset ico-favo-theater"></i> <span class="font-gblue">${memberInfo.MEMBER_NAME}</span>님의
 							선호영화관
-							<ul class="theater-circle">
-								<c:forEach var="fav" items="${favList}">
-									<li><a href="detail?theaterId=${fav.THEATER_ID}" title="${fav.THEATER_NAME} 상세보기">${fav.THEATER_NAME}</a></li>
-								</c:forEach>
+							<ul id="fav-theater-list" class="theater-circle">
+							
 							</ul>
 	
 						</div>
