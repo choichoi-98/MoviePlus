@@ -54,16 +54,16 @@
 	</select>
 	
 	<select id="getMovieList" resultType="movie">
-SELECT *
-FROM (
-    SELECT ROWNUM AS row_num, MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN
-    FROM (
-        SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN, ROWNUM AS rnum
-        FROM MOVIE
-    )
-    WHERE rnum &lt;= #{end}
-)
-WHERE row_num &gt;= #{start}
+		SELECT *
+		FROM (
+		    SELECT ROWNUM AS row_num, MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN
+		    FROM (
+		        SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN, ROWNUM AS rnum
+		        FROM MOVIE
+		    )
+		    WHERE rnum &lt;= #{end}
+		)
+		WHERE row_num &gt;= #{start}
 
 
     </select>

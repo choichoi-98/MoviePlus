@@ -1,12 +1,20 @@
 $(document).ready(function() {
-
 	//영화 목록 10개 가져오기
 	let token = $("meta[name='_csrf']").attr("content");
    	let header = $("meta[name='_csrf_header']").attr("content");
    	console.log(token);
    	console.log(header);
-   
+
+   	movieListAll();
+    console.log("첫번째: movieListAll()");
+	movieListPlaying();
+    console.log("첫번째: movieListPlaying()");
+	movieListEnded();
+    console.log("첫번째: movieListEnded()");
+	
    	
+   	
+   	function movieListAll(){
     $.ajax({
         type: 'POST',
         url: 'movieListAll',
@@ -30,14 +38,16 @@ $(document).ready(function() {
                    + ' <a class="endBtn" ref="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
                 table.append(row);
             });
-            console.log("영화 목록 가져오기 성공");
+            console.log("전체 영화 목록 가져오기 성공");
         },
         error: function() {
-            console.log("영화 목록 가져오기 실패");
+            console.log("전체 영화 목록 가져오기 실패");
         }
     });//$.ajax({
+	}//function movieListAll(){
 	
 	//상영 중인 영화
+	function movieListPlaying(){
 	$.ajax({
         type: 'POST',
         url: 'now-playing',
@@ -57,18 +67,20 @@ $(document).ready(function() {
                  row.append($('<td>').text(movie.movie_Title));
                  row.append($('<td>').text(movie.movie_Screen));
                  row.append($('<td>')
-                 .html('<a class="playBtn" href="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
+                 .html('<a class="endBtn" href="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
                 table.append(row);
                 
             });
-            console.log("영화 목록 가져오기 성공");
+            console.log("상영 중인 영화 목록 가져오기 성공");
         },
         error: function() {
-            console.log("영화 목록 가져오기 실패");
+            console.log("상영 중인 영화 목록 가져오기 실패");
         }
     });//$.ajax({
+    };//function movieListPlaying(){
     
     //상영 종료 영화
+    function movieListEnded(){
 	$.ajax({
         type: 'POST',
         url: 'ended',
@@ -92,34 +104,23 @@ $(document).ready(function() {
                 table.append(row);
                 
             });
-            console.log("영화 목록 가져오기 성공");
+            console.log("상영 종료 영화 목록 가져오기 성공");
         },
         error: function() {
-            console.log("영화 목록 가져오기 실패");
+            console.log("상영 종료 영화 목록 가져오기 실패");
         }
     });//$.ajax({
+	};//function movieListEnded(){
 	
 	//전체 영화목록 가져오기 
 	var currentPage = 1; //초기 페이지 설정
 	
-	//모달 열기 이벤트
+	//---------------------------modal 이벤트 -------------------------------//
+	//1. 전체 영화 모달 열기 이벤트
 	$("#movieListAllModal").on('click', function(){
+		$("#movieListAllTableModal").empty();
 		loadPageData(currentPage);
 	});
-	
-	 // 이전 페이지로 이동
-    $('#prevPage').click(function() {
-        if (currentPage > 1) {
-            currentPage--;
-            loadPageData(currentPage);
-        }
-    });
-
-    // 다음 페이지로 이동
-    $('#nextPage').click(function() {
-        currentPage++;
-        loadPageData(currentPage);
-    });
 	
 	// 페이지 데이터를 불러오고 모달에 표시하는 함수
 	function loadPageData(page){
@@ -154,6 +155,84 @@ $(document).ready(function() {
 		});//$.ajax({
 	};//function loadPageData(page){
 	
+	//2. 상영 중인 영화 모달 이벤트
+	$("#movieListPlayingModal").on('click', function(){
+	    $("#movieListPlayingTableModal").empty();
+		movieListPlayingModal();
+	});
+	
+	// 페이지 데이터를 불러오고 모달에 표시하는 함수
+	function movieListPlayingModal(){
+		$.ajax({
+        	type: 'POST',
+        	url: 'now-playing',
+        	dataType: 'json', // JSON 데이터로 응답을 기대합니다.
+        	beforeSend : function(xhr)
+        	{ //데이터를 전송하기 전에 헤더에 csrf값을 설정
+         	xhr.setRequestHeader(header, token);
+       	 	},
+        	success: function(movielist) {
+        		// 데이터를 테이블에 삽입
+            	var table = $('#movieListPlayingTableModal');
+            	movielist.forEach(function (movie) {
+                var row = $('<tr>');
+                row.css('color', 'white');
+                row.append($('<td>').text(movie.movie_Code));
+                row.append($('<td>').text(movie.movie_Title));
+                row.append($('<td>').text(movie.movie_Screen));
+                row.append($('<td>')
+                    .html('<a class="endBtn" href="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
+                table.append(row);
+        		console.log("상영 중인 영화 목록 모달 가져오기 성공");
+        		});
+        	},
+        	error: function(){
+        		console.log("상영 중인 영화 목록 모달 가져오기 실패");
+        	}
+		
+		});//$.ajax({
+	};//function movieListPlayingModal(page){
+	
+	//3. 상영 종료 영화 모달 이벤트
+	$("#movieListEndedModal").on('click', function(){
+		$("#movieListEndedTableModal").empty();
+		movieListEndedModal();
+	});
+	
+	// 페이지 데이터를 불러오고 모달에 표시하는 함수
+	function movieListEndedModal(){
+		$.ajax({
+        	type: 'POST',
+        	url: 'ended',
+        	dataType: 'json', // JSON 데이터로 응답을 기대합니다.
+        	beforeSend : function(xhr)
+        	{ //데이터를 전송하기 전에 헤더에 csrf값을 설정
+         	xhr.setRequestHeader(header, token);
+       	 	},
+        	success: function(movielist) {
+        		// 데이터를 테이블에 삽입
+            	var table = $('#movieListEndedTableModal');
+            	movielist.forEach(function (movie) {
+                var row = $('<tr>');
+                row.css('color', 'white');
+                row.append($('<td>').text(movie.movie_Code));
+                row.append($('<td>').text(movie.movie_Title));
+                row.append($('<td>').text(movie.movie_Screen));
+                row.append($('<td>')
+                    .html('<a class="playBtn" href="#"><img src=' + playImagePath + ' style="width:25px"></a>'));
+                table.append(row);
+        		console.log("상영 종료 영화 목록 모달 가져오기 성공");
+        		});
+        	},
+        	error: function(){
+        		console.log("상영 종료 영화 목록 모달 가져오기 실패");
+        	}
+		
+		});//$.ajax({
+	};//function movieListPlayingModal(page){
+
+	
+	//---------------------------update 이벤트 -------------------------------//
 	//상영중으로 update
 	$("body").on("click", ".playBtn", function(e) {
     e.preventDefault(); // 기본 링크 동작 방지
@@ -167,22 +246,33 @@ $(document).ready(function() {
         type: 'POST',
         url: 'moviePlayUpdate', 
         data: { "movieCode": movieCode }, 
-        dataType: 'json',
         beforeSend: function(xhr) {
             // 데이터를 전송하기 전에 헤더에 csrf값을 설정
             xhr.setRequestHeader(header, token);
         },
-        success: function(response) {
+        success: function() {
             // AJAX 요청 성공 시 처리
+            $("#movieListAllTable").empty();
+             movieListAll();
+             console.log("moviePlayUpdate : movieListAll()");
+
+			$("#movieListNowPlaying").empty();
+			movieListPlaying();
+             console.log("moviePlayUpdate : movieListPlaying()");
+
+			$("#movieListEnded").empty();
+            movieListEnded();
+             console.log("moviePlayUpdate : movieListEnded()");
             console.log("movieUpdate 성공");
-            // response에서 서버로부터 받은 데이터를 처리
+            
         },
         error: function() {
             // AJAX 요청 실패 시 처리
             console.log("movieUpdate 실패");
+            
         }
      });//$.ajax({
-	});//$("playBtn").click(function(){
+	});//("body").on("click", ".playBtn", function(e) {
 	
 	//상영종료로 update
 	$("body").on("click", ".endBtn", function(e) {
@@ -197,14 +287,24 @@ $(document).ready(function() {
         type: 'POST',
         url: 'movieEndedUpdate', 
         data: { movieCode: movieCode }, 
-        dataType: 'json',
         beforeSend: function(xhr) {
             // 데이터를 전송하기 전에 헤더에 csrf값을 설정
             xhr.setRequestHeader(header, token);
         },
-        success: function(response) {
+        success: function() {
             // AJAX 요청 성공 시 처리
             console.log("movieEndedUpdate 성공");
+
+            $("#movieListAllTable").empty();
+             movieListAll();
+             console.log("movieEndedUpdate : movieListAll()");
+			$("#movieListNowPlaying").empty();
+			movieListPlaying();
+             console.log("movieEndedUpdate : movieListPlaying()");
+			$("#movieListEnded").empty();
+            movieListEnded();
+             console.log("movieEndedUpdate : movieListEnded()");
+            
             // response에서 서버로부터 받은 데이터를 처리
         },
         error: function() {
@@ -212,7 +312,7 @@ $(document).ready(function() {
             console.log("movieEndedUpdate 실패");
         }
      });//$.ajax({
-	});//$("playBtn").click(function(){
+	});//$("body").on("click", ".endBtn", function(e) {
 	
     // movie db 최신화
     $("#updateDBButton").click(function(e) {
