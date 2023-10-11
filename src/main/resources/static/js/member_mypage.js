@@ -104,20 +104,6 @@ $(document).ready(function(){
 	})
 	
 	
-	//마이페이지 개인정보 변경 제출
-	$("#modifyinfoform").submit(function(){
-		
-		//파일 첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
-		//파라미터 'check'라는 이름으로 form에 추가하여 전송
-		if(check == 0){
-			const value = $('#filevalue').text();
-			const html = "<input type='hidden' value='" + value + "' name='check'>";
-			console.log(html);
-			$(this).append(html);
-		}
-	})
-	
-	
 	function showprofilebtn(){
 		if($('#filevalue').text()== ''){	//파일 이름이 없는 경우 이미지 등록 버튼 보이게
 			$('#addProfileImgBtn').css('display','inline-block');
@@ -160,8 +146,24 @@ $(document).ready(function(){
 		$('#filevalue + img').attr('src', "/movieplus/resources/image/member/bg-profile.png"); 
 		$("#filevalue").text('');
 		$(this).css('display', 'none');
+		showprofilebtn();
 		$('#upfile').val(''); //<input type=file>의 값도 빈문자열로 만든다.
+	})
 	
+	
+	//마이페이지 개인정보 변경 제출
+	$("#modifyinfoform").submit(function(){
+		
+		//파일 첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
+		//파라미터 'check'라는 이름으로 form에 추가하여 전송
+		if(check == 0){
+			const value = $('#filevalue').text();
+			const html = "<input type='hidden' value='" + value + "' name='check'>";
+			console.log(html);
+			$(this).append(html);
+		}
+		
+		alert('회원정보가 수정되었습니다.');
 	})
 	
 	

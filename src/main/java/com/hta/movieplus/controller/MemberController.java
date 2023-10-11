@@ -207,6 +207,7 @@ public class MemberController {
 		Member memberInfo = (Member) session.getAttribute("memberInfo");
 		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
 		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+		memberInfo.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
 		session.setAttribute("memberInfo", memberInfo);
 		
 		if(result == 1) {
