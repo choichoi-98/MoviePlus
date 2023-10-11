@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.CartMapper">
+
+	<insert id="addItemToCart" parameterType="StoreVO">
+		insert into STORE_CART(CART_NUM, ITEM_CODE)
+		values(, #{ITEM_CODE})	
+	</insert>
+
+</mapper>

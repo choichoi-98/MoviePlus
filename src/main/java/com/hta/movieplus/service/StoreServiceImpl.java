@@ -65,7 +65,6 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 
-
 //	@Override
 //	public List<StoreVO> getItemList(int page, int limit) {
 //		HashMap<String, Integer> map = new HashMap<String, Integer>();

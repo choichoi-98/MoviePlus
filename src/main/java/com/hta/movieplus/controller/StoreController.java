@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.service.CartService;
 import com.hta.movieplus.service.StoreService;
@@ -40,7 +42,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/admin/additem")
-	public String additem(StoreVO storeVO, ModelAndView mv) {
+	public String additem(StoreVO storeVO) {
 		return "store/additem";
 	}
 	
@@ -52,7 +54,7 @@ public class StoreController {
 //	}
 	
 	@RequestMapping("/admin/additempro")
-	public String additempro(StoreVO storeVO, ModelAndView mv) {
+	public String additempro(StoreVO storeVO) {
 		storeService.insertItem(storeVO);
 		return "store/additem";
 	}
@@ -70,6 +72,7 @@ public class StoreController {
 		if(endpage > maxpage) {
 			endpage = maxpage;
 		}
+		
 		List<StoreVO> itemlist = storeService.getItemList(page, limit);
 		
 		mv.setViewName("store/catalog");
@@ -107,31 +110,62 @@ public class StoreController {
 	}
 	
 	@GetMapping("")
-	public String store() {
-		return "store/store_cp02";
+	public ModelAndView store(ModelAndView mv) {
+		List<StoreVO> ticketlist = storeService.getItemListByKind("ticket");
+		
+		mv.setViewName("store/store_cp02");
+		mv.addObject("ticketlist", ticketlist);
+		return mv;
 	}
 	
 	@GetMapping("/cp02")
-	public String store2() {
-		return "store/store_cp02";
+	public ModelAndView store2(ModelAndView mv) {
+		List<StoreVO> ticketlist = storeService.getItemListByKind("ticket");
+		
+		mv.setViewName("store/store_cp02");
+		mv.addObject("ticketlist", ticketlist);
+		return mv;
 	}
 	
 	@GetMapping("/cp05")
-	public String store5() {
-		return "store/store_cp05";
+	public ModelAndView store5(ModelAndView mv) {
+		List<StoreVO> snacklist = storeService.getItemListByKind("snack");
+		
+		mv.setViewName("store/store_cp05");
+		mv.addObject("snacklist", snacklist);
+		return mv;
 	}
 	
 	@GetMapping("/cp09")
-	public ModelAndView store9(ModelAndView mv) {
+	public ModelAndView store9(ModelAndView mv, HttpServletRequest request) {
 		List<StoreVO> voucherlist = storeService.getItemListByKind("voucher");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("voucherlist", voucherlist);
+		
 		mv.setViewName("store/store_cp09");
 		mv.addObject("voucherlist", voucherlist);
 		return mv;
 	}
 	
+	@RequestMapping("/cp9cart")
+	public ModelAndView cp9cart(
+			@RequestParam("ITEM_CODE") int ITEM_CODE, 
+			ModelAndView mv) {
+		
+		CartVO itemincart = cartService.addItemToCart(ITEM_CODE);
+		mv.setViewName("store/store_cp09");
+		mv.addObject("itemincart", itemincart);
+		return mv;
+	}
+	
 	@GetMapping("/cp07")
-	public String score7() {
-		return "store/store_cp07";
+	public ModelAndView score7(ModelAndView mv) {
+		List<StoreVO> pointlist = storeService.getItemListByKind("point");
+		
+		mv.setViewName("store/store_cp07");
+		mv.addObject("pointlist", pointlist);
+		return mv;
 	}
 	
 	@GetMapping("/item")

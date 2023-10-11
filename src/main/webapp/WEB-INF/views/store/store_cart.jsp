@@ -25,8 +25,8 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="https://www.megabox.co.kr/store"
-						title="스토어">스토어</a> <a href="https://www.megabox.co.kr/store#"
+					<span>Home</span> <a href="#"
+						title="스토어">스토어</a> <a href="#"
 						title="결제">결제</a>
 				</div>
 			</div>

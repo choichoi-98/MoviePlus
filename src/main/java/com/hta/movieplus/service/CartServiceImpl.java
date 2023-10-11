@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.mybatis.mapper.CartMapper;
 import com.hta.movieplus.mybatis.mapper.StoreMapper;
@@ -20,9 +21,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public int additem(StoreVO storeitem) {
-		int result = cdao.insertCart(storeitem);
-		return (result > 0) ? 1 : -1;
+	public CartVO addItemToCart(int ITEM_CODE) {
+		return cdao.addItemToCart(ITEM_CODE);
 	}
 	
 }

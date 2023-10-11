@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html lang="ko">
@@ -54,273 +55,42 @@
 				</div>
 
 				<!-- 카테고리 별 상품 -->
-
-				<div id="divCategoryPrdtArea_CPC02" style="display: none">
-					<!-- store-list -->
-					<div class="store-list mt30">
-						<ul class="list">
-						</ul>
-					</div>
-					<!--// store-list -->
-				</div>
-
 				<div id="divCategoryPrdtArea_CPC05" style="">
 					<!-- store-list -->
 					<div class="store-list mt30">
+						<c:forEach var="i" items="${snacklist}">
 						<ul class="list">
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1970&#39;);"
-								title="메가박스 미니 시네마 (단품) 상세보기">
+							<li class="">
+								<a href="cart">
 									<div class="soldout">SOLD OUT</div>
-
-
-
-
-									<div class="label new">NEW</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_cp5_files/hApRC44t2qBnFmLMlpthyuJTLlsC2qzz_280.jpg"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 미니 시네마 (단품)</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">미니 시네마 (단품)</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>23,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea">
-
-												<span>1,526</span>개 남음
-
-											</p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1971&#39;);"
-								title="메가박스 미니 시네마(러브콤보 세트) 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-									<div class="label new">NEW</div>
-
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_cp5_files/muo0f1sDqziR7MdCuNZiO7cQb5qDrdmP_280.jpg"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">메가박스 미니 시네마(러브콤보 세트)</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">미니 시네마+팝콘L 1+콜라R 2</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>28,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea">
-
-												<span>1,747</span>개 남음
-
-											</p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1728&#39;);"
-								title="러브콤보 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-
-
-
-									<div class="label hot">대표상품</div>
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_cp5_files/qB1IVqlOLCV7hOOEAJp4J9iG3J5oVWjv_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">러브콤보</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">팝콘(L) 1 + 탄산음료(R) 2</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>10,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1729&#39;);"
-								title="더블콤보 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
 									<div class="label event">BEST</div>
-
-
-
-
-
-
-
-
-
 									<div class="img">
 										<img
 											src="./MEET PLAY SHARE, 메가박스_cp5_files/ERDC5wGVMC0YZPIRUsuuaJuAGRyqeDjC_280.png"
 											alt="" onerror="noImg(this);">
 									</div>
-
 									<div class="info">
 										<div class="tit">
 											<!-- 제품명 최대 2줄 -->
-											<p class="name">더블콤보</p>
-
+											<p class="name">${i.ITEM_NAME}</p>
 											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">팝콘(R) 2 + 탄산음료(R) 2</p>
+											<p class="bundle">스낵</p>
 										</div>
-
 										<div class="price">
 											<p class="original"></p>
-
-
-
 											<p class="sale">
-												<em>13,000</em> <span>원</span>
+												<em>${i.ITEM_PRICE}</em> <span>원</span>
 											</p>
-
-
-
 											<p class="ea"></p>
-
 										</div>
 									</div>
-							</a></li>
-
-
-
-
-
+								</a>
+							</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<!--// store-list -->
 				</div>
-
-				<div id="divCategoryPrdtArea_CPC09" style="display: none">
-					<!-- store-list -->
-					<div class="store-list mt30">
-						<ul class="list">
-						</ul>
-					</div>
-					<!--// store-list -->
-				</div>
-
-				<div id="divCategoryPrdtArea_CPC07" style="display: none">
-					<!-- store-list -->
-					<div class="store-list mt30">
-						<ul class="list">
-						</ul>
-					</div>
-					<!--// store-list -->
-				</div>
-
 				<!--// 카테고리 별 상품 -->
 			</div>
 			<!--// inner-wrap -->
