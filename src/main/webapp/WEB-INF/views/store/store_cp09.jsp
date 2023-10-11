@@ -19,6 +19,33 @@
 <!-- 탭 클릭 시 이벤트 처리 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="static/store_tabs.js"></script>
+<script>
+    function addToCart(itemName, itemPrice) {
+        // AJAX를 사용하여 서버에 요청을 보냅니다.
+        $.ajax({
+            type: "POST", // 또는 GET, 서버와의 통신 방식에 따라 선택
+            url: "/addtocart", // 서버에서 처리할 URL 경로를 지정
+            data: {
+                itemName: itemName,
+                itemPrice: itemPrice
+            },
+            success: function (response) {
+                // 서버로부터의 응답을 처리합니다.
+                if (response.success) {
+                    // 성공적으로 장바구니에 추가되었을 때 사용자에게 알림
+                    alert(itemName + "을(를) 장바구니에 추가했습니다.");
+                } else {
+                    // 실패 시 에러 메시지를 사용자에게 표시
+                    alert("상품 추가에 실패했습니다. 다시 시도해주세요.");
+                }
+            },
+            error: function () {
+                // 서버 통신 오류 시 처리
+                alert("서버와의 통신 중 오류가 발생했습니다.");
+            }
+        });
+    }
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -62,7 +89,7 @@
 						<c:forEach var="i" items="${voucherlist}">
 						<ul class="list">
 							<li class="">
-								<a href="cart?ITEM_CODE=${i.ITEM_CODE}">
+								<a href="cart">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label new">NEW</div>
 									<div class="img">

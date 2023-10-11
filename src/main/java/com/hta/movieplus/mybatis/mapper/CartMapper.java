@@ -3,6 +3,7 @@ package com.hta.movieplus.mybatis.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.StoreVO;
 /*
 	Mapper 인터페이스란 매퍼 파일에 기재된 SQL을 호출하기 위한 인터페이스입니다.
@@ -12,6 +13,8 @@ import com.hta.movieplus.domain.StoreVO;
 public interface CartMapper {
 	
 	public int insertCart(StoreVO StoreVO);
+
+	public CartVO addItemToCart(int ITEM_CODE);
 
 	
 }

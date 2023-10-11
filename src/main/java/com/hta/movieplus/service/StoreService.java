@@ -20,6 +20,7 @@ public interface StoreService {
 	public List<StoreVO> getItemListByKind(String ITEM_MENU);
 	
 	public StoreVO get1item(int ITEM_CODE);
+
 	
 //	public boolean isAdmin(int num, String pass);
 //	

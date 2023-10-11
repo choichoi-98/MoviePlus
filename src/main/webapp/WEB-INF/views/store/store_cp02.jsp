@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html lang="ko">
@@ -53,14 +54,13 @@
 				</div>
 
 				<!-- 카테고리 별 상품 -->
-
 				<div id="divCategoryPrdtArea_CPC02" style="">
 					<!-- store-list -->
 					<div class="store-list mt30">
+						<c:forEach var="i" items="${ticketlist}">
 						<ul class="list">
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;2005&#39;);"
-								title="[한가위] 연인 패키지 상세보기">
+							<li class="">
+								<a href="cart">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label event">EVENT</div>
 									<div class="img">
@@ -71,337 +71,23 @@
 									<div class="info">
 										<div class="tit">
 											<!-- 제품명 최대 2줄 -->
-											<p class="name">연인 패키지</p>
-
+											<p class="name">${i.ITEM_NAME}</p>
 											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">2인관람권 + 러브콤보 [팝콘(L)1 + 탄산음료(R)2]</p>
+											<p class="bundle">ticket</p>
 										</div>
 
 										<div class="price">
-											<p class="original">36,000원</p>
+											<p class="original">12,000원</p>
 											<p class="sale">
-												<em>23,000</em> <span>원</span>
+												<em>${i.ITEM_PRICE}</em> <span>원</span>
 											</p>
 											<p class="ea"></p>
 										</div>
 									</div>
-							</a></li>
-
-							<li class="sold-out"><a
-								href="javascript:fn_storeDetail(&#39;2006&#39;);"
-								title="[한가위] 친구 패키지 상세보기">
-									<div class="soldout">SOLD OUT</div>
-									<div class="label event">EVENT</div>
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/iAymxNnDf53SSTbaB4ekEm77DyJh0nUP_280.jpg"
-											alt="" onerror="noImg(this);">
-									</div>
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">친구 패키지</p>
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">3인관람권 + 더블콤보 [팝콘(R)2 + 탄산음료(R)2]</p>
-										</div>
-										<div class="price">
-											<p class="original">51,000원</p>
-											<p class="sale">
-												<em>31,900</em> <span>원</span>
-											</p>
-											<p class="ea"></p>
-										</div>
-									</div>
-							</a></li>
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1747&#39;);"
-								title="일반관람권(2D) 상세보기">
-									<div class="soldout">SOLD OUT</div>
-									<div class="label hot">대표상품</div>
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/OzjTPmOIAocfyQnas3x8Vo9JDRRnHeKf_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">일반관람권(2D)</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">일반 관람권</p>
-										</div>
-
-										<div class="price">
-											<p class="original">13,000원</p>
-											<p class="sale">
-												<em>12,000</em> <span>원</span>
-											</p>
-											<p class="ea"></p>
-										</div>
-									</div>
-							</a></li>
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1748&#39;);"
-								title="더 부티크 전용관람권 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-
-
-
-
-									<div class="label"></div>
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/rxCDUuqHT9RostRRQYeu1mr1knFyHxWr_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">더 부티크 전용관람권</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">2D 더 부티크 전용 관람권</p>
-										</div>
-
-										<div class="price">
-											<p class="original">16,000원</p>
-
-
-
-											<p class="sale">
-												<em>15,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1749&#39;);"
-								title="더 부티크 스위트 전용관람권 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-
-									<div class="label push">추천</div>
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/M8qiScDr6orSchgFPCRCcCtLPVenv6tm_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">더 부티크 스위트 전용관람권</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">더 부티크 스위트 전용 관람권</p>
-										</div>
-
-										<div class="price">
-											<p class="original"></p>
-
-
-
-											<p class="sale">
-												<em>40,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1750&#39;);"
-								title="MX 전용관람권 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-
-
-
-
-									<div class="label"></div>
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/Yk3B0T93JXWbbjrrwVxbmTT9Iij5Tszv_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">MX 전용관람권</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">2D MX 전용 관람권</p>
-										</div>
-
-										<div class="price">
-											<p class="original">17,000원</p>
-
-
-
-											<p class="sale">
-												<em>16,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1751&#39;);"
-								title="Dolby Cinema 전용관람권 상세보기">
-									<div class="soldout">SOLD OUT</div>
-
-
-
-
-
-									<div class="label push">추천</div>
-
-
-
-
-
-
-
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/XxKX38rQAArz5GGaFCs7KwvYyUz5oQFC_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">Dolby Cinema 전용관람권</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">Dolby Cinema 전용 관람권(2D)</p>
-										</div>
-
-										<div class="price">
-											<p class="original">18,000원</p>
-
-
-
-											<p class="sale">
-												<em>17,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
-
-							<li class=""><a
-								href="javascript:fn_storeDetail(&#39;1753&#39;);"
-								title="러브콤보패키지 상세보기">
-									<div class="soldout">SOLD OUT</div>
-									<div class="label event">BEST</div>
-									<div class="img">
-										<img
-											src="./MEET PLAY SHARE, 메가박스_files/ZVX4FRDP8NLYto5HL0gAtxr6u4ZCmwOP_280.png"
-											alt="" onerror="noImg(this);">
-									</div>
-
-									<div class="info">
-										<div class="tit">
-											<!-- 제품명 최대 2줄 -->
-											<p class="name">러브콤보패키지</p>
-
-											<!-- 제품구성 최대 2줄 -->
-											<p class="bundle">2D 일반관람권 2매 + 러브콤보 [팝콘(L)1 + 탄산음료(R)2]</p>
-										</div>
-
-										<div class="price">
-											<p class="original">36,000원</p>
-
-
-
-											<p class="sale">
-												<em>30,000</em> <span>원</span>
-											</p>
-
-
-
-											<p class="ea"></p>
-
-										</div>
-									</div>
-							</a></li>
+								</a>
+							</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<!--// store-list -->
 				</div>

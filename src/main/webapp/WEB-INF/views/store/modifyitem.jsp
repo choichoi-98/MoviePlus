@@ -78,7 +78,7 @@
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드" name="ITEM_CODE">
+										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드" name="ITEM_CODE" readonly="readonly">
 									</div>
 
 									<div class="col-12">
