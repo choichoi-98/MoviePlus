@@ -1,5 +1,9 @@
 package com.hta.movieplus.controller;
 
+import java.io.File;
+import java.util.Calendar;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,16 +11,16 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,6 +35,8 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	@Value("${my.savefolder}")
+	private String saveFolder;
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
 	private SendMail sendMail;
@@ -163,19 +169,34 @@ public class MemberController {
 		return "member/mypage_modify";
 	}
 	
-	
-	//개인정보 수정처리(이메일, 핸드폰번호)
+	//개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
 	public String modifyProcess(Member member, Model model, 
 								HttpServletRequest request, 
 								RedirectAttributes rattr, HttpSession session)throws Exception{
+		
+		MultipartFile uploadfile = member.getUploadfile();
+		
+		if(!uploadfile.isEmpty()) {
+			String fileName = uploadfile.getOriginalFilename();	//원래 파일명
+			member.setPROFILE_ORIGINAL(fileName);				//원래 파일명 저장
+			
+			String fileDBName = fileDBName(fileName, saveFolder);
+			logger.info("fileDBName = " + fileDBName);
+			
+			//업로드한 파일을 매개변수의 경로에 저장
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+			logger.info("transferTo path = " + saveFolder + fileDBName);
+			//바뀐 파일명으로 저장
+			member.setMEMBER_PROFILE(fileDBName);
+		}
+		
 		
 		int result = memberservice.update(member);
 		Member memberInfo = (Member) session.getAttribute("memberInfo");
 		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
 		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
 		session.setAttribute("memberInfo", memberInfo);
-		
 		
 		if(result == 1) {
 			rattr.addFlashAttribute("result","updateSuccess");
@@ -185,8 +206,46 @@ public class MemberController {
 			model.addAttribute("message", "정보 수정 실패");
 			return "error/error";
 		}
-		
 	}
+	
+	
+	private String fileDBName(String fileName, String saveFolder) {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int date = c.get(Calendar.DATE);
+		
+		String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
+		logger.info(homedir);
+		File path1 = new File(homedir);
+		if(!(path1.exists())) {
+			path1.mkdir();	//새로운 폴더 생성
+		}
+		
+		//난수 구하기
+		Random r = new Random();
+		int random = r.nextInt(1000000000);
+		
+		//확장자 구하기 시작 */
+		int index = fileName.lastIndexOf(".");
+		logger.info("index = " + index);
+		
+		String fileExtension = fileName.substring(index + 1);
+		logger.info("fileExtension = " + fileExtension);
+		//확장자 구하기 끝 */
+		
+		
+		//새로운 파일명
+		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+		logger.info("refileName = " + refileName);
+		
+		//오라클 디비에 저장될 파일명
+		String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
+		logger.info("fileDBName = " + fileDBName);
+		return fileDBName;
+	}
+	
+	
 	
 	//마이페이지 - 비밀번호 변경
 	@GetMapping("/passchg")
@@ -194,25 +253,25 @@ public class MemberController {
 		return "member/mypage_passchg";
 	}
 	
-	//
+	//마이페이지 - 비밀번호 변경처리
 	@PostMapping("/modifypass")
-	public String modifypass(Member member, Model model, 
-			HttpServletRequest request, 
-			RedirectAttributes rattr, HttpSession session) {
+	public String modifypass(@RequestParam("MEMBER_ID") String MEMBER_ID, 
+							 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
+							 Model model, 
+							 HttpServletRequest request, 
+							 RedirectAttributes rattr, HttpSession session)throws Exception {
 		
-		String encPassword = passwordEncoder.encode(member.getMEMBER_PASS());
-		logger.info(encPassword);
-		member.setMEMBER_PASS(encPassword);
+		String encPassword = passwordEncoder.encode(MEMBER_PASS);
 		
-		int result = memberservice.updatepass(member);
+		int result = memberservice.updatepass(MEMBER_ID, encPassword);
 		
 		if(result == 1) { 	//삽입이 된 경우
-			session.setAttribute("memberInfo", member);
-			return "/member/member_join_step4";  //step4 화면으로 이동
+			session.invalidate();
+			return "redirect:/main";  //메인페이지로 이동
 		} else {
 			model.addAttribute("url", request.getRequestURL());
 			model.addAttribute("message", "회원 가입 실패");
-			return "redirect:/main";  //에러페이지
+			return "/member/mypage";  //에러페이지
 		}
 	}
 	

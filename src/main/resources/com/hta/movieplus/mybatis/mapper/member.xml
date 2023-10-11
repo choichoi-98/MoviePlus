@@ -44,7 +44,7 @@
 		where  MEMBER_ID = #{MEMBER_ID}
 	</update>
 	
-	<update id="updatepass" parameterType="member">
+	<update id="updatepass">
 		update MEMBER
 		set    MEMBER_PASS = #{MEMBER_PASS} 
 		where  MEMBER_ID = #{MEMBER_ID}

@@ -73,9 +73,10 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public int updatepass(Member m) {
-		return dao.updatepass(m);
+	public int updatepass(String MEMBER_ID, String MEMBER_PASS) {
+		return dao.updatepass(MEMBER_ID, MEMBER_PASS);
 	}
+
 
 
 

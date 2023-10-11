@@ -46,26 +46,21 @@
 			</colgroup>
 			<tbody>
 				<tr>
-					<th scope="row"><label for="pwnow">현재 비밀번호</label></th>
-					<td>
-						<input type="password" id="pwnow" class="input-text w150px">
-					</td>
-				</tr>
-				<tr>
 					<th scope="row"><label for="pwnew">새 비밀번호</label></th>
 					<td>
 						<form id="changepassform" action="${pageContext.request.contextPath}/member/modifypass" method="post">
-  					    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<input name="MEMBER_PASS" type="password" id="pwnew" class="input-text w150px">
-						<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
-						<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
-					</form>
+	  					    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+							<input type="hidden" name="MEMBER_ID" value="${memberInfo.MEMBER_ID}" >
+							<input name="MEMBER_PASS" type="password" id="pwnew" class="input-text w150px">
+							<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
+							<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
+						</form>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
 					<td>
-						<input type="password" id="repwnew" class="input-text w150px">
+						<input type="password" id="checkpwnew" class="input-text w150px">
 						<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
 						<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
 					</td>
@@ -83,7 +78,7 @@
 
 	<div class="btn-group pt40">
 		<button class="button large" style="border:1px solid #792828; color:black;" id="chgcancelBtn">취소</button>
-		<button type="submit" class="button purple large" data-key="login_d358254baad74d7a9913bf7100ea5c0a" id="updatepassBtn">수정</button>
+		<button form="changepassform" type="submit" class="button purple large" data-key="login_d358254baad74d7a9913bf7100ea5c0a" id="updatepassBtn">수정</button>
 	</div>
 </div>
 
