@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
 
@@ -34,6 +35,10 @@ public interface TheaterMapper {
 	public void deleteMemberById(String theater_MANAGER_ID);
 
 	public List<Theater> getAllTheaterList();
+
+	public List<FavoriteTheater> getFavoriteTheaterListById(String name);
+
+	public int checkFavoriteTheater(Map<String, Object> dataMap);
 
 
 	

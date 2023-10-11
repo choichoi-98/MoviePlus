@@ -8,6 +8,8 @@ $(document).ready(function(){
 
 
     // theater-main 시작 =======================================================================
+
+
     $('#favorite-theater-btn').click(function() {
         $('#favor_theater_setting').addClass('on');
         $('.bg-modal').css('opacity', '1');
@@ -26,6 +28,10 @@ $(document).ready(function(){
     	$('.theater-place > ul > li').removeClass('on');
     	$(this).parent().addClass('on');
     })
+
+
+
+    
     // theater-main 끝 =======================================================================
 
     // theater-detail 시작 =======================================================================
@@ -49,20 +55,8 @@ $(document).ready(function(){
         $(tab_selector).addClass('on');
     })
 
-    $('#favorBrch').click(function(){
-        if($(this).hasClass('on')){
-            $(this).removeClass('on');
-            return;
-        }
-        $(this).addClass('on');
 
-        $('#login-alert-modal').css('display', 'block');
-        $('.bg-modal').css('opacity', '1');
-        $('body').addClass('no-scroll');
-    })
     
-
-
     
 
     // theater-detail 끝 =======================================================================
