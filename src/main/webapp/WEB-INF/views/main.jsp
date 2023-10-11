@@ -15,6 +15,12 @@
 #header.main-header{
 	top:0px;
 }
+.button.gblue {
+    color: #fff;
+    line-height: 36px;
+    border: 0;
+    background: #792828;
+}
 </style>
 
 
@@ -40,7 +46,6 @@ document.ready
 			<div id="main_section01" class="section main-movie on">
 				<div class="bg">
 					<div class="bg-pattern"></div>
-					<img src="./MEET PLAY SHARE, 메가박스_files/pvp0aae1G11CUCBtP2ynLNg5hRCiKqeq_380.jpg" alt="거미집 티저 포스터_개봉일.jpg" onerror="noImg(this, &#39;main&#39;);">
 					</div>
 
 				<!-- cont-area  -->
@@ -94,7 +99,9 @@ document.ready
         </a>
         <div class="btn-util">
             <button type="button" class="button btn-like" rpst-movie-no="${m.movie_Code}">
-                <i title="보고싶어 설정 안함" class="iconset ico-heart-toggle-gray"></i>
+                <img
+                   src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png" 
+                   style="width:15px" >
                 398</button>
             <div class="case">
                 <!-- 개봉 예매가능 기본-->
@@ -121,12 +128,7 @@ document.ready
 						<div class="cell"><a href="https://www.megabox.co.kr/movie" title="박스오피스 보기"><i class="iconset ico-boxoffice-main"></i> 박스오피스</a></div>
 						<div class="cell"><a href="https://www.megabox.co.kr/booking" title="빠른예매 보기"><i class="iconset ico-quick-reserve-main"></i> 빠른예매</a></div>
 					</div>
-					<!-- 2019-02-22 추가 : 마우스 아이콘 영역 추가 -->
-					<div class="moving-mouse">
-						<!--  <i class="iconset ico-mouse"></i> -->
-						<img class="iconset" alt="" src="./MEET PLAY SHARE, 메가박스_files/ico-mouse.png" style="top: 2px;">
-					</div>
-					<!--// 2019-02-22 추가 : 마우스 아이콘 영역 추가 -->
+					
 				</div>
 				<!--// cont-area  -->
 			</div>

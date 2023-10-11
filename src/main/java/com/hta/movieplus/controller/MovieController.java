@@ -60,25 +60,6 @@ public class MovieController {
 		
 	}
 	
-//	@ResponseBody
-//	@RequestMapping("/updatePoster")
-//	public void updatePoster(HttpServletRequest request, Model model) throws Exception {
-//		//MovieServiceImpl을 사용하여 DB에 저장된 MOVIE_TITLE, MOVIE_DIRECTOR 값 가져옴
-//		 List<Movie> movies = movieServiceImpl.getAllMovies(); 
-//	     logger.info("movies=" + movies.toString()); 
-//		 
-//		 for(Movie  movie : movies) {
-//			 String movieTitle = movie.getMovie_Title();
-//			 String movieDirector = movie.getMovie_Director();
-//			 if (movieDirector == null) {
-//				 movieDirector = " ";
-//			 }
-//			 //TestMoviePosterApi.moviePosterApi(movieTitle, movieDirector);
-//			 logger.info("여기는 MovieController의 updatePoster");
-//		 }
-//	      
-//		
-//	}
 	
 	@ResponseBody
 	@RequestMapping(value="/movieListAll")
@@ -129,6 +110,7 @@ public class MovieController {
 	public List<Movie> getPlayingMovie(){
 		return movieServiceImpl.getPlayingMovie();
 	}
+
 	
 	@ResponseBody
 	@RequestMapping(value="/ended")
