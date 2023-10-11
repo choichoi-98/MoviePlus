@@ -83,13 +83,16 @@ public class MovieServiceImpl implements MovieService{
 		return dao.getMovieList(map);
 	}
 
-	public String moviePlayUpdate(String movieCode) {
+	public int moviePlayUpdate(String movieCode) {
+		System.out.println(movieCode);
 		return dao.moviePlayUpdate(movieCode);
 	}
 
-	public String movieEndedUpdate(String movieCode) {
+	public int movieEndedUpdate(String movieCode) {
 		return dao.movieEndedUpdate(movieCode);
 	}
+
+
 
 
 

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>MoviePlus: 모두를 위한 영화관 </title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" media="all">
 <style>
 #header.main-header{
@@ -46,14 +49,12 @@ document.ready
 					<!-- tab-sorting -->
 					<div class="tab-sorting" style="margin-top:130px">
 						<button type="button" class="on" sort="boxoRankList" name="btnSort">박스오피스</button>
-						<!-- 2020.03.16. 김민영K 삭제요청.
-						<button type="button" sort="accmAdncList" name="btnSort">누적관객순</button>
-						<button type="button" sort="megaScoreList" name="btnSort">메가스코어순</button>
-						-->
 					</div>
 					<!-- tab-sorting -->
 
-					<a href="https://www.megabox.co.kr/movie" class="more-movie" title="더 많은 영화보기">
+					<a href="https://www.megabox.co.kr/movie" class="more-movie" title="더 많은 영화보기" style="
+    top: 140px;
+">
 						더 많은 영화보기 <i class="iconset ico-more-corss gray"></i>
 					</a>
 
@@ -65,46 +66,44 @@ document.ready
 									<!-- 각 map 별 첫번째 li 에 first클래스 추가 -->
 
 										<!-- 각 map 별 첫번째 li 에 first클래스 추가 -->
-										<c:forEach var="m" items="${movieList }" begin="0" end="3" varStatus="loop">
-										<script>
-       									// JavaScript를 사용하여 첫 번째 포스터 이미지의 URL을 설정
-       									 var posterUrls = "${m.movie_Poster}".split('|');
-       									 var firstPosterUrl = posterUrls[0];
-       									 document.querySelector(".poster").src = firstPosterUrl;
-    									</script>
-										
-										<li name="li_boxoRankList" class="first">
-											<a href="javascript:gfn_moveDetail(&#39;23069500&#39;)" class="movie-list-info" title="영화상세 보기">
-												<div class="screen-type2">
-													<p></p>
-													</div>
-												<p class="rank">${loop.index + 1}<span class="ir">위</span></p>
-												<!-- to 개발 : alt 값에 영화 제목 출력 -->
-										      	<img src="" alt="${m.movie_Title}" class="poster" onerror="noImg(this, &#39;main&#39;);">
-							                      	<div class="wrap" style="display: none; opacity: 1;">
-													<div class="summary">
-														${m.movie_Plot}
-														
-													<div class="score">
-														<div class="preview">
-															<p class="tit">관람평</p>
-															<p class="number">0<span class="ir">점</span></p>
-														</div>
-													</div>
-												</div>
-											</a>
-											<div class="btn-util">
-                                                <button type="button" class="button btn-like" rpst-movie-no="23069500">
-													<i title="보고싶어 설정 안함" class="iconset ico-heart-toggle-gray"></i>
-														398</button>
-                                                <div class="case">
-                                                    <!-- 개봉 예매가능 기본-->
-                                                            <a href="javascript:moveBokdPage(&#39;23069500&#39;);" class="button gblue" title="영화 예매하기">예매</a>
-                                                        </div>
-                                                </div>
-										</li>
-										
-										</c:forEach>
+										<c:forEach var="m" items="${movieList}" begin="0" end="3" varStatus="loop">
+    <li name="li_boxoRankList" class="first" style="
+    border-right-width: 50px‒;
+    padding-right: 0px;
+    border-right-width: 50px;
+    margin-right: 30px;
+    ">
+        <a href="javascript:gfn_moveDetail('${m.movie_Code}')" class="movie-list-info" title="영화상세 보기">
+            <div class="screen-type2">
+                <p></p>
+            </div>
+            <p class="rank">${loop.index + 1}<span class="ir">위</span></p>
+            <!-- to 개발 : alt 값에 영화 제목 출력 -->
+            <img src="${fn:split(m.movie_Poster, '|')[0]}" alt="${m.movie_Title}" class="poster" onerror="noImg(this, 'main');">
+            <div class="wrap" style="display: none; opacity: 1;">
+                <div class="summary">
+                    ${m.movie_Plot}
+                </div>
+                <div class="score">
+                    <div class="preview">
+                        <p class="tit">관람평</p>
+                        <p class="number">0<span class="ir">점</span></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="btn-util">
+            <button type="button" class="button btn-like" rpst-movie-no="${m.movie_Code}">
+                <i title="보고싶어 설정 안함" class="iconset ico-heart-toggle-gray"></i>
+                398</button>
+            <div class="case">
+                <!-- 개봉 예매가능 기본-->
+                <a href="javascript:moveBokdPage('${m.movie_Code}');" class="button gblue" title="영화 예매하기">예매</a>
+            </div>
+        </div>
+    </li>
+</c:forEach>
+
 									<!-- 박스오피스 종료 -->
 								</ol>
 					</div>
