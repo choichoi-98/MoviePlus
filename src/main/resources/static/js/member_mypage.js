@@ -39,9 +39,7 @@ $(document).ready(function(){
 	function formatPhoneNo(phoneNumber) {
    	   return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
     }
-	
-	
-	
+
 	
 	//이메일 변경
 	let verifyemailcheck = false;
@@ -96,16 +94,109 @@ $(document).ready(function(){
 		} //checkinput === '' else end	
 	})
 	
-	//마이페이지 개인정보 변경 제출
-	$("#modifyinfoform").submit(function(){
-		if(verifyemailcheck = false)
-		return false;
+	
+		
+	//마이페이지 - 프로필 이미지 등록버튼 클릭 
+	let check = 0;
+	
+	$('#addProfileImgBtn').click(function(){
+		$('#upfile').click();
 	})
 	
-	//마이페이지 비밀번호 변경
-	$('#changepassform').submit(function(){
-		
 	
+	//마이페이지 개인정보 변경 제출
+	$("#modifyinfoform").submit(function(){
+		
+		//파일 첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
+		//파라미터 'check'라는 이름으로 form에 추가하여 전송
+		if(check == 0){
+			const value = $('#filevalue').text();
+			const html = "<input type='hidden' value='" + value + "' name='check'>";
+			console.log(html);
+			$(this).append(html);
+		}
+	})
+	
+	
+	function showprofilebtn(){
+		if($('#filevalue').text()== ''){	//파일 이름이 없는 경우 이미지 등록 버튼 보이게
+			$('#addProfileImgBtn').css('display','inline-block');
+		} else {		//파일 이름이 있는 경우 이미지 삭제 버튼 보이게				
+			$('#deleteProfileImgBtn').css('display', 'inline-block');
+			$('#addProfileImgBtn').css('display','none');
+		}
+	}
+	
+	showprofilebtn();
+	
+	
+	
+	//마이페이지 - 프로필 이미지 파일 업로드 미리보기
+	$('#upfile').change(function(upload){
+		check++;
+		const inputfile = $(this).val().split('\\');
+		const filename=inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
+
+		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
+		if(pattern.test(filename)){
+			$('#upfile').text(filename);
+			
+			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
+			
+		  reader.readAsDataURL(event.target.files[0]);
+			 
+		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('#filevalue + img').attr('src', this.result);  
+		  };
+		} else {
+			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
+			$(this).val('')
+		}
+		
+	})
+	
+	//마이페이지 - 프로필 이미지 삭제
+	$('#deleteProfileImgBtn').click(function(){
+		$('#filevalue + img').attr('src', "/movieplus/resources/image/member/bg-profile.png"); 
+		$("#filevalue").text('');
+		$(this).css('display', 'none');
+		$('#upfile').val(''); //<input type=file>의 값도 빈문자열로 만든다.
+	
+	})
+	
+	
+	//마이페이지 비밀번호 변경
+	let passcheck = false;
+	
+	$('#changepassform').submit(function(){
+		var pwnew = $('#pwnew').val();
+		var checkpwnew = $('#checkpwnew').val();
+		
+		/*
+		if(!passcheck){
+			alert('비밀번호를 확인해주세요.');
+			return false;
+		}
+		*/
+		
+		if(pwnew == ''){	//새 비밀번호 미입력
+			alert('새 비밀번호를 입력하세요.');
+			return false;
+		}
+		
+		if(checkpwnew == ''){	//새 비밀번호 재입력 미입력
+			alert('새 비밀번호를 재입력하세요.');
+			return false;
+		}
+		
+		if(pwnew != checkpwnew){	//새 비밀번호 확인 불일치
+			alert('비밀번호를 확인해주세요.');
+			return false;
+		}
+		
+		alert('비밀번호가 변경되었습니다.');
+		
+		
 	})
 	
 	

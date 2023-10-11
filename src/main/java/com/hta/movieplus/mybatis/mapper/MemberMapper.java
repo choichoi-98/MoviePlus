@@ -19,7 +19,7 @@ public interface MemberMapper {
 	
 	public int update(Member m);
 
-	public int updatepass(Member m);
+	public int updatepass(String MEMBER_ID, String MEMBER_PASS);
 	
 }
 

@@ -1,5 +1,7 @@
 package com.hta.movieplus.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private int    MEMBER_NUM; 					//회원번호
 	private String MEMBER_NAME;					//이름
@@ -15,6 +17,35 @@ public class Member {
 	private int    MEMBER_POINT;				//적립 포인트
 	
 	
+	
+	private MultipartFile uploadfile;			//프로필 사진 업로드시 사용하는 <input name="uploadfile">과 일치하는지 확인!
+	private String PROFILE_ORIGINAL;
+	
+	
+	@Override
+	public String toString() {
+		return "Member [MEMBER_NUM=" + MEMBER_NUM + ", MEMBER_NAME=" + MEMBER_NAME + ", MEMBER_ID=" + MEMBER_ID
+				+ ", MEMBER_PASS=" + MEMBER_PASS + ", MEMBER_EMAIL=" + MEMBER_EMAIL + ", MEMBER_PHONENO="
+				+ MEMBER_PHONENO + ", MEMBER_BIRTH=" + MEMBER_BIRTH + ", MEMBER_PROFILE=" + MEMBER_PROFILE
+				+ ", MEMBER_AUTH=" + MEMBER_AUTH + ", MEMBER_LOGINTYPE=" + MEMBER_LOGINTYPE + ", MEMBER_MEMBERSHIP="
+				+ MEMBER_MEMBERSHIP + ", MEMBER_POINT=" + MEMBER_POINT + ", uploadfile=" + uploadfile
+				+ ", PROFILE_ORIGINAL=" + PROFILE_ORIGINAL + "]";
+	}
+
+	
+	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
+	public String getPROFILE_ORIGINAL() {
+		return PROFILE_ORIGINAL;
+	}
+	public void setPROFILE_ORIGINAL(String pROFILE_ORIGINAL) {
+		PROFILE_ORIGINAL = pROFILE_ORIGINAL;
+	}
 	public int getMEMBER_NUM() {
 		return MEMBER_NUM;
 	}
