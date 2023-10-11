@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hta.movieplus.mybatis.mapper.CartMapper">
-
-	<insert id="addItemToCart" parameterType="StoreVO">
-		insert into STORE_CART(CART_NUM, ITEM_CODE)
-		values(, #{ITEM_CODE})	
+	
+	<insert id="addItemToCart" parameterType="CartVO">
+    <selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
+        select nvl(max(CART_NUM), 0) + 1 from STORE_CART
+    </selectKey>
+    	insert into STORE_CART(CART_NUM, ITEM_CODE)
+    	values(#{CART_NUM}, #{ITEM_CODE})
 	</insert>
-
+	
+	<select id="getCodeList" parameterType="CartVO" resultType="StoreVO">
+		SELECT * FROM STORE_CART
+		INNER JOIN STORE_ITEM ON STORE_CART.ITEM_CODE = STORE_ITEM.ITEM_CODE
+		WHERE STORE_CART.ITEM_CODE = #{ITEM_CODE}
+	</select>
+	
 </mapper>

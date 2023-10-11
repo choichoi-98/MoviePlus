@@ -34,6 +34,11 @@
     	WHERE ITEM_CODE = #{ITEM_CODE}
 	</select>
 	
+	<select id="getItemListByCodes" parameterType="java.util.Map">
+		select * from STORE_ITEM
+		where ITEM_CODE = #{ITEM_CODE}
+	</select>
+	
 	<select id="seleteItem" parameterType="StoreVO">
 		select * from STORE_ITEM
 		where ITEM_CODE = #{ITEM_CODE}
