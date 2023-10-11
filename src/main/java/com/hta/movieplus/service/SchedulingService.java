@@ -1,9 +1,13 @@
 package com.hta.movieplus.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
+import com.hta.movieplus.domain.TimeTableDate;
 
 public interface SchedulingService {
 
@@ -20,5 +24,13 @@ public interface SchedulingService {
 	TheaterSchedule getSchedule(int scheduleId);
 
 	int updateSchedule(TheaterSchedule schedule);
+
+	List<TimeTableDate> getDateList();
+
+	List<TheaterSchedule> getMovieScheduleWithMovie(Map<String, Object> dataMap);
+
+	List<Theater> getTheaterWithMovie(Map<String, Object> dataMap);
+
+	List<TheaterRoom> getTheaterRoomWithMovie(Map<String, Object> dataMap);
 
 }

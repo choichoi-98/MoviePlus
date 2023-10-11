@@ -120,5 +120,21 @@
 		WHERE FT.THEATER_ID = ${theaterId}
 		AND M.MEMBER_ID = #{userId} 
 	</select>
+	
+	<insert id="addFavoriteTheater" parameterType="map">
+		INSERT INTO FAVORITE_THEATER
+		VALUES(FAVORITE_THEATER_SEQ.NEXTVAL, ( SELECT MEMBER_NUM
+												FROM MEMBER
+												WHERE MEMBER_ID = #{userId} ), #{theaterId} )
+	</insert>
+	
+	<delete id="deleteFavoriteTheater" parameterType="map">
+		DELETE
+		FROM FAVORITE_THEATER
+		WHERE THEATER_ID = #{theaterId}
+		AND MEMBER_NUM = ( SELECT MEMBER_NUM
+							FROM MEMBER
+							WHERE MEMBER_ID = #{userId} )
+	</delete>
 
 </mapper>

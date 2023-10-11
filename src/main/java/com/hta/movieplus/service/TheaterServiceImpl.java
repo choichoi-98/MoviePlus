@@ -185,4 +185,26 @@ public class TheaterServiceImpl implements TheaterService {
 		return mapper.checkFavoriteTheater(dataMap);
 	}
 
+	@Override
+	public int deleteFavoriteTheater(int theaterId, String userId) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		dataMap.put("theaterId", theaterId);
+		dataMap.put("userId", userId);
+		
+		return mapper.deleteFavoriteTheater(dataMap);
+	}
+
+	@Override
+	public int addFavoriteTheater(int theaterId, String userId) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		dataMap.put("theaterId", theaterId);
+		dataMap.put("userId", userId);
+		
+		return mapper.addFavoriteTheater(dataMap);
+	}
+
 }

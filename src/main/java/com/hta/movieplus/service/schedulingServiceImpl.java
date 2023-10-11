@@ -2,8 +2,11 @@ package com.hta.movieplus.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,7 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
+import com.hta.movieplus.domain.TimeTableDate;
 import com.hta.movieplus.mybatis.mapper.SchedulingMapper;
 
 @Service
@@ -75,14 +81,6 @@ public class schedulingServiceImpl implements SchedulingService {
 		
 		LocalTime compStartTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_START());
 		LocalTime compEndTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_END());
-
-//		LocalTime firstTime = LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START());
-//		LocalTime LastTime = LocalTime.parse(scheduleList.get(scheduleList.size()-1).getTHEATER_SCHEDULE_END());
-//		
-//		if(compStartTime.isAfter(LastTime) && compEndTime.isBefore(firstTime)) {
-//			return true;
-//		}// 가장 처음, 가장 끝 로직
-		
 		
 		for(int i=0;i<listSize;i++) {
 			LocalTime origStartTime = LocalTime.parse(scheduleList.get(i).getTHEATER_SCHEDULE_START());
@@ -92,12 +90,6 @@ public class schedulingServiceImpl implements SchedulingService {
 				logger.info("넘어감");
 				origEndTime = LocalTime.of(0,0,0);
 			}
-		
-			
-			
-//			if(i==0 && compEndTime.isBefore(LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START()))) {
-//				return true;
-//			}
 			
 			if(compStartTime.isAfter(origEndTime)) { // 
 				if(i == listSize-1) {
@@ -140,6 +132,46 @@ public class schedulingServiceImpl implements SchedulingService {
 	public int updateSchedule(TheaterSchedule schedule) {
 		// TODO Auto-generated method stub
 		return mapper.updateSchedule(schedule);
+	}
+
+	@Override
+	public List<TheaterSchedule> getMovieScheduleWithMovie(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+
+		
+		return mapper.getMovieScheduleWithMovie(dataMap);
+	}
+
+	@Override
+	public List<TimeTableDate> getDateList() {
+		// TODO Auto-generated method stub
+		List<TimeTableDate> dateList = new ArrayList<TimeTableDate>();
+		
+		
+		// 오늘 날짜 기준으로 14일까지의 값
+		LocalDate date = LocalDate.now();
+		date = date.minusDays(1);
+		
+		for(int i=0;i<=14;i++) {
+			TimeTableDate temp = new TimeTableDate(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.KOREAN).toString(), date.toString());
+			dateList.add(temp);
+			
+			date = date.plusDays(1);
+			
+		}
+		return dateList;
+	}
+
+	@Override
+	public List<Theater> getTheaterWithMovie(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return mapper.getTheaterWithMovie(dataMap);
+	}
+
+	@Override
+	public List<TheaterRoom> getTheaterRoomWithMovie(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return mapper.getTheaterRoomWithMovie(dataMap);
 	}
 	
 	

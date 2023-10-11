@@ -12,11 +12,13 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
-<script
+<script 
 	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	
 
 
 
@@ -67,19 +69,20 @@
 				<!--// theater-area-list -->
 
 				<p class="name">강남</p>
-
+				<input type="hidden" id="ajax-theaterId" value="${ajax_theaterId}">
 				<div class="btn-util right">
 
 					<div class="block">
 
 						<sec:authorize access="isAnonymous()">
-							<button type="button" class="btn btn-like" id="non-login-favorBrch">
+							<button type="button" class="btn btn-like"
+								id="non-login-favorBrch">
 								<i class="iconset ico-like-line"></i> <span>선호극장</span>
 							</button>
 						</sec:authorize>
-						
+
 						<sec:authorize access="isAuthenticated()">
-						<button type="button" class="btn btn-like" id="favorBrch">
+							<button type="button" class="btn btn-like" id="favorBrch">
 								<i class="iconset ico-like-line"></i> <span>선호극장</span>
 							</button>
 						</sec:authorize>
