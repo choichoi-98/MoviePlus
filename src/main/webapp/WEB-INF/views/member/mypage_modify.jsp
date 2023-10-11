@@ -40,7 +40,7 @@
                                   <div class="profile-img">
                                       <img src="${pageContext.request.contextPath}/resources/image/member/profile1.png" alt="프로필 사진">
                                   </div>
-
+									 <!-- <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  -->
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn">이미지 삭제</button>
                                       
                                   <a href="${pageContext.request.contextPath}/member/delete?MEMBER_ID=${memberInfo.MEMBER_ID}" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>

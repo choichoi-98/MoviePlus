@@ -167,7 +167,7 @@ button.button.purple {
 
 <!-- 로그인 실패 알림 모달 -->
 <div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005; display: none;"></div>
-<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 0;">
+<section id="loginfailalert" class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 0;  display: none;">
 	<div class="wrap">
 		<header class="layer-header">
 			<h3 class="tit">알림</h3>

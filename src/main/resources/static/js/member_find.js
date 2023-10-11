@@ -52,7 +52,6 @@ $(document).ready(function(){
 		                 $('#findIdBirth').val('');
 		                 $('#findIdPhoneno').val('');
 					} else {		    //db에 해당 아이디가 있는 경우
-						alert('회원정보가 있습니다.');
 						$('#findIdresult').text(resp.member_ID);
 						openAlertPopup();
 					}		

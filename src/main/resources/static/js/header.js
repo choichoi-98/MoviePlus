@@ -132,6 +132,7 @@ $(document).ready(function(){
 	
 	function openAlertPopup(){
 		$('#loginfailalert').css('opacity', '1');
+		//$('#loginfailalert').css('display', 'block');
 		$('.alertStyle').css('display', 'block');
         $('body').addClass('no-scroll');
 	}

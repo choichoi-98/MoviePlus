@@ -21,14 +21,14 @@
 <div class="alertStyle" style="position: fixed; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; width: 100%; height: 100%; z-index: 5005; display: none;"></div>
 <section class="alert-popup" style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 371px; left: 459.5px; width: 400px; opacity: 0;">
 	<div class="wrap">
-		<header class="layer-header">
+		<header class="layer-header" style="background: #792828;">
 			<h3 class="tit">알림</h3>
 		</header>
 		<div class="layer-con" style="height:250px">
 			<p class="txt-common"><p class="txt-common">회원님의 아이디는 <span id="findIdresult"></span> 입니다.</p>
 			<div class="btn-group">
 				<button type="button" class="button lyclose" style="display: none;"></button>
-				<button id="alertclose" type="button" class="button purple confirm">확인</button>
+				<button id="alertclose" type="button" class="button purple confirm" style="background: #792828;">확인</button>
 			</div>
 		</div>
 		<button type="button" class="btn-layer-close">레이어 닫기</button>

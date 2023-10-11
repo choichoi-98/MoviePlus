@@ -37,9 +37,6 @@
 	<ul class="dot-list mb10">
 		<li>현재 비밀번호를 입력한 후 새로 사용할 비밀번호를 입력하세요.</li>
 	</ul>
-
-    <form id="changepassform" action="${pageContext.request.contextPath}/member/modifypass" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	<div class="table-wrap mb20">
 		<table class="board-form">
 			<caption>현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 항목을 가진 표</caption>
@@ -57,9 +54,12 @@
 				<tr>
 					<th scope="row"><label for="pwnew">새 비밀번호</label></th>
 					<td>
+						<form id="changepassform" action="${pageContext.request.contextPath}/member/modifypass" method="post">
+  					    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<input name="MEMBER_PASS" type="password" id="pwnew" class="input-text w150px">
 						<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
 						<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
+					</form>
 					</td>
 				</tr>
 				<tr>
@@ -82,10 +82,9 @@
 	</ul>
 
 	<div class="btn-group pt40">
-		<button class="button large" id="cancelBtn">취소</button>
+		<button class="button large" style="border:1px solid #792828; color:black;" id="chgcancelBtn">취소</button>
 		<button type="submit" class="button purple large" data-key="login_d358254baad74d7a9913bf7100ea5c0a" id="updatepassBtn">수정</button>
 	</div>
-	</form>
 </div>
 
 <!-- contents end -->
