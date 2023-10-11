@@ -29,7 +29,7 @@ public class MainController {
 	@RequestMapping("/main")
 	public ModelAndView Main( ModelAndView mv) {
 		
-		List<Movie> movieList = movieServiceImpl.getAllMovies();
+		List<Movie> movieList = movieServiceImpl.getPlayingMovie();
 		mv.addObject("movieList", movieList);
 		
 		return mv;

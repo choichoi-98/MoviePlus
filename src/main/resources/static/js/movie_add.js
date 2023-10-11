@@ -57,8 +57,7 @@ $(document).ready(function() {
                  row.append($('<td>').text(movie.movie_Title));
                  row.append($('<td>').text(movie.movie_Screen));
                  row.append($('<td>')
-                 .html('<a class="playBtn" href="#"><img src=' + playImagePath + ' style="width:25px"></a>'
-                   + ' <a class="endBtn" href="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
+                 .html('<a class="playBtn" href="#"><img src=' + pauseImagePath + ' style="width:25px"></a>'));
                 table.append(row);
                 
             });
@@ -70,7 +69,6 @@ $(document).ready(function() {
     });//$.ajax({
     
     //상영 종료 영화
-    //상영 중인 영화
 	$.ajax({
         type: 'POST',
         url: 'ended',
@@ -90,8 +88,7 @@ $(document).ready(function() {
                  row.append($('<td>').text(movie.movie_Title));
                  row.append($('<td>').text(movie.movie_Screen));
                  row.append($('<td>')
-                 .html('<a class="playBtn" href="#"><img src=' + playImagePath + ' style="width:25px"></a>'
-                   + ' <a class="endBtn" href="#"><img src=' + playImagePath + ' style="width:25px"></a>'));
+                 .html('<a class="playBtn" href="#"><img src=' + playImagePath + ' style="width:25px"></a>'));
                 table.append(row);
                 
             });
@@ -164,12 +161,12 @@ $(document).ready(function() {
     var movieCode = $(this).closest("tr").find("td:first").text().trim();
 
     console.log("playBtn");
-    console.log(movieCode);
+    console.log("movieCode:"+movieCode);
 	
     $.ajax({
         type: 'POST',
         url: 'moviePlayUpdate', 
-        data: { movieCode: movieCode }, 
+        data: { "movieCode": movieCode }, 
         dataType: 'json',
         beforeSend: function(xhr) {
             // 데이터를 전송하기 전에 헤더에 csrf값을 설정
@@ -188,7 +185,7 @@ $(document).ready(function() {
 	});//$("playBtn").click(function(){
 	
 	//상영종료로 update
-	$(".endBtn").click(function(e) {
+	$("body").on("click", ".endBtn", function(e) {
     e.preventDefault(); // 기본 링크 동작 방지
 
     var movieCode = $(this).closest("tr").find("td:first").text().trim();

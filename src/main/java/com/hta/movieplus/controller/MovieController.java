@@ -97,7 +97,7 @@ public class MovieController {
 	                    ) {
 	    Map<String, Object> response = new HashMap<>();
 
-	    int limit = 20;
+	    int limit = 100;
 	    
 	    // 전체 영화 목록을 가져오는 대신, 해당 페이지의 데이터만 가져오도록 서비스 계층 호출
 	    List<Movie> movieList = movieServiceImpl.getMovieListByPage(page, limit);
@@ -106,8 +106,8 @@ public class MovieController {
 	    int listcount = movieServiceImpl.getListCount();
 
 	    int maxpage = (listcount + limit - 1) / limit;
-	    int startpage = ((page - 1) / 20) * 20 + 1;
-	    int endpage = startpage + 20 - 1;
+	    int startpage = ((page - 1) / 100) * 100 + 1;
+	    int endpage = startpage + 100 - 1;
 	    if (endpage > maxpage)
 	         endpage = maxpage;
 	    System.out.println("startpage="+startpage);
@@ -138,14 +138,15 @@ public class MovieController {
 
 	@ResponseBody
 	@RequestMapping(value="/moviePlayUpdate")
-	public String moviePlayUpdate(@RequestParam("movieCode") String movieCode){
-		return movieServiceImpl.moviePlayUpdate(movieCode);
+	public void moviePlayUpdate(@RequestParam("movieCode") String movieCode){
+		System.out.println("movieCode: " + movieCode);
+		 movieServiceImpl.moviePlayUpdate(movieCode);
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/movieEndedUpdate")
-	public String movieEndedUpdate(@RequestParam("movieCode") String movieCode){
-		return movieServiceImpl.movieEndedUpdate(movieCode);
+	public void movieEndedUpdate(@RequestParam("movieCode") String movieCode){
+		 movieServiceImpl.movieEndedUpdate(movieCode);
 	}
 	
 }

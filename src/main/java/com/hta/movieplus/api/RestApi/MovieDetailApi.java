@@ -57,10 +57,6 @@ public class MovieDetailApi {
 				= (Map<String, Object>) responseBody.get("movieInfoResult");
 			logger.info(movieDetailResult.toString());
 			
-			for(String key : responseBody.keySet()){
-                System.out.println("키 : " + key);
-            }
-			
 			//출연배우 정보를 가져와서 MovieServiceImpl를 사용하여 업데이트
 			Map<String,Object> movieInfoList 
 				= (Map<String, Object>)movieDetailResult.get("movieInfo");

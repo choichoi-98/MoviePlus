@@ -69,9 +69,7 @@ public class MovieListApi {
 				for (Map<String, Object> movieData : movieList) {
 					String prdtStatNm = (String) movieData.get("prdtStatNm");
 					String genreAlt = (String) movieData.get("genreAlt");
-					logger.info("거르기 전 genreAlt:" + genreAlt);
 					String repGenreNm = (String) movieData.get("repGenreNm");
-					logger.info("거르기 전 repGenreNm:" + repGenreNm);
 
 					if(!genreAlt.isEmpty()&& genreAlt != null) {
 						
@@ -81,8 +79,6 @@ public class MovieListApi {
 							
 						  if(!repGenreNm.isEmpty() && repGenreNm != null) {
 							if (!repGenreNm.equals("멜로/로맨스")) {
-								logger.info("거른 후 genreAlt:" + genreAlt);
-								logger.info("거른 후 repGenreNm: " + repGenreNm);
 
 								if (prdtStatNm.equals("개봉") || prdtStatNm.equals("개봉 예정")) {
 									Movie movie = new Movie();
@@ -106,7 +102,6 @@ public class MovieListApi {
 									Movie returnmovie = movieServiceImpl.select((String) movieData.get("movieCd"));
 									if (returnmovie == null) {
 										movieServiceImpl.insert(movie);
-										logger.info("for문 : 영화 데이터 삽입 성공");
 
 									}
 								 }
@@ -118,7 +113,6 @@ public class MovieListApi {
 				}
 				}
 				page++;
-				logger.info("page=" + page);
 			}
 
 		} catch (HttpClientErrorException | HttpServerErrorException e) {

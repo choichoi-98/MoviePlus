@@ -34,9 +34,10 @@ public interface MovieMapper {
 
 	public List<Movie> getMovieList(HashMap<String, Integer> map);
 
-	public String moviePlayUpdate(String movieCode);
+	public int moviePlayUpdate(String movieCode);
 
-	public String movieEndedUpdate(String movieCode);
+	public int movieEndedUpdate(String movieCode);
+
 
 }
 
