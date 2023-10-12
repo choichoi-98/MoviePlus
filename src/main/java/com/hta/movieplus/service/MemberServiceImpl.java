@@ -60,28 +60,29 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
-	@Override
+	@Override //회원탈퇴
 	public void delete(String MEMBER_ID) {
 		dao.delete(MEMBER_ID);
 	}
 
 
-	@Override
+	@Override //개인정보수정
 	public int update(Member m) {
 		return dao.update(m);
 	}
 
 
-	@Override
+	@Override //마이페이지 - 비밀번호변경
 	public int updatepass(String MEMBER_ID, String MEMBER_PASS) {
 		return dao.updatepass(MEMBER_ID, MEMBER_PASS);
 	}
 
 
-	@Override
+	@Override //비밀번호 찾기
 	public Member findPass(String MEMBER_ID,String MEMBER_NAME, String MEMBER_EMAIL) {
 		return dao.findPass(MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL);
 	}
+
 
 
 

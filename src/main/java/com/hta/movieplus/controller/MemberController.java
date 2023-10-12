@@ -51,9 +51,9 @@ public class MemberController {
 	}
 	
 	//test 폼 이동
-	@GetMapping("/test")
+	//@GetMapping("/test")
 	public String test() {
-		return "member/member_remove";
+		return "member/member_findpassreset";
 	}
 	
 	//회원가입 폼 이동
@@ -103,9 +103,19 @@ public class MemberController {
 		return memberservice.isId(MEMBER_ID);
 	}
 	
-	@GetMapping("/logincheck")
-	public int loginProcess(@RequestParam("id") String MEMBER_ID, @RequestParam("pass") String MEMBER_PASS) {
-		return memberservice.isId(MEMBER_ID, MEMBER_PASS);
+	//마이페이지 - 로그인 체크
+	@PostMapping("/logincheck")
+	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
+									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
+									 ModelAndView mv)throws Exception {
+		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
+		
+		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
+			mv.setViewName("member/mypage_modify");
+		} else {
+			mv.setViewName("/mypage");
+		}
+		return mv;
 	}
 	
 	//회원가입 처리
@@ -156,17 +166,28 @@ public class MemberController {
 		return "member/member_findpass";
 	}
 	
-	/*
-	//비밀번호 찾기 프로세스
+	
+	//비밀번호 찾기 프로세스 - 아이디 정보 확인
 	@ResponseBody
 	@PostMapping("/findpassProcess")
-	public Member findpassProcess(Member member, RedirectAttributes rattr,
-							  Model model,
-							  HttpServletRequest request) {
-		int result = memberservice.findPass(member);
-		return member;
+	public ModelAndView findpassProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
+								  @RequestParam("MEMBER_NAME") String MEMBER_NAME, 
+								  @RequestParam("MEMBER_EMAIL") String MEMBER_EMAIL,
+								  ModelAndView mv
+								  )throws Exception {
+		
+		Member member = memberservice.findPass(MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL);
+		
+		if(member != null) { 	//아이디가 있는 경우
+			logger.info(member.toString());
+			mv.addObject("memberInfo", member);
+			mv.setViewName("member/member_findpassreset");   //비밀번호 재설정 화면으로 이동
+		} else {
+			mv.addObject("message", "해당하는 정보가 없습니다.");
+			mv.setViewName("/main");  //에러페이지
+		}
+		return mv;
 	}
-	*/
 	
 	
 	//마이페이지 이동
@@ -175,11 +196,21 @@ public class MemberController {
 		return "member/mypage_main";
 	}
 	
-	//마이페이지 - 개인정보 수정
+	//마이페이지 - 개인정보수정 클릭시 비밀번호 확인페이지로 이동
 	@GetMapping("/modifyinfo")
-	public String testpage() {
+	public String modify() {
+		return "member/mypage_premodify";
+	}
+	
+	//마이페이지 - 비밀번호 확인페이지에서 비밀번호 확인 후 수정페이지로 이동
+	@GetMapping("/modifyform")
+	public String modifyform() {
+		
+		
 		return "member/mypage_modify";
 	}
+	
+	
 	
 	//마이페이지 - 개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
@@ -294,8 +325,8 @@ public class MemberController {
 			return "redirect:/main";  //메인페이지로 이동
 		} else {
 			model.addAttribute("url", request.getRequestURL());
-			model.addAttribute("message", "회원 가입 실패");
-			return "/member/mypage";  //에러페이지
+			model.addAttribute("message", "비밀번호 변경 실패");
+			return "/member/";  //에러페이지로 이동
 		}
 	}
 	
