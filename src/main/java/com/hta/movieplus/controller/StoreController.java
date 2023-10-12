@@ -29,6 +29,8 @@ import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.service.CartService;
 import com.hta.movieplus.service.StoreService;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping(value = "store")
 public class StoreController {
@@ -172,6 +174,7 @@ public class StoreController {
 	@GetMapping("/item")
 	public ModelAndView item( 
 		@RequestParam("ITEM_CODE") int ITEM_CODE,
+		CartVO cartVO,
 		ModelAndView mv) {
 		StoreVO selecteditem = storeService.get1item(ITEM_CODE);
 		
@@ -180,7 +183,18 @@ public class StoreController {
 		return mv;
 	}
 	
-	@RequestMapping("/cart")
+	@PostMapping("/item")
+	public ModelAndView item2( 
+		@RequestParam("itemCode") int ITEM_CODE,
+		CartVO cartVO,
+		ModelAndView mv) {
+		storeService.cartInsert(ITEM_CODE);
+		
+		mv.setViewName("store/item_select");
+		return mv;
+	}
+	
+	@RequestMapping("/cart_prev")
 	public ModelAndView cart(
 		CartVO cartVO,
 		ModelAndView mv) {
@@ -188,19 +202,12 @@ public class StoreController {
 		return mv;
 	}
 	
-	@RequestMapping("/cartpro")
+	@RequestMapping("/cart")
 	public ModelAndView cartpro(
 		CartVO cartVO,
 		ModelAndView mv) {
-		cartService.addItemToCart(cartVO);
-		List<StoreVO> codelist = cartService.getCodeList();
-//		List<StoreVO> cartlist = storeService.getItemListByCodes(codelist);
-		System.out.println(codelist);
-//		System.out.println(cartlist);
 		
 		mv.setViewName("store/store_cart");
-		mv.addObject("codelist", codelist);
-//		mv.addObject("cartlist", cartlist);
 		return mv;
 	}
 	

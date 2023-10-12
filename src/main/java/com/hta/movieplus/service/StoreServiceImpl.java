@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.mybatis.mapper.StoreMapper;
 
@@ -67,6 +68,11 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreVO> getItemListByCodes(List<Integer> codelist) {
 		return dao.getItemListByCodes(codelist);
+	}
+
+	@Override
+	public int cartInsert(int ITEM_CODE) {
+		return dao.cartInsert(ITEM_CODE);
 	}
 
 

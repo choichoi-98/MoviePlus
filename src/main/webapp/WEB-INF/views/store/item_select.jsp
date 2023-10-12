@@ -15,22 +15,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-	$('#btnGift').click(function() {
-		var ITEM_CODE = $(this).data('item-code'); // ITEM_CODE 가져오기
-		  $.ajax({
-		        url: "cart",
-		        method: 'GET',
-		        data: { "ITEM_CODE": ITEM_CODE }, // 서버로 전송(ITEM_CODE)
-		        success: function(response) {
-		            alert("장바구니에 추가되었습니다.");
-		        },
-		        error: function(error) {
-		            alert("장바구니 추가 중 오류가 발생했습니다.");
-		        }
-		   });
-	});
-</script>  -->
+<script>
+$('#btnGift').click(function() {
+    var itemCode = $('#btnGift').data('item-code'); // 'data-item-code' 속성의 값을 가져오기
+    $.ajax({
+        url: "item",
+        method: 'POST',
+        data: { "itemCode": itemCode }, // 서버로 전송(ITEM_CODE)
+        success: function(response) {
+            alert("장바구니에 추가되었습니다.");
+        },
+        error: function(error) {
+            alert("장바구니 추가 중 오류가 발생했습니다.");
+        }
+    });
+});
+
+</script>  
 
 </head>
 <body>
@@ -153,10 +154,11 @@
 									</div>
 								</div>
 								<div class="btn-group">
-									<a href="cartpro?ITEM_CODE=${selecteditem.ITEM_CODE}" id="btnGift" class="button large" 
-									   w-data="500" h-data="410" title="장바구니" >장바구니
+									<a href="cart" id="btnGift" class="button large" 
+   									 w-data="500" h-data="410" title="장바구니" 
+   									 data-item-code="${selecteditem.ITEM_CODE}">장바구니
 									</a> 
-									<a href="cartpro?ITEM_CODE=${selecteditem.ITEM_CODE}" id="btnPurc" class="button purple large" 
+									<a href="cart" id="btnPurc" class="button purple large" 
 									   w-data="500" h-data="410" title="구매">구매
 									</a>
 								</div>

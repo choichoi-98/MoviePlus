@@ -8,6 +8,14 @@
 		values(#{ITEM_CODE}, #{ITEM_MENU}, #{ITEM_NAME}, #{ITEM_PRICE})	
 	</insert>
 	
+	<insert id="cartInsert" parameterType="CartVO">
+	<selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
+        select nvl(max(CART_NUM), 0) + 1 from STORE_CART
+    </selectKey>
+    	insert into STORE_CART(CART_NUM, ITEM_CODE)
+    	values(#{CART_NUM}, #{itemCode})
+	</insert>
+	
 	<select id="getItemListCount" resultType="int">
 		select count(*) 
 		from STORE_ITEM
