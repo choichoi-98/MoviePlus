@@ -67,14 +67,36 @@ public class TimeTableController {
 		List<TheaterRoom> theaterRoomList = schedulingService.getTheaterRoomWithMovie(dataMap);
 		Movie movie = movieService.select(movieCode);
 		
-		Map<String, Object> data = new HashMap<>();
-		data.put("theaterList", theaterList);
-		data.put("theaterRoomList", theaterRoomList);
-		data.put("scheduleList", scheduleList);
-		data.put("selected_movie", movie);
+		Map<String, Object> resultData = new HashMap<>();
+		resultData.put("theaterList", theaterList);
+		resultData.put("theaterRoomList", theaterRoomList);
+		resultData.put("scheduleList", scheduleList);
+		resultData.put("selected_movie", movie);
 		
 		
-		return data;
+		return resultData;
+	}
+	
+	@ResponseBody
+	@PostMapping("booking/getMovieScheduleWithTheater")
+	public Map<String, Object> getMovieScheduleWithTheater(String date, int theaterId){
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("date", date);
+		dataMap.put("theaterId", theaterId);
+		
+		List<Movie> movieList = schedulingService.getMovieWithTheater(dataMap);
+		List<TheaterRoom> theaterRoomList = schedulingService.getTheaterRoomWithTheater(dataMap);
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleWithTheater(dataMap);
+		
+		
+		Map<String, Object> resultData = new HashMap<>();
+		
+		resultData.put("movieList", movieList);
+		resultData.put("theaterRoomList", theaterRoomList);
+		resultData.put("scheduleList", scheduleList);
+		
+		return resultData;
 	}
 
 }

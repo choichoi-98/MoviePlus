@@ -276,7 +276,7 @@
 									value="simya"> <label for="update-time-simya">심야</label></li>
 							</ul>
 							
-							<div id="text-container">
+							<div id="update-text-container">
 							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span>
 							<span class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span>
 							<span class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>

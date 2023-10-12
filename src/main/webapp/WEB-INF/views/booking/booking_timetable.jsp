@@ -112,7 +112,7 @@
 														<ul class="list" id="tab-theaterList">
 															<c:forEach var="theater" items="${theaterList}">
 																<c:if test="${theater.THEATER_LOCATION eq location.value}">
-																	<li><button type="button" class="btn">${theater.THEATER_NAME}</button></li>
+																	<li><button data-theaterId="${theater.THEATER_ID}" type="button" class="btn">${theater.THEATER_NAME}</button></li>
 																</c:if>
 															</c:forEach>
 														</ul>
@@ -157,10 +157,10 @@
 								<i class="iconset ico-cld-next"></i> <em>다음</em>
 							</button>
 							<div class="bg-line">
-									<input type="hidden" name="datePicker" id="datePicker"
-										class="hasDatepicker" value="2023.09.27">
-									<button type="button" class="btn-calendar-large" title="달력보기">
-										달력보기</button>
+										<input type="hidden" name="datePicker" id="datePicker"
+											class="hasDatepicker" value="2023.09.27">
+										<button type="button" class="btn-calendar-large" title="달력보기">
+											달력보기</button>
 							</div>
 						</div>
 					</div>
@@ -175,7 +175,7 @@
 					</div>
 
 					<div id="theater-list-box" class="reserve theater-list-box">
-						<div class="tab-block tab-layer mb30">
+						<div id="timeTable-location-select" class="tab-block tab-layer mb30">
 							<ul>
 								<c:forEach var="location" items="${locationList}"> 
 									<li class="location-select-tab" data-selected-loc="${location.value}"><a

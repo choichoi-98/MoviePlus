@@ -18,6 +18,9 @@ import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.TheaterSchedule;
+import com.hta.movieplus.domain.TimeTableDate;
+import com.hta.movieplus.service.SchedulingService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
 
@@ -26,13 +29,15 @@ public class TheaterController {
 
 	private TheaterService theaterservice;
 	private TheaterManagerService theaterManagerService;
+	private SchedulingService schedulingService;
 	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
 
 	@Autowired
-	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService) {
+	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService, SchedulingService schedulingService) {
 		// TODO Auto-generated constructor stub
 		this.theaterservice = theaterService;
 		this.theaterManagerService = theaterManagerService;
+		this.schedulingService = schedulingService;
 	}
 
 	@GetMapping("/theater")
@@ -50,13 +55,15 @@ public class TheaterController {
 	public ModelAndView theaterDetailView(@RequestParam(value = "theaterId", required = true) int theaterId,
 			ModelAndView mv, Principal principal) {
 		// 메뉴바 부분
-		
+		List<TimeTableDate> dateList = schedulingService.getDateList();
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
 
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
+		mv.addObject("dateList", dateList);
 		// 메뉴바 부분
 
+		
 		mv.addObject("ajax_theaterId", theaterId);
 		mv.setViewName("theater/theater_detail");
 

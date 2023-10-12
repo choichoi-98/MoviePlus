@@ -33,4 +33,10 @@ public interface SchedulingService {
 
 	List<TheaterRoom> getTheaterRoomWithMovie(Map<String, Object> dataMap);
 
+	List<Movie> getMovieWithTheater(Map<String, Object> dataMap);
+
+	List<TheaterRoom> getTheaterRoomWithTheater(Map<String, Object> dataMap);
+
+	List<TheaterSchedule> getScheduleWithTheater(Map<String, Object> dataMap);
+
 }
