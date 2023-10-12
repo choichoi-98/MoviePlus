@@ -69,15 +69,17 @@
     </select>
     
     <select id="getPlayingMovieList" resultType="movie">
-    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, MOVIE_STILL, MOVIE_PLOT
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, 
+    		   MOVIE_STILL, MOVIE_PLOT, MOVIE_OPENDATE, MOVIE_GRADE
 		FROM MOVIE
 		WHERE MOVIE_SCREEN = '상영중'
 		
     </select>
     
     <select id="getPlayingMovieLogin" resultType="movie">
-    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, M.MOVIE_STILL, M.MOVIE_PLOT, 
-    			MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
+    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
+    		   M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+    		   MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
 		FROM MOVIE M
 		     CROSS JOIN MEMBER MEM
 		     LEFT OUTER JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
@@ -85,7 +87,12 @@
 		AND MEM.MEMBER_ID = #{memberId}
     </select>
     
-    
+    <sql id="search_">
+    	<if test='search_word != null'>
+    		and
+    		like #{search_word}
+    	</if>
+    </sql>
 
     <select id="getEndedMovieList" resultType="movie">
     	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
@@ -105,9 +112,9 @@
 		WHERE MOVIE_CODE = #{movieCode}
 	</update>
 	
-	<insert id="addMovieDibs">
+	<insert id="addMovieDibs" parameterType="java.lang.String">
 	INSERT INTO MOVIE_DIBS
-	VALUES(MOVIE_DIBS_SEQ.NEXTVAL, #{memberId}, #{movieCode});
+	VALUES(movie_dibs_seq.nextval, #{memberId}, #{movieCode})
 	</insert>
 
 	<delete id="deleteMovieDibs">
