@@ -144,4 +144,15 @@
 		ORDER BY THEATER_ROOM_ID, THEATER_SCHEDULE_START
 	</select>
 		
+	<select id="getOpenMovieListWithScheduleCnt" resultType="movie">
+		SELECT *
+		FROM MOVIE M
+		LEFT JOIN (SELECT *
+			FROM ( SELECT MOVIE_CODE, COUNT(*) CNT	
+			FROM THEATER_SCHEDULE
+			GROUP BY MOVIE_CODE )) CNT_TABLE
+		ON M.MOVIE_CODE = CNT_TABLE.MOVIE_CODE
+	</select>
+	
+	
 </mapper>

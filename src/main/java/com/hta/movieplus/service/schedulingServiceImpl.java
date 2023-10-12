@@ -197,4 +197,39 @@ public class schedulingServiceImpl implements SchedulingService {
 		return mapper.getScheduleWithTheater(dataMap);
 	}
 
+	@Override
+	public List<Movie> getOpenMovieListWithScheduleCnt() {
+		// TODO Auto-generated method stub
+		List<Movie> movieList = mapper.getOpenMovieListWithScheduleCnt();
+		
+		for(Movie movie : movieList) {
+			movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
+		}
+		
+		return movieList;
+		
+	}
+	
+	public String getGradeData(String grade) {
+		String result = "all";
+		
+		switch(grade) {
+			case "전체관람가":
+				result = "all";
+				break;
+			case "12세이상관람가":
+				result = "12";
+				break;
+			case "15세이상관람가":
+				result = "15";
+				break;
+			case "청소년관람불가":
+				result = "19";
+				break;
+		}
+		
+		return result;
+	}
+
+
 }
