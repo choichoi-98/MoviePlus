@@ -50,16 +50,16 @@ public class MemberController {
 		this.mailVO = mailVO;
 	}
 	
+	//test 폼 이동
+	@GetMapping("/test")
+	public String test() {
+		return "member/member_remove";
+	}
+	
 	//회원가입 폼 이동
 	@GetMapping("/join")
 	public String memberjoin() {
 		return "member/member_join_step1";
-	}
-	
-	//test 폼 이동
-	@GetMapping("/test")
-	public String test() {
-		return "test";
 	}
 	
 	//회원가입 step1 인증메일 보내기
@@ -156,6 +156,18 @@ public class MemberController {
 		return "member/member_findpass";
 	}
 	
+	/*
+	//비밀번호 찾기 프로세스
+	@ResponseBody
+	@PostMapping("/findpassProcess")
+	public Member findpassProcess(Member member, RedirectAttributes rattr,
+							  Model model,
+							  HttpServletRequest request) {
+		int result = memberservice.findPass(member);
+		return member;
+	}
+	*/
+	
 	
 	//마이페이지 이동
 	@GetMapping("/mypage")
@@ -169,7 +181,7 @@ public class MemberController {
 		return "member/mypage_modify";
 	}
 	
-	//개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
+	//마이페이지 - 개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
 	public String modifyProcess(Member member, Model model, String check,
 								HttpServletRequest request, 
@@ -207,6 +219,7 @@ public class MemberController {
 		Member memberInfo = (Member) session.getAttribute("memberInfo");
 		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
 		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+		memberInfo.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
 		session.setAttribute("memberInfo", memberInfo);
 		
 		if(result == 1) {
