@@ -81,7 +81,6 @@ $(document).ready(function(){
 	$('#delete-schedule-modal-btn').click(function() { // 모달 삭제 확인 버튼
 		deleteSchedule();	
 	})
-	
 
 
 
@@ -270,6 +269,8 @@ function getSchedule(){
 			$('#update-movie-start').val(data.theater_SCHEDULE_START);
 			$('#update-modal-movie-code').val(data.movie_CODE);
 
+			$('.update-time-sale-btn').prop('checked', false);
+
 			$('.update-time-sale-btn').each(function() {
 				if($(this).val() == data.theater_SCHEDULE_TYPE){
 					$(this).prop('checked', true);
@@ -293,7 +294,8 @@ function updateSchedule(){
 		data : { 
 			THEATER_SCHEDULE_ID : selected_schedule_id,
 			MOVIE_CODE : $('#update-modal-movie-code').val(),
-			THEATER_SCHEDULE_START : $('#update-movie-start').val()
+			THEATER_SCHEDULE_START : $('#update-movie-start').val(),
+			THEATER_SCHEDULE_TYPE : $('input[name=update-jojosimya]:checked').val()
 		},
 		cache: false,
 		beforeSend : function(xhr){

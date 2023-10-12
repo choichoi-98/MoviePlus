@@ -267,7 +267,7 @@
 							<ul class="form__radio">
 								<li><input id="update-time-normal" type="radio"
 									class="update-time-sale-btn" name="update-jojosimya"
-									value="normal" checked> <label for="update-time-normal">일반</label></li>
+									value="normal"> <label for="update-time-normal">일반</label></li>
 								<li><input id="update-time-jojo" type="radio"
 									class="update-time-sale-btn" name="update-jojosimya"
 									value="jojo"> <label for="update-time-jojo">조조</label></li>
