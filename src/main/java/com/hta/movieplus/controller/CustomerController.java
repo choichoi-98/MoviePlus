@@ -68,7 +68,7 @@ public class CustomerController {
 	@PostMapping("/oneonone_process")
 	public String oneProcess(CustomerOneOnOneVO oneonone) {
 		customerService.insertOneOnOne(oneonone);
-		//데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요 dd 
+		//데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요 
  
 		return "redirect:/customer_service";
 	}
