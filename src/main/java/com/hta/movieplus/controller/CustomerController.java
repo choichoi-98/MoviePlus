@@ -19,7 +19,7 @@ public class CustomerController {
 	/* 컨트롤러 서비스 연결부분 */
 	CustomerService customerService;
 
-	@Autowired /* 생성자에 의존성주입 초기화 */
+	@Autowired /* 생성자에 의존성주입 초기화 이미 만들어진객체를 new없이 받음*/
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
@@ -67,6 +67,8 @@ public class CustomerController {
 	/* 1대1 문의 데이터 저장페이지 */
 	@PostMapping("/oneonone_process")
 	public String oneProcess(CustomerOneOnOneVO oneonone) {
+		
+		oneonone.setCUSTOMER_PHONNUM(oneonone.getCUSTOMER_PHONNUM1()+ oneonone.getCUSTOMER_PHONNUM2()+ oneonone.getCUSTOMER_PHONNUM3());
 		customerService.insertOneOnOne(oneonone);
 		//데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요 
  
