@@ -12,6 +12,9 @@ $(document).ready(function(){
 
 	let selected_schedule_id;
 
+	var text = `<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span>
+	<span class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span>
+	<span class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>`;
 	
 
 	getScheduleList(); // 리스트 불러오기
@@ -38,13 +41,20 @@ $(document).ready(function(){
 	$('.main__table-btn--banned').click(function(){ // 추가 모달 클릭
 		getOpenMoiveList();
 
+		$("#modal-movie-title").val('');
+		$("#movie-start").val('');
+
+
+		$('#text-container').empty().append(text);
+
 		roomId = $(this).next().next().val();
 		theater_room_name = $(this).next().val();
 		$('#modal-room-name').val(theater_room_name);
 	
 	})
 
-	$('body').on('click', '.modal-movie-select', function() { // 영화 선택
+	$('body').on('click', '.modal-movie-select', function(e) { // 영화 선택
+		e.preventDefault();
 		movie_title = $(this).text();
 		movie_code = $(this).prev().text();
 
@@ -59,12 +69,19 @@ $(document).ready(function(){
 	});
 
 	$('#change-status-modal-btn').click(function() { // 추가 모달 확인 버튼
+		if($('#modal-movie-title').val()=='' || $('#movie-start').val()==''){
+			$('#text-container').empty().append("<span style='color:red'>빈 칸을 입력해주세요.</span>");
+			return false;
+		}
+
 		addSchedule();
-			
 	})
 
 	$('.main__table').on('click', '.main__table-btn--edit', function() { // 모달 수정 시작 버튼
 		selected_schedule_id = $(this).parent().find('#selected-schedule-id').val();
+
+		$('#update-text-container').empty().append(text);
+
 		getOpenMoiveList();
 
 		getSchedule();
@@ -81,7 +98,6 @@ $(document).ready(function(){
 	$('#delete-schedule-modal-btn').click(function() { // 모달 삭제 확인 버튼
 		deleteSchedule();	
 	})
-	
 
 
 
@@ -221,7 +237,7 @@ function addSchedule() {
 			
 		},
 		error: function() {
-			$('#text-container').empty().append("<span style='color:red'>빈 칸을 입력해주세요.</span>");
+			console.log('스케줄 추가 오류');
 		} 
 	})	
 
@@ -270,6 +286,8 @@ function getSchedule(){
 			$('#update-movie-start').val(data.theater_SCHEDULE_START);
 			$('#update-modal-movie-code').val(data.movie_CODE);
 
+			$('.update-time-sale-btn').prop('checked', false);
+
 			$('.update-time-sale-btn').each(function() {
 				if($(this).val() == data.theater_SCHEDULE_TYPE){
 					$(this).prop('checked', true);
@@ -293,7 +311,8 @@ function updateSchedule(){
 		data : { 
 			THEATER_SCHEDULE_ID : selected_schedule_id,
 			MOVIE_CODE : $('#update-modal-movie-code').val(),
-			THEATER_SCHEDULE_START : $('#update-movie-start').val()
+			THEATER_SCHEDULE_START : $('#update-movie-start').val(),
+			THEATER_SCHEDULE_TYPE : $('input[name=update-jojosimya]:checked').val()
 		},
 		cache: false,
 		beforeSend : function(xhr){

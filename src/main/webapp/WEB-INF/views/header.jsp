@@ -247,7 +247,7 @@ button.button.purple {
 			<li><a href="#" class="gnb-txt-movie" title="영화">영화</a>
 				<div class="gnb-depth2">
 					<ul>
-						<li><a href="#" title="전체영화">전체영화</a></li>
+						<li><a href="/movieplus/movie/movieListPage" title="전체영화">전체영화</a></li>
 						<li><a href="#" title="무비포스트">무비포스트</a></li>
 					</ul>
 				</div></li>
@@ -300,7 +300,7 @@ button.button.purple {
 				<p class="tit-depth">영화</p>
 
 				<ul class="list-depth">
-					<li><a href="#" title="전체영화">전체영화</a></li>
+					<li><a href="/movieplus/movie/movieListPage" title="전체영화">전체영화</a></li>
 					<li><a href="#" title="무비포스트">무비포스트</a></li>
 				</ul>
 			</div>

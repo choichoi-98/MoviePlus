@@ -23,10 +23,10 @@ import com.hta.movieplus.mybatis.mapper.SchedulingMapper;
 
 @Service
 public class schedulingServiceImpl implements SchedulingService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(schedulingServiceImpl.class);
 	SchedulingMapper mapper;
-	
+
 	public schedulingServiceImpl(SchedulingMapper mapper) {
 		// TODO Auto-generated constructor stub
 		this.mapper = mapper;
@@ -36,7 +36,7 @@ public class schedulingServiceImpl implements SchedulingService {
 	public List<TheaterSchedule> getScheduleList(int theaterId, String todayDate) {
 		// TODO Auto-generated method stub
 		Map<String, Object> dataMap = new HashMap<>();
-		
+
 		dataMap.put("theaterId", theaterId);
 		dataMap.put("todayDate", todayDate);
 		return mapper.getScheduleList(dataMap);
@@ -46,7 +46,7 @@ public class schedulingServiceImpl implements SchedulingService {
 	public String getTodayDate() {
 		// TODO Auto-generated method stub
 		LocalDate now = LocalDate.now();
-		
+
 		return now.toString();
 	}
 
@@ -54,10 +54,8 @@ public class schedulingServiceImpl implements SchedulingService {
 	public List<Movie> getOpenMovieList(String keyword) {
 		// TODO Auto-generated method stub
 		List<Movie> movieList = mapper.getOpenMovieList();
-		
-		return movieList.stream()
-				.filter(item -> item.getMovie_Title().contains(keyword))
-				.collect(Collectors.toList());
+
+		return movieList.stream().filter(item -> item.getMovie_Title().contains(keyword)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -65,43 +63,51 @@ public class schedulingServiceImpl implements SchedulingService {
 		// TODO Auto-generated method stub
 		String endTime = calculateEndTime(schedule);
 		schedule.setTHEATER_SCHEDULE_END(endTime);
-	
-		return checkScheduleOverlap(schedule) ? mapper.addSchedule(schedule) : -1; 
+
+		return checkScheduleOverlap(schedule) ? mapper.addSchedule(schedule) : -1;
 	}
 
 	private boolean checkScheduleOverlap(TheaterSchedule schedule) {
 		// TODO Auto-generated method stub
 		List<TheaterSchedule> scheduleList = mapper.getScheduleListByTheaterRoomId(schedule);
-		
 		int listSize = scheduleList.size();
-		
-		if(listSize == 0){ // 스케줄 없는 경우
-			return true;
-		}
+
+		LocalTime FirstStartTime = LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START());
+		LocalTime LastEndTime = LocalTime.parse(scheduleList.get(listSize-1).getTHEATER_SCHEDULE_END());
 		
 		LocalTime compStartTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_START());
 		LocalTime compEndTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_END());
+
+		if (listSize == 0) { // 스케줄 없는 경우
+			return true;
+		}
 		
-		for(int i=0;i<listSize;i++) {
-			LocalTime origStartTime = LocalTime.parse(scheduleList.get(i).getTHEATER_SCHEDULE_START());
+		if(compStartTime.isAfter(LastEndTime) || compEndTime.isBefore(FirstStartTime)) {
+			return true;
+		}
+
+		LocalTime temp = LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START());
+		if (listSize == 1) {
+			if (compEndTime.isBefore(temp)) {
+				return true;
+			}
+		}
+		
+
+		for (int i = 0; i < listSize; i++) {
 			LocalTime origEndTime = LocalTime.parse(scheduleList.get(i).getTHEATER_SCHEDULE_END());
-			
-			if(origStartTime.isAfter(origEndTime)) {
-				logger.info("넘어감");
-				origEndTime = LocalTime.of(0,0,0);
-			}
-			
-			if(compStartTime.isAfter(origEndTime)) { // 
-				if(i == listSize-1) {
+
+			if (compStartTime.isAfter(origEndTime)) {
+				if (i + 1 == listSize) {
 					return true;
-				}else {
-					if(compEndTime.isBefore(LocalTime.parse(scheduleList.get(i+1).getTHEATER_SCHEDULE_START()))) {
-						return true;
-					}
 				}
+
+				if (compEndTime.isBefore(LocalTime.parse(scheduleList.get(i + 1).getTHEATER_SCHEDULE_START()))) {
+					return true;
+				}
+
 			}
-			
-			
+
 		}
 
 		return false;
@@ -110,9 +116,9 @@ public class schedulingServiceImpl implements SchedulingService {
 	private String calculateEndTime(TheaterSchedule schedule) {
 		// TODO Auto-generated method stub
 		Movie movie = mapper.getMovieByID(schedule.getMOVIE_CODE());
-		
+
 		LocalTime startTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_START());
-		
+
 		return startTime.plusMinutes(Integer.parseInt(movie.getMovie_Runtime())).toString();
 	}
 
@@ -138,7 +144,6 @@ public class schedulingServiceImpl implements SchedulingService {
 	public List<TheaterSchedule> getMovieScheduleWithMovie(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
 
-		
 		return mapper.getMovieScheduleWithMovie(dataMap);
 	}
 
@@ -146,18 +151,18 @@ public class schedulingServiceImpl implements SchedulingService {
 	public List<TimeTableDate> getDateList() {
 		// TODO Auto-generated method stub
 		List<TimeTableDate> dateList = new ArrayList<TimeTableDate>();
-		
-		
+
 		// 오늘 날짜 기준으로 14일까지의 값
 		LocalDate date = LocalDate.now();
 		date = date.minusDays(1);
-		
-		for(int i=0;i<=14;i++) {
-			TimeTableDate temp = new TimeTableDate(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.KOREAN).toString(), date.toString());
+
+		for (int i = 0; i <= 14; i++) {
+			TimeTableDate temp = new TimeTableDate(date.getYear(), date.getMonthValue(), date.getDayOfMonth(),
+					date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.KOREAN).toString(), date.toString());
 			dateList.add(temp);
-			
+
 			date = date.plusDays(1);
-			
+
 		}
 		return dateList;
 	}
@@ -173,7 +178,23 @@ public class schedulingServiceImpl implements SchedulingService {
 		// TODO Auto-generated method stub
 		return mapper.getTheaterRoomWithMovie(dataMap);
 	}
-	
-	
+
+	@Override
+	public List<Movie> getMovieWithTheater(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return mapper.getMovieWithTheater(dataMap);
+	}
+
+	@Override
+	public List<TheaterRoom> getTheaterRoomWithTheater(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return mapper.getTheaterRoomWithTheater(dataMap);
+	}
+
+	@Override
+	public List<TheaterSchedule> getScheduleWithTheater(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return mapper.getScheduleWithTheater(dataMap);
+	}
 
 }

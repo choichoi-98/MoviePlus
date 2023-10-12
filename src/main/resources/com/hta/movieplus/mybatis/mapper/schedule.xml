@@ -78,12 +78,70 @@
 	<select id="getTheaterWithMovie" resultType="theater" parameterType="map">
 		SELECT *
 		FROM THEATER
-		WHERE THEATER_LOCATION = #{location}
+		WHERE THEATER_ID IN ( SELECT ID
+								FROM
+								 ( SELECT TS.THEATER_ID ID, COUNT(*) AS SCHEDULE_COUNT
+								FROM THEATER_SCHEDULE TS
+								JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+								WHERE T.THEATER_LOCATION = #{location}
+								  AND TS.MOVIE_CODE = #{movieCode}
+								  AND TS.THEATER_SCHEDULE_DATE = #{date}
+								GROUP BY TS.THEATER_ID ) 
+								 )
+		ORDER BY THEATER_CREATED_DATE
 	</select>
 
 	<select id="getTheaterRoomWithMovie" resultType="theaterRoom" parameterType="map">
 		SELECT *
-		FROM THEATER_ROOM 
-	</select> <!-- 위 아래 2개 쿼리로 스케줄 있는 애들만 가져오는거 짜기 -->
+		FROM THEATER_ROOM
+		WHERE THEATER_ROOM_ID IN (SELECT ID
+					  FROM (SELECT TR.THEATER_ROOM_ID AS ID, COUNT(*)
+							FROM THEATER_SCHEDULE TS
+							JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+							JOIN THEATER_ROOM TR ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+							WHERE T.THEATER_LOCATION = #{location}
+							AND TS.MOVIE_CODE = #{movieCode}
+							AND TS.THEATER_SCHEDULE_DATE = #{date}
+							GROUP BY TR.THEATER_ROOM_ID
+							)
+						)
+		ORDER BY THEATER_ROOM_ID
+
+	</select>
+	
+	<select id="getMovieWithTheater" resultType="movie" parameterType="map">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_CODE IN ( SELECT ID
+					FROM ( SELECT MOVIE_CODE ID, COUNT(*)
+						FROM THEATER_SCHEDULE
+						WHERE THEATER_ID = #{theaterId}
+						AND THEATER_SCHEDULE_DATE = #{date}
+						GROUP BY MOVIE_CODE )
+					)		
+	</select>
+	
+	<select id="getTheaterRoomWithTheater" resultType="theaterRoom" parameterType="map">
+		SELECT *
+		FROM THEATER_ROOM
+		WHERE THEATER_ROOM_ID IN ( SELECT ID
+					   FROM ( SELECT THEATER_ROOM_ID ID, COUNT(*)
+						FROM THEATER_SCHEDULE
+						WHERE THEATER_ID = #{theaterId}
+						AND THEATER_SCHEDULE_DATE = #{date}
+						GROUP BY THEATER_ROOM_ID )
+					)
+		ORDER BY THEATER_ROOM_ID
+		
+		
+	</select>
+	
+	<select id="getScheduleWithTheater" resultType="theaterSchedule" parameterType="map">
+		SELECT *
+		FROM THEATER_SCHEDULE
+		WHERE THEATER_ID = #{theaterId}
+		AND THEATER_SCHEDULE_DATE = #{date}
+		ORDER BY THEATER_ROOM_ID, THEATER_SCHEDULE_START
+	</select>
 		
 </mapper>
