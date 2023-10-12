@@ -29,8 +29,8 @@
 	<select id="findPass" resultType="member" parameterType="String">
 		select *
 		from MEMBER
-		WHERE MEMBER_NAME = #{MEMBER_NAME} 
-		AND MEMBER_ID = #{MEMBER_ID}
+		WHERE MEMBER_ID = #{MEMBER_ID} 
+		AND MEMBER_NAME = #{MEMBER_NAME}
 		AND MEMBER_EMAIL = #{MEMBER_EMAIL}
 	</select>
 	
