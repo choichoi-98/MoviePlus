@@ -117,33 +117,46 @@ $(document).ready(function(){
 
 				//극장, 상영관, 스케쥴 순서대로 값 가져와서 each
 				$(data.theaterList).each(function(theater_index, theater){
-					var theater_output = '<div class="theater-list" data-theater-index="'+theater.theater_ID+'">';
+					var theater_output = '<div class="theater-list timeTable-theater-list" data-theater-index="'+theater.theater_ID+'">';
 					theater_output += '<div class="theater-area-click">';
-					theater_output += '<a href="#" title="'+theater.theater_NAME+'상세보기">'+theater.theater_NAME+'</a></div></div>';
+					theater_output += '<a href="#" title="'+theater.theater_NAME+' 상세보기">'+theater.theater_NAME+'</a></div></div>';
 					
 					$('#theater-list-box').append(theater_output);
-
-					
-					$(data.theaterRoomList).each(function(theaterRoom_index, theaterRoom){
-						console.log($('.theater-list').attr('data-theater-index'));
-						
-						if($('.theater-list').attr('data-theater-index')==theaterRoom.theater_ID){
-
-							var theaterRoom_output = '<div class="theater-type-box">';
-							theaterRoom_output += '<div class="theater-type">';
-							theaterRoom_output += '<p class="theater-name">1관</p>';
-							theaterRoom_output += '<p class="chair">총 232석</p></div></div>';
-							
-							console.log($(this).prop('class'));
-							// append(theaterRoom_output);
-						}
-						
-						
-							
-						
-					})
-					
 				})					
+
+				$(data.theaterRoomList).each(function(theaterRoom_index, theaterRoom) {
+					var theaterRoom_output = '<div class="theater-type-box">';
+					theaterRoom_output += '<div class="theater-type">';
+					theaterRoom_output += '<p class="theater-name">' + theaterRoom.theater_ROOM_NAME + '</p>';
+					theaterRoom_output += '<p class="chair">' + theaterRoom.theater_ROOM_SEAT_TYPE + '</p></div>';
+					theaterRoom_output += '<div class="theater-time">';
+					theaterRoom_output += '<div class="theater-time-box"><table class="time-list-table timeTable-table" data-room-index="'+theaterRoom.theater_ROOM_ID+'"><tbody><tr></tr></tbody></table></div></div></div>';
+				
+					var theaterIndex = theaterRoom.theater_ID;
+					var $theaterList = $('.timeTable-theater-list[data-theater-index="' + theaterIndex + '"]');
+				
+					if ($theaterList.length > 0) {
+						$theaterList.append(theaterRoom_output);
+					}
+				});
+
+				$(data.scheduleList).each(function(schedule_index, schedule){
+					var schedule_output = '<td class="">';
+					schedule_output += '<div class="td-ab">';
+					schedule_output += '<div class="txt-center">';
+					schedule_output += '<a href="" title="영화예매하기"><div class="ico-box"><i class="iconset ico-sun"></i></div>';
+					schedule_output += '<p class="time">09:50</p><p class="chair">219석</p>';
+					schedule_output += '<div class="play-time"><p>09:50~11:38</p><p>1회차</p></div>';
+					schedule_output += '</a></div></div></td>';
+
+					var roomIndex = schedule.theater_ROOM_ID;
+					var $roomList = $('.timeTable-table[data-room-index="' + roomIndex + '"]');
+
+					$roomList.find('tr').append(schedule_output);
+	
+					
+					
+				})
 			
 			
 				

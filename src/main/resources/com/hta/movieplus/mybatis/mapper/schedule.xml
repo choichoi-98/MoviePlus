@@ -83,10 +83,7 @@
 
 	<select id="getTheaterRoomWithMovie" resultType="theaterRoom" parameterType="map">
 		SELECT *
-		FROM THEATER_ROOM TR
-		JOIN THEATER T
-		ON TR.THEATER_ID = T.THEATER_ID
-		WHERE THEATER_LOCATION = #{location}
-	</select>
+		FROM THEATER_ROOM 
+	</select> <!-- 위 아래 2개 쿼리로 스케줄 있는 애들만 가져오는거 짜기 -->
 		
 </mapper>
