@@ -16,19 +16,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$('#btnGift').click(function() {
-    var itemCode = $('#btnGift').data('item-code'); // 'data-item-code' 속성의 값을 가져오기
-    $.ajax({
-        url: "item",
-        method: 'POST',
-        data: { "itemCode": itemCode }, // 서버로 전송(ITEM_CODE)
-        success: function(response) {
-            alert("장바구니에 추가되었습니다.");
-        },
-        error: function(error) {
-            alert("장바구니 추가 중 오류가 발생했습니다.");
-        }
-    });
+$(function() {
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	
+	$('#btnGift').on('click', function(e) {
+		var itemCode = $('#prdtSumAmt').data('test');
+		
+		$.ajax({
+		    url: "item",
+		    method: 'POST',
+		    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 폼 데이터 형식으로 설정
+		    data: { "itemCode": itemCode }, // 서버로 폼 데이터로 전송
+		    dataType : "text",
+		    beforeSend: function(xhr) {
+		        xhr.setRequestHeader(header, token);
+		    },
+		    success: function(response) {
+		        alert("장바구니에 추가되었습니다.");
+		    },
+		    error: function(error) {
+		        alert("장바구니 추가 중 오류가 발생했습니다.");
+		    }
+		});
+	});
 });
 
 </script>  
@@ -147,16 +158,16 @@ $('#btnGift').click(function() {
 													<i class="iconset ico-plus"></i>
 												</button>
 												<div class="money">
-													<em id="prdtSumAmt">${selecteditem.ITEM_PRICE}</em> <span>원</span>
+													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}">${selecteditem.ITEM_PRICE}</em> <span>원</span>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="btn-group">
-									<a href="cart" id="btnGift" class="button large" 
+									<a href="#" id="btnGift" class="button large" 
    									 w-data="500" h-data="410" title="장바구니" 
-   									 data-item-code="${selecteditem.ITEM_CODE}">장바구니
+   									 data-test="${selecteditem.ITEM_CODE}">장바구니
 									</a> 
 									<a href="cart" id="btnPurc" class="button purple large" 
 									   w-data="500" h-data="410" title="구매">구매

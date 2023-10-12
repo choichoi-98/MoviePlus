@@ -25,38 +25,35 @@
 	    // per1page 값을 <span> 요소 내에 동적으로 삽입
 	    document.querySelector('div#per1page').textContent = per1page;
 	})
-	
+$(document).ready(function() {	
 	$(function() {
-		let token = $("meta[name='_csrf']").attr("content");
-		let header = $("meta[name='_csrf_header']").attr("content");
-		
-    	// "삭제" 버튼 클릭 이벤트 처리
-    	$('#delitem').click(function() {
-        	// 해당 행에서 ITEM_CODE 찾기
-        	var secondTableRow = document.querySelector('table.main__table tbody tr');
-			// 첫 번째 td 요소 선택
-			var firstTableCell = secondTableRow.querySelector('td:first-child');
-			// div 요소 내부의 값을 가져오기
-			var ITEM_CODE = firstTableCell.querySelector('div').textContent;
-
-        	// 서버로 삭제 요청 보내기 (AJAX를 사용하여 비동기 요청)
-        	$.ajax({
-    			url: 'delitem', // 서버의 삭제 요청 URL을 입력하세요.
-    			method: 'POST', // 삭제 요청의 HTTP 메서드를 지정하세요.
-    			data: { "ITEM_CODE":ITEM_CODE }, // ITEM_CODE 값을 보내기
-//    			dataType: "json",
-            	beforeSend : function(xhr){
-                	xhr.setRequestHeader(header, token);
-            	},
-    			success: function(response) {
-        			location.reload(); // 페이지 새로 고침
-    			},
-    			error: function() {
-     	   		console.log('삭제 실패');
-    			}
-			});
-    	});
-	}); 
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	
+	$('#delitem').on('click', function(e) {
+	    var row = $(this).closest('tr'); // 해당 삭제 버튼이 속한 행을 찾기
+	    var itemCode = row.find('.thisItem').data('code');
+		alert("itemCode: " + itemCode);
+ 		$.ajax({
+		    url: "delitem",
+		    method: 'POST',
+		    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 폼 데이터 형식으로 설정
+		    data: { "itemCode": itemCode }, // 서버로 폼 데이터로 전송
+		    dataType : "text",
+		    beforeSend: function(xhr) {
+		        xhr.setRequestHeader(header, token);
+		    },
+		    success: function(response) {
+		        alert("삭제 성공" + itemCode);
+		        window.location.reload();
+		    },
+		    error: function(error) {
+		        alert("삭제 하는중 오류" + itemCode);
+		    }
+		}); 
+	});
+});
+});
 </script>
 
 </head>
@@ -124,7 +121,7 @@
 								<c:forEach var="i" items="${itemlist}">
 								<tr>
 									<td>
-										<div ID="thisItem" class="main__table-text">${i.ITEM_CODE}</div>
+										<div id="thisItem" class="main__table-text" data-code="${i.ITEM_CODE}">${i.ITEM_CODE}</div>
 									</td>
 									<td>
 										<div class="main__table-text">
@@ -154,7 +151,8 @@
 											<a href="#" class="main__table-btn main__table-btn--view">
 												<i class="icon ion-ios-eye"></i>
 											</a>
-											<a href="modifyitem?ITEM_CODE=${i.ITEM_CODE}" class="main__table-btn main__table-btn--edit">
+											<a href="modifyitem?ITEM_CODE=${i.ITEM_CODE}" class="main__table-btn main__table-btn--edit"
+											   id="forcode" data-code="${i.ITEM_CODE}">
 												<i class="icon ion-ios-create"></i>
 											</a>
 											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" >

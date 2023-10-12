@@ -9,11 +9,11 @@
 	</insert>
 	
 	<insert id="cartInsert" parameterType="CartVO">
-	<selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
+    <selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
         select nvl(max(CART_NUM), 0) + 1 from STORE_CART
     </selectKey>
     	insert into STORE_CART(CART_NUM, ITEM_CODE)
-    	values(#{CART_NUM}, #{itemCode})
+    	values(#{CART_NUM}, #{ITEM_CODE})
 	</insert>
 	
 	<select id="getItemListCount" resultType="int">
@@ -30,6 +30,12 @@
 				where rownum &lt; = #{end}	 
 				)
 		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
+	
+	<select id="getCartList" resultType="StoreVO">
+		select * from STORE_ITEM
+		inner join STORE_CART
+		on STORE_ITEM.ITEM_CODE = STORE_CART.ITEM_CODE
 	</select>
 	
 	<select id="getItemListByKind" parameterType="StoreVO" resultType="StoreVO">
@@ -62,6 +68,12 @@
 		DELETE 
 		FROM STORE_ITEM
 		WHERE ITEM_CODE = #{ITEM_CODE}
+	</delete>
+	
+	<delete id="delCartItem" parameterType="int">
+		delete 
+		from STORE_CART
+		where ITEM_CODE = #{ITEM_CODE}
 	</delete>
 
 </mapper>

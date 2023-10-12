@@ -1,8 +1,14 @@
 $(function() {
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
     $('#btn-kakaopay').click(function() {
         $.ajax({
             url: 'kakaopay',
+            method: 'POST',
             dataType: 'json',
+            beforeSend: function(xhr) {
+		        xhr.setRequestHeader(header, token);
+		    },
             success: function(data) {
                 var box = data.next_redirect_pc_url;
                 window.open(box);

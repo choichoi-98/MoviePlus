@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
-<html lang="ko">
+<html>
 <!--<![endif]-->
 <head>
 <style>
@@ -60,7 +60,7 @@
 						<c:forEach var="i" items="${ticketlist}">
 						<ul class="list">
 							<li class="">
-								<a href="cart">
+								<a href="item?ITEM_CODE=${i.ITEM_CODE}">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label event">EVENT</div>
 									<div class="img">

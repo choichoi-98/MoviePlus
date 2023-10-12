@@ -61,7 +61,7 @@
 						<c:forEach var="i" items="${snacklist}">
 						<ul class="list">
 							<li class="">
-								<a href="cart">
+								<a href="item?ITEM_CODE=${i.ITEM_CODE}">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label event">BEST</div>
 									<div class="img">
