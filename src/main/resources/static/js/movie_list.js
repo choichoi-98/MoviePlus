@@ -7,14 +7,14 @@ $(document).ready(function(){
 	$("body").on("mouseover", ".poster", function(e) {
 		e.preventDefault();
 		
-		$(this).closest('.first').find('.wrap').css('display', 'block');
+		 $(this).parent().find('.wrap1').css('display', 'block');
 		
-	});//$("body").on("click", ".playBtn", function(e) {
+	});//$("body").on("mouseover", ".poster", function(e) {
 
    $("body").on("mouseleave", ".poster", function(e) {
 		e.preventDefault();
 		
-		$(this).closest('.first').find('.wrap').css('display', 'none');
+		$(this).find('.my-score').css('display', 'none');
 		
 	});
 
@@ -32,9 +32,9 @@ $(document).ready(function(){
 		var ajaxURL;
 		
 		if(imgsrc.includes('heart_full.png')){
-			ajaxURL = 'movie/deleteMovieDibs';		
+			ajaxURL = '../movie/deleteMovieDibs';		
 		} else {
-			ajaxURL = 'movie/addMovieDibs';		
+			ajaxURL = '../movie/addMovieDibs';		
 		}
 		
 		$.ajax({

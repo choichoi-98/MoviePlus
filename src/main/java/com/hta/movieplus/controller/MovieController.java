@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
@@ -39,8 +40,25 @@ public class MovieController {
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
-    public String movieList() {
-    	return "movie/movie_list";
+    public ModelAndView movieList(ModelAndView mv,
+    							HttpSession session) throws Exception {
+    	
+    	Member memberInfo = (Member) session.getAttribute("memberInfo");
+    	if(memberInfo != null) {
+    		String memberId = memberInfo.getMEMBER_ID();
+    		
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId);
+    		mv.addObject("movieList",movieList);
+    		
+    	} else {
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovie();
+    		mv.addObject("movieList",movieList);
+    	
+    	}
+    	
+    	mv.setViewName("movie/movie_list");
+    	
+    	return mv;
     }
     
     @GetMapping("/movieAdd")
@@ -149,31 +167,43 @@ public class MovieController {
 			HttpSession session
 			) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		
-		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		String memberId = memberInfo.getMEMBER_ID();
-		map.put("memberId", memberId);
-		
-		if (memberId != null) {
-		movieServiceImpl.addMovieDibs(memberId, movieCode);
-		}
-		
-		return map;
-		
+	    
+	    Member memberInfo = (Member) session.getAttribute("memberInfo");
+	    String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
+	    
+	    if (memberId != null) {
+	        movieServiceImpl.addMovieDibs(memberId, movieCode);
+	        map.put("alert", false);
+	        boolean alertValue = (boolean) map.get("alert");
+	        logger.info("alert 값=" + alertValue);
+	        
+	    } else {
+	        // alert 표시 
+	        map.put("alert", true);
+	    }
+	    
+	    return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/deleteMovieDibs")
-	public void deleteMovieDibs(
+	public Map<String, Object> deleteMovieDibs(
 			@RequestParam("movieCode") String movieCode,
 			HttpSession session
 			) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		
 		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		String memberId = memberInfo.getMEMBER_ID();
-		
-		movieServiceImpl.deleteMovieDibs(memberId, movieCode);
-		
+		String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
+	    
+	    if (memberId != null) {
+	        movieServiceImpl.deleteMovieDibs(memberId, movieCode);
+	        map.put("alert", false);
+	    } else {
+	        // alert 표시 
+	        map.put("alert", true);
+	    }
+	    return map;
 	}
-	
 }
 
