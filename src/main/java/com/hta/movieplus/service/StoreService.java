@@ -1,6 +1,8 @@
 package com.hta.movieplus.service;
 
 import java.util.List;
+
+import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.StoreVO;
 
 public interface StoreService {
@@ -22,6 +24,8 @@ public interface StoreService {
 	public StoreVO get1item(int ITEM_CODE);
 
 	public List<StoreVO> getItemListByCodes(List<Integer> codelist);
+
+	public int cartInsert(int ITEM_CODE);
 
 	
 //	public boolean isAdmin(int num, String pass);

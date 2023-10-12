@@ -246,7 +246,7 @@
 						<!-- 20220802 페이즈 약관동의 추가 -->
 						<!-- 20220802 페이즈 약관동의 추가 end -->
 						<div class="btn-group pt40">
-							<a href="https://www.megabox.co.kr/store"
+							<a href="#"
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
 
 							<a href="javascript:void(0);"
