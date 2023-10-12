@@ -64,7 +64,8 @@ public class MemberController {
 	
 	//회원가입 step1 인증메일 보내기
 	@GetMapping("/sendEmail")
-	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, ModelAndView mv, HttpSession session) throws Exception {
+	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, 
+						  ModelAndView mv, HttpSession session) throws Exception {
 		session.setAttribute("MEMBER_EMAIL", email);
 		
 		mailVO.setTo(email);
@@ -74,6 +75,9 @@ public class MemberController {
 		
 		logger.info("email 값 : " + email);
 	}
+	
+	
+	
 
 	//회원가입 step2
 	@PostMapping("/join2")
