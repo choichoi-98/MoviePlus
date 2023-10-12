@@ -59,7 +59,7 @@ $(document).ready(function(){
 	})
 		
 	
-	//비밀번호 찾기
+	/****** 비밀번호 찾기 ******/
 	let verifyemailcheck = false;
 	
 	//비밀번호 찾기 - 이메일 인증번호 요청
@@ -95,7 +95,7 @@ $(document).ready(function(){
 	$('#btnCheckVerify').on("click", function(){
 		var checkinput = $('#findpassVerifyNo').val(); //입력한 인증번호
 		
-		if(checkinput === ''){
+		if(checkinput == ''){
 			alert('인증번호를 입력하세요.');
 			$('#findpassVerifyNo').focus();
 			verifyemailcheck = false;
@@ -103,7 +103,6 @@ $(document).ready(function(){
 			if(checkinput == $("#verifycode").val()){
 				alert('인증에 성공하였습니다.');
 				verifyemailcheck = true;
-				$('#btnSchPwd').removeClass("disabled");	
 			  } else {
 				alert('인증에 실패하였습니다.');
 				console.log();
@@ -111,9 +110,70 @@ $(document).ready(function(){
 			  }	
 		} 
 	})//인증번호 확인 end
+	
+	
+	//비밀번호 찾기 폼 제출
+	$('#findpassform').submit(function(){
+		var id = $('#findpassId').val();
+		var name = $('#findpassName').val();
+		var email = $('#findpassEmail').val();
+		
+		if(id == ''){
+			alert('아이디를 입력하세요.');
+			$('#findpassId').focus();
+			return false;
+		}
+		
+		if(name == ''){
+			alert('이름을 입력하세요.');
+			$('#findpassName').focus();
+			return false;
+		}
+		
+		if(email == ''){
+			alert('이메일을 입력하세요.');
+			$('#findpassEmail').focus();
+			return false;
+		}
 
+		if(!verifyemailcheck){
+			alert('이메일 인증을 완료해주세요.');
+			return false;
+		}	
+	})
 	
 	
+	
+	
+	/*****비밀번호 재설정****/
+	//비밀번호 재설정 폼 제출
+	$('#findPassResetform').submit(function(){
+		var pass = $('#ResetLoginPass').val();
+		var passcheck = $('#ResetLoginPassConfirm').val();
+		
+		if(pass == ''){
+			alert('비밀번호를 입력하세요.');
+			$('#ResetLoginPass').focus();
+			return false;
+		}
+		
+		if(passcheck == ''){
+			alert('비밀번호 확인을 입력하세요.');
+			$('#ResetLoginPassConfirm').focus();
+			return false;
+		}
+		
+		if(pass != passcheck){
+			alert('비밀번호를 확인해주세요.');
+			$('#ResetLoginPassConfirm').focus();
+			return false;
+		}
+		
+		
+		alert('비밀번호가 재설정되었습니다.');	
+	
+	})
+		
 
 
 });

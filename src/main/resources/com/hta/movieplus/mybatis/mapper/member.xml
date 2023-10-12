@@ -18,6 +18,13 @@
 		where MEMBER_ID = #{MEMBER_ID}
 	</select>
 	
+	<select id="modifycheck" resultType="member" parameterType="String">
+		select *
+		from MEMBER
+		where MEMBER_ID = #{MEMBER_ID}
+		AND MEMBER_PASS = #{MEMBER_PASS}
+	</select>
+	
 	<select id="findId" resultType="member" parameterType="String">
 		select *
 		from MEMBER
@@ -29,8 +36,8 @@
 	<select id="findPass" resultType="member" parameterType="String">
 		select *
 		from MEMBER
-		WHERE MEMBER_NAME = #{MEMBER_NAME} 
-		AND MEMBER_ID = #{MEMBER_ID}
+		WHERE MEMBER_ID = #{MEMBER_ID} 
+		AND MEMBER_NAME = #{MEMBER_NAME}
 		AND MEMBER_EMAIL = #{MEMBER_EMAIL}
 	</select>
 	

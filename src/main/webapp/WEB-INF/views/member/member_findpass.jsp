@@ -40,6 +40,7 @@
 				<h2 class="tit mt40">간편찾기<!--간편찾기--></h2>
 
 				<div class="table-wrap">
+				<input type="hidden" class="verifycode" id="verifycode" name="verifycode" />
 				 <form id="findpassform" action="${pageContext.request.contextPath}/member/findpassProcess" method="post">
 				   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<table class="board-form">
@@ -52,13 +53,13 @@
 							<tr>
 								<th scope="row"><label for="findpassId">아이디<!--아이디--></label></th>
 								<td>
-									<input name="MEMBER_ID" id="findpassId" maxlength="20" type="text" placeholder="아이디" class="input-text w230px" required><!--아이디-->
+									<input name="MEMBER_ID" id="findpassId" maxlength="20" type="text" placeholder="아이디" class="input-text w230px"><!--아이디-->
 								</td>
 							</tr>
 							<tr>
 								<th scope="row"><label for="findpassName">이름<!--이름--></label></th>
 								<td>
-									<input name="MEMBER_NAME" id="findpassName" maxlength="20" type="text" placeholder="이름" class="input-text w230px" required><!--이름-->
+									<input name="MEMBER_NAME" id="findpassName" maxlength="20" type="text" placeholder="이름" class="input-text w230px"><!--이름-->
 								</td>
 							</tr>
 							<tr>
@@ -74,14 +75,13 @@
 									<div class="chk-num">
 										<div class="line">
 											<input maxlength="6" type="text" id="findpassVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
-											<input type="hidden" class="verifycode" id="verifycode" name="verifycode" />
 											<div class="time-limit" id="schPwdtimer">
 												10:00
 											</div>
 										</div>
 									</div>
 
-									<button id="btnCheckVerify" type="submit" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
+									<button id="btnCheckVerify" type="button" class="button gray-line w75px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
 									<div id="schPwdMblpNo-error-text" class="alert"></div>
 								</td>
 							</tr>
@@ -93,7 +93,7 @@
 				</div>
 
 				<div class="btn-member-bottom v1" style="border-bottom: 0px;">
-					<button id="btnSchPwd" type="button" class="button purple large disabled" >비밀번호 찾기<!--비밀번호 찾기--></button>
+					<button id="btnSchPwd" type="submit" class="button purple large" style="background:#792828;" >비밀번호 찾기<!--비밀번호 찾기--></button>
 				</div>
 			  </form>
 			 </div>

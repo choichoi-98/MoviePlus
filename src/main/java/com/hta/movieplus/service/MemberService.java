@@ -20,8 +20,6 @@ public interface MemberService {
 
 	public int updatepass(String MEMBER_ID, String MEMBER_PASS);
 
-	public int findPass(Member member);
-
-	
+	public Member findPass(String MEMBER_ID,String MEMBER_NAME, String MEMBER_EMAIL);
 	
 }

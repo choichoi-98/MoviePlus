@@ -74,4 +74,5 @@ public class SendMail {
 	mailSender.send(mp);  // 메일 전송합니다.
 	logger.info("메일 전송했습니다.");
 	}
-}
+	
+}//class end 
