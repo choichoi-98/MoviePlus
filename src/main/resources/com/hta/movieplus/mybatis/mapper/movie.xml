@@ -72,7 +72,20 @@
     	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, MOVIE_STILL, MOVIE_PLOT
 		FROM MOVIE
 		WHERE MOVIE_SCREEN = '상영중'
+		
     </select>
+    
+    <select id="getPlayingMovieLogin" resultType="movie">
+    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, M.MOVIE_STILL, M.MOVIE_PLOT, 
+    			MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
+		FROM MOVIE M
+		     CROSS JOIN MEMBER MEM
+		     LEFT OUTER JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		WHERE MOVIE_SCREEN = '상영중'
+		AND MEM.MEMBER_ID = #{memberId}
+    </select>
+    
+    
 
     <select id="getEndedMovieList" resultType="movie">
     	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
@@ -92,6 +105,15 @@
 		WHERE MOVIE_CODE = #{movieCode}
 	</update>
 	
+	<insert id="addMovieDibs">
+	INSERT INTO MOVIE_DIBS
+	VALUES(MOVIE_DIBS_SEQ.NEXTVAL, #{memberId}, #{movieCode});
+	</insert>
 
+	<delete id="deleteMovieDibs">
+	DELETE MOVIE_DIBS
+	WHERE MEMBER_ID = #{memberId}
+	AND MOVIE_DIBS_OBJECT = #{movieCode}
+	</delete>
 	
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.service.MovieServiceImpl;
 
@@ -107,8 +109,17 @@ public class MovieController {
 
 	@ResponseBody
 	@RequestMapping(value="/now-playing")
-	public List<Movie> getPlayingMovie(){
-		return movieServiceImpl.getPlayingMovie();
+	public List<Movie> getPlayingMovie(
+			HttpSession session
+			){
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		String memberId = memberInfo.getMEMBER_ID();
+		
+		if(memberId == null) {
+			return movieServiceImpl.getPlayingMovie();
+		} else {
+			return movieServiceImpl.getPlayingMovieLogin(memberId);
+		}
 	}
 
 	
@@ -129,6 +140,39 @@ public class MovieController {
 	@RequestMapping(value="/movieEndedUpdate")
 	public void movieEndedUpdate(@RequestParam("movieCode") String movieCode){
 		 movieServiceImpl.movieEndedUpdate(movieCode);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addMovieDibs")
+	public Map<String, Object> addMovieDibs(
+			@RequestParam("movieCode") String movieCode,
+			HttpSession session
+			) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		String memberId = memberInfo.getMEMBER_ID();
+		map.put("memberId", memberId);
+		
+		if (memberId != null) {
+		movieServiceImpl.addMovieDibs(memberId, movieCode);
+		}
+		
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/deleteMovieDibs")
+	public void deleteMovieDibs(
+			@RequestParam("movieCode") String movieCode,
+			HttpSession session
+			) {
+		
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		String memberId = memberInfo.getMEMBER_ID();
+		
+		movieServiceImpl.deleteMovieDibs(memberId, movieCode);
+		
 	}
 	
 }

@@ -99,10 +99,17 @@ document.ready
         </a>
         <div class="btn-util">
             <button type="button" class="button btn-like" rpst-movie-no="${m.movie_Code}">
-                <img
-                   src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png" 
-                   style="width:15px" >
-                398</button>
+             <c:if test="${empty m.MOVIE_DIBS_OBJECT }">
+							<img class="dibs_img" 
+							src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png" 
+                  			 style="width:15px">
+			</c:if>
+			<c:if test="${!empty m.MOVIE_DIBS_OBJECT }">
+							<img class="dibs_img" 
+							src="${pageContext.request.contextPath}/resources/image/movie/heart_full.png" 
+                  			 style="width:15px">
+			</c:if>
+            </button>
             <div class="case">
                 <!-- 개봉 예매가능 기본-->
                 <a href="javascript:moveBokdPage('${m.movie_Code}');" class="button gblue" title="영화 예매하기">예매</a>

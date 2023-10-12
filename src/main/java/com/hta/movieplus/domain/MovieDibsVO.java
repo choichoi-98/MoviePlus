@@ -4,6 +4,7 @@ public class MovieDibsVO {
 	private String movie_Dibs_Id; //pk
 	private String member_Id;	 //회원 id, member테이블 참조
 	private String movie_Dibs_Object;//보고싶어요 한 영화
+	
 	public String getMovie_Dibs_Id() {
 		return movie_Dibs_Id;
 	}

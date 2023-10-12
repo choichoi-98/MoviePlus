@@ -59,6 +59,10 @@ public class MovieServiceImpl implements MovieService{
 		return dao.getPlayingMovieList();
 	}
 
+	public List<Movie> getPlayingMovieLogin(String memberId) {
+		return dao.getPlayingMovieLogin(memberId);
+	}
+
 	public List<Movie> getUpcomingMovie() {
 		return dao.getUpcomingMovieList();
 	}
@@ -92,11 +96,13 @@ public class MovieServiceImpl implements MovieService{
 		return dao.movieEndedUpdate(movieCode);
 	}
 
+	public int addMovieDibs(String memberId, String movieCode) {
+		return dao.addMovieDibs(memberId, movieCode);
+	}
 
-
-
-
-	
+	public int deleteMovieDibs(String memberId, String movieCode) {
+		return dao.deleteMovieDibs(memberId, movieCode);
+	}
 	
 
 }
