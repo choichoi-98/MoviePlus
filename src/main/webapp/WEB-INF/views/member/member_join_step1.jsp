@@ -79,7 +79,7 @@
 										</td>
 									</tr>
 									<tr id="schPwdMblpCertRow">
-										<th scope="row"><label for="ibxSchPwdMblpCharCertNo">인증번호<!--인증번호--></label></th>
+										<th scope="row"><label for="JoinVerifyNo">인증번호<!--인증번호--></label></th>
 										<td>
 											<div class="chk-num">
 												<div class="line">

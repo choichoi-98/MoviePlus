@@ -78,6 +78,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
+	@Override
+	public int findPass(Member member) {
+		return dao.findPass(member);
+	}
+
+
 
 
 

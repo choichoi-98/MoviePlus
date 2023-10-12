@@ -26,6 +26,14 @@
 		AND MEMBER_PHONENO = #{MEMBER_PHONENO}
 	</select>
 	
+	<select id="findPass" resultType="member" parameterType="String">
+		select *
+		from MEMBER
+		WHERE MEMBER_NAME = #{MEMBER_NAME} 
+		AND MEMBER_ID = #{MEMBER_ID}
+		AND MEMBER_EMAIL = #{MEMBER_EMAIL}
+	</select>
+	
 	<select id="memberinfo" parameterType="String" resultType="member">
 		select *
 		from MEMBER 

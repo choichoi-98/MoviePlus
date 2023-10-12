@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-	
 	//모달
 	function openAlertPopup(){
 		$('.alert-popup').css('opacity', '1');
@@ -60,9 +59,61 @@ $(document).ready(function(){
 	})
 		
 	
+	//비밀번호 찾기
+	let verifyemailcheck = false;
+	
+	//비밀번호 찾기 - 이메일 인증번호 요청
+	$('#findVerifyNoSend').click(function(){	
+		var email = $('#findpassEmail').val();
+		const pattern =  /^\w+@\w+[.]\w{3}$/;
+		
+		if(!pattern.test(email)){	//형식에 맞는 이메일 주소를 입력하지 않고 인증요청 버튼을 클릭하였을 때
+			alert('형식에 맞게 이메일 주소를 입력하세요.');
+			$('#findpassEmail').focus();
+			verifyemailcheck = false;
+		} else {	//형식에 맞는 이메일 주소를 입력하였을 때
+		
+			$.ajax({
+				url:"sendEmail",
+				data : {"email" : email},
+				success : function(data){
+						$("#verifycode").val(data);
+						alert('인증번호가 발송되었습니다.');
+						$('#findpassVerifyNo').removeAttr("disabled");	//인증번호 입력창 활성화
+						$('#btnCheckVerify').removeAttr("disabled");	//인증번호 입력창 활성화
+						$('#btnCheckVerify').removeClass("disabled");	//인증번호 입력창 활성화
+					}, 
+				error : function(){
+	           	 	console.log();
+	            }
+			 });//ajax end
+		}
+	})//$('#findVerifyNoSend').click end
 
 
+	//이메일 인증번호 확인
+	$('#btnCheckVerify').on("click", function(){
+		var checkinput = $('#findpassVerifyNo').val(); //입력한 인증번호
+		
+		if(checkinput === ''){
+			alert('인증번호를 입력하세요.');
+			$('#findpassVerifyNo').focus();
+			verifyemailcheck = false;
+		} else {
+			if(checkinput == $("#verifycode").val()){
+				alert('인증에 성공하였습니다.');
+				verifyemailcheck = true;
+				$('#btnSchPwd').removeClass("disabled");	
+			  } else {
+				alert('인증에 실패하였습니다.');
+				console.log();
+				verifyemailcheck = false;
+			  }	
+		} 
+	})//인증번호 확인 end
 
+	
+	
 
 
 });
