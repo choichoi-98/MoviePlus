@@ -14,6 +14,16 @@ public class Movie {
     private int movie_Star;			//평점
     private String movie_Release;	//개봉상태(개봉, 개봉예정)
     private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
+	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
+    
+   
+
+	public String getMOVIE_DIBS_OBJECT() {
+		return MOVIE_DIBS_OBJECT;
+	}
+	public void setMOVIE_DIBS_OBJECT(String mOVIE_DIBS_OBJECT) {
+		MOVIE_DIBS_OBJECT = mOVIE_DIBS_OBJECT;
+	}
 	public String getMovie_Screen() {
 		return movie_Screen;
 	}

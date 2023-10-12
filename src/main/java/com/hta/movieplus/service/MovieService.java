@@ -24,4 +24,12 @@ public interface MovieService {
 	
 	public List<Movie> getMovieListByPage(int page, int pageSize);
 	
+	public int moviePlayUpdate(String movieCode);
+	
+	public int movieEndedUpdate(String movieCode);
+	
+	public int addMovieDibs(String memberId, String movieCode);
+	
+	public int deleteMovieDibs(String memberId, String movieCode);
+	
 }

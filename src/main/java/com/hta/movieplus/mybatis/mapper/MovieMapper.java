@@ -26,6 +26,8 @@ public interface MovieMapper {
 
 	public List<Movie> getPlayingMovieList();
 
+	public List<Movie> getPlayingMovieLogin(String memberId);
+
 	public List<Movie> getUpcomingMovieList();
 
 	public List<Movie> getEndedMovieList();
@@ -37,6 +39,11 @@ public interface MovieMapper {
 	public int moviePlayUpdate(String movieCode);
 
 	public int movieEndedUpdate(String movieCode);
+
+	public int addMovieDibs(String memberId, String movieCode);
+
+	public int deleteMovieDibs(String memberId, String movieCode);
+
 
 
 }
