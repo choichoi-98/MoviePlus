@@ -19,9 +19,8 @@ public class CustomerController {
 	/* 컨트롤러 서비스 연결부분 */
 	CustomerService customerService;
 
-	@Autowired /* 생성자에 의존성주입 */
+	@Autowired /* 생성자에 의존성주입 초기화 */
 	public CustomerController(CustomerService customerService) {
-		// TODO Auto-generated constructor stub
 		this.customerService = customerService;
 	}
 
@@ -60,14 +59,14 @@ public class CustomerController {
 	}
 
 	@GetMapping("/myinjury")
-	public String myinjury() {
-		return "customer_service/customer_service_myinjury";
+	public String myinjury(CustomerOneOnOneVO myinjury) {
+		/* customerService.insertOneOnOne(myinjury); */
+		return "customer_service/customer_service_myinjury"; //리턴이 없어도되나요? 안되는거같음..
 	}
 
 	/* 1대1 문의 데이터 저장페이지 */
 	@PostMapping("/oneonone_process")
 	public String oneProcess(CustomerOneOnOneVO oneonone) {
-		
 		customerService.insertOneOnOne(oneonone);
 		//데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요 
  

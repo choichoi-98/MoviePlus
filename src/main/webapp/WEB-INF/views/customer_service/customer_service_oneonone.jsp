@@ -116,7 +116,13 @@
 								<tr>
 									<th scope="row"><label for="ask-type">문의유형</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										<div class="dropdown bootstrap-select small bs3 dropup">
+										<select name="dropdown" size="1" value="selectoption">
+    <option value="americano">아메리카노</option>
+    <option value="caffe latte">카페라테</option>
+    <option value="cafe au lait">카페오레</option>
+    <option value="espresso">에스프레소</option>
+</select>
+<!-- 									<div class="dropdown bootstrap-select small bs3 dropup">
 										<select name="CUSTOMER_TYPE" id="ask-type" class="small" tabindex="-98">
 										<option value="">문의유형 선택</option>
 										<option value="QDET01">영화정보문의</option>
@@ -127,7 +133,7 @@
 										<option value="QDET06">제안/건의</option>
 										</select>
 										<button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="ask-type" title="문의유형 선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">문의유형 선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox" style="overflow: hidden;"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1" style="overflow-y: auto;"><ul class="dropdown-menu inner "><li class="selected active"><a role="option" aria-disabled="false" tabindex="0" class="selected active" aria-selected="true"><span class="text">문의유형 선택</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">영화정보문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">회원 및 포인트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">예매/결제관련문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">이벤트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">일반문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">제안/건의</span></a></li></ul></div></div></div>
-									</td>
+ -->									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="name">이름</label> <em class="font-orange">*</em></th>

@@ -11,7 +11,7 @@ import com.hta.movieplus.domain.CustomerOneOnOneVO;
 public interface CustomerMapper {
 	
 	public void insertCustomerOneOnOneVO(CustomerOneOnOneVO oneonone);
-
+	
 	/* public List<CustomerOneOnOneVO> getCustomerOneOnOneVOList();  일단 제외 */
 	
 	

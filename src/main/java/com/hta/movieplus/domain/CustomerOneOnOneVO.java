@@ -11,6 +11,7 @@ public class CustomerOneOnOneVO {
 	private String CUSTOMER_PHONNUM1; // 전화번호 앞자리
 	private String CUSTOMER_PHONNUM2; // 전화번호 중간자리
 	private String CUSTOMER_PHONNUM3; // 전화번호 나머지 뒷자리
+	private String CUSTOMER_PHONNUM; // 전화번호 통합
 	private String CUSTOMER_TITLE; // 제목
 	private String CUSTOMER_CONTENT; // 내용
 	private int CUSTOMER_PASSWARD; // 글 비밀번호
@@ -136,5 +137,13 @@ public class CustomerOneOnOneVO {
 	public void setCUSTOMER_REGISTRATIONDATE(String cUSTOMER_REGISTRATIONDATE) {
 		CUSTOMER_REGISTRATIONDATE = cUSTOMER_REGISTRATIONDATE;
 	} // 등록일
+
+	public String getCUSTOMER_PHONNUM() {
+		return CUSTOMER_PHONNUM;
+	}
+
+	public void setCUSTOMER_PHONNUM(String cUSTOMER_PHONNUM1, String cUSTOMER_PHONNUM2, String cUSTOMER_PHONNUM3) {
+		CUSTOMER_PHONNUM = cUSTOMER_PHONNUM1 + cUSTOMER_PHONNUM2 + cUSTOMER_PHONNUM3;
+	}
 
 }
