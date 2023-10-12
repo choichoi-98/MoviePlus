@@ -101,7 +101,12 @@
 
 				<p class="reset mt30 a-r font-orange">* 필수</p>
 
-				<!-- 폼 시작 시점 -->
+				<!-- 폼 시작 시점 JS 작성포함-->
+				<script>
+					function enableRegionSelect(){
+						document.getElementByid("")
+					}
+				</script>
 				<form name="regFrm" method="post" action="oneonone_process">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<div class="table-wrap mt10">
@@ -114,26 +119,40 @@
 							</colgroup>
 							<tbody>
 								<tr>
+									<th scope="row"><label for="ask-select">문의선택</label> <em class="font-orange">*</em></th>
+									<td colspan="3">
+										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="고객센터문의" value="고객센터문의"> 
+										<label>&nbsp;고객센터문의&nbsp;&nbsp;&nbsp;&nbsp;</label>
+										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="극장별문의" value="극장별문의"> 
+										<label>극장별문의&nbsp;&nbsp;&nbsp;&nbsp;</label>
+										<select name="CUSTOMER_SELECT_REGION" size="1" style="width:90px; height:35px; border-radius:5px;">
+    										<option value="" disabled selected>지역선택</option>
+    										<option value="서울">서울</option>
+   											<option value="서울1">서울1</option>
+   											<option value="서울2">서울2</option>
+   											<option value="서울3">서울3</option>
+   											<option value="서울4">서울4</option>
+										</select>&nbsp;&nbsp;
+										<select name="CUSTOMER_SELECT_CENEMA" size="1" style="width:90px; height:35px; border-radius:5px;">
+    										<option value="" disabled selected>극장선택</option>
+    										<option value="극장1">극장1</option>
+   											<option value="극장2">극장2</option>
+   											<option value="극장3">극장3</option>
+   											<option value="극장4">극장4</option>
+   											<option value="극장5">극장5</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
 									<th scope="row"><label for="ask-type">문의유형</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										<select name="dropdown" size="1" value="selectoption">
-    <option value="americano">아메리카노</option>
-    <option value="caffe latte">카페라테</option>
-    <option value="cafe au lait">카페오레</option>
-    <option value="espresso">에스프레소</option>
-</select>
-<!-- 									<div class="dropdown bootstrap-select small bs3 dropup">
-										<select name="CUSTOMER_TYPE" id="ask-type" class="small" tabindex="-98">
-										<option value="">문의유형 선택</option>
-										<option value="QDET01">영화정보문의</option>
-										<option value="QDET02">회원 및 포인트문의</option>
-										<option value="QDET03">예매/결제관련문의</option>
-										<option value="QDET04">이벤트문의</option>
-										<option value="QDET05">일반문의</option>
-										<option value="QDET06">제안/건의</option>
+										<select name="CUSTOMER_TYPE" size="1" style="width:120px; height:35px; border-radius:5px;" required>
+    										<option value="" disabled selected>문의유형 선택</option>
+   											<option value="예매 문의">예매 문의</option>
+   											<option value="포인트 문의">포인트 문의</option>
+   											<option value="이벤트 문의">이벤트 문의</option>
+   											<option value="일반 문의">일반 문의</option>
 										</select>
-										<button type="button" class="btn dropdown-toggle bs-placeholder btn-default" data-toggle="dropdown" role="button" data-id="ask-type" title="문의유형 선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">문의유형 선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox" style="overflow: hidden;"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1" style="overflow-y: auto;"><ul class="dropdown-menu inner "><li class="selected active"><a role="option" aria-disabled="false" tabindex="0" class="selected active" aria-selected="true"><span class="text">문의유형 선택</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">영화정보문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">회원 및 포인트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">예매/결제관련문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">이벤트문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">일반문의</span></a></li><li><a role="option" aria-disabled="false" tabindex="0" aria-selected="false"><span class="text">제안/건의</span></a></li></ul></div></div></div>
- -->									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="name">이름</label> <em class="font-orange">*</em></th>
