@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
-<html lang="ko">
+<html>
 <!--<![endif]-->
 <head>
 <style>
@@ -15,9 +15,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script>
+<!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
+<script>
+$(function() {
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
 
+    $('#btn-kakaopay').click(function() {
+        var totalPrice = $('#totPrdtAmtView').data('price');
+
+        $.ajax({
+            url: 'kakaopay',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { "totalPrice": totalPrice },
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(data) {
+                var box = data.next_redirect_pc_url;
+                window.open(box);
+                alert(totalPrice);
+                // 여기에서 추가 작업 수행 가능
+            },
+            error: function(error) {
+                alert(JSON.stringify(error, null, 2));
+            }
+        });
+    });
+});
+
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -81,7 +110,8 @@
 								</thead>
 
 								<tbody>
-									<c:forEach var="c" items="${codelist}">
+									<c:set var="totalPrice" value="0"/>
+									<c:forEach var="c" items="${cartlist}">
 										<tr>
 											<td class="a-c">
 												<div class="goods-info">
@@ -99,7 +129,7 @@
 													<p class="name">
 														<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">${c.ITEM_NAME}</a>
 													</p>
-													<p class="bundle">${c}</p>
+													<p class="bundle">${c.ITEM_MENU}</p>
 												</div>
 
 												<div class="mt10">
@@ -110,15 +140,15 @@
 											<td><em id="purcQtyView">1</em></td>
 											<td>
 												<div class="goods-info">
-													<em id="prdtSumAmtView" class="price">12,000</em>원
+													<em id="prdtSumAmtView" class="price">${c.ITEM_PRICE}</em>원
 												</div>
 											</td>
 											<td><a href="#" class="a-link" name="brchList"
 												title="삭제">삭제</a></td>
 										</tr>
+										<c:set var="totalPrice" value="${totalPrice + c.ITEM_PRICE}"/>
 									</c:forEach>
 								</tbody>
-
 							</table>
 						</div>
 						<!-- 결제수단 포인트 시작 -->
@@ -132,22 +162,23 @@
 								<div class="cell all">
 									<p class="txt">총 상품금액</p>
 									<p class="price">
-										<em id="totPrdtAmtView">12,000</em> <span>원</span>
+										<em id="totPrdtAmtView" data-price="${totalPrice}">${totalPrice}</em> <span>원</span>
 									</p>
 								</div>
+								
 								<i class="iconset ico-circle-minus">빼기</i>
-
 								<div class="cell sale">
 									<p class="txt">할인금액</p>
 									<p class="price">
-										<em id="totDcAmtView">2,000</em> <span>원</span>
+										<em id="totDcAmtView">0</em> <span>원</span>
 									</p>
 								</div>
+								
 								<i class="iconset ico-circle-equal">등호</i>
 								<div class="cell real">
 									<p class="txt">최종 결제금액</p>
 									<p class="price">
-										<em id="lstPayAmtView">10,000</em> <span>원</span>
+										<em id="lstPayAmtView">${totalPrice}</em> <span>원</span>
 									</p>
 								</div>
 							</div>

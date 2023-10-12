@@ -15,6 +15,8 @@ public interface StoreService {
 	
 	public void deleteItem(int ITEM_CODE);
 	
+	public void delCartItem(int ITEM_CODE);
+	
 	public int getItemListCount();
 	
 	public List<StoreVO> getItemList(int page, int limit);
@@ -25,13 +27,8 @@ public interface StoreService {
 
 	public List<StoreVO> getItemListByCodes(List<Integer> codelist);
 
-	public int cartInsert(int ITEM_CODE);
+	public CartVO cartInsert(CartVO CartVO);
 
-	
-//	public boolean isAdmin(int num, String pass);
-//	
-//	public List<String> DeleteItemFileList();
-//
-//	public void deleteItemFileList(String filename);
+	public List<StoreVO> getCartList();
 
 }

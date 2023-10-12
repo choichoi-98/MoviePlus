@@ -39,6 +39,11 @@ public class StoreServiceImpl implements StoreService {
 	public void deleteItem(int ITEM_CODE) {
 		dao.deleteItem(ITEM_CODE);
 	}
+	
+	@Override
+	public void delCartItem(int ITEM_CODE) {
+		dao.delCartItem(ITEM_CODE);
+	}
 
 	@Override
 	public int getItemListCount() {
@@ -59,6 +64,11 @@ public class StoreServiceImpl implements StoreService {
 		map.put("end", endrow);
 		return dao.getItemList(map);
 	}
+	
+	@Override
+	public List<StoreVO> getCartList() {
+		return dao.getCartList();
+	}
 
 	@Override
 	public List<StoreVO> getItemListByKind(String ITEM_MENU) {
@@ -71,43 +81,9 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public int cartInsert(int ITEM_CODE) {
-		return dao.cartInsert(ITEM_CODE);
+	public CartVO cartInsert(CartVO CartVO) {
+		dao.cartInsert(CartVO);
+		return CartVO;
 	}
 
-
-//	@Override
-//	public List<StoreVO> getItemList(int page, int limit) {
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		int startrow = (page-1) * limit + 1;
-//		int endrow = startrow + limit - 1;
-//		map.put("start", startrow);
-//		map.put("end", endrow);
-//		return dao.getItemList(map);
-//	}
-
-
-//	@Override
-//	public boolean isAdmin(int num, String pass) {
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		map.put("num", num);
-//		map.put("pass", pass);
-//		StoreVO store = dao.isAdmin(map);
-//		
-//		if(store == null) {
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	}
-//
-//	@Override
-//	public List<String> DeleteItemFileList() {
-//		return dao.getDeleteItemFileList();
-//	}
-//
-//	@Override
-//	public void deleteItemFileList(String filename) {
-//		dao.deleteItemFileList(filename);
-//	}
 }

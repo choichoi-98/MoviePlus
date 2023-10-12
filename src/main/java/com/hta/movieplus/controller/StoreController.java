@@ -108,7 +108,7 @@ public class StoreController {
 	@PostMapping("/admin/delitem")
 	@ResponseBody
 	public void delitem(
-		@RequestParam("ITEM_CODE") int ITEM_CODE) {
+		@RequestParam("itemCode") int ITEM_CODE) {
 		storeService.deleteItem(ITEM_CODE);
 	}
 	
@@ -143,24 +143,10 @@ public class StoreController {
 	public ModelAndView store9(ModelAndView mv, HttpServletRequest request) {
 		List<StoreVO> voucherlist = storeService.getItemListByKind("voucher");
 		
-//		HttpSession session = request.getSession();
-//		session.setAttribute("voucherlist", voucherlist);
-		
 		mv.setViewName("store/store_cp09");
 		mv.addObject("voucherlist", voucherlist);
 		return mv;
 	}
-	
-//	@RequestMapping("/cp9cart")
-//	public ModelAndView cp9cart(
-//			@RequestParam("ITEM_CODE") int ITEM_CODE, 
-//			ModelAndView mv) {
-//		
-//		CartVO itemincart = cartService.addItemToCart(ITEM_CODE);
-//		mv.setViewName("store/store_cp09");
-//		mv.addObject("itemincart", itemincart);
-//		return mv;
-//	}
 	
 	@GetMapping("/cp07")
 	public ModelAndView score7(ModelAndView mv) {
@@ -188,30 +174,33 @@ public class StoreController {
 		@RequestParam("itemCode") int ITEM_CODE,
 		CartVO cartVO,
 		ModelAndView mv) {
-		storeService.cartInsert(ITEM_CODE);
+		cartVO.setITEM_CODE(ITEM_CODE);
+		storeService.cartInsert(cartVO);
 		
 		mv.setViewName("store/item_select");
 		return mv;
 	}
 	
-	@RequestMapping("/cart_prev")
+	@GetMapping("/cart")
 	public ModelAndView cart(
 		CartVO cartVO,
 		ModelAndView mv) {
-		mv.setViewName("store/store_cart");
-		return mv;
-	}
-	
-	@RequestMapping("/cart")
-	public ModelAndView cartpro(
-		CartVO cartVO,
-		ModelAndView mv) {
+		
+		List<StoreVO> cartlist = storeService.getCartList();
 		
 		mv.setViewName("store/store_cart");
+		mv.addObject("cartlist", cartlist);
 		return mv;
 	}
 	
-	@RequestMapping("kakaopay")
+	@PostMapping("/cart")
+	@ResponseBody
+	public void cart2(
+		@RequestParam("itemCode") int ITEM_CODE) {
+		storeService.delCartItem(ITEM_CODE);
+	}
+	
+	@PostMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay2() {
 		try {
@@ -230,7 +219,7 @@ public class StoreController {
 					+ "&item_name=popcorn" // 상품명
 					+ "&quantity=1" // 상품 수량
 					+ "&total_amount=10000" // 총 금액
-					+ "&vat_amount=200" // 부가세
+					+ "&vat_amount=0" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
 					+ "&approval_url=http://localhost:9000/movieplus/store/success" // 결제 성공 시
 					+ "&fail_url=http://localhost:9000/movieplus/store/fail" // 결제 실패 시(유효 시간: 15분)

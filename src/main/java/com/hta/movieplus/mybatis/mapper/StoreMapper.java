@@ -33,7 +33,11 @@ public interface StoreMapper {
 
 	public List<StoreVO> getItemListByCodes(List<Integer> codelist);
 
-	public int cartInsert(int ITEM_CODE);
+	public void cartInsert(CartVO CartVO);
+
+	public List<StoreVO> getCartList();
+
+	public void delCartItem(int ITEM_CODE);
 
 //	public int getListCount();
 //	
