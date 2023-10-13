@@ -71,8 +71,58 @@ public class SendMail {
 			}
 		}; //newMimeMessagePreparator() end
 		
-	mailSender.send(mp);  // 메일 전송합니다.
-	logger.info("메일 전송했습니다.");
+	  mailSender.send(mp);  // 메일 전송합니다.
+	  logger.info("회원가입 인증번호 전송했습니다.");
+	}
+	
+	
+	
+	public void MypagechgMail(MailVO vo) {		//마이페이지 이메일변경 인증번호 
+			
+		MimeMessagePreparator mp = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+			
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			helper.setFrom(vo.getFrom());
+			helper.setTo(vo.getTo());
+				
+			String subject = "[MoviePlus] 마이페이지 이메일 변경 인증번호"; 
+			String content = "고객님의 인증번호는 다음과 같습니다. [ " + vo.getVerifycode() + " ]";
+				
+			helper.setSubject(subject);
+			helper.setText(content, true);
+				
+			}
+		}; //newMimeMessagePreparator() end
+		
+	  mailSender.send(mp);  // 메일 전송합니다.
+	  logger.info("마이페이지 이메일변경 인증번호 전송했습니다.");
+	}
+	
+	public void FindpassMail(MailVO vo) {		//마이페이지 이메일변경 인증번호 
+		
+		MimeMessagePreparator mp = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				helper.setFrom(vo.getFrom());
+				helper.setTo(vo.getTo());
+				
+				String subject = "[MoviePlus] 비밀번호 찾기 인증번호"; 
+				String content = "고객님의 인증번호는 다음과 같습니다. [ " + vo.getVerifycode() + " ]";
+				
+				helper.setSubject(subject);
+				helper.setText(content, true);
+				
+			}
+		}; //newMimeMessagePreparator() end
+		
+		mailSender.send(mp);  // 메일 전송합니다.
+		logger.info("마이페이지 이메일변경 인증번호 전송했습니다.");
 	}
 	
 	

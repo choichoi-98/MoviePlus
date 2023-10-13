@@ -66,6 +66,8 @@ public class MemberController {
 	@GetMapping("/sendEmail")
 	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, 
 						  ModelAndView mv, HttpSession session) throws Exception {
+		
+		
 		session.setAttribute("MEMBER_EMAIL", email);
 		
 		mailVO.setTo(email);
@@ -75,9 +77,6 @@ public class MemberController {
 		
 		logger.info("email 값 : " + email);
 	}
-	
-	
-	
 
 	//회원가입 step2
 	@PostMapping("/join2")
@@ -107,34 +106,19 @@ public class MemberController {
 		return memberservice.isId(MEMBER_ID);
 	}
 	
-	//마이페이지 - 로그인 체크
-	@PostMapping("/logincheck")
-	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
-									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
-									 ModelAndView mv)throws Exception {
-		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
-		
-		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
-			mv.setViewName("member/mypage_modify");
-		} else {
-			mv.setViewName("/mypage");
-		}
-		return mv;
-	}
-	
 	//회원가입 처리
 	@PostMapping("/joinProcess")
 	public String joinProcess(Member member, 
-							  RedirectAttributes rattr,
-							  Model model,
-							  HttpServletRequest request) {
+								  RedirectAttributes rattr,
+								  Model model,
+								  HttpServletRequest request) {
 		//비밀번호 암호화 추가
 		String encPassword = passwordEncoder.encode(member.getMEMBER_PASS());
 		logger.info(encPassword);
 		member.setMEMBER_PASS(encPassword);
-		
+			
 		int result = memberservice.insert(member);
-		
+			
 		if(result == 1) { 	//삽입이 된 경우
 			model.addAttribute("member", member);
 			return "/member/member_join_step4";  //step4 화면으로 이동
@@ -144,6 +128,7 @@ public class MemberController {
 			return "redirect:/main";  //에러페이지
 		}
 	}
+	
 	
 	//아이디 찾기 이동
 	@GetMapping("/findid")
@@ -168,6 +153,22 @@ public class MemberController {
 	@GetMapping("/findpass")
 	public String findpass() {
 		return "member/member_findpass";
+	}
+	
+
+	//비밀번호 찾기 인증메일 보내기
+	@GetMapping("/findpassEmail")
+	public void findpassEmail(@RequestParam("email") String email, HttpServletResponse resp, 
+			ModelAndView mv, HttpSession session) throws Exception {
+		
+		session.setAttribute("MEMBER_EMAIL", email);
+		
+		mailVO.setTo(email);
+		int verifycode = mailVO.getVerifycode();
+		sendMail.FindpassMail(mailVO);
+		resp.getWriter().write(Integer.toString(verifycode));
+		
+		logger.info("email 값 : " + email);
 	}
 	
 	
@@ -199,7 +200,7 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage_main";
 	}
-	
+
 	//마이페이지 - 개인정보수정 클릭시 비밀번호 확인페이지로 이동
 	@GetMapping("/modifyinfo")
 	public String modify() {
@@ -210,11 +211,42 @@ public class MemberController {
 	@GetMapping("/modifyform")
 	public String modifyform() {
 		
-		
 		return "member/mypage_modify";
 	}
+
+	//마이페이지 - 로그인 체크
+	@PostMapping("/logincheck")
+	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
+									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
+									 ModelAndView mv, HttpSession session)throws Exception {
+		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
+		
+		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
+			mv.setViewName("member/mypage_modify");
+		} else {
+			mv.setViewName("member/mypage_main");
+			Member memberInfo = (Member) session.getAttribute("memberInfo");
+			session.setAttribute("memberInfo", memberInfo);
+			mv.addObject("passwordMismatch", true);
+		}
+		return mv;
+	}
 	
+	//마이페이지 이메일 변경 인증메일 보내기
+	@GetMapping("/mypageChgEmail")
+	public void mypageChgEmail(@RequestParam("email") String email, HttpServletResponse resp, 
+				ModelAndView mv, HttpSession session) throws Exception {
 	
+		session.setAttribute("MEMBER_EMAIL", email);
+			
+		mailVO.setTo(email);
+		int verifycode = mailVO.getVerifycode();
+		sendMail.MypagechgMail(mailVO);
+		resp.getWriter().write(Integer.toString(verifycode));
+			
+		logger.info("email 값 : " + email);
+	}
+		
 	
 	//마이페이지 - 개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
@@ -267,7 +299,7 @@ public class MemberController {
 		}
 	}
 	
-	
+	//마이페이지 개인정보수정 - 프로필 사진 파일 업로드 DB 저장 파일명 
 	private String fileDBName(String fileName, String saveFolder) {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -303,7 +335,6 @@ public class MemberController {
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 	}
-	
 	
 	
 	//마이페이지 - 비밀번호 변경
