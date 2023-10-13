@@ -60,13 +60,13 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="A14 (스탠다드/장애인석)"
-		class="jq-tooltip seat-condition standard disabled"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 521px; top: 50px; width: 20px;">
 		<span class="num">14</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">장애인석</span>
 	</button>
 	<button type="button" title="A15 (스탠다드/장애인석)"
-		class="jq-tooltip seat-condition standard disabled"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 541px; top: 50px; width: 20px;">
 		<span class="num">15</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">장애인석</span>
@@ -326,7 +326,7 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="E9 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 401px; top: 130px; width: 20px;">
 		<span class="num">9</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>

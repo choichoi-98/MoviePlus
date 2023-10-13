@@ -5,19 +5,19 @@
 	<button type="button" class="btn-seat-row" title="A 행"
 		style="position: absolute; left: 106px; top: 52px;">A</button>
 	<button type="button" title="A2 (스탠다드/장애인석)"
-		class="jq-tooltip seat-condition standard disabled"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 171px; top: 50px; width: 20px;">
 		<span class="num">2</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">장애인석</span>
 	</button>
 	<button type="button" title="A3 (스탠다드/장애인석)"
-		class="jq-tooltip seat-condition standard disabled"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 191px; top: 50px; width: 20px;">
 		<span class="num">3</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">장애인석</span>
 	</button>
 	<button type="button" title="A4 (스탠다드/장애인석)"
-		class="jq-tooltip seat-condition standard disabled"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 211px; top: 50px; width: 20px;">
 		<span class="num">4</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">장애인석</span>
@@ -877,19 +877,19 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="H6 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 251px; top: 190px; width: 20px;">
 		<span class="num">6</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="H9 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 331px; top: 190px; width: 20px;">
 		<span class="num">9</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="H10 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 351px; top: 190px; width: 20px;">
 		<span class="num">10</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -907,7 +907,7 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="H13 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 411px; top: 190px; width: 20px;">
 		<span class="num">13</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -995,7 +995,7 @@
 	<button type="button" class="btn-seat-row" title="J 행"
 		style="position: absolute; left: 106px; top: 232px;">J</button>
 	<button type="button" title="J7 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 291px; top: 230px; width: 20px;">
 		<span class="num">7</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -1025,7 +1025,7 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="J12 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 391px; top: 230px; width: 20px;">
 		<span class="num">12</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -1271,19 +1271,19 @@
 	<button type="button" class="btn-seat-row" title="M 행"
 		style="position: absolute; left: 106px; top: 292px;">M</button>
 	<button type="button" title="M7 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 291px; top: 290px; width: 20px;">
 		<span class="num">7</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="M8 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 311px; top: 290px; width: 20px;">
 		<span class="num">8</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="M9 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 331px; top: 290px; width: 20px;">
 		<span class="num">9</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -1363,13 +1363,13 @@
 	<button type="button" class="btn-seat-row" title="N 행"
 		style="position: absolute; left: 106px; top: 312px;">N</button>
 	<button type="button" title="N7 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 291px; top: 310px; width: 20px;">
 		<span class="num">7</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="N8 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 311px; top: 310px; width: 20px;">
 		<span class="num">8</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>
@@ -1381,7 +1381,7 @@
 			class="condition">판매가능</span><span class="rank">일반</span>
 	</button>
 	<button type="button" title="N10 (스탠다드/일반)"
-		class="jq-tooltip seat-condition standard finish"
+		class="jq-tooltip seat-condition standard common"
 		style="position: absolute; left: 351px; top: 310px; width: 20px;">
 		<span class="num">10</span><span class="kind">스탠다드</span><span
 			class="condition">판매가능</span><span class="rank">일반</span>

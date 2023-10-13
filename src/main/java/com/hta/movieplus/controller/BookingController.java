@@ -13,6 +13,8 @@ import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.TheaterSchedule;
+import com.hta.movieplus.domain.TimeTableDate;
 import com.hta.movieplus.service.SchedulingService;
 import com.hta.movieplus.service.TheaterService;
 
@@ -33,15 +35,20 @@ public class BookingController {
 	
 	@GetMapping("")
 	public ModelAndView bookingMainView(ModelAndView mv, Principal principal) {
-		List<Movie> movieList = schedulingService.getOpenMovieListWithScheduleCnt();
 		List<Theater> theaterList = theaterService.getAllTheaterList();
-		List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
-		int favTheaterCnt = theaterService.getCountFavoriteTheater(principal.getName());
 		
-		mv.addObject("favTheaterCnt", favTheaterCnt);
-		mv.addObject("favTheaterList", favTheaterList);
+		if(principal != null) {
+			List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
+			int favTheaterCnt = theaterService.getCountFavoriteTheater(principal.getName());
+			mv.addObject("favTheaterList", favTheaterList);
+			mv.addObject("favTheaterCnt", favTheaterCnt);
+		}
+		
+		List<TimeTableDate> dateList = schedulingService.getDateList();
+		
+		
+		mv.addObject("dateList", dateList);
 		mv.addObject("theaterList", theaterList);
-		mv.addObject("movieList", movieList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.setViewName("booking/booking_main");
 		
@@ -49,8 +56,15 @@ public class BookingController {
 	}
 	
 	@GetMapping("/seat")
-	public String bookingSeatView() {
-		return "booking/booking_seat";
+	public ModelAndView bookingSeatView(int scheduleId, ModelAndView mv) {
+		TheaterSchedule schedule = schedulingService.getSchedule(scheduleId);
+		Movie movie = schedulingService.getMovieDetailByCode(schedule.getMOVIE_CODE());
+		
+		mv.addObject("movie", movie);
+		mv.addObject("schedule", schedule);
+		mv.setViewName("booking/booking_seat");
+		
+		return mv;
 	}
 
 }

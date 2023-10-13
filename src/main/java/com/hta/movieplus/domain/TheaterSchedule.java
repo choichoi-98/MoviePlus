@@ -13,6 +13,7 @@ public class TheaterSchedule {
 	private String THEATER_ROOM_NAME;
 	private String MOVIE_TITLE;
 	private String THEATER_NAME;
+	private int ScheduleCnt;
 	
 	
 	
@@ -82,6 +83,12 @@ public class TheaterSchedule {
 	}
 	public void setTHEATER_NAME(String tHEATER_NAME) {
 		THEATER_NAME = tHEATER_NAME;
+	}
+	public int getScheduleCnt() {
+		return ScheduleCnt;
+	}
+	public void setScheduleCnt(int scheduleCnt) {
+		ScheduleCnt = scheduleCnt;
 	}
 	
 	

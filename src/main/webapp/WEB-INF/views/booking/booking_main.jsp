@@ -69,69 +69,16 @@
 									<div class="date-area" id="formDeList">
 										<div class="wrap"
 											style="position: relative; width: 2100px; border: none; left: -70px;">
-											<button class="disabled holi" type="button"
-												date-data="2023.09.24" month="8" tabindex="-1">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">24<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">일</span><span
-													class="day-en" style="pointer-events: none; display: none">Sun</span>
-											</button>
-											<button class="disabled" type="button" date-data="2023.09.25"
-												month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">25<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">오늘</span><span
-													class="day-en" style="pointer-events: none; display: none">Mon</span>
-											</button>
-											<button class="disabled holi" type="button"
-												date-data="2023.09.26" month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">26<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">내일</span><span
-													class="day-en" style="pointer-events: none; display: none">Tue</span>
-											</button>
-											<button class="" type="button" date-data="2023.09.27"
-												month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">27<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">수</span><span
-													class="day-en" style="pointer-events: none; display: none">Wed</span>
-											</button>
-											<button class="holi on" type="button" date-data="2023.09.28"
-												month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">28<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">목</span><span
-													class="day-en" style="pointer-events: none; display: none">Thu</span>
-											</button>
-											<button class="holi" type="button" date-data="2023.09.29"
-												month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">29<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">금</span><span
-													class="day-en" style="pointer-events: none; display: none">Fri</span>
-											</button>
-											<button class="sat" type="button" date-data="2023.09.30"
-												month="8">
-												<span class="ir">2023년 9월</span><em
-													style="pointer-events: none;">30<span
-													style="pointer-events: none;" class="ir">일</span></em><span
-													class="day-kr"
-													style="pointer-events: none; display: inline-block">토</span><span
-													class="day-en" style="pointer-events: none; display: none">Sat</span>
-											</button>
+											<c:forEach var="date" items="${dateList}">
+												<button class="timetable-date" type="button"
+													data-date="${date.date}">
+													<span class="ir">${date.year}년 ${date.month}월</span><em
+														style="pointer-events: none;">${date.day}<span
+														style="pointer-events: none;" class="ir">${date.week}</span></em><span
+														class="day-kr"
+														style="pointer-events: none; display: inline-block">${date.week}</span>
+												</button>
+											</c:forEach>
 										</div>
 									</div>
 								</div>
@@ -176,19 +123,8 @@
 												<div id="mCSB_1_container"
 													class="mCSB_container mCS_no_scrollbar_y"
 													style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
-													<ul>
-														<c:forEach var="movie" items="${movieList}">
-															<li>
-																<button type="button" class="btn ">
-																	<!-- on 클래스 -->
-																	<span class="movie-grade small age-${movie.grade_data}">${movie.movie_Grade}</span>
-																	<i data-dib-index="${movie.movie_Code}"
-																		class="iconset ico-heart-small">보고싶어 설정안함</i>
-																	<!-- ajax로 ico-heart-on-small-->
-																	<span class="txt">${movie.movie_Title}</span>
-																</button>
-															</li>
-														</c:forEach>
+													<ul id="movie-timetable-ul">
+														<!-- ajax 리스트 업 -->
 													</ul>
 												</div>
 											</div>
@@ -203,13 +139,7 @@
 
 									<!-- 영화 선택 하지 않았을 때 -->
 									<div class="choice-all" id="choiceMovieNone" style="display:;">
-										<strong>모든영화</strong> <span>목록에서 영화를 선택하세요.</span>
-									</div>
-
-									<!-- 영화를 선택했을 때 -->
-									<div class="choice-all" id="choiceMovieNone"
-										style="display: none;">
-										<span>선택한 영화 이름</span>
+										<strong>상영 영화</strong> <span>목록에서 영화를 선택하세요.</span>
 									</div>
 								</div>
 								<!--// view-area -->
@@ -227,13 +157,14 @@
 
 									<!-- all-list : 전체 -->
 									<div class="all-list">
-										<button type="button" class="btn-tab" style="border-right:1px solid #d9d8dd">전체</button>
+										<button type="button" class="btn-tab"
+											style="border-right: 1px solid #d9d8dd">전체</button>
 										<div class="list">
 											<div class="scroll" id="brchList">
 												<ul>
 													<li id="liFavorBrch" class="booking-theater-li"><button
 															id="btnFavorBrch" type="button" class="btn">
-															<span class="txt">선호극장(${favTheaterCnt})</span>
+															<span class="txt">선호극장</span><span class="theaterRoomCnt">(${favTheaterCnt})</span>
 														</button>
 
 
@@ -243,9 +174,7 @@
 																	<div class="no-favorite">
 																		<div class="wrap">
 																			<i class="iconset ico-theater-favorite"></i>
-																			<div class="txt">
-																				등록된 극장이 없습니다
-																			</div>
+																			<div class="txt">등록된 극장이 없습니다</div>
 																		</div>
 																	</div>
 																</c:when>
@@ -256,8 +185,13 @@
 																			class="mCSB_container mCS_no_scrollbar_y"
 																			style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto"
 																			dir="ltr">
-																			<ul>
-																				<li><button id="btn" type="button" class="">강남</button></li>
+																			<ul class="theater-ul-list">
+																				<c:forEach var="theater" items="${favTheaterList}">
+																					<li class="theater-timetable"
+																						data-theaterId="${theater.THEATER_ID}"><button
+																							id="btn" class="theater-btn" type="button"
+																							class="">${theater.THEATER_NAME}</button></li>
+																				</c:forEach>
 																			</ul>
 																		</div>
 																	</div>
@@ -285,11 +219,13 @@
 																	<div id="mCSB_5_container"
 																		class="mCSB_container mCS_no_scrollbar_y"
 																		style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
-																		<ul>
+																		<ul class="theater-ul-list">
 																			<c:forEach var="theater" items="${theaterList}">
 																				<c:if
 																					test="${theater.THEATER_LOCATION eq location.value}">
-																					<li><button id="btn" type="button">${theater.THEATER_NAME}</button></li>
+																					<li class="theater-timetable"
+																						data-theaterId="${theater.THEATER_ID}"><button
+																							id="btn" class="theater-btn" type="button">${theater.THEATER_NAME}</button></li>
 																				</c:if>
 																			</c:forEach>
 																		</ul>
@@ -316,11 +252,6 @@
 										<strong>전체극장</strong> <span>목록에서 극장을 선택하세요.</span>
 									</div>
 
-									<!-- 영화관을 한개라도 선택 했을때 -->
-									<div class="choice-all" id="choiceBrchNone"
-										style="display: none;">
-										<span>선택한 영화관</span>
-									</div>
 								</div>
 								<!--// view-area -->
 
@@ -346,11 +277,20 @@
 									<!-- 영화, 영화관 선택 안했을때 -->
 									<!---->
 									<div class="no-result" id="playScheduleNonList"
-										style="display: none;">
+										style="">
 										<i class="iconset ico-movie-time"></i>
 
 										<p class="txt">
-											영화와 극장을 선택하시면<br> 상영시간표를 비교하여 볼 수 있습니다.
+											영화나 극장을 선택하시면<br> 상영시간표를 비교하여 볼 수 있습니다.
+										</p>
+									</div>
+									
+									<div class="no-result" id="playScheduleNonList2"
+										style="display:none">
+										<i class="iconset ico-movie-time"></i>
+
+										<p class="txt">
+											상영 스케줄이 없습니다.
 										</p>
 									</div>
 
@@ -366,50 +306,8 @@
 												<div id="mCSB_23_container"
 													class="mCSB_container mCS_no_scrollbar_y"
 													style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
-													<ul>
-														<li><button type="button" class="btn">
-																<div class="legend">
-																	<i class="iconset ico-sun" title="조조">조조</i>
-																</div>
-																<span class="time"><strong title="상영 시작">09:00</strong><em
-																	title="상영 종료">~10:48</em></span><span class="title"><strong
-																	title="천박사 퇴마 연구소: 설경의 비밀">천박사 퇴마 연구소: 설경의 비밀</strong><em>2D</em></span>
-																<div class="info">
-																	<span class="theater" title="극장">광명소하<br>컴포트
-																		2관 (리클라이너/LASER)
-																	</span><span class="seat"><strong class="now"
-																		title="잔여 좌석">97</strong><span>/</span><em class="all"
-																		title="전체 좌석">97</em></span>
-																</div>
-															</button></li>
-														<li><button type="button" class="btn">
-																<div class="legend">
-																	<i class="iconset ico-sun" title="조조">조조</i>
-																</div>
-																<span class="time"><strong title="상영 시작">09:20</strong><em
-																	title="상영 종료">~11:08</em></span><span class="title"><strong
-																	title="천박사 퇴마 연구소: 설경의 비밀">천박사 퇴마 연구소: 설경의 비밀</strong><em>2D</em></span>
-																<div class="info">
-																	<span class="theater" title="극장">강남<br>1관
-																	</span><span class="seat"><strong class="now"
-																		title="잔여 좌석">229</strong><span>/</span><em
-																		class="all" title="전체 좌석">232</em></span>
-																</div>
-															</button></li>
-
-														<li><button type="button" class="btn">
-																<div class="legend"></div>
-																<span class="time"><strong title="상영 시작">11:30</strong><em
-																	title="상영 종료">~13:18</em></span><span class="title"><strong
-																	title="천박사 퇴마 연구소: 설경의 비밀">천박사 퇴마 연구소: 설경의 비밀</strong><em>2D</em></span>
-																<div class="info">
-																	<span class="theater" title="극장">강남<br>1관
-																	</span><span class="seat"><strong class="now"
-																		title="잔여 좌석">220</strong><span>/</span><em
-																		class="all" title="전체 좌석">232</em></span>
-																</div>
-															</button></li>
-
+													<ul id="scheduleListResult">
+														
 													</ul>
 												</div>
 											</div>

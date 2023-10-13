@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	var checkCnt=0;
 	// 빠른 예매 시작
 	function seat_alert() {
 		$('.seat-count-before').css('display', 'none');
@@ -17,11 +17,15 @@ $(document).ready(function(){
 		var $count = $(this).prev().find('button');
 		var currentValue = $count.text();
 
+		if(checkCnt >= 8){
+			return;
+		}
 		if(currentValue >= 8) {
 			return;
 		}
 
 		currentValue++;	
+		checkCnt++;
 		$count.text(currentValue);
 	})
 
@@ -34,6 +38,7 @@ $(document).ready(function(){
 		}
 
 		currentValue--;
+		checkCnt--;
 		$count.text(currentValue);
 	})
 	//빠른 예매 끝

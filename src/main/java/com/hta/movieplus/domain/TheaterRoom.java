@@ -7,7 +7,10 @@ public class TheaterRoom {
 	private String THEATER_ROOM_STATUS ="대기";
 	private String THEATER_ROOM_CREATED_DATE;
 	private int THEATER_ID;
-
+	//--
+	private int SCHEDULE_CNT;
+	
+	
 	public int getTHEATER_ROOM_ID() {
 		return THEATER_ROOM_ID;
 	}
@@ -61,6 +64,14 @@ public class TheaterRoom {
 		return "TheaterRoom [THEATER_ROOM_ID=" + THEATER_ROOM_ID + ", THEATER_ROOM_NAME=" + THEATER_ROOM_NAME
 				+ ", THEATER_ROOM_SEAT_TYPE=" + THEATER_ROOM_SEAT_TYPE + ", THEATER_ROOM_STATUS=" + THEATER_ROOM_STATUS
 				+ ", THEATER_ROOM_CREATED_DATE=" + THEATER_ROOM_CREATED_DATE + ", THEATER_ID=" + THEATER_ID + "]";
+	}
+
+	public int getSCHEDULE_CNT() {
+		return SCHEDULE_CNT;
+	}
+
+	public void setSCHEDULE_CNT(int sCHEDULE_CNT) {
+		SCHEDULE_CNT = sCHEDULE_CNT;
 	}
 
 }
