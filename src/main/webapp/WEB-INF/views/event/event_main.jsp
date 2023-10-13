@@ -67,20 +67,7 @@
 
 				<div id="toptablist" class="toptablist display-none"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
-
 
 			<div id="divTopArea" class="event-slider">
 				<div class="inner-wrap">
