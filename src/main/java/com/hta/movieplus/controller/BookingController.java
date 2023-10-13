@@ -1,5 +1,6 @@
 package com.hta.movieplus.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.Theater;
-import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.service.SchedulingService;
 import com.hta.movieplus.service.TheaterService;
 
@@ -31,10 +32,14 @@ public class BookingController {
 	}
 	
 	@GetMapping("")
-	public ModelAndView bookingMainView(ModelAndView mv) {
+	public ModelAndView bookingMainView(ModelAndView mv, Principal principal) {
 		List<Movie> movieList = schedulingService.getOpenMovieListWithScheduleCnt();
 		List<Theater> theaterList = theaterService.getAllTheaterList();
+		List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
+		int favTheaterCnt = theaterService.getCountFavoriteTheater(principal.getName());
 		
+		mv.addObject("favTheaterCnt", favTheaterCnt);
+		mv.addObject("favTheaterList", favTheaterList);
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("movieList", movieList);
 		mv.addObject("locationList", TheaterLocationEnum.values());

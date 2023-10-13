@@ -1,6 +1,15 @@
 $(document).ready(function(){
 
-	console.log('tet123123s');	
-	
-	//빠른 예매 끝
+	$('.booking-theater-li').click(function() {
+		$('.booking-theater-li .btn').removeClass('on');
+		$('.booking-theater-li .depth').removeClass('on');
+
+
+
+		$(this).children().addClass('on');
+		$(this).children().prev().addClass('on');
+	})
+
+	$('#liFavorBrch').trigger('click');
+
 });
