@@ -72,15 +72,17 @@ public class schedulingServiceImpl implements SchedulingService {
 		List<TheaterSchedule> scheduleList = mapper.getScheduleListByTheaterRoomId(schedule);
 		int listSize = scheduleList.size();
 
+
+		if (listSize == 0) { // 스케줄 없는 경우
+			return true;
+		}
+		
 		LocalTime FirstStartTime = LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START());
 		LocalTime LastEndTime = LocalTime.parse(scheduleList.get(listSize-1).getTHEATER_SCHEDULE_END());
 		
 		LocalTime compStartTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_START());
 		LocalTime compEndTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_END());
 
-		if (listSize == 0) { // 스케줄 없는 경우
-			return true;
-		}
 		
 		if(compStartTime.isAfter(LastEndTime) || compEndTime.isBefore(FirstStartTime)) {
 			return true;
@@ -198,9 +200,10 @@ public class schedulingServiceImpl implements SchedulingService {
 	}
 
 	@Override
-	public List<Movie> getOpenMovieListWithScheduleCnt() {
+	public List<Movie> getOpenMovieListWithScheduleCnt(String date) {
 		// TODO Auto-generated method stub
-		List<Movie> movieList = mapper.getOpenMovieListWithScheduleCnt();
+				
+		List<Movie> movieList = mapper.getOpenMovieListWithScheduleCnt(date);
 		
 		for(Movie movie : movieList) {
 			movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
@@ -229,6 +232,39 @@ public class schedulingServiceImpl implements SchedulingService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public List<TheaterSchedule> getTheaterRoomWithScheduleCnt(String movieCode, String date) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("movieCode", movieCode);
+		dataMap.put("date", date);
+		
+		return mapper.getTheaterRoomWithScheduleCnt(dataMap);
+}
+
+	@Override
+	public List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(String movieCode, String date,
+			String theaterId) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("movieCode", movieCode);
+		dataMap.put("date", date);
+		dataMap.put("theaterId", theaterId);
+		
+		return mapper.getScheduleListByDateAndMovieCodeAndTheaterId(dataMap);
+	}
+
+	@Override
+	public Movie getMovieDetailByCode(String movieCode) {
+		// TODO Auto-generated method stub
+		Movie movie = mapper.getMovieDetailByCode(movieCode);
+		movie.setMovie_Poster(movie.getMovie_Poster().substring(0,60));
+		
+		movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
+		
+		return movie;
 	}
 
 

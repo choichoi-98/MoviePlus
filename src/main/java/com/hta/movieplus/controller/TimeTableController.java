@@ -27,15 +27,13 @@ public class TimeTableController {
 
 	SchedulingService schedulingService;
 	TheaterService theaterService;
-	MovieService movieService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TimeTableController.class);
 	
-	public TimeTableController(SchedulingService schedulingService, TheaterService theaterService, MovieService movieService) {
+	public TimeTableController(SchedulingService schedulingService, TheaterService theaterService) {
 		// TODO Auto-generated constructor stub
 		this.schedulingService = schedulingService;
 		this.theaterService = theaterService;
-		this.movieService = movieService;
 	}
 	
 	@GetMapping("booking/timetable")
@@ -65,7 +63,7 @@ public class TimeTableController {
 		List<TheaterSchedule> scheduleList = schedulingService.getMovieScheduleWithMovie(dataMap);
 		List<Theater> theaterList = schedulingService.getTheaterWithMovie(dataMap);
 		List<TheaterRoom> theaterRoomList = schedulingService.getTheaterRoomWithMovie(dataMap);
-		Movie movie = movieService.select(movieCode);
+		Movie movie = schedulingService.getMovieDetailByCode(movieCode);
 		
 		Map<String, Object> resultData = new HashMap<>();
 		resultData.put("theaterList", theaterList);
@@ -98,5 +96,45 @@ public class TimeTableController {
 		
 		return resultData;
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("booking/getTheaterRoomListWithScheduleCnt")
+	public List<TheaterSchedule> getTheaterRoomListWithScheduleCnt(String movieCode, String date){
+		List<TheaterSchedule> scheduleList = schedulingService.getTheaterRoomWithScheduleCnt(movieCode, date);
+		
+		return scheduleList;
+	}
+	
+	@ResponseBody
+	@PostMapping("booking/getScheduleListByDateAndMovieCodeAndTheaterId")
+	public List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(String movieCode, String date, String theaterId){
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleListByDateAndMovieCodeAndTheaterId(movieCode, date, theaterId);
+		
+		return scheduleList; 
+	}
+	
+	@ResponseBody
+	@PostMapping("booking/getOpenMovieListWithScheduleCnt")
+	public List<Movie> getOpenMovieListWithScheduleCnt(String date){
+		List<Movie> movieList = schedulingService.getOpenMovieListWithScheduleCnt(date);
+		
+		return movieList;
+	}
+	
+	@ResponseBody
+	@PostMapping("booking/getScheduleListByTheaterIdAndDate_ajax")
+	public List<TheaterSchedule> getScheduleListByTheaterIdAndDate_ajax(String date, String theaterId){
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("date", date);
+		dataMap.put("theaterId", theaterId);
+		
+		List<TheaterSchedule> scheduleList = schedulingService.getScheduleWithTheater(dataMap);
+		
+		return scheduleList;
+	}
+	
 
+		
 }

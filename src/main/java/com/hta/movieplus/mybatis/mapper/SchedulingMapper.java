@@ -41,7 +41,13 @@ public interface SchedulingMapper {
 
 	List<TheaterSchedule> getScheduleWithTheater(Map<String, Object> dataMap);
 
-	List<Movie> getOpenMovieListWithScheduleCnt();
+	List<Movie> getOpenMovieListWithScheduleCnt(String date);
+
+	List<TheaterSchedule> getTheaterRoomWithScheduleCnt(Map<String, Object> dataMap);
+
+	List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(Map<String, Object> dataMap);
+
+	Movie getMovieDetailByCode(String movieCode);
 
 
 }
