@@ -25,7 +25,14 @@
     color: #fff;
 }
 </style>
+<script>
+$(function() {
+    $("#btnSearch").click(function() {
+        $("#searchForm").submit();
+    });
+});
 
+</script>
 </head>
 <body>
 
@@ -55,9 +62,9 @@
 					<ul id="topMenu">
 						<li class="on"><a href="https://www.megabox.co.kr/movie"
 							title="박스오피스 탭으로 이동">박스오피스</a></li>
-						<li><a href="https://www.megabox.co.kr/movie/comingsoon"
+						<!--  <li><a href="https://www.megabox.co.kr/movie/comingsoon"
 							title="상영예정작 탭으로 이동">상영종료작</a></li>
-
+						-->
 					</ul>
 				</div>
 
@@ -71,24 +78,23 @@
 							<!-- 						<span><button type="button" class="btn" sort-type="megaScore">메가스코어순</button></span> -->
 						</div>
 
-						<div class="onair-condition">
-							<button type="button" title="개봉작만 보기" class="btn-onair btnOnAir">개봉작만</button>
-						</div>
+						
 					</div>
 					<!--// 박스오피스 -->
 
 
 					<!-- 검색결과 없을 때 -->
 					<p class="no-result-count">
-						<strong id="totCnt">106</strong>개의 영화가 검색되었습니다.
+						<strong id="totCnt">${fn:length(movieList)}</strong>개의 영화가 검색되었습니다.
 					</p>
 					<!--// 검색결과 없을 때 -->
-
-					<div class="movie-search">
-						<input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch"
-							name="ibxMovieNmSearch" placeholder="영화명 검색" class="input-text">
-						<button type="button" class="btn-search-input" id="btnSearch">검색</button>
-					</div>
+					
+					<form action="${pageContext.request.contextPath}/movie/movieListPage" method="get" id="searchForm">
+					    <div class="movie-search">
+					        <input type="text" title="영화명을 입력하세요" id="search_word" name="search_word" placeholder="영화명 검색" class="input-text" value="${search_word}">
+					        <button type="button" class="btn-search-input" id="btnSearch">검색</button>
+					    </div>
+					</form>
 				</div>
 				<!--// movie-list-util -->
 
@@ -101,6 +107,8 @@
 				<!-- movie-list -->
 				<div class="movie-list">
 					<ol class="list" id="movieList">
+					<c:choose>
+					    <c:when test="${not empty movieList}">					
 					<c:forEach var="m" items="${movieList }" varStatus="loop">
 						<li tabindex="0" class="no-img">
 							<div class="movie-list-info">
@@ -183,7 +191,16 @@
 							</div>
 							
 						</li>
-						</c:forEach>
+					</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="movie-list-no-result" id="noDataDiv"
+							style="display: block;">
+							<p>현재 상영중인 영화가 없습니다.</p>
+						</div>
+					</c:otherwise>
+					</c:choose>
+					</ol>
 				</div>
 				<!--// movie-list -->
 
@@ -194,10 +211,7 @@
 				</div>
 
 				<!-- 검색결과 없을 때 -->
-				<div class="movie-list-no-result" id="noDataDiv"
-					style="display: none;">
-					<p>현재 상영중인 영화가 없습니다.</p>
-				</div>
+				
 
 
 				<!-- 검색결과 없을 때 -->

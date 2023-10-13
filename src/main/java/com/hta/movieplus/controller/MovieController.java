@@ -41,19 +41,21 @@ public class MovieController {
 	
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public ModelAndView movieList(ModelAndView mv,
-    							HttpSession session) throws Exception {
+    							HttpSession session,
+    				@RequestParam(value="search_word", defaultValue="", required=false) String search_word) throws Exception {
     	
     	Member memberInfo = (Member) session.getAttribute("memberInfo");
     	if(memberInfo != null) {
     		String memberId = memberInfo.getMEMBER_ID();
     		
-    		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId);
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId,search_word);
     		mv.addObject("movieList",movieList);
+    		mv.addObject("search_word", search_word);
     		
     	} else {
-    		List<Movie> movieList = movieServiceImpl.getPlayingMovie();
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovie(search_word);
     		mv.addObject("movieList",movieList);
-    	
+    		mv.addObject("search_word", search_word);
     	}
     	
     	mv.setViewName("movie/movie_list");
@@ -128,16 +130,10 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/now-playing")
 	public List<Movie> getPlayingMovie(
-			HttpSession session
 			){
-		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		String memberId = memberInfo.getMEMBER_ID();
 		
-		if(memberId == null) {
-			return movieServiceImpl.getPlayingMovie();
-		} else {
-			return movieServiceImpl.getPlayingMovieLogin(memberId);
-		}
+			return movieServiceImpl.getPlayingMovieAdmin();
+		
 	}
 
 	

@@ -54,14 +54,35 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> getMovieListAll() {
 		return dao.getMovieListAll();
 	}
+	
+	
 
-	public List<Movie> getPlayingMovie() {
-		return dao.getPlayingMovieList();
+	//메인-로그인한 경우
+	public List<Movie> getPlayingMovieLoginMain(String memberId) {
+		return dao.getPlayingMovieLoginMain(memberId);
+	}
+	
+	//메인-로그인 x
+	public List<Movie> getPlayingMovieMain() {
+		return dao.getPlayingMovieMain();
 	}
 
-	public List<Movie> getPlayingMovieLogin(String memberId) {
-		return dao.getPlayingMovieLogin(memberId);
+	//영화 목록 - 로그인x, 검색
+	public List<Movie> getPlayingMovie(String search_word) {
+		return dao.getPlayingMovieList(search_word);
 	}
+
+	//영화 목록-로그인 한 경우 검색
+	public List<Movie> getPlayingMovieLogin(String memberId, String search_word) {
+		return dao.getPlayingMovieLogin(memberId, search_word);
+	}
+
+	//관리자 - 상영 중 영화 목록
+	public List<Movie> getPlayingMovieAdmin() {
+		return dao.getPlayingMovieListAdmin();
+	}
+	
+	
 
 	public List<Movie> getUpcomingMovie() {
 		return dao.getUpcomingMovieList();

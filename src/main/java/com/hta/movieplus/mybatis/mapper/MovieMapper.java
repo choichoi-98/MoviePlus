@@ -24,9 +24,13 @@ public interface MovieMapper {
 
 	public List<Movie> getMovieListAll();
 
-	public List<Movie> getPlayingMovieList();
+	//일반
+	public List<Movie> getPlayingMovieList(String search_word);
+	//일반
+	public List<Movie> getPlayingMovieLogin(String memberId, String search_word);
 
-	public List<Movie> getPlayingMovieLogin(String memberId);
+	//관리자
+	public List<Movie> getPlayingMovieListAdmin();
 
 	public List<Movie> getUpcomingMovieList();
 
@@ -43,6 +47,10 @@ public interface MovieMapper {
 	public int addMovieDibs(String memberId, String movieCode);
 
 	public int deleteMovieDibs(String memberId, String movieCode);
+
+	public List<Movie> getPlayingMovieMain();
+
+	public List<Movie> getPlayingMovieLoginMain(String memberId);
 
 
 

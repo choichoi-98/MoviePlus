@@ -26,7 +26,15 @@
 }
 </style>
 
+<script>
+$(function() {
+    $("#btnSearch").click(function() {
+        $("#searchForm").submit();
+    });
+});
 
+</script>
+</head>
 
 </head>
 <body>
@@ -132,13 +140,16 @@ document.ready
 
 						<div class="search-link">
 							<div class="cell">
+							<form action="${pageContext.request.contextPath}/movie/movieListPage" method="get" id="searchForm">
 								<div class="search">
-									<input type="text" placeholder="영화명을 입력해 주세요" title="영화 검색"
-										class="input-text" id="movieName">
+									<input type="text" title="영화명을 입력하세요" 
+									 id="search_word" name="search_word"
+									  placeholder="영화명 검색" class="input-text" value="${search_word}">
 									<button type="button" class="btn" id="btnSearch">
 										<i class="iconset ico-search-w"></i> 검색
 									</button>
 								</div>
+							</form>
 							</div>
 
 							<div class="cell">

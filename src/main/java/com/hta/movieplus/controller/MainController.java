@@ -33,16 +33,18 @@ public class MainController {
 	public ModelAndView Main( ModelAndView mv
 							, HttpSession session) throws Exception{
 
+		logger.info("main");
+		
 		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		if (memberInfo != null) {
+		if (memberInfo != null) { //로그인 한 경우
 		       String memberId = memberInfo.getMEMBER_ID();
 		       System.out.println(memberId);
-
-	        List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId);
+		       logger.info("로그인 한 경우 메인"+memberId);
+	        List<Movie> movieList = movieServiceImpl.getPlayingMovieLoginMain(memberId);
 	        mv.addObject("movieList", movieList);
 	        
 	    } else {
-	        List<Movie> movieList = movieServiceImpl.getPlayingMovie();
+	        List<Movie> movieList = movieServiceImpl.getPlayingMovieMain();
 	        mv.addObject("movieList", movieList);
 	    }
 
