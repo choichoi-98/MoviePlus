@@ -1,31 +1,5 @@
 $(document).ready(function(){
 
-	let token = $("meta[name='_csrf']").attr("content");
-   	let header = $("meta[name='_csrf_header']").attr("content");
-   	
-	//hover 이벤트 발생시 줄거리 노출
-	$("body").on("mouseover", ".poster", function(e) {
-		e.preventDefault();
-		
-		 $(this).parent().find('.wrap1').css('display', 'block');
-		
-	});//$("body").on("mouseover", ".poster", function(e) {
-
-   $("body").on("mouseleave", ".poster", function(e) {
-		e.preventDefault();
-		
-		$(this).find('.my-score').css('display', 'none');
-		
-	});
-	
-	//영화 겁색
-	 $("#btnSearch").click(function() {
-        $("#searchForm").submit();
-    });// $("#btnSearch").click(function() {
-
-
-	
-
 //보고싶어요 추가 및 삭제
 	$("body").on("click", ".btn-like", function(e){
 		e.preventDefault();
@@ -40,9 +14,9 @@ $(document).ready(function(){
 		var ajaxURL;
 		
 		if(imgsrc.includes('heart_full.png')){
-			ajaxURL = '../movie/deleteMovieDibs';		
+			ajaxURL = 'movie/deleteMovieDibs';		
 		} else {
-			ajaxURL = '../movie/addMovieDibs';		
+			ajaxURL = 'movie/addMovieDibs';		
 		}
 		
 		$.ajax({
@@ -78,6 +52,5 @@ $(document).ready(function(){
 	    });//$.ajax({
 	
 	});//$("body").on("click", ".btn-like", function(e){
-	
 
 });//$(document).ready(function(){

@@ -69,7 +69,7 @@ document.ready
 						</div>
 						<!-- tab-sorting -->
 
-						<a href="https://www.megabox.co.kr/movie" class="more-movie"
+						<a href="${pageContext.request.contextPath}/movie/movieListPage" class="more-movie"
 							title="더 많은 영화보기" style="top: 140px;"> 더 많은 영화보기 <i
 							class="iconset ico-more-corss gray"></i>
 						</a>
@@ -86,7 +86,7 @@ document.ready
 									varStatus="loop">
 									<li name="li_boxoRankList" class="first"
 										style="border-right-width: 50px‒; padding-right: 0px; border-right-width: 50px; margin-right: 30px;">
-										<a href="javascript:gfn_moveDetail('${m.movie_Code}')"
+										<a href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${m.movie_Code}"
 										class="movie-list-info" title="영화상세 보기">
 											<div class="screen-type2">
 												<p></p>

@@ -124,6 +124,18 @@ public class MovieServiceImpl implements MovieService{
 	public int deleteMovieDibs(String memberId, String movieCode) {
 		return dao.deleteMovieDibs(memberId, movieCode);
 	}
+
+	//로그인 한 경우 movieDetail
+	public List<Movie> getMovieDetailLogin(String memberId, String movieCode) {
+		// TODO Auto-generated method stub
+		return dao.getMovieDetailLogin(memberId, movieCode);
+	}
+
+	//로그인 x 경우 movieDetail
+	public List<Movie> getMovieDetail(String movieCode) {
+		// TODO Auto-generated method stub
+		return dao.getMovieDetail(movieCode);
+	}
 	
 
 }
