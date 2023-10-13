@@ -52,6 +52,10 @@ public interface MovieMapper {
 
 	public List<Movie> getPlayingMovieLoginMain(String memberId);
 
+	public List<Movie> getMovieDetailLogin(String memberId, String movieCode);
+
+	public List<Movie> getMovieDetail(String movieCode);
+
 
 
 }

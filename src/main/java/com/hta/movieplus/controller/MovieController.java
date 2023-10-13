@@ -63,6 +63,26 @@ public class MovieController {
     	return mv;
     }
     
+    @GetMapping("/movieDetail")
+    public ModelAndView movieDetail(ModelAndView mv,
+    							HttpSession session,
+    				@RequestParam(value="movieCode", defaultValue="") String movieCode
+    		) {
+    	
+    	Member memberInfo = (Member) session.getAttribute("memberInfo");
+    	if(memberInfo != null) {
+    		String memberId = memberInfo.getMEMBER_ID();
+    		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
+    		mv.addObject("movieDetail", movieDetail);
+    	} else {
+    		List<Movie> movieDetail = movieServiceImpl.getMovieDetail(movieCode);
+    		mv.addObject("movieDetail", movieDetail);
+    	}
+    	
+    	mv.setViewName("movie/movie_detail");
+    	return mv;
+    }
+    
     @GetMapping("/movieAdd")
     public String movieAdd() {
     	return "admin/movie_add";
@@ -133,7 +153,6 @@ public class MovieController {
 			){
 		
 			return movieServiceImpl.getPlayingMovieAdmin();
-		
 	}
 
 	

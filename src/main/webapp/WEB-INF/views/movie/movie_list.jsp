@@ -26,12 +26,19 @@
 }
 </style>
 <script>
-$(function() {
-    $("#btnSearch").click(function() {
-        $("#searchForm").submit();
-    });
+$(document).ready(function(){
+	//상세정보 이동    
+    $(".movieBtn").click(function(){
+		
+    	//moviecode 가 저장된 data-no 추출
+    	var movieCode = this.getAttribute("data-no");
+    	console.log("movieCode=" + movieCode);
+    	var newURL = "${pageContext.request.contextPath}/movie/movieDetail?movieCode=" + movieCode;
+    	
+    	window.location.href =newURL;
+    	
+    });//$("#movieBtn").click(function(){
 });
-
 </script>
 </head>
 <body>
@@ -115,7 +122,7 @@ $(function() {
 								<p class="rank" style="">
 									${loop.index + 1}<span class="ir">위</span>
 								</p>
-								<a href="https://www.megabox.co.kr/movie#"
+								<a href="#"
 										class="wrap movieBtn" data-no="${m.movie_Code}" title="${m.movie_Title} 상세보기">
 								<img
 									src="${fn:split(m.movie_Poster, '|')[0]}"
