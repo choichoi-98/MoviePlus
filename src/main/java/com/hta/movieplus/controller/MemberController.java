@@ -214,20 +214,20 @@ public class MemberController {
 		return "member/mypage_modify";
 	}
 
-	//마이페이지 - 로그인 체크
+	//마이페이지 - 비밀번호 체크
 	@PostMapping("/logincheck")
 	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
 									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
-									 ModelAndView mv, HttpSession session)throws Exception {
+									 ModelAndView mv, HttpSession session, RedirectAttributes rattr)throws Exception {
 		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
 		
 		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
 			mv.setViewName("member/mypage_modify");
-		} else {
+		} else {	//확인하기
+			rattr.addFlashAttribute("result", "passFail");
 			mv.setViewName("member/mypage_main");
 			Member memberInfo = (Member) session.getAttribute("memberInfo");
 			session.setAttribute("memberInfo", memberInfo);
-			mv.addObject("passwordMismatch", true);
 		}
 		return mv;
 	}

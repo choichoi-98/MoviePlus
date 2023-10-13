@@ -1,14 +1,11 @@
 package com.hta.movieplus.task;
 
-import java.io.File;
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -73,6 +70,7 @@ public class SendMail {
 		
 	  mailSender.send(mp);  // 메일 전송합니다.
 	  logger.info("회원가입 인증번호 전송했습니다.");
+	  
 	}
 	
 	

@@ -39,7 +39,7 @@
 							<tr>
 								<th scope="row"><label for="ibxSchPwdMblpTelno">비밀번호 입력<!--비밀번호--></label></th>
 								<td>
-									<input name="MEMBER_PASS" type="password" class="input-text w260px" >
+									<input name="MEMBER_PASS" type="password" class="input-text w260px" required>
 									
 								</td>
 							</tr>
@@ -49,7 +49,7 @@
 		</div>
 
 		<div class="btn-group">
-			<button class="button large" id="cancelBtn" title="취소">취소</button>
+			<button type="button" class="button large" id="premodifycancelBtn" title="취소">취소</button>
 			<button type="submit" class="button large purple" id="ckBtn" title="확인">확인</button>
 		</div>
 		
@@ -58,7 +58,6 @@
 
    </div>
 </div>
-        
 	
 	<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
