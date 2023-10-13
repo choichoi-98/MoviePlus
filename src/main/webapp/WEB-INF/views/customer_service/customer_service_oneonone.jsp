@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,13 +37,6 @@
 						<li class="on"><a href="https://megabox.co.kr/support/inquiry" title="1:1문의">1:1문의</a></li>
 						<li><a href="https://megabox.co.kr/support/rent" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
 						<li><a href="https://megabox.co.kr/support/lost" title="분실물 문의">분실물 문의</a></li>
-						
-							<li><a href="https://megabox.co.kr/support/nonMember-inq/check" title="비회원 문의내역">비회원 문의내역</a></li>
-						
-						<li><a href="https://megabox.co.kr/support/terms" title="이용약관">이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/lcinfo" title="위치기반서비스이용약관">위치기반서비스이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/privacy" title="개인정보처리방침">개인정보처리방침</a></li>
-						<li><a href="https://megabox.co.kr/support/screenrule" style="border-radius: 0 0 10px 10px;" title="스크린배정수에관한기준">스크린배정수에관한기준</a></li>
 					</ul>
 
 					<!-- 고객센터 메뉴일때만 출력 -->
@@ -134,19 +129,18 @@
 										<label>극장별문의&nbsp;&nbsp;&nbsp;&nbsp;</label>
 										<select name="CUSTOMER_SELECT_REGION" id="regionSelect" size="1" style="width:90px; height:35px; border-radius:5px;" disabled onclick="enableTheaterSelect();">
     										<option value="" disabled selected>지역선택</option>
-    										<option value="서울">서울</option>
-   											<option value="서울1">서울1</option>
-   											<option value="서울2">서울2</option>
-   											<option value="서울3">서울3</option>
-   											<option value="서울4">서울4</option>
+    										<c:forEach var="loc" items="${locationList}">
+												<option value="${loc.value}">${loc.value}</option>
+											</c:forEach>
 										</select>&nbsp;&nbsp;
 										<select name="CUSTOMER_SELECT_CENEMA" id="theaterSelect" size="1" style="width:90px; height:35px; border-radius:5px;" disabled>
     										<option value="" disabled selected>극장선택</option>
-    										<option value="극장1">극장1</option>
-   											<option value="극장2">극장2</option>
-   											<option value="극장3">극장3</option>
-   											<option value="극장4">극장4</option>
-   											<option value="극장5">극장5</option>
+    										<!-- ajax -->
+    										<script>
+    										$(document).ready(function(){
+    								 			
+    										})
+    										</script>
 										</select>
 									</td>
 								</tr>
