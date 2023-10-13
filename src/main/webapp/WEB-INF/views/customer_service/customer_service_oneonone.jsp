@@ -74,7 +74,7 @@
 					<dl>
 						<dt>
 							<span class="bg-chk mr10">
-								<input type="checkbox" id="chk">
+								<input type="checkbox" id="chk" required>
 								<label for="chk"><strong>개인정보 수집에 대한 동의</strong></label>
 							</span>
 
@@ -104,7 +104,14 @@
 				<!-- 폼 시작 시점 JS 작성포함-->
 				<script>
 					function enableRegionSelect(){
-						document.getElementByid("")
+						document.getElementById("regionSelect").removeAttribute("disabled");
+					}
+					function enableTheaterSelect(){
+						document.getElementById("theaterSelect").removeAttribute("disabled");
+					}
+					function disableRegionSelect(){
+						document.getElementById("regionSelect").setAttribute("disabled", "disabled");
+						document.getElementById("theaterSelect").setAttribute("disabled", "disabled");
 					}
 				</script>
 				<form name="regFrm" method="post" action="oneonone_process">
@@ -121,11 +128,11 @@
 								<tr>
 									<th scope="row"><label for="ask-select">문의선택</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="고객센터문의" value="고객센터문의"> 
+										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="고객센터문의" value="고객센터문의" onclick="disableRegionSelect();"> 
 										<label>&nbsp;고객센터문의&nbsp;&nbsp;&nbsp;&nbsp;</label>
-										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="극장별문의" value="극장별문의"> 
+										<input type="radio" name="CUSTOMER_SELECT_WHERE" id="극장별문의" value="극장별문의" onclick="enableRegionSelect();"> 
 										<label>극장별문의&nbsp;&nbsp;&nbsp;&nbsp;</label>
-										<select name="CUSTOMER_SELECT_REGION" size="1" style="width:90px; height:35px; border-radius:5px;">
+										<select name="CUSTOMER_SELECT_REGION" id="regionSelect" size="1" style="width:90px; height:35px; border-radius:5px;" disabled onclick="enableTheaterSelect();">
     										<option value="" disabled selected>지역선택</option>
     										<option value="서울">서울</option>
    											<option value="서울1">서울1</option>
@@ -133,7 +140,7 @@
    											<option value="서울3">서울3</option>
    											<option value="서울4">서울4</option>
 										</select>&nbsp;&nbsp;
-										<select name="CUSTOMER_SELECT_CENEMA" size="1" style="width:90px; height:35px; border-radius:5px;">
+										<select name="CUSTOMER_SELECT_CENEMA" id="theaterSelect" size="1" style="width:90px; height:35px; border-radius:5px;" disabled>
     										<option value="" disabled selected>극장선택</option>
     										<option value="극장1">극장1</option>
    											<option value="극장2">극장2</option>
@@ -157,53 +164,38 @@
 								<tr>
 									<th scope="row"><label for="name">이름</label> <em class="font-orange">*</em></th>
 									<td>
-												<input type="text" id="name" name="CUSTOMER_NAME" class="input-text w150px" value="" maxlength="30">
+												<input type="text" id="name" name="CUSTOMER_NAME" class="input-text w150px" value="" maxlength="30" required>
 									</td>
 									<th scope="row"><label for="qnaRpstEmail">이메일</label> <em class="font-orange">*</em></th>
 									<td>
-											 	<input type="text" name="CUSTOMER_EMAIL" id="qnaRpstEmail" class="input-text" value="" maxlength="50">
+											 	<input type="text" name="CUSTOMER_EMAIL" id="qnaRpstEmail" class="input-text" value="" maxlength="50" required>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="hpNum1">휴대전화</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-												<input type="text" name="CUSTOMER_PHONNUM1" id="hpNum1" class="input-text w60px numType" maxlength="3" title="핸드폰번호 첫자리 입력">
+												<input type="text" name="CUSTOMER_PHONNUM1" id="hpNum1" class="input-text w60px numType" maxlength="3" title="핸드폰번호 첫자리 입력" required>
 												<span>-</span>
-												<input type="text" name="CUSTOMER_PHONNUM2" id="hpNum2" class="input-text w70px numType" maxlength="4" title="핸드폰번호 중간자리 입력">
+												<input type="text" name="CUSTOMER_PHONNUM2" id="hpNum2" class="input-text w70px numType" maxlength="4" title="핸드폰번호 중간자리 입력" required>
 												<span>-</span>
-												<input type="text" name="CUSTOMER_PHONNUM3" id="hpNum3" class="input-text w70px numType" maxlength="4" title="핸드폰번호 마지막자리 입력">
-												<button id="btnQnaMblpCertNoSend" type="button" disabled="disabled" class="button gray w100px ml08 disabled">인증요청</button>
+												<input type="text" name="CUSTOMER_PHONNUM3" id="hpNum3" class="input-text w70px numType" maxlength="4" title="핸드폰번호 마지막자리 입력" required>
 												<div id="qnaMblpNo-error-text" class="alert"></div>
 									</td>
 								</tr>
-								<tr id="qnaMblpCertRow" style="display: none;">
-									<th scope="row"><label for="ibxQnaMblpCharCertNo">인증번호</label> <em class="font-orange">*</em></th>
-									<td colspan="3">
-										<div class="chk-num">
-											<div class="line">
-												<input maxlength="4" type="text" id="ibxQnaMblpCharCertNo" class="input-text w180px numType" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
-												<div id="qnaTimer" class="time-limit">3:00</div>
-											</div>
-										</div>
-										<button id="btnQnaMblpCharCert" type="button" class="button purple w100px ml08 disabled" disabled="disabled">인증확인<!--인증확인--></button>
-										<div id="qnaCertNo-error-text" class="alert"></div>
-									</td>
-								</tr>
-								
 								<tr>
 									<th scope="row"><label for="qnaCustInqTitle">제목</label> <em class="font-orange">*</em></th>
-									<td colspan="3"><input type="text" name="CUSTOMER_TITLE" id="qnaCustInqTitle" class="input-text" maxlength="100"></td>
+									<td colspan="3"><input type="text" name="CUSTOMER_TITLE" id="qnaCustInqTitle" class="input-text" maxlength="100" required></td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="textarea">내용</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
 										<div class="textarea">
 											<div id="textarea-notice" style="color: #999999; margin-left: 10px;">
-												<ul>- 문의내용에 개인정보(이름,연락처,카드번호 등)가 포함되지 않도록 유의하시기 바랍니다.</ul>
+												<!-- <ul>- 문의내용에 개인정보(이름,연락처,카드번호 등)가 포함되지 않도록 유의하시기 바랍니다.</ul>
 												<ul style="font-weight: bold"> - 비회원 문의시 이메일로 답변내용이 발송되오니 정확하게 작성부탁드립니다.</ul>
-												<ul> - 회원로그인 후 문의작성시 나의 문의내역을 통해 답변을 확인하실 수 있습니다.</ul>
+												<ul> - 회원로그인 후 문의작성시 나의 문의내역을 통해 답변을 확인하실 수 있습니다.</ul> -->
 											</div>
-											<textarea id="textarea" name="CUSTOMER_CONTENT" rows="5" cols="30" title="내용입력" class="input-textarea"></textarea>
+											<textarea id="textarea" placeholder="문의 내용을 작성해주세요 &#10;답변은 메일로도 전달됩니다. 메일주소를 확인해주세요." name="CUSTOMER_CONTENT" rows="5" cols="30" title="내용입력" class="input-textarea" required></textarea>
 											<div class="util">
 												<p class="count">
 													<span id="textareaCnt">0</span> / 2000
