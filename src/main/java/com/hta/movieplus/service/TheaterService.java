@@ -39,6 +39,8 @@ public interface TheaterService {
 
 	public int addFavoriteTheater(int theaterId, String userId);
 
+	public int getCountFavoriteTheater(String name);
+
 	
 	
 

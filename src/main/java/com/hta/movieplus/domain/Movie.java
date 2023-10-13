@@ -15,8 +15,11 @@ public class Movie {
     private String movie_Release;	//개봉상태(개봉, 개봉예정)
     private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
 	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
-    
-   
+	
+	//--
+	private int MOVIE_SCHEDULE_CNT;
+	private String grade_data;
+	
 
 	public String getMOVIE_DIBS_OBJECT() {
 		return MOVIE_DIBS_OBJECT;
@@ -103,6 +106,20 @@ public class Movie {
 	public void setMovie_Release(String movie_Release) {
 		this.movie_Release = movie_Release;
 	}
+	public int getMOVIE_SCHEDULE_CNT() {
+		return MOVIE_SCHEDULE_CNT;
+	}
+	public void setMOVIE_SCHEDULE_CNT(int mOVIE_SCHEDULE_CNT) {
+		MOVIE_SCHEDULE_CNT = mOVIE_SCHEDULE_CNT;
+	}
+	public String getGrade_data() {
+		return grade_data;
+	}
+	public void setGrade_data(String grade_data) {
+		this.grade_data = grade_data;
+	}
+	
+	
    
 	
 }

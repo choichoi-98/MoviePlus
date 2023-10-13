@@ -44,6 +44,8 @@ public interface TheaterMapper {
 
 	public int addFavoriteTheater(Map<String, Object> dataMap);
 
+	public int getCountFavoriteTheater(String name);
+
 
 	
 }

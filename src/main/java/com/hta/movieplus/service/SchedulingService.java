@@ -39,4 +39,6 @@ public interface SchedulingService {
 
 	List<TheaterSchedule> getScheduleWithTheater(Map<String, Object> dataMap);
 
+	List<Movie> getOpenMovieListWithScheduleCnt();
+
 }

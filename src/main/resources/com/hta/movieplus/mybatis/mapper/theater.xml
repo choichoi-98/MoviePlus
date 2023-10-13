@@ -136,5 +136,14 @@
 							FROM MEMBER
 							WHERE MEMBER_ID = #{userId} )
 	</delete>
+	
+	<select id="getCountFavoriteTheater" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		WHERE M.MEMBER_ID = #{name}
+		
+	</select>
 
 </mapper>

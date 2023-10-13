@@ -207,4 +207,10 @@ public class TheaterServiceImpl implements TheaterService {
 		return mapper.addFavoriteTheater(dataMap);
 	}
 
+	@Override
+	public int getCountFavoriteTheater(String name) {
+		// TODO Auto-generated method stub
+		return mapper.getCountFavoriteTheater(name);
+	}
+
 }
