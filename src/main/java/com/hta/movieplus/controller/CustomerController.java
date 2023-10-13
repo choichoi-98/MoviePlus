@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.CustomerOneOnOneVO;
 import com.hta.movieplus.service.CustomerService;
 
@@ -44,8 +46,10 @@ public class CustomerController {
 	}
 
 	@GetMapping("/oneonone")
-	public String oneOnOne() {
-		return "customer_service/customer_service_oneonone";
+	public ModelAndView oneOnOne(ModelAndView mv) {
+		mv.addObject("locationList", TheaterLocationEnum.values());
+		mv.setViewName("customer_service/customer_service_oneonone");
+		return mv;
 	}
 
 	@GetMapping("/group")
@@ -60,6 +64,8 @@ public class CustomerController {
 
 	@GetMapping("/myinjury")
 	public String myinjury(CustomerOneOnOneVO myinjury) {
+		
+	
 		/* customerService.insertOneOnOne(myinjury); */
 		return "customer_service/customer_service_myinjury"; //리턴이 없어도되나요? 안되는거같음..
 	}
