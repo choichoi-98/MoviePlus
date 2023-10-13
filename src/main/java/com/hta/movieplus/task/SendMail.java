@@ -31,7 +31,7 @@ public class SendMail {
 		this.mailSender = mailSender;
 	}
 	
-	public void SendMail(MailVO vo) {
+	public void SendMail(MailVO vo) {	//회원가입 인증번호
 		
 		MimeMessagePreparator mp = new MimeMessagePreparator() {
 			
@@ -74,5 +74,7 @@ public class SendMail {
 	mailSender.send(mp);  // 메일 전송합니다.
 	logger.info("메일 전송했습니다.");
 	}
+	
+	
 	
 }//class end 

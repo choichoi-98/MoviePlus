@@ -58,29 +58,16 @@
 							title="제휴/할인 탭으로 이동">제휴/할인</a></li>
 
 						<!--  li id="eventTab_CED04"><a href="javascript:fn_chgEventTab('CED04')">시사회/무대인사</a></li-->
-						<li id="eventTab_CED04" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED04&#39;)"
-							title="시사회/무대인사 탭으로 이동">시사회/무대인사</a></li>
+						<li id="eventTab_CED04" class="">
+						<a href="${pageContext.request.contextPath}/event/curtaincall" 
+							title="시사회/무대인사 탭으로 이동"><!-- href="javascript:fn_eventTabMove(&#39;CED04&#39;)"  -->시사회/무대인사</a></li>
 
 					</ul>
 				</div>
 
 				<div id="toptablist" class="toptablist display-none"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
-
 
 			<div id="divTopArea" class="event-slider">
 				<div class="inner-wrap">

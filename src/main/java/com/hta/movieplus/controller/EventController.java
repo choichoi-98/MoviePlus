@@ -13,6 +13,16 @@ public class EventController {
 		return "event/event_main";
 	}
 	
+	@GetMapping("/curtaincall")
+	public String curtaincall() {
+		return "event/event_curtaincall";
+	}
+	
+	@GetMapping("/eventview")
+	public String eventview() {
+		return "event/event_viewform";
+	}
+	
 
 
 }
