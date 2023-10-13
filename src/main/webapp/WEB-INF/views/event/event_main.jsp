@@ -9,7 +9,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
 
-
 	<!-- container -->
 	<div class="container">
 
@@ -18,29 +17,19 @@
 				<div class="location">
 					<span>Home</span> 
 					<a href="https://www.megabox.co.kr/event"	title="이벤트 메인 페이지로 이동">이벤트</a> 
-						<a href="#" title="진행중 이벤트 페이지로 이동">진행중 이벤트</a>
+					<a href="#" title="진행중 이벤트 페이지로 이동">진행중 이벤트</a>
 				</div>
-
-
 			</div>
 		</div>
 
 		<div id="contents">
-
 			<div class="inner-wrap">
-
 				<h2 class="tit">진행중인 이벤트</h2>
-
-				<div class="tab-list fixed">
+				<div class="tab-list fixed">	<!-- 탭 리스트 -->
 					<ul>
 						<!-- li class="on" id="eventTab_"><a href="javascript:fn_chgEventTab('')">전체</a></li-->
 						<li class="on" id="eventTab_"><a
 							href="javascript:fn_eventTabMove(&#39;&#39;)" title="전체">전체</a></li>
-
-						<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
-						<li id="eventTab_CED03" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED03&#39;)"
-							title="메가Pick 탭으로 이동">메가Pick</a></li>
 
 						<!--  li id="eventTab_CED01"><a href="javascript:fn_chgEventTab('CED01')">영화</a></li-->
 						<li id="eventTab_CED01" class=""><a
@@ -61,19 +50,21 @@
 						<li id="eventTab_CED04" class="">
 						<a href="${pageContext.request.contextPath}/event/curtaincall" 
 							title="시사회/무대인사 탭으로 이동"><!-- href="javascript:fn_eventTabMove(&#39;CED04&#39;)"  -->시사회/무대인사</a></li>
-
+						
+						<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
+						<li id="eventTab_CED03" class=""><a
+							href="javascript:fn_eventTabMove(&#39;CED03&#39;)"
+							title="재개봉 탭으로 이동">재개봉</a></li>
 					</ul>
-				</div>
+				</div>	<!-- 탭 리스트 end -->
 
 				<div id="toptablist" class="toptablist display-none"></div>
+			</div> <!-- inner-wrap class end -->
 
-			</div>
 
 			<div id="divTopArea" class="event-slider">
 				<div class="inner-wrap">
-
 					<p class="name">추천 이벤트</p>
-
 					<div class="event-pagination swiper-pagination-bullets">
 						<span class="swiper-pagination-bullet"></span><span
 							class="swiper-pagination-bullet"></span><span
@@ -132,15 +123,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="12761"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X더쎈카드] 할인카드 조회하고 혜택받자! 상세보기">
+								title="[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/tGlm2fXaKlYTeX55sC3h4VFQUwHPXdXV.jpg"
-										alt="[메가박스X더쎈카드] 할인카드 조회하고 혜택받자!" onerror="noImg(this);">
+										alt="[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자!" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X더쎈카드] 할인카드 조회하고 혜택받자!</p>
+									<p class="tit">[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자!</p>
 									<p class="date">2023.03.10 ~ 2023.12.31</p>
 								</div>
 							</a>
@@ -266,16 +257,16 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="14091"
 								data-netfunnel="N" class="eventBtn"
-								title="[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기">
+								title="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/wFzM0LZSmlPX81lnpQhuowNb9VP9LkGj.jpg"
-										alt="[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람!"
+										alt="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!"
 										onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람!</p>
+									<p class="tit">[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!</p>
 									<p class="date">2023.09.25 ~ 2023.10.31</p>
 								</div>
 							</a>
@@ -286,15 +277,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="14016"
 								data-netfunnel="N" class="eventBtn"
-								title="메가박스 한가위 관람권패키지 출시 상세보기">
+								title="무비플러스 한가위 관람권패키지 출시 상세보기">
 
 								<p class="img">
 									<img src="./event_files/CD7iGjetxRFCiC5wrn2zKOVNi2dDQ0SM.jpg"
-										alt="메가박스 한가위 관람권패키지 출시" onerror="noImg(this);">
+										alt="무비플러스 한가위 관람권패키지 출시" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">메가박스 한가위 관람권패키지 출시</p>
+									<p class="tit">무비플러스 한가위 관람권패키지 출시</p>
 									<p class="date">2023.09.11 ~ 2023.10.03</p>
 								</div>
 							</a>
@@ -345,15 +336,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="14060"
 								data-netfunnel="N" class="eventBtn"
-								title="[KT x 메가박스] 9월 어썸한 달달혜택 상세보기">
+								title="[KT x 무비플러스] 9월 어썸한 달달혜택 상세보기">
 
 								<p class="img">
 									<img src="./event_files/yPvhJmofW2ydgsAX0vQTE2pXEvtnq4gH.jpg"
-										alt="[KT x 메가박스] 9월 어썸한 달달혜택" onerror="noImg(this);">
+										alt="[KT x 무비플러스] 9월 어썸한 달달혜택" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[KT x 메가박스] 9월 어썸한 달달혜택</p>
+									<p class="tit">[KT x 무비플러스] 9월 어썸한 달달혜택</p>
 									<p class="date">2023.09.15 ~ 2023.09.30</p>
 								</div>
 							</a>
@@ -364,15 +355,15 @@
 							data-swiper-slide-index="10"
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="12642"
-								data-netfunnel="N" class="eventBtn" title="메가박스 VIP 혜택 안내 상세보기">
+								data-netfunnel="N" class="eventBtn" title="무비플러스 VIP 혜택 안내 상세보기">
 
 								<p class="img">
 									<img src="./event_files/ZbBRWoViHfa6Oc40yCwEs1lB4VmW4Lhi.jpg"
-										alt="메가박스 VIP 혜택 안내" onerror="noImg(this);">
+										alt="무비플러스 VIP 혜택 안내" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">메가박스 VIP 혜택 안내</p>
+									<p class="tit">무비플러스 VIP 혜택 안내</p>
 									<p class="date">2023.03.02 ~ 2024.02.29</p>
 								</div>
 							</a>
@@ -421,15 +412,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13975"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X진에어] 추석은 메X진행렬입니다! 상세보기">
+								title="[무비플러스X진에어] 추석은 메X진행렬입니다! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/GEGjJIHH7M7GYDaBEPXVvi3wpsAkX03h.jpg"
-										alt="[메가박스X진에어] 추석은 메X진행렬입니다!" onerror="noImg(this);">
+										alt="[무비플러스X진에어] 추석은 메X진행렬입니다!" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X진에어] 추석은 메X진행렬입니다!</p>
+									<p class="tit">[무비플러스X진에어] 추석은 메X진행렬입니다!</p>
 									<p class="date">2023.09.07 ~ 2023.10.09</p>
 								</div>
 							</a>
@@ -440,16 +431,16 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13941"
 								data-netfunnel="N" class="eventBtn"
-								title="[톡학생증 x  메가박스] 톡학생증 발급받고 톡똑한 영화관람! 상세보기">
+								title="[톡학생증 x  무비플러스] 톡학생증 발급받고 톡똑한 영화관람! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/KpW5X2KPkHXO19gdVvbpfwM3rJNkCYLr.jpg"
-										alt="[톡학생증 x  메가박스] 톡학생증 발급받고 톡똑한 영화관람!"
+										alt="[톡학생증 x  무비플러스] 톡학생증 발급받고 톡똑한 영화관람!"
 										onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[톡학생증 x 메가박스] 톡학생증 발급받고 톡똑한 영화관람!</p>
+									<p class="tit">[톡학생증 x 무비플러스] 톡학생증 발급받고 톡똑한 영화관람!</p>
 									<p class="date">2023.09.01 ~ 2024.08.31</p>
 								</div>
 							</a>
@@ -479,15 +470,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13953"
 								data-netfunnel="N" class="eventBtn"
-								title="[토스페이] 메가박스 최대 1.3만원 혜택받기 상세보기">
+								title="[토스페이] 무비플러스 최대 1.3만원 혜택받기 상세보기">
 
 								<p class="img">
 									<img src="./event_files/aVHBHL1xMICgmQgwH1D7l92o0SNr2B4J.jpg"
-										alt="[토스페이] 메가박스 최대 1.3만원 혜택받기" onerror="noImg(this);">
+										alt="[토스페이] 무비플러스 최대 1.3만원 혜택받기" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[토스페이] 메가박스 최대 1.3만원 혜택받기</p>
+									<p class="tit">[토스페이] 무비플러스 최대 1.3만원 혜택받기</p>
 									<p class="date">2023.09.01 ~ 2023.09.30</p>
 								</div>
 							</a>
@@ -498,15 +489,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13935"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X더쎈카드] 더쎈카드에서 메가박스 쿠폰 받자! 상세보기">
+								title="[무비플러스X더쎈카드] 더쎈카드에서 무비플러스 쿠폰 받자! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/hboB4LC3tVmiHIhQPNDxa0LljgSZyKvl.png"
-										alt="[메가박스X더쎈카드] 더쎈카드에서 메가박스 쿠폰 받자!" onerror="noImg(this);">
+										alt="[무비플러스X더쎈카드] 더쎈카드에서 무비플러스 쿠폰 받자!" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X더쎈카드] 더쎈카드에서 메가박스 쿠폰 받자!</p>
+									<p class="tit">[무비플러스X더쎈카드] 더쎈카드에서 무비플러스 쿠폰 받자!</p>
 									<p class="date">2023.08.19 ~ 2023.09.30</p>
 								</div>
 							</a>
@@ -517,16 +508,16 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13889"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X발로소득] 메가박스 챌린지 참여하고 영화 할인쿠폰 받기 상세보기">
+								title="[무비플러스X발로소득] 무비플러스 챌린지 참여하고 영화 할인쿠폰 받기 상세보기">
 
 								<p class="img">
 									<img src="./event_files/qycpbOhLKmjFMyecVF8Nbmatf2ZdmiBG.png"
-										alt="[메가박스X발로소득] 메가박스 챌린지 참여하고 영화 할인쿠폰 받기"
+										alt="[무비플러스X발로소득] 무비플러스 챌린지 참여하고 영화 할인쿠폰 받기"
 										onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X발로소득] 메가박스 챌린지 참여하고 영화 할인쿠폰 받기</p>
+									<p class="tit">[무비플러스X발로소득] 무비플러스 챌린지 참여하고 영화 할인쿠폰 받기</p>
 									<p class="date">2023.08.19 ~ 2023.09.30</p>
 								</div>
 							</a>
@@ -537,15 +528,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="13633"
 								data-netfunnel="N" class="eventBtn"
-								title="[ktM모바일X메가박스] 알뜰폰 제휴요금제 출시 안내 상세보기">
+								title="[ktM모바일X무비플러스] 알뜰폰 제휴요금제 출시 안내 상세보기">
 
 								<p class="img">
 									<img src="./event_files/FxG3rrK1qAbig01AxmJP7jvGvtB850Ii.jpg"
-										alt="[ktM모바일X메가박스] 알뜰폰 제휴요금제 출시 안내" onerror="noImg(this);">
+										alt="[ktM모바일X무비플러스] 알뜰폰 제휴요금제 출시 안내" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[ktM모바일X메가박스] 알뜰폰 제휴요금제 출시 안내</p>
+									<p class="tit">[ktM모바일X무비플러스] 알뜰폰 제휴요금제 출시 안내</p>
 									<p class="date">2023.07.06 ~ 2023.12.31</p>
 								</div>
 							</a>
@@ -556,15 +547,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="8865"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X현대카드] 상시 6,000M 포인트 사용 상세보기">
+								title="[무비플러스X현대카드] 상시 6,000M 포인트 사용 상세보기">
 
 								<p class="img">
 									<img src="./event_files/liflSYt4BQt4RYxrBuLVXG3Tk3Wq2CdA.jpg"
-										alt="[메가박스X현대카드] 상시 6,000M 포인트 사용" onerror="noImg(this);">
+										alt="[무비플러스X현대카드] 상시 6,000M 포인트 사용" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X현대카드] 상시 6,000M 포인트 사용</p>
+									<p class="tit">[무비플러스X현대카드] 상시 6,000M 포인트 사용</p>
 									<p class="date">2023.05.02 ~ 2023.12.31</p>
 								</div>
 							</a>
@@ -594,15 +585,15 @@
 							style="width: 530px; margin-right: 40px;">
 							<a href="https://www.megabox.co.kr/event#" data-no="12761"
 								data-netfunnel="N" class="eventBtn"
-								title="[메가박스X더쎈카드] 할인카드 조회하고 혜택받자! 상세보기">
+								title="[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자! 상세보기">
 
 								<p class="img">
 									<img src="./event_files/tGlm2fXaKlYTeX55sC3h4VFQUwHPXdXV.jpg"
-										alt="[메가박스X더쎈카드] 할인카드 조회하고 혜택받자!" onerror="noImg(this);">
+										alt="[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자!" onerror="noImg(this);">
 								</p>
 
 								<div class="cont">
-									<p class="tit">[메가박스X더쎈카드] 할인카드 조회하고 혜택받자!</p>
+									<p class="tit">[무비플러스X더쎈카드] 할인카드 조회하고 혜택받자!</p>
 									<p class="date">2023.03.10 ~ 2023.12.31</p>
 								</div>
 							</a>
@@ -670,16 +661,12 @@
 					<span class="swiper-notification" aria-live="assertive"
 						aria-atomic="true"></span>
 				</div>
-			</div>
+			</div> <!-- slider end -->
 
 
 			<div id="boardSearch" class="inner-wrap" style="display: none">
 
-
-
 				<div class="board-list-util mt40">
-
-
 					<p class="result-count"></p>
 
 					<div class="board-search">
@@ -690,107 +677,11 @@
 				</div>
 			</div>
 
-			<div id="event-list-wrap">
-
-
+			<div id="event-list-wrap"> <!-- 이벤트 리스트 (4 x 5) -->
 
 				<div class="inner-wrap">
-
-
 					<div class="tit-util mt70">
-						<h3 class="tit">메가Pick</h3>
-						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED03&#39;)" title="더보기">더보기
-								<i class="iconset ico-arr-right-gray ml05"></i>
-							</a>
-						</div>
-					</div>
-
-
-
-					<div class="event-list mt15">
-
-						<ul>
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14148" data-netfunnel="N" class="eventBtn"
-								title="[미니 시네마 무비칩 NO.4] 거미집 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/qBvplprRP9LBljXVlfpW2Ytpl8BwWD3i.jpg"
-											alt="[미니 시네마 무비칩 NO.4] 거미집" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">[미니 시네마 무비칩 NO.4] 거미집</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.10</p>
-							</a></li>
-
-
-
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14130" data-netfunnel="N" class="eventBtn"
-								title="[냥사원 추석선물세트] MEGA-DRAW🍀 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/Rc68zSpipRxRcmJD92NV2oNOUGZhferp.png"
-											alt="[냥사원 추석선물세트] MEGA-DRAW🍀" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">[냥사원 추석선물세트] MEGA-DRAW🍀</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.09</p>
-							</a></li>
-
-
-
-
-
-
-
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14129" data-netfunnel="N" class="eventBtn"
-								title="[냥사원 추석선물세트] 만원의 행복💸 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/GFRbC0aYEs0pv5IFSJRdbdwJyIMiR2HB.png"
-											alt="[냥사원 추석선물세트] 만원의 행복💸" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">[냥사원 추석선물세트] 만원의 행복💸</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.03</p>
-							</a></li>
-
-
-
-
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14131" data-netfunnel="N" class="eventBtn"
-								title="냥사원이 먹고 싶어서 만든 만춘쿠키🍪 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/exewEGhKg35lsTwavoeUhuUP01e3BwFo.jpg"
-											alt="냥사원이 먹고 싶어서 만든 만춘쿠키🍪" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">냥사원이 먹고 싶어서 만든 만춘쿠키🍪</p>
-
-									<p class="date">2023.09.22 ~ 2023.10.09</p>
-							</a></li>
-
-
-
-
-
-
-						</ul>
-
-					</div>
-
-
-
-					<div class="tit-util mt70">
-						<h3 class="tit">영화</h3>
+						<h3 class="tit">영화*</h3>
 						<div class="right">
 							<a href="javascript:fn_chgEventTab(&#39;CED01&#39;)" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
@@ -799,12 +690,8 @@
 					</div>
 
 
-
-
 					<div class="event-list mt15">
-
 						<ul>
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
 								title="[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -818,8 +705,6 @@
 
 									<p class="date">2023.10.30 ~ 2023.11.13</p>
 							</a></li>
-
-
 
 
 							<li><a href="https://www.megabox.co.kr/event#"
@@ -837,8 +722,6 @@
 							</a></li>
 
 
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14111" data-netfunnel="N" class="eventBtn"
 								title="[2023 사건 읽는 영화관] 마지막 사건 : ep09. 조직 폭력사건 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -854,8 +737,6 @@
 							</a></li>
 
 
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="13986" data-netfunnel="N" class="eventBtn"
 								title="[특별기획 시네 도슨트] 파리로 떠나는 미술관 나들이  상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -869,14 +750,9 @@
 									<p class="date">2023.10.14 ~ 2023.10.14</p>
 							</a></li>
 
-
-
 						</ul>
 
 					</div>
-
-
-
 
 
 					<div class="tit-util mt70">
@@ -887,9 +763,6 @@
 							</a>
 						</div>
 					</div>
-
-
-
 
 
 					<div class="event-list mt15">
@@ -912,9 +785,6 @@
 
 
 
-
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14058" data-netfunnel="N" class="eventBtn"
 								title="[대구경북지역] 대구경북 추석 감사제! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -927,8 +797,6 @@
 
 									<p class="date">2023.09.28 ~ 2023.10.09</p>
 							</a></li>
-
-
 
 
 							<li><a href="https://www.megabox.co.kr/event#"
@@ -945,8 +813,6 @@
 							</a></li>
 
 
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14147" data-netfunnel="N" class="eventBtn"
 								title="[영통] 추석 감사제 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -960,14 +826,9 @@
 									<p class="date">2023.09.21 ~ 2023.10.09</p>
 							</a></li>
 
-
-
 						</ul>
 
 					</div>
-
-
-
 
 
 					<div class="tit-util mt70">
@@ -979,34 +840,23 @@
 						</div>
 					</div>
 
-
-
-
 					<div class="event-list mt15">
 
 						<ul>
 
-
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14091" data-netfunnel="N" class="eventBtn"
-								title="[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="./event_files/nP1W09ckc1CSXuj57ge2iVJxG7KSUUuJ.jpg"
-											alt="[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람!"
+											alt="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!"
 											onerror="noImg(this);">
 									</p>
 
-									<p class="tit">[삼성카드X메가박스] 삼성카드 이용하신다면 영화 9천원 관람!</p>
+									<p class="tit">[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!</p>
 
 									<p class="date">2023.09.25 ~ 2023.10.31</p>
 							</a></li>
-
-
-
-
-
 
 
 							<li><a href="https://www.megabox.co.kr/event#"
@@ -1023,10 +873,6 @@
 							</a></li>
 
 
-
-
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14064" data-netfunnel="N" class="eventBtn"
 								title="[포인트페스타] 제휴포인트 쓰고 콤보 할인쿠폰 받아가세요! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -1041,32 +887,22 @@
 							</a></li>
 
 
-
-
-
-
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14060" data-netfunnel="N" class="eventBtn"
-								title="[KT x 메가박스] 9월 어썸한 달달혜택 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="[KT x 무비플러스] 9월 어썸한 달달혜택 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="./event_files/xoVut4qd0vhGvFLOofidsMQRgeoU3YPZ.jpg"
-											alt="[KT x 메가박스] 9월 어썸한 달달혜택" onerror="noImg(this);">
+											alt="[KT x 무비플러스] 9월 어썸한 달달혜택" onerror="noImg(this);">
 									</p>
 
-									<p class="tit">[KT x 메가박스] 9월 어썸한 달달혜택</p>
+									<p class="tit">[KT x 무비플러스] 9월 어썸한 달달혜택</p>
 
 									<p class="date">2023.09.15 ~ 2023.09.30</p>
 							</a></li>
 
-
-
-
-
 						</ul>
 
 					</div>
-
-
 
 					<div class="tit-util mt70">
 						<h3 class="tit">시사회/무대인사</h3>
@@ -1076,8 +912,6 @@
 							</a>
 						</div>
 					</div>
-
-
 
 
 					<div class="event-list mt15">
@@ -1146,6 +980,84 @@
 							</a></li>
 						</ul>
 					</div>
+				
+				
+					<div class="tit-util mt70">
+						<h3 class="tit">재개봉</h3>
+						<div class="right">
+							<a href="javascript:fn_chgEventTab(&#39;CED03&#39;)" title="더보기">더보기
+								<i class="iconset ico-arr-right-gray ml05"></i>
+							</a>
+						</div>
+					</div>
+
+					<div class="event-list mt15">
+
+						<ul>
+
+							<li><a href="https://www.megabox.co.kr/event#"
+								data-no="14148" data-netfunnel="N" class="eventBtn"
+								title="[미니 시네마 무비칩 NO.4] 거미집 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+									<p class="img">
+										<img src="./event_files/qBvplprRP9LBljXVlfpW2Ytpl8BwWD3i.jpg"
+											alt="[미니 시네마 무비칩 NO.4] 거미집" onerror="noImg(this);">
+									</p>
+
+									<p class="tit">[미니 시네마 무비칩 NO.4] 거미집</p>
+
+									<p class="date">2023.09.27 ~ 2023.10.10</p>
+							</a></li>
+
+
+							<li><a href="https://www.megabox.co.kr/event#"
+								data-no="14130" data-netfunnel="N" class="eventBtn"
+								title="[냥사원 추석선물세트] MEGA-DRAW🍀 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+									<p class="img">
+										<img src="./event_files/Rc68zSpipRxRcmJD92NV2oNOUGZhferp.png"
+											alt="[냥사원 추석선물세트] MEGA-DRAW🍀" onerror="noImg(this);">
+									</p>
+
+									<p class="tit">[냥사원 추석선물세트] MEGA-DRAW🍀</p>
+
+									<p class="date">2023.09.27 ~ 2023.10.09</p>
+							</a></li>
+
+
+
+
+							<li><a href="https://www.megabox.co.kr/event#"
+								data-no="14129" data-netfunnel="N" class="eventBtn"
+								title="[냥사원 추석선물세트] 만원의 행복💸 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+									<p class="img">
+										<img src="./event_files/GFRbC0aYEs0pv5IFSJRdbdwJyIMiR2HB.png"
+											alt="[냥사원 추석선물세트] 만원의 행복💸" onerror="noImg(this);">
+									</p>
+
+									<p class="tit">[냥사원 추석선물세트] 만원의 행복💸</p>
+
+									<p class="date">2023.09.27 ~ 2023.10.03</p>
+							</a></li>
+
+
+							<li><a href="https://www.megabox.co.kr/event#"
+								data-no="14131" data-netfunnel="N" class="eventBtn"
+								title="냥사원이 먹고 싶어서 만든 만춘쿠키🍪 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+									<p class="img">
+										<img src="./event_files/exewEGhKg35lsTwavoeUhuUP01e3BwFo.jpg"
+											alt="냥사원이 먹고 싶어서 만든 만춘쿠키🍪" onerror="noImg(this);">
+									</p>
+
+									<p class="tit">냥사원이 먹고 싶어서 만든 만춘쿠키🍪</p>
+
+									<p class="date">2023.09.22 ~ 2023.10.09</p>
+							</a></li>
+
+
+
+						</ul>
+
+					</div>
+				
 				</div>
 
 			</div>

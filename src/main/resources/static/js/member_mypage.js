@@ -60,7 +60,7 @@ $(document).ready(function(){
 		} else { 	//이메일 주소를 입력하였을 때
 		
 			$.ajax({
-				url : "sendEmail",
+				url : "mypageChgEmail",
 				data : {"email" : email},
 				success : function(data){
 					$("#chverifycode").val(data);
@@ -153,7 +153,8 @@ $(document).ready(function(){
 	
 	//마이페이지 개인정보 변경 제출
 	$("#modifyinfoform").submit(function(){
-		
+		 event.preventDefault(); 
+		 
 		//파일 첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을
 		//파라미터 'check'라는 이름으로 form에 추가하여 전송
 		if(check == 0){
@@ -163,7 +164,12 @@ $(document).ready(function(){
 			$(this).append(html);
 		}
 		
+		this.submit();
 		alert('회원정보가 수정되었습니다.');
+	})
+	
+	$('#modifycancelBtn').on("click",function(){
+		location.href="/member/mypage";	
 	})
 	
 	

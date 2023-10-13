@@ -74,7 +74,7 @@ $(document).ready(function(){
 		} else {	//형식에 맞는 이메일 주소를 입력하였을 때
 		
 			$.ajax({
-				url:"sendEmail",
+				url:"findpassEmail",
 				data : {"email" : email},
 				success : function(data){
 						$("#verifycode").val(data);
