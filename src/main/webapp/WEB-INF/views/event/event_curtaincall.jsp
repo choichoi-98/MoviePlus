@@ -33,9 +33,6 @@
 						<!-- li class="on" id="eventTab_"><a href="javascript:fn_chgEventTab('')">전체</a></li-->
 						<li class="" id="eventTab_"><a href="javascript:fn_eventTabMove(&#39;&#39;)" title="전체">전체</a></li>
 						
-							<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
-							<li id="eventTab_CED03" class=""><a href="javascript:fn_eventTabMove(&#39;CED03&#39;)" title="메가Pick 탭으로 이동">메가Pick</a></li>
-						
 							<!--  li id="eventTab_CED01"><a href="javascript:fn_chgEventTab('CED01')">영화</a></li-->
 							<li id="eventTab_CED01" class=""><a href="javascript:fn_eventTabMove(&#39;CED01&#39;)" title="영화 탭으로 이동">영화</a></li>
 						
@@ -47,6 +44,9 @@
 						
 							<!--  li id="eventTab_CED04"><a href="javascript:fn_chgEventTab('CED04')">시사회/무대인사</a></li-->
 							<li id="eventTab_CED04" class="on"><a href="javascript:fn_eventTabMove(&#39;CED04&#39;)" title="시사회/무대인사 탭으로 이동">시사회/무대인사</a></li>
+						
+							<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">재개봉</a></li-->
+							<li id="eventTab_CED03" class=""><a href="javascript:fn_eventTabMove(&#39;CED03&#39;)" title="재개봉 탭으로 이동">재개봉</a></li>
 						
 					</ul>
 				</div>
