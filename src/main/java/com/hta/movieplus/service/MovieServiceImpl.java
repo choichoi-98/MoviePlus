@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieReviewVO;
 import com.hta.movieplus.mybatis.mapper.MovieMapper;
 
 @Service
@@ -135,6 +136,19 @@ public class MovieServiceImpl implements MovieService{
 	public List<Movie> getMovieDetail(String movieCode) {
 		// TODO Auto-generated method stub
 		return dao.getMovieDetail(movieCode);
+	}
+	
+	//관람평(댓글) 추가
+	public int addMovieReview(String memberId, String movieCode) {
+		// TODO Auto-generated method stub
+		return dao.addMovieReview(memberId,movieCode);
+		
+	}
+	
+	//관람평(댓글) 가져오기
+	public List<MovieReviewVO> getMovieReview(String movieCode) {
+		// TODO Auto-generated method stub
+		return dao.getMovieReview(movieCode);
 	}
 	
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieReviewVO;
 
 @Mapper
 public interface MovieMapper {
@@ -55,7 +56,12 @@ public interface MovieMapper {
 	public List<Movie> getMovieDetailLogin(String memberId, String movieCode);
 
 	public List<Movie> getMovieDetail(String movieCode);
+	
+	//관람평(댓글) 삽입
+	public int addMovieReview(String memberId, String movieCode);
 
+	//관람평(댓글) 가져오기
+	public List<MovieReviewVO> getMovieReview(String movieCode);
 
 
 }
