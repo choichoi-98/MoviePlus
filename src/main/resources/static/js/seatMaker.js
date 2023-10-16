@@ -33,5 +33,12 @@ $(document).ready(function(){
         })
     }
 
+    $('#create-btn').click(function(){
+        var seat_x = $('#seat-x').val();
+        var seat_y = $('#seat-y').val();
+
+        console.log(seat_x + ':' + seat_y);
+    })
+
 
 }); 
