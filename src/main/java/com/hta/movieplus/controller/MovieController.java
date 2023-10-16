@@ -22,6 +22,7 @@ import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieReviewVO;
 import com.hta.movieplus.service.MovieServiceImpl;
 
 @Controller
@@ -63,25 +64,6 @@ public class MovieController {
     	return mv;
     }
     
-    @GetMapping("/movieDetail")
-    public ModelAndView movieDetail(ModelAndView mv,
-    							HttpSession session,
-    				@RequestParam(value="movieCode", defaultValue="") String movieCode
-    		) {
-    	
-    	Member memberInfo = (Member) session.getAttribute("memberInfo");
-    	if(memberInfo != null) {
-    		String memberId = memberInfo.getMEMBER_ID();
-    		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
-    		mv.addObject("movieDetail", movieDetail);
-    	} else {
-    		List<Movie> movieDetail = movieServiceImpl.getMovieDetail(movieCode);
-    		mv.addObject("movieDetail", movieDetail);
-    	}
-    	
-    	mv.setViewName("movie/movie_detail");
-    	return mv;
-    }
     
     @GetMapping("/movieAdd")
     public String movieAdd() {
@@ -175,6 +157,93 @@ public class MovieController {
 		 movieServiceImpl.movieEndedUpdate(movieCode);
 	}
 	
+    @GetMapping("/movieDetail")
+    public ModelAndView movieDetail(ModelAndView mv,
+    							HttpSession session,
+    				@RequestParam(value="movieCode", defaultValue="") String movieCode
+    		) {
+    	
+    	Member memberInfo = (Member) session.getAttribute("memberInfo");
+    	
+    	if(memberInfo != null) {
+    		String memberId = memberInfo.getMEMBER_ID();
+    		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
+    		mv.addObject("movieDetail", movieDetail);
+    	} else {
+    		List<Movie> movieDetail = movieServiceImpl.getMovieDetail(movieCode);
+    		mv.addObject("movieDetail", movieDetail);
+    	}
+    	
+    	mv.setViewName("movie/movie_detail");
+    	return mv;
+    }
+	
+	
+	//관람평(댓글) 화면 표시
+	@ResponseBody
+	@RequestMapping(value="/getMovieReview")
+	public List<MovieReviewVO> getMovieReview(
+				HttpSession session,
+				@RequestParam("movieCode") String movieCode
+			){
+		logger.info("관람평 moviecode:"+ movieCode);
+		List<MovieReviewVO> movieReviews = movieServiceImpl.getMovieReview(movieCode);
+//		 for (MovieReviewVO review : movieReviews) {
+//		        System.out.println("Review ID: " + review.getMember_Id());
+//		        System.out.println("Review content: " + review.getMovie_Review_content());
+//		    }
+//		
+		return movieReviews;
+		
+	}
+	
+	//관람평(댓글) 팝업
+//	@ResponseBody
+//	@RequestMapping(value="/popup")
+//	public ModelAndView movieDetail(ModelAndView mv,
+//			HttpSession session) {
+//		
+//		Member memberInfo = (Member) session.getAttribute("memberInfo");
+//    	
+//    	if(memberInfo != null) {
+//    		String memberId = memberInfo.getMEMBER_ID();
+//    		mv.addObject("login", true);
+//    	} else {
+//    		mv.addObject("login", false);
+//    	}
+//		
+//        return mv;
+//		
+//	}
+	
+	//관람평(댓글) 추가
+	@ResponseBody
+	@RequestMapping(value="/addMovieReview")
+	public Map<String, Object> addMovieReview(
+			@RequestParam("movieCode") String movieCode,
+			HttpSession session
+			){
+		Map<String, Object> map = new HashMap<String,Object>();
+		
+		Member memberInfo = (Member) session.getAttribute("memberInfo");
+		String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
+		
+		
+		if(memberId !=null) { // 로그인 한 경우
+			movieServiceImpl.addMovieReview(memberId, movieCode);
+			map.put("login", true);
+			boolean alertValue = (boolean) map.get("alert");
+			logger.info("alert 값=" + alertValue);
+			
+		} else { // 로그인 x 경우
+			map.put("login", false);
+		}
+		
+		return map;
+		
+	}
+	
+	//보고싶어요 추가
 	@ResponseBody
 	@RequestMapping(value="/addMovieDibs")
 	public Map<String, Object> addMovieDibs(
@@ -200,6 +269,7 @@ public class MovieController {
 	    return map;
 	}
 	
+	//보고싶어요 삭제
 	@ResponseBody
 	@RequestMapping(value="/deleteMovieDibs")
 	public Map<String, Object> deleteMovieDibs(

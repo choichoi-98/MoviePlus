@@ -9,6 +9,44 @@
 <title>MoviePlus: 모두를 위한 영화관</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_detail.js"></script>
+<script>
+$(document).ready(function(){
+	$("#popupLink").click(function (e) {
+		e.preventDefault();
+		
+		var loginId = $("#loginId").val();
+		console.log("로그인 아이디: " + loginId);
+		
+	    if (loginId == "") {
+	        e.preventDefault(); // 클릭 이벤트의 기본 동작(링크 이동)을 방지
+	        console.log("로그인 x");
+	        $("#tooltip-layer01").css("display", "block");
+	    }else{
+	    	console.log("로그인 o");
+// 	    	e.preventDefault();
+ 	    	$("#layer_regi_reply_review").css("display", "block");
+	    }
+	});//	$("#popupLink").click(function (e) {
+
+	var buttons = $(".box-star-score .star .group button");
+	  var numEm = $(".box-star-score .num em");
+	  var score = 0;
+
+	  buttons.hover(
+	    function() {
+	      var buttonIndex = buttons.index(this);
+	      buttons.slice(0, buttonIndex + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
+	      numEm.text(buttonIndex + 1); // em 엘리먼트에 버튼의 숫자 설정
+	      score = buttonIndex + 1;
+	    },
+	    function() {
+	      buttons.removeClass('on'); // hover가 빠져나가면 모든 버튼의 'on' 클래스 제거
+	      numEm.text(score); // em 엘리먼트를 마지막으로 선택된 점수로 설정
+	    }
+	  );
+
+})
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -18,6 +56,7 @@
 
 		
 	<c:forEach var="m" items="${movieDetail }">
+	<input type="hidden" id="movieCode" value="${m.movie_Code}" name="movieCode">
 		<!-- movie-detail -->
 		<div class="movie-detail-page">
 			<div class="bg-img"
@@ -184,7 +223,7 @@
 						  </c:forEach>
 						</p>
 				</div>
-
+				</c:forEach>
 				<!-- movie-graph -->
 				<div class="movie-graph infoContent">
 					<div class="col">
@@ -274,7 +313,7 @@
 				<!-- 한줄평 있을 때 -->
 				<div class="tit-util mt70 mb15 oneContent">
 					<h2 class="tit small">
-						${m.movie_Title}에 대한 <span class="font-gblue">4,605</span>개의 이야기가 있어요!
+						${m.movie_Title}에 대한 <span id="count" class="font-gblue"></span>개의 이야기가 있어요!
 					</h2>
 				</div>
 
@@ -303,6 +342,7 @@
 										</div>
 
 										<div class="story-write">
+										<input type="hidden" value="${memberInfo.MEMBER_ID}" id="loginId">
 											<a
 												href=""
 												title="관람평쓰기" class="tooltip-click oneWrtNonMbBtn"
@@ -310,7 +350,7 @@
 												<i class="iconset ico-story-write"></i> 
 											관람평쓰기</a>
 											<div id="tooltip-layer01" class="tooltip-cont"
-												style="width: 225px; height: 80px;">
+												style="width: 225px;height: 80px;left: 800px;">
 												<div class="wrap loginTagClick">
 													로그인이 필요한 서비스 입니다.<br> <a
 														href="javaScript:fn_viewLoginPopup(&#39;default&#39;,&#39;pc&#39;);"
@@ -326,72 +366,8 @@
 								<!-- // 내용 영역 -->
 							</div>
 						</li>
-						</c:forEach>
+						
 
-						<li class="type01 oneContentTag">
-							<div class="story-area">
-								<div class="user-prof">
-									<div class="prof-img">
-										<img
-											src="./(30일) 주요정보 _ 영화 _ MEET PLAY SHARE, 메가박스_files/bg-photo.png"
-											alt="프로필 사진" title="프로필 사진"
-											onerror="noImg(this, &#39;human&#39;)">
-									</div>
-									<p class="user-id">rjsdud52**</p>
-								</div>
-								<div class="story-box">
-									<div class="story-wrap review">
-										<div class="tit">관람평</div>
-										<div class="story-cont">
-											<div class="story-point">
-												<span>10</span>
-											</div>
-											<div class="story-recommend">
-												<em>배우</em>
-											</div>
-											<div class="story-txt">유쾌한 킬링타임용 코미디 영화</div>
-											<div class="story-like">
-												<button type="button" class="oneLikeBtn" title="댓글 추천"
-													data-no="2470459" data-is="N">
-													<i class="iconset ico-like-gray"></i> <span>0</span>
-												</button>
-											</div>
-											<div class="story-util">
-												<div class="post-funtion">
-													<div class="wrap">
-														<button type="button" class="btn-alert">옵션보기</button>
-														<div class="balloon-space user">
-															<div class="balloon-cont">
-																<div class="user">
-																	<p class="reset a-c">
-																		스포일러 및 욕설/비방하는<br>내용이 있습니까?
-																	</p>
-																	<button type="button" class="maskOne" data-no="2470459">
-																		댓글 신고 <i class="iconset ico-arr-right-green"></i>
-																	</button>
-																</div>
-																<div class="btn-close">
-																	<a
-																		href="https://www.megabox.co.kr/movie-detail?rpstMovieNo=23069600#"
-																		title="닫기"><img
-																		src="./(30일) 주요정보 _ 영화 _ MEET PLAY SHARE, 메가박스_files/btn-balloon-close.png"
-																		alt="닫기"></a>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="story-date">
-								<div class="review on">
-									<span>4 분전</span>
-								</div>
-							</div>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -544,21 +520,7 @@
 							<!--// score -->
 
 							<!-- point -->
-							<div class="point">
-								<p class="tit">
-									<span class="oneText"></span>포인트는 무엇인가요?
-								</p>
-								<p class="txt">(최대 5개 선택가능)</p>
-
-								<div class="box">
-									<button type="button" class="btn">연출</button>
-									<button type="button" class="btn">스토리</button>
-									<button type="button" class="btn">영상미</button>
-									<button type="button" class="btn">배우</button>
-									<button type="button" class="btn">OST</button>
-								</div>
-							</div>
-							<!--// point -->
+							
 
 							<div class="txt-alert errText" style="display: none;">한줄평
 								내용을 입력해 주세요.</div>
