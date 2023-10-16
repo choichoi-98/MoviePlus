@@ -180,7 +180,7 @@
 	<select id="getMovieDetail" parameterType="java.lang.String" resultType="movie">
 		SELECT MOVIE_TITLE, MOVIE_POSTER, MOVIE_GRADE, MOVIE_PLOT,
  				MOVIE_DIRECTOR, MOVIE_GENRE, MOVIE_RUNTIME,
- 				MOVIE_OPENDATE, MOVIE_ACTORS
+ 				MOVIE_OPENDATE, MOVIE_ACTORS, MOVIE_CODE
 		FROM MOVIE
 		WHERE MOVIE_CODE = #{movieCode} 
 	</select>
