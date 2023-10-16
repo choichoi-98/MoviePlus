@@ -17,7 +17,7 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>공지사항 작성</title>
+<title>공지사항 상세</title>
 </head>
 <body>
 	<div class="sidebar">
@@ -94,7 +94,10 @@
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
+				
+				
 			</ul>
+			
 		</div>
 		<div class="sidebar__copyright">총 관리자 메뉴</div>
 	</div>
@@ -107,14 +110,13 @@
 	<script src="${pageContext.request.contextPath}/resources/js/admin/select2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 	
-	<sec:authentication property="principal" var="pinfo" />
-	<main class="main">
+		<main class="main">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>공지사항</h2>
+						<h2>공지사항 Detail</h2>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -123,22 +125,33 @@
 				<div class="col-12">
 					<form action="#" class="form">
 						<div class="row row--form">
-
-							<div class="col-12 col-md-8 form__content">
+							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									
-									<div class="col-md-12">
-										<input type="text" class="form__input" value="[공지]&nbsp;">
+									<div class="col-12 col-sm-6 col-lg-3">
+										<input type="text" class="form__input" value="전체공지">
+									</div>
+									<div class="col-12 col-sm-6 col-lg-3">
+										<input type="text" class="form__input" placeholder="작성일">
 									</div>
 
-									<div class="col-md-12">
-										<textarea id="text" name="text" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;"></textarea>
+									<div class="col-12">
+										<input type="text" class="form__input" placeholder="Title">
+									</div>
+
+									<div class="col-12">
+										<textarea id="text" style= "height: 500px;" name="text" class="form__textarea" placeholder="Description"></textarea>
+									</div>
+
+
+									<div class="col-12" style="display:flex; margin-left: 75%;">
+										<a href="localhost:9000/movieplus/admin#"><button type="button" class="form__btn" style="margin-right:20px;">뒤로</button></a>
+										<button type="button" type="submit"class="form__btn">수정
+
+											
+										</button>
 									</div>
 								</div>
-							</div>
-							<div class="col-12" style="display:flex; margin-left: 60%;">
-								<a href="localhost:9000/movieplus/customer_service"><button type="button" class="form__btn" style="margin-right:20px;">취소</button></a>
-								<button type="button" type="submit"class="form__btn">확인</button>
 							</div>
 						</div>
 					</form>
@@ -147,5 +160,6 @@
 			</div>
 		</div>
 	</main>
+	
 </body>
 </html>

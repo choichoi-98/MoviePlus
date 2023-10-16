@@ -17,7 +17,13 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>공지사항 작성</title>
+<title>공지사항 목록</title>
+<style>
+	.paginator-wrap {
+    display: flex;
+    justify-content: right;
+}
+</style>
 </head>
 <body>
 	<div class="sidebar">
@@ -94,7 +100,10 @@
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
+				
+				
 			</ul>
+			
 		</div>
 		<div class="sidebar__copyright">총 관리자 메뉴</div>
 	</div>
@@ -107,45 +116,158 @@
 	<script src="${pageContext.request.contextPath}/resources/js/admin/select2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 	
-	<sec:authentication property="principal" var="pinfo" />
+		<!-- main content -->
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>공지사항</h2>
+						<h2>공지사항 List</h2>
+
+						<span class="main__title-stat">카운트숫자 Total</span>
+
+						<div class="main__title-wrap">
+							<!-- search -->
+							<form action="#" class="main__title-form">
+								<input type="text" placeholder="검색">
+								<button type="button">
+									<i class="icon ion-ios-search"></i>
+								</button>
+							</form>
+							<!-- end search -->
+						</div>
 					</div>
 				</div>
 				<!-- end main title -->
 
-				<!-- form -->
+				<!-- comments -->
 				<div class="col-12">
-					<form action="#" class="form">
-						<div class="row row--form">
+					<div class="main__table-wrap">
+						<table class="main__table">
+							<thead>
+								<tr>
+									<th> 글 번 호</th>
+									<th> 제 목 </th>
+									<th> 유 형 </th>
+									<th> 작 성 일</th>
+								</tr>
+							</thead>
 
-							<div class="col-12 col-md-8 form__content">
-								<div class="row row--form">
-									
-									<div class="col-md-12">
-										<input type="text" class="form__input" value="[공지]&nbsp;">
-									</div>
-
-									<div class="col-md-12">
-										<textarea id="text" name="text" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;"></textarea>
-									</div>
-								</div>
-							</div>
-							<div class="col-12" style="display:flex; margin-left: 60%;">
-								<a href="localhost:9000/movieplus/customer_service"><button type="button" class="form__btn" style="margin-right:20px;">취소</button></a>
-								<button type="button" type="submit"class="form__btn">확인</button>
-							</div>
-						</div>
-					</form>
+							<tbody>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<!-- end form -->
+				<!-- end comments -->
+
+				<!-- paginator -->
+				<div class="col-12">
+					<div class="paginator-wrap">
+
+						<ul class="paginator">
+							<li class="paginator__item paginator__item--prev">
+								<a href="#"><i class="icon ion-ios-arrow-back"></i></a>
+							</li>
+							<li class="paginator__item"><a href="#">1</a></li>
+							<li class="paginator__item paginator__item--active"><a href="#">2</a></li>
+							<li class="paginator__item"><a href="#">3</a></li>
+							<li class="paginator__item"><a href="#">4</a></li>
+							<li class="paginator__item paginator__item--next">
+								<a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- end paginator -->
 			</div>
 		</div>
 	</main>
+	<!-- end main content -->
+	
 </body>
 </html>
