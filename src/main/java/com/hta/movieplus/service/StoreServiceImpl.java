@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.mybatis.mapper.StoreMapper;
 
@@ -84,6 +85,26 @@ public class StoreServiceImpl implements StoreService {
 	public CartVO cartInsert(CartVO CartVO) {
 		dao.cartInsert(CartVO);
 		return CartVO;
+	}
+
+	@Override
+	public void payInsert(String itemDisplay, int totalPrice) {
+		dao.payInsert(itemDisplay, totalPrice);
+	}
+
+	@Override
+	public List<StorePayVO> getPayList() {
+		return dao.getPayList();
+	}
+
+	@Override
+	public void insertPgToken(String pg_token) {
+		dao.insertPgToken(pg_token);
+	}
+
+	@Override
+	public List<StorePayVO> selectApproved() {
+		return dao.selectApproved();
 	}
 
 }

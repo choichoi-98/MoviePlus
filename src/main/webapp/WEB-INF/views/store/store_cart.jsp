@@ -14,6 +14,7 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
 <script>
@@ -23,20 +24,23 @@ $(function() {
 
     $('#btn-kakaopay').click(function() {
         var totalPrice = $('#totPrdtAmtView').data('price');
+        var cartItemNames = $('#totPrdtAmtView').data('name');
 
         $.ajax({
             url: 'kakaopay',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: { "totalPrice": totalPrice },
+            data: { "totalPrice": totalPrice,
+            	    "cartItemNames": cartItemNames},
             dataType: 'json',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(header, token);
+                xhr.setRequestHeader("Accept-Charset", "UTF-8");
             },
             success: function(data) {
                 var box = data.next_redirect_pc_url;
                 window.open(box);
-                alert(totalPrice);
+                alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
             },
             error: function(error) {
                 alert(JSON.stringify(error, null, 2));
@@ -109,8 +113,9 @@ $(function() {
 								</thead>
 
 								<tbody>
+									<c:set var="cartItemNames" value="" />
 									<c:set var="totalPrice" value="0"/>
-									<c:forEach var="c" items="${cartlist}">
+									<c:forEach var="c" items="${cartlist}" varStatus="loop">
 										<tr>
 											<td class="a-c">
 												<div class="goods-info">
@@ -145,6 +150,14 @@ $(function() {
 											<td><a href="#" class="a-link" name="brchList"
 												title="삭제">삭제</a></td>
 										</tr>
+										<c:choose>
+        									<c:when test="${!loop.last}"> <!-- 마지막 요소가 아닐 때만 쉼표 추가 -->
+            									<c:set var="cartItemNames" value="${cartItemNames}${c.ITEM_NAME}, " />
+        									</c:when>
+        									<c:otherwise>
+            									<c:set var="cartItemNames" value="${cartItemNames}${c.ITEM_NAME}" />
+        									</c:otherwise>
+    									</c:choose>
 										<c:set var="totalPrice" value="${totalPrice + c.ITEM_PRICE}"/>
 									</c:forEach>
 								</tbody>
@@ -161,7 +174,8 @@ $(function() {
 								<div class="cell all">
 									<p class="txt">총 상품금액</p>
 									<p class="price">
-										<em id="totPrdtAmtView" data-price="${totalPrice}">${totalPrice}</em> <span>원</span>
+										<em id="totPrdtAmtView" data-price="${totalPrice}"
+										data-name="${cartItemNames}">${totalPrice}</em> <span>원</span>
 									</p>
 								</div>
 								

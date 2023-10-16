@@ -16,6 +16,24 @@
     	values(#{CART_NUM}, #{ITEM_CODE})
 	</insert>
 	
+	<insert id="payInsert">
+	<selectKey resultType="int" order="BEFORE" keyProperty="PAY_NUM">
+		select nvl(max(PAY_NUM), 0) + 1 from STORE_PAY
+	</selectKey>
+		insert into STORE_PAY(PAY_NUM, PAY_NAME, PAY_AMOUNT)
+		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice})
+	</insert>
+	
+	<update id="insertPgToken">
+    	UPDATE STORE_PAY
+    	SET pg_token = #{pg_token}
+    	WHERE pg_token IS NULL
+    	AND PAY_NUM = (SELECT MAX(PAY_NUM) 
+    				   FROM STORE_PAY 
+    				   WHERE pg_token IS NULL)
+	</update>
+
+	
 	<select id="getItemListCount" resultType="int">
 		select count(*) 
 		from STORE_ITEM
@@ -30,6 +48,16 @@
 				where rownum &lt; = #{end}	 
 				)
 		where rnum &gt;=#{start} and rnum &lt;=#{end}
+	</select>
+	
+	<select id="selectApproved" resultType="StorePayVO">
+		SELECT PAY_NUM, PAY_NAME, PAY_AMOUNT
+		FROM STORE_PAY 
+		WHERE pg_token IS NOT NULL
+	</select>
+	
+	<select id="getPayList" resultType="StorePayVO">
+		select * from STORE_PAY
 	</select>
 	
 	<select id="getCartList" resultType="StoreVO">
