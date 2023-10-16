@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieDibsVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -48,6 +49,8 @@ public interface SchedulingMapper {
 	List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(Map<String, Object> dataMap);
 
 	Movie getMovieDetailByCode(String movieCode);
+
+	List<MovieDibsVO> getMovieDibsList(String name);
 
 
 }

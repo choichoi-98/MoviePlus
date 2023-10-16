@@ -14,6 +14,7 @@ public class TheaterSchedule {
 	private String MOVIE_TITLE;
 	private String THEATER_NAME;
 	private int ScheduleCnt;
+	private int bookingCnt;
 	
 	
 	
@@ -89,6 +90,12 @@ public class TheaterSchedule {
 	}
 	public void setScheduleCnt(int scheduleCnt) {
 		ScheduleCnt = scheduleCnt;
+	}
+	public int getBookingCnt() {
+		return bookingCnt;
+	}
+	public void setBookingCnt(int bookingCnt) {
+		this.bookingCnt = bookingCnt;
 	}
 	
 	

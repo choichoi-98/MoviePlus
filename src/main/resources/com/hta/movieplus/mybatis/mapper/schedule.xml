@@ -4,15 +4,17 @@
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.SchedulingMapper">
 	
 	<select id="getScheduleList" parameterType="map" resultType="theaterSchedule">
-		SELECT TS.*, M.MOVIE_TITLE
+		SELECT *
 		FROM THEATER_SCHEDULE TS
 		JOIN MOVIE M
 		ON TS.MOVIE_CODE = M.MOVIE_CODE
-		WHERE THEATER_ROOM_ID IN ( SELECT THEATER_ROOM_ID
+		JOIN THEATER_ROOM TR 
+		ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		WHERE TS.THEATER_ROOM_ID IN ( SELECT THEATER_ROOM_ID
 									FROM THEATER_ROOM
 									WHERE THEATER_ID = #{theaterId} )
-		AND THEATER_SCHEDULE_DATE = #{todayDate}
-		ORDER BY THEATER_SCHEDULE_START
+		AND TS.THEATER_SCHEDULE_DATE = #{todayDate}
+		ORDER BY TS.THEATER_SCHEDULE_START
 	</select>
 	
 	<select id="getScheduleListByTheaterRoomId" parameterType="theaterSchedule" resultType="theaterSchedule">
@@ -193,6 +195,13 @@
 	<select id="getMovieDetailByCode" parameterType="String" resultType="movie">
 		SELECT * FROM MOVIE
 		WHERE movie_code = #{movie_Code}
+	</select>
+	
+	<select id="getMovieDibsList" parameterType="String" resultType="movieDibsVo">
+		SELECT *
+		FROM MOVIE_DIBS MD
+		JOIN MEMBER M ON MD.MEMBER_ID = M.MEMBER_ID
+		WHERE M.MEMBER_ID = #{name}
 	</select>
 	
 </mapper>

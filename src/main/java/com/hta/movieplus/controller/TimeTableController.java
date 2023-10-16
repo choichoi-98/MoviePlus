@@ -1,5 +1,6 @@
 package com.hta.movieplus.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieDibsVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -134,7 +136,14 @@ public class TimeTableController {
 		
 		return scheduleList;
 	}
-	
+
+	@ResponseBody
+	@PostMapping("booking/getMovieDIBS")
+	public List<MovieDibsVO> getMovieDIBS(Principal principal){
+		List<MovieDibsVO> list = schedulingService.getMovieDibsList(principal.getName());
+		
+		return list; 
+	}
 
 		
 }

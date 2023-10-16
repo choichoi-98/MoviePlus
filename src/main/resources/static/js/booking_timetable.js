@@ -45,6 +45,7 @@ $(document).ready(function(){
 	//화면 첫 진입 날짜 선택
 	$('.timetable-date').eq(1).trigger('click');
 
+	
 	//극장 탭 ( 단순 메뉴 변경 )
 	$('.booking-theater-li').click(function() {
 		$('.booking-theater-li .btn').removeClass('on');
@@ -158,6 +159,8 @@ $(document).ready(function(){
 	
 					
 				})
+
+				getMovieDIBS() // 영화 목록 추가 이후 보고싶은 영화
 
             },
             error: function() {	
@@ -301,6 +304,32 @@ $(document).ready(function(){
             },
             error: function() {	
                 console.log('영화 ajax 실패');
+            } 
+        });
+    }
+
+	function getMovieDIBS(){
+        $.ajax({
+            type: "POST",
+            url: "getMovieDIBS",
+            cache: false,
+            beforeSend : function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (data) {
+				console.log(data);
+				$(data).each(function(index, item){
+
+					$('.ico-heart-small').each(function(index2, item2){
+						if($(item2).attr('data-dib-index')==item.movie_Dibs_object){
+							$(item2).attr('class', 'iconset ico-heart-on-small')
+						}
+					})
+
+				})
+            },
+            error: function() {	
+                console.log('영화dib ajax 실패');
             } 
         });
     }

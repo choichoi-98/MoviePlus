@@ -33,6 +33,10 @@ public class TheaterManagerServiceImpl implements TheaterManagerService {
 	@Override
 	public void addTheaterRoom(TheaterRoom theaterRoom) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
 		mapper.addTheaterRoom(theaterRoom);
 	}
 	@Override
