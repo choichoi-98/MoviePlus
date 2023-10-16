@@ -203,7 +203,8 @@ public class StoreController {
 	@PostMapping("/kakaopay")
 	@ResponseBody
 	// requestparam("totalPrice") 으로 totalprice 가져와서 작업
-	public String kakaopay2() {
+	public String kakaopay2(
+			@RequestParam("totalPrice") int totalPrice) {
 		try {
 			URL payadr = new URL("https://kapi.kakao.com/v1/payment/ready");
 			// 전봇대 1: 내 서버 / 전봇대 2: 카카오페이 서버
