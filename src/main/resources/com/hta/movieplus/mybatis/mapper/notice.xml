@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.NoticeMapper"> 
+
+	<insert id="insertNoticeVO" parameterType="noticeVO">
+		INSERT INTO CUSTOMER_NOTICE
+		VALUES((<include refid = "insertNoticeNum" />), #{CUSTOMER_NOTICE_TYPE}, #{CUSTOMER_NOTICE_REGION}, #{CUSTOMER_NOTICE_THEATER},
+		#{CUSTOMER_NOTICE_SUBJECT}, #{CUSTOMER_NOTICE_CONTENT}, SYSDATE)
+	</insert>
+	
+	<sql id="insertNoticeNum">
+		select nvl(max(CUSTOMER_NOTICE_NUM),0)+1 from CUSTOMER_NOTICE
+	</sql>
+	
+</mapper>
