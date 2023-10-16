@@ -306,7 +306,7 @@ public class MemberController {
 		int month = c.get(Calendar.MONTH);
 		int date = c.get(Calendar.DATE);
 		
-		String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
+		String homedir = saveFolder + "/profile/" + year + "-" + month + "-" + date;
 		logger.info(homedir);
 		File path1 = new File(homedir);
 		if(!(path1.exists())) {
@@ -327,11 +327,11 @@ public class MemberController {
 		
 		
 		//새로운 파일명
-		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+		String refileName = "profile" + year + month + date + random + "." + fileExtension;
 		logger.info("refileName = " + refileName);
 		
 		//오라클 디비에 저장될 파일명
-		String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
+		String fileDBName = File.separator + "profile" + File.separator + year + "-" + month + "-" + date + File.separator + refileName;
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 	}

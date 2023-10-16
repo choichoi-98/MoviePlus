@@ -3,6 +3,15 @@
 
 <mapper namespace="com.hta.movieplus.mybatis.mapper.EventMapper">
 
-	<!-- movie db 첫번째 ajax -->
+	<insert id="insert_event" parameterType="event">
+		INSERT INTO EVENT
+		VALUES((<include refid="insert_EVENT_NUM" />), #{EVENT_TYPE}, 
+		#{EVENT_SUBJECT}, #{EVENT_CONTENT}, SYSDATE, #{EVENT_FILE}, 
+		#{EVENT_STARTDATE}, #{EVENT_ENDDATE},#{EVENT_STATUS})
+	</insert>	
+	
+		<sql id="insert_EVENT_NUM">
+			select nvl(max(EVENT_NUM),0)+1 from EVENT
+		</sql>
 		
 </mapper>
