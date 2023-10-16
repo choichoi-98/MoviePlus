@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/membership.js"></script>
 <title>MoviePlus: 모두를 위한 영화관 </title>
 </head>
 <body>
@@ -36,7 +38,7 @@
 
 				<div class="rightBox mbClassInx1 mbClassInx0">
 					<div class="inbox">
-						<div class="totalPoint">0 P</div>
+						<div class="totalPoint">${memberInfo.MEMBER_POINT} P</div>
 						<ul>
 							<li class="nowClass"><span>현재등급</span><em>${memberInfo.MEMBER_MEMBERSHIP}</em></li>
 							<li class="continue">
@@ -54,8 +56,9 @@
 								<div class="inBar"></div>
 							</div>
 						</div>
+						<input type="hidden" id="membershipPoint" value="${memberInfo.MEMBER_POINT}">
 						<ul class="list" id="pointFlag-list">
-							<li class="list-dtl on act">Welcome
+							<li class="list-dtl on">Welcome
 								<div class="pointFlag"><span>다음 Friends 등급까지 6,000 P 남았어요!</span></div>
 							</li>
 							<li class="list-dtl">Friends

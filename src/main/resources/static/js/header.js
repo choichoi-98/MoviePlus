@@ -80,7 +80,7 @@ $(document).ready(function(){
     $('#movelogin').click(function() {
         openLoginModal();
     })
-    
+
     
     $('.btn-modal-close').click(function() {
         $('.modal-layer').removeClass('on');

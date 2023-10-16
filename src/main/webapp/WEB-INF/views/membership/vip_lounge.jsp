@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,8 @@
 			</div>
 		</div>
 
+
+
 		<!-- contents -->
 		<div id="contents">
 			<div class="inner-wrap">
@@ -33,8 +37,7 @@
 
 				<div class="tab-list">
 					<ul id="membership-tab-ul">
-						<li><a
-							href="/movieplus/benefit/membership/"
+						<li><a href="/movieplus/benefit/membership/"
 							title="멤버십 안내 탭으로 이동">멤버십 안내</a></li>
 						<li class="on"><a href="/movieplus/benefit/viplounge/"
 							title="VIP LOUNGE 탭으로 이동">VIP LOUNGE</a></li>
@@ -43,87 +46,92 @@
 
 				<!-- benefit-vip-lounge -->
 
-				<!-- 로그인 전 -->
-				<div class="benefit-vip-lounge2 logout" style="display: none;">
-					<div class="title">
-						MEGABOX <span>VIP</span>
+
+				<sec:authorize access="isAnonymous()">
+					<div class="benefit-vip-lounge2 logout">
+						<div class="title">
+							MEGABOX <span>VIP</span>
+						</div>
+						<div class="subtext">메가박스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 메가박스
+							등급을 확인하세요.</div>
+						<a href="#" id="membership-login" class="btn">로그인</a>
 					</div>
-					<div class="subtext">메가박스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 메가박스
-						등급을 확인하세요.</div>
-					<a href="#" id="moveLogin" w-data="850" h-data="484" class="btn">로그인</a>
-				</div>
+				</sec:authorize>
+				<!-- 로그인 전 -->
+
 
 				<!-- 로그인 후 -->
-
-				<div class="benefit-vip-lounge2 normal">
-					<div class="lt">
-						<div class="mbimg">
-							<img
-								src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
-								alt="WELCOME">
-						</div>
-						<div class="mb_name">
-							안녕하세요!<br>
-							<p>
-								<span>이름</span>님
-							</p>
-						</div>
-						<div class="period"></div>
-					</div>
-
-					<div class="rt">
-						<div class="sect n1">
-							<div class="tit">VIP선정포인트</div>
-							<div class="point nowPoint">0 P</div>
+				<sec:authorize access="isAuthenticated()">
+					<div class="benefit-vip-lounge2 normal">
+						<div class="lt">
+							<div class="mbimg">
+								<img
+									src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
+									alt="WELCOME">
+							</div>
+							<div class="mb_name">
+								안녕하세요!<br>
+								<p>
+									<span>${membership_member.MEMBER_NAME}</span>님
+								</p>
+							</div>
+							<div class="period"></div>
 						</div>
 
-						<div class="sect n3 activityInfo">
-							<ul>
-								<li>서로다른 영화관람<span>0편</span></li>
-								<li>티켓<span>0 P</span></li>
-								<li>매점<span>0 P</span></li>
-								<li>이벤트<span>0 P</span></li>
+						<div class="rt">
+							<div class="sect n1">
+								<div class="tit">VIP선정포인트</div>
+								<div class="point nowPoint">${membership_member.MEMBER_POINT} P</div>
+								<input type="hidden" id="membershipPoint" value="${membership_member.MEMBER_POINT}">
+							</div>
+
+							<div class="sect n3 activityInfo">
+								<ul>
+									<li>서로다른 영화관람<span>0편</span></li>
+									<li>티켓<span>0</span></li>
+									<li>매점<span>0</span></li>
+									<li>이벤트<span>0</span></li>
+								</ul>
+							</div>
+						</div>
+
+
+						<div class="graphBox mbClassInx0">
+							<div class="inner">
+								<div class="bar">
+									<div class="inBar"></div>
+								</div>
+							</div>
+							<ul class="list" id="pointFlag-list">
+								<li class="on">Welcome <!-- on, act -->
+									<div class="pointFlag">
+										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+									</div>
+								</li>
+								<li class="">Friends
+									<div class="pointFlag">
+										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+									</div>
+								</li>
+								<li class="">VIP
+									<div class="pointFlag">
+										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+									</div>
+								</li>
+								<li class="">VVIP
+									<div class="pointFlag">
+										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+									</div>
+								</li>
+								<li class="">MVIP
+									<div class="pointFlag">
+										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
-
-
-					<div class="graphBox mbClassInx0">
-						<div class="inner">
-							<div class="bar">
-								<div class="inBar"></div>
-							</div>
-						</div>
-						<ul class="list" id="pointFlag-list">
-							<li class="on act">Welcome <!-- on, act -->
-								<div class="pointFlag">
-									<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-								</div>
-							</li>
-							<li class="">Friends
-								<div class="pointFlag">
-									<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-								</div>
-							</li>
-							<li class="">VIP
-								<div class="pointFlag">
-									<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-								</div>
-							</li>
-							<li class="">VVIP
-								<div class="pointFlag">
-									<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-								</div>
-							</li>
-							<li class="">MVIP
-								<div class="pointFlag">
-									<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-
+				</sec:authorize>
 				<!-- 로그인 관련 종료 -->
 			</div>
 
@@ -368,8 +376,7 @@
 					</div>
 				</div>
 				<section id="layer_card_request" class="modal-layer">
-					<a href="#" class="focus">레이어로
-						포커스 이동 됨</a>
+					<a href="#" class="focus">레이어로 포커스 이동 됨</a>
 					<div class="wrap">
 						<header class="layer-header">
 							<h3 class="tit">중앙멤버십 신청하기</h3>
@@ -501,7 +508,8 @@
 				<div class="section">
 					<div class="inner">
 						<div class="imgs">
-							<img src="${pageContext.request.contextPath}/resources/image/membership/viplounge_img05.png"
+							<img
+								src="${pageContext.request.contextPath}/resources/image/membership/viplounge_img05.png"
 								alt="VIP CULTURE EVENT">
 						</div>
 						<div class="number">혜택 05</div>
@@ -544,5 +552,6 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+	
 </body>
 </html>
