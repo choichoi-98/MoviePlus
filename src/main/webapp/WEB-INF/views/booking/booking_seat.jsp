@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 
+<style>
+.disabled{
+	pointer-events: none;
+}
+
+</style>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/booking.js"></script>
@@ -51,7 +57,7 @@
 								<h3 class="tit small">관람인원선택</h3>
 								<div class="right">
 									<button type="button" class="button gray-line small"
-										id="seatMemberCntInit">
+										id="reset-seat-select">
 										<i class="iconset ico-reset-small"></i>초기화
 									</button>
 								</div>
@@ -63,7 +69,7 @@
 										<div class="count">
 											<button type="button" class="down" title="성인 좌석 선택 감소">-</button>
 											<div class="number">
-												<button type="button" class="now" title="성인 현재 좌석 선택 수">0</button>
+												<button id="adult-btn" type="button" class="now" title="성인 현재 좌석 선택 수">0</button>
 											</div>
 											<button type="button" class="up" title="성인 좌석 선택 증가">+</button>
 										</div>
@@ -73,7 +79,7 @@
 										<div class="count">
 											<button type="button" class="down" title="청소년 좌석 선택 감소">-</button>
 											<div class="number">
-												<button type="button" class="now" title="청소년 현재 좌석 선택 수">0</button>
+												<button id="child-btn" type="button" class="now" title="청소년 현재 좌석 선택 수">0</button>
 											</div>
 											<button type="button" class="up" title="청소년 좌석 선택 증가">+</button>
 										</div>
@@ -93,8 +99,9 @@
 													alt="screen"
 													style="position: absolute; left: 62px; top: 10px;"
 													class="mCS_img_loaded">
-												<jsp:include page="/WEB-INF/views/seats/seat-1.jsp" />
-												<!-- 좌석 인클루드, 1-3 순 크기 -->
+												<!------------------------------------------------------------------>
+												<!-- 좌석 -->		<div class="">${seat}</div>			<!-- 좌석 -->
+												<!------------------------------------------------------------------>
 											</div>
 											<div id="mCSB_1_scrollbar_vertical"
 												class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical">
@@ -112,6 +119,7 @@
 							</div>
 							<div class="seat-result">
 								<div class="wrap">
+									<input type="hidden" id="hidden-scheduleId" value="${schedule.THEATER_SCHEDULE_ID}">
 									<div class="tit-area">
 										<span class="movie-grade small age-${movie.grade_data}">${movie.movie_Grade}</span>
 										<p class="tit">${movie.movie_Title}</p>
@@ -124,6 +132,7 @@
 										</p>
 										<div class="other-time">
 											<button type="button" class="now">${schedule.THEATER_SCHEDULE_START}~${schedule.THEATER_SCHEDULE_END}</button>
+											<input type="hidden" id="jojosimya" value="${schedule.THEATER_SCHEDULE_TYPE}">
 										</div>
 										<p class="poster">
 											<img src="${movie.movie_Poster}" alt="${movie.movie_Title}">
@@ -144,7 +153,7 @@
 										</div>
 										<div class="seat-num">
 											<p class="tit">선택좌석</p>
-											<div class="my-seat">
+											<div class="my-seat" id="dashboard-seat">
 												<div class="seat all" title="구매가능 좌석">-</div>
 												<div class="seat all" title="구매가능 좌석">-</div>
 												<div class="seat all" title="구매가능 좌석">-</div>
@@ -166,7 +175,7 @@
 										</div>
 									</div>
 									<div class="btn-group">
-										<a href="#" class="button" id="pagePrevious" title="이전">이전</a>
+										<a href="/movieplus/booking/" class="button" id="pagePrevious" title="이전">이전</a>
 										<a href="#" class="button disabled" id="pageNext" title="다음">다음</a>
 									</div>
 								</div>

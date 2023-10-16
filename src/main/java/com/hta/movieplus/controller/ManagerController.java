@@ -3,6 +3,8 @@ package com.hta.movieplus.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.TheaterRoom;
+import com.hta.movieplus.service.SeatService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
 
@@ -24,12 +27,17 @@ public class ManagerController {
 	
 	TheaterManagerService theaterManagerService;
 	TheaterService theaterService;
+	SeatService seatService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
+
 
 	@Autowired
-	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService) {
+	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService, SeatService seatService) {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
 		this.theaterService = theaterService;
+		this.seatService = seatService;
 	}
 	
 	@GetMapping("") 
@@ -80,7 +88,11 @@ public class ManagerController {
 	public String addRoomAction(ModelAndView mv, TheaterRoom theaterRoom, Model model) {
 		int theaterId = (int) model.asMap().get("theaterId");
 		theaterRoom.setTHEATER_ID(theaterId);
+
+		theaterRoom.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(theaterRoom.getTHEATER_ROOM_SEAT()));
+		
 		theaterManagerService.addTheaterRoom(theaterRoom);
+		
 		
 		return "redirect:/manager/manageroom";
 	}
@@ -97,9 +109,10 @@ public class ManagerController {
 	@PostMapping("/modifyRoomAction")
 	public String modfiyRoomAction(TheaterRoom theaterRoom) {
 		
-		System.out.println(theaterRoom);
-		
+		theaterRoom.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(theaterRoom.getTHEATER_ROOM_SEAT()));
 		theaterManagerService.modifyTheaterRoom(theaterRoom);
+		
+	
 		
 		return "redirect:/manager/manageroom";
 	}

@@ -27,7 +27,7 @@
 
 				<div class="link">
 					<a href="${pageContext.request.contextPath}/member/modifyinfo" title="개인정보수정 페이지로 이동">개인정보수정</a>
-					<a href="#" id="bfrClassSearch" class="btn-modal-open" title="지난등급 상세보기">지난등급조회</a>
+					<a href="#" id="bfrClassSearch" class="" title="지난등급 상세보기">지난등급조회</a>
 				</div>
 
 				<!-- <div class="txt-vip-coupon" style="display: none;">

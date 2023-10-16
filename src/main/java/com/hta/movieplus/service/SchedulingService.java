@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieDibsVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -47,5 +48,7 @@ public interface SchedulingService {
 			String theaterId);
 
 	Movie getMovieDetailByCode(String movieCode);
+
+	List<MovieDibsVO> getMovieDibsList(String name);
 
 }

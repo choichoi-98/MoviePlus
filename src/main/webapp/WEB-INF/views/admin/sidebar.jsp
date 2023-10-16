@@ -78,17 +78,12 @@
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>공지사항 등록</span></a>
 				</li>
-				
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
-				</li>
-				
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>자주 묻는 질문 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>이벤트 관리</span></a>
+					<a href="/movieplus/event/manageEvent" class="sidebar__nav-link"><span>이벤트 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

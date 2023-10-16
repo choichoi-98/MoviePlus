@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    var alp = ["A", "B", "C", "D", "E", "D", "F", "G", "H", "J", "K", "L", "M"];
     let seat_data='';
 
     $('.seat').click(function(e){
@@ -14,7 +15,8 @@ $(document).ready(function(){
     })
 
     $('#reset-seat').click(function() {
-        $('.seat').removeClass('selected').removeClass('deleted');
+        $('.seat').attr('class', 'seat hide')
+        seat_data='';
     })
 
     $('#delete-seat').click(function() {
@@ -37,8 +39,27 @@ $(document).ready(function(){
         var seat_x = $('#seat-x').val();
         var seat_y = $('#seat-y').val();
 
-        console.log(seat_x + ':' + seat_y);
+        createTable(seat_x, seat_y);
+        
     })
+
+    function createTable(x, y){
+        $('.seat-column').each(function(index, item){
+
+            console.log(index);
+            if(index==y){
+                return false;
+            }
+
+            for(var i=0;i<x;i++){
+                $(this).find('.seat').eq(i).removeClass('hide');
+            }   
+        })
+
+        seat_data = alp[y-1]+x;
+        $('#seat-value').val(seat_data);
+        
+    }
 
 
 }); 

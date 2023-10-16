@@ -13,9 +13,12 @@ import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.domain.TimeTableDate;
 import com.hta.movieplus.service.SchedulingService;
+import com.hta.movieplus.service.SeatService;
+import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
 
 @Controller
@@ -24,13 +27,17 @@ public class BookingController {
 	
 	SchedulingService schedulingService;
 	TheaterService theaterService;
+	TheaterManagerService theaterManagerService;
+	SeatService seatService;
 	
 	
 	@Autowired
-	public BookingController(SchedulingService schedulingService, TheaterService theaterService) {
+	public BookingController(SchedulingService schedulingService, TheaterService theaterService, TheaterManagerService theaterManagerService, SeatService seatService) {
 		// TODO Auto-generated constructor stub
 		this.schedulingService = schedulingService;
 		this.theaterService = theaterService;
+		this.theaterManagerService = theaterManagerService;
+		this.seatService = seatService;
 	}
 	
 	@GetMapping("")
@@ -59,12 +66,25 @@ public class BookingController {
 	public ModelAndView bookingSeatView(int scheduleId, ModelAndView mv) {
 		TheaterSchedule schedule = schedulingService.getSchedule(scheduleId);
 		Movie movie = schedulingService.getMovieDetailByCode(schedule.getMOVIE_CODE());
+		TheaterRoom room = theaterManagerService.getTheaterRoomById(schedule.getTHEATER_ROOM_ID());
+		String seat = seatService.makeSeatStr(room.getTHEATER_ROOM_SEAT());
 		
+		mv.addObject("seat", seat);
 		mv.addObject("movie", movie);
 		mv.addObject("schedule", schedule);
 		mv.setViewName("booking/booking_seat");
 		
 		return mv;
 	}
+	
+	@GetMapping("/cart")
+	public ModelAndView bookingCartView(int scheduleId, int price, String[] seat, ModelAndView mv) {
+		
+
+		mv.setViewName("booking/booking_cart");
+		
+		return mv;
+	}
+
 
 }

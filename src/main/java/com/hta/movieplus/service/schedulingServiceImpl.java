@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MovieDibsVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -265,6 +266,13 @@ public class schedulingServiceImpl implements SchedulingService {
 		movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
 		
 		return movie;
+	}
+
+	@Override
+	public List<MovieDibsVO> getMovieDibsList(String name) {
+		// TODO Auto-generated method stub
+		
+		return mapper.getMovieDibsList(name);
 	}
 
 
