@@ -45,7 +45,7 @@
 										<div class="main__table-text">${roomList.THEATER_ROOM_NAME}</div>
 									</td>
 									<td>
-										<div class="main__table-text">${roomList.THEATER_ROOM_SEAT_TYPE}</div>
+										<div class="main__table-text">${roomList.THEATER_ROOM_SEAT}</div>
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">${roomList.THEATER_ROOM_STATUS}</div>

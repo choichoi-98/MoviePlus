@@ -46,14 +46,14 @@
 								<ul class="form__radio">
 									<li><span>좌석 타입 :</span></li>
 									<li><input id="type1" type="radio"
-										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT_TYPE"
-										value="TYPE-A" ${theaterRoom.THEATER_ROOM_SEAT_TYPE == 'TYPE-A' ? 'checked' : ''}> <label for="type1">A타입</label></li>
+										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT"
+										value="TYPE-A" ${theaterRoom.THEATER_ROOM_SEAT == 'TYPE-A' ? 'checked' : ''}> <label for="type1">A타입</label></li>
 									<li><input id="type2" type="radio"
-										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT_TYPE"
-										value="TYPE-B" ${theaterRoom.THEATER_ROOM_SEAT_TYPE == 'TYPE-B' ? 'checked' : ''}> <label for="type2">B타입</label></li>
+										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT"
+										value="TYPE-B" ${theaterRoom.THEATER_ROOM_SEAT == 'TYPE-B' ? 'checked' : ''}> <label for="type2">B타입</label></li>
 									<li><input id="type3" type="radio"
-										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT_TYPE"
-										value="TYPE-C" ${theaterRoom.THEATER_ROOM_SEAT_TYPE == 'TYPE-C' ? 'checked' : ''}> <label for="type3">C타입</label></li>
+										class="THEATER_SEAT_TYPE" name="THEATER_ROOM_SEAT"
+										value="TYPE-C" ${theaterRoom.THEATER_ROOM_SEAT == 'TYPE-C' ? 'checked' : ''}> <label for="type3">C타입</label></li>
 								</ul>
 							</div>
 						</div>
