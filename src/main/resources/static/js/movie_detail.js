@@ -1,11 +1,14 @@
 $(document).ready(function(){
 
+	let token = $("meta[name='_csrf']").attr("content");
+   	let header = $("meta[name='_csrf_header']").attr("content");
+
 //보고싶어요 추가 및 삭제
 	$("body").on("click", ".btn-like", function(e){
 		e.preventDefault();
 		
 		var imgsrc = $(this).find('.dibs_img').attr('src');
-		var movieCode = $(this).attr('rpst-movie-no');
+		var movieCode = $(this).attr('data-movie-code');
 		
 		
 		console.log("imgsrc = " + imgsrc);
@@ -14,9 +17,9 @@ $(document).ready(function(){
 		var ajaxURL;
 		
 		if(imgsrc.includes('heart_full.png')){
-			ajaxURL = 'movie/deleteMovieDibs';		
+			ajaxURL = '../movie/deleteMovieDibs';		
 		} else {
-			ajaxURL = 'movie/addMovieDibs';		
+			ajaxURL = '../movie/addMovieDibs';		
 		}
 		
 		$.ajax({
@@ -52,5 +55,8 @@ $(document).ready(function(){
 	    });//$.ajax({
 	
 	});//$("body").on("click", ".btn-like", function(e){
+
+
+
 
 });//$(document).ready(function(){

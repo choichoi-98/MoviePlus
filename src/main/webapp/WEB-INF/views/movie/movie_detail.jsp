@@ -34,7 +34,7 @@
 
 				<div class="btn-util">
 					<button type="button" class="button btn-like" style="width: 80px;color: white;background: #792828;"
-							rpst-movie-no="${m.movie_Code}">
+							data-movie-code="${m.movie_Code}">
 					  <c:if test="${empty m.MOVIE_DIBS_OBJECT }">
 						<img class="dibs_img"
 							src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png"
@@ -268,13 +268,13 @@
 					</div>
 				</div>
 				<!--// movie-graph -->
-				</c:forEach>
+				
 				<!-- 영화관 선택후 -->
 
 				<!-- 한줄평 있을 때 -->
 				<div class="tit-util mt70 mb15 oneContent">
 					<h2 class="tit small">
-						30일에 대한 <span class="font-gblue">4,605</span>개의 이야기가 있어요!
+						${m.movie_Title}에 대한 <span class="font-gblue">4,605</span>개의 이야기가 있어요!
 					</h2>
 				</div>
 
@@ -298,15 +298,17 @@
 								<div class="story-box">
 									<div class="story-wrap">
 										<div class="story-cont">
-											<span class="font-gblue">30일</span> 재미있게 보셨나요? 영화의 어떤 점이 좋았는지
+											<span class="font-gblue">${m.movie_Title}</span> 재미있게 보셨나요? 영화의 어떤 점이 좋았는지
 											이야기해주세요.
 										</div>
 
 										<div class="story-write">
 											<a
-												href="https://www.megabox.co.kr/movie-detail?rpstMovieNo=23069600#tooltip-layer01"
-												title="관람평쓰기" class="tooltip-click oneWrtNonMbBtn"><i
-												class="iconset ico-story-write"></i> 관람평쓰기</a>
+												href=""
+												title="관람평쓰기" class="tooltip-click oneWrtNonMbBtn"
+												id="popupLink">
+												<i class="iconset ico-story-write"></i> 
+											관람평쓰기</a>
 											<div id="tooltip-layer01" class="tooltip-cont"
 												style="width: 225px; height: 80px;">
 												<div class="wrap loginTagClick">
@@ -324,7 +326,7 @@
 								<!-- // 내용 영역 -->
 							</div>
 						</li>
-
+						</c:forEach>
 
 						<li class="type01 oneContentTag">
 							<div class="story-area">
