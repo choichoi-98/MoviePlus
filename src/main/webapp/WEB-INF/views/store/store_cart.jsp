@@ -37,7 +37,6 @@ $(function() {
                 var box = data.next_redirect_pc_url;
                 window.open(box);
                 alert(totalPrice);
-                // 여기에서 추가 작업 수행 가능
             },
             error: function(error) {
                 alert(JSON.stringify(error, null, 2));
@@ -277,7 +276,7 @@ $(function() {
 						<!-- 20220802 페이즈 약관동의 추가 -->
 						<!-- 20220802 페이즈 약관동의 추가 end -->
 						<div class="btn-group pt40">
-							<a href="#"
+							<a href="cp02"
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
 
 							<a href="javascript:void(0);"
