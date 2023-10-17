@@ -185,7 +185,7 @@ public class EventController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/list_ajax")
+	@RequestMapping(value="event/list_ajax")
 	public Map<String, Object> eventListAjax(
 			@RequestParam(value="page", defaultValue="1", required=false) int page
 			){

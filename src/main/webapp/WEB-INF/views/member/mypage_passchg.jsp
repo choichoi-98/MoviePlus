@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,9 +51,10 @@
 				<tr>
 					<th scope="row"><label for="pwnew">새 비밀번호</label></th>
 					<td>
+					<sec:authentication property="principal" var="pinfo"/>
 						<form id="changepassform" action="${pageContext.request.contextPath}/member/modifypass" method="post">
 	  					    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="MEMBER_ID" value="${memberInfo.MEMBER_ID}" >
+							<input type="hidden" name="MEMBER_ID" value="${pinfo.MEMBER_ID}" >
 							<input name="MEMBER_PASS" type="password" id="pwnew" class="input-text w150px">
 							<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ~ ! @ # $ % ^ &amp; * + = - ? _  입니다.</span>
 							<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
