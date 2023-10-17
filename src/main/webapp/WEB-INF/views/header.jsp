@@ -451,8 +451,7 @@ button.button.purple {
 	<!-- ** 멤버십등급 사진 변경하기** --> <img src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png" alt="프로필 사진">
 						</div>
 						<div class="name">
-							<span>${memberInfo.MEMBER_NAME}</span>님
-							<%-- <span>${memberInfo.MEMBER_NAME}</span>님 --%>
+							<span>${pinfo.MEMBER_NAME}</span>님
 						</div>
 
 						<a href="${pageContext.request.contextPath}/member/mypage" class="linkBtn" title="나의 무비플러스">마이페이지</a>
@@ -463,7 +462,7 @@ button.button.purple {
 							<span>멤버십 등급</span>
 						</div>
 						<ul class="membership">
-							<li class="txt" style="font-size:15pt; padding-top: 0px">${memberInfo.MEMBER_MEMBERSHIP}</li>
+							<li class="txt" style="font-size:15pt; padding-top: 0px">${pinfo.MEMBER_MEMBERSHIP}</li>
 						</ul>
 					</div>
 
@@ -472,7 +471,7 @@ button.button.purple {
 						<div class="tit">
 							<a class="linkA" href="#" title="멤버십 포인트"><span>포인트</span></a>
 						</div>
-						<div class="count">${memberInfo.MEMBER_POINT}</div>
+						<div class="count">${pinfo.MEMBER_POINT}</div>
 					</div>
 
 					<div class="box coupon">

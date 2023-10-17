@@ -33,18 +33,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		//session.setAttribute("loginUser", authentication.getName());
 		//session.setAttribute("MEMBER_ID", MEMBER_ID);
 		
-		String MEMBER_ID = authentication.getName();
-		Member m = memberservice.memberinfo(MEMBER_ID);
-		
-		if(m != null) {
-			session.setAttribute("memberInfo", m);
-		}
-		
+		/*
+		 * String MEMBER_ID = authentication.getName(); Member m =
+		 * memberservice.memberinfo(MEMBER_ID);
+		 * 
+		 * if(m != null) { session.setAttribute("memberInfo", m); }
+		 */
 		session.removeAttribute("loginfail");
 		String url = request.getContextPath() +  "/main";
 		response.sendRedirect(url);
-		
-		
 		
 	}
 
