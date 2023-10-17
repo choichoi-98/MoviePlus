@@ -139,9 +139,10 @@ public class MovieServiceImpl implements MovieService{
 	}
 	
 	//관람평(댓글) 추가
-	public int addMovieReview(String memberId, String movieCode) {
+	public int addMovieReview(String memberId, String movieCode, String reviewText, int star) {
 		// TODO Auto-generated method stub
-		return dao.addMovieReview(memberId,movieCode);
+		System.out.println(memberId+" "+movieCode+" "+ reviewText+ " "+ star);
+		return dao.addMovieReview(memberId,movieCode,reviewText,star);
 		
 	}
 	

@@ -57,11 +57,12 @@ public interface MovieMapper {
 
 	public List<Movie> getMovieDetail(String movieCode);
 	
-	//관람평(댓글) 삽입
-	public int addMovieReview(String memberId, String movieCode);
 
 	//관람평(댓글) 가져오기
 	public List<MovieReviewVO> getMovieReview(String movieCode);
+	
+	//관람평(댓글) 등록
+	public int addMovieReview(String memberId, String movieCode, String reviewText, int star);
 
 
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -197,51 +198,34 @@ public class MovieController {
 		
 	}
 	
-	//관람평(댓글) 팝업
-//	@ResponseBody
-//	@RequestMapping(value="/popup")
-//	public ModelAndView movieDetail(ModelAndView mv,
-//			HttpSession session) {
-//		
-//		Member memberInfo = (Member) session.getAttribute("memberInfo");
-//    	
-//    	if(memberInfo != null) {
-//    		String memberId = memberInfo.getMEMBER_ID();
-//    		mv.addObject("login", true);
-//    	} else {
-//    		mv.addObject("login", false);
-//    	}
-//		
-//        return mv;
-//		
-//	}
 	
 	//관람평(댓글) 추가
 	@ResponseBody
 	@RequestMapping(value="/addMovieReview")
-	public Map<String, Object> addMovieReview(
+	public int addMovieReview(
 			@RequestParam("movieCode") String movieCode,
-			HttpSession session
+			@RequestParam("memberId") String memberId,
+			@RequestParam("reviewText") String reviewText,
+			@RequestParam("movieStar")  String movieStar
 			){
-		Map<String, Object> map = new HashMap<String,Object>();
 		
-		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
+	        int star = Integer.parseInt(movieStar);
+
+	  
 		
-		
-		if(memberId !=null) { // 로그인 한 경우
-			movieServiceImpl.addMovieReview(memberId, movieCode);
-			map.put("login", true);
-			boolean alertValue = (boolean) map.get("alert");
-			logger.info("alert 값=" + alertValue);
-			
-		} else { // 로그인 x 경우
-			map.put("login", false);
-		}
-		
-		return map;
+		return movieServiceImpl.addMovieReview(memberId, movieCode,reviewText,star);
 		
 	}
+	
+	//관람평(댓글) 수정
+	@ResponseBody
+	@RequestMapping(value="modifyReview")
+	public int modifyReview() {
+		
+		
+		return 0;
+	}
+	
 	
 	//보고싶어요 추가
 	@ResponseBody

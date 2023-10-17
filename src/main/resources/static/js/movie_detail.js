@@ -80,42 +80,61 @@ console.log("movieReviewList 메서드입니다.");
         console.log("revieList"+reviewList);
         movieReview.forEach(function (review) {
           var listItem = `
-            <li class="type01 oneContentTag">
-              <div class="story-area">
-                <div class="user-prof">
-                  <div class="prof-img">
-                    <img src="${review.MEMBER_PROFILE}" alt="프로필 사진" title="프로필 사진" onerror="noImg(this, 'human')">
-                  </div>
-                  <p class="user-id">${review.member_Id}</p>
-                </div>
-                <div class="story-box">
-                  <div class="story-wrap review">
-                    <div class="tit">관람평</div>
-                    <div class="story-cont">
-                      <div class="story-point">
+<li class="type01 oneContentTag">
+    <div class="story-area">
+        <div class="user-prof">
+            <div class="prof-img">
+                <img src="${review.MEMBER_PROFILE}" alt="프로필 사진" title="프로필 사진" onerror="noImg(this, 'human')">
+            </div>
+            <p class="user-id">${review.member_Id}</p>
+        </div>
+        <div class="story-box">
+            <div class="story-wrap review">
+                <div class="tit">관람평</div>
+                <div class="story-cont">
+                    <div class="story-point">
                         <span>${review.movie_Review_star}</span>
-                      </div>
-                      <div class="story-recommend">
-                        <em>배우</em>
-                      </div>
-                      <div class="story-txt">${review.movie_Review_content}</div>
-                      <div class="story-like">
-                        <button type="button" class="oneLikeBtn" title="댓글 추천"
-                          data-no="2470459" data-is="N">
-                          <i class="iconset ico-like-gray"></i> <span>0</span>
-                        </button>
-                      </div>
-                      <!-- 나머지 HTML 구조 -->
                     </div>
-                  </div>
+                    <div class="story-recommend">
+                        <em>배우</em>
+                    </div>
+                    <div class="story-txt">${review.movie_Review_content}</div>
+                    <div class="story-like">
+                        <button type="button" class="oneLikeBtn" title="댓글 추천" data-no="2470459" data-is="N">
+                            <i class="iconset ico-like-gray"></i> <span>0</span>
+                        </button>
+                    </div>
+                    <div class="story-util">
+                        <div class="post-funtion">
+                            <div class="wrap">
+                                <button type="button" class="btn-alert">옵션보기</button>
+                                <div class="balloon-space writer">
+                                    <div class="balloon-cont">
+                                        <div class="writer">
+                                            <a href="#layer_regi_reply_review" title="수정" class="btn-modal-open updateOne" w-data="500" h-data="680" data-score="10" data-no="2475551" data-cn="chlrhldml dudghk cncjsgkqslek.">수정 <i class="iconset ico-arr-right-green"></i></a>
+                                            <button type="button" class="deleteOne" data-no="2475551" data-mno="01573800" data-cd="PREV">삭제 <i class="iconset ico-arr-right-green"></i></button>
+                                        </div>
+                                        <div class="btn-close" id="popup_close">
+                                            <a href=" " title="닫기">
+                                            <img src="${contextPath}/resources/image/movie/btn-balloon-close.png" alt="닫기">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="story-date">
-                <div class="review on">
-                  <span>${review.movie_Review_reg_date}</span>
-                </div>
-              </div>
-            </li>
+            </div>
+        </div>
+    </div>
+    <div class="story-date">
+        <div class="review on">
+            <span>${review.movie_Review_reg_date}</span>
+        </div>
+    </div>
+</li>
+
           `;
           
 
@@ -129,23 +148,119 @@ console.log("movieReviewList 메서드입니다.");
 
 
 //글자수 100개 제한 이벤트
-   $("#content").on('input',function(){
-      let content = $(this).val();
-      let length = content.length;
-      if(length > 100){
-         length=100;
-         content = content.substring(0,length);
-         $(this).val(content);
-      }
-      $(".float-left").text(length+"/50");
-   });//comtent input end
+    var textarea = $('#textarea');
+    var count = $('#contentCount');
+    var maxLength = 100; // 최대 글자 수
+
+    textarea.on('input', function() {
+        var text = textarea.val();
+        var currentLength = text.length;
+
+        if (currentLength > maxLength) {
+            textarea.val(text.substring(0, maxLength)); // 글자 수 제한
+            currentLength = maxLength;
+        }
+
+        count.text(currentLength + ' / ' + maxLength);
+    });
    
-   $("#message").click(function(){
-      getList(++page);
-   });
+
+
+//관람평 점수 hover이벤트
+ var buttons = $(".box-star-score .star .group button");
+	  var numEm = $(".box-star-score .num em");
+	  var score = 0;
+	  var clicked = false;
+
+	  buttons.on('click', function() {
+	    var buttonIndex = buttons.index(this);
+	    buttons.removeClass('on'); // 모든 버튼의 'on' 클래스 제거
+	    buttons.slice(0, buttonIndex + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
+	    numEm.text(buttonIndex + 1); // em 엘리먼트에 버튼의 숫자 설정
+	    score = buttonIndex + 1;
+	    clicked = true; // 클릭 이벤트 발생 시 clicked 값을 true로 설정
+	  });
+
+	  buttons.hover(
+	    function() {
+	      if (!clicked) { // 클릭 이벤트로 값이 고정되지 않은 경우에만 호버 이벤트 적용
+	        var buttonIndex = buttons.index(this);
+	        buttons.slice(0, buttonIndex + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
+	        numEm.text(buttonIndex + 1); // em 엘리먼트에 버튼의 숫자 설정
+	      }
+	    },
+	    function() {
+	      if (!clicked) { // 클릭 이벤트로 값이 고정되지 않은 경우에만 호버 이벤트 적용
+	        buttons.removeClass('on'); // 마우스가 벗어나면 모든 버튼의 'on' 클래스 제거
+	        numEm.text(score); // em 엘리먼트를 클릭한 버튼의 숫자로 설정
+	      }
+	    }
+	  );
+
+//관람평 팝업 닫기
+$(".btn-modal-close").click(function (e) {
+		e.preventDefault();
+		
+		$("#layer_regi_reply_review").css("display", "none");
+	   
+	});//$(".btn-modal-close").click(function (e) {
+$(".close-layer").click(function (e) {
+		e.preventDefault();
+		
+		$("#layer_regi_reply_review").css("display", "none");
+	   
+	   
+	});//$(".btn-modal-close").click(function (e) {
+
 
 //관람평(댓글) 등록
-$("#popupLink").on('click',function(){
-	
-  });
+$("body").on("click", "#regOneBtn", function(e){
+		var movieCode = $("#movieCode").val();
+		var memberId = $("#loginId").val();
+		var reviewText = $("#textarea").val();
+		var movieStar = $(".num em").text();
+		
+		$.ajax({
+			type: 'POST',
+			url: "../movie/addMovieReview",
+			data: {
+				"movieCode":movieCode,
+				"memberId":memberId,
+				"reviewText":reviewText,
+				"movieStar":movieStar
+			},
+			dataType: 'json',
+			beforeSend: function(xhr) {
+            // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+            xhr.setRequestHeader(header, token);
+	        },
+	        success: function(response) {
+	          console.log("댓글 등록 성공")
+	           $("#layer_regi_reply_review").css("display", "none");
+	           $(".movie-idv-story ul li:not(:first)").empty();
+	            movieReviewList();
+	            
+	        },
+	        error: function() {
+	            // AJAX 요청 실패 시 처리
+	            console.log("댓글 등록 실패");
+	        }
+	        
+	    });//$.ajax({
+});//$("body").on("click", "#btnPostRly", function(e){
+
+
+//댓글 수정, 삭제 popup 열기
+$("body").on("click", ".post-funtion", function(e){
+	console.log("댓글 수정,삭제 popup open")
+	var $balloonSpace = $(this).find(".balloon-space.writer");
+    $balloonSpace.toggleClass("on");
+});
+
+//댓글 수정, 삭제 popup 닫기
+$("body").on("click", "#popup_close", function(e){
+	e.preventDefault();
+	console.log("댓글 수정,삭제 popup close")
+	$(this).find(".balloon-space.writer").removeClass("on");
+});
 });//$(document).ready(function(){
