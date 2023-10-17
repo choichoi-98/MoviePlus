@@ -31,6 +31,7 @@ $(document).ready(function(){
 
 		addDashboardSeat();
 		getPrice();
+		checkSelectCnt();
 	})
 
 	$('.count > button.down').click(function() {
@@ -50,6 +51,7 @@ $(document).ready(function(){
 		}
 		deleteDashboardSeat();
 		getPrice();
+		checkSelectCnt();
 	})
 
 	$('.common').mouseenter(function () { 
@@ -57,11 +59,30 @@ $(document).ready(function(){
 			$(this).addClass('on');
 		}
 
+		if(checkCnt-selectCnt == 2){ // 4명 이상 선택된거 정리
+			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
+				$(this).addClass('on').prev().addClass('on');
+			}else {
+				$(this).addClass('on').next().addClass('on');
+			}
+			
+		}
+
 	});
 	$('.common').mouseleave(function () { 
 		if(!$(this).hasClass('choice')){
 		  $(this).removeClass('on');
 		}
+
+		if(checkCnt-selectCnt == 2){
+			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
+				$(this).removeClass('on').prev().removeClass('on');
+			}else {
+				$(this).removeClass('on').next().removeClass('on');
+			}
+			
+		}
+
 		
 	});
 
@@ -70,19 +91,50 @@ $(document).ready(function(){
 		if(checkCnt ==0 || selectCnt>=checkCnt || $(this).hasClass('choice')){
 			return false;
 		}
-		selectCnt++;
 
-		$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
+		if(checkCnt-selectCnt == 2){ // 2명 이상 선택\
+			if(Number($(this).attr('blockLength')) == Number($(this).attr('blockIndex'))){
+				selectCnt++;
+				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
+	
+				$(this).addClass("choice");
 
-		// selectedSeat.push($(this).attr('data-seat-num'));
+				checkSelectCnt();
+				return;
+			}
 
-		$(this).addClass("choice");
+			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
+				selectCnt = selectCnt + 2;
+				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
+				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).prev().attr('data-seat-num'));
 
+				$(this).addClass("choice").prev().addClass("choice");
+
+			}else {
+				selectCnt = selectCnt + 2;
+				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
+				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).next().attr('data-seat-num'));
+
+				$(this).addClass("choice").next().addClass("choice");
+			}
+
+			
+		
+		}else{ // 1명 선택
+			selectCnt++;
+
+			$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
+	
+			$(this).addClass("choice");
+		}
+		
 		if(checkCnt!=0 && selectCnt==checkCnt){
 			$('#pageNext').attr('class', 'button active');
 		}else {
 			$('#pageNext').attr('class', 'button disabled');
 		}
+
+		checkSelectCnt();
 
 	})
 
@@ -142,11 +194,21 @@ $(document).ready(function(){
 	function reset(){
 		selectCnt = 0;
 		checkCnt = 0;
-		$('.now').text('0');
+		$('#adult-btn').text('0');
+		$('#child-btn').text('0');
 		$('#dashboard-seat > .seat').attr('class', 'seat all').text('-');
 		$('.money').find('em').text('0');
 		$('.common').attr('class','jq-tooltip seat-condition standard common');
 		$('#pageNext').attr('class', 'button disabled');
 	}
+
+	function checkSelectCnt(){
+		if(checkCnt-selectCnt==1){
+			$('.common[selectiontype="non-solo"]:not(.on.choice)').addClass('impossible view');
+		}else{
+			$('.common[selectiontype="non-solo"]').removeClass('impossible view');
+		}
+	}
+
 
 });

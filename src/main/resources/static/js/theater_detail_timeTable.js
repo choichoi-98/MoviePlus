@@ -82,7 +82,7 @@ $(document).ready(function(){
 					
 					var movie_output = '<div class="theater-list timeTable-theater-list" data-theater-index="'+movie.movie_Code+'">';
 					movie_output += '<div class="theater-tit"><p class="movie-grade age-'+movie_grade+'"></p>';
-					movie_output += '<p><a href="#" title="'+movie.movie_Title+' 상세보기">'+movie.movie_Title+'</a></p>';
+					movie_output += '<p><a href="/movieplus/movie/movieDetail?movieCode='+movie.movie_Code+'" title="'+movie.movie_Title+' 상세보기">'+movie.movie_Title+'</a></p>';
 					movie_output += '<p class="infomation"><span>'+movie.movie_Screen+'</span>/상영시간 '+movie.movie_Runtime+'분</p></div></div>';
 					
 					$('#theater-list-box').append(movie_output);
@@ -114,7 +114,7 @@ $(document).ready(function(){
 				$(data.theaterRoomList).each(function(theaterRoom_index, theaterRoom) {
 					var theaterRoom_output = '<div class="theater-type">';
 					theaterRoom_output += '<p class="theater-name">' + theaterRoom.theater_ROOM_NAME + '</p>';
-					theaterRoom_output += '<p class="chair">' + theaterRoom.theater_ROOM_SEAT_TYPE + '</p></div>';
+					theaterRoom_output += '<p class="chair">' + theaterRoom.theater_ROOM_SEAT_CNT + '석</p></div>';
 					theaterRoom_output += '<div class="theater-time">';
 					theaterRoom_output += '<div class="theater-time-box"><table class="time-list-table timeTable-table" data-room-index="'+theaterRoom.theater_ROOM_ID+'"><tbody><tr></tr></tbody></table></div></div>';
 				
@@ -143,7 +143,7 @@ $(document).ready(function(){
 					var schedule_output = '<td class="">';
 					schedule_output += '<div class="td-ab">';
 					schedule_output += '<div class="txt-center">';
-					schedule_output += '<a href="" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
+					schedule_output += '<a href="/movieplus/booking/" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
 					schedule_output += '<p class="time">'+schedule.theater_SCHEDULE_START+'</p><p class="chair">219석</p>';
 					schedule_output += '<div class="play-time"><p>'+schedule.theater_SCHEDULE_START+'~'+schedule.theater_SCHEDULE_END+'</p><p>219석</p></div>';
 					schedule_output += '</a></div></div></td>';

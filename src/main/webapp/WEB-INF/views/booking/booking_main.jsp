@@ -41,6 +41,7 @@
 		</div>
 
 		<div id="bokdMBooking" style="overflow: hidden; height: 760px;">
+			<input type="hidden" id="fast-movieCode" value="${fast-movieCode}">
 			<div class="inner-wrap"
 				style="padding-top: 40px; padding-bottom: 100px;">
 

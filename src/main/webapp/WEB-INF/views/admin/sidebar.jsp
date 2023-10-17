@@ -21,7 +21,9 @@
 </head>
 <body>
 	<div class="sidebar">
-	<sec:authentication property="principal" var="pinfo" />
+	<sec:authorize access="isAuthenticated()">
+	         <sec:authentication property="principal" var="pinfo"/>
+	</sec:authorize>
 		<!-- sidebar logo -->
 		<a href="#" class="sidebar__logo">
 			<img src="${pageContext.request.contextPath}/resources/image/admin/admin_logo.png" alt="" style="width:100%;">
@@ -35,7 +37,7 @@
 
 			<div class="sidebar__user-title">
 				<span>사이트 관리자</span>
-				<p>${memberInfo.MEMBER_NAME}님</p>
+				<p>${pinfo.MEMBER_NAME}님</p>
 			</div>
 
 			<button class="sidebar__user-btn" type="button" onclick="location='/movieplus/'">

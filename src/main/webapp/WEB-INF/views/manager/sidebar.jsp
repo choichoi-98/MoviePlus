@@ -20,6 +20,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<sec:authorize access="isAuthenticated()">
+         <sec:authentication property="principal" var="pinfo"/>
+</sec:authorize>
 	<div class="sidebar">
 		<!-- sidebar logo -->
 		<a href="#" class="sidebar__logo">
@@ -34,7 +37,7 @@
 
 			<div class="sidebar__user-title">
 				<span>${theaterName}관</span>
-				<p>${memberInfo.MEMBER_NAME}님</p>
+				<p>${pinfo.MEMBER_NAME}님</p>
 			</div>
 
 			<button class="sidebar__user-btn" type="button" onclick="location='/movieplus/'">

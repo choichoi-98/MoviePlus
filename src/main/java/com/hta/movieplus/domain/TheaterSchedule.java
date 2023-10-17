@@ -15,6 +15,8 @@ public class TheaterSchedule {
 	private String THEATER_NAME;
 	private int ScheduleCnt;
 	private int bookingCnt;
+	private String THEATER_ROOM_SEAT;
+	private int THEATER_ROOM_SEAT_CNT;
 	
 	
 	
@@ -96,6 +98,19 @@ public class TheaterSchedule {
 	}
 	public void setBookingCnt(int bookingCnt) {
 		this.bookingCnt = bookingCnt;
+	}
+
+	public int getTHEATER_ROOM_SEAT_CNT() {
+		return THEATER_ROOM_SEAT_CNT;
+	}
+	public void setTHEATER_ROOM_SEAT_CNT(int tHEATER_ROOM_SEAT_CNT) {
+		THEATER_ROOM_SEAT_CNT = tHEATER_ROOM_SEAT_CNT;
+	}
+	public String getTHEATER_ROOM_SEAT() {
+		return THEATER_ROOM_SEAT;
+	}
+	public void setTHEATER_ROOM_SEAT(String tHEATER_ROOM_SEAT) {
+		THEATER_ROOM_SEAT = tHEATER_ROOM_SEAT;
 	}
 	
 	
