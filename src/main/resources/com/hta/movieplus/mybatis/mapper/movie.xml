@@ -209,11 +209,11 @@
 	
 	<!-- 관람평(댓글) 추가 -->
 	<insert id="addMovieReview">
-		INSERT INTO MOVIE_REVIEW
-				(MOVIE_REVIEW_NUM, MOVIE_REVIEW_STAR, 
-		 		MOVIE_REVIEW_CONTENT, MOVIE_CODE, MOVIE_REVIEW_REG_DATE)
-		VALUES(movie_review_seq.nextval, 5, 
-				배우의 연기가 돋보이는 영화였습니다.', '20223565', sysdate);
+	INSERT INTO MOVIE_REVIEW
+		(MOVIE_REVIEW_NUM, MEMBER_ID, MOVIE_REVIEW_STAR, 
+		MOVIE_REVIEW_CONTENT, MOVIE_CODE, MOVIE_REVIEW_REG_DATE)
+	VALUES(movie_review_seq.nextval, #{memberId} , #{star} , 
+		#{reviewText}, #{movieCode}, sysdate)
 	</insert>
 	
 </mapper>

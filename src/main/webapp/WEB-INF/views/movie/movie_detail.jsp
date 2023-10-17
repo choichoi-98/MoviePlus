@@ -11,6 +11,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/movie_detail.js"></script>
 <script>
 $(document).ready(function(){
+
 	$("#popupLink").click(function (e) {
 		e.preventDefault();
 		
@@ -27,25 +28,10 @@ $(document).ready(function(){
  	    	$("#layer_regi_reply_review").css("display", "block");
 	    }
 	});//	$("#popupLink").click(function (e) {
+	
+});//$(document).ready(function(){
+var contextPath = "${pageContext.request.contextPath}";
 
-	var buttons = $(".box-star-score .star .group button");
-	  var numEm = $(".box-star-score .num em");
-	  var score = 0;
-
-	  buttons.hover(
-	    function() {
-	      var buttonIndex = buttons.index(this);
-	      buttons.slice(0, buttonIndex + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
-	      numEm.text(buttonIndex + 1); // em 엘리먼트에 버튼의 숫자 설정
-	      score = buttonIndex + 1;
-	    },
-	    function() {
-	      buttons.removeClass('on'); // hover가 빠져나가면 모든 버튼의 'on' 클래스 제거
-	      numEm.text(score); // em 엘리먼트를 마지막으로 선택된 점수로 설정
-	    }
-	  );
-
-})
 </script>
 </head>
 <body>
@@ -223,7 +209,7 @@ $(document).ready(function(){
 						  </c:forEach>
 						</p>
 				</div>
-				</c:forEach>
+				
 				<!-- movie-graph -->
 				<div class="movie-graph infoContent">
 					<div class="col">
@@ -462,20 +448,20 @@ $(document).ready(function(){
 
 			<!-- 레이어 : 관람평 등록 -->
 			<section id="layer_regi_reply_review" class="modal-layer">
-				<div class="wrap">
+				<div class="wrap" style="top:30%; width:478px; left:35%">
 					<header class="layer-header none-ad">
 						<h3 class="tit">
 							<span class="oneTitle"></span> 작성하기
 						</h3>
 					</header>
-
+					
 					<div class="layer-con">
 						<!-- regi-reply-score review -->
 						<div class="regi-reply-score review">
 							<!-- score -->
 							<div class="score">
 								<p class="tit">
-									"30일"<br>영화 어떠셨나요?
+									"${m.movie_Title}"<br>영화 어떠셨나요?
 								</p>
 								<div class="box">
 									<div class="box-star-score">
@@ -510,7 +496,7 @@ $(document).ready(function(){
 										<textarea id="textarea" rows="5" cols="30" title="한줄평 입력"
 											placeholder="실관람평을 남겨주세요." class="input-textarea"></textarea>
 										<div class="util">
-											<p class="count">
+											<p id="contentCount">
 												<span>0</span> / 100
 											</p>
 										</div>
@@ -527,14 +513,14 @@ $(document).ready(function(){
 						</div>
 						<!--// regi-reply-score preview -->
 					</div>
-
+					
 					<div class="btn-group-fixed">
 						<button type="button" class="button close-layer">취소</button>
 						<button type="button" class="button purple" id="regOneBtn"
-							data-no="" data-cd="" data-mno="23069600">등록</button>
+							data-no="" data-cd="" data-mno="">등록</button>
 					</div>
 
-					<button type="button" class="btn-modal-close">레이어 닫기</button>
+					<button type="button" class="btn-modal-close" id="review-modal-close">레이어 닫기</button>
 				</div>
 			</section>
 
@@ -650,8 +636,8 @@ $(document).ready(function(){
 									<p>
 										<span id="rlyCnt">댓글 </span>
 									</p>
-									<input type="hidden" id="rlyCntTop" value=""> <input
-										type="hidden" id="hdnMoviePostNo" value="">
+									<input type="hidden" id="rlyCntTop" value=""> 
+									<input type="hidden" id="hdnMoviePostNo" value="">
 								</div>
 
 								<div class="comment" id="input-comment">
@@ -694,7 +680,7 @@ $(document).ready(function(){
 	</div>
 	<!--// container -->
 	<!-- 		</div> -->
-
+</c:forEach>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
