@@ -187,11 +187,11 @@ public class EventController {
 	@ResponseBody
 	@RequestMapping(value="/list_ajax")
 	public Map<String, Object> eventListAjax(
-			@RequestParam(value="page", defaultValue="1", required=false) int page,
-			@RequestParam(value="limit", defaultValue="10", required=false) int limit
+			@RequestParam(value="page", defaultValue="1", required=false) int page
 			){
-		int listcount = eventservice.getEventListCount();
 		
+		int limit = 10;
+		int listcount = eventservice.getEventListCount();
 		int maxpage = (listcount + limit - 1) / limit;
 		
 		//현재 페이지에 보여줄 시작 페이지 수
@@ -206,7 +206,6 @@ public class EventController {
 				
 		List<Event> eventlist = eventservice.getEventList(page, limit);
 				
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", page);
 		map.put("maxpage",maxpage);

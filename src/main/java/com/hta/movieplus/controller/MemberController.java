@@ -229,16 +229,14 @@ public class MemberController {
 	@PostMapping("/logincheck")
 	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
 									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
-									 ModelAndView mv, HttpSession session, RedirectAttributes rattr)throws Exception {
+									 ModelAndView mv, HttpSession session)throws Exception {
 		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
 		
 		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
 			mv.setViewName("member/mypage_modify");
 		} else {	//확인하기
-			rattr.addFlashAttribute("result", "passFail");
-			mv.setViewName("member/mypage_main");
-			Member memberInfo = (Member) session.getAttribute("memberInfo");
-			session.setAttribute("memberInfo", memberInfo);
+			mv.addObject("result", "passFail");
+			mv.setViewName("member/mypage_premodify");
 		}
 		return mv;
 	}
@@ -294,11 +292,11 @@ public class MemberController {
 		}
 		
 		int result = memberservice.update(member);
-		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
-		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
-		memberInfo.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
-		session.setAttribute("memberInfo", memberInfo);
+//		Member memberInfo = (Member) session.getAttribute("memberInfo");
+//		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
+//		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+//		memberInfo.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
+//		session.setAttribute("memberInfo", memberInfo);
 		
 		if(result == 1) {
 			rattr.addFlashAttribute("result","updateSuccess");
@@ -374,14 +372,6 @@ public class MemberController {
 			model.addAttribute("message", "비밀번호 변경 실패");
 			return "/member/";  //에러페이지로 이동
 		}
-	}
-	
-	
-	//로그아웃
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/main";
 	}
 	
 	//회원탈퇴

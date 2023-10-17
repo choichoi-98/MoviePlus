@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/js/admin_theater.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/event_list.js"></script>
 
 	
 	<main class="main">
@@ -76,30 +76,28 @@
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>${event.EVENT_TYPE}</h3>
+												<h3>${event.EVENT_TYPE}</h3><!-- 이벤트 분류 -->
 											</div>
 										</div>
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_SUBJECT}</div><!-- 클릭시 이벤트 뷰 페이지로 이동 -->
+										<div class="main__table-text">
+										<a href="detail?num=${event.EVENT_NUM}">${event.EVENT_SUBJECT}</a></div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_STARTDATE}-${event.EVENT_ENDDATE}</div>
+										<div class="main__table-text">${event.EVENT_STARTDATE}-${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_DATE}</div>
+										<div class="main__table-text">${event.EVENT_DATE}</div><!-- 이벤트 작성일자 -->
 									</td>
 									<td>
-										<div class="main__table-text main__table-text--green">${event.EVENT_STATUS}</div>
+										<div class="main__table-text main__table-text--green">${event.EVENT_STATUS}</div><!-- 이벤트 상태 -->
 									</td>
 									<td>
 										<div class="main__table-btns">
-											<input type="hidden" class="selected-theater-id" value=""/>
-											<input type="hidden" class="selected-theater-manager-id" value=""/>
 											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-log-out" title="당첨자 관리"></i>
 											</a>
-											
 											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
 												<i class="icon ion-ios-lock" title="상태 관리"></i>
 												<input type="hidden" class="selected-theater-status" value=""/>
@@ -122,7 +120,7 @@
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
-						<span>${theaterCount}10 중 10개씩</span>
+						<span>${theaterCount} 중 10개씩</span>
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
