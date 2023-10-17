@@ -146,10 +146,16 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 	
-	//관람평(댓글) 가져오기
+	//관람평(댓글) list 가져오기
 	public List<MovieReviewVO> getMovieReview(String movieCode) {
 		// TODO Auto-generated method stub
 		return dao.getMovieReview(movieCode);
+	}
+
+	//관람평(댓글) 수정
+	public int updateMovieReview(String review_num, String reviewText, int star) {
+		// TODO Auto-generated method stub
+		return dao.updateMovieReview(review_num, reviewText, star);
 	}
 	
 

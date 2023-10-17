@@ -189,6 +189,7 @@
 	<select id="getMovieDetailLogin" resultType="movie">
     	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
     		   M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+    		   M.MOVIE_DIRECTOR, M.MOVIE_ACTORS, M.MOVIE_GENRE, M.MOVIE_RUNTIME,
     		   MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
 		FROM MOVIE M
 		     CROSS JOIN MEMBER MEM
@@ -216,4 +217,10 @@
 		#{reviewText}, #{movieCode}, sysdate)
 	</insert>
 	
+	<update id="updateMovieReview">
+	UPDATE MOVIE_REVIEW
+	SET MOVIE_REVIEW_CONTENT = #{reviewText},
+		MOVIE_REVIEW_STAR = #{star}
+	WHERE MOVIE_REVIEW_NUM = #{review_num}
+	</update>
 </mapper>

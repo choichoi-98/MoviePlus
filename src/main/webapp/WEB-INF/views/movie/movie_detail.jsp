@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,7 @@ $(document).ready(function(){
 		var loginId = $("#loginId").val();
 		console.log("로그인 아이디: " + loginId);
 		
-	    if (loginId == "") {
+	    if (loginId == null) {
 	        e.preventDefault(); // 클릭 이벤트의 기본 동작(링크 이동)을 방지
 	        console.log("로그인 x");
 	        $("#tooltip-layer01").css("display", "block");
@@ -26,6 +28,7 @@ $(document).ready(function(){
 	    	console.log("로그인 o");
 // 	    	e.preventDefault();
  	    	$("#layer_regi_reply_review").css("display", "block");
+ 	    	$('#updateBtn').prop('id', 'regOneBtn').text('등록');
 	    }
 	});//	$("#popupLink").click(function (e) {
 	
@@ -328,7 +331,10 @@ var contextPath = "${pageContext.request.contextPath}";
 										</div>
 
 										<div class="story-write">
-										<input type="hidden" value="${memberInfo.MEMBER_ID}" id="loginId">
+										<sec:authorize access="isAuthenticated()">
+        									 <sec:authentication property="principal" var="pinfo"/>
+											<input type="hidden" value="${pinfo.MEMBER_ID}" id="loginId">
+         								</sec:authorize>
 											<a
 												href=""
 												title="관람평쓰기" class="tooltip-click oneWrtNonMbBtn"
@@ -338,7 +344,8 @@ var contextPath = "${pageContext.request.contextPath}";
 											<div id="tooltip-layer01" class="tooltip-cont"
 												style="width: 225px;height: 80px;left: 800px;">
 												<div class="wrap loginTagClick">
-													로그인이 필요한 서비스 입니다.<br> <a
+													로그인이 필요한 서비스 입니다.<br> 
+													<a
 														href="javaScript:fn_viewLoginPopup(&#39;default&#39;,&#39;pc&#39;);"
 														class="font-green" title="로그인 바로가기">로그인 바로가기 <i
 														class="iconset ico-arr-right-green"></i></a>
@@ -458,6 +465,7 @@ var contextPath = "${pageContext.request.contextPath}";
 					<div class="layer-con">
 						<!-- regi-reply-score review -->
 						<div class="regi-reply-score review">
+						
 							<!-- score -->
 							<div class="score">
 								<p class="tit">
@@ -491,7 +499,7 @@ var contextPath = "${pageContext.request.contextPath}";
 											<em>0</em> <span>점</span>
 										</div>
 									</div>
-
+									<input type="hidden" id="review_num" value=""> 
 									<div class="textarea">
 										<textarea id="textarea" rows="5" cols="30" title="한줄평 입력"
 											placeholder="실관람평을 남겨주세요." class="input-textarea"></textarea>
@@ -671,6 +679,30 @@ var contextPath = "${pageContext.request.contextPath}";
 			<!-- //무비포스트 상세 레이어팝업 -->
 
 			<!--// 레이어 : 관람평 등록 -->
+
+			<!--레이어 : 삭제 모달 -->
+			<section class="alert-popup" id="layerId_04504997593960893" 
+					style="position: fixed; padding-top: 45px; 
+							background: rgb(255, 255, 255); z-index: 5006; top: 360px; left: 369.5px; 
+							width: 300px; opacity: 1;
+							display:none">
+			    <div class="wrap">
+			        <header class="layer-header">
+			            <h3 class="tit">알림</h3>
+			        </header>
+			        <div class="layer-con" style="height: 200px">
+			            <p class="txt-common">삭제 하시겠습니까?</p>
+			            <div class="btn-group">
+			                <button type="button" class="button lyclose">취소</button>
+			                <button type="button" class="button purple confirm" id="deleteBtn">확인</button>
+			            </div>
+			        </div>
+			        <button type="button" class="btn-layer-close">레이어 닫기</button>
+			    </div>
+			</section>
+	
+				
+			<!--//레이어 : 삭제 모달 -->
 		</div>
 
 

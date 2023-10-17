@@ -64,6 +64,9 @@ public interface MovieMapper {
 	//관람평(댓글) 등록
 	public int addMovieReview(String memberId, String movieCode, String reviewText, int star);
 
+	//관람평(댓글) 수정
+	public int updateMovieReview(String review_num, String reviewText, int star);
+
 
 }
 
