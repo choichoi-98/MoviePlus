@@ -540,7 +540,14 @@ if( loginfail === 'loginFailMsg'){
 	/* openAlertPopup(); */
 	$('#loginfailalert').css('opacity', '1');
 	$('.alertStyle').css('display', 'block');
+	$('#loginfailalert').css('display', 'block');
     $('body').addClass('no-scroll');
+    
+}
+
+if('${logout}' == 'logout' ){
+	console.log("logout");
+	$("form[name=logout]").submit();
 }
 
 </script>

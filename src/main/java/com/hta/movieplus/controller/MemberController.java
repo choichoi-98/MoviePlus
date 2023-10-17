@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -227,9 +229,12 @@ public class MemberController {
 
 	//마이페이지 - 비밀번호 체크
 	@PostMapping("/logincheck")
-	public ModelAndView loginProcess(@RequestParam("MEMBER_ID") String MEMBER_ID, 
+	public ModelAndView loginProcess(@AuthenticationPrincipal Member member, 
 									 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
-									 ModelAndView mv, HttpSession session)throws Exception {
+									 ModelAndView mv)throws Exception {
+		
+		String MEMBER_ID = member.getMEMBER_ID();
+		
 		int result = memberservice.isId(MEMBER_ID, MEMBER_PASS);
 		
 		if(result == 1) {	//아이디와 비밀번호가 일치하는 경우
@@ -244,9 +249,7 @@ public class MemberController {
 	//마이페이지 이메일 변경 인증메일 보내기
 	@GetMapping("/mypageChgEmail")
 	public void mypageChgEmail(@RequestParam("email") String email, HttpServletResponse resp, 
-				ModelAndView mv, HttpSession session) throws Exception {
-	
-		session.setAttribute("MEMBER_EMAIL", email);
+				ModelAndView mv) throws Exception {
 			
 		mailVO.setTo(email);
 		int verifycode = mailVO.getVerifycode();
@@ -259,9 +262,11 @@ public class MemberController {
 	
 	//마이페이지 - 개인정보 수정처리(프로필 사진, 이메일, 핸드폰번호)
 	@PostMapping("/modifyProcess")
-	public String modifyProcess(Member member, Model model, String check,
+	public String modifyProcess(Member member, Model model, Principal principal,
+			@AuthenticationPrincipal Member principalmember,
+								String check,
 								HttpServletRequest request, 
-								RedirectAttributes rattr, HttpSession session)throws Exception{
+								RedirectAttributes rattr)throws Exception{
 		
 		MultipartFile uploadfile = member.getUploadfile();
 		
@@ -292,11 +297,10 @@ public class MemberController {
 		}
 		
 		int result = memberservice.update(member);
-//		Member memberInfo = (Member) session.getAttribute("memberInfo");
-//		memberInfo.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
-//		memberInfo.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
-//		memberInfo.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
-//		session.setAttribute("memberInfo", memberInfo);
+		
+		principalmember.setMEMBER_PHONENO(member.getMEMBER_PHONENO());
+		principalmember.setMEMBER_EMAIL(member.getMEMBER_EMAIL());
+		principalmember.setMEMBER_PROFILE(member.getMEMBER_PROFILE());
 		
 		if(result == 1) {
 			rattr.addFlashAttribute("result","updateSuccess");
@@ -357,7 +361,7 @@ public class MemberController {
 	public String modifypass(@RequestParam("MEMBER_ID") String MEMBER_ID, 
 							 @RequestParam("MEMBER_PASS") String MEMBER_PASS, 
 							 Model model, 
-							 HttpServletRequest request, 
+							 HttpServletRequest request,  HttpServletResponse response,
 							 RedirectAttributes rattr, HttpSession session)throws Exception {
 		
 		String encPassword = passwordEncoder.encode(MEMBER_PASS);
@@ -365,20 +369,21 @@ public class MemberController {
 		int result = memberservice.updatepass(MEMBER_ID, encPassword);
 		
 		if(result == 1) { 	//삽입이 된 경우
-			session.invalidate();
+			rattr.addFlashAttribute("logout","logout");
 			return "redirect:/main";  //메인페이지로 이동
 		} else {
 			model.addAttribute("url", request.getRequestURL());
 			model.addAttribute("message", "비밀번호 변경 실패");
-			return "/member/";  //에러페이지로 이동
+			return "/member/mypage_main";  //에러페이지로 이동
 		}
 	}
 	
+	
 	//회원탈퇴
 	@GetMapping("/delete")
-	public String delete(String MEMBER_ID, HttpSession session) {
+	public String delete(String MEMBER_ID, RedirectAttributes rattr) {
 		memberservice.delete(MEMBER_ID);
-		session.invalidate();
+		rattr.addFlashAttribute("logout","logout");
 		return "redirect:/main";
 	}
 	

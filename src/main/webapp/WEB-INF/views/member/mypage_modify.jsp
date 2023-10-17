@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,8 @@
 
 <!-- 컨텐츠 영역 -->
 <div id="contents"  class="">
+ <sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="pinfo"/>
   <form enctype="multipart/form-data" id="modifyinfoform" action="${pageContext.request.contextPath}/member/modifyProcess" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	  <h2 class="tit">개인정보 수정</h2>
@@ -36,19 +40,19 @@
                           <td>
                               <div class="profile-photo">
                                   <div class="profile-img">
-                                  	  <span id="filevalue" style="display:none;">${memberInfo.MEMBER_PROFILE}</span>
-                                  	  <c:if test="${empty memberInfo.MEMBER_PROFILE}">
+                                  	  <span id="filevalue" style="display:none;">${pinfo.MEMBER_PROFILE}</span>
+                                  	  <c:if test="${empty pinfo.MEMBER_PROFILE}">
                                      	 <img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="프로필 사진">
                                       </c:if>
-                                      <c:if test="${!empty memberInfo.MEMBER_PROFILE}">
-                                     	 <img src="${pageContext.request.contextPath}/upload${memberInfo.MEMBER_PROFILE}" alt="프로필 사진">
+                                      <c:if test="${!empty pinfo.MEMBER_PROFILE}">
+                                     	 <img src="${pageContext.request.contextPath}/upload${pinfo.MEMBER_PROFILE}" alt="프로필 사진">
                                       </c:if>
-                                      <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" value="${memberInfo.MEMBER_PROFILE}">
+                                      <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" value="${pinfo.MEMBER_PROFILE}">
                                   </div>
 									 <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn" style="display:none;">이미지 삭제</button> 
                                       
-                                  <a href="${pageContext.request.contextPath}/member/delete?MEMBER_ID=${memberInfo.MEMBER_ID}" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
+                                  <a href="${pageContext.request.contextPath}/member/delete?MEMBER_ID=${pinfo.MEMBER_ID}" id="deletemember" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
                               </div>
                               <p style="font-size:0.8em; color:#999; margin-top:10px; padding:0; text-align:left; position:absolute; top:22px; left:194px;">
                                   ※ 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
@@ -56,7 +60,7 @@
                       </tr>
                       <tr>
                           <th scope="row">아이디</th>
-                          <td>${memberInfo.MEMBER_ID}</td>
+                          <td>${pinfo.MEMBER_ID}</td>
                       </tr>
                   </tbody>
               </table>
@@ -70,7 +74,7 @@
               </div>
           </div>
 
-              <input type="hidden" name="MEMBER_ID" value="${memberInfo.MEMBER_ID}">
+              <input type="hidden" name="MEMBER_ID" value="${pinfo.MEMBER_ID}">
 
               <div class="table-wrap mb40">
                   <table class="board-form">
@@ -85,7 +89,7 @@
                                   이름 <em class="font-orange">*</em>
                               </th>
                               <td>
-                                  <span class="mbNmClass">${memberInfo.MEMBER_NAME}</span>
+                                  <span class="mbNmClass">${pinfo.MEMBER_NAME}</span>
 
                                   <section id="layer_name" class="modal-layer"><a href="${pageContext.request.contextPath}/member/mypage" class="focus">레이어로 포커스 이동 됨</a>
                                       <div class="wrap">
@@ -120,7 +124,7 @@
                                   생년월일 <em class="font-orange">*</em>
                               </th>
                               <td>
-                                <span id="birth">${memberInfo.MEMBER_BIRTH}</span>
+                                <span id="birth">${pinfo.MEMBER_BIRTH}</span>
                               </td>
                           </tr>
                            <tr>
@@ -128,7 +132,7 @@
                                  <label for="num">휴대폰</label> <em class="font-orange">*</em>
                               </th>
                               <td>
-                                  <input type="text" name="MEMBER_PHONENO" id="phoneNo" class="input-text w500px" value="${memberInfo.MEMBER_PHONENO}" maxLength="11" placeholder="&#39;-&#39;제외하고 입력해 주세요">
+                                  <input type="text" name="MEMBER_PHONENO" id="phoneNo" class="input-text w500px" value="${pinfo.MEMBER_PHONENO}" maxLength="11" placeholder="&#39;-&#39;제외하고 입력해 주세요">
                               </td>
                           </tr>
                           <tr>
@@ -138,7 +142,7 @@
                               <td>
                                   <div class="clearfix">
                                       <p class="reset float-l w170px lh32 changeVal" data-name="Email">
-                                       <span id="email" >${memberInfo.MEMBER_EMAIL}</span> 
+                                       <span id="email" >${pinfo.MEMBER_EMAIL}</span> 
                                       </p>
                                       <div class="float-l">
                                           <button type="button" class="button small gray-line change-phone-num" id="EmailChgBtn" title="이메일 변경">이메일 변경</button>
@@ -148,7 +152,7 @@
                                   <div class="change-phone-num-area">
                                       <div class="position">
                                           <label for="chPhone" class="label">변경할 이메일</label>
-                                          <input type="text" name="MEMBER_EMAIL" value="${memberInfo.MEMBER_EMAIL}" id="chEmail" class="input-text w180px" placeholder="&#39;@&#39;포함하여 입력해 주세요" title="변경할 이메일 입력" style="width:220px; !important" >
+                                          <input type="text" name="MEMBER_EMAIL" value="${pinfo.MEMBER_EMAIL}" id="chEmail" class="input-text w180px" placeholder="&#39;@&#39;포함하여 입력해 주세요" title="변경할 이메일 입력" style="width:220px; !important" >
                                           <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                                       	  <input type="hidden" class="verifycode" id="chverifycode" name="chverifycode" />
                                       </div>
@@ -246,7 +250,9 @@
               <button type="submit" class="button purple large" id="updateBtn">등록</button>
           </div>
           </form>
+		</sec:authorize>
       </div>
+      
 <!-- contents end -->
 
    </div>

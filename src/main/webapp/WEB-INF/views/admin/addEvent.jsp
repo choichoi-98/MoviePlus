@@ -71,7 +71,7 @@
 
 							<div class="col-12" >
 								<button type="submit" class="form__btn" style="display:inline-block;">등록</button>
-								<button type="button" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
+								<button type="button" id="cancelbtn" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
 							</div>
 					  </div>
 					</form>
@@ -87,8 +87,11 @@ $(document).ready(function(){
 		console.log($(this).val())		//c:\fakepath\upload.png
 		const inputfile = $(this).val().split('\\');
 		$('#filevalue').text(inputfile[inputfile.length - 1]);
-		
 	});
+	
+	$("#cancelbtn").click(function(){
+		location.href = "/movieplus/event/manageEvent";		
+	})
 	
    
 }) //ready end

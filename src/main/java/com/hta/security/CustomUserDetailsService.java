@@ -16,7 +16,6 @@ import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.mybatis.mapper.MemberMapper;
 
 
-
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);

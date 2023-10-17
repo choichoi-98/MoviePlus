@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +22,9 @@
 	<div id="contents" class="">
 
 		<!-- my-megabox-main -->
+		<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="pinfo"/>
 		<div class="my-megabox-main">
-
 			<div class="my-magabox-info ">
 				<!-- top -->
 				<div class="top2">
@@ -36,7 +36,7 @@
 					</div>
 					<div class="mb_name">
 						안녕하세요!
-						<p>${memberInfo.MEMBER_NAME}<span>님</span>
+						<p>${pinfo.MEMBER_NAME}<span>님</span>
 						</p>
 					</div>
 
@@ -52,9 +52,9 @@
 
 					<div class="rightBox mbClassInx1 mbClassInx0">
 						<div class="inbox">
-							<div class="totalPoint">${memberInfo.MEMBER_POINT}P</div>
+							<div class="totalPoint">${pinfo.MEMBER_POINT}P</div>
 							<ul>
-								<li class="nowClass"><span>현재등급</span><em>${memberInfo.MEMBER_MEMBERSHIP}</em></li>
+								<li class="nowClass"><span>현재등급</span><em>${pinfo.MEMBER_MEMBERSHIP}</em></li>
 								<li class="continue"></li>
 								<li class="vipCoup">아직 VIP쿠폰을 받지 않았어요. <a href="#">VIP쿠폰북
 										발급</a>
@@ -69,7 +69,7 @@
 								</div>
 							</div>
 							<input type="hidden" id="membershipPoint"
-								value="${memberInfo.MEMBER_POINT}">
+								value="${pinfo.MEMBER_POINT}">
 							<ul class="list" id="pointFlag-list">
 								<li class="list-dtl on">Welcome
 									<div class="pointFlag">
@@ -326,6 +326,7 @@
 			<!--// column -->
 		</div>
 		<!--// my-megabox-main -->
+		</sec:authorize>
 	</div>
 
 	</div>
