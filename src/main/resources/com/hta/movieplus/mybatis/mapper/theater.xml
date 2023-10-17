@@ -82,7 +82,7 @@
 		INSERT INTO MEMBER
 		VALUES((select nvl(max(MEMBER_NUM),0)+1 from MEMBER), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL},
 				#{MEMBER_PHONENO}, #{MEMBER_BIRTH}, #{MEMBER_PROFILE}, #{MEMBER_AUTH}, #{MEMBER_LOGINTYPE},
-				#{MEMBER_MEMBERSHIP}, #{MEMBER_POINT})
+				'MVIP', 24000)
 	</insert>
 	
 	<update id="resetManagerPasswordById" parameterType="map">

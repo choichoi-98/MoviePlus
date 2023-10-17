@@ -5,7 +5,7 @@
 	
 	<insert id="insert" parameterType="member">
 		INSERT INTO MEMBER
-		VALUES((<include refid="insert_Member_num" />), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL}, #{MEMBER_PHONENO}, #{MEMBER_BIRTH}, NULL, #{MEMBER_AUTH}, NULL, NULL, NULL )
+		VALUES((<include refid="insert_Member_num" />), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL}, #{MEMBER_PHONENO}, #{MEMBER_BIRTH}, NULL, #{MEMBER_AUTH}, NULL, 'Welcome', 0)
 	</insert>	
 
 		<sql id="insert_Member_num">
