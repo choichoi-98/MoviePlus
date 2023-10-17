@@ -13,4 +13,14 @@
 		select nvl(max(CUSTOMER_NOTICE_NUM),0)+1 from CUSTOMER_NOTICE
 	</sql>
 	
+	<select id="getNoticelist" resultType="NoticeVO">
+		SELECT * FROM CUSTOMER_NOTICE
+		where CUSTOMER_NOTICE_TYPE = #{string}
+	</select>
+		
+	<delete id="deleteNoticeVO" parameterType="int">
+		DELETE
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_NUM = #{noticenum}
+	</delete>
 </mapper>
