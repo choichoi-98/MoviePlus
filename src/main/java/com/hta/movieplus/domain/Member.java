@@ -1,8 +1,14 @@
 package com.hta.movieplus.domain;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
-public class Member {
+public class Member implements UserDetails {
 	private int    MEMBER_NUM; 					//회원번호
 	private String MEMBER_NAME;					//이름
 	private String MEMBER_ID;					//아이디
@@ -117,6 +123,57 @@ public class Member {
 	}
 	public void setMEMBER_POINT(int mEMBER_POINT) {
 		MEMBER_POINT = mEMBER_POINT;
+	}
+
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		 ArrayList<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+         list.add(new SimpleGrantedAuthority(MEMBER_AUTH));
+         return list;
+	}
+
+
+
+	@Override
+	public String getPassword() {
+		return MEMBER_PASS;
+	}
+
+
+
+	@Override
+	public String getUsername() { //아이디
+		return MEMBER_ID;
+	}
+
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 	
