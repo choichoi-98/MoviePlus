@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,13 +42,13 @@ public class MovieController {
 	
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public ModelAndView movieList(ModelAndView mv,
-    							HttpSession session,
+    		@AuthenticationPrincipal Member member,
     				@RequestParam(value="search_word", defaultValue="", required=false) String search_word) throws Exception {
     	
-    	Member memberInfo = (Member) session.getAttribute("memberInfo");
-    	if(memberInfo != null) {
-    		String memberId = memberInfo.getMEMBER_ID();
-    		
+    	
+    	
+    	if(member != null) {
+    		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId,search_word);
     		mv.addObject("movieList",movieList);
     		mv.addObject("search_word", search_word);
@@ -160,14 +159,15 @@ public class MovieController {
 	
     @GetMapping("/movieDetail")
     public ModelAndView movieDetail(ModelAndView mv,
-    							HttpSession session,
-    				@RequestParam(value="movieCode", defaultValue="") String movieCode
+    				@RequestParam(value="movieCode", defaultValue="") String movieCode,
+    				@AuthenticationPrincipal Member member
     		) {
     	
-    	Member memberInfo = (Member) session.getAttribute("memberInfo");
+
     	
-    	if(memberInfo != null) {
-    		String memberId = memberInfo.getMEMBER_ID();
+    	
+    	if(member != null) {
+    		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
     		mv.addObject("movieDetail", movieDetail);
     	} else {
@@ -184,7 +184,7 @@ public class MovieController {
 	@ResponseBody
 	@RequestMapping(value="/getMovieReview")
 	public List<MovieReviewVO> getMovieReview(
-				HttpSession session,
+				
 				@RequestParam("movieCode") String movieCode
 			){
 		logger.info("관람평 moviecode:"+ movieCode);
@@ -210,8 +210,6 @@ public class MovieController {
 			){
 		
 	        int star = Integer.parseInt(movieStar);
-
-	  
 		
 		return movieServiceImpl.addMovieReview(memberId, movieCode,reviewText,star);
 		
@@ -220,10 +218,15 @@ public class MovieController {
 	//관람평(댓글) 수정
 	@ResponseBody
 	@RequestMapping(value="modifyReview")
-	public int modifyReview() {
+	public int modifyReview(
+			@RequestParam("review_num") String review_num,
+			@RequestParam("reviewText") String reviewText,
+			@RequestParam("movieStar") String movieStar
+			) {
 		
+		int star = Integer.parseInt(movieStar);
 		
-		return 0;
+		return movieServiceImpl.updateMovieReview(review_num,reviewText,star);
 	}
 	
 	
@@ -232,14 +235,12 @@ public class MovieController {
 	@RequestMapping(value="/addMovieDibs")
 	public Map<String, Object> addMovieDibs(
 			@RequestParam("movieCode") String movieCode,
-			HttpSession session
+			@AuthenticationPrincipal Member member
 			) {
 		Map<String,Object> map = new HashMap<String,Object>();
 	    
-	    Member memberInfo = (Member) session.getAttribute("memberInfo");
-	    String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
-	    
-	    if (memberId != null) {
+	    if (member != null) {
+	    	String memberId =  member.getMEMBER_ID();
 	        movieServiceImpl.addMovieDibs(memberId, movieCode);
 	        map.put("alert", false);
 	        boolean alertValue = (boolean) map.get("alert");
@@ -258,14 +259,13 @@ public class MovieController {
 	@RequestMapping(value="/deleteMovieDibs")
 	public Map<String, Object> deleteMovieDibs(
 			@RequestParam("movieCode") String movieCode,
-			HttpSession session
+			@AuthenticationPrincipal Member member
 			) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		Member memberInfo = (Member) session.getAttribute("memberInfo");
-		String memberId = memberInfo != null ? memberInfo.getMEMBER_ID() : null;
 	    
-	    if (memberId != null) {
+	    if (member != null) {
+	    	String memberId =  member.getMEMBER_ID();
 	        movieServiceImpl.deleteMovieDibs(memberId, movieCode);
 	        map.put("alert", false);
 	    } else {

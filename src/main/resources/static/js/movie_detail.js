@@ -3,7 +3,7 @@ $(document).ready(function(){
 	let token = $("meta[name='_csrf']").attr("content");
    	let header = $("meta[name='_csrf_header']").attr("content");
 	movieReviewList();
-	
+	var loginId = $("#loginId").val();
 //보고싶어요 추가 및 삭제
 	$("body").on("click", ".btn-like", function(e){
 		e.preventDefault();
@@ -111,8 +111,15 @@ console.log("movieReviewList 메서드입니다.");
                                 <div class="balloon-space writer">
                                     <div class="balloon-cont">
                                         <div class="writer">
-                                            <a href="#layer_regi_reply_review" title="수정" class="btn-modal-open updateOne" w-data="500" h-data="680" data-score="10" data-no="2475551" data-cn="chlrhldml dudghk cncjsgkqslek.">수정 <i class="iconset ico-arr-right-green"></i></a>
-                                            <button type="button" class="deleteOne" data-no="2475551" data-mno="01573800" data-cd="PREV">삭제 <i class="iconset ico-arr-right-green"></i></button>
+                                            <a href="#layer_regi_reply_review" title="수정" class="btn-modal-open updateOne" 
+                                            	data-content="${review.movie_Review_content}" data-score="${review.movie_Review_star}" 
+                                            	data-code="${review.movie_code}"  data-no="${review.movie_Review_num}"
+                                            	owner="${review.member_Id}">
+                                            	수정 <i class="iconset ico-arr-right-green"></i>
+                                            </a>
+                                            <button type="button" class="deleteOne" data-no="2475551" data-mno="01573800" data-cd="PREV">
+                                            	삭제 <i class="iconset ico-arr-right-green"></i>
+                                            </button>
                                         </div>
                                         <div class="btn-close" id="popup_close">
                                             <a href=" " title="닫기">
@@ -167,7 +174,7 @@ console.log("movieReviewList 메서드입니다.");
 
 
 //관람평 점수 hover이벤트
- var buttons = $(".box-star-score .star .group button");
+	  var buttons = $(".box-star-score .star .group button");
 	  var numEm = $(".box-star-score .num em");
 	  var score = 0;
 	  var clicked = false;
@@ -202,14 +209,21 @@ $(".btn-modal-close").click(function (e) {
 		e.preventDefault();
 		
 		$("#layer_regi_reply_review").css("display", "none");
-	   
+	    $(".num em").text(0);
+	    $("#textarea").val("");
+	    $("#contentCount").text("0/ 100");
+	    buttons.removeClass('on');
+	    
 	});//$(".btn-modal-close").click(function (e) {
 $(".close-layer").click(function (e) {
 		e.preventDefault();
 		
 		$("#layer_regi_reply_review").css("display", "none");
-	   
-	   
+	    $(".num em").text(0);
+	    $("#textarea").val("");	   
+	    $("#contentCount").text("0/ 100");
+	    buttons.removeClass('on');
+	    
 	});//$(".btn-modal-close").click(function (e) {
 
 
@@ -219,7 +233,10 @@ $("body").on("click", "#regOneBtn", function(e){
 		var memberId = $("#loginId").val();
 		var reviewText = $("#textarea").val();
 		var movieStar = $(".num em").text();
-		
+    if (!reviewText || reviewText.trim() === "") {
+        // 만약 reviewText가 null이거나 빈 문자열이면 경고를 표시하고 AJAX 호출을 하지 않음
+        alert("내용을 입력해주세요");
+    }else {		
 		$.ajax({
 			type: 'POST',
 			url: "../movie/addMovieReview",
@@ -247,12 +264,18 @@ $("body").on("click", "#regOneBtn", function(e){
 	        }
 	        
 	    });//$.ajax({
+	    }//}else {	
 });//$("body").on("click", "#btnPostRly", function(e){
 
+// "로그인 바로가기" 링크를 클릭하면 #header-login-btn 버튼을 클릭합니다.
+$('a[title="로그인 바로가기"]').on('click', function(e) {
+    e.preventDefault(); // 기본 동작을 중지합니다 (페이지 이동 방지).
+    
+    $('#header-login-btn').click(); // #header-login-btn 버튼을 클릭합니다.
+});
 
 //댓글 수정, 삭제 popup 열기
 $("body").on("click", ".post-funtion", function(e){
-	console.log("댓글 수정,삭제 popup open")
 	var $balloonSpace = $(this).find(".balloon-space.writer");
     $balloonSpace.toggleClass("on");
 });
@@ -260,7 +283,101 @@ $("body").on("click", ".post-funtion", function(e){
 //댓글 수정, 삭제 popup 닫기
 $("body").on("click", "#popup_close", function(e){
 	e.preventDefault();
-	console.log("댓글 수정,삭제 popup close")
 	$(this).find(".balloon-space.writer").removeClass("on");
 });
+
+//댓글 수정 popup
+$("body").on("click", ".updateOne", function(e){
+
+    var ownerValue = $(this).attr('owner');
+    console.log("loginId=" + loginId);
+    console.log("ownerValue=" + ownerValue);
+    //평점
+    var score = $(this).attr('data-score');
+    console.log("data-score=" + score);
+    //콘텐츠
+    var review_content = $(this).attr('data-content');
+    console.log("data-content=" + review_content);
+    //review_num
+    var review_num = $(this).attr('data-no');
+    console.log("data-no=" + review_num);
+    
+	if(loginId == ownerValue){
+		$("#layer_regi_reply_review").css("display", "block");
+		$(".num em").text(score);
+		$("#textarea").val(review_content);
+		buttonIndex = score;
+		buttons.removeClass('on'); // 모든 버튼의 'on' 클래스 제거
+	    buttons.slice(0, score + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
+	    $("#review_num").val(review_num);
+		 $('#regOneBtn').prop('id', 'updateBtn').text('수정');
+	} else{
+		alert('나의 댓글만 수정 가능합니다.');
+	}
+
+});//$("body").on("click", ".updateOne", function(e){
+
+//댓글 수정
+$("body").on("click", "#updateBtn", function(e){
+		var movieCode = $("#movieCode").val();
+		var memberId = $("#loginId").val();
+		var reviewText = $("#textarea").val();
+		var movieStar = $(".num em").text();
+		var review_num = $("#review_num").val();
+	 console.log("수정 review_num=" + review_num);
+	 console.log("수정 score=" + movieStar);
+	 console.log("수정 review_content=" + reviewText);
+	$.ajax({
+			type: 'POST',
+			url: "../movie/modifyReview",
+			data: {
+				"review_num":review_num,
+				"reviewText":reviewText,
+				"movieStar":movieStar
+			},
+			dataType: 'json',
+			beforeSend: function(xhr) {
+            // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+            xhr.setRequestHeader(header, token);
+	        },
+	        success: function(response) {
+	          console.log("댓글 등록 성공")
+	           $("#layer_regi_reply_review").css("display", "none");
+	           $(".movie-idv-story ul li:not(:first)").empty();
+	            movieReviewList();
+	            
+	        },
+	        error: function() {
+	            // AJAX 요청 실패 시 처리
+	            console.log("댓글 수정 실패");
+	        }
+	        
+	    });//$.ajax({
+});//$("body").on("click", "#updateBtn", function(e){
+
+//댓글 삭제 popup
+$("body").on("click", ".deleteOne", function(e){
+
+    var ownerValue = $(this).attr('owner');
+    console.log("삭제 loginId=" + loginId);
+    console.log("삭제 ownerValue=" + ownerValue);
+    //평점
+    var score = $(this).attr('data-score');
+    console.log("data-score=" + score);
+    //콘텐츠
+    var review_content = $(this).attr('data-content');
+    console.log("data-content=" + review_content);
+    //review_num
+    var review_num = $(this).attr('data-no');
+    console.log("data-no=" + review_num);
+    
+	if(loginId == ownerValue){
+		$("#layerId_04504997593960893").css("display", "block");
+		
+	} else{
+		alert('나의 댓글만 삭제 가능합니다.');
+	}
+
+});//$("body").on("click", ".updateOne", function(e){
+
 });//$(document).ready(function(){
