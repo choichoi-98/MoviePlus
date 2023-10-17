@@ -128,13 +128,6 @@
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
 									
-									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" value="전체공지">
-									</div>
-									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="작성일">
-									</div>
-
 									<div class="col-12">
 										<input type="text" class="form__input" placeholder="Title">
 									</div>

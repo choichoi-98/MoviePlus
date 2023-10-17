@@ -1,7 +1,10 @@
 package com.hta.movieplus.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,18 +27,27 @@ public class AdminNoticeController {
 	}
 
 	@GetMapping("/admin/noticelist")
-	public String siteAdminNoticeList() {
+	public String siteAdminNoticeList(Model model) {
+		List<NoticeVO> list = noticeService.getNoticelist("전체");
+		model.addAttribute("list2", list); // admin/noticeList 객체를담아서보냄 list2
 		return "admin/noticeList";
+		/* 내가구한 객체를 페이지 사용할수 있게 (리턴) */
 	}
 
-	@GetMapping("/admin/noticedetail")
-	public String siteAdminNoiceDetail() {
-		return "admin/noticeDetail";
+	@GetMapping("/admin/noticemodify")
+	public String siteAdminNoicemodify() {
+		return "admin/noticeModify";
 	}
 
-	@PostMapping("/notice_insert") 
+	@PostMapping("/admin/notice_insert")
 	public String noticeInsert(NoticeVO notice) {
 		noticeService.insertNoticeVO(notice);
-		return "admin/noticeList";
+		return "redirect:/admin/noticelist";
+	}
+
+	@GetMapping("/admin/noticedelete")
+	public String noticeDelete(int noticenum) {
+		noticeService.deleteNoticeVO(noticenum);
+		return "redirect:/admin/noticelist";
 	}
 }

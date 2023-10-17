@@ -121,26 +121,28 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form">
+					<form action="notice_insert" class="form" method="post">
 						<div class="row row--form">
 
 							<div class="col-12 col-md-8 form__content">
 								<div class="row row--form">
 									
 									<div class="col-md-12">
-										<input type="text" class="form__input" value="[공지]&nbsp;">
+										<input type="text" name="CUSTOMER_NOTICE_SUBJECT" class="form__input" value="[공지]&nbsp;">
 									</div>
 
 									<div class="col-md-12">
-										<textarea id="text" name="text" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;"></textarea>
+										<textarea id="text" name="CUSTOMER_NOTICE_CONTENT" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;"></textarea>
 									</div>
 								</div>
 							</div>
 							<div class="col-12" style="display:flex; margin-left: 60%;">
-								<a href="localhost:9000/movieplus/customer_service"><button type="button" class="form__btn" style="margin-right:20px;">취소</button></a>
-								<button type="button" type="submit"class="form__btn">확인</button>
+								<a href="${pageContext.request.contextPath}/admin/noticelist"><button type="button" class="form__btn" style="margin-right:20px;">취소</button></a>
+								<button type="submit"class="form__btn">확인</button>
 							</div>
 						</div>
+						<input type="hidden" name="CUSTOMER_NOTICE_TYPE" class="form__input" value="전체">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
 				</div>
 				<!-- end form -->
