@@ -242,7 +242,7 @@
           </div>
 
           <div class="btn-group mt40">
-              <button class="button large" id="modifycancelBtn" >취소</button>
+              <button type="button" class="button large" id="modifycancelBtn" >취소</button>
               <button type="submit" class="button purple large" id="updateBtn">등록</button>
           </div>
           </form>

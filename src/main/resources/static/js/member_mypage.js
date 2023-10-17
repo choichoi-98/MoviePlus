@@ -168,8 +168,8 @@ $(document).ready(function(){
 		alert('회원정보가 수정되었습니다.');
 	})
 	
-	$('#modifycancelBtn').on("click",function(){
-		location.href="/member/mypage";	
+	$('#modifycancelBtn').click(function(){
+		location.href="/movieplus/member/mypage";	
 	})
 	
 	

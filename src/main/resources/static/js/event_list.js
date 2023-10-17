@@ -24,9 +24,19 @@ function ajax(data){
 		},
 		success : function(data){
 			
-		
-		}
-	
+		  if(data.listcount > 0){ //총 갯수가 0보다 큰 경우
+			$("tbody").remove();
+			let num = data.listcount - (data.page - 1) * data.limit;
+			console.log(num)
+			let output = "<tbody>";
+			$(data.eventlist).each(function(index, item){
+				output += ''
+			
+			)//each end
+				
+			}//if end
+			
+		}//success end
 	
 	})//ajax end
 
