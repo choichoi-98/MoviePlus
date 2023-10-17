@@ -17,7 +17,7 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세</title>
+<title>공지사항 수정</title>
 </head>
 <body>
 	<div class="sidebar">
@@ -116,7 +116,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>공지사항 Detail</h2>
+						<h2>공지사항 수정</h2>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -145,11 +145,12 @@
 
 
 									<div class="col-12" style="display:flex; margin-left: 75%;">
-										<a href="localhost:9000/movieplus/admin#"><button type="button" class="form__btn" style="margin-right:20px;">뒤로</button></a>
-										<button type="button" type="submit"class="form__btn">수정
-
-											
-										</button>
+										<a href="admin/noticeList">
+										<button type="button" class="form__btn" style="margin-right:20px;">뒤로</button>
+										</a>
+										<a href="admin/noticeDetail">
+										<button type="submit"class="form__btn">수정</button>
+										</a>
 									</div>
 								</div>
 							</div>

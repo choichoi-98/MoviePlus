@@ -151,6 +151,7 @@
 									<th> 제 목 </th>
 									<th> 유 형 </th>
 									<th> 작 성 일</th>
+									<th style="display: flex; justify-content: center;"> 관 리 </th>
 								</tr>
 							</thead>
 
@@ -168,19 +169,15 @@
 									<td>
 										<div class="main__table-text">ex) 작성일 예정</div>
 									</td>
-								</tr>
-								<tr>
 									<td>
-										<div class="main__table-text"> ex) 1</div>
-									</td>
-									<td>
-										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
-									</td>
-									<td>
-										<div class="main__table-text">ex) 유형 예정</div>
-									</td>
-									<td>
-										<div class="main__table-text">ex) 작성일 예정</div>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -196,19 +193,15 @@
 									<td>
 										<div class="main__table-text">ex) 작성일 예정</div>
 									</td>
-								</tr>
-								<tr>
 									<td>
-										<div class="main__table-text"> ex) 1</div>
-									</td>
-									<td>
-										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
-									</td>
-									<td>
-										<div class="main__table-text">ex) 유형 예정</div>
-									</td>
-									<td>
-										<div class="main__table-text">ex) 작성일 예정</div>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -224,6 +217,16 @@
 									<td>
 										<div class="main__table-text">ex) 작성일 예정</div>
 									</td>
+									<td>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -237,6 +240,64 @@
 									</td>
 									<td>
 										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+									<td>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+									<td>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="main__table-text"> ex) 1</div>
+									</td>
+									<td>
+										<div class="main__table-text"><a href="#">ex) 제목 예정</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 유형 예정</div>
+									</td>
+									<td>
+										<div class="main__table-text">ex) 작성일 예정</div>
+									</td>
+									<td>
+										<div class="main__table-btns" style = "display: flex; justify-content: center;">
+											<a href="#" class="main__table-btn main__table-btn--edit">
+												<i class="icon ion-ios-create"></i>
+											</a>&nbsp;
+											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+												<i class="icon ion-ios-trash"></i>
+											</a>
+										</div>
 									</td>
 								</tr>
 							</tbody>
@@ -244,7 +305,7 @@
 					</div>
 				</div>
 				<!-- end comments -->
-
+				<a href="/admin/noticewrite" class="main__title-link">작성하기</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
