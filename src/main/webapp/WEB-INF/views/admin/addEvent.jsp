@@ -64,13 +64,14 @@
 							<div class="col-12">
 								<label>
 									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
-									<input type="file" id="eventupfile" name="uploadevent" value="" multiple />
+									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
 								</label>
-								<span id="filevalue"></span>
+								<span id="filevalue" style="display:none;"></span>
                             </div>
 
-							<div class="col-12">
-								<button type="submit" class="form__btn">등록</button>
+							<div class="col-12" >
+								<button type="submit" class="form__btn" style="display:inline-block;">등록</button>
+								<button type="button" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
 							</div>
 					  </div>
 					</form>

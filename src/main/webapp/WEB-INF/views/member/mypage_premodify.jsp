@@ -10,6 +10,13 @@
 <title>MoviePlus: 모두를 위한 영화관 </title>
 </head>
 <body>
+<script>
+
+if ("${result}" == "passFail") {
+    alert("비밀번호 불일치");
+  }
+  
+</script>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
 	<jsp:include page="/WEB-INF/views/mypage_sidebar.jsp"/>
 

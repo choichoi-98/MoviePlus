@@ -2,6 +2,9 @@ package com.hta.movieplus.controller;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +16,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.Event;
 import com.hta.movieplus.service.EventService;
@@ -118,6 +126,98 @@ public class EventController {
 		return fileDBName;
 	}
 	
+	
+	@GetMapping("/event/view")
+	public ModelAndView viewDetail(int num, ModelAndView mv, 
+			HttpServletRequest request,
+			@RequestHeader(value="referer", required=false)String beforeURL) {
+		
+		
+		logger.info("referer:" + beforeURL);
+		
+		Event event = eventservice.getDetailEvent(num);
+		
+		//board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
+		if(event == null) {
+			logger.info("상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "상세보기 실패입니다.");
+		} else {
+			logger.info("상세보기 성공");
+			mv.setViewName("event/event_viewform");
+			mv.addObject("eventdata", event);
+		}
+		return mv;
+	}
 
+	
+	@GetMapping("/event/list")
+	public ModelAndView eventList(ModelAndView mv, int page) {
+		
+		int limit = 10;	//한 화면에 출력할 로우 갯수
+		int listcount = eventservice.getEventListCount();	//총 리스트 수
+
+		//총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수
+		int startpage = ((page - 1)/10) * 10 + 1;
+		
+		//현재 페이지에 보여줄 마지막 페이지 수
+		int endpage = startpage + 10 - 1;
+		
+		if(endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		List<Event> eventlist = eventservice.getEventList(page, limit);
+		mv.setViewName("event/manageEvent");
+		mv.addObject("page", page);
+		mv.addObject("maxpage",maxpage);
+		mv.addObject("startpage",startpage);		
+		mv.addObject("endpage",endpage);
+		mv.addObject("listcount",listcount);
+		mv.addObject("eventlist",eventlist);
+		mv.addObject("limit",limit);
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/list_ajax")
+	public Map<String, Object> eventListAjax(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			@RequestParam(value="limit", defaultValue="10", required=false) int limit
+			){
+		int listcount = eventservice.getEventListCount();
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수
+		int startpage = ((page - 1)/10) * 10 + 1;
+				
+		//현재 페이지에 보여줄 마지막 페이지 수
+		int endpage = startpage + 10 - 1;
+				
+		if(endpage > maxpage) {
+			endpage = maxpage;
+		}
+				
+		List<Event> eventlist = eventservice.getEventList(page, limit);
+				
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);		
+		map.put("endpage",endpage);
+		map.put("listcount",listcount);
+		map.put("eventlist",eventlist);
+		map.put("limit",limit);
+				
+		return map;
+		
+	}
 
 }
