@@ -1,4 +1,4 @@
-package com.hta.movieplus.controller;
+package com.hta.movieplus.service;
 
 import com.hta.movieplus.domain.Member;
 

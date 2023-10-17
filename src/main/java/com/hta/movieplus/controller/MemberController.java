@@ -1,7 +1,9 @@
 package com.hta.movieplus.controller;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,15 +26,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.MailVO;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.service.MemberService;
+import com.hta.movieplus.service.TheaterService;
 import com.hta.movieplus.task.SendMail;
 
 @Controller
 @RequestMapping(value="/member")
 public class MemberController {
 	
+	TheaterService theaterService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Value("${my.savefolder}")
@@ -43,8 +48,9 @@ public class MemberController {
 	private MailVO mailVO;
 	
 	@Autowired
-	public MemberController(MemberService memberservice, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
+	public MemberController(MemberService memberservice ,TheaterService theaterService, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
 		this.memberservice = memberservice;
+		this.theaterService = theaterService;
 		this.passwordEncoder = passwordEncoder;
 		this.sendMail = sendMail;
 		this.mailVO = mailVO;
@@ -197,8 +203,13 @@ public class MemberController {
 	
 	//마이페이지 이동
 	@GetMapping("/mypage")
-	public String mypage() {
-		return "member/mypage_main";
+	public ModelAndView mypage(ModelAndView mv, Principal principal) {
+		List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
+		
+		mv.addObject("favTheaterList", favTheaterList);
+		mv.setViewName("member/mypage_main");
+		
+		return mv;
 	}
 
 	//마이페이지 - 개인정보수정 클릭시 비밀번호 확인페이지로 이동

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.service.MembershipService;
 
 @Controller
-@RequestMapping(value = "/benefit")
 public class MembershipController {
 
 	MembershipService membershipService;
@@ -22,12 +22,12 @@ public class MembershipController {
 		this.membershipService = membershipService;
 	}
 
-	@GetMapping("/membership")
+	@GetMapping("/benefit/membership")
 	public String MembershipMainView() {
 		return "membership/membership";
 	}
 
-	@GetMapping("/viplounge")
+	@GetMapping("/benefit/viplounge")
 	public ModelAndView vipLoungeView(ModelAndView mv, Principal principal) {
 		
 		if(principal != null) {
@@ -35,10 +35,17 @@ public class MembershipController {
 			mv.addObject("membership_member", member);
 		}
 		
-		
-		
 		mv.setViewName("membership/vip_lounge");
 
+		return mv;
+	}
+	
+	@GetMapping("/member/mypage/membership")
+	public ModelAndView mypageMemebershipView(ModelAndView mv, Principal principal) {
+		Member member = membershipService.getMemberByName(principal.getName());
+		mv.addObject("membership_member", member);
+		mv.setViewName("membership/mypage_membership");
+		
 		return mv;
 	}
 }

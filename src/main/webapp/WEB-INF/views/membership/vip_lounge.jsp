@@ -115,18 +115,15 @@
 								</li>
 								<li class="">VIP
 									<div class="pointFlag">
-										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+										<span>다음 등급까지 6,000 P 남았어요!</span>
 									</div>
 								</li>
 								<li class="">VVIP
 									<div class="pointFlag">
-										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
+										<span>다음 등급까지 6,000 P 남았어요!</span>
 									</div>
 								</li>
 								<li class="">MVIP
-									<div class="pointFlag">
-										<span>다음 Friends 등급까지 6,000 P 남았어요!</span>
-									</div>
 								</li>
 							</ul>
 						</div>

@@ -11,6 +11,7 @@ $(document).ready(function(){
         var point = Number($('#membershipPoint').val());
         var $pointFlag;
         
+        
         if(point>=6000){
             $pointFlag = $('#pointFlag-list > li').eq(1);
             $pointFlag.addClass('on');
@@ -19,14 +20,17 @@ $(document).ready(function(){
             $pointFlag = $('#pointFlag-list > li').eq(2);
             $pointFlag.addClass('on');
         }
+        
         if(point>=18000){
             $pointFlag = $('#pointFlag-list > li').eq(3);
             $pointFlag.addClass('on');
         }
+        
         if(point>=24000){
             $pointFlag = $('#pointFlag-list > li').eq(4);
             $pointFlag.addClass('on');
         }
+        
         
         
     }
