@@ -25,11 +25,13 @@ import com.hta.movieplus.mybatis.mapper.SchedulingMapper;
 @Service
 public class schedulingServiceImpl implements SchedulingService {
 
+	SeatService seatService;
 	private static final Logger logger = LoggerFactory.getLogger(schedulingServiceImpl.class);
 	SchedulingMapper mapper;
 
-	public schedulingServiceImpl(SchedulingMapper mapper) {
+	public schedulingServiceImpl(SchedulingMapper mapper, SeatService seatService) {
 		// TODO Auto-generated constructor stub
+		this.seatService = seatService;
 		this.mapper = mapper;
 	}
 
@@ -73,19 +75,17 @@ public class schedulingServiceImpl implements SchedulingService {
 		List<TheaterSchedule> scheduleList = mapper.getScheduleListByTheaterRoomId(schedule);
 		int listSize = scheduleList.size();
 
-
 		if (listSize == 0) { // 스케줄 없는 경우
 			return true;
 		}
-		
+
 		LocalTime FirstStartTime = LocalTime.parse(scheduleList.get(0).getTHEATER_SCHEDULE_START());
-		LocalTime LastEndTime = LocalTime.parse(scheduleList.get(listSize-1).getTHEATER_SCHEDULE_END());
-		
+		LocalTime LastEndTime = LocalTime.parse(scheduleList.get(listSize - 1).getTHEATER_SCHEDULE_END());
+
 		LocalTime compStartTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_START());
 		LocalTime compEndTime = LocalTime.parse(schedule.getTHEATER_SCHEDULE_END());
 
-		
-		if(compStartTime.isAfter(LastEndTime) || compEndTime.isBefore(FirstStartTime)) {
+		if (compStartTime.isAfter(LastEndTime) || compEndTime.isBefore(FirstStartTime)) {
 			return true;
 		}
 
@@ -95,7 +95,6 @@ public class schedulingServiceImpl implements SchedulingService {
 				return true;
 			}
 		}
-		
 
 		for (int i = 0; i < listSize; i++) {
 			LocalTime origEndTime = LocalTime.parse(scheduleList.get(i).getTHEATER_SCHEDULE_END());
@@ -179,7 +178,13 @@ public class schedulingServiceImpl implements SchedulingService {
 	@Override
 	public List<TheaterRoom> getTheaterRoomWithMovie(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
-		return mapper.getTheaterRoomWithMovie(dataMap);
+		List<TheaterRoom> list = mapper.getTheaterRoomWithMovie(dataMap);
+
+		for (TheaterRoom room : list) {
+			room.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(room.getTHEATER_ROOM_SEAT()));
+		}
+
+		return list;
 	}
 
 	@Override
@@ -197,41 +202,47 @@ public class schedulingServiceImpl implements SchedulingService {
 	@Override
 	public List<TheaterSchedule> getScheduleWithTheater(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
-		return mapper.getScheduleWithTheater(dataMap);
+		List<TheaterSchedule> list = mapper.getScheduleWithTheater(dataMap);
+
+		for (TheaterSchedule schedule : list) {
+			schedule.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(schedule.getTHEATER_ROOM_SEAT()));
+		}
+		
+		return list;
 	}
 
 	@Override
 	public List<Movie> getOpenMovieListWithScheduleCnt(String date) {
 		// TODO Auto-generated method stub
-				
+
 		List<Movie> movieList = mapper.getOpenMovieListWithScheduleCnt(date);
-		
-		for(Movie movie : movieList) {
+
+		for (Movie movie : movieList) {
 			movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
 		}
-		
+
 		return movieList;
-		
+
 	}
-	
+
 	public String getGradeData(String grade) {
 		String result = "all";
-		
-		switch(grade) {
-			case "전체관람가":
-				result = "all";
-				break;
-			case "12세이상관람가":
-				result = "12";
-				break;
-			case "15세이상관람가":
-				result = "15";
-				break;
-			case "청소년관람불가":
-				result = "19";
-				break;
+
+		switch (grade) {
+		case "전체관람가":
+			result = "all";
+			break;
+		case "12세이상관람가":
+			result = "12";
+			break;
+		case "15세이상관람가":
+			result = "15";
+			break;
+		case "청소년관람불가":
+			result = "19";
+			break;
 		}
-		
+
 		return result;
 	}
 
@@ -241,9 +252,9 @@ public class schedulingServiceImpl implements SchedulingService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("movieCode", movieCode);
 		dataMap.put("date", date);
-		
+
 		return mapper.getTheaterRoomWithScheduleCnt(dataMap);
-}
+	}
 
 	@Override
 	public List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(String movieCode, String date,
@@ -253,7 +264,7 @@ public class schedulingServiceImpl implements SchedulingService {
 		dataMap.put("movieCode", movieCode);
 		dataMap.put("date", date);
 		dataMap.put("theaterId", theaterId);
-		
+
 		return mapper.getScheduleListByDateAndMovieCodeAndTheaterId(dataMap);
 	}
 
@@ -261,19 +272,18 @@ public class schedulingServiceImpl implements SchedulingService {
 	public Movie getMovieDetailByCode(String movieCode) {
 		// TODO Auto-generated method stub
 		Movie movie = mapper.getMovieDetailByCode(movieCode);
-		movie.setMovie_Poster(movie.getMovie_Poster().substring(0,60));
-		
+		movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
+
 		movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
-		
+
 		return movie;
 	}
 
 	@Override
 	public List<MovieDibsVO> getMovieDibsList(String name) {
 		// TODO Auto-generated method stub
-		
+
 		return mapper.getMovieDibsList(name);
 	}
-
 
 }

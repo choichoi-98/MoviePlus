@@ -6,14 +6,6 @@
 	margin-left: 30px;
 }
 
-#seat-table>tbody>tr>td:nth-child(8)>button {
-	margin-left: 30px;
-}
-
-#seat-table>tbody>tr>td:nth-child(18)>button {
-	margin-left: 30px;
-}
-
 .seat {
 	display: inline-block;
 	border: 1px solid #999;
@@ -42,7 +34,7 @@
 }
 
 .deleted {
-	display: none;
+	visibility: hidden;
 }
 
 .seat-xy {

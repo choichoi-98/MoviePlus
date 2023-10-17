@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
@@ -41,7 +42,8 @@ public class BookingController {
 	}
 	
 	@GetMapping("")
-	public ModelAndView bookingMainView(ModelAndView mv, Principal principal) {
+	public ModelAndView bookingMainView(ModelAndView mv, Principal principal,
+										@RequestParam(value="movieCode", required=false) String movieCode) {
 		List<Theater> theaterList = theaterService.getAllTheaterList();
 		
 		if(principal != null) {
@@ -53,6 +55,9 @@ public class BookingController {
 		
 		List<TimeTableDate> dateList = schedulingService.getDateList();
 		
+		if(movieCode != null) {
+			mv.addObject("fast-movieCode", movieCode);
+		}
 		
 		mv.addObject("dateList", dateList);
 		mv.addObject("theaterList", theaterList);
