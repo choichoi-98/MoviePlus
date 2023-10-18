@@ -12,7 +12,9 @@ $(document).ready(function(){
                 selectCnt--;
                 selectedMovieCode = "";
             }else {
-                return false;
+                $('#movieList > li').find('a').removeClass("on");
+                $(this).find('a').addClass("on");
+                selectedMovieCode = $(this).find('a').attr('data-moviecode');  
             }
             
             
@@ -45,7 +47,8 @@ $(document).ready(function(){
         var stillcut = $('#form-stillcut').prop('src');
         var movieCode = $('#hidden-movieCode').val();
         var content = $('#post_content').val();
+  
 
-        location.href = "writeAction?moviepost_Content=" + content + "&moviepost_Still=" + stillcut + "&moviepost_Code=" + movieCode;
+        location.href = "writeAction?moviepost_Content=" + content + "&moviepost_Still=" + stillcut + "&movie_Code=" + movieCode;
     })
 });

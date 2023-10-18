@@ -19,8 +19,9 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
-	
-	
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal" var="pinfo" />
+	</sec:authorize>
 
 	<div class="container">
 
@@ -84,7 +85,7 @@
 						<sec:authorize access="isAuthenticated()">
 						<!-- 로그인 후 -->
 						<div>
-							<i class="iconset ico-favo-theater"></i> <span class="font-gblue">${memberInfo.MEMBER_NAME}</span>님의
+							<i class="iconset ico-favo-theater"></i> <span class="font-gblue">${pinfo.MEMBER_NAME}</span>님의
 							선호영화관
 							<ul id="fav-theater-list" class="theater-circle">
 							

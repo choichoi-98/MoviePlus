@@ -28,6 +28,9 @@
 	background-size: cover
 }
 
+.modal-layer2 .wrap .layer-header {
+	background: #792828;
+}
 #gnb>ul>li>a:after {
 	background: #792828;
 }
