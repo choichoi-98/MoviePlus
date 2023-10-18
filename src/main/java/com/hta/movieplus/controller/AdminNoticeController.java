@@ -20,12 +20,7 @@ public class AdminNoticeController {
 	public AdminNoticeController(NoticeService noticeService) {
 		this.noticeService = noticeService;
 	}
-
-	@GetMapping("/admin/noticewrite")
-	public String siteAdminNotice() {
-		return "admin/addNotice";
-	}
-
+	
 	@GetMapping("/admin/noticelist")
 	public String siteAdminNoticeList(Model model) {
 		List<NoticeVO> list = noticeService.getNoticelist("전체");
@@ -33,23 +28,39 @@ public class AdminNoticeController {
 		return "admin/noticeList";
 		/* 내가구한 객체를 페이지 사용할수 있게 (리턴) */
 	}
-
-	@PostMapping("/admin/notice_insert")
-	public String noticeInsert(NoticeVO notice) {
-		noticeService.insertNoticeVO(notice);
-		return "redirect:/admin/noticelist";
+	
+	@GetMapping("/admin/gonoticewrite")
+		public String gonoticeWrite() {
+		return "admin/addNotice";
 	}
 
+	@PostMapping("/admin/noticewrite")
+		public String noticeWrite(NoticeVO notice) {
+		noticeService.noticeWrite(notice);
+		return "redirect:/admin/noticelist";
+	}
+	
 	@GetMapping("/admin/noticedelete")
 	public String noticeDelete(int noticenum) {
 		noticeService.deleteNoticeVO(noticenum);
 		return "redirect:/admin/noticelist";
 	}
+	
+	@PostMapping("/admin/noticeread")
+	public String noticeRead(Model model) {
+		/*
+		 * List<NoticeVO> listread = noticeService.getNoticelist("전체");
+		 * model.addAttribute("list4", listread);
+		 */
+		return "admin/noticeModify";
+}
+	
 	@PostMapping("/admin/noticemodify")
 	public String noticeModifyList(Model model) {
-		List<NoticeVO> listnotice = noticeService.getNoticeModifyList("전체");
-		model.addAttribute("list3", listnotice);
+		/*
+		 * List<NoticeVO> listnotice = noticeService.getNoticeModifyList("전체");
+		 * model.addAttribute("list3", listnotice);
+		 */
 		return "admin/noticeModify";
-		
 	}
 }

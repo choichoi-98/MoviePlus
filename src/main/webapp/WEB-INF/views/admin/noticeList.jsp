@@ -115,7 +115,7 @@
 					</div>
 				</div>
 				<!-- end comments -->
-				<a href="${pageContext.request.contextPath}/admin/noticewrite"
+				<a href="${pageContext.request.contextPath}/admin/gonoticewrite"
 					class="main__title-link">작성하기</a>
 				<!-- paginator -->
 				<div class="col-12">

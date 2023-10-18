@@ -24,15 +24,16 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public void insertNoticeVO(NoticeVO notice) {
-		dao.insertNoticeVO(notice);
-	}
-
-	@Override
 	public List<NoticeVO> getNoticelist(String string) {
 		// TODO Auto-generated method stub
 		return dao.getNoticelist(string);
 	}
+	
+	@Override
+	public void noticeWrite(NoticeVO notice) {
+		dao.noticeWrite(notice);
+	}
+	
 
 	@Override
 	public void deleteNoticeVO(int noticenum) {
@@ -44,5 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }
