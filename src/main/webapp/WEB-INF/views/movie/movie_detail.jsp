@@ -302,7 +302,7 @@ var contextPath = "${pageContext.request.contextPath}";
 				<!-- 한줄평 있을 때 -->
 				<div class="tit-util mt70 mb15 oneContent">
 					<h2 class="tit small">
-						${m.movie_Title}에 대한 <span id="count" class="font-gblue"></span>개의 이야기가 있어요!
+						${m.movie_Title}에 대한 <span id="count" class="font-gblue">${m.review_Count}</span>개의 이야기가 있어요!
 					</h2>
 				</div>
 
