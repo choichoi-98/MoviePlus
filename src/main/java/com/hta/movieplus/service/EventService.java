@@ -8,11 +8,14 @@ public interface EventService {
 	
 	public void insert_event(Event event);
 	
+	public List<Event> getAllEventList();
+	
 	public int getEventListCount();
 
 	public List<Event> getEventList(int page, int limit);
 
 	public Event getDetailEvent(int num);
+	
 	
 	
 }

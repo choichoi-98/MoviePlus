@@ -40,33 +40,33 @@ public class EventController {
 		this.eventservice = eventservice;
 	}
 	
-	
+	//이벤트 전체 페이지(메인)
 	@GetMapping("/event")
-	public String eventmain() {
-		return "event/event_main";
+	public ModelAndView eventmain(ModelAndView mv) throws Exception {
+		
+		List<Event> Alleventlist = eventservice.getAllEventList();
+		mv.addObject("Alleventlist", Alleventlist);
+		logger.info(Alleventlist.toString());
+		
+		mv.setViewName("event/event_main");
+		
+		return mv;
 	}
 	
+	//이벤트 시사회/무대인사 페이지
 	@GetMapping("/event/curtaincall")
 	public String curtaincall() {
 		return "event/event_curtaincall";
 	}
 	
-	@GetMapping("/event/eventview")
-	public String eventview() {
-		return "event/event_viewform";
-	}
-	
-	@GetMapping("/event/manageEvent")
-	public String eventwrite() {
-		return "admin/manageEvent";
-	}
-	
-	@GetMapping("/event/addEvent")
+	//관리자 - 이벤트 추가페이지 이동
+	@GetMapping("/admin/addEvent")
 	public String eventwrite2() {
 		return "admin/addEvent";
 	}
 	
-	@PostMapping("/event/insert")
+	//관리자 - 이벤트 추가 프로세스
+	@PostMapping("/admin/eventInsert")
 	public String insertevent (Event event, HttpServletRequest request) throws Exception {
 		
 		MultipartFile uploadevent = event.getUploadevent();
@@ -85,11 +85,10 @@ public class EventController {
 		}
 		
 		eventservice.insert_event(event);
-		logger.info(eventmain().toString());
 		
-		return "admin/manageEvent";
+		return "redirect:/admin/manageEvent";
 	}
-	
+	//파일 이름
 	private String fileDBname(String fileName, String saveFolder) {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);	
@@ -126,34 +125,10 @@ public class EventController {
 		return fileDBName;
 	}
 	
-	
-	@GetMapping("/event/view")
-	public ModelAndView viewDetail(int num, ModelAndView mv, 
-			HttpServletRequest request,
-			@RequestHeader(value="referer", required=false)String beforeURL) {
-		
-		
-		logger.info("referer:" + beforeURL);
-		
-		Event event = eventservice.getDetailEvent(num);
-		
-		//board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
-		if(event == null) {
-			logger.info("상세보기 실패");
-			mv.setViewName("error/error");
-			mv.addObject("url", request.getRequestURL());
-			mv.addObject("message", "상세보기 실패입니다.");
-		} else {
-			logger.info("상세보기 성공");
-			mv.setViewName("event/event_viewform");
-			mv.addObject("eventdata", event);
-		}
-		return mv;
-	}
 
-	
-	@GetMapping("/event/list")
-	public ModelAndView eventList(ModelAndView mv, int page) {
+	//관리자 - 이벤트 리스트 페이지
+	@GetMapping("/admin/manageEvent")
+	public ModelAndView eventList(ModelAndView mv, @RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
 		int limit = 10;	//한 화면에 출력할 로우 갯수
 		int listcount = eventservice.getEventListCount();	//총 리스트 수
@@ -184,39 +159,38 @@ public class EventController {
 		return mv;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="event/list_ajax")
-	public Map<String, Object> eventListAjax(
-			@RequestParam(value="page", defaultValue="1", required=false) int page
-			){
-		
-		int limit = 10;
-		int listcount = eventservice.getEventListCount();
-		int maxpage = (listcount + limit - 1) / limit;
-		
-		//현재 페이지에 보여줄 시작 페이지 수
-		int startpage = ((page - 1)/10) * 10 + 1;
-				
-		//현재 페이지에 보여줄 마지막 페이지 수
-		int endpage = startpage + 10 - 1;
-				
-		if(endpage > maxpage) {
-			endpage = maxpage;
+	
+	//이벤트 내용 상세페이지(뷰 페이지)
+		@GetMapping("/event/eventview")
+		public String eventview() {
+			return "event/event_viewform";
 		}
-				
-		List<Event> eventlist = eventservice.getEventList(page, limit);
-				
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("page", page);
-		map.put("maxpage",maxpage);
-		map.put("startpage",startpage);		
-		map.put("endpage",endpage);
-		map.put("listcount",listcount);
-		map.put("eventlist",eventlist);
-		map.put("limit",limit);
-				
-		return map;
+	
+	
+	//이벤트 뷰 페이지 detail 주소
+	@GetMapping("/event/detail")
+	public ModelAndView viewDetail(ModelAndView mv, 
+			HttpServletRequest request,
+			@RequestHeader(value="EVENT_NUM", required=false) int eventNo) {
 		
+		logger.info("EVENT_NUM : " + eventNo);
+		
+		Event event = eventservice.getDetailEvent(eventNo);
+		
+//		if(event == null) {
+//			logger.info("상세보기 실패");
+//			mv.setViewName("error/error");
+//			mv.addObject("url", request.getRequestURL());
+//			mv.addObject("message", "상세보기 실패입니다.");
+//		} else {
+//			logger.info("상세보기 성공");
+//			mv.setViewName("event/event_viewform");
+//			mv.addObject("eventdata", event);
+//		}
+		
+		mv.addObject("eventDetail", event);
+		mv.setViewName("event/event_viewform");
+		return mv;
 	}
 
 }

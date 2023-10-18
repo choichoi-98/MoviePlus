@@ -23,6 +23,12 @@ public class EventServiceImpl implements EventService{
 	public void insert_event(Event event) {
 		dao.insert_event(event);
 	}
+	
+	@Override
+	public List<Event> getAllEventList() {
+		return dao.getAllEventList();
+	}
+	
 
 	@Override
 	public int getEventListCount() {
@@ -44,7 +50,6 @@ public class EventServiceImpl implements EventService{
 	public Event getDetailEvent(int num) {
 		return dao.getDetailEvent(num);
 	}
-	
 	
 
 

@@ -14,6 +14,11 @@
 			select nvl(max(EVENT_NUM),0)+1 from EVENT
 		</sql>
 	
+	<select id="getAllEventList" resultType="event">
+		SELECT * 
+		FROM EVENT
+	</select>
+	
 	<select id="getEventListCount" resultType="int">	<!-- 이벤트 수 -->
 		select count(*) from EVENT
 	</select>
@@ -24,14 +29,12 @@
 			   SELECT ROWNUM AS RNUM, EVENT.*
 			    FROM EVENT
 			  )
-		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="getDetailEvent" parameterType="int" resultType="event">
 		SELECT *
 		FROM EVENT
-		WHERE EVENT_NUM = #{number}
-	
+		WHERE EVENT_NUM = #{EVENT_NUM}
 	</select>
 
 </mapper>

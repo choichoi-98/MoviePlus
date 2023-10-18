@@ -29,16 +29,17 @@
 
 
 	<div id="contents" class="location-fixed">
-	 <input type="hidden" id="EVENT_NUM" value="${eventdata.EVENT_NUM}" name="EVENT_NUM">
+	<c:forEach var="event" items="${eventDetail}">
+	 <input type="hidden" id="EVENT_NUM" value="${event.EVENT_NUM}" name="EVENT_NUM">
 		<!-- event-detail -->
 		<div class="event-detail">
 			<h2 class="tit">
-				이벤트제목:<c:out value="${eventdata.EVENT_SUBJECT}" /> <!--이벤트 제목 --> 
+				이벤트제목:<c:out value="${event.EVENT_SUBJECT}" /> <!--이벤트 제목 --> 
 			</h2>
 			<p class="event-detail-date">
 				<span>기간</span>
-				<em><c:out value="${eventdata.START_DATE}" /> - 
-					<c:out value="${eventdata.END_DATE}" />
+				<em><c:out value="${event.START_DATE}" /> - 
+					<c:out value="${event.END_DATE}" />
 				</em>
 			</p>
 
@@ -75,6 +76,7 @@
 
 			<!--// iframe 아닐 때  -->
 		</div>
+	  </c:forEach>	
     </div>
 </div><!-- container end -->
 
