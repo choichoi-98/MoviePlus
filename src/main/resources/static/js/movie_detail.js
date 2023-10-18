@@ -99,7 +99,7 @@ console.log("movieReviewList 메서드입니다.");
                     <div class="story-txt">${review.movie_Review_content}</div>
                     <div class="story-like">
                         <button type="button" class="oneLikeBtn" title="댓글 추천" data-no="${review.movie_Review_num}" data-is="N">
-                            <i class="iconset ico-like-gray"></i> <span>0</span>
+                            <i class="iconset ico-like-gray"></i> <span>${review.movie_Review_like_cnt}</span>
                         </button>
                     </div>
 
@@ -231,6 +231,7 @@ $("body").on("click", "#regOneBtn", function(e){
 		var memberId = $("#loginId").val();
 		var reviewText = $("#textarea").val();
 		var movieStar = $(".num em").text();
+		console.log("등록-평점="+movieStar)
     if (!reviewText || reviewText.trim() === "") {
         // 만약 reviewText가 null이거나 빈 문자열이면 경고를 표시하고 AJAX 호출을 하지 않음
         alert("내용을 입력해주세요");

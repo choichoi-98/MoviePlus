@@ -17,7 +17,23 @@ public class Movie {
 	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
 	private int review_Count;	//댓글 수
 	private String movie_Still;
+	private String interest_Status;//보고싶어요
+	private int post_Count;		//무비 포스트 수
 	
+	
+	public int getPost_Count() {
+		return post_Count;
+	}
+	public void setPost_Count(int post_Count) {
+		this.post_Count = post_Count;
+	}
+	
+	public String getInterest_Status() {
+		return interest_Status;
+	}
+	public void setInterest_Status(String interest_Status) {
+		this.interest_Status = interest_Status;
+	}
 	public int getReview_Count() {
 		return review_Count;
 	}

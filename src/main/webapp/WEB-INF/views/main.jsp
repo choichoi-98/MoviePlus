@@ -113,12 +113,12 @@ document.ready
 										<div class="btn-util">
 											<button type="button" class="button btn-like"
 												rpst-movie-no="${m.movie_Code}">
-												<c:if test="${empty m.MOVIE_DIBS_OBJECT }">
+												<c:if test="${empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png"
 														style="width: 15px">
 												</c:if>
-												<c:if test="${!empty m.MOVIE_DIBS_OBJECT }">
+												<c:if test="${!empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_full.png"
 														style="width: 15px">
