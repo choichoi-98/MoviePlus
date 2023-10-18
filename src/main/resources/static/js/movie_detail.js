@@ -98,7 +98,7 @@ console.log("movieReviewList 메서드입니다.");
                     
                     <div class="story-txt">${review.movie_Review_content}</div>
                     <div class="story-like">
-                        <button type="button" class="oneLikeBtn" title="댓글 추천" data-no="2470459" data-is="N">
+                        <button type="button" class="oneLikeBtn" title="댓글 추천" data-no="${review.movie_Review_num}" data-is="N">
                             <i class="iconset ico-like-gray"></i> <span>0</span>
                         </button>
                     </div>
@@ -404,7 +404,50 @@ $("body").on("click", "#deleteBtn", function(e){
 	        }
 	        
 	    });//$.ajax({
-	
 });
+
+//댓글 좋아요 추가
+$("body").on("click", ".oneLikeBtn", function(e){
+	var loginId = $("#loginId").val();
+	var iconElement = $(this).find('i.iconset');
+	var iconClass = iconElement.attr('class');
+	var review_num = $(this).attr('data-no');
+    var ajaxURL;
+	console.log("댓글 pk=" + review_num);
+	console.log("iconClass=" + iconClass);
+	console.log("loginId=" + loginId);
+	if(loginId === null){ 
+		alert("로그인이 필요한 서비스입니다.");
+	} else {
+		if(iconClass == 'iconset ico-like-gray'){
+		    iconElement.removeClass('ico-like-gray').addClass('ico-like-purple');
+			ajaxURL = '../movie/addMovieReviewLike';
+			console.log("ajax 로그인=" + ajaxURL);
+		}
+		$.ajax({
+			type: 'POST',
+			url: ajaxURL,
+			data: {
+				"review_num": review_num,
+				"loginId":loginId
+			},
+			dataType: 'json',
+			beforeSend: function(xhr) {
+				// 데이터를 전송하기 전에 헤더에 csrf값을 설정
+				xhr.setRequestHeader(header, token);
+			},
+			success: function(response) {
+				console.log("좋아요 성공");
+				$(".movie-idv-story ul li:not(:first)").empty();
+				movieReviewList();
+			},
+			error: function() {
+				// AJAX 요청 실패 시 처리
+				console.log("좋아요 실패");
+			}
+		});
+	}
+});//$("body").on("click", ".oneLikeBtn", function(e){
+
 
 });//$(document).ready(function(){

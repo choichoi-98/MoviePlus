@@ -70,6 +70,12 @@ public interface MovieMapper {
 	//관람평(댓글) 삭제
 	public int deleteMovieReview(String review_num);
 
+	//관람평(댓글) 좋아요 등록
+	public int addMoviewReviewLike(String memberId, int review_num);
+
+	//관람평(댓글) 좋아요 삭제
+	public int deleteMovieReviewLike(String memberId, String review_num);
+
 
 }
 
