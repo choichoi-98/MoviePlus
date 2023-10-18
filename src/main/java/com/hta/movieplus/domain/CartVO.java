@@ -1,11 +1,16 @@
 package com.hta.movieplus.domain;
 
 public class CartVO {
-
+	
+	/* 이 형식에 맞게 변경하기 
+	 * CREATE TABLE STORE_CART ( CART_NUM NUMBER PRIMARY KEY, ITEM_CODE NUMBER,
+	 * MEMBER_ID VARCHAR2(20), FOREIGN KEY (ITEM_CODE) REFERENCES
+	 * STORE_ITEM(ITEM_CODE) ON DELETE CASCADE, FOREIGN KEY (MEMBER_ID) REFERENCES
+	 * MEMBER(MEMBER_ID) ON DELETE CASCADE );
+	 */ 
+	
 	private int CART_NUM; // 카트 번호(PK)
 	private int ITEM_CODE; // 상품 코드(FK)
-	private int CART_AMOUNT; // 금액
-	private String CART_APPROVED; // 결제 승인 여부
 	
 	public int getCART_NUM() {
 		return CART_NUM;
@@ -18,18 +23,6 @@ public class CartVO {
 	}
 	public void setITEM_CODE(int iTEM_CODE) {
 		ITEM_CODE = iTEM_CODE;
-	}
-	public int getCART_AMOUNT() {
-		return CART_AMOUNT;
-	}
-	public void setCART_AMOUNT(int cART_AMOUNT) {
-		CART_AMOUNT = cART_AMOUNT;
-	}
-	public String getCART_APPROVED() {
-		return CART_APPROVED;
-	}
-	public void setCART_APPROVED(String cART_APPROVED) {
-		CART_APPROVED = cART_APPROVED;
 	}
 	
 }

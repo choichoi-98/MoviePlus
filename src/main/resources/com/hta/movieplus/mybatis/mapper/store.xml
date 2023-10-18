@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="selectApproved" resultType="StorePayVO">
-		SELECT PAY_NUM, PAY_NAME, PAY_AMOUNT
+		SELECT *
 		FROM STORE_PAY 
 		WHERE pg_token IS NOT NULL
 	</select>
@@ -102,6 +102,11 @@
 		delete 
 		from STORE_CART
 		where ITEM_CODE = #{ITEM_CODE}
+	</delete>
+	
+	<delete id="clearCart">
+		delete  
+		from STORE_CART
 	</delete>
 
 </mapper>

@@ -179,6 +179,7 @@ public class StoreController {
 	@PostMapping("/item")
 	public ModelAndView item2( 
 		@RequestParam("itemCode") int ITEM_CODE,
+//      Requestpm로 memberId 불러오기
 		CartVO cartVO,
 		ModelAndView mv) {
 		cartVO.setITEM_CODE(ITEM_CODE);
@@ -262,13 +263,14 @@ public class StoreController {
 	
 	@GetMapping("/success")
 	public ModelAndView pay_success(
-			@RequestParam("pg_token") String pg_token,
+			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
 //			@RequestParam("PAY_NUM") int PAY_NUM,
 			ModelAndView mv) {
 //		storeService.insertPgToken(PAY_NUM, pg_token);
-		if (pg_token == null) {
+		if (pg_token.equals("none")) {
 		} else {
 			storeService.insertPgToken(pg_token);
+			storeService.clearCart();
 		}
 		
 		List<StorePayVO> AprPayList = storeService.selectApproved();

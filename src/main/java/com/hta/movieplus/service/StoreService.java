@@ -40,4 +40,6 @@ public interface StoreService {
 
 	public List<StorePayVO> selectApproved();
 
+	public void clearCart();
+
 }
