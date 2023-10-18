@@ -234,4 +234,16 @@
 	DELETE FROM MOVIE_REVIEW
 	WHERE MOVIE_REVIEW_NUM = #{review_num}
 	</delete>
+	
+	<!-- 관람평(댓글) 좋아요 추가 -->
+	<insert id="addMoviewReviewLike">	
+	INSERT INTO MOVIE_REVIEW_LIKE
+	VALUES(movie_review_like_seq.nextval,#{memberId},#{review_num})
+	</insert>
+	
+	<!-- 관람평(댓글) 좋아요 삭제 -->
+	<!-- 
+	DELETE FROM MOVIE_REVIEW_LIKE
+	WHERE MOVIE_REVIEW_LIKE_NUM = #{MOVIE_REVIEW_LIKE}
+	-->
 </mapper>

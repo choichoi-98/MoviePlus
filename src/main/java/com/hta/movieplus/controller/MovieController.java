@@ -163,9 +163,6 @@ public class MovieController {
     				@AuthenticationPrincipal Member member
     		) {
     	
-
-    	
-    	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
@@ -239,6 +236,30 @@ public class MovieController {
 		return movieServiceImpl.deleteMovieReview(review_num);
 	}
 	
+	//관람평(댓글) 좋아요 추가
+	@ResponseBody
+	@RequestMapping(value="/addMovieReviewLike")
+	public int addMovieReviewLike(
+				@RequestParam("review_num") int review_num,
+				@RequestParam("loginId") String memberId 
+			) {
+		
+		
+		return movieServiceImpl.addMovieReviewLike(memberId, review_num);
+	}
+	
+	//관람평(댓글) 좋아요 삭제
+//	@ResponseBody
+//	@RequestMapping("/deleteMovieReviewLike")
+//	public int deleteMovieReviewLike(
+//			@RequestParam("review_num") String review_num,
+//			@AuthenticationPrincipal Member member) {
+//		
+//		String memberId = member.getMEMBER_ID();
+//		
+//		return movieServiceImpl.deleteMovieReviewLike(memberId, review_num);
+//	}
+//	
 	
 	//보고싶어요 추가
 	@ResponseBody

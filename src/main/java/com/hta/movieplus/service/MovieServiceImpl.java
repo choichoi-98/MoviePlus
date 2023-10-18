@@ -163,6 +163,18 @@ public class MovieServiceImpl implements MovieService{
 		// TODO Auto-generated method stub
 		return dao.deleteMovieReview(review_num);
 	}
+
+	//관람평(댓글) 추가
+	public int addMovieReviewLike(String memberId, int review_num) {
+		// TODO Auto-generated method stub
+		return dao.addMoviewReviewLike(memberId, review_num);
+	}
+	
+	//관람평(댓글) 삭제
+	public int deleteMovieReviewLike(String memberId, String review_num) {
+		// TODO Auto-generated method stub
+		return dao.deleteMovieReviewLike(memberId, review_num);
+	}
 	
 
 }
