@@ -44,9 +44,15 @@ public class EventController {
 	@GetMapping("/event")
 	public ModelAndView eventmain(ModelAndView mv) throws Exception {
 		
-		List<Event> Alleventlist = eventservice.getAllEventList();
-		mv.addObject("Alleventlist", Alleventlist);
-		logger.info(Alleventlist.toString());
+		List<Event> movieEventList = eventservice.getMovieEventList();
+		List<Event> theaterEventList = eventservice.getTheaterEventList();
+		List<Event> promotionEventList = eventservice.getPromotionEventList();
+		List<Event> curtaincallEventList = eventservice.getCurtaincallEventList();
+		
+		mv.addObject("movieEventList", movieEventList);
+		mv.addObject("theaterEventList", theaterEventList);
+		mv.addObject("promotionEventList", promotionEventList);
+		mv.addObject("curtaincallEventList", curtaincallEventList);
 		
 		mv.setViewName("event/event_main");
 		
