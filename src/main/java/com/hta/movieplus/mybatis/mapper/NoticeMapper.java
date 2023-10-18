@@ -13,7 +13,10 @@ public interface NoticeMapper {
 
 	public void noticeWrite(NoticeVO notice); //공지사항 DB 입력
 	
-	public List<NoticeVO> getNoticeModify(String string1);
+	public NoticeVO getNoticeModify(int getmodify); // DB에서 공지사항 수정하기 전 기존의 내용을 가져옴
+	
+	
+	
 	
 	public void deleteNoticeVO(int noticenum); 
 	

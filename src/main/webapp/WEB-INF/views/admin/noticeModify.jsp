@@ -129,11 +129,11 @@
 								<div class="row row--form">
 									
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="Title">
+										<input type="text" class="form__input" placeholder="Title" value="${notice.CUSTOMER_NOTICE_SUBJECT}">
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" style= "height: 500px;" name="text" class="form__textarea" placeholder="Description"></textarea>
+										<textarea id="text" style= "height: 500px;" name="text" class="form__textarea" placeholder="Description">${notice.CUSTOMER_NOTICE_CONTENT}</textarea>
 									</div>
 
 
