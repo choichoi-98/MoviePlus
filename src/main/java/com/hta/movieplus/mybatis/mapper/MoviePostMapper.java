@@ -1,6 +1,7 @@
 package com.hta.movieplus.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,5 +16,9 @@ public interface MoviePostMapper {
 	Movie getMovieByCode(String movieCode);
 
 	void insert(MoviePostVO post);
+
+	List<MoviePostVO> getMoviePostList(Map<String, Object> dataMap);
+
+	MoviePostVO getPostDetail(int postNum);
 
 }

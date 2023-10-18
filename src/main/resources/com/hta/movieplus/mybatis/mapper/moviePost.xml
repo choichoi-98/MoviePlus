@@ -17,7 +17,37 @@
 	
 	<insert id="insert" parameterType="moviePostVO">
 		INSERT INTO MOVIEPOST
-		VALUES ( MOVIEPOST_SEQ.NEXTVAL, #{movie_Code}, #{member_Id}, #{moviepost_Still}, #{moviepost_Content}, sysdate, #{moviepost_Like} )
-		
+		VALUES ( MOVIEPOST_SEQ.NEXTVAL, #{movie_Code}, #{member_Id}, #{moviepost_Still}, #{moviepost_Content}, to_char(sysdate,'yyyy-mm-dd'), #{moviepost_Like} )
 	</insert>
+	
+	<select id="getMoviePostList" parameterType="map" resultType="moviePostVO">
+		
+		SELECT ROWNUM, T.*
+		FROM (
+		    SELECT *
+		    FROM MOVIEPOST MP
+		    JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		    WHERE M.MOVIE_TITLE LIKE  '%' ||  #{keyword} || '%'
+		<choose>
+			<when test='option == "date"'>
+			ORDER BY MP.MOVIEPOST_NUM
+			</when>
+			<when test='option == "like"'>
+			ORDER BY MP.MOVIEPOST_LIKE DESC
+			</when>	
+		</choose>
+		) T
+		WHERE ROWNUM &lt;= #{index}
+		
+	</select>
+	
+	<select id="getPostDetail" parameterType="int" resultType="moviePostVO">
+		SELECT *
+		FROM MOVIEPOST MP
+		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		JOIN MEMBER MEM ON MP.MEMBER_ID = MEM.MEMBER_ID 
+		WHERE MP.MOVIEPOST_NUM = #{postNum}
+	</select>
+	
+	
 </mapper>

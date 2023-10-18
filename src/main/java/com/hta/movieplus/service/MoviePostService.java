@@ -15,4 +15,7 @@ public interface MoviePostService {
 
 	void insert(MoviePostVO post);
 
+	List<MoviePostVO> getMoviePostList(String option, int index, String keyword);
+
+	MoviePostVO getPostDetail(int postNum);
 }

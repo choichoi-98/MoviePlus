@@ -1,8 +1,11 @@
 package com.hta.movieplus.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +28,7 @@ public class MoviePostServiceImpl implements MoviePostService {
 		List<Movie> movieList = mapper.getSeenMovieList(member_NUM);
 
 		for (Movie movie : movieList) {
-			if (movie.getMovie_Poster().length() >= 60) {
+			if (movie.getMovie_Poster() != "없음" || movie.getMovie_Poster() != null) {
 				movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
 			}
 		}
@@ -60,6 +63,26 @@ public class MoviePostServiceImpl implements MoviePostService {
 	public void insert(MoviePostVO post) {
 		// TODO Auto-generated method stub
 		mapper.insert(post);
+	}
+
+	@Override
+	public List<MoviePostVO> getMoviePostList(String option, int index, String keyword) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<>();
+		
+		
+		dataMap.put("option", option);
+		dataMap.put("index", index);
+		dataMap.put("keyword", keyword);
+		
+		
+		return mapper.getMoviePostList(dataMap);
+	}
+
+	@Override
+	public MoviePostVO getPostDetail(int postNum) {
+		// TODO Auto-generated method stub
+		return mapper.getPostDetail(postNum);
 	}
 
 }

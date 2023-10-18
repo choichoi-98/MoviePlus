@@ -6,7 +6,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
@@ -56,7 +58,20 @@ public class MoviePostController {
 		
 		return "redirect:/moviepost/all";
 	}
-
-
+	
+	@ResponseBody
+	@PostMapping("/getMoviePostListAjax")
+	public List<MoviePostVO> getMoviePostList(String option, int index, String keyword){
+		List<MoviePostVO> list = moviePostService.getMoviePostList(option, index, keyword);
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@PostMapping("/getPostDetail")
+	public MoviePostVO getPostDetail(int postNum){
+		
+		return moviePostService.getPostDetail(postNum); 
+	}
 	
 }
