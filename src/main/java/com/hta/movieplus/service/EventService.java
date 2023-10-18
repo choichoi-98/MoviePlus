@@ -9,6 +9,14 @@ public interface EventService {
 	public void insert_event(Event event);
 	
 	public List<Event> getAllEventList();
+
+	public List<Event> getMovieEventList();
+	
+	public List<Event> getTheaterEventList();
+	
+	public List<Event> getPromotionEventList();
+	
+	public List<Event> getCurtaincallEventList();
 	
 	public int getEventListCount();
 

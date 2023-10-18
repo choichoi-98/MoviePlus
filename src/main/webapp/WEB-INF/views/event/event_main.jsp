@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,22 +89,23 @@
 						</div>
 					</div>
 
-
 					<div class="event-list mt15">
 						<ul>
+						<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" begin="0" end="3">
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
-								title="[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventmovie.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src="./event_files/OuF8MwUmJhBV5sCkz6RIDXu5CUXrjCeK.jpg"
-											alt="[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프"
-											onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventmovie.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
-									<p class="tit">[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프</p>
+									<p class="tit">${eventmovie.EVENT_SUBJECT}</p>
 
-									<p class="date">2023.10.30 ~ 2023.11.13</p>
-							</a></li>
+									<p class="date">${eventmovie.EVENT_STARTDATE} ~ ${eventmovie.EVENT_ENDDATE} </p>
+							</a>
+							</li>
+						  </c:forEach>	
 						</ul>
 
 					</div>
@@ -120,20 +123,22 @@
 
 					<div class="event-list mt15">
 						<ul>
+						<c:forEach var="eventtheater" items="${theaterEventList}" varStatus="loop" begin="0" end="3">
 							<li>
 								<a href="https://www.megabox.co.kr/event#"
 								data-no="13594" data-netfunnel="N" class="eventBtn"
-								title="[목동] 달콤 고소 믹스팝콘 출시! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventtheater.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src="./event_files/H5Gp79G35D7EGI79myLrHbvhMyvCXVfG.jpg"
-											alt="[목동] 달콤 고소 믹스팝콘 출시!" onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventtheater.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
-									<p class="tit">[목동] 달콤 고소 믹스팝콘 출시!</p>
+									<p class="tit">${eventtheater.EVENT_SUBJECT}</p>
 
-									<p class="date">2023.09.04 ~ 2024.12.31</p>
+									<p class="date">${eventtheater.EVENT_STARTDATE} ~ ${eventtheater.EVENT_ENDDATE}</p>
 								</a>
 							</li>
+							</c:forEach>
 						</ul>
 					</div>
 
@@ -149,19 +154,21 @@
 
 					<div class="event-list mt15">
 						<ul>
-							<li><a href="https://www.megabox.co.kr/event#"
+						 <c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" begin="0" end="3">
+						 
+							<li><a href="#"
 								data-no="14091" data-netfunnel="N" class="eventBtn"
-								title="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventpromotion.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src="./event_files/nP1W09ckc1CSXuj57ge2iVJxG7KSUUuJ.jpg"
-											alt="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!"
-											onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventpromotion.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
-									<p class="tit">[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!</p>
+									<p class="tit">${eventpromotion.EVENT_SUBJECT}</p>
 
-									<p class="date">2023.09.25 ~ 2023.10.31</p>
+									<p class="date">${eventpromotion.EVENT_STARTDATE} ~ ${eventpromotion.EVENT_ENDDATE}</p>
 							</a></li>
+						  </c:forEach>	
 						</ul>
 					</div>
 
@@ -178,23 +185,27 @@
 
 					<div class="event-list mt15">
 						<ul>
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14167" data-netfunnel="N" class="eventBtn"
-								title="&lt;거미집&gt; 10월 9일(월) 무대인사 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" begin="0" end="3">
+							<li><a href="#"	data-no="14167" data-netfunnel="N" class="eventBtn"
+								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src="./event_files/r67e27z9KJcShtK6GmKLyZa540D7BIhs.jpg"
-											alt="&lt;거미집&gt; 10월 9일(월) 무대인사" onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventcurtaincall.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
-									<p class="tit">&lt;거미집&gt; 10월 9일(월) 무대인사</p>
+									<p class="tit">${eventcurtaincall.EVENT_SUBJECT}</p>
 
-									<p class="date">2023.10.09 ~ 2023.10.09</p>
+									<p class="date">${eventcurtaincall.EVENT_STARTDATE} ~ ${eventcurtaincall.EVENT_ENDDATE}</p>
 							</a></li>
+						    </c:forEach>
 						</ul>
 					</div>
+					
 				
 				
 				
+				
+				<!-- ******* 재개봉 **********  -->
 					<div class="tit-util mt70">
 						<h3 class="tit">재개봉</h3>
 						<div class="right">

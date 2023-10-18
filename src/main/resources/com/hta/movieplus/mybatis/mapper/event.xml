@@ -19,6 +19,31 @@
 		FROM EVENT
 	</select>
 	
+	<select id="getMovieEventList" resultType="event">
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'MOVIE'
+	</select>
+	
+	<select id="getTheaterEventList" resultType="event">
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'THEATER'
+	</select>
+	
+	<select id="getPromotionEventList" resultType="event">
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'PROMOTION'
+	</select>
+	
+	<select id="getCurtaincallEventList" resultType="event">
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'CURTAINCALL'
+	</select>
+	
+	
 	<select id="getEventListCount" resultType="int">	<!-- 이벤트 수 -->
 		select count(*) from EVENT
 	</select>
@@ -37,4 +62,9 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</select>
 
+
+
+
+
+	
 </mapper>

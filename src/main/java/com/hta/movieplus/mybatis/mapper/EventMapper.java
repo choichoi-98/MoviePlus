@@ -14,6 +14,14 @@ public interface EventMapper {
 	
 	public List<Event> getAllEventList();
 	
+	public List<Event> getMovieEventList();
+	
+	public List<Event> getTheaterEventList();
+	
+	public List<Event> getPromotionEventList();
+	
+	public List<Event> getCurtaincallEventList();
+	
 	public int getEventListCount();
 	
 	public List<Event> getEventList(HashMap<String, Integer> map);

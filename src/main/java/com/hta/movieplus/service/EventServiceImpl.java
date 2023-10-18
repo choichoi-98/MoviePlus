@@ -28,7 +28,6 @@ public class EventServiceImpl implements EventService{
 	public List<Event> getAllEventList() {
 		return dao.getAllEventList();
 	}
-	
 
 	@Override
 	public int getEventListCount() {
@@ -50,6 +49,27 @@ public class EventServiceImpl implements EventService{
 	public Event getDetailEvent(int num) {
 		return dao.getDetailEvent(num);
 	}
+
+	@Override
+	public List<Event> getMovieEventList() {
+		return dao.getMovieEventList();
+	}
+
+	@Override
+	public List<Event> getTheaterEventList() {
+		return dao.getTheaterEventList();
+	}
+
+	@Override
+	public List<Event> getPromotionEventList() {
+		return dao.getPromotionEventList();
+	}
+
+	@Override
+	public List<Event> getCurtaincallEventList() {
+		return dao.getCurtaincallEventList();
+	}
+
 	
 
 
