@@ -11,4 +11,6 @@ public interface NoticeService {
 	public List<NoticeVO> getNoticelist(String string);
 		
 	public void deleteNoticeVO(int noticenum);
+	
+	public List<NoticeVO> getNoticeModifyList(String string2);
 }

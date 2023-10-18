@@ -23,4 +23,9 @@
 		FROM CUSTOMER_NOTICE
 		WHERE CUSTOMER_NOTICE_NUM = #{noticenum}
 	</delete>
+	
+	<select id="getNoticeModifyList" resultType="String">
+		SELECT * FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_TYPE ={string2}
+	</select>
 </mapper>
