@@ -85,7 +85,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="/movieplus/event/manageEvent" class="sidebar__nav-link"><span>이벤트 관리</span></a>
+					<a href="/movieplus/admin/manageEvent" class="sidebar__nav-link"><span>이벤트 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

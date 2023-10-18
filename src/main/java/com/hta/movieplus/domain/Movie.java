@@ -16,6 +16,7 @@ public class Movie {
     private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
 	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
 	private int review_Count;	//댓글 수
+	private String movie_Still;
 	
 	public int getReview_Count() {
 		return review_Count;
@@ -124,6 +125,12 @@ public class Movie {
 	}
 	public void setGrade_data(String grade_data) {
 		this.grade_data = grade_data;
+	}
+	public String getMovie_Still() {
+		return movie_Still;
+	}
+	public void setMovie_Still(String movie_Still) {
+		this.movie_Still = movie_Still;
 	}
 	
 	
