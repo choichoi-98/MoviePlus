@@ -128,11 +128,11 @@
 								<div class="row row--form">
 									
 									<div class="col-md-12">
-										<input type="text" name="CUSTOMER_NOTICE_SUBJECT" class="form__input" value="[공지]&nbsp;">
+										<input type="text" name="CUSTOMER_NOTICE_SUBJECT" class="form__input" value="[공지]&nbsp;" required title="제목을 입력하세요">
 									</div>
 
 									<div class="col-md-12">
-										<textarea id="text" name="CUSTOMER_NOTICE_CONTENT" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;"></textarea>
+										<textarea id="text" name="CUSTOMER_NOTICE_CONTENT" class="form__textarea" placeholder="공지 내용을 입력해주세요." style="height:500px;" required title ="내용을 입력하세요"></textarea>
 									</div>
 								</div>
 							</div>
@@ -141,7 +141,7 @@
 								<button type="submit"class="form__btn">확인</button>
 							</div>
 						</div>
-						<input type="hidden" name="CUSTOMER_NOTICE_TYPE" class="form__input" value="전체">
+						<input type="hidden" name="CUSTOMER_NOTICE_TYPE" class="form__input" value="전체"> <!-- 이건뭐지 -->
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
 				</div>

@@ -123,7 +123,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form">
+					<form action="#" class="form" method="post">
 						<div class="row row--form">
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">

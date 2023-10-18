@@ -6,7 +6,7 @@ import com.hta.movieplus.domain.NoticeVO;
 
 public interface NoticeService {
 
-	public void insertNoticeVO(NoticeVO notice);
+	public void noticeWrite(NoticeVO notice);
 
 	public List<NoticeVO> getNoticelist(String string);
 		

@@ -8,10 +8,10 @@ import com.hta.movieplus.domain.NoticeVO;
 
 @Mapper
 public interface NoticeMapper {
+	
+	public List<NoticeVO> getNoticelist(String string); // DB에서 공지사항 리스트를 불러옴
 
-	public void insertNoticeVO(NoticeVO notice);
-
-	public List<NoticeVO> getNoticelist(String string);
+	public void noticeWrite(NoticeVO notice); //공지사항 DB 입력
 	
 	public List<NoticeVO> getNoticeModify(String string1);
 	
