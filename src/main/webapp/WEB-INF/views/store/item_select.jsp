@@ -22,6 +22,7 @@ $(function() {
 	
 	$('#btnGift').on('click', function(e) {
 		var itemCode = $('#prdtSumAmt').data('test');
+//		var memberId = 
 		
 		$.ajax({
 		    url: "item",

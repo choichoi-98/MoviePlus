@@ -107,4 +107,9 @@ public class StoreServiceImpl implements StoreService {
 		return dao.selectApproved();
 	}
 
+	@Override
+	public void clearCart() {
+		dao.clearCart();
+	}
+
 }

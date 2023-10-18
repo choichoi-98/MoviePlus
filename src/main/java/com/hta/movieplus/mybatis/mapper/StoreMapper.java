@@ -48,6 +48,8 @@ public interface StoreMapper {
 
 	public List<StorePayVO> selectApproved();
 
+	public void clearCart();
+
 //	public int getListCount();
 //	
 //	public List<StoreVO> getItemList(HashMap<String, Integer> map);

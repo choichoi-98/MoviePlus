@@ -40,7 +40,7 @@ $(function() {
             success: function(data) {
                 var box = data.next_redirect_pc_url;
                 window.open(box);
-                alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
+//              alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
             },
             error: function(error) {
                 alert(JSON.stringify(error, null, 2));
