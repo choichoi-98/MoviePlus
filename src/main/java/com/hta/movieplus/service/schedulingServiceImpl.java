@@ -272,7 +272,10 @@ public class schedulingServiceImpl implements SchedulingService {
 	public Movie getMovieDetailByCode(String movieCode) {
 		// TODO Auto-generated method stub
 		Movie movie = mapper.getMovieDetailByCode(movieCode);
-		movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
+		if(movie.getMovie_Poster().length() >= 60) {
+			movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
+		}
+		
 
 		movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
 

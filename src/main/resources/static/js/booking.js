@@ -59,7 +59,7 @@ $(document).ready(function(){
 			$(this).addClass('on');
 		}
 
-		if(checkCnt-selectCnt == 2){ // 4명 이상 선택된거 정리
+		if(checkCnt-selectCnt >= 2){ // 4명 이상 선택된거 정리
 			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
 				$(this).addClass('on').prev().addClass('on');
 			}else {
@@ -74,7 +74,7 @@ $(document).ready(function(){
 		  $(this).removeClass('on');
 		}
 
-		if(checkCnt-selectCnt == 2){
+		if(checkCnt-selectCnt >= 2){
 			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
 				$(this).removeClass('on').prev().removeClass('on');
 			}else {
@@ -88,12 +88,16 @@ $(document).ready(function(){
 
 
 	$('.common').click(function() {
+		if($(this).hasClass('impossible')){
+			return false;
+		}
+
 		if(checkCnt ==0 || selectCnt>=checkCnt || $(this).hasClass('choice')){
 			return false;
 		}
 
-		if(checkCnt-selectCnt == 2){ // 2명 이상 선택\
-			if(Number($(this).attr('blockLength')) == Number($(this).attr('blockIndex'))){
+		if(checkCnt-selectCnt >= 2){ // 2명 이상 선택
+			if(Number($(this).attr('blockLength') == 1)){ 
 				selectCnt++;
 				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
 	
@@ -103,7 +107,7 @@ $(document).ready(function(){
 				return;
 			}
 
-			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){
+			if(Number($(this).attr('blockLength')) - Number($(this).attr('blockIndex')) == 0){ //우측끝값
 				selectCnt = selectCnt + 2;
 				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).attr('data-seat-num'));
 				$('#dashboard-seat > .possible').eq(0).attr('class','seat choice').text($(this).prev().attr('data-seat-num'));
@@ -204,7 +208,7 @@ $(document).ready(function(){
 
 	function checkSelectCnt(){
 		if(checkCnt-selectCnt==1){
-			$('.common[selectiontype="non-solo"]:not(.on.choice)').addClass('impossible view');
+			$('.common[selectiontype="non-solo"]:not(.choice)').addClass('impossible view');
 		}else{
 			$('.common[selectiontype="non-solo"]').removeClass('impossible view');
 		}

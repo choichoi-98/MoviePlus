@@ -170,6 +170,7 @@ $(document).ready(function(){
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
+				console.log(data);
 				$('.timeTable-theater-list').remove();
 
 				if(data.scheduleList.length == 0){
