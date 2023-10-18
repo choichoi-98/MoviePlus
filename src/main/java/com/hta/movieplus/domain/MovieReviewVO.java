@@ -11,6 +11,15 @@ public class MovieReviewVO {
 	private int movie_Review_like;	//좋아요 
 	private String MEMBER_PROFILE;				//프로필 사진
 	private int movie_Review_star;
+	private int movie_Review_like_cnt;//좋아요 수
+	
+	
+	public int getMovie_Review_like_cnt() {
+		return movie_Review_like_cnt;
+	}
+	public void setMovie_Review_like_cnt(int movie_Review_like_cnt) {
+		this.movie_Review_like_cnt = movie_Review_like_cnt;
+	}
 	public int getMovie_Review_num() {
 		return movie_Review_num;
 	}

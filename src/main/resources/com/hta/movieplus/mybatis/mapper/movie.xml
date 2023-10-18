@@ -73,14 +73,17 @@
     
     <!-- 메인 로그인한 경우  -->
     <select id="getPlayingMovieLoginMain" resultType="movie">
-    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
-    		   M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
-    		   MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
+		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+		       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+		       MD.MEMBER_ID,
+		       CASE
+		         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
+		         ELSE NULL
+		       END AS INTEREST_STATUS
 		FROM MOVIE M
-		     CROSS JOIN MEMBER MEM
-		     LEFT OUTER JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
-		WHERE MOVIE_SCREEN = '상영중'
-		AND MEM.MEMBER_ID = #{memberId}
+		LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		AND MD.MEMBER_ID = #{memberId}
+		WHERE M.MOVIE_SCREEN = '상영중'
     </select>
 	
 	<!-- 메인 로그인 x 경우 -->
@@ -92,29 +95,20 @@
 		
     </select>
 
-	<!-- 메인-로그인한 경우 상영 중 영화 목록 -->
-    <select id="getPlayingMovieLoginMain1" resultType="movie">
-    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
-    		   M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
-    		   MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
-		FROM MOVIE M
-		     CROSS JOIN MEMBER MEM
-		     LEFT OUTER JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
-		WHERE MOVIE_SCREEN = '상영중'
-		AND MEM.MEMBER_ID = #{memberId}
-		<include refid="search_"/>
-    </select>
     
-    <!--영화 목록-로그인한 경우 검색 -->
+    <!--영화 목록-로그인한 경우 검색 0-->
     <select id="getPlayingMovieLogin" resultType="movie">
-    	SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
-    		   M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
-    		   MEM.MEMBER_ID, MD.MOVIE_DIBS_OBJECT
+		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+		       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+		       MD.MEMBER_ID,
+		       CASE
+		         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
+		         ELSE NULL
+		       END AS INTEREST_STATUS
 		FROM MOVIE M
-		     CROSS JOIN MEMBER MEM
-		     LEFT OUTER JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
-		WHERE MOVIE_SCREEN = '상영중'
-		AND MEM.MEMBER_ID = #{memberId}
+		LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		AND MD.MEMBER_ID = #{memberId}
+		WHERE M.MOVIE_SCREEN = '상영중'
 		<include refid="search_"/>
     </select>
     
@@ -204,12 +198,13 @@
 	
 	<!-- 관람평(댓글) select -->
 	<select id="getMovieReview" resultType="MovieReviewVO">
-	select r.movie_review_num, r.member_id, m.member_profile, 
-			MOVIE_REVIEW_STAR, MOVIE_REVIEW_CONTENT, MOVIE_CODE, MOVIE_REVIEW_REG_DATE
-	from movie_review r
-		left outer join member m 
-		on r.member_id = m.member_id
-	where movie_code = #{movieCode}
+		SELECT R.MOVIE_REVIEW_NUM, R.MEMBER_ID, M.MEMBER_PROFILE, R.MOVIE_REVIEW_STAR,
+		       R.MOVIE_REVIEW_CONTENT, R.MOVIE_CODE, R.MOVIE_REVIEW_REG_DATE,
+		       (SELECT COUNT(*) FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) 
+		       						AS MOVIE_REVIEW_LIKE_CNT
+		FROM MOVIE_REVIEW R
+		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+		WHERE R.MOVIE_CODE = #{movieCode}
 	</select>
 	
 	<!-- 관람평(댓글) 추가 -->
