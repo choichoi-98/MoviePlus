@@ -228,6 +228,16 @@ public class MovieController {
 		
 		return movieServiceImpl.updateMovieReview(review_num,reviewText,star);
 	}
+
+	//관람평(댓글) 삭제
+	@ResponseBody
+	@RequestMapping(value="deleteReview")
+	public int deleteReview(
+			@RequestParam("review_num") String review_num
+			) {
+		
+		return movieServiceImpl.deleteMovieReview(review_num);
+	}
 	
 	
 	//보고싶어요 추가

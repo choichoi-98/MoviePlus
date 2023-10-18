@@ -95,15 +95,14 @@ console.log("movieReviewList 메서드입니다.");
                     <div class="story-point">
                         <span>${review.movie_Review_star}</span>
                     </div>
-                    <div class="story-recommend">
-                        <em>배우</em>
-                    </div>
+                    
                     <div class="story-txt">${review.movie_Review_content}</div>
                     <div class="story-like">
                         <button type="button" class="oneLikeBtn" title="댓글 추천" data-no="2470459" data-is="N">
                             <i class="iconset ico-like-gray"></i> <span>0</span>
                         </button>
                     </div>
+
                     <div class="story-util">
                         <div class="post-funtion">
                             <div class="wrap">
@@ -117,8 +116,9 @@ console.log("movieReviewList 메서드입니다.");
                                             	owner="${review.member_Id}">
                                             	수정 <i class="iconset ico-arr-right-green"></i>
                                             </a>
-                                            <button type="button" class="deleteOne" data-no="2475551" data-mno="01573800" data-cd="PREV">
+											<button type="button" class="deleteOne" data-no="2475551" data-mno="01573800" data-cd="PREV" data-id="${review.member_Id}" data-num="${review.movie_Review_num}">
                                             	삭제 <i class="iconset ico-arr-right-green"></i>
+                                            	
                                             </button>
                                         </div>
                                         <div class="btn-close" id="popup_close">
@@ -141,11 +141,9 @@ console.log("movieReviewList 메서드입니다.");
         </div>
     </div>
 </li>
-
-          `;
+`;
           
 
-          // 각 동적으로 생성된 목록 아이템을 "reviewList" ID를 가진 요소에 추가합니다.
           reviewList.append(listItem);
         });
       }
@@ -256,7 +254,10 @@ $("body").on("click", "#regOneBtn", function(e){
 	           $("#layer_regi_reply_review").css("display", "none");
 	           $(".movie-idv-story ul li:not(:first)").empty();
 	            movieReviewList();
-	            
+			    $(".num em").text(0);
+			    $("#textarea").val("");	   
+			    $("#contentCount").text("0/ 100");
+			    buttons.removeClass('on');
 	        },
 	        error: function() {
 	            // AJAX 요청 실패 시 처리
@@ -317,7 +318,7 @@ $("body").on("click", ".updateOne", function(e){
 
 });//$("body").on("click", ".updateOne", function(e){
 
-//댓글 수정
+//댓글 수정 action
 $("body").on("click", "#updateBtn", function(e){
 		var movieCode = $("#movieCode").val();
 		var memberId = $("#loginId").val();
@@ -358,26 +359,52 @@ $("body").on("click", "#updateBtn", function(e){
 //댓글 삭제 popup
 $("body").on("click", ".deleteOne", function(e){
 
-    var ownerValue = $(this).attr('owner');
+    var ownerValue = $(this).attr('data-id');
     console.log("삭제 loginId=" + loginId);
     console.log("삭제 ownerValue=" + ownerValue);
-    //평점
-    var score = $(this).attr('data-score');
-    console.log("data-score=" + score);
-    //콘텐츠
-    var review_content = $(this).attr('data-content');
-    console.log("data-content=" + review_content);
+
     //review_num
-    var review_num = $(this).attr('data-no');
+    var review_num = $(this).attr('data-num');
     console.log("data-no=" + review_num);
     
 	if(loginId == ownerValue){
 		$("#layerId_04504997593960893").css("display", "block");
-		
+		$("#review_num").val(review_num);
 	} else{
 		alert('나의 댓글만 삭제 가능합니다.');
 	}
-
 });//$("body").on("click", ".updateOne", function(e){
+
+//댓글 삭제 action
+$("body").on("click", "#deleteBtn", function(e){
+	var review_num = $("#review_num").val();
+	console.log("댓글 삭제 action review_num" + review_num);
+	$.ajax({
+			type: 'POST',
+			url: "../movie/deleteReview",
+			data: {
+				"review_num":review_num
+			},
+			dataType: 'json',
+			beforeSend: function(xhr) {
+            // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+            xhr.setRequestHeader(header, token);
+	        },
+	        success: function(response) {
+	          console.log("댓글 삭제 성공")
+				$("#layerId_04504997593960893").css("display", "none");
+	           $("#layer_regi_reply_review").css("display", "none");
+	           $(".movie-idv-story ul li:not(:first)").empty();
+	            movieReviewList();
+	            
+	        },
+	        error: function() {
+	            // AJAX 요청 실패 시 처리
+	            console.log("댓글 삭제 실패");
+	        }
+	        
+	    });//$.ajax({
+	
+});
 
 });//$(document).ready(function(){

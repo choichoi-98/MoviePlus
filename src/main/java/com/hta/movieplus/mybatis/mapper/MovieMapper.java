@@ -67,6 +67,9 @@ public interface MovieMapper {
 	//관람평(댓글) 수정
 	public int updateMovieReview(String review_num, String reviewText, int star);
 
+	//관람평(댓글) 삭제
+	public int deleteMovieReview(String review_num);
+
 
 }
 

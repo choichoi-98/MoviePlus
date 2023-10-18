@@ -157,6 +157,12 @@ public class MovieServiceImpl implements MovieService{
 		// TODO Auto-generated method stub
 		return dao.updateMovieReview(review_num, reviewText, star);
 	}
+
+	//관람평(댓글) 삭제
+	public int deleteMovieReview(String review_num) {
+		// TODO Auto-generated method stub
+		return dao.deleteMovieReview(review_num);
+	}
 	
 
 }

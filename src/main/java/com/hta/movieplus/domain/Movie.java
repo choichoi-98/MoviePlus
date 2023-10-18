@@ -15,7 +15,14 @@ public class Movie {
     private String movie_Release;	//개봉상태(개봉, 개봉예정)
     private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
 	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
+	private int review_Count;	//댓글 수
 	
+	public int getReview_Count() {
+		return review_Count;
+	}
+	public void setReview_Count(int review_Count) {
+		this.review_Count = review_Count;
+	}
 	//--
 	private int MOVIE_SCHEDULE_CNT;
 	private String grade_data;
