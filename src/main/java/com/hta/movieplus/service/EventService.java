@@ -24,6 +24,14 @@ public interface EventService {
 
 	public Event getDetailEvent(int num);
 	
+	public int getMovieEventListCount();
+	
+	public int getTheaterEventListCount();
+	
+	public int getPromotionEventListCount();
+	
+	public int getCurtaincallEventListCount();
+	
 	
 	
 }

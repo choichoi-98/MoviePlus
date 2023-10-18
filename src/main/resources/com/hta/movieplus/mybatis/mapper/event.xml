@@ -14,39 +14,64 @@
 			select nvl(max(EVENT_NUM),0)+1 from EVENT
 		</sql>
 	
-	<select id="getAllEventList" resultType="event">
+	<select id="getAllEventList" resultType="event">	<!-- 이벤트 전체 총 목록 -->
 		SELECT * 
 		FROM EVENT
 	</select>
 	
-	<select id="getMovieEventList" resultType="event">
+	<select id="getMovieEventList" resultType="event">	<!-- 영화 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'MOVIE'
 	</select>
 	
-	<select id="getTheaterEventList" resultType="event">
+	<select id="getMovieEventListCount" resultType="int">	<!-- 영화 이벤트 목록 COUNT -->
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'MOVIE'
+	</select>
+	
+	<select id="getTheaterEventList" resultType="event">	<!-- 극장 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'THEATER'
 	</select>
 	
-	<select id="getPromotionEventList" resultType="event">
+	<select id="getTheaterEventListCount" resultType="int">	<!-- 극장 이벤트 목록 COUNT-->
+		SELECT COUNT(*)
+		FROM EVENT
+		WHERE EVENT_TYPE = 'THEATER'
+	</select>
+	
+	<select id="getPromotionEventList" resultType="event"> 	<!-- 제휴/할인 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'PROMOTION'
 	</select>
 	
-	<select id="getCurtaincallEventList" resultType="event">
+	<select id="getPromotionEventListCount" resultType="int"> 	<!-- 제휴/할인 이벤트 목록 Count -->
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'PROMOTION'
+	</select>
+	
+	<select id="getCurtaincallEventList" resultType="event">	<!-- 시사회 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'CURTAINCALL'
 	</select>
 	
-	
-	<select id="getEventListCount" resultType="int">	<!-- 이벤트 수 -->
-		select count(*) from EVENT
+	<select id="getCurtaincallEventListCount" resultType="int">	<!-- 시사회 이벤트 목록 Count -->
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = 'CURTAINCALL'
 	</select>
+	
+	<select id="getEventListCount" resultType="int">	<!-- 이벤트 전체 갯수 -->
+		select count(*) 
+		from EVENT
+	</select>
+	
 	
 	<select id="getEventList" parameterType="java.util.Map" resultType="event">
 		SELECT * 

@@ -60,29 +60,38 @@ public class EventController {
 		return mv;
 	}
 	
-	//이벤트 시사회/무대인사 페이지
+	//이벤트 영화 페이지
 	@GetMapping("/event/movie")
 	public ModelAndView eventmovie(ModelAndView mv) {
 		List<Event> movieEventList = eventservice.getMovieEventList();
+		int movieEventListCount = eventservice.getMovieEventListCount();
+		
 		mv.addObject("movieEventList", movieEventList);
+		mv.addObject("movieEventListCount", movieEventListCount);
 		mv.setViewName("event/event_movie");
 		return mv;
 	}
 	
-	//이벤트 시사회/무대인사 페이지
+	//이벤트 극장 페이지
 	@GetMapping("/event/theater")
 	public ModelAndView eventtheater(ModelAndView mv) {
 		List<Event> theaterEventList = eventservice.getTheaterEventList();
+		int theaterEventListCount = eventservice.getTheaterEventListCount();
+		
 		mv.addObject("theaterEventList", theaterEventList);
+		mv.addObject("theaterEventListCount", theaterEventListCount);
 		mv.setViewName("event/event_theater");
 		return mv;
 	}
 	
-	//이벤트 시사회/무대인사 페이지
+	//이벤트 제휴/할인 페이지
 	@GetMapping("/event/promotion")
 	public ModelAndView eventpromotion(ModelAndView mv) {
 		List<Event> promotionEventList = eventservice.getPromotionEventList();
+		int promotionEventListCount = eventservice.getPromotionEventListCount();
+		
 		mv.addObject("promotionEventList", promotionEventList);
+		mv.addObject("promotionEventListCount", promotionEventListCount);
 		mv.setViewName("event/event_promotion");
 		return mv;
 	}
@@ -91,7 +100,10 @@ public class EventController {
 	@GetMapping("/event/curtaincall")
 	public ModelAndView curtaincall(ModelAndView mv) {
 		List<Event> curtaincallEventList = eventservice.getCurtaincallEventList();
+		int curtaincallEventListCount = eventservice.getCurtaincallEventListCount();
+		
 		mv.addObject("curtaincallEventList", curtaincallEventList);
+		mv.addObject("curtaincallEventListCount", curtaincallEventListCount);
 		mv.setViewName("event/event_curtaincall");
 		return mv;
 	}

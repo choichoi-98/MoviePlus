@@ -34,23 +34,33 @@
 				<div class="tab-list fixed">
 					<ul>
 						<!-- li class="on" id="eventTab_"><a href="javascript:fn_chgEventTab('')">전체</a></li-->
-						<li class="" id="eventTab_"><a href="javascript:fn_eventTabMove(&#39;&#39;)" title="전체">전체</a></li>
+						<li class="" id="eventTab_"><a
+							href="${pageContext.request.contextPath}/event" title="전체">전체</a></li>
+
+						<!--  li id="eventTab_CED01"><a href="javascript:fn_chgEventTab('CED01')">영화</a></li-->
+						<li id="eventTab_CED01" class="">
+						<a href="${pageContext.request.contextPath}/event/movie"
+							title="영화 탭으로 이동">영화</a></li>
+
+						<!--  li id="eventTab_CED02"><a href="javascript:fn_chgEventTab('CED02')">극장</a></li-->
+						<li id="eventTab_CED02" class="">
+						<a href="${pageContext.request.contextPath}/event/theater"
+							title="극장 탭으로 이동">극장</a></li>
+
+						<!--  li id="eventTab_CED05"><a href="javascript:fn_chgEventTab('CED05')">제휴/할인</a></li-->
+						<li id="eventTab_CED05" class="">
+						<a href="${pageContext.request.contextPath}/event/promotion"
+							title="제휴/할인 탭으로 이동">제휴/할인</a></li>
+
+						<!--  li id="eventTab_CED04"><a href="javascript:fn_chgEventTab('CED04')">시사회/무대인사</a></li-->
+						<li id="eventTab_CED04" class="on">
+						<a href="${pageContext.request.contextPath}/event/curtaincall" 
+							title="시사회/무대인사 탭으로 이동"><!-- href="javascript:fn_eventTabMove(&#39;CED04&#39;)"  -->시사회/무대인사</a></li>
 						
-							<!--  li id="eventTab_CED01"><a href="javascript:fn_chgEventTab('CED01')">영화</a></li-->
-							<li id="eventTab_CED01" class=""><a href="javascript:fn_eventTabMove(&#39;CED01&#39;)" title="영화 탭으로 이동">영화</a></li>
-						
-							<!--  li id="eventTab_CED02"><a href="javascript:fn_chgEventTab('CED02')">극장</a></li-->
-							<li id="eventTab_CED02" class=""><a href="javascript:fn_eventTabMove(&#39;CED02&#39;)" title="극장 탭으로 이동">극장</a></li>
-						
-							<!--  li id="eventTab_CED05"><a href="javascript:fn_chgEventTab('CED05')">제휴/할인</a></li-->
-							<li id="eventTab_CED05" class=""><a href="javascript:fn_eventTabMove(&#39;CED05&#39;)" title="제휴/할인 탭으로 이동">제휴/할인</a></li>
-						
-							<!--  li id="eventTab_CED04"><a href="javascript:fn_chgEventTab('CED04')">시사회/무대인사</a></li-->
-							<li id="eventTab_CED04" class="on"><a href="javascript:fn_eventTabMove(&#39;CED04&#39;)" title="시사회/무대인사 탭으로 이동">시사회/무대인사</a></li>
-						
-							<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">재개봉</a></li-->
-							<li id="eventTab_CED03" class=""><a href="javascript:fn_eventTabMove(&#39;CED03&#39;)" title="재개봉 탭으로 이동">재개봉</a></li>
-						
+						<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
+						<li id="eventTab_CED03" class=""><a
+							href="javascript:fn_eventTabMove(&#39;CED03&#39;)"
+							title="재개봉 탭으로 이동">재개봉</a></li>
 					</ul>
 				</div>
 
@@ -99,8 +109,8 @@
 			
 				<div class="board-list-util mt40">
 			
-
-				<p class="result-count"><strong>전체 <b>4</b>건</strong></p>
+				<c:set var="curtaincallEventCount" value="${curtaincallEventListCount}" />
+				<p class="result-count"><strong>전체 <b>${curtaincallEventCount}</b>건</strong></p>
 
 				<div class="board-search">
 					<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text">

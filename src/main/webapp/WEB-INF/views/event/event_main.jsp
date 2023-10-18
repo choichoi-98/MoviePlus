@@ -31,21 +31,21 @@
 					<ul>
 						<!-- li class="on" id="eventTab_"><a href="javascript:fn_chgEventTab('')">전체</a></li-->
 						<li class="on" id="eventTab_"><a
-							href="javascript:fn_eventTabMove(&#39;&#39;)" title="전체">전체</a></li>
+							href="${pageContext.request.contextPath}/event" title="전체">전체</a></li>
 
 						<!--  li id="eventTab_CED01"><a href="javascript:fn_chgEventTab('CED01')">영화</a></li-->
-						<li id="eventTab_CED01" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED01&#39;)"
+						<li id="eventTab_CED01" class="">
+						<a href="${pageContext.request.contextPath}/event/movie"
 							title="영화 탭으로 이동">영화</a></li>
 
 						<!--  li id="eventTab_CED02"><a href="javascript:fn_chgEventTab('CED02')">극장</a></li-->
-						<li id="eventTab_CED02" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED02&#39;)"
+						<li id="eventTab_CED02" class="">
+						<a href="${pageContext.request.contextPath}/event/theater"
 							title="극장 탭으로 이동">극장</a></li>
 
 						<!--  li id="eventTab_CED05"><a href="javascript:fn_chgEventTab('CED05')">제휴/할인</a></li-->
-						<li id="eventTab_CED05" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED05&#39;)"
+						<li id="eventTab_CED05" class="">
+						<a href="${pageContext.request.contextPath}/event/promotion"
 							title="제휴/할인 탭으로 이동">제휴/할인</a></li>
 
 						<!--  li id="eventTab_CED04"><a href="javascript:fn_chgEventTab('CED04')">시사회/무대인사</a></li-->
@@ -81,7 +81,7 @@
 
 				<div class="inner-wrap">
 					<div class="tit-util mt70">
-						<h3 class="tit">영화*</h3>
+						<h3 class="tit">영화</h3>
 						<div class="right">
 							<a href="javascript:fn_chgEventTab(&#39;CED01&#39;)" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>

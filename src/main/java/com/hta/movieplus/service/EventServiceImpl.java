@@ -70,6 +70,26 @@ public class EventServiceImpl implements EventService{
 		return dao.getCurtaincallEventList();
 	}
 
+	@Override
+	public int getMovieEventListCount() {
+		return dao.getMovieEventListCount();
+	}
+
+	@Override
+	public int getTheaterEventListCount() {
+		return dao.getTheaterEventListCount();
+	}
+
+	@Override
+	public int getPromotionEventListCount() {
+		return dao.getPromotionEventListCount();
+	}
+
+	@Override
+	public int getCurtaincallEventListCount() {
+		return dao.getCurtaincallEventListCount();
+	}
+
 	
 
 
