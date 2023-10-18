@@ -39,4 +39,10 @@ public class NoticeServiceImpl implements NoticeService {
 		dao.deleteNoticeVO(noticenum);
 	}
 
+	@Override
+	public List<NoticeVO> getNoticeModifyList(String string2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

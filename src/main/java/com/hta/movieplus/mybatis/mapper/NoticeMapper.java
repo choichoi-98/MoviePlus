@@ -15,5 +15,7 @@ public interface NoticeMapper {
 	
 	public List<NoticeVO> getNoticeModify(String string1);
 	
-	public void deleteNoticeVO(int noticenum); //void? 게시글의 id
+	public void deleteNoticeVO(int noticenum); 
+	
+	public List<NoticeVO> getNoticeModifyList(String string2);
 }
