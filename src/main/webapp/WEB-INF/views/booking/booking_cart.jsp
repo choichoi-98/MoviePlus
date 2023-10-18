@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html lang="ko">
@@ -15,7 +16,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
+$(function() {
+	let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    
+    $('#btn_booking_pay').click(function() {
+    	var totalAmount = $('#Checker').data("amount");
+    	var sid = $('#Checker').data("sid");
+    	var cnt = $('#Checker').data("cnt");
+    	
+        $.ajax({
+            url: 'kakaopay',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { "totalAmount": totalAmount,
+            	    "sid": sid, 
+            	    "cnt": cnt},
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+                xhr.setRequestHeader("Accept-Charset", "UTF-8");
+            },
+            success: function(data) {
+                var box = data.next_redirect_pc_url;
+                window.open(box);
+//              alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
+            },
+            error: function(error) {
+                alert(JSON.stringify(error, null, 2));
+            }
+        });
+    });
+	
     var couponOpen = false; // 초기 상태는 닫혀있음
     $('#grp_coupon').click(function()  {
         if (couponOpen) {
@@ -285,6 +317,7 @@ $(document).ready(function() {
 								<span class="price">6,000</span>
 							</div>
 							-->
+							<c:set var="totalPrice" value="0"/>
 									<div class="all">
 										<span class="tit">금액 <!-- 금액 --></span> <span class="price"><em>${price}</em>
 											<span>원 <!-- 원 --></span></span>
@@ -309,6 +342,7 @@ $(document).ready(function() {
 
 									<div class="money">0</div>
 								</div>
+								<c:set var="totalPrice" value="${totalPrice + price - 0}"/>
 								<div class="pay">
 									<p class="tit">
 										최종결제금액
@@ -316,7 +350,8 @@ $(document).ready(function() {
 									</p>
 
 									<div class="money">
-										<em>${price}</em> <span>원 <!-- 원 --></span>
+										<em id="Checker" data-amount="${totalPrice}"
+										data-sid="${scheduleId}" data-cnt="${seatCnt}">${totalPrice}</em> <span>원<!-- 원 --></span>
 									</div>
 								</div>
 								<div class="payment-thing">
@@ -329,9 +364,10 @@ $(document).ready(function() {
 									href="#"
 									class="button" id="btn_booking_back" title="이전">이전 <!-- 이전 --></a>
 								<a
-									href="#"
+									href="javascript:void(0);"
 									w-data="600" h-data="400" class="button active btn-modal-open"
-									id="btn_booking_pay" onclick="startPay()" title="결제">결제</a>
+									id="btn_booking_pay"  title="결제">결제</a>
+									<!-- onclick="startPay()" -->
 							</div>
 						</div>
 					</div>
