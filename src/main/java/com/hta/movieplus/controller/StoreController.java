@@ -128,14 +128,14 @@ public class StoreController {
 		return mv;
 	}
 	
-	@GetMapping("/cp02")
-	public ModelAndView store2(ModelAndView mv) {
-		List<StoreVO> ticketlist = storeService.getItemListByKind("ticket");
-		
-		mv.setViewName("store/store_cp02");
-		mv.addObject("ticketlist", ticketlist);
-		return mv;
-	}
+//	@GetMapping("/cp02")
+//	public ModelAndView store2(ModelAndView mv) {
+//		List<StoreVO> ticketlist = storeService.getItemListByKind("ticket");
+//		
+//		mv.setViewName("store/store_cp02");
+//		mv.addObject("ticketlist", ticketlist);
+//		return mv;
+//	}
 	
 	@GetMapping("/cp05")
 	public ModelAndView store5(ModelAndView mv) {

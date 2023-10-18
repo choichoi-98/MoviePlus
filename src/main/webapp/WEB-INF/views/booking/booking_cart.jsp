@@ -258,21 +258,21 @@ $(document).ready(function() {
 							<span class="movie-grade small age-19">청소년 관람 불가</span>
 							<span class="movie-grade small age-no">미정</span>
 							-->
-								<span class="movie-grade small age-15" id="admisClassNm">15세이상관람가</span>
+								<span class="movie-grade small age-${movie.grade_data}" id="admisClassNm"></span>
 
-								<p class="tit" id="movieNm">거미집</p>
-								<p class="cate" id="playKindNm">2D</p>
-								<p class="theater" id="brchNm">군자/8관</p>
+								<p class="tit" id="movieNm">${movie.movie_Title}</p>
+								<p class="cate" id="playKindNm">${ts.THEATER_NAME}</p>
+								<p class="theater" id="brchNm">${ts.THEATER_ROOM_NAME}</p>
 								<p class="date">
-									<span id="playDe">2023.09.27</span><em id="dowNm">(수)</em> <span
+									<span id="playDe">${ts.THEATER_SCHEDULE_DATE}</span><em id="dowNm"></em> <span
 										class="time" id="playTime"><i
-										class="iconset ico-clock-white"></i>17:00~19:22</span>
+										class="iconset ico-clock-white"></i>${ts.THEATER_SCHEDULE_START}~${ts.THEATER_SCHEDULE_END}</span>
 								</p>
 							</div>
 							<div class="price-process">
 								<div class="box">
 									<div class="data">
-										<span class="tit">성인 <em>2</em></span><span class="price">14,000</span>
+										<span class="tit">성인 <em>2</em></span><span class="price">${price}</span>
 									</div>
 									<!--
 							<div class="data">
@@ -286,7 +286,7 @@ $(document).ready(function() {
 							</div>
 							-->
 									<div class="all">
-										<span class="tit">금액 <!-- 금액 --></span> <span class="price"><em>14,000</em>
+										<span class="tit">금액 <!-- 금액 --></span> <span class="price"><em>${price}</em>
 											<span>원 <!-- 원 --></span></span>
 									</div>
 								</div>
@@ -316,7 +316,7 @@ $(document).ready(function() {
 									</p>
 
 									<div class="money">
-										<em>14,000</em> <span>원 <!-- 원 --></span>
+										<em>${price}</em> <span>원 <!-- 원 --></span>
 									</div>
 								</div>
 								<div class="payment-thing">
