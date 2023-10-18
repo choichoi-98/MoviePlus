@@ -10,7 +10,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 	<main class="main">
 		<div class="container-fluid">
@@ -25,7 +24,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventadd" action="${pageContext.request.contextPath}/event/insert" class="form" method="post">
+					<form enctype="multipart/form-data" id="eventadd" action="${pageContext.request.contextPath}/admin/eventInsert" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 			
@@ -36,7 +35,7 @@
 									<select name="EVENT_TYPE" class="js-example-basic-single" id="rights" data-select2-id="rights" tabindex="-1" aria-hidden="true">
 												<option value="MOVIE">영화</option>
 												<option value="THEATER">극장</option>
-												<option value="DISCOUNT">제휴/할인</option>
+												<option value="PROMOTION">제휴/할인</option>
 												<option value="CURTAINCALL">시사회/무대인사</option>
 									</select>
 								</div>

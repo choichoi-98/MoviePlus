@@ -12,10 +12,13 @@ public interface EventMapper {
 	
 	public void insert_event(Event event);
 	
+	public List<Event> getAllEventList();
+	
 	public int getEventListCount();
 	
 	public List<Event> getEventList(HashMap<String, Integer> map);
 
 	public Event getDetailEvent(int num);
+	
 }
 

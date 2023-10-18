@@ -63,10 +63,10 @@
 						<table class="main__table">
 							<thead>
 								<tr>
-									<th>분류</th><!--(영화|극장|제휴할인|시사회/무대인사)  -->
+									<th></th>
+									<th>이벤트 분류</th><!--(영화|극장|제휴할인|시사회/무대인사)  -->
 									<th>이벤트 제목</th>
 									<th>이벤트 기간</th>
-									<th>생성 날짜</th>
 									<th>상태</th><!-- (대기/진행중/종료) -->
 									<th>관리</th>
 								</tr>
@@ -76,6 +76,9 @@
 							  <c:set var="num" value="${listcount - (page - 1) * limit }" />
 							  <c:forEach var="event" items="${eventlist}">
 								<tr>
+									<td>
+										<div class="main__table-text">${event.EVENT_NUM}</div><!-- 이벤트 작성일자 -->
+									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
@@ -88,10 +91,7 @@
 										<a href="detail?num=${event.EVENT_NUM}">${event.EVENT_SUBJECT}</a></div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_STARTDATE}-${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
-									</td>
-									<td>
-										<div class="main__table-text">${event.EVENT_DATE}</div><!-- 이벤트 작성일자 -->
+										<div class="main__table-text">${event.EVENT_STARTDATE} - ${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">${event.EVENT_STATUS}</div><!-- 이벤트 상태 -->
@@ -119,7 +119,7 @@
 						</table>
 				</div>
 				<!-- end users -->
-				<a href="/movieplus/event/addEvent" class="main__title-link">이벤트 추가</a>
+				<a href="/movieplus/admin/addEvent" class="main__title-link">이벤트 추가</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
