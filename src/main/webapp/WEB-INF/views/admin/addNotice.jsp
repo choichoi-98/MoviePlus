@@ -121,7 +121,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="notice_insert" class="form" method="post">
+					<form action="${pageContext.request.contextPath}/admin/noticewrite" class="form" method="post">
 						<div class="row row--form">
 
 							<div class="col-12 col-md-8 form__content">

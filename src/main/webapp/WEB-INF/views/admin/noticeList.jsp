@@ -98,7 +98,7 @@
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
 												<a
-													href="${pageContext.request.contextPath}/admin/noticemodify"
+													href="${pageContext.request.contextPath}/admin/gonoticemodify?noticemodify=${m.CUSTOMER_NOTICE_NUM}"
 													class="main__table-btn main__table-btn--edit"> <i
 													class="icon ion-ios-create"></i>
 												</a>&nbsp; <a href="#modal-delete"
@@ -111,6 +111,7 @@
 									</tr>
 								</c:forEach>
 							</tbody>
+							
 						</table>
 					</div>
 				</div>
