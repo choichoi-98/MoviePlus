@@ -40,7 +40,7 @@
 				<div class="tab-list fixed">
 					<ul>
 						<li id="storeTab_CPC02" class="on"><a
-							href="/movieplus/store/cp02" title="메가티켓 탭으로 이동">영화 티켓</a></li>
+							href="/movieplus/store" title="메가티켓 탭으로 이동">영화 티켓</a></li>
 						<li id="storeTab_CPC05" class=""><a
 							href="/movieplus/store/cp05" title="팝콘/음료/굿즈 탭으로 이동">팝콘/음료/굿즈</a>
 						</li>
@@ -60,7 +60,7 @@
 						<c:forEach var="i" items="${ticketlist}">
 						<ul class="list">
 							<li class="">
-								<a href="item?ITEM_CODE=${i.ITEM_CODE}">
+								<a href="store/item?ITEM_CODE=${i.ITEM_CODE}">
 									<div class="soldout">SOLD OUT</div>
 									<div class="label event">EVENT</div>
 									<div class="img">

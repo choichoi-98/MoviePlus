@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.KakaopayMapper">
+
+	<insert id="payInsert">
+	<selectKey resultType="int" order="BEFORE" keyProperty="PAY_NUM">
+		select nvl(max(PAY_NUM), 0) + 1 from KAKAO_PAY
+	</selectKey>
+		insert into KAKAO_PAY(PAY_NUM, THEATER_SCHEDULE_ID, KPAY_AMOUNT, KPAY_SEAT_CNT)
+		values(#{PAY_NUM}, #{scheduleId}, #{totalPrice}, #{seatCnt})
+	</insert>
+	
+	<update id="insertPgToken">
+    	UPDATE STORE_PAY
+    	SET pg_token = #{pg_token}
+    	WHERE pg_token IS NULL
+    	AND PAY_NUM = (SELECT MAX(PAY_NUM) 
+    				   FROM STORE_PAY 
+    				   WHERE pg_token IS NULL)
+	</update>
+</mapper>
