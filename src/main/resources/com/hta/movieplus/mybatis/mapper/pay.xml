@@ -4,19 +4,25 @@
 <mapper namespace="com.hta.movieplus.mybatis.mapper.KakaopayMapper">
 
 	<insert id="payInsert">
-	<selectKey resultType="int" order="BEFORE" keyProperty="PAY_NUM">
-		select nvl(max(PAY_NUM), 0) + 1 from KAKAO_PAY
+	<selectKey resultType="int" order="BEFORE" keyProperty="KPAY_NUM">
+		select nvl(max(KPAY_NUM), 0) + 1 from KAKAO_PAY
 	</selectKey>
-		insert into KAKAO_PAY(PAY_NUM, THEATER_SCHEDULE_ID, KPAY_AMOUNT, KPAY_SEAT_CNT)
-		values(#{PAY_NUM}, #{scheduleId}, #{totalPrice}, #{seatCnt})
+		insert into KAKAO_PAY(KPAY_NUM, THEATER_SCHEDULE_ID, KPAY_AMOUNT, KPAY_SEAT_CNT)
+		values(#{KPAY_NUM}, #{scheduleId}, #{totalPrice}, #{seatCnt})
 	</insert>
 	
 	<update id="insertPgToken">
-    	UPDATE STORE_PAY
+    	UPDATE KAKAO_PAY
     	SET pg_token = #{pg_token}
     	WHERE pg_token IS NULL
-    	AND PAY_NUM = (SELECT MAX(PAY_NUM) 
-    				   FROM STORE_PAY 
+    	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) 
+    				   FROM KAKAO_PAY 
     				   WHERE pg_token IS NULL)
 	</update>
+	
+	<select id="getAprBooking" resultType="KakaoPayVO">
+		select *
+		from KAKAO_PAY
+		where pg_token IS NOT NULL
+	</select>
 </mapper>

@@ -25,7 +25,7 @@ $(function() {
     $('#btn-kakaopay').click(function() {
         var totalPrice = $('#totPrdtAmtView').data('price');
         var cartItemNames = $('#totPrdtAmtView').data('name');
-
+		
         $.ajax({
             url: 'kakaopay',
             method: 'POST',

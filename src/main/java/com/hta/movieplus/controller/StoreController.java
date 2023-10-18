@@ -96,6 +96,13 @@ public class StoreController {
 		return mv;
 	}
 	
+	@PostMapping("/admin/itemlist")
+	@ResponseBody
+	public void delitem(
+		@RequestParam("itemCode") int ITEM_CODE) {
+		storeService.deleteItem(ITEM_CODE);
+	}
+	
 	@RequestMapping("/admin/modifyitem")
 	public ModelAndView itemdetail(
 			@RequestParam("ITEM_CODE") int ITEM_CODE,
@@ -112,12 +119,6 @@ public class StoreController {
 		return "store/modifyitem";
 	}
 	
-	@PostMapping("/admin/delitem")
-	@ResponseBody
-	public void delitem(
-		@RequestParam("itemCode") int ITEM_CODE) {
-		storeService.deleteItem(ITEM_CODE);
-	}
 	
 	@GetMapping("")
 	public ModelAndView store(ModelAndView mv) {

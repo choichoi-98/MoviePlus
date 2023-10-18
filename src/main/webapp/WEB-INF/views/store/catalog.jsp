@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	
 <script>
-	$(function(){
+	$(function() {
 		var itemlistcount = ${itemlistcount};
 		if(itemlistcount == 10) {
 			var per1page = 10;
@@ -25,17 +26,19 @@
 	    // per1page 값을 <span> 요소 내에 동적으로 삽입
 	    document.querySelector('div#per1page').textContent = per1page;
 	})
-$(document).ready(function() {	
-	$(function() {
+$(function() {
 	let token = $("meta[name='_csrf']").attr("content");
 	let header = $("meta[name='_csrf_header']").attr("content");
 	
 	$('#delitem').on('click', function(e) {
-	    var row = $(this).closest('tr'); // 해당 삭제 버튼이 속한 행을 찾기
-	    var itemCode = row.find('.thisItem').data('code');
-		alert("itemCode: " + itemCode);
+//	    var row = $(this).closest('tr'); // 해당 삭제 버튼이 속한 행을 찾기
+//	    var itemCode = row.find('#thisItem').data('icode');
+	    var itemCode = $('#thisItem').data('icode');
+
+	    alert("ajax 전, itemCode: " + itemCode);
+	    
  		$.ajax({
-		    url: "delitem",
+		    url: "itemlist",
 		    method: 'POST',
 		    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 폼 데이터 형식으로 설정
 		    data: { "itemCode": itemCode }, // 서버로 폼 데이터로 전송
@@ -44,15 +47,14 @@ $(document).ready(function() {
 		        xhr.setRequestHeader(header, token);
 		    },
 		    success: function(response) {
-		        alert("삭제 성공" + itemCode);
+		        alert("삭제 성공, itemCode: " + itemCode);
 		        window.location.reload();
 		    },
 		    error: function(error) {
-		        alert("삭제 하는중 오류" + itemCode);
+		        alert("삭제 하는중 오류, itemCode: " + itemCode);
 		    }
 		}); 
 	});
-});
 });
 </script>
 
@@ -75,14 +77,14 @@ $(document).ready(function() {
 								<span class="filter__item-label">Sort by:</span>
 
 								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<input type="button" value="최신순">
+									<input type="button" value="상품">
 									<span></span>
 								</div>
 
 								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-									<li>최신순</li>
-									<li>오래된 순</li>
-									<li>메뉴별</li>
+									<li>상품</li>
+									<li>최신</li>
+									<li>오래된</li>
 								</ul>
 							</div>
 							<!-- end filter sort -->
@@ -121,7 +123,7 @@ $(document).ready(function() {
 								<c:forEach var="i" items="${itemlist}">
 								<tr>
 									<td>
-										<div id="thisItem" class="main__table-text" data-code="${i.ITEM_CODE}">${i.ITEM_CODE}</div>
+										<div id="thisItem" class="main__table-text" data-icode="${i.ITEM_CODE}">${i.ITEM_CODE}</div>
 									</td>
 									<td>
 										<div class="main__table-text">
@@ -135,13 +137,15 @@ $(document).ready(function() {
 										<div class="main__table-text">${i.ITEM_PRICE}</div>
 									</td>
 									<td>
-										<div class="main__table-text">1000</div>
+										<div class="main__table-text">-</div>
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">판매중</div>
 									</td>
 									<td>
-										<div class="main__table-text">2023/10/05</div>
+									<c:set var="ymd" value="<%=new java.util.Date()%>" />
+									<fmt:formatDate var="fmtymd" value="${ymd}" pattern="yyyy-MM-dd" />
+										<div class="main__table-text">${fmtymd}</div>
 									</td>
 									<td>
 										<div class="main__table-btns">
