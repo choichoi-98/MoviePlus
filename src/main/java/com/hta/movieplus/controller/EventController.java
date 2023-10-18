@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -60,10 +61,43 @@ public class EventController {
 	}
 	
 	//이벤트 시사회/무대인사 페이지
-	@GetMapping("/event/curtaincall")
-	public String curtaincall() {
-		return "event/event_curtaincall";
+	@GetMapping("/event/movie")
+	public ModelAndView eventmovie(ModelAndView mv) {
+		List<Event> movieEventList = eventservice.getMovieEventList();
+		mv.addObject("movieEventList", movieEventList);
+		mv.setViewName("event/event_movie");
+		return mv;
 	}
+	
+	//이벤트 시사회/무대인사 페이지
+	@GetMapping("/event/theater")
+	public ModelAndView eventtheater(ModelAndView mv) {
+		List<Event> theaterEventList = eventservice.getTheaterEventList();
+		mv.addObject("theaterEventList", theaterEventList);
+		mv.setViewName("event/event_theater");
+		return mv;
+	}
+	
+	//이벤트 시사회/무대인사 페이지
+	@GetMapping("/event/promotion")
+	public ModelAndView eventpromotion(ModelAndView mv) {
+		List<Event> promotionEventList = eventservice.getPromotionEventList();
+		mv.addObject("promotionEventList", promotionEventList);
+		mv.setViewName("event/event_promotion");
+		return mv;
+	}
+	
+	//이벤트 시사회/무대인사 페이지
+	@GetMapping("/event/curtaincall")
+	public ModelAndView curtaincall(ModelAndView mv) {
+		List<Event> curtaincallEventList = eventservice.getCurtaincallEventList();
+		mv.addObject("curtaincallEventList", curtaincallEventList);
+		mv.setViewName("event/event_curtaincall");
+		return mv;
+	}
+	
+	
+	
 	
 	//관리자 - 이벤트 추가페이지 이동
 	@GetMapping("/admin/addEvent")
@@ -73,35 +107,87 @@ public class EventController {
 	
 	//관리자 - 이벤트 추가 프로세스
 	@PostMapping("/admin/eventInsert")
-	public String insertevent (Event event, HttpServletRequest request) throws Exception {
+	public String insertevent (Event event,Model model, HttpServletRequest request) throws Exception {
 		
-		MultipartFile uploadevent = event.getUploadevent();
+		MultipartFile uploadevent = event.getUploadevent();	//1)이벤트 내용 업로드
 		
-		if(!uploadevent.isEmpty()) {
-			String fileName = uploadevent.getOriginalFilename();	//원래 파일명
-			event.setEVENTFILE_ORIGINAL(fileName);	//원래 파일명 저장
+		MultipartFile uploadthumb = event.getUploadthumb();	//2)이벤트 썸네일 업로드
+		
+		
+		if(!uploadevent.isEmpty() && !uploadthumb.isEmpty()) {
 			
-			String fileDBName = fileDBname(fileName, saveFolder);
-			logger.info("fileDBName = " + fileDBName);
+			//1)이벤트 내용 업로드
+			String contentfileName = uploadevent.getOriginalFilename();	//이벤트 내용 원래 파일명
+			event.setEVENTCONTENT_ORIGINAL(contentfileName);	//이벤트 내용 원래 파일명 저장
 			
-			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-			uploadevent.transferTo(new File(saveFolder + fileDBName));
-			logger.info("transferTo path = " + saveFolder +  fileDBName);
-			event.setEVENT_FILE(fileDBName);
+			String contentfileDBName = fileDBname(contentfileName, saveFolder);
+			logger.info("contentfileDBName(내용) = " + contentfileDBName);
+			uploadevent.transferTo(new File(saveFolder + contentfileDBName));
+			logger.info("transferTo path(내용) = " + saveFolder +  contentfileDBName);
+			event.setEVENT_CONTENT(contentfileDBName);
+			
+			//2)이벤트 썸네일 업로드
+			String thumbfileName = uploadthumb.getOriginalFilename();
+			event.setEVENTFILE_ORIGINAL(thumbfileName);
+			
+			String thumbfileDBName = thumbfileDBname(thumbfileName, saveFolder);
+			uploadthumb.transferTo(new File(saveFolder + thumbfileDBName));
+			event.setEVENT_FILE(thumbfileDBName);
+			
 		}
 		
 		eventservice.insert_event(event);
+		model.addAttribute("eventdata", event);
 		
 		return "redirect:/admin/manageEvent";
 	}
-	//파일 이름
-	private String fileDBname(String fileName, String saveFolder) {
+	
+	//이벤트 썸네일 파일 이름
+	private String thumbfileDBname(String thumbfileName, String saveFolder) {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);	
 		int month = c.get(Calendar.MONTH) + 1;	
 		int date = c.get(Calendar.DATE);
 		
-		String homedir = saveFolder + "/event/" + year + "-" + month + "-" + date;
+		String homedir = saveFolder + "/event/thumb/" + year + "-" + month + "-" + date;
+		logger.info(homedir);
+		File path1 = new File(homedir);
+		if(!(path1.exists())) {
+			path1.mkdir();	//새로운 폴더 생성
+		}
+		
+		//난수 구하기
+		Random r = new Random();
+		int random = r.nextInt(1000000000);
+		
+		/*** 확장자 구하기 시작 ***/
+		int index = thumbfileName.lastIndexOf(".");
+		//문자열에서 특정 문자열의 위치 값(index)을 반환합니다.
+		logger.info("index = " + index);
+		
+		String fileExtension = thumbfileName.substring(index + 1);
+		logger.info("fileExtension = " + fileExtension);
+		/*** 확장자 구하기 끝 ***/
+		
+		//새로운 파일명
+		String refileName = "event" + year + month + date + random + "." + fileExtension;
+		logger.info("refileName = " + refileName);
+		
+		//오라클 디비에 저장될 파일명
+		String thumbfileDBName = File.separator + "event"+  File.separator + "thumb" + File.separator + year + "-" + month + "-" + date + File.separator + refileName;
+		logger.info("fileDBName = " + thumbfileDBName);
+		return thumbfileDBName;
+	}
+	
+	
+	//이벤트 내용 파일 이름
+	private String fileDBname(String contentfileName, String saveFolder) {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);	
+		int month = c.get(Calendar.MONTH) + 1;	
+		int date = c.get(Calendar.DATE);
+		
+		String homedir = saveFolder + "/event/contents/" + year + "-" + month + "-" + date;
 		logger.info(homedir);
 		File path1 = new File(homedir);
 		if(!(path1.exists())) {
@@ -113,11 +199,11 @@ public class EventController {
 		int random = r.nextInt(1000000000);
 				
 		/*** 확장자 구하기 시작 ***/
-		int index = fileName.lastIndexOf(".");
+		int index = contentfileName.lastIndexOf(".");
 		//문자열에서 특정 문자열의 위치 값(index)을 반환합니다.
 		logger.info("index = " + index);
 				
-		String fileExtension = fileName.substring(index + 1);
+		String fileExtension = contentfileName.substring(index + 1);
 		logger.info("fileExtension = " + fileExtension);
 		/*** 확장자 구하기 끝 ***/
 				
@@ -126,7 +212,7 @@ public class EventController {
 		logger.info("refileName = " + refileName);
 				
 		//오라클 디비에 저장될 파일명
-		String fileDBName = File.separator + "event" + File.separator + year + "-" + month + "-" + date + File.separator + refileName;
+		String fileDBName = File.separator + "event" +  File.separator + "contents" + File.separator + year + "-" + month + "-" + date + File.separator + refileName;
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 	}

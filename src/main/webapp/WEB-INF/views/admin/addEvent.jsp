@@ -39,15 +39,10 @@
 												<option value="CURTAINCALL">시사회/무대인사</option>
 									</select>
 								</div>
-					
+							
 								<div class="col-12">
 									<input type="text" name="EVENT_SUBJECT" class="form__input"
 											placeholder="이벤트 제목" required>
-								</div>
-									
-								<div class="col-12">
-									<textarea id="text" name="EVENT_CONTENT"
-											class="form__textarea" placeholder="이벤트 내용"></textarea>
 								</div>
 									
 								<div class="col-3"><!-- 이벤트 시작일 -->
@@ -62,8 +57,24 @@
 
 							<div class="col-12">
 								<label>
+									<span style="color:white;"> 
+									<c:if test = "${empty eventdata.EVENT_FILE}">
+										<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="썸네일" style="width: 50px;">
+									</c:if>
+									<c:if test = "${!empty eventdata.EVENT_FILE}">
+										<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
+									</c:if>
+									<input type="file" id="eventthumbupfile" name="uploadthumb" value="${eventdata.EVENT_FILE}" style="color:white;" />
+									</span>
+									<span id="thumbfilevalue" style="display:none;"></span>
+								</label>
+							</div>	
+							
+							<div class="col-12">
+								<label>
 									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
 									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
+									
 								</label>
 								<span id="filevalue" style="display:none;"></span>
                             </div>
@@ -88,10 +99,43 @@ $(document).ready(function(){
 		$('#filevalue').text(inputfile[inputfile.length - 1]);
 	});
 	
+	$("#eventthumbupfile").change(function(){
+		console.log($(this).val())		//c:\fakepath\upload.png
+		const inputfile = $(this).val().split('\\');
+		$('#thumbfilevalue').text(inputfile[inputfile.length - 1]);
+	});
+	
 	$("#cancelbtn").click(function(){
 		location.href = "/movieplus/event/manageEvent";		
 	})
 	
+	let check = 0;
+	
+		//마이페이지 - 프로필 이미지 파일 업로드 미리보기
+	$('#eventthumbupfile').change(function(upload){
+		check++;
+		const inputfile = $(this).val().split('\\');
+		const filename=inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
+		
+		console.log(filename);
+		
+		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
+		if(pattern.test(filename)){
+			$('#eventthumbupfile').text(filename);
+			
+			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
+			
+		  reader.readAsDataURL(event.target.files[0]);
+			 
+		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('#thumbfilevalue + img').attr('src', this.result);  
+		  };
+		} else {
+			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
+			$(this).val('')
+		}
+		
+	})
    
 }) //ready end
 </script>	

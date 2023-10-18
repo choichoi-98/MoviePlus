@@ -15,16 +15,20 @@ public class Event {
 	private String EVENT_ENDDATE;		//이벤트 종료일
 	private String EVENT_STATUS="WAIT"; //이벤트 상태(대기(WAIT)| 진행중(PROGRESS) | 종료(END))
 	
-	private MultipartFile uploadevent;		//이벤트 사진 업로드시 사용
+	private MultipartFile uploadevent;		//이벤트 내용 사진 업로드시 사용(EVENT_CONTENT)
+	private String EVENTCONTENT_ORIGINAL;
+	
+	private MultipartFile uploadthumb;	//이벤트 썸네일 사진 업로드시 사용(EVENT_FILE)
 	private String EVENTFILE_ORIGINAL;
 	
-	
+
 	@Override
 	public String toString() {
 		return "Event [EVENT_NUM=" + EVENT_NUM + ", EVENT_TYPE=" + EVENT_TYPE + ", EVENT_SUBJECT=" + EVENT_SUBJECT
 				+ ", EVENT_CONTENT=" + EVENT_CONTENT + ", EVENT_DATE=" + EVENT_DATE + ", EVENT_FILE=" + EVENT_FILE
-				+ ", EVENT_STARTDATE=" + EVENT_STARTDATE + ", EVENT_ENDDATE=" + EVENT_ENDDATE + ", uploadevent="
-				+ uploadevent + ", EVENTFILE_ORIGINAL=" + EVENTFILE_ORIGINAL + "]";
+				+ ", EVENT_STARTDATE=" + EVENT_STARTDATE + ", EVENT_ENDDATE=" + EVENT_ENDDATE + ", EVENT_STATUS="
+				+ EVENT_STATUS + ", uploadevent=" + uploadevent + ", EVENTCONTENT_ORIGINAL=" + EVENTCONTENT_ORIGINAL
+				+ ", uploadthumb=" + uploadthumb + ", EVENTFILE_ORIGINAL=" + EVENTFILE_ORIGINAL + "]";
 	}
 
 
@@ -135,6 +139,26 @@ public class Event {
 
 	public void setEVENT_STATUS(String eVENT_STATUS) {
 		EVENT_STATUS = eVENT_STATUS;
+	}
+
+
+	public String getEVENTCONTENT_ORIGINAL() {
+		return EVENTCONTENT_ORIGINAL;
+	}
+
+
+	public void setEVENTCONTENT_ORIGINAL(String eVENTCONTENT_ORIGINAL) {
+		EVENTCONTENT_ORIGINAL = eVENTCONTENT_ORIGINAL;
+	}
+
+
+	public MultipartFile getUploadthumb() {
+		return uploadthumb;
+	}
+
+
+	public void setUploadthumb(MultipartFile uploadthumb) {
+		this.uploadthumb = uploadthumb;
 	}
 	
 	

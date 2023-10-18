@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,88 +120,27 @@
 			
                 <input type="hidden" id="totCount" name="totCount" value="4">
 				<ul>
-				
+				<c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" >
 					<li>
 						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14248" data-netfunnel="N" class="eventBtn" title="&lt;화란&gt; 개봉주 무대인사 상세보기">
-							
 
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./eventtab_files/YX9pCGwSR3XIT8W5U7JF0ketc3YPuUav.jpg" alt="&lt;화란&gt; 개봉주 무대인사" onerror="noImg(this);"></p>
+							<p class="img"> <img src="${pageContext.request.contextPath}/upload${eventcurtaincall.EVENT_FILE}" alt="&lt;화란&gt; 개봉주 무대인사" onerror="noImg(this);"></p>
 
 							<p class="tit">
-								&lt;화란&gt; 개봉주 무대인사
+								${eventcurtaincall.EVENT_SUBJECT}
 							</p>
 
 							<p class="date">
-								2023.10.14 ~ 2023.10.15
+								${eventcurtaincall.EVENT_STARTDATE} ~ ${eventcurtaincall.EVENT_ENDDATE}
 							</p>
 						</a>
                 
 					</li>
-
-				
-					<li>
-						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14170" data-netfunnel="N" class="eventBtn" title="&lt;30일&gt; 2주차 무대인사 상세보기">
-							
-
-							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./eventtab_files/Je1xxOx0rnPcpShyrOgQvbmczlwVKnE8.jpg" alt="&lt;30일&gt; 2주차 무대인사" onerror="noImg(this);"></p>
-
-							<p class="tit">
-								&lt;30일&gt; 2주차 무대인사
-							</p>
-
-							<p class="date">
-								2023.10.14 ~ 2023.10.15
-							</p>
-						</a>
-                
-					</li>
-
-				
-					<li>
-						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14200" data-netfunnel="N" class="eventBtn" title="&lt;퍼피 구조대: 더 마이티 무비&gt; 코스튬 무대인사 상세보기">
-							
-
-							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./eventtab_files/yegomYF0LoTGFjRbI4pZLfGcGm969osC.jpg" alt="&lt;퍼피 구조대: 더 마이티 무비&gt; 코스튬 무대인사" onerror="noImg(this);"></p>
-
-							<p class="tit">
-								&lt;퍼피 구조대: 더 마이티 무비&gt; 코스튬 무대인사
-							</p>
-
-							<p class="date">
-								2023.10.07 ~ 2023.10.15
-							</p>
-						</a>
-                
-					</li>
-
-				
-					<li>
-						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14162" data-netfunnel="N" class="eventBtn" title="&lt;익스펜더블4&gt; 무비플러스 회원 시사회 상세보기">
-							
-
-							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./eventtab_files/RLDbVyII0mo0Ec29W92eiMhj2wNjXVxG.jpg" alt="&lt;익스펜더블4&gt; 무비플러스 회원 시사회" onerror="noImg(this);"></p>
-
-							<p class="tit">
-								&lt;익스펜더블4&gt; 무비플러스 회원 시사회
-							</p>
-
-							<p class="date">
-								2023.09.26 ~ 2023.10.15
-							</p>
-						</a>
-                
-					</li>
-
-				
+				</c:forEach>	
 				</ul>
-			
-          
 			</div>
-		
+
 		
 		</div>
 	</div>

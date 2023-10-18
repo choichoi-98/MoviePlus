@@ -94,11 +94,10 @@
 						<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" begin="0" end="3">
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
-								title="[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventmovie.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src="./event_files/OuF8MwUmJhBV5sCkz6RIDXu5CUXrjCeK.jpg"
-											alt="[음반 증정 이벤트] 21세기 피아노의 거장 : 다닐 트리포노프"
-											onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventmovie.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
 									<p class="tit">${eventmovie.EVENT_SUBJECT}</p>
@@ -128,10 +127,10 @@
 							<li>
 								<a href="https://www.megabox.co.kr/event#"
 								data-no="13594" data-netfunnel="N" class="eventBtn"
-								title="[목동] 달콤 고소 믹스팝콘 출시! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventtheater.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src=""
-											alt="[목동] 달콤 고소 믹스팝콘 출시!" onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventtheater.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
 									<p class="tit">${eventtheater.EVENT_SUBJECT}</p>
@@ -157,13 +156,12 @@
 						<ul>
 						 <c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" begin="0" end="3">
 						 
-							<li><a href="https://www.megabox.co.kr/event#"
+							<li><a href="#"
 								data-no="14091" data-netfunnel="N" class="eventBtn"
-								title="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람! 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+								title="${eventpromotion.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src=""
-											alt="[삼성카드X무비플러스] 삼성카드 이용하신다면 영화 9천원 관람!"
-											onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventpromotion.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
 									<p class="tit">${eventpromotion.EVENT_SUBJECT}</p>
@@ -188,12 +186,11 @@
 					<div class="event-list mt15">
 						<ul>
 						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" begin="0" end="3">
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14167" data-netfunnel="N" class="eventBtn"
-								title="&lt;거미집&gt; 10월 9일(월) 무대인사 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
+							<li><a href="#"	data-no="14167" data-netfunnel="N" class="eventBtn"
+								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
-										<img src=""
-											alt="&lt;거미집&gt; 10월 9일(월) 무대인사" onerror="noImg(this);">
+										<img src="${pageContext.request.contextPath}/upload${eventcurtaincall.EVENT_FILE}"
+											alt="" onerror="noImg(this);">
 									</p>
 
 									<p class="tit">${eventcurtaincall.EVENT_SUBJECT}</p>
