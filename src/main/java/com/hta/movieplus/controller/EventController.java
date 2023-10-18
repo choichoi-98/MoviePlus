@@ -172,7 +172,7 @@ public class EventController {
 		}
 		
 		List<Event> eventlist = eventservice.getEventList(page, limit);
-		mv.setViewName("event/manageEvent");
+		mv.setViewName("admin/manageEvent");
 		mv.addObject("page", page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);		

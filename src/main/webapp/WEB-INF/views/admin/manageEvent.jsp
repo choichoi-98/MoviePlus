@@ -25,7 +25,7 @@
 					<div class="main__title">
 						<h2>이벤트 관리</h2>
 
-						<span class="main__title-stat">총 ${theaterCount}개</span>
+						<span class="main__title-stat">총 ${listcount}개</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
@@ -79,7 +79,7 @@
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>${event.EVENT_TYPE}</h3><!-- 이벤트 분류 -->
+												<h3><c:out value="${event.EVENT_TYPE}" /></h3><!-- 이벤트 분류 -->
 											</div>
 										</div>
 									</td>
