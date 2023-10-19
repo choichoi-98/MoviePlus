@@ -18,7 +18,7 @@
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
 	
 	
-	<script>
+	<script> /* 리스트에서 삭제기능 */
 		$(document).ready(function () {
 			var selected_delete_notice_num;
 
@@ -30,7 +30,7 @@
 				location.href = '/movieplus/admin/noticedelete?noticenum=' + selected_delete_notice_num;
 			})
 		})
-		
+		/* 리스트 개수를 확인하는 기능 */
 		  $(document).ready(function () {
         // 글의 개수를 가져오는 부분
         var total = ; // list2는 CUSTOMER_NOTICE_TYPE컬럼의 값이 string(전체)인 데이터의 수
@@ -74,9 +74,8 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
+									<th>코 드 번 호</th>
 									<th>제 목</th>
-									<th>유 형</th>
-									<th>작 성 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
 							</thead>
@@ -117,7 +116,7 @@
 				</div>
 				<!-- end comments -->
 				<a href="${pageContext.request.contextPath}/admin/gonoticewrite"
-					class="main__title-link">작성하기</a>
+					class="main__title-link">등록하기</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
