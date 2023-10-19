@@ -128,6 +128,7 @@
                 <input type="hidden" id="totCount" name="totCount" value="4">
 				<ul>
 					<c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" >
+					<c:if test='${eventpromotion.EVENT_STATUS == "PROGRESS"}'>
 					<li>
 						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14248" data-netfunnel="N" class="eventBtn" title="${eventpromotion.EVENT_SUBJECT}">
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -143,6 +144,7 @@
 							</p>
 						</a>
 					</li>
+					</c:if>
 				</c:forEach>
 				</ul>
 			

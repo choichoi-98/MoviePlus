@@ -131,6 +131,7 @@
                 <input type="hidden" id="totCount" name="totCount" value="4">
 				<ul>
 				<c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" >
+					<c:if test='${eventcurtaincall.EVENT_STATUS == "PROGRESS"}'>
 					<li>
 						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14248" data-netfunnel="N" class="eventBtn" title="&lt;화란&gt; 개봉주 무대인사 상세보기">
 
@@ -147,6 +148,7 @@
 						</a>
                 
 					</li>
+					</c:if>
 				</c:forEach>	
 				</ul>
 			</div>

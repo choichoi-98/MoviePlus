@@ -358,11 +358,11 @@ public class EventController {
 	@GetMapping("/event/detail")
 	public ModelAndView viewDetail(ModelAndView mv, 
 			HttpServletRequest request,
-			@RequestHeader(value="EVENT_NUM", required=false) int eventNo) {
+			@RequestHeader(value="num", required=false) int num) {
 		
-		logger.info("EVENT_NUM : " + eventNo);
+		logger.info("EVENT_NUM : " + num);
 		
-		Event event = eventservice.getDetailEvent(eventNo);
+		Event event = eventservice.getDetailEvent(num);
 		
 //		if(event == null) {
 //			logger.info("상세보기 실패");

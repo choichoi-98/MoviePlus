@@ -90,7 +90,10 @@
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="">${event.EVENT_SUBJECT}</a></div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
+										<a href="#">${event.EVENT_SUBJECT}
+											<input type="hidden" name="EVENT_NUM" value="${event.EVENT_NUM}">
+										</a>
+										</div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
 									</td>
 									<td>
 										<div class="main__table-text">${event.EVENT_STARTDATE} - ${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
