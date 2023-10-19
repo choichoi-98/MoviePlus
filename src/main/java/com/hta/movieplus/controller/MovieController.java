@@ -248,18 +248,7 @@ public class MovieController {
 		return movieServiceImpl.addMovieReviewLike(memberId, review_num);
 	}
 	
-	//관람평(댓글) 좋아요 삭제
-//	@ResponseBody
-//	@RequestMapping("/deleteMovieReviewLike")
-//	public int deleteMovieReviewLike(
-//			@RequestParam("review_num") String review_num,
-//			@AuthenticationPrincipal Member member) {
-//		
-//		String memberId = member.getMEMBER_ID();
-//		
-//		return movieServiceImpl.deleteMovieReviewLike(memberId, review_num);
-//	}
-//	
+
 	
 	//보고싶어요 추가
 	@ResponseBody
@@ -305,5 +294,13 @@ public class MovieController {
 	    }
 	    return map;
 	}
+	
+	//관리자 - 감상평(댓글) 관리
+	@RequestMapping(value="/manageMovieReview")
+	public String adminMovieReview() {
+		
+		return "admin/manageMovieReview";
+	}
+	
 }
 

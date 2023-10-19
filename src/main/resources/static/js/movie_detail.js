@@ -310,7 +310,7 @@ $("body").on("click", ".updateOne", function(e){
 		$("#textarea").val(review_content);
 		buttonIndex = score;
 		buttons.removeClass('on'); // 모든 버튼의 'on' 클래스 제거
-	    buttons.slice(0, score + 1).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
+	    buttons.slice(0, score).addClass('on'); // 해당 버튼과 이전 버튼들에 'on' 클래스 추가
 	    $("#review_num").val(review_num);
 		 $('#regOneBtn').prop('id', 'updateBtn').text('수정');
 	} else{
