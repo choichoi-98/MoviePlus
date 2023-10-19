@@ -16,6 +16,20 @@
 
 <title></title>
 
+<style>
+#modal-delete-btn {
+	background: #792828;  
+	padding: 4px 12px;  
+  	font-size: 12px;
+	text-decoration: none;
+	color: white;
+	border: 1px solid rgba(0,0,0,0.21);
+	border-bottom: 4px solid rgba(0,0,0,0.21);
+	border-radius: 4px;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	margin: 5px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -216,7 +230,8 @@
 										<div class="wrapper">
 											<input type="hidden" id="hidden-member-id"
 												value="${pinfo.MEMBER_ID}">
-											<button id="modal-delete-btn" type="button" class="" style="display:none">삭제하기</button>
+											<button id="modal-delete-btn" type="button" class=""
+												style="display: none">삭제하기</button>
 										</div>
 									</div>
 									<!--// post-funtion -->
@@ -280,9 +295,7 @@
 						<!--// comment input-->
 
 						<!-- comment list -->
-						<div class="comment-list" id="commentList">
-
-						</div>
+						<div class="comment-list" id="commentList"></div>
 						<!--// comment list -->
 
 						<div class="mb50"></div>

@@ -156,8 +156,9 @@ var contextPath = "${pageContext.request.contextPath}";
 				<div class="reserve screen-type col-2">
 					<div class="reserve">
 						<a
+							href="${pageContext.request.contextPath}/booking?movieCode=${m.movie_Code}"
 							class="btn reserve" title="영화 예매하기" 
-							style="width: 100%;border-radius: 5px;"
+							style="width: 100%;border-radius: 5px; cursor:pointer;"
 							>예매
 					    </a> 
 

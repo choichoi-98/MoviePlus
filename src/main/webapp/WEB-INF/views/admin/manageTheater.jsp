@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/js/admin_theater.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin_theater_list.js"></script>
 
 	
 	<main class="main">
@@ -26,7 +26,7 @@
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
-							<div class="filter" id="filter__sort">
+							<!-- <div class="filter" id="filter__sort">
 								<span class="filter__item-label">정렬 순서</span>
 
 								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,21 +35,21 @@
 								</div>
 
 								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-									<li>생성 순</li>
-									<li>상태</li>
-									<li>매출 순</li>
-									<li>지역</li>
+									<li class="filter-option">생성 순</li>
+									<li class="filter-option">상태</li>
+									<li class="filter-option">매출 순</li>
+									<li class="filter-option">지역</li>
 								</ul>
 							</div>
-							<!-- end filter sort -->
+							end filter sort
 
-							<!-- search -->
+							search
 							<form action="#" class="main__title-form">
 								<input type="text" placeholder="극장명 검색">
 								<button type="button">
 									<i class="icon ion-ios-search"></i>
 								</button>
-							</form>
+							</form> -->
 							<!-- end search -->
 						</div>
 					</div>
@@ -126,7 +126,7 @@
 							</tbody>
 						</table>
 				</div>
-			
+				<a href="${pageContext.request.contextPath}/admin/addtheater" class="main__title-link">극장 추가</a>
 				<div class="col-12">
 					<div class="paginator-wrap">
 						<span>${theaterCount} 중 10개씩</span>

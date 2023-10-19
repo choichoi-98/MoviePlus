@@ -12,6 +12,7 @@ $(document).ready(function(){
 
 	var cnt;
 
+
 	countTheaterAble(); // 지역별 활성화된 상영관 갯수
 	
 	//날짜
@@ -58,7 +59,7 @@ $(document).ready(function(){
 	//화면 첫 진입 선호 극장 탭 선택
 	$('#liFavorBrch').trigger('click');
 
-	
+
 
 	//영화 선택
 	$('body').on('click', '.movie-timetable', function() {
@@ -107,7 +108,7 @@ $(document).ready(function(){
 	$('body').on('click', '#scheduleListResult li .btn', function() {
 		var scheduleId = $(this).parent().attr('data-scheduleId');	
 		
-		location.href="seat?scheduleId=" + scheduleId;
+		location.href="/movieplus/booking/seat?scheduleId=" + scheduleId;
 	});
 	
 
@@ -132,7 +133,7 @@ $(document).ready(function(){
 	function getOpenMovieListWithScheduleCnt() {
 		$.ajax({
             type: "POST",
-            url: "getOpenMovieListWithScheduleCnt",
+            url: "/movieplus/booking/getOpenMovieListWithScheduleCnt",
             data: {
 				date : timetableDate
             },
@@ -162,6 +163,16 @@ $(document).ready(function(){
 
 				getMovieDIBS() // 영화 목록 추가 이후 보고싶은 영화
 
+				if($('#fast-movieCode').val() != 'none'){
+					$('.movie-timetable').each(function(index, item){
+						if($(item).attr('data-moviecode')==$('#fast-movieCode').val()){
+							$(item).trigger('click');
+						}
+					})
+				}
+
+				
+
             },
             error: function() {	
                 console.log('영화 불러오기 ajax 실패');
@@ -172,7 +183,7 @@ $(document).ready(function(){
 	function getTheaterRoomListWithScheduleCnt(){
         $.ajax({
             type: "POST",
-            url: "getTheaterRoomListWithScheduleCnt",
+            url: "/movieplus/booking/getTheaterRoomListWithScheduleCnt",
             data: {
                 movieCode : timetableMovie,
 				date : timetableDate
@@ -202,7 +213,7 @@ $(document).ready(function(){
 	function getScheduleListByDateAndMovieCodeAndTheaterId(){
         $.ajax({
             type: "POST",
-            url: "getScheduleListByDateAndMovieCodeAndTheaterId",
+            url: "/movieplus/booking/getScheduleListByDateAndMovieCodeAndTheaterId",
             data: {
                 movieCode : timetableMovie,
 				date : timetableDate,
@@ -259,7 +270,7 @@ $(document).ready(function(){
 	function getScheduleListByTheaterIdAndDate(){
         $.ajax({
             type: "POST",
-            url: "getScheduleListByTheaterIdAndDate_ajax",
+            url: "/movieplus/booking/getScheduleListByTheaterIdAndDate_ajax",
             data: {
                 theaterId : timetableTheater,
 				date : timetableDate
@@ -270,7 +281,6 @@ $(document).ready(function(){
             },
             success: function (data) {
 				$('#scheduleListResult').empty();
-				console.log(data);
 				if(data.length > 0){
 					$(data).each(function (index, item) {
 						
@@ -311,13 +321,12 @@ $(document).ready(function(){
 	function getMovieDIBS(){
         $.ajax({
             type: "POST",
-            url: "getMovieDIBS",
+            url: "/movieplus/booking/getMovieDIBS",
             cache: false,
             beforeSend : function(xhr){
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
-				console.log(data);
 				$(data).each(function(index, item){
 
 					$('.ico-heart-small').each(function(index2, item2){

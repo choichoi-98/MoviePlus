@@ -13,6 +13,8 @@ import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
@@ -50,6 +52,8 @@ public class BookingController {
 	SeatService seatService;
 	KakaopayService kakaopayService;
 	
+	 private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
+	
 	
 	@Autowired
 	public BookingController(SchedulingService schedulingService, TheaterService theaterService, TheaterManagerService theaterManagerService, SeatService seatService, KakaopayService kakaopayService) {
@@ -61,11 +65,11 @@ public class BookingController {
 		this.kakaopayService = kakaopayService;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ModelAndView bookingMainView(ModelAndView mv, Principal principal,
-										@RequestParam(value="movieCode", required=false) String movieCode) {
+										@RequestParam(value="movieCode", required=false, defaultValue="none") String movieCode) {
 		List<Theater> theaterList = theaterService.getAllTheaterList();
-		
+
 		if(principal != null) {
 			List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
 			int favTheaterCnt = theaterService.getCountFavoriteTheater(principal.getName());
@@ -76,7 +80,7 @@ public class BookingController {
 		List<TimeTableDate> dateList = schedulingService.getDateList();
 		
 		if(movieCode != null) {
-			mv.addObject("fast-movieCode", movieCode);
+			mv.addObject("fast_movieCode", movieCode);
 		}
 		
 		mv.addObject("dateList", dateList);
