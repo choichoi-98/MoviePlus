@@ -528,6 +528,7 @@ button.button.purple:hover {
 
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="pinfo" />
+				<input type="hidden" id="header-pinfo-memberId" value="${pinfo.MEMBER_ID}">
 				<div class="login-after" style="display:;">
 					<!-- 로그인 이후 -->
 					<div class="inner">

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MoviePostCommentVO;
+import com.hta.movieplus.domain.MoviePostLikeVO;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.service.MoviePostService;
 
@@ -29,8 +31,12 @@ public class MoviePostController {
 	@GetMapping("/all")
 	public String moviePostAllView(Model model, @AuthenticationPrincipal Member member) {
 		List<Movie> movieList = moviePostService.getMovieWithPostCnt();
+		int myPostCnt = -1;
 		int totalCnt = moviePostService.getTotalCnt();
-		int myPostCnt = moviePostService.getMyPostCnt(member.getMEMBER_ID());
+		if(member != null) {
+			 myPostCnt = moviePostService.getMyPostCnt(member.getMEMBER_ID());
+		}
+		
 		
 		model.addAttribute("myPostCnt", myPostCnt);
 		model.addAttribute("mp_movieList", movieList);
@@ -82,4 +88,58 @@ public class MoviePostController {
 		return moviePostService.getPostDetail(postNum); 
 	}
 	
+	@ResponseBody
+	@PostMapping("/deletePost")
+	public int deletePost(int postNum) {
+		
+		return moviePostService.deletePost(postNum);
+	}
+
+	@ResponseBody
+	@PostMapping("/checkLike")
+	public int checkLike(int MOVIEPOST_NUM, @AuthenticationPrincipal Member member) {
+				
+		if(member == null) {
+			return -1;
+			
+		}
+		return moviePostService.checkLike(MOVIEPOST_NUM, member);
+	}
+	
+	@ResponseBody
+	@PostMapping("/addLikeAction")
+	public int addLikeAction(int MOVIEPOST_NUM, @AuthenticationPrincipal Member member) {
+		
+		
+		return moviePostService.addLikeByPostNum(MOVIEPOST_NUM, member);
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteLikeAction")
+	public int deleteLikeAction(int MOVIEPOST_NUM, @AuthenticationPrincipal Member member) {
+		
+		
+		return moviePostService.deleteLikeByPostNum(MOVIEPOST_NUM, member);
+	}
+	
+	@ResponseBody
+	@PostMapping("/addMoviePostComment")
+	public int addMoviePostComment(MoviePostCommentVO comment) {
+		
+		return moviePostService.addMoviePostComment(comment);
+	}
+	
+	@ResponseBody
+	@PostMapping("/getCommentList")
+	public List<MoviePostCommentVO> getCommentList(int postNum){
+		
+		return moviePostService.getCommemtListByPostNum(postNum);
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteComment")
+	public int deleteComment(int comment_num) {
+		
+		return moviePostService.deleteCommentByCommNum(comment_num);
+	}
 }

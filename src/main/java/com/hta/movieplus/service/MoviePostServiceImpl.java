@@ -8,7 +8,9 @@ import java.util.StringTokenizer;
 
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MoviePostCommentVO;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.mybatis.mapper.MoviePostMapper;
 
@@ -108,5 +110,63 @@ public class MoviePostServiceImpl implements MoviePostService {
 		// TODO Auto-generated method stub
 		return mapper.getMyPostCnt(MEMBER_ID);
 	}
+
+	@Override
+	public int checkLike(int postNum, Member member) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("POST_NUM", postNum);
+		dataMap.put("MEMBER_ID", member.getMEMBER_ID());
+		return mapper.checkLike(dataMap);
+	}
+
+	@Override
+	public int addLikeByPostNum(int postNum, Member member) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("POST_NUM", postNum);
+		dataMap.put("MEMBER_ID", member.getMEMBER_ID());
+		
+		return mapper.addLikeByPostNum(dataMap);
+	}
+
+	@Override
+	public int deleteLikeByPostNum(int postNum, Member member) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		dataMap.put("POST_NUM", postNum);
+		dataMap.put("MEMBER_ID", member.getMEMBER_ID());
+		
+		return mapper.deleteLikeByPostNum(dataMap);
+	}
+
+	@Override
+	public int addMoviePostComment(MoviePostCommentVO comment) {
+		// TODO Auto-generated method stub
+		return mapper.insertComment(comment);
+	}
+
+	@Override
+	public List<MoviePostCommentVO> getCommemtListByPostNum(int postNum) {
+		// TODO Auto-generated method stub
+		return mapper.getCommemtListByPostNum(postNum);
+	}
+
+	@Override
+	public int deleteCommentByCommNum(int comment_num) {
+		// TODO Auto-generated method stub
+		return mapper.deleteCommentById(comment_num);
+	}
+
+	@Override
+	public int deletePost(int postNum) {
+		// TODO Auto-generated method stub
+		return mapper.deletePostById(postNum);
+	}
+	
+
 
 }
