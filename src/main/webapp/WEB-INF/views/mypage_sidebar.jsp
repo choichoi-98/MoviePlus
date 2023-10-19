@@ -51,8 +51,8 @@
 							</ul></li>
 						<li><a id="discountCoupon" href="#" title="무비플러스/제휴쿠폰">무비플러스/제휴쿠폰</a></li>
 						<!-- <li><a href="/on/oh/ohh/Mvtckt/GiftCardL.do">무비플러스 기프트카드</a></li> -->
-						<li><a href="/movieplus/member/mypage/membership" titel="나의 무비스토리">멤버십 포인트</a></li>
-						<li><a href="#" titel="나의 무비스토리">나의 무비스토리</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/mypage/membership" title="멤버십 포인트">멤버십 포인트</a></li>
+						<li><a href="${pageContext.request.contextPath}/member/mypage/moviestory" title="나의 무비스토리">나의 무비스토리</a></li>
 						<li><a href="#" title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
 						<li><a href="#" title="나의 문의내역">나의 문의내역</a></li>
 						<li><a href="#" title="자주쓰는 할인카드">자주쓰는 카드 관리</a></li>
@@ -67,12 +67,6 @@
 				</nav>
 			</div>
 
-
-			<div id="myLoactionInfo" style="display: none;">
-				<div class="location">
-					<span>Home</span> <a href="" title="나의 무비플러스 페이지로 이동">나의 무비플러스</a>
-				</div>
-			</div>
 			
 			
 </body>
