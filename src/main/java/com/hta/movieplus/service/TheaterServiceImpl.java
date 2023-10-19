@@ -122,13 +122,12 @@ public class TheaterServiceImpl implements TheaterService {
 	public List<Theater> getTheaterList(int page, int limit) {
 		// TODO Auto-generated method stub
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		int startrow = (page - 1) * limit + 1;
 		int endrow = startrow + limit - 1;
 
 		map.put("start", startrow);
 		map.put("end", endrow);
-
 		return mapper.getTheaterList(map);
 	}
 

@@ -16,7 +16,7 @@ public interface TheaterMapper {
 	
 	public int getCountByTheater();
 
-	public List<Theater> getTheaterList(Map<String, Integer> map);
+	public List<Theater> getTheaterList(Map<String, Object> map);
 
 	public int deleteTheaterById(int num);
 

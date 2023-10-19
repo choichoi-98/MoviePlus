@@ -95,8 +95,7 @@ document.ready
 											</p> <!-- to 개발 : alt 값에 영화 제목 출력 --> 
 											<img
 											src="${fn:split(m.movie_Poster, '|')[0]}"
-											alt="${m.movie_Title}" class="poster"
-											onerror="noImg(this, 'main');">
+											alt="${m.movie_Title}" class="poster">
 											<div class="wrap" style="display: none; opacity: 1;">
 												<div class="summary">${m.movie_Plot}</div>
 												<div class="score">
@@ -126,7 +125,7 @@ document.ready
 											</button>
 											<div class="case">
 												<!-- 개봉 예매가능 기본-->
-												<a href="javascript:moveBokdPage('${m.movie_Code}');"
+												<a href="${pageContext.request.contextPath}/booking?movieCode=${m.movie_Code}"
 													class="button gblue" title="영화 예매하기">예매</a>
 											</div>
 										</div>
@@ -153,16 +152,16 @@ document.ready
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/booking/timetable"
+								<a href="${pageContext.request.contextPath}/booking/timetable"
 									title="상영시간표 보기"><i class="iconset ico-schedule-main"></i>
 									상영시간표</a>
 							</div>
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/movie" title="박스오피스 보기"><i
+								<a href="${pageContext.request.contextPath}/movie/movieListPage" title="박스오피스 보기"><i
 									class="iconset ico-boxoffice-main"></i> 박스오피스</a>
 							</div>
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/booking" title="빠른예매 보기"><i
+								<a href="${pageContext.request.contextPath}/booking" title="빠른예매 보기"><i
 									class="iconset ico-quick-reserve-main"></i> 빠른예매</a>
 							</div>
 						</div>
@@ -183,41 +182,41 @@ document.ready
 						<div class="swiper-wrapper">
 							<div class="swiper-slide special-cell swiper-slide-active"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/dolby"
+								<a href="#"
 									title="DOLBY CINEMA 페이지로 이동" class="bg-dolby">DOLBY CINEMA</a>
 							</div>
 							<div class="swiper-slide special-cell swiper-slide-next"
 								style="width: 170px; margin-right: 16px;">
 								<a
-									href="https://www.megabox.co.kr/specialtheater/boutique/private"
+									href="#"
 									title="THE BOUTIQUE PRIVATE 페이지로 이동" class="bg-private">THE
 									BOUTIQUE PRIVATE</a>
 							</div>
 							<div class="swiper-slide special-cell"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/boutique"
+								<a href="#"
 									title="THE BOUTIQUE 페이지로 이동" class="bg-boutique">THE
 									BOUTIQUE</a>
 							</div>
 							<div class="swiper-slide special-cell"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/mx"
+								<a href="#"
 									title="MX 페이지로 이동" class="bg-mx">MX</a>
 							</div>
 							<div class="swiper-slide special-cell"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/comfort"
+								<a href="#"
 									title="COMFORT 페이지로 이동" class="bg-comfort">COMFORT</a>
 							</div>
 							<div class="swiper-slide special-cell"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/puppy"
+								<a href="#"
 									title="PUPPY CINEMA 페이지로 이동" class="bg-puppy new">PUPPY
 									CINEMA</a>
 							</div>
 							<div class="swiper-slide special-cell"
 								style="width: 170px; margin-right: 16px;">
-								<a href="https://www.megabox.co.kr/specialtheater/megakids"
+								<a href="#"
 									title="MEGABOX KIDS 페이지로 이동" class="bg-kids">MEGABOX KIDS</a>
 							</div>
 						</div>
@@ -258,41 +257,41 @@ document.ready
 					<div class="info-link">
 						<div class="table">
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/support" title="고객센터 페이지로 이동">
+								<a href="${pageContext.request.contextPath}/customer_service" title="고객센터 페이지로 이동">
 									<i class="iconset ico-main-customer"></i> <span>고객센터</span>
 								</a>
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/support/faq"
+								<a href="${pageContext.request.contextPath}/customer_service/question"
 									title="자주 묻는 질문 페이지로 이동"> <i class="iconset ico-main-faq"></i>
 									<span>자주 묻는 질문</span>
 								</a>
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/support/inquiry"
+								<a href="${pageContext.request.contextPath}/customer_service/oneonone"
 									title="1:1 문의 페이지로 이동"> <i class="iconset ico-main-qna"></i>
 									<span>1:1 문의</span>
 								</a>
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/support/rent"
+								<a href="${pageContext.request.contextPath}/customer_service/group"
 									title="단체/대관문의 페이지로 이동"> <i class="iconset ico-main-group"></i>
 									<span>단체/대관문의</span>
 								</a>
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/support/lost"
+								<a href="#"
 									title="분실물 문의/접수 페이지로 이동"> <i class="iconset ico-main-lost"></i>
 									<span>분실물 문의/접수</span>
 								</a>
 							</div>
 
 							<div class="cell">
-								<a href="https://www.megabox.co.kr/booking/privatebooking"
+								<a href="#"
 									title="더 부티크 프라이빗 대관예매 페이지로 이동"> <i
 									class="iconset ico-main-boutique"></i> <span>더 부티크 프라이빗<br>대관예매
 								</span>
