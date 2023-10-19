@@ -34,10 +34,13 @@
 </script>
 </head>
 <body>
+<div>결제내역</div>
 <c:forEach var="p" items="${AprPayList}">
+<div>=========================</div>
 	<div>결제 번호: <span>${p.PAY_NUM}</span></div>
+	<div>결제 회원ID: <span>${p.MEMBER_ID}</span></div>
     <div>결제 상품: <span>${p.PAY_NAME}</span></div>
- <!--   <em id="payNum" data-paynum="${p.PAY_NUM}"></em> --> 
+ <!-- <em id="payNum" data-paynum="${p.PAY_NUM}"></em> --> 
     <div>결제 총 금액: <span>${p.PAY_AMOUNT}</span></div> 
 </c:forEach>
 

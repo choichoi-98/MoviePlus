@@ -12,16 +12,16 @@
     <selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
         select nvl(max(CART_NUM), 0) + 1 from STORE_CART
     </selectKey>
-    	insert into STORE_CART(CART_NUM, ITEM_CODE, ITEM_CNT)
-        values (#{CART_NUM}, #{ITEM_CODE}, #{ITEM_CNT})
+    	insert into STORE_CART(CART_NUM, ITEM_CODE, MEMBER_ID, ITEM_CNT)
+        values (#{CART_NUM}, #{ITEM_CODE}, #{MEMBER_ID}, #{ITEM_CNT})
 	</insert>
 	
 	<insert id="payInsert">
 	<selectKey resultType="int" order="BEFORE" keyProperty="PAY_NUM">
 		select nvl(max(PAY_NUM), 0) + 1 from STORE_PAY
 	</selectKey>
-		insert into STORE_PAY(PAY_NUM, PAY_NAME, PAY_AMOUNT)
-		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice})
+		insert into STORE_PAY(PAY_NUM, PAY_NAME, PAY_AMOUNT, MEMBER_ID)
+		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice}, #{MEMBER_ID})
 	</insert>
 	
 	<update id="insertPgToken">
@@ -32,7 +32,6 @@
     				   FROM STORE_PAY 
     				   WHERE pg_token IS NULL)
 	</update>
-
 	
 	<select id="getItemListCount" resultType="int">
 		select count(*) 

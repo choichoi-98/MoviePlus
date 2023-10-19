@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
@@ -182,11 +184,14 @@ public class StoreController {
 	public ModelAndView item2( 
 		@RequestParam("itemCode") int ITEM_CODE,
 		@RequestParam("itemCnt") int ITEM_CNT,
+		@AuthenticationPrincipal Member member,
 //      Requestpm로 memberId 불러오기
 		CartVO cartVO,
 		ModelAndView mv) {
 		cartVO.setITEM_CODE(ITEM_CODE);
 		cartVO.setITEM_CNT(ITEM_CNT);
+		String MEMBER_ID = member.getMEMBER_ID();
+		cartVO.setMEMBER_ID(MEMBER_ID);
 		storeService.cartInsert(cartVO);
 		
 		mv.setViewName("store/item_select");
@@ -218,14 +223,16 @@ public class StoreController {
 	@ResponseBody
 	public String kakaopay2(
 	    @RequestParam("totalPrice") int totalPrice,
+	    @AuthenticationPrincipal Member member,
 	    @RequestParam("cartItemNames") String cartItemNames) throws UnsupportedEncodingException {
 		
 	    String[] CartItemList = cartItemNames.split(",");
 	    int Count = CartItemList.length - 1;
 	    String itemDisplay = CartItemList[0] + " 외 " + Count + "개";
 	    String itemDisplayEnc = URLEncoder.encode(itemDisplay, "UTF-8");
+	    String MEMBER_ID = member.getMEMBER_ID();
 	    
-	    storeService.payInsert(itemDisplay, totalPrice);
+	    storeService.payInsert(itemDisplay, totalPrice, MEMBER_ID);
 //	    int PAY_NUM = storeService.getThisPayNum();
 	    try {
 	        URL payadr = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -280,10 +287,11 @@ public class StoreController {
 		}
 		
 		List<StorePayVO> AprPayList = storeService.selectApproved();
-		List<StorePayVO> paylist = storeService.getPayList();
+//		List<StorePayVO> paylist = storeService.getPayList();
+//		List<StoreCartPayDTO> AprPayList = storeService.selectApproveds();
 		
 		mv.setViewName("store/pay_success");
-		mv.addObject("paylist", paylist);
+//		mv.addObject("paylist", paylist);
 		mv.addObject("AprPayList", AprPayList);
 		return mv;
 	}
