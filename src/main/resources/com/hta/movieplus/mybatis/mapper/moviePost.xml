@@ -30,7 +30,7 @@
 		    WHERE M.MOVIE_TITLE LIKE  '%' ||  #{keyword} || '%'
 		<choose>
 			<when test='option == "date"'>
-			ORDER BY MP.MOVIEPOST_NUM
+			ORDER BY MP.MOVIEPOST_NUM desc
 			</when>
 			<when test='option == "like"'>
 			ORDER BY MP.MOVIEPOST_LIKE DESC
@@ -47,6 +47,27 @@
 		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
 		JOIN MEMBER MEM ON MP.MEMBER_ID = MEM.MEMBER_ID 
 		WHERE MP.MOVIEPOST_NUM = #{postNum}
+	</select>
+	
+	<select id="getMovieWithPostCnt" resultType="movie">
+		SELECT M.*, NVL(MP.CNT, 0) post_Count
+		FROM MOVIE M
+		LEFT JOIN ( SELECT MOVIE_CODE, COUNT(*) CNT
+		FROM MOVIEPOST
+		GROUP BY MOVIE_CODE) MP
+		ON M.MOVIE_CODE = MP.MOVIE_CODE
+		ORDER BY CNT
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIEPOST
+	</select>
+	
+	<select id="getMyPostCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM MOVIEPOST
+		WHERE MEMBER_ID = #{MEMBER_ID}
 	</select>
 	
 	

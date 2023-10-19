@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class MoviePostServiceImpl implements MoviePostService {
 		List<Movie> movieList = mapper.getSeenMovieList(member_NUM);
 
 		for (Movie movie : movieList) {
-			if (movie.getMovie_Poster() != "없음" || movie.getMovie_Poster() != null) {
+			if (movie.getMovie_Poster().length() > 10) {
 				movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
 			}
 		}
@@ -83,6 +82,31 @@ public class MoviePostServiceImpl implements MoviePostService {
 	public MoviePostVO getPostDetail(int postNum) {
 		// TODO Auto-generated method stub
 		return mapper.getPostDetail(postNum);
+	}
+
+	@Override
+	public List<Movie> getMovieWithPostCnt() {
+		// TODO Auto-generated method stub
+		
+		List<Movie> list = mapper.getMovieWithPostCnt();
+		for (Movie movie : list) {
+			if (movie.getMovie_Poster().length() > 10) {
+				movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public int getTotalCnt() {
+		// TODO Auto-generated method stub
+		return mapper.getTotalCount();
+	}
+
+	@Override
+	public int getMyPostCnt(String MEMBER_ID) {
+		// TODO Auto-generated method stub
+		return mapper.getMyPostCnt(MEMBER_ID);
 	}
 
 }

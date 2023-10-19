@@ -21,4 +21,10 @@ public interface MoviePostMapper {
 
 	MoviePostVO getPostDetail(int postNum);
 
+	List<Movie> getMovieWithPostCnt();
+
+	int getTotalCount();
+
+	int getMyPostCnt(String mEMBER_ID);
+
 }

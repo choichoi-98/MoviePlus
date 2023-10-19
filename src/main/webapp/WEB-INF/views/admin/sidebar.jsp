@@ -40,7 +40,7 @@
 				<p>${pinfo.MEMBER_NAME}님</p>
 			</div>
 
-			<button class="sidebar__user-btn" type="button" onclick="location='/movieplus/'">
+			<button class="sidebar__user-btn" type="button" onclick="location='${pageContext.request.contextPath}/'">
 				<i class="icon ion-ios-log-out"></i>
 			</button>
 		</div>
@@ -50,7 +50,7 @@
 		<div class="sidebar__nav-wrap">
 			<ul class="sidebar__nav">
 				<li class="sidebar__nav-item">
-					<a href="/movieplus/admin/" class="sidebar__nav-link"><span>대쉬보드</span></a>
+					<a href="${pageContext.request.contextPath}/admin/" class="sidebar__nav-link"><span>대쉬보드</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
@@ -58,11 +58,11 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="/movieplus/admin/managetheater" class="sidebar__nav-link"><span>극장 관리</span></a>
+					<a href="${pageContext.request.contextPath}/admin/managetheater" class="sidebar__nav-link"><span>극장 관리</span></a>
 				</li>
 
 				<li class="sidebar__nav-item">
-					<a href="/movieplus/movie/movieAdd" class="sidebar__nav-link"><span>상영 영화 관리</span></a>
+					<a href="${pageContext.request.contextPath}/movie/movieAdd" class="sidebar__nav-link"><span>상영 영화 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
@@ -74,7 +74,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>감상평 관리</span></a>
+					<a href="${pageContext.request.contextPath}/movie/manageMovieReview" class="sidebar__nav-link"><span>감상평 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
@@ -85,7 +85,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="/movieplus/admin/manageEvent" class="sidebar__nav-link"><span>이벤트 관리</span></a>
+					<a href="${pageContext.request.contextPath}/admin/manageEvent" class="sidebar__nav-link"><span>이벤트 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

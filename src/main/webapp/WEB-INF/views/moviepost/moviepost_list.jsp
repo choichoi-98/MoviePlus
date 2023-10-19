@@ -8,11 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-.listBtn {
-	pointer-events: none;
-}
-</style>
+
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script
@@ -48,40 +44,25 @@
 					<!-- post-lank -->
 					<ol class="post-lank">
 
+						<c:forEach begin="1" end="5" step="1" var="mp_movie"
+							items="${mp_movieList}" varStatus='status'>
+							<li><a href="#" class="top5Btn"
+								data-movieTitle="${mp_movie.movie_Title}"
+								title="더 퍼스트 슬램덩크 무비포스트 보기">
+									<p class="lank">${status.index}</p>
 
-						<li><a href="#" class="top5Btn" data-no="더 퍼스트 슬램덩크"
-							title="더 퍼스트 슬램덩크 무비포스트 보기">
-								<p class="lank">1</p>
+									<div class="post-count">
+										<p class="tit">POST</p>
+										<p class="count">${mp_movie.post_Count}</p>
+									</div>
 
-								<div class="post-count">
-									<p class="tit">POST</p>
-									<p class="count">877</p>
-								</div>
+									<p class="img">
+										<img src="${mp_movie.movie_Poster}"
+											alt="${mp_movie.movie_Title}">
+									</p>
+							</a></li>
+						</c:forEach>
 
-								<p class="img">
-									<img
-										src="./모든영화 _ 무비포스트 _ MEET PLAY SHARE, 메가박스_files/XzaJQVMME9uYLyqeXsmasMOIHOV5ccOB_150.jpg"
-										alt="더 퍼스트 슬램덩크">
-								</p>
-						</a></li>
-
-
-
-						<li><a href="#" class="top5Btn" data-no="스즈메의 문단속"
-							title="스즈메의 문단속 무비포스트 보기">
-								<p class="lank">2</p>
-
-								<div class="post-count">
-									<p class="tit">POST</p>
-									<p class="count">761</p>
-								</div>
-
-								<p class="img">
-									<img
-										src="./모든영화 _ 무비포스트 _ MEET PLAY SHARE, 메가박스_files/jpVJy55iJTCzSxRk3NhLedZQnBo3xtVl_150.jpg"
-										alt="스즈메의 문단속">
-								</p>
-						</a></li>
 
 
 					</ol>
@@ -113,14 +94,23 @@
 						</sec:authorize>
 
 						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal" var="pinfo" />
 							<div class="after">
 								<p class="lank">My</p>
 								<div class="post-count">
 									<p class="tit">MY POST</p>
-									<p class="count">0</p>
+									<p class="count">${myPostCnt}</p>
 								</div>
 								<div class="txt-info">
-									작성된 포스트가<br> 없습니다.
+									<c:choose>
+										<c:when test="${myPostCnt > 0}">
+											<a href="#" style="color: white;">내 글보기로 이동</a>
+										</c:when>
+										<c:otherwise>
+											작성된 포스트가<br> 없습니다.
+										</c:otherwise>
+									</c:choose>
+
 								</div>
 							</div>
 						</sec:authorize>
@@ -132,7 +122,7 @@
 					<!-- add-post -->
 					<div class="add-post">
 						<a href="${pageContext.request.contextPath}/moviepost/selectMovie"
-							class="button purple" title="무비포스트 작성" style="background">무비포스트 작성</a>
+							class="button purple" title="무비포스트 작성" style="">무비포스트 작성</a>
 					</div>
 					<!--// add-post -->
 				</div>
@@ -143,7 +133,7 @@
 			<div class="inner-wrap mt30">
 				<div class="board-list-util">
 					<p class="result-count">
-						<strong>전체 <b class="result-count-cnt">217,171</b>건
+						<strong>전체 <b id="totalCnt" class="result-count-cnt">${totalCnt}</b>건
 						</strong>
 					</p>
 
@@ -210,13 +200,14 @@
 
 									<div class="user-info">
 										<p class="photo">
-											<img id="modal-profile" src="/static/pc/images/common/bg/bg-noimage-notmain.png"
+											<img id="modal-profile"
+												src="/static/pc/images/common/bg/bg-noimage-notmain.png"
 												alt="님의 무비포스트">
 										</p>
 
-										<p id="modal-user-id" class="user-id">Pty873**</p>
+										<p id="modal-user-id" class="user-id"></p>
 
-										<p id="modal-date" class="user-write-time">42 분전</p>
+										<p id="modal-date" class="user-write-time"></p>
 									</div>
 
 
@@ -224,7 +215,8 @@
 									<!-- post-funtion -->
 									<div class="post-funtion">
 										<div class="wrapper">
-											<button type="button" class="">삭제하기</button>
+											<input type="hidden" id="hidden-member-id" value="${pinfo.MEMBER_ID}">
+											<button id="modal-delete-btn" type="button" class="" style="display:none">삭제하기</button>
 											<!--// 말풍선 -->
 										</div>
 									</div>
@@ -236,9 +228,7 @@
 									<!-- post 내용  -->
 									<div class="section-area">
 										<div class="section">
-											<img id="modal-still"
-												src=""
-												alt="">
+											<img id="modal-still" src="" alt="">
 											<p id="modal-content" class="p-caption"></p>
 										</div>
 									</div>
@@ -247,7 +237,8 @@
 
 								<!-- comment count -->
 								<div class="count">
-									<button id="modal-like-btn" type="button" class="btn" data-postNum="236678">
+									<button id="modal-like-btn" type="button" class="btn"
+										data-postNum="236678">
 										<i title="좋아요 설정 안함" class="iconset ico-like"></i> 0
 									</button>
 
@@ -304,7 +295,8 @@
 
 					</div>
 				</div>
-				<button type="button" id="post-modal-close" class="btn-modal-close2">레이어 닫기</button>
+				<button type="button" id="post-modal-close" class="btn-modal-close2">레이어
+					닫기</button>
 			</div>
 			<div class="bg-modal2" style="opacity: 1;"></div>
 		</section>

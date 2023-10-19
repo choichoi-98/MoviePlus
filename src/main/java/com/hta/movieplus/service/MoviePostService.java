@@ -18,4 +18,10 @@ public interface MoviePostService {
 	List<MoviePostVO> getMoviePostList(String option, int index, String keyword);
 
 	MoviePostVO getPostDetail(int postNum);
+
+	List<Movie> getMovieWithPostCnt();
+
+	int getTotalCnt();
+
+	int getMyPostCnt(String MEMBER_ID);
 }
