@@ -11,6 +11,8 @@ public class CartVO {
 	
 	private int CART_NUM; // 카트 번호(PK)
 	private int ITEM_CODE; // 상품 코드(FK)
+	private String MEMBER_ID;
+	private int ITEM_CNT;
 	
 	public int getCART_NUM() {
 		return CART_NUM;
@@ -24,5 +26,16 @@ public class CartVO {
 	public void setITEM_CODE(int iTEM_CODE) {
 		ITEM_CODE = iTEM_CODE;
 	}
-	
+	public String getMEMBER_ID() {
+		return MEMBER_ID;
+	}
+	public void setMEMBER_ID(String mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
+	}
+	public int getITEM_CNT() {
+		return ITEM_CNT;
+	}
+	public void setITEM_CNT(int iTEM_CNT) {
+		ITEM_CNT = iTEM_CNT;
+	}
 }

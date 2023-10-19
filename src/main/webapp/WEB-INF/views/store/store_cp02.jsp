@@ -77,7 +77,7 @@
 										</div>
 
 										<div class="price">
-											<p class="original">12,000원</p>
+											<p class="original">${i.ITEM_PRICE + 4500}</p>
 											<p class="sale">
 												<em>${i.ITEM_PRICE}</em> <span>원</span>
 											</p>

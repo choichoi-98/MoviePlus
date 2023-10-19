@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.mybatis.mapper.StoreMapper;
@@ -110,6 +111,16 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void clearCart() {
 		dao.clearCart();
+	}
+
+	@Override
+	public List<CartVO> getCartList2() {
+		return dao.getCartList2();
+	}
+
+	@Override
+	public List<StoreCartDTO> getCartLists() {
+		return dao.getCartLists();
 	}
 
 }

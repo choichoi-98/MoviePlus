@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import java.util.List;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
 
@@ -41,5 +42,9 @@ public interface StoreService {
 	public List<StorePayVO> selectApproved();
 
 	public void clearCart();
+
+	public List<CartVO> getCartList2();
+
+	public List<StoreCartDTO> getCartLists();
 
 }

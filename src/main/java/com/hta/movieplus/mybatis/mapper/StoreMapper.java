@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
 /*
@@ -50,14 +51,8 @@ public interface StoreMapper {
 
 	public void clearCart();
 
-//	public int getListCount();
-//	
-//	public List<StoreVO> getItemList(HashMap<String, Integer> map);
-//	
-//	public StoreVO isAdmin(Map<String, Object> map);
-//	
-//	public List<String> getDeleteItemFileList();
-//
-//	public void deleteItemFileList(String filename);
+	public List<CartVO> getCartList2();
+
+	public List<StoreCartDTO> getCartLists();
 	
 }

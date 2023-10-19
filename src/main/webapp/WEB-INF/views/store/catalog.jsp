@@ -26,36 +26,38 @@
 	    // per1page 값을 <span> 요소 내에 동적으로 삽입
 	    document.querySelector('div#per1page').textContent = per1page;
 	})
+	
 $(function() {
 	let token = $("meta[name='_csrf']").attr("content");
-	let header = $("meta[name='_csrf_header']").attr("content");
-	
-	$('#delitem').on('click', function(e) {
-//	    var row = $(this).closest('tr'); // 해당 삭제 버튼이 속한 행을 찾기
-//	    var itemCode = row.find('#thisItem').data('icode');
-	    var itemCode = $('#thisItem').data('icode');
-
-	    alert("ajax 전, itemCode: " + itemCode);
-	    
- 		$.ajax({
-		    url: "itemlist",
-		    method: 'POST',
-		    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 폼 데이터 형식으로 설정
-		    data: { "itemCode": itemCode }, // 서버로 폼 데이터로 전송
-		    dataType : "text",
-		    beforeSend: function(xhr) {
-		        xhr.setRequestHeader(header, token);
-		    },
-		    success: function(response) {
-		        alert("삭제 성공, itemCode: " + itemCode);
-		        window.location.reload();
-		    },
-		    error: function(error) {
-		        alert("삭제 하는중 오류, itemCode: " + itemCode);
-		    }
-		}); 
-	});
-});
+    let header = $("meta[name='_csrf_header']").attr("content");
+    
+    $(document).on('click', '.main__table-btn--delete', function(e) {
+        e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+        
+        const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾습니다.
+        const itemCode = row.find('.item-code').data('icode');  // 해당 행의 ITEM_CODE 값을 추출합니다.
+        
+//      alert("itemCode: " + itemCode);
+        $.ajax({
+            url: "itemlist",
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { "itemCode": itemCode },
+            dataType: "text",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(response) {
+//                alert("삭제 성공, itemCode: " + itemCode);
+                window.location.reload();
+            },
+            error: function(error) {
+//                alert("삭제 하는중 오류, itemCode: " + itemCode);
+                window.location.reload();
+            }
+        });
+    });
+}); 
 </script>
 
 </head>
@@ -123,7 +125,7 @@ $(function() {
 								<c:forEach var="i" items="${itemlist}">
 								<tr>
 									<td>
-										<div id="thisItem" class="main__table-text" data-icode="${i.ITEM_CODE}">${i.ITEM_CODE}</div>
+    									<div class="main__table-text item-code" data-icode="${i.ITEM_CODE}">${i.ITEM_CODE}</div>
 									</td>
 									<td>
 										<div class="main__table-text">
@@ -159,7 +161,7 @@ $(function() {
 											   id="forcode" data-code="${i.ITEM_CODE}">
 												<i class="icon ion-ios-create"></i>
 											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal" >
+											<a href="#" id="deleteicon" class="main__table-btn main__table-btn--delete open-modal" >
 												<i class="icon ion-ios-trash"></i>
 											</a>
 										</div>
@@ -216,8 +218,8 @@ $(function() {
 		<p class="modal__text">정말 등록된 해당 상품을 삭제하시겠습니까? </p>
 
 		<div class="modal__btns">
-			<button id='delitem' class="modal__btn modal__btn--apply" type="button">삭제</button>
-			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
+    		<button class="modal__btn modal__btn--apply delete-item" type="button">삭제</button>
+    		<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 		</div>
 	</div>
 	<!-- end modal delete -->

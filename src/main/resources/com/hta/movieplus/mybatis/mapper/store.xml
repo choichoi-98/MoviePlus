@@ -12,8 +12,8 @@
     <selectKey resultType="int" order="BEFORE" keyProperty="CART_NUM">
         select nvl(max(CART_NUM), 0) + 1 from STORE_CART
     </selectKey>
-    	insert into STORE_CART(CART_NUM, ITEM_CODE)
-    	values(#{CART_NUM}, #{ITEM_CODE})
+    	insert into STORE_CART(CART_NUM, ITEM_CODE, ITEM_CNT)
+        values (#{CART_NUM}, #{ITEM_CODE}, #{ITEM_CNT})
 	</insert>
 	
 	<insert id="payInsert">
@@ -64,6 +64,16 @@
 		select * from STORE_ITEM
 		inner join STORE_CART
 		on STORE_ITEM.ITEM_CODE = STORE_CART.ITEM_CODE
+	</select>
+	
+	<select id="getCartLists" resultType="StoreCartDTO">
+		select * from STORE_ITEM
+		inner join STORE_CART
+		on STORE_ITEM.ITEM_CODE = STORE_CART.ITEM_CODE
+	</select>
+	
+	<select id="getCartList2" resultType="CartVO">
+		select * from STORE_CART
 	</select>
 	
 	<select id="getItemListByKind" parameterType="StoreVO" resultType="StoreVO">
