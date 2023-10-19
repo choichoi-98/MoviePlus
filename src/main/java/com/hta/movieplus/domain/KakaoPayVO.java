@@ -6,6 +6,7 @@ public class KakaoPayVO {
 	private int THEATER_SCHEDULE_ID; 
 	private int KPAY_AMOUNT; // 총 금액
 	private int KPAY_SEAT_CNT; // 선택한 자리 갯수
+	private String MEMBER_ID;
 	private String pg_token;
 	
 	public int getKPAY_NUM() {
@@ -37,6 +38,12 @@ public class KakaoPayVO {
 	}
 	public void setPg_token(String pg_token) {
 		this.pg_token = pg_token;
+	}
+	public String getMEMBER_ID() {
+		return MEMBER_ID;
+	}
+	public void setMEMBER_ID(String mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
 	}
 	
 }
