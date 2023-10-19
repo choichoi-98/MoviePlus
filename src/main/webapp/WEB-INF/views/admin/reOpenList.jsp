@@ -12,7 +12,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>재개봉 관리 리스트</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
@@ -49,7 +49,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>공지사항 List</h2>
+						<h2>재개봉 영화 List</h2>
 
 						<span class="main__title-stat"> </span>
 

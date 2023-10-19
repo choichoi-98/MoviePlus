@@ -123,17 +123,19 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="#" class="form" method="post">
+					<form action="${pageContext.request.contextPath}/admin/noticemodify" class="form" method="post">
+					<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}">
 						<div class="row row--form">
 							<div class="col-12 col-md-7 form__content">
 								<div class="row row--form">
-									
+									<input type="hidden" name="CUSTOMER_NOTICE_NUM" VALUE="${notice.CUSTOMER_NOTICE_NUM}"> <!-- notice는 키값 -->
 									<div class="col-12">
-										<input type="text" class="form__input" placeholder="Title" value="${notice.CUSTOMER_NOTICE_SUBJECT}">
+										<input type="text" name="CUSTOMER_NOTICE_SUBJECT" class="form__input" placeholder="Title" value="${notice.CUSTOMER_NOTICE_SUBJECT}">
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" style= "height: 500px;" name="text" class="form__textarea" placeholder="Description">${notice.CUSTOMER_NOTICE_CONTENT}</textarea>
+										<textarea id="text" name="CUSTOMER_NOTICE_CONTENT" style= "height: 500px;" name="text" class="form__textarea" placeholder="Description">${notice.CUSTOMER_NOTICE_CONTENT}</textarea>
 									</div>
 
 
@@ -142,7 +144,7 @@
 										<button type="button" class="form__btn" style="margin-right:20px;">뒤로</button>
 										</a>
 										<a href="admin/noticeDetail">
-										<button type="submit"class="form__btn">수정</button>
+										<button type="submit"class="form__btn">수정</button> <!-- form 안의 name 값만 넘어감 name값이 같은 input 타입이 넘어감 -->
 										</a>
 									</div>
 								</div>
