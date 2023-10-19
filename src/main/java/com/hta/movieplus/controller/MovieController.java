@@ -45,8 +45,6 @@ public class MovieController {
     		@AuthenticationPrincipal Member member,
     				@RequestParam(value="search_word", defaultValue="", required=false) String search_word) throws Exception {
     	
-    	
-    	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId,search_word);
@@ -297,9 +295,48 @@ public class MovieController {
 	
 	//관리자 - 감상평(댓글) 관리
 	@RequestMapping(value="/manageMovieReview")
-	public String adminMovieReview() {
+	public ModelAndView adminMovieReview(ModelAndView mv,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value="search_word", defaultValue="", required=false) String search_word) {
+			
+			int limit = 10;
+			
+			int reviewCnt = movieServiceImpl.getAdminMovieReviewCnt();
+			
+			int maxpage = (reviewCnt + limit -1) / limit;
+			
+			int startpage = ((page -1)/10) * 10 + 1;
+			
+			int endpage = startpage + 10 - 1;
+			
+			if(endpage > maxpage)
+				endpage = maxpage;
+			
+    		List<MovieReviewVO> reviewList = movieServiceImpl.getAdminMovieReviewList(page,limit);
+    		mv.addObject("search_word", search_word);
+    	
+    	 mv.setViewName("admin/manageMovieReview");
+    	
+    	 mv.addObject("page", page);
+         mv.addObject("maxpage", maxpage);
+         mv.addObject("startpage", startpage);
+         mv.addObject("endpage", endpage);
+     	 mv.addObject("reviewCnt", reviewCnt);
+     	 mv.addObject("reviewList",reviewList);
+         mv.addObject("limit", limit);
+    	
+    	return mv;
+	}
+	
+	//관리자 - 관람평 삭제
+	@ResponseBody
+	@RequestMapping(value="/adminDeleteMovieReview")
+	public int adminDeleteMovieReview(
+			@RequestParam("review_num") int review_num
+			) {
 		
-		return "admin/manageMovieReview";
+		logger.info("삭제할 댓글 번호:" + review_num);
+		return movieServiceImpl.adminDeleteMovieReview(review_num);
 	}
 	
 }
