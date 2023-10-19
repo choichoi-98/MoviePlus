@@ -126,9 +126,7 @@
 							</tbody>
 						</table>
 				</div>
-				<!-- end users -->
-				<a href="/movieplus/admin/addtheater" class="main__title-link">극장 추가</a>
-				<!-- paginator -->
+			
 				<div class="col-12">
 					<div class="paginator-wrap">
 						<span>${theaterCount} 중 10개씩</span>

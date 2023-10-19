@@ -78,6 +78,16 @@ public interface MovieMapper {
 	//관람평(댓글) 좋아요 삭제
 	public int deleteMovieReviewLike(String memberId, String review_num);
 
+	//관리자-관람평(댓글) list 
+	public List<MovieReviewVO> adminMovieReviewList(HashMap<String, Integer> map);
+	
+	//관리자-관람평 count
+	public int adminMovieReviewListCnt();
+
+	//관리자-관람평 삭제
+	public int adminDeleteMovieReview(int review_num);
+
+
 
 }
 

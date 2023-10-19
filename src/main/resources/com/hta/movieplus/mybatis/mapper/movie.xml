@@ -208,7 +208,7 @@
 		       	FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) 
 		       						AS MOVIE_REVIEW_LIKE_CNT,
        		   (SELECT MOVIE_TITLE 
-       		    FROM MOVIE WHERE MOVIE_CODE = '20223565') 
+       		    FROM MOVIE WHERE MOVIE_CODE = #{movieCode}) 
        		   						AS MOVIE_TITLE   	
 		FROM MOVIE_REVIEW R
 		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
@@ -250,4 +250,40 @@
 	DELETE FROM MOVIE_REVIEW_LIKE
 	WHERE MOVIE_REVIEW_LIKE_NUM = #{MOVIE_REVIEW_LIKE}
 	-->
+	
+	<!-- 관리자 - 관람평 관리 list -->
+	<select id="adminMovieReviewList" parameterType="java.util.Map"
+			resultType="MovieReviewVO">
+	select * from
+            (select rownum rnum, r.*	
+	    from
+		(
+		SELECT R.MOVIE_REVIEW_NUM, R.MEMBER_ID, M.MEMBER_PROFILE, R.MOVIE_REVIEW_STAR,
+		       R.MOVIE_REVIEW_CONTENT, R.MOVIE_CODE, R.MOVIE_REVIEW_REG_DATE, MOVIE.MOVIE_TITLE,
+		       M.MEMBER_NAME, 
+		       (SELECT COUNT(*) 
+		       	FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) 
+		       						AS MOVIE_REVIEW_LIKE_CNT,
+		       	 COUNT(*) OVER () AS review_cnt	
+		FROM MOVIE_REVIEW R
+		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+		INNER JOIN MOVIE ON R.MOVIE_CODE = MOVIE.MOVIE_CODE) r
+		where rownum &lt; = #{end}
+	  )
+      where rnum &gt; = #{start} and rnum &lt; = #{end}
+
+	</select>
+	
+	<!-- 관리자 - 관람평 count -->
+	<select id="adminMovieReviewListCnt" resultType="int">
+		SELECT COUNT(*) 
+		FROM MOVIE_REVIEW
+	</select>
+	
+	<!-- 관리자 - 관람평 삭제 -->
+	<delete id="adminDeleteMovieReview">
+		delete from movie_review
+		where MOVIE_REVIEW_NUM = #{review_num}
+	</delete>
+	
 </mapper>

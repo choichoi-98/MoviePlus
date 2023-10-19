@@ -175,6 +175,36 @@ public class MovieServiceImpl implements MovieService{
 		// TODO Auto-generated method stub
 		return dao.deleteMovieReviewLike(memberId, review_num);
 	}
+
+	//관리자 - 관람평 list
+//	public List<MovieReviewVO> getAdminMovieReviewList(String search_word) {
+//		// TODO Auto-generated method stub
+//		return dao.adminMovieReviewList(search_word);
+//	}
+	
+	//관리자 - 관람평 갯수
+	public int getAdminMovieReviewCnt() {
+		// TODO Auto-generated method stub
+		return dao.adminMovieReviewListCnt();
+	}
+
+	//관리자 - 관람평 list
+	public List<MovieReviewVO> getAdminMovieReviewList(int page, int limit) {
+	    
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	    int startrow = (page - 1) * limit + 1;
+	    int endrow = startrow + limit - 1;
+	    map.put("start", startrow);
+	    map.put("end", endrow);
+		
+	    return dao.adminMovieReviewList(map);
+	}
+
+	//관리자 - 관람평 삭제
+	public int adminDeleteMovieReview(int review_num) {
+		// TODO Auto-generated method stub
+		return dao.adminDeleteMovieReview(review_num);
+	}
 	
 
 }

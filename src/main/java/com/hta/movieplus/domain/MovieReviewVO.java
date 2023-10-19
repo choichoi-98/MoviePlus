@@ -13,8 +13,24 @@ public class MovieReviewVO {
 	private int movie_Review_star;
 	private int movie_Review_like_cnt;//좋아요 수
 	private String movie_Title;		//영화 제목
+	private String member_Name;		//멤버 이름
+	private int review_cnt;	// 댓글 갯수
+	
+
 	
 	
+	public int getReview_cnt() {
+		return review_cnt;
+	}
+	public void setReview_cnt(int review_cnt) {
+		this.review_cnt = review_cnt;
+	}
+	public String getMember_Name() {
+		return member_Name;
+	}
+	public void setMember_Name(String member_Name) {
+		this.member_Name = member_Name;
+	}
 	public String getMovie_Title() {
 		return movie_Title;
 	}
