@@ -3,6 +3,26 @@
 
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.MovieStoryMapper">
 	
+	<select id="getMovieDibsListByMemberId" parameterType="String" resultType="movie">
+			SELECT *
+			FROM MOVIE
+			WHERE MOVIE_CODE IN ( SELECT MOVIE_DIBS_OBJECT
+									FROM MOVIE_DIBS
+									WHERE MEMBER_ID = #{memberId}
+									GROUP BY MOVIE_DIBS_OBJECT )
+	</select>
+	
+	<select id="getMoviePostListByMemberId" parameterType="String" resultType="moviePostVO">
+		SELECT *
+		FROM MOVIEPOST
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="getMovieReviewListByMemberId" parameterType="String" resultType="movieReviewVO">
+		SELECT *
+		FROM MOVIE_REVIEW
+		WHERE MEMBER_ID = #{memberId}
+	</select>
 	
 	
 	
