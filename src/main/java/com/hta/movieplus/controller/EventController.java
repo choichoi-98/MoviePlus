@@ -38,6 +38,11 @@ public class EventController {
 		this.eventservice = eventservice;
 	}
 	
+	@GetMapping("/event/test")
+	public String testevent() {
+		return "event/event_end";
+	}
+	
 	//이벤트 전체 페이지(메인)
 	@GetMapping("/event")
 	public ModelAndView eventmain(ModelAndView mv) throws Exception {
@@ -56,6 +61,7 @@ public class EventController {
 		
 		return mv;
 	}
+	
 	
 	//이벤트 영화 페이지
 	@GetMapping("/event/movie")
@@ -358,7 +364,7 @@ public class EventController {
 	@GetMapping("/event/detail")
 	public ModelAndView viewDetail(ModelAndView mv, 
 			HttpServletRequest request,
-			@RequestHeader(value="num", required=false) int num) {
+			@RequestParam(value="num", required=false) int num) {
 		
 		logger.info("EVENT_NUM : " + num);
 		

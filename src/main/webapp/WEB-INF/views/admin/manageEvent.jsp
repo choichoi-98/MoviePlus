@@ -90,7 +90,7 @@
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="#">${event.EVENT_SUBJECT}
+										<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}">${event.EVENT_SUBJECT}
 											<input type="hidden" name="EVENT_NUM" value="${event.EVENT_NUM}">
 										</a>
 										</div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
@@ -111,7 +111,7 @@
 												<i class="icon ion-ios-lock" title="상태 관리"></i>
 										 		<input type="hidden" id="eventstatus" name="EVENT_STATUS" value="${event.EVENT_STATUS}">
 											</a>
-											<a href="/movieplus/admin/modifyEvent?num=${event.EVENT_NUM}" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
+											<a href="${pageContext.request.contextPath}/admin/modifyEvent?num=${event.EVENT_NUM}" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
 												<i class="icon ion-ios-create" title="수정"></i>
 											</a>
 											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -125,7 +125,7 @@
 						</table>
 				</div>
 				<!-- end users -->
-				<a href="/movieplus/admin/addEvent" class="main__title-link">이벤트 추가</a>
+				<a href="${pageContext.request.contextPath}/admin/addEvent" class="main__title-link">이벤트 추가</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">

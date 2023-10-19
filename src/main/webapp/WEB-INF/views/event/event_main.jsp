@@ -83,7 +83,7 @@
 					<div class="tit-util mt70">
 						<h3 class="tit">영화</h3>
 						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED01&#39;)" title="더보기">더보기
+							<a href="${pageContext.request.contextPath}/event/movie" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
 							</a>
 						</div>
@@ -93,7 +93,7 @@
 						<ul>
 						<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" begin="0" end="3">
 							<c:if test='${eventmovie.EVENT_STATUS == "PROGRESS"}'>
-							<li><a href="https://www.megabox.co.kr/event#"
+							<li><a href="${pageContext.request.contextPath}/event/detail?num=${eventmovie.EVENT_NUM}"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
 								title="${eventmovie.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
@@ -116,7 +116,7 @@
 					<div class="tit-util mt70">
 						<h3 class="tit">극장</h3>
 						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED02&#39;)" title="더보기">더보기
+							<a href="${pageContext.request.contextPath}/event/theater" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
 							</a>
 						</div>
@@ -128,7 +128,7 @@
 						<c:forEach var="eventtheater" items="${theaterEventList}" varStatus="loop" begin="0" end="3">
 							<c:if test='${eventtheater.EVENT_STATUS == "PROGRESS"}'>
 							<li>
-								<a href="https://www.megabox.co.kr/event#"
+								<a href="${pageContext.request.contextPath}/event/detail?num=${eventtheater.EVENT_NUM}"
 								data-no="13594" data-netfunnel="N" class="eventBtn"
 								title="${eventtheater.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
@@ -150,7 +150,7 @@
 					<div class="tit-util mt70">
 						<h3 class="tit">제휴/할인</h3>
 						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED05&#39;)" title="더보기">더보기
+							<a href="${pageContext.request.contextPath}/event/promotion" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
 							</a>
 						</div>
@@ -161,7 +161,7 @@
 						 <c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" begin="0" end="3">
 						  <c:if test='${eventpromotion.EVENT_STATUS == "PROGRESS"}'>
 							<li>
-							<a href="#" data-no="14091" data-netfunnel="N" class="eventBtn"
+							<a href="${pageContext.request.contextPath}/event/detail?num=${eventpromotion.EVENT_NUM}" data-no="14091" data-netfunnel="N" class="eventBtn"
 								title="${eventpromotion.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="${pageContext.request.contextPath}/upload${eventpromotion.EVENT_FILE}"
@@ -182,7 +182,7 @@
 					<div class="tit-util mt70">
 						<h3 class="tit">시사회/무대인사</h3>
 						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED04&#39;)" title="더보기">더보기
+							<a href="${pageContext.request.contextPath}/event/curtaincall" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
 							</a>
 						</div>
@@ -193,7 +193,7 @@
 						<ul>
 						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" begin="0" end="3">
 							<c:if test='${eventcurtaincall.EVENT_STATUS == "PROGRESS"}'>
-							<li><a href="#"	data-no="14167" data-netfunnel="N" class="eventBtn"
+							<li><a href="${pageContext.request.contextPath}/event/detail?num=${eventcurtaincall.EVENT_NUM}"	data-no="14167" data-netfunnel="N" class="eventBtn"
 								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="${pageContext.request.contextPath}/upload${eventcurtaincall.EVENT_FILE}"
