@@ -52,6 +52,13 @@ public class EventController {
 	}
 	
 	
+	//이벤트 테스트
+	@GetMapping("/event/test")
+	public String test() {
+		
+		return "event/event_winner";
+	}
+	
 	//이벤트 전체 페이지(메인)
 	@GetMapping("/event")
 	public ModelAndView eventmain(ModelAndView mv) throws Exception {
@@ -265,9 +272,6 @@ public class EventController {
 	}
 	
 	
-	
-	
-	
 	//관리자 - 이벤트 수정
 	@GetMapping("/admin/modifyEvent")
 	public ModelAndView modifyEvent(@RequestParam(value = "num") int num, ModelAndView mv) {
@@ -366,20 +370,15 @@ public class EventController {
 		
 		Event event = eventservice.getDetailEvent(num);
 		
-//		if(event == null) {
-//			logger.info("상세보기 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "상세보기 실패입니다.");
-//		} else {
-//			logger.info("상세보기 성공");
-//			mv.setViewName("event/event_viewform");
-//			mv.addObject("eventdata", event);
-//		}
-		
 		mv.addObject("eventDetail", event);
 		mv.setViewName("event/event_viewform");
 		return mv;
 	}
 
+	//이벤트 당첨자발표 페이지
+	@GetMapping("/event/winner")
+	public String eventWinner() {
+		
+		return "event/event_winner";
+	}
 }
