@@ -132,7 +132,7 @@
 					<c:forEach var="eventtheater" items="${theaterEventList}" varStatus="loop" >
 					<c:if test='${eventtheater.EVENT_STATUS == "PROGRESS"}'>
 					<li>
-						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14248" data-netfunnel="N" class="eventBtn" title="${eventtheater.EVENT_SUBJECT}">
+						<a href="${pageContext.request.contextPath}/event/detail?num=${eventtheater.EVENT_NUM}" data-no="14248" data-netfunnel="N" class="eventBtn" title="${eventtheater.EVENT_SUBJECT}">
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 							<p class="img"> 
 							<img src="${pageContext.request.contextPath}/upload${eventtheater.EVENT_FILE}" alt="" onerror="noImg(this);"></p>
