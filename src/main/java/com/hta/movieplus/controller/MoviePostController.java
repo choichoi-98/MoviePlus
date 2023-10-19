@@ -142,4 +142,5 @@ public class MoviePostController {
 		
 		return moviePostService.deleteCommentByCommNum(comment_num);
 	}
+	
 }
