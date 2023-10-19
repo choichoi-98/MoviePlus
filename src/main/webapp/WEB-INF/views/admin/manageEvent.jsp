@@ -24,8 +24,9 @@
 				<div class="col-12">
 					<div class="main__title">
 						<h2>이벤트 관리</h2>
-
-						<span class="main__title-stat">총 ${listcount}개</span>
+						
+						<c:set var="eventcount" value="${eventlistcount}" />
+						<span class="main__title-stat">총 <b>${eventcount}</b>개</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
@@ -73,7 +74,7 @@
 							</thead>
 
 							<tbody>
-							  <c:set var="num" value="${listcount - (page - 1) * limit }" />
+							  <c:set var="num" value="${eventlistcount - (page - 1) * limit }" />
 							  <c:forEach var="event" items="${eventlist}">
 								<tr>
 									<td>
@@ -123,7 +124,7 @@
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
-						<span>${theaterCount} 중 10개씩</span>
+						<span>총 개수 </span>
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
@@ -164,16 +165,28 @@
 
 	<!-- modal delete -->
 	<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-		<h6 class="modal__title">극장 삭제</h6>
+		<h6 class="modal__title">이벤트 삭제</h6>
 
-		<p class="modal__text">정말로 삭제하시겠습니까?</p>
+		<p class="modal__text">정말로 이벤트를 삭제하시겠습니까?</p>
 
 		<div class="modal__btns">
-			<button id="delete-theater-modal-btn" class="modal__btn modal__btn--apply" type="button">삭제</button>
+			<button id="delete-event-modal-btn" class="modal__btn modal__btn--apply" type="button">삭제</button>
 			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 		</div>
 	</div>
 	<!-- end modal delete -->
 	</main>
+<script>
+
+$('.main__table-btn--delete').click(function() {
+    delete_id = $(this).parent().find('.selected-theater-id').val();
+ });
+
+$('#delete-event-modal-btn').click(function() {
+    location.href="deleteEvent?num=" + EVENT_NUM;
+})
+
+</script>	
+	
 </body>
 </html>

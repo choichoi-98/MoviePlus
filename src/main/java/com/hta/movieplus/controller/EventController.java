@@ -235,10 +235,11 @@ public class EventController {
 	public ModelAndView eventList(ModelAndView mv, @RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
 		int limit = 10;	//한 화면에 출력할 로우 갯수
-		int listcount = eventservice.getEventListCount();	//총 리스트 수
+		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
+		logger.info("eventlistcount 수 : " + eventlistcount);
 
 		//총 페이지 수
-		int maxpage = (listcount + limit - 1) / limit;
+		int maxpage = (eventlistcount + limit - 1) / limit;
 		
 		//현재 페이지에 보여줄 시작 페이지 수
 		int startpage = ((page - 1)/10) * 10 + 1;
@@ -250,25 +251,33 @@ public class EventController {
 			endpage = maxpage;
 		}
 		
+		
 		List<Event> eventlist = eventservice.getEventList(page, limit);
-		mv.setViewName("admin/manageEvent");
 		mv.addObject("page", page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);		
 		mv.addObject("endpage",endpage);
-		mv.addObject("listcount",listcount);
+		mv.addObject("eventlistcount",eventlistcount);
 		mv.addObject("eventlist",eventlist);
 		mv.addObject("limit",limit);
+		mv.setViewName("admin/manageEvent");
 		
 		return mv;
 	}
 	
+	//관리자 - 이벤트 삭제
+	@GetMapping("/admin/deleteEvent")
+	public String deleteEvent(int num) {
+		eventservice.deleteEvent(num);
+		return "redirect:/admin/manageEvent";
+	}
+	
 	
 	//이벤트 내용 상세페이지(뷰 페이지)
-		@GetMapping("/event/eventview")
-		public String eventview() {
-			return "event/event_viewform";
-		}
+	@GetMapping("/event/eventview")
+	public String eventview() {
+		return "event/event_viewform";
+	}
 	
 	
 	//이벤트 뷰 페이지 detail 주소

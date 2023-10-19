@@ -35,6 +35,8 @@ public interface EventMapper {
 	public int getPromotionEventListCount();
 	
 	public int getCurtaincallEventListCount();
+
+	public void deleteEvent(int num);
 	
 }
 

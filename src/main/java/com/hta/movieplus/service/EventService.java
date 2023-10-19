@@ -31,6 +31,8 @@ public interface EventService {
 	public int getPromotionEventListCount();
 	
 	public int getCurtaincallEventListCount();
+
+	public void deleteEvent(int num);
 	
 	
 	

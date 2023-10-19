@@ -90,6 +90,11 @@ public class EventServiceImpl implements EventService{
 		return dao.getCurtaincallEventListCount();
 	}
 
+	@Override
+	public void deleteEvent(int num) {
+		dao.deleteEvent(num);
+	}
+
 	
 
 

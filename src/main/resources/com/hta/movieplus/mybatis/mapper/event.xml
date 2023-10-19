@@ -67,7 +67,7 @@
 		WHERE EVENT_TYPE = 'CURTAINCALL'
 	</select>
 	
-	<select id="getEventListCount" resultType="int">	<!-- 이벤트 전체 갯수 -->
+	<select id="getEventListCount" resultType="int">	<!-- 이벤트 전체 개수 -->
 		select count(*) 
 		from EVENT
 	</select>
@@ -87,8 +87,12 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</select>
 
-
-
+	<delete id="deleteEvent" parameterType="int">
+		DELETE
+		FROM EVENT
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</delete>
+	
 
 
 	
