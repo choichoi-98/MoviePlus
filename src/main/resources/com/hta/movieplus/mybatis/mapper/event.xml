@@ -22,53 +22,53 @@
 	<select id="getMovieEventList" resultType="event">	<!-- 영화 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'MOVIE'
+		WHERE EVENT_TYPE = '영화'
 		
 	</select>
 	
 	<select id="getMovieEventListCount" resultType="int">	<!-- 영화 이벤트 목록 COUNT -->
 		SELECT COUNT(*) 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'MOVIE'
+		WHERE EVENT_TYPE = '영화'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getTheaterEventList" resultType="event">	<!-- 극장 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'THEATER'
+		WHERE EVENT_TYPE = '극장'
 	</select>
 	
 	<select id="getTheaterEventListCount" resultType="int">	<!-- 극장 이벤트 목록 COUNT-->
 		SELECT COUNT(*)
 		FROM EVENT
-		WHERE EVENT_TYPE = 'THEATER'
+		WHERE EVENT_TYPE = '극장'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getPromotionEventList" resultType="event"> 	<!-- 제휴/할인 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'PROMOTION'
+		WHERE EVENT_TYPE = '제휴/할인'
 	</select>
 	
 	<select id="getPromotionEventListCount" resultType="int"> 	<!-- 제휴/할인 이벤트 목록 Count -->
 		SELECT COUNT(*) 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'PROMOTION'
+		WHERE EVENT_TYPE = '제휴/할인'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getCurtaincallEventList" resultType="event">	<!-- 시사회 이벤트 목록 -->
 		SELECT * 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'CURTAINCALL'
+		WHERE EVENT_TYPE = '시사회/무대인사'
 	</select>
 	
 	<select id="getCurtaincallEventListCount" resultType="int">	<!-- 시사회 이벤트 목록 Count -->
 		SELECT COUNT(*) 
 		FROM EVENT
-		WHERE EVENT_TYPE = 'CURTAINCALL'
+		WHERE EVENT_TYPE = '시사회/무대인사'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
@@ -88,6 +88,7 @@
 				    ORDER BY EVENT_STATUS DESC, EVENT_DATE DESC
 				  ) EVENT
 			)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}	
 	</select>
 	
 	<select id="getDetailEvent" parameterType="int" resultType="event">		<!-- 이벤트 상세페이지 -->

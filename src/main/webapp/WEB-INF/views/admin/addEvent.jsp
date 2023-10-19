@@ -33,10 +33,10 @@
 								
 								<div class="col-3">
 									<select name="EVENT_TYPE" class="js-example-basic-single" id="rights" data-select2-id="rights" tabindex="-1" aria-hidden="true">
-												<option value="MOVIE">영화</option>
-												<option value="THEATER">극장</option>
-												<option value="PROMOTION">제휴/할인</option>
-												<option value="CURTAINCALL">시사회/무대인사</option>
+												<option value="영화">영화</option>
+												<option value="극장">극장</option>
+												<option value="제휴/할인">제휴/할인</option>
+												<option value="시사회/무대인사">시사회/무대인사</option>
 									</select>
 								</div>
 							

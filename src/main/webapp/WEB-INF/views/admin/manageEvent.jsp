@@ -25,11 +25,11 @@
 				<div class="col-12">
 					<div class="main__title">
 						<h2>이벤트 관리</h2>
-						
-						<c:set var="eventcount" value="${eventlistcount}" />
-						<span class="main__title-stat">총 <b>${eventcount}</b>개</span>
+
+						<span class="main__title-stat">총 <b>${eventlistcount}</b>개</span>
 
 						<div class="main__title-wrap">
+						 
 							<!-- filter sort -->
 							<div class="filter" id="filter__sort">
 								<span class="filter__item-label">정렬 순서</span>
@@ -62,6 +62,7 @@
 
 				<!-- users -->
 				<div class="col-12">
+				<c:if test="${eventlistcount > 0}">
 						<table class="main__table">
 							<thead>
 								<tr>
@@ -75,7 +76,6 @@
 							</thead>
 
 							<tbody>
-							  <c:set var="num" value="${eventlistcount - (page - 1) * limit }" />
 							  <c:forEach var="event" items="${eventlist}">
 								<tr>
 									<td>
@@ -123,17 +123,23 @@
 							  </c:forEach>	
 							</tbody>
 						</table>
+					</c:if>	
+					
+					<c:if test="${eventlistcount == 0 }">
+			         <h3 style="text-align: center">등록된 글이 없습니다.</h3>
+			      	</c:if>
+			      	
 				</div>
 				<!-- end users -->
 				<a href="${pageContext.request.contextPath}/admin/addEvent" class="main__title-link">이벤트 추가</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
-						<span>총 개수 </span>
+						<span style="display:none;"></span>
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>
-							    <a href="managetheater?page=${page-1}"><i class="icon ion-ios-arrow-back"></i></a>
+							    <a href="manageEvent?page=${page-1}"><i class="icon ion-ios-arrow-back"></i></a>
 							</li>
 			
 							<c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -141,12 +147,12 @@
 										<li class="paginator__item paginator__item--active" ><a href="#">${a }</a></li>
 									</c:if>
 								<c:if test="${a != page }">
-									<li class="paginator__item"><a href="managetheater?page=${a }">${a}</a></li>
+									<li class="paginator__item"><a href="manageEvent?page=${a }">${a}</a></li>
 								</c:if>
 							</c:forEach>
 							
 							<li class="paginator__item paginator__item--next" ${page >= maxpage ? 'style="pointer-events: none;"' : ''}>
-								<a href="managetheater?page=${page+1}"><i class="icon ion-ios-arrow-forward"></i></a>
+								<a href="manageEvent?page=${page+1}"><i class="icon ion-ios-arrow-forward"></i></a>
 							</li>
 						</ul>
 					</div>

@@ -18,9 +18,9 @@
 		<div class="inner-wrap">
 			<div class="location">
 				<span>Home</span>
-                <a href="https://www.megabox.co.kr/event" title="이벤트 메인 페이지로 이동">이벤트</a>
+                <a href="${pageContext.request.contextPath}/event" title="이벤트 메인 페이지로 이동">이벤트</a>
 				
-					<a href="https://www.megabox.co.kr/event/end" title="지난 이벤트 페이지로 이동">지난 이벤트</a>
+					<a href="${pageContext.request.contextPath}/event/end" title="지난 이벤트 페이지로 이동">지난 이벤트</a>
 			</div>
 
 		</div>
@@ -75,33 +75,35 @@
 			
                 <input type="hidden" id="totCount" name="totCount" value="10714">
 				<ul>
-				
+				 	<c:forEach var="event" items="${eventlist}" varStatus="loop" >
+					<c:if test='${event.EVENT_STATUS == "END"}'>				 	
 					<li>
-						<a href="https://www.megabox.co.kr/event/end#" data-no="12411" data-netfunnel="N" class="eventBtn" title="[대구이시아] 라운지 이용권 런칭! 상세보기">
+						<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}" data-no="12411" data-netfunnel="N" class="eventBtn" title="${event.EVENT_SUBJECT}">
 							
-								<p class="cate">극장</p>
+								<p class="cate">${event.EVENT_TYPE}</p>
 							
 
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./지난이벤트_files/IwOFR5fvobJmrVwYXm4M8cqjdwQj0LoO.jpg" alt="[대구이시아] 라운지 이용권 런칭!" onerror="noImg(this);"></p>
+							<p class="img"> 
+							<img src="${pageContext.request.contextPath}/upload${event.EVENT_FILE}" alt="${event.EVENT_SUBJECT}" onerror="noImg(this);"></p>
 
 							<p class="tit">
-								[대구이시아] 라운지 이용권 런칭!
+								${event.EVENT_SUBJECT}
 							</p>
 
 							<p class="date">
-								2022.12.15 ~ 2023.12.31
+								${event.EVENT_STARTDATE} ~ ${event.EVENT_ENDDATE}
 							</p>
 						</a>
-                
 					</li>
+					</c:if>
+				  </c:forEach>	
 				</ul>
 			</div>
 		
 	</div>
 
 </div>
-
 
 		
 			<div class="btn-more v1" style="">

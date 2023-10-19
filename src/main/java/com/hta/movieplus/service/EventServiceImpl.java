@@ -37,9 +37,11 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public List<Event> getEventList(int page, int limit) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		int startrow = (page-1) * limit + 1;
 		int endrow = startrow+limit-1;
+		
 		map.put("start", startrow);
 		map.put("end", endrow);
 		
@@ -109,8 +111,37 @@ public class EventServiceImpl implements EventService{
 		map.put("EVENT_STATUS", status);
 		
 		dao.changeStatus(map);
+	}
+
+	@Override
+	public Map<String, Object> pagination(int page) {
 		
+		Map<String, Object> pagemap = new HashMap<String,Object>();
 		
+		int limit = 10;	//한 화면에 출력할 로우 갯수
+		
+		int eventlistcount = getEventListCount();	//총 리스트 수
+
+		//총 페이지 수
+		int maxpage = (eventlistcount + limit - 1) / limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수
+		int startpage = ((page - 1)/10) * 10 + 1;
+		
+		//현재 페이지에 보여줄 마지막 페이지 수
+		int endpage = startpage + 10 - 1;
+		
+		if(endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		pagemap.put("page", page);
+		pagemap.put("maxpage",maxpage);
+		pagemap.put("startpage",startpage);
+		pagemap.put("endpage",endpage);
+		pagemap.put("limit",limit);
+		
+		return pagemap;
 	}
 
 

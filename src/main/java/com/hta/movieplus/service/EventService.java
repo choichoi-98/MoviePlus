@@ -1,6 +1,7 @@
 package com.hta.movieplus.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hta.movieplus.domain.Event;
 
@@ -37,6 +38,8 @@ public interface EventService {
 	public int updateEvent(Event event);
 
 	public void changeStatus(int num, String status);
+
+	public Map<String, Object> pagination(int page);
 
 
 	

@@ -326,7 +326,7 @@ button.button.purple:hover {
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/event/"
 							title="진행중 이벤트">진행중 이벤트</a></li>
-						<li><a id="" href="#" title="지난 이벤트">지난 이벤트</a></li>
+						<li><a id="" href="${pageContext.request.contextPath}/event/end" title="지난 이벤트">지난 이벤트</a></li>
 						<li><a href="#" title="당첨자발표">당첨자발표</a></li>
 					</ul>
 				</div></li>
