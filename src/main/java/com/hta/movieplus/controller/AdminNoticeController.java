@@ -43,32 +43,34 @@ public class AdminNoticeController {
 	@GetMapping("admin/gonoticemodify")
 	public String gonoticeModify(int noticemodify, Model model) {
 		NoticeVO notice = noticeService.getNoticeModify(noticemodify);
-		model.addAttribute("notice",notice);
+		model.addAttribute("notice", notice); /* model 안에 notice 벨류 */
 		return "admin/noticeModify";
 	}
-
-	@PostMapping("admin/noticemodify")
-	public String noticeModify(NoticeVO modify) {
-		noticeService.noticeModify(modify);
-		return "redirect:/admin/noticeList";
-	}
 	
-	
-	
-	
-
 	@GetMapping("/admin/noticedelete")
 	public String noticeDelete(int noticenum) {
 		noticeService.deleteNoticeVO(noticenum);
 		return "redirect:/admin/noticelist";
 	}
-
-	@PostMapping("/admin/noticeread")
-	public String noticeRead(Model model) {
-		/*
-		 * List<NoticeVO> listread = noticeService.getNoticelist("전체");
-		 * model.addAttribute("list4", listread);
-		 */
-		return "admin/noticeModify";
+	
+	
+	
+	
+	
+	
+	
+	@PostMapping("admin/noticemodify")
+	public String noticeModify(NoticeVO modify) {
+		noticeService.noticeModify(modify);
+		return "redirect:/admin/noticelist";
 	}
+	
+	/*
+	 * @PostMapping("admin/noticemodify") public int noticeModify(int moidfy) {
+	 * noticeService.noticeModify(int); return "redirect:/admin/noticeList; }
+	 */
+	
+
+
+	
 }

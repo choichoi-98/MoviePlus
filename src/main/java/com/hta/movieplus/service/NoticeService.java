@@ -14,13 +14,16 @@ public interface NoticeService {
 
 	public NoticeVO getNoticeModify(int getmodify);
 	
+	
+	
+	
 	public void noticeModify(NoticeVO modify); //진행
 
+	/* public void noticeModify(int modify); */
 	
 	
 	
 	
-	public List<NoticeVO> getNoticeModifyList(String string2);
 
 	
 }

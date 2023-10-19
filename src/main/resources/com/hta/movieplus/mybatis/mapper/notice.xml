@@ -29,4 +29,15 @@
 		SELECT * FROM CUSTOMER_NOTICE
 		WHERE CUSTOMER_NOTICE_NUM= #{getmodify}
 	</select>
+	
+	<update id="noticeModify" parameterType="noticeVO"> <!-- 직접만든도메인일때  -->
+		UPDATE
+		CUSTOMER_NOTICE 
+		SET
+		CUSTOMER_NOTICE_SUBJECT = #{CUSTOMER_NOTICE_SUBJECT}, <!-- NoticeVO 파라미터타입이 가진 값 -->
+		CUSTOMER_NOTICE_CONTENT = #{CUSTOMER_NOTICE_CONTENT}
+		WHERE CUSTOMER_NOTICE_NUM = #{CUSTOMER_NOTICE_NUM} <!-- 무엇을 바꿀것인지 -->
+	</update>
+	
+	
 </mapper>

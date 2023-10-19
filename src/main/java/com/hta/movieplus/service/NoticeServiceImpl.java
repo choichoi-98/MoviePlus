@@ -41,21 +41,16 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> getNoticeModifyList(String string2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public NoticeVO getNoticeModify(int getmodify) {
 		return dao.getNoticeModify(getmodify);
 	}
-
+	
 	@Override
 	public void noticeModify(NoticeVO modify) {
-		// TODO Auto-generated method stub
-		
+		dao.noticeModify(modify);
 	}
+
+	
 
 	
 
