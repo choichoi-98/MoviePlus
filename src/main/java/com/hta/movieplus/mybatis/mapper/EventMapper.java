@@ -2,6 +2,7 @@ package com.hta.movieplus.mybatis.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,6 +38,10 @@ public interface EventMapper {
 	public int getCurtaincallEventListCount();
 
 	public void deleteEvent(int num);
+
+	public int updateEvent(Event event);
+
+	public void changeStatus(Map<String, Object> map);
 	
 }
 

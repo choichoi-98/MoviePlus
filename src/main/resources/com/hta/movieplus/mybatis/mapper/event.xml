@@ -81,7 +81,7 @@
 			  )
 	</select>
 	
-	<select id="getDetailEvent" parameterType="int" resultType="event">
+	<select id="getDetailEvent" parameterType="int" resultType="event">		<!-- 이벤트 상세페이지 -->
 		SELECT *
 		FROM EVENT
 		WHERE EVENT_NUM = #{EVENT_NUM}
@@ -93,7 +93,30 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</delete>
 	
+	<update id="updateEvent" parameterType="event">
+		update EVENT
+		set EVENT_TYPE = #{EVENT_TYPE},
+			EVENT_SUBJECT = #{EVENT_SUBJECT}, 
+			EVENT_CONTENT = #{EVENT_CONTENT}, 
+			EVENT_FILE = #{EVENT_FILE}, 
+			EVENT_STARTDATE = #{EVENT_STARTDATE}, 
+			EVENT_ENDDATE = #{EVENT_ENDDATE}
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</update>
 
-
+	<update id="changeStatus" parameterType="map">
+		update EVENT
+		<choose>	
+			<when test='EVENT_STATUS == "END"'>
+				set EVENT_STATUS = 'PROGRESS'
+			</when>
+			<when test='EVENT_STATUS == "PROGRESS"'>
+				set EVENT_STATUS = 'END'
+			</when>
+		</choose>
+		WHERE EVENT_NUM = #{EVENT_NUM}	
+	</update>
+	
+	
 	
 </mapper>

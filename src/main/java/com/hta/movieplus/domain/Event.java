@@ -13,7 +13,8 @@ public class Event {
 	private String EVENT_FILE;			//이벤트 업로드 파일(포스터)
 	private String EVENT_STARTDATE;		//이벤트 시작일
 	private String EVENT_ENDDATE;		//이벤트 종료일
-	private String EVENT_STATUS="WAIT"; //이벤트 상태(대기(WAIT)| 진행중(PROGRESS) | 종료(END))
+	private String EVENT_STATUS="PROGRESS"; //이벤트 상태(진행중(PROGRESS) | 종료(END))
+	private int RNUM;
 	
 	private MultipartFile uploadevent;		//이벤트 내용 사진 업로드시 사용(EVENT_CONTENT)
 	private String EVENTCONTENT_ORIGINAL;
@@ -21,14 +22,25 @@ public class Event {
 	private MultipartFile uploadthumb;	//이벤트 썸네일 사진 업로드시 사용(EVENT_FILE)
 	private String EVENTFILE_ORIGINAL;
 	
-
+	
 	@Override
 	public String toString() {
 		return "Event [EVENT_NUM=" + EVENT_NUM + ", EVENT_TYPE=" + EVENT_TYPE + ", EVENT_SUBJECT=" + EVENT_SUBJECT
 				+ ", EVENT_CONTENT=" + EVENT_CONTENT + ", EVENT_DATE=" + EVENT_DATE + ", EVENT_FILE=" + EVENT_FILE
 				+ ", EVENT_STARTDATE=" + EVENT_STARTDATE + ", EVENT_ENDDATE=" + EVENT_ENDDATE + ", EVENT_STATUS="
-				+ EVENT_STATUS + ", uploadevent=" + uploadevent + ", EVENTCONTENT_ORIGINAL=" + EVENTCONTENT_ORIGINAL
-				+ ", uploadthumb=" + uploadthumb + ", EVENTFILE_ORIGINAL=" + EVENTFILE_ORIGINAL + "]";
+				+ EVENT_STATUS + ", RNUM=" + RNUM + ", uploadevent=" + uploadevent + ", EVENTCONTENT_ORIGINAL="
+				+ EVENTCONTENT_ORIGINAL + ", uploadthumb=" + uploadthumb + ", EVENTFILE_ORIGINAL=" + EVENTFILE_ORIGINAL
+				+ "]";
+	}
+
+
+	public int getRNUM() {
+		return RNUM;
+	}
+
+
+	public void setRNUM(int rNUM) {
+		RNUM = rNUM;
 	}
 
 

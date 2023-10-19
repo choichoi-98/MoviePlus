@@ -11,6 +11,7 @@
 <head>	
 <meta charset="UTF-8">
 <title>MoviePlus 이벤트 관리 페이지</title>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
@@ -68,7 +69,7 @@
 									<th>이벤트 분류</th><!--(영화|극장|제휴할인|시사회/무대인사)  -->
 									<th>이벤트 제목</th>
 									<th>이벤트 기간</th>
-									<th>상태</th><!-- (대기/진행중/종료) -->
+									<th>상태</th><!-- (진행중/종료) -->
 									<th>관리</th>
 								</tr>
 							</thead>
@@ -78,7 +79,7 @@
 							  <c:forEach var="event" items="${eventlist}">
 								<tr>
 									<td>
-										<div class="main__table-text">${event.EVENT_NUM}</div><!-- 이벤트 작성일자 -->
+										<div class="main__table-text">${event.RNUM}</div><!-- 이벤트 번호 -->
 									</td>
 									<td>
 										<div class="main__user">
@@ -89,7 +90,7 @@
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="detail?num=${event.EVENT_NUM}">${event.EVENT_SUBJECT}</a></div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
+										<a href="">${event.EVENT_SUBJECT}</a></div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
 									</td>
 									<td>
 										<div class="main__table-text">${event.EVENT_STARTDATE} - ${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
@@ -99,14 +100,15 @@
 									</td>
 									<td>
 										<div class="main__table-btns">
+										 <input type="hidden" id="eventnum" name="EVENT_NUM" value="${event.EVENT_NUM}">
 											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-log-out" title="당첨자 관리"></i>
 											</a>
 											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
 												<i class="icon ion-ios-lock" title="상태 관리"></i>
-												<input type="hidden" class="selected-theater-status" value=""/>
+										 		<input type="hidden" id="eventstatus" name="EVENT_STATUS" value="${event.EVENT_STATUS}">
 											</a>
-											<a href="#" id="theater-modify-btn" class="main__table-btn main__table-btn--edit">
+											<a href="/movieplus/admin/modifyEvent?num=${event.EVENT_NUM}" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
 												<i class="icon ion-ios-create" title="수정"></i>
 											</a>
 											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -152,9 +154,9 @@
 		
 			<!-- modal status -->
 	<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-		<h6 class="modal__title">극장 상태 변경</h6>
+		<h6 class="modal__title">이벤트 상태 변경</h6>
 
-		<p class="modal__text">극장 상태를 변경하시겠습니까? (운영|대기)</p>
+		<p class="modal__text">이벤트 상태를 변경하시겠습니까? (진행중/종료)</p>
 
 		<div class="modal__btns">
 			<button id="change-status-modal-btn" class="modal__btn modal__btn--apply" type="button">확인</button>
@@ -176,17 +178,6 @@
 	</div>
 	<!-- end modal delete -->
 	</main>
-<script>
-
-$('.main__table-btn--delete').click(function() {
-    delete_id = $(this).parent().find('.selected-theater-id').val();
- });
-
-$('#delete-event-modal-btn').click(function() {
-    location.href="deleteEvent?num=" + EVENT_NUM;
-})
-
-</script>	
 	
 </body>
 </html>

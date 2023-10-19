@@ -2,9 +2,7 @@ package com.hta.movieplus.controller;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hta.movieplus.domain.Event;
 import com.hta.movieplus.service.EventService;
@@ -265,13 +262,90 @@ public class EventController {
 		return mv;
 	}
 	
+	
+	
+	
+	
+	//관리자 - 이벤트 수정
+	@GetMapping("/admin/modifyEvent")
+	public ModelAndView modifyEvent(@RequestParam(value = "num") int num, ModelAndView mv) {
+		Event event = eventservice.getDetailEvent(num);
+		mv.addObject("eventdata", event);
+		mv.setViewName("admin/modifyEvent");
+		return mv;
+	}
+	
+	//관리자 - 이벤트 수정프로세스
+	@PostMapping("/admin/modifyEventProcess")
+	public String modifyEventProcess(Event event, String check, 
+							  HttpServletRequest request, RedirectAttributes rattr,
+							  Model model) throws Exception {
+		
+		MultipartFile uploadevent = event.getUploadevent();	//1)이벤트 내용 업로드
+		
+		MultipartFile uploadthumb = event.getUploadthumb();	//2)이벤트 썸네일 업로드
+		
+		if(check != null && check.equals("")) {
+			logger.info("기존파일 그대로 사용");
+			event.setEVENTCONTENT_ORIGINAL(check);
+			event.setEVENTFILE_ORIGINAL(check);
+		} else {
+			
+			if(!uploadevent.isEmpty() && !uploadthumb.isEmpty()) {
+				logger.info("파일 추가/변경");
+				
+				//1)이벤트 내용 업로드
+				String contentfileName = uploadevent.getOriginalFilename();	//이벤트 내용 원래 파일명
+				event.setEVENTCONTENT_ORIGINAL(contentfileName);	//이벤트 내용 원래 파일명 저장
+				
+				String contentfileDBName = fileDBname(contentfileName, saveFolder);
+				logger.info("contentfileDBName(내용) = " + contentfileDBName);
+				
+				uploadevent.transferTo(new File(saveFolder + contentfileDBName));
+				logger.info("transferTo path(내용) = " + saveFolder +  contentfileDBName);
+				event.setEVENT_CONTENT(contentfileDBName);
+				
+				//2)이벤트 썸네일 업로드
+				String thumbfileName = uploadthumb.getOriginalFilename();
+				event.setEVENTFILE_ORIGINAL(thumbfileName);
+				
+				String thumbfileDBName = thumbfileDBname(thumbfileName, saveFolder);
+				uploadthumb.transferTo(new File(saveFolder + thumbfileDBName));
+				event.setEVENT_FILE(thumbfileDBName);
+			} else {
+				logger.info("선택 파일이 없습니다.");
+				event.setEVENT_FILE("");
+				event.setEVENTFILE_ORIGINAL("");
+				event.setEVENT_CONTENT("");
+				event.setEVENTCONTENT_ORIGINAL("");
+			}
+		}
+		
+		int result = eventservice.updateEvent(event);
+		
+		if(result == 1) {
+			model.addAttribute("eventdata", event);
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "정보 수정 실패");
+		}
+		return "redirect:/admin/manageEvent";
+ 	}
+	
 	//관리자 - 이벤트 삭제
 	@GetMapping("/admin/deleteEvent")
 	public String deleteEvent(int num) {
 		eventservice.deleteEvent(num);
+		logger.info("이벤트num : " + num);
 		return "redirect:/admin/manageEvent";
 	}
 	
+	//관리자 - 이벤트 상태 변경
+	@GetMapping("/admin/changeStatus")
+	public String changeStatus(int num, String status)throws Exception {
+		eventservice.changeStatus(num, status);
+		return "redirect:/admin/manageEvent";
+	}
 	
 	//이벤트 내용 상세페이지(뷰 페이지)
 	@GetMapping("/event/eventview")

@@ -17,14 +17,14 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>이벤트 추가</h2>
+						<h2>이벤트 수정</h2>
 					</div>
 				</div>
 				<!-- end main title -->
 
 				<!-- form -->
 				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventadd" action="${pageContext.request.contextPath}/admin/eventInsert" class="form" method="post">
+					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/modifyEventProcess" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 			
@@ -32,25 +32,25 @@
 								<div class="row row--form">
 								
 								<div class="col-3">
-									<select name="EVENT_TYPE" class="js-example-basic-single" id="rights" data-select2-id="rights" tabindex="-1" aria-hidden="true">
-												<option value="MOVIE">영화</option>
-												<option value="THEATER">극장</option>
-												<option value="PROMOTION">제휴/할인</option>
-												<option value="CURTAINCALL">시사회/무대인사</option>
+									<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="update_EVENT_TYPE" data-select2-id="rights" tabindex="-1" >
+												<option value="MOVIE" ${eventdata.EVENT_TYPE == 'MOVIE' ? 'selected' : ''}>영화</option>
+												<option value="THEATER" ${eventdata.EVENT_TYPE == 'THEATER' ? 'selected' : ''}>극장</option>
+												<option value="PROMOTION"  ${eventdata.EVENT_TYPE == 'PROMOTION' ? 'selected' : ''}>제휴/할인</option>
+												<option value="CURTAINCALL" ${eventdata.EVENT_TYPE == 'CURTAINCALL' ? 'selected' : ''}>시사회/무대인사</option>
 									</select>
 								</div>
-							
+								<input type="hidden" name="EVENT_NUM" value="${eventdata.EVENT_NUM}">
 								<div class="col-12">
 									<input type="text" name="EVENT_SUBJECT" class="form__input"
-											placeholder="이벤트 제목" required>
+										 placeholder="이벤트 제목" value="${eventdata.EVENT_SUBJECT}" required>
 								</div>
 									
 								<div class="col-3"><!-- 이벤트 시작일 -->
-									<input type="text" name="EVENT_STARTDATE" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" required>
+									<input type="text" name="EVENT_STARTDATE" value="${eventdata.EVENT_STARTDATE}" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" required>
 								</div>
 							
 								<div class="col-3"><!-- 이벤트 종료일 -->
-									<input type="text" name="EVENT_ENDDATE" class="form__input" placeholder="이벤트 종료일 " required>
+									<input type="text" name="EVENT_ENDDATE" value="${eventdata.EVENT_ENDDATE}" class="form__input" placeholder="이벤트 종료일 " required>
 								</div>
 							 </div>
 						   </div><!-- form content end -->
@@ -92,6 +92,9 @@
 	</main>
 <script>
 $(document).ready(function(){
+	
+	
+	
    
 	$("#eventupfile").change(function(){
 		console.log($(this).val())		//c:\fakepath\upload.png
@@ -135,6 +138,10 @@ $(document).ready(function(){
 			$(this).val('')
 		}
 		
+	})
+	
+	$('form').submit(function(){
+		alert('이벤트가 수정되었습니다.');
 	})
    
 }) //ready end
