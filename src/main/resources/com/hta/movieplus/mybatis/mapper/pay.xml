@@ -7,8 +7,8 @@
 	<selectKey resultType="int" order="BEFORE" keyProperty="KPAY_NUM">
 		select nvl(max(KPAY_NUM), 0) + 1 from KAKAO_PAY
 	</selectKey>
-		insert into KAKAO_PAY(KPAY_NUM, THEATER_SCHEDULE_ID, KPAY_AMOUNT, KPAY_SEAT_CNT)
-		values(#{KPAY_NUM}, #{scheduleId}, #{totalPrice}, #{seatCnt})
+		insert into KAKAO_PAY(KPAY_NUM, THEATER_SCHEDULE_ID, KPAY_AMOUNT, KAPY_OCCUPIED_SEAT, KPAY_SEAT_CNT, MEMBER_ID)
+		values(#{KPAY_NUM}, #{scheduleId}, #{totalPrice}, #{KAPY_OCCUPIED_SEAT}, #{seatCnt}, #{MEMBER_ID})
 	</insert>
 	
 	<update id="insertPgToken">

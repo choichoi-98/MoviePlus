@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.KakaoPayVO;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.Theater;
@@ -121,6 +123,7 @@ public class BookingController {
 		mv.setViewName("booking/booking_cart");
 		mv.addObject("scheduleId", scheduleId);
 		mv.addObject("price", price);
+		mv.addObject("seat", seat);
 		mv.addObject("seatCnt", seatCnt);
 		mv.addObject("movie", movie);
 		mv.addObject("ts", ts);
@@ -132,9 +135,13 @@ public class BookingController {
 	public String kakaopay(
 		@RequestParam("totalAmount") int totalAmount,
 		@RequestParam("sid") int sid,
+		@AuthenticationPrincipal Member member,
+		@RequestParam("OCseats") String KAPY_OCCUPIED_SEAT,
 		@RequestParam("cnt") int seatCnt) throws UnsupportedEncodingException {
 		
-		kakaopayService.payInsert(sid, totalAmount, seatCnt);
+		String MEMBER_ID = member.getMEMBER_ID();
+		
+		kakaopayService.payInsert(sid, totalAmount, KAPY_OCCUPIED_SEAT, seatCnt, MEMBER_ID);
 		
 		TheaterSchedule ts = schedulingService.getSchedule(sid);
 		Movie movie = schedulingService.getMovieDetailByCode(ts.getMOVIE_CODE());

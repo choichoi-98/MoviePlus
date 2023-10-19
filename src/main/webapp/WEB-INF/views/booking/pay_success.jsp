@@ -34,11 +34,14 @@
 </script>
 </head>
 <body>
+<div>영화 예매 내역</div>
 <c:forEach var="b" items="${BookingList}">
+	<div>=================</div>
 	<div>예약 번호: <span>${b.KPAY_NUM}</span></div>
+	<div>예약자 ID: <span>${b.MEMBER_ID}</span></div>
     <div>예약 상품ID: <span>${b.THEATER_SCHEDULE_ID}</span></div>
+    <div>예약 좌석: <span></span></div>
     <div>예약 좌석수: <span>${b.KPAY_SEAT_CNT}</span></div>
- <!-- <em id="payNum" data-paynum="${p.PAY_NUM}"></em> --> 
     <div>결제 총 금액: <span>${b.KPAY_AMOUNT}</span></div> 
 </c:forEach>
 

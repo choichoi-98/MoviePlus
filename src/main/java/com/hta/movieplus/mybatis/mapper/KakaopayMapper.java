@@ -13,7 +13,7 @@ import com.hta.movieplus.domain.KakaoPayVO;
 @Mapper
 public interface KakaopayMapper {
 	
-	public void payInsert(int scheduleId, int totalPrice, int seatCnt);
+	public void payInsert(int scheduleId, int totalPrice, String KAPY_OCCUPIED_SEAT, int seatCnt, String MEMBER_ID);
 
 	public void insertPgToken(String pg_token);
 

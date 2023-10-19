@@ -20,17 +20,22 @@ $(function() {
 	let token = $("meta[name='_csrf']").attr("content");
     let header = $("meta[name='_csrf_header']").attr("content");
     
-    $('#btn_booking_pay').click(function() {
+    $(document).on('click', '#btn_booking_pay', function(e) {
+    	e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+//    $('#btn_booking_pay').click(function() {
     	var totalAmount = $('#Checker').data("amount");
     	var sid = $('#Checker').data("sid");
     	var cnt = $('#Checker').data("cnt");
+    	var OCseats = $('#Checker').data("seat").split(",");
+        alert(OCseats);
     	
         $.ajax({
             url: 'kakaopay',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { "totalAmount": totalAmount,
-            	    "sid": sid, 
+            	    "sid": sid,
+            	    "OCseats": OCseats,
             	    "cnt": cnt},
             dataType: 'json',
             beforeSend: function(xhr) {
@@ -246,7 +251,7 @@ $(function() {
 						<div class="select-payment ty2">
 							<div class="radio-group">
 								<span class="bg-chk small"> <input type="radio"
-									name="radio_payment" id="rdo_pay_credit" value="credit">
+									name="radio_payment" id="rdo_pay_credit" value="credit" checked="checked">
 									<label for="rdo_pay_credit">신용/체크카드</label>
 								</span> <span class="bg-chk small"> <input type="radio"
 									name="radio_payment" id="rdo_pay_mobile" value="mobile">
@@ -351,7 +356,8 @@ $(function() {
 
 									<div class="money">
 										<em id="Checker" data-amount="${totalPrice}"
-										data-sid="${scheduleId}" data-cnt="${seatCnt}">${totalPrice}</em> <span>원<!-- 원 --></span>
+										data-sid="${scheduleId}" data-cnt="${seatCnt}"
+										data-seat="${seat}">${totalPrice}</em> <span>원<!-- 원 --></span>
 									</div>
 								</div>
 								<div class="payment-thing">
