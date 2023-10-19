@@ -92,6 +92,7 @@
 					<div class="event-list mt15">
 						<ul>
 						<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" begin="0" end="3">
+							<c:if test='${eventmovie.EVENT_STATUS == "PROGRESS"}'>
 							<li><a href="https://www.megabox.co.kr/event#"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
 								title="${eventmovie.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -105,6 +106,7 @@
 									<p class="date">${eventmovie.EVENT_STARTDATE} ~ ${eventmovie.EVENT_ENDDATE} </p>
 							</a>
 							</li>
+							</c:if>
 						  </c:forEach>	
 						</ul>
 
@@ -124,6 +126,7 @@
 					<div class="event-list mt15">
 						<ul>
 						<c:forEach var="eventtheater" items="${theaterEventList}" varStatus="loop" begin="0" end="3">
+							<c:if test='${eventtheater.EVENT_STATUS == "PROGRESS"}'>
 							<li>
 								<a href="https://www.megabox.co.kr/event#"
 								data-no="13594" data-netfunnel="N" class="eventBtn"
@@ -138,6 +141,7 @@
 									<p class="date">${eventtheater.EVENT_STARTDATE} ~ ${eventtheater.EVENT_ENDDATE}</p>
 								</a>
 							</li>
+							</c:if>
 							</c:forEach>
 						</ul>
 					</div>
@@ -155,9 +159,9 @@
 					<div class="event-list mt15">
 						<ul>
 						 <c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" begin="0" end="3">
-						 
-							<li><a href="#"
-								data-no="14091" data-netfunnel="N" class="eventBtn"
+						  <c:if test='${eventpromotion.EVENT_STATUS == "PROGRESS"}'>
+							<li>
+							<a href="#" data-no="14091" data-netfunnel="N" class="eventBtn"
 								title="${eventpromotion.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="${pageContext.request.contextPath}/upload${eventpromotion.EVENT_FILE}"
@@ -167,7 +171,9 @@
 									<p class="tit">${eventpromotion.EVENT_SUBJECT}</p>
 
 									<p class="date">${eventpromotion.EVENT_STARTDATE} ~ ${eventpromotion.EVENT_ENDDATE}</p>
-							</a></li>
+							</a>
+							</li>
+							</c:if>
 						  </c:forEach>	
 						</ul>
 					</div>
@@ -186,6 +192,7 @@
 					<div class="event-list mt15">
 						<ul>
 						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" begin="0" end="3">
+							<c:if test='${eventcurtaincall.EVENT_STATUS == "PROGRESS"}'>
 							<li><a href="#"	data-no="14167" data-netfunnel="N" class="eventBtn"
 								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
@@ -197,6 +204,7 @@
 
 									<p class="date">${eventcurtaincall.EVENT_STARTDATE} ~ ${eventcurtaincall.EVENT_ENDDATE}</p>
 							</a></li>
+							</c:if>
 						    </c:forEach>
 						</ul>
 					</div>

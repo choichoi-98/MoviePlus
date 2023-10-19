@@ -124,6 +124,7 @@
 			
 				<ul>
 				<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" >
+					<c:if test='${eventmovie.EVENT_STATUS == "PROGRESS"}'>
 					<li>
 						<a href="https://www.megabox.co.kr/event/curtaincall#" data-no="14248" data-netfunnel="N" class="eventBtn" title="${eventmovie.EVENT_SUBJECT}">
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -139,7 +140,9 @@
 							</p>
 						</a>
 					</li>
+					</c:if>
 				</c:forEach>
+				
 				</ul>
 			
           

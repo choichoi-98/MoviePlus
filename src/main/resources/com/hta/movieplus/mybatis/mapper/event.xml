@@ -23,12 +23,14 @@
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'MOVIE'
+		
 	</select>
 	
 	<select id="getMovieEventListCount" resultType="int">	<!-- 영화 이벤트 목록 COUNT -->
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'MOVIE'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getTheaterEventList" resultType="event">	<!-- 극장 이벤트 목록 -->
@@ -41,6 +43,7 @@
 		SELECT COUNT(*)
 		FROM EVENT
 		WHERE EVENT_TYPE = 'THEATER'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getPromotionEventList" resultType="event"> 	<!-- 제휴/할인 이벤트 목록 -->
@@ -53,6 +56,7 @@
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'PROMOTION'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getCurtaincallEventList" resultType="event">	<!-- 시사회 이벤트 목록 -->
@@ -65,6 +69,7 @@
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = 'CURTAINCALL'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<select id="getEventListCount" resultType="int">	<!-- 이벤트 전체 개수 -->
@@ -74,11 +79,15 @@
 	
 	
 	<select id="getEventList" parameterType="java.util.Map" resultType="event">
-		SELECT * 
+		SELECT *
 		FROM (
-			   SELECT ROWNUM AS RNUM, EVENT.*
-			    FROM EVENT
-			  )
+			  SELECT ROWNUM AS RNUM, EVENT.*
+			  FROM (
+				    SELECT *
+				    FROM EVENT
+				    ORDER BY EVENT_STATUS DESC, EVENT_DATE DESC
+				  ) EVENT
+			)
 	</select>
 	
 	<select id="getDetailEvent" parameterType="int" resultType="event">		<!-- 이벤트 상세페이지 -->
