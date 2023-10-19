@@ -2,6 +2,7 @@ package com.hta.movieplus.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,6 +95,24 @@ public class EventServiceImpl implements EventService{
 	public void deleteEvent(int num) {
 		dao.deleteEvent(num);
 	}
+
+	@Override
+	public int updateEvent(Event event) {
+		return dao.updateEvent(event);
+		 
+	}
+
+	@Override
+	public void changeStatus(int num, String status) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("EVENT_NUM", num);
+		map.put("EVENT_STATUS", status);
+		
+		dao.changeStatus(map);
+		
+		
+	}
+
 
 	
 

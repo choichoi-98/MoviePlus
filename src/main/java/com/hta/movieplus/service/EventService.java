@@ -33,6 +33,12 @@ public interface EventService {
 	public int getCurtaincallEventListCount();
 
 	public void deleteEvent(int num);
+
+	public int updateEvent(Event event);
+
+	public void changeStatus(int num, String status);
+
+
 	
 	
 	
