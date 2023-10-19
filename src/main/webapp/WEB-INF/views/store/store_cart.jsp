@@ -47,6 +47,33 @@ $(function() {
             }
         });
     });
+    
+    $(document).on('click', '.delbtn', function(e) {
+    	e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+    	
+    	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾습니다.
+        const itemCode = row.find('.delbtn').data('code');  // 해당 행의 ITEM_CODE 값을 추출합니다.
+        
+        $.ajax({
+            url: 'cart',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { "itemCode": itemCode},
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+                xhr.setRequestHeader("Accept-Charset", "UTF-8");
+            },
+            success: function(data) {
+//                alert("삭제 성공, itemCode: " + itemCode);
+                window.location.reload();
+            },
+            error: function(error) {
+//                alert("삭제 실패, itemCode: " + itemCode);
+                window.location.reload();
+            }
+        });
+    });
 });
 
 </script>
@@ -141,14 +168,17 @@ $(function() {
 														id="acptBrchChoiValView"></em>
 												</div>
 											</th>
-											<td><em id="purcQtyView">1</em></td>
+											<td><em id="purcQtyView">${c.ITEM_CNT}</em></td>
 											<td>
 												<div class="goods-info">
-													<em id="prdtSumAmtView" class="price">${c.ITEM_PRICE}</em>원
+													<em id="prdtSumAmtView" class="price">${c.ITEM_PRICE * c.ITEM_CNT}</em>원
 												</div>
 											</td>
-											<td><a href="#" class="a-link" name="brchList"
-												title="삭제">삭제</a></td>
+											<td>
+											<a href="http://localhost:9000/movieplus/store/cart?ITEM_CODE=${c.ITEM_CODE}" 
+											   class="a-link delbtn" name="brchList" title="삭제" 
+											   data-code="${c.ITEM_CODE}">삭제</a>
+											</td>
 										</tr>
 										<c:choose>
         									<c:when test="${!loop.last}"> <!-- 마지막 요소가 아닐 때만 쉼표 추가 -->
@@ -158,7 +188,7 @@ $(function() {
             									<c:set var="cartItemNames" value="${cartItemNames}${c.ITEM_NAME}" />
         									</c:otherwise>
     									</c:choose>
-										<c:set var="totalPrice" value="${totalPrice + c.ITEM_PRICE}"/>
+										<c:set var="totalPrice" value="${totalPrice + (c.ITEM_PRICE * c.ITEM_CNT)}"/>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -199,13 +229,13 @@ $(function() {
 								<div class="inbox">
 									<p class="txt">결제수단 선택</p>
 									<div class="cell">
+										<input type="radio" id="radio_choice03" name="radio_choice"
+											value="kakaopay" checked> <label for="radio_choice03">카카오페이</label>
+									</div>
+									<div class="cell">
 										<input type="radio" id="radio_choice01" name="radio_choice"
 											value="credit"> <label for="radio_choice01">일반
 											결제</label>
-									</div>
-									<div class="cell">
-										<input type="radio" id="radio_choice03" name="radio_choice"
-											value="kakaopay"> <label for="radio_choice03">카카오페이</label>
 									</div>
 								</div>
 							</div>
@@ -290,7 +320,7 @@ $(function() {
 						<!-- 20220802 페이즈 약관동의 추가 -->
 						<!-- 20220802 페이즈 약관동의 추가 end -->
 						<div class="btn-group pt40">
-							<a href="cp02"
+							<a href="cp05"
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
 
 							<a href="javascript:void(0);"

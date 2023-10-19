@@ -20,15 +20,42 @@ $(function() {
 	let token = $("meta[name='_csrf']").attr("content");
 	let header = $("meta[name='_csrf_header']").attr("content");
 	
-	$('#btnGift').on('click', function(e) {
+	// 수량 값을 저장하는 변수
+    var quantity = 1;
+    var quantityInput = $('#quantity');
+
+    // "수량증가" 버튼을 클릭할 때
+    $('.btn.plus').on('click', function() {
+        // 수량을 1 증가시키고 입력 요소에 반영
+        quantity++;
+        quantityInput.val(quantity);
+    });
+
+    // "수량감소" 버튼을 클릭할 때
+    $('.btn.minus').on('click', function() {
+        if (quantity > 1) {
+            // 수량을 1 감소시키고 입력 요소에 반영
+            quantity--;
+            quantityInput.val(quantity);
+        }
+    });
+
+	
+	$(document).on('click', '#btnGift', function(e) {
+//	$('#btnGift').on('click', function(e) {
+	e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
 		var itemCode = $('#prdtSumAmt').data('test');
 //		var memberId = 
+//		var itemCnt = $('#quantity').attr("value"); // 값을 가져오려면 attr("value")를 사용합니다.
+		var itemCnt = quantity; 
+		alert("itemCnt: " + itemCnt);
 		
 		$.ajax({
 		    url: "item",
 		    method: 'POST',
 		    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 폼 데이터 형식으로 설정
-		    data: { "itemCode": itemCode }, // 서버로 폼 데이터로 전송
+		    data: { "itemCode": itemCode,
+		    		"itemCnt": itemCnt}, // 서버로 폼 데이터로 전송
 		    dataType : "text",
 		    beforeSend: function(xhr) {
 		        xhr.setRequestHeader(header, token);
@@ -154,7 +181,7 @@ $(function() {
 													<i class="iconset ico-minus"></i>
 												</button>
 												<input type="text" title="수량 입력" class="input-text"
-													readonly="readonly" value="1">
+													   id="quantity" value="1"  readonly="readonly">
 												<button type="button" class="btn plus" title="수량증가">
 													<i class="iconset ico-plus"></i>
 												</button>

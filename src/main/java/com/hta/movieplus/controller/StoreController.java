@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
 import com.hta.movieplus.service.CartService;
@@ -180,10 +181,12 @@ public class StoreController {
 	@PostMapping("/item")
 	public ModelAndView item2( 
 		@RequestParam("itemCode") int ITEM_CODE,
+		@RequestParam("itemCnt") int ITEM_CNT,
 //      Requestpm로 memberId 불러오기
 		CartVO cartVO,
 		ModelAndView mv) {
 		cartVO.setITEM_CODE(ITEM_CODE);
+		cartVO.setITEM_CNT(ITEM_CNT);
 		storeService.cartInsert(cartVO);
 		
 		mv.setViewName("store/item_select");
@@ -195,7 +198,9 @@ public class StoreController {
 		CartVO cartVO,
 		ModelAndView mv) {
 		
-		List<StoreVO> cartlist = storeService.getCartList();
+//		List<StoreVO> cartlist = storeService.getCartList();
+//		List<CartVO> cartlist2 = storeService.getCartList2();
+		List<StoreCartDTO> cartlist = storeService.getCartLists();
 		
 		mv.setViewName("store/store_cart");
 		mv.addObject("cartlist", cartlist);
