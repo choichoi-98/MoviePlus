@@ -68,10 +68,6 @@
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>스토어 관리</span></a>
 				</li>
-								
-				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>무비포스트 관리</span></a>
-				</li>
 				
 				<li class="sidebar__nav-item">
 					<a href="${pageContext.request.contextPath}/movie/manageMovieReview" class="sidebar__nav-link"><span>감상평 관리</span></a>

@@ -9,6 +9,7 @@ public class MoviePostVO {
 	private String moviepost_Content;
 	private String moviepost_Reg_date;
 	private int moviepost_Like = 0;
+	private int comment_Cnt = 0;
 //	--
 	private String movie_Title;
 	private String MEMBER_PROFILE;
@@ -73,6 +74,12 @@ public class MoviePostVO {
 	}
 	public void setMEMBER_PROFILE(String mEMBER_PROFILE) {
 		MEMBER_PROFILE = mEMBER_PROFILE;
+	}
+	public int getComment_Cnt() {
+		return comment_Cnt;
+	}
+	public void setComment_Cnt(int comment_Cnt) {
+		this.comment_Cnt = comment_Cnt;
 	}
 	
 }

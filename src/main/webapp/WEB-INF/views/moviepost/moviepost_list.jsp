@@ -14,7 +14,6 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/moviePost_view.js"></script>
 
-
 <title></title>
 
 </head>
@@ -48,7 +47,7 @@
 							items="${mp_movieList}" varStatus='status'>
 							<li><a href="#" class="top5Btn"
 								data-movieTitle="${mp_movie.movie_Title}"
-								title="더 퍼스트 슬램덩크 무비포스트 보기">
+								title="${mp_movie.movie_Title} 무비포스트 보기">
 									<p class="lank">${status.index}</p>
 
 									<div class="post-count">
@@ -215,9 +214,9 @@
 									<!-- post-funtion -->
 									<div class="post-funtion">
 										<div class="wrapper">
-											<input type="hidden" id="hidden-member-id" value="${pinfo.MEMBER_ID}">
+											<input type="hidden" id="hidden-member-id"
+												value="${pinfo.MEMBER_ID}">
 											<button id="modal-delete-btn" type="button" class="" style="display:none">삭제하기</button>
-											<!--// 말풍선 -->
 										</div>
 									</div>
 									<!--// post-funtion -->
@@ -238,11 +237,11 @@
 								<!-- comment count -->
 								<div class="count">
 									<button id="modal-like-btn" type="button" class="btn"
-										data-postNum="236678">
-										<i title="좋아요 설정 안함" class="iconset ico-like"></i> 0
+										data-postNum="">
+										<i id="modal-like-icon" title="좋아요 설정 안함"
+											class="iconset ico-like"></i> <span id="modal-like-cnt">0</span>
 									</button>
 
-									<!-- 코멘트 등록 영역으로 이동 -->
 
 								</div>
 								<!--// comment count -->
@@ -270,7 +269,7 @@
 
 								<div class="comment-function">
 									<p class="reset">
-										<span class="text-count">0</span> / 100
+										<span id="comm-length" class="text-count">0</span> / 100
 									</p>
 									<div class="btn">
 										<button type="button" id="btnPostRly">등록</button>
@@ -282,11 +281,6 @@
 
 						<!-- comment list -->
 						<div class="comment-list" id="commentList">
-
-
-
-							<form id="movieForm" method="get"></form>
-
 
 						</div>
 						<!--// comment list -->
