@@ -47,15 +47,15 @@ public class AdminNoticeController {
 		return "admin/noticeModify";
 	}
 
-	
-	
-	
-	
 	@PostMapping("admin/noticemodify")
 	public String noticeModify(NoticeVO modify) {
 		noticeService.noticeModify(modify);
 		return "redirect:/admin/noticeList";
 	}
+	
+	
+	
+	
 
 	@GetMapping("/admin/noticedelete")
 	public String noticeDelete(int noticenum) {
