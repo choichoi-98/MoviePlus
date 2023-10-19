@@ -27,7 +27,15 @@ public class MoviePostController {
 	
 	
 	@GetMapping("/all")
-	public String moviePostAllView() {
+	public String moviePostAllView(Model model, @AuthenticationPrincipal Member member) {
+		List<Movie> movieList = moviePostService.getMovieWithPostCnt();
+		int totalCnt = moviePostService.getTotalCnt();
+		int myPostCnt = moviePostService.getMyPostCnt(member.getMEMBER_ID());
+		
+		model.addAttribute("myPostCnt", myPostCnt);
+		model.addAttribute("mp_movieList", movieList);
+		model.addAttribute("totalCnt", totalCnt);
+		
 		return "moviepost/moviepost_list";
 	}
 	

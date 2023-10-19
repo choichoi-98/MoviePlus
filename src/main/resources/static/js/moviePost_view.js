@@ -57,9 +57,8 @@ $(document).ready(function(){
 
         $('body').addClass('no-scroll');
         $('#layer_post_detail').addClass('on');
-        
-        
     })
+
 
     $('#post-modal-close').click(function() {
         $('body').removeClass('no-scroll');
@@ -69,6 +68,12 @@ $(document).ready(function(){
     $('.bg-modal2').click(function() {
         $('body').removeClass('no-scroll');
         $('#layer_post_detail').removeClass('on');
+    })
+
+    $('.top5Btn').click(function() {
+        reset();
+        keyword = $(this).attr('data-movieTitle');
+        getMoviePostList(option);
     })
 
     function reset(){
@@ -98,15 +103,14 @@ $(document).ready(function(){
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
+                console.log(data);
                 $('#moviePostList').empty();
 
                 if(data.length==0){
                     $('#moviePostList').append('<div class="no-moviepost">등록된 무비포스트가 없습니다.</div>');
                     return false;
                 }
-                if(data.length <= 12){
-                    $('#btnAddMovie').css('display', 'none');
-                }
+       
 
                 if(data.length/12 == 0){
                     height_plus = 1300
@@ -150,15 +154,15 @@ $(document).ready(function(){
                                                 href="#"
                                                 title="무비포스트 상세보기"
                                                 class="link btn-modal-open2 post-detailPopup" 
-                                                data-postNum="" >
+                                                data-postNum="`+item.moviepost_Num+`" >
                                                 <p class="txt">`+item.moviepost_Content+`</p>
                                                 <p class="time">`+item.moviepost_Reg_date+`</p>
                                             </a>
-                                            <div class="condition">
-                                                <button type="button"
-                                                    class="btn-like postLikeBtn listBtn jsMake" data-postNum="236655">
-                                                    <i class="iconset ico-like">좋아요 수</i> <span class="none">`+item.moviepost_Like+`</span>
-                                                </button>
+                                            <div class="condition">               
+                                                <button type="button" class="btn-like postLikeBtn listBtn jsMake" style="pointer-events:none;">
+                                                <i class="iconset ico-like">좋아요 수</i> <span class="none">`+item.moviepost_Like+`</span></button>                
+                                                <a href="#" title="댓글 작성하기" class="link btn-modal-open2 post-reply-detail" style="pointer-events:none;">
+                                                <i class="iconset ico-reply">댓글 수</i> 0</a>           
                                             </div>
                                         </div>
                                     </div>
@@ -208,8 +212,16 @@ $(document).ready(function(){
                $('#modal-stillcut').prop('src', data.moviepost);
                $('#modal-content').text(data.moviepost_Content);
                $('#modal-like-btn').attr('data-postNum', data.moviepost_Num);
+               
+               if($('#hidden-member-id').val() == data.member_Id || $('#hidden-member-id').val() == 'admin'){
+                    $('#modal-delete-btn').css('display', 'block');
+               }else {
+                $('#modal-delete-btn').css('display', 'none');
+                }
 
                $('#layer_post_detail').addClass('on');
+
+               
             },
             error: function() {	
                 console.log('ㅍㅅㅌ ajax 실패');
