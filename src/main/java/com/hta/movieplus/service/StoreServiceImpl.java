@@ -89,8 +89,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void payInsert(String itemDisplay, int totalPrice) {
-		dao.payInsert(itemDisplay, totalPrice);
+	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID) {
+		dao.payInsert(itemDisplay, totalPrice, MEMBER_ID);
 	}
 
 	@Override
