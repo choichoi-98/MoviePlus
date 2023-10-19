@@ -52,9 +52,11 @@ public interface MovieMapper {
 	public List<Movie> getPlayingMovieMain();
 
 	public List<Movie> getPlayingMovieLoginMain(String memberId);
-
+	
+	//로그인 o 영화 상세
 	public List<Movie> getMovieDetailLogin(String memberId, String movieCode);
 
+	//로그인 x 영화 상세
 	public List<Movie> getMovieDetail(String movieCode);
 	
 
