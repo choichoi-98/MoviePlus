@@ -47,7 +47,9 @@
 	var ws;
 
 	function wsOpen(){
-		ws = new WebSocket("ws://localhost:9000/chating");
+		console.log("웹소켓 연결 요청 - wsOpen()")
+		ws = new WebSocket("ws://"+ location.host +"/movieplus/chating");
+		console.log(ws)
 		wsEvt();
 	}
 		
@@ -63,6 +65,11 @@
 			}
 		}
 
+		ws.onerror = function(error){
+			
+			console.log("WebSocket 연결 실패:", error);
+		};
+		
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){ //enter press
 				send();
@@ -75,12 +82,13 @@
 		if(userName == null || userName.trim() == ""){
 			alert("사용자 이름을 입력해주세요.");
 			$("#userName").focus();
-		}else{
+		}else{ //사용자가 닉네임을 입력하면 웹소켓 연결 요청 보냄
 			wsOpen();
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
 	}
+	
 
 	function send() {
 		var uN = $("#userName").val();
