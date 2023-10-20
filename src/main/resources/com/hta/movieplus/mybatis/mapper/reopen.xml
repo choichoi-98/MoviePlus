@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.ReOpenMapper">
+
+<!-- 관리자 - 상영 종료 영화 목록 -->
+    <select id="getEndedMovieList" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영종료'
+    </select>
+    
+</mapper>
+    
