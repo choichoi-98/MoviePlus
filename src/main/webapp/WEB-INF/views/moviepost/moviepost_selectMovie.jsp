@@ -43,7 +43,7 @@
                 <div class="user-post-top movieList">
                     <p class="tit">무비포스트로 등록하실 영화를 선택해주세요!</p>
                     <div class="right">
-                        등록가능한 영화 <strong class="font-gblue"><span id="totMovieCnt">1</span></strong> 건
+                        등록가능한 영화 <strong class="font-gblue"><span id="totMovieCnt">${mp_movieCnt}</span></strong> 건
                     </div>
                 </div>
 

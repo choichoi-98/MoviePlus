@@ -25,7 +25,7 @@
 	         <sec:authentication property="principal" var="pinfo"/>
 	</sec:authorize>
 		<!-- sidebar logo -->
-		<a href="#" class="sidebar__logo">
+		<a href="${pageContext.request.contextPath}" class="sidebar__logo">
 			<img src="${pageContext.request.contextPath}/resources/image/admin/admin_logo.png" alt="" style="width:100%;">
 		</a>
 		<!-- end sidebar logo -->

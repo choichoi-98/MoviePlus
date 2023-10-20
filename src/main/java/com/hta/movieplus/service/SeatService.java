@@ -9,4 +9,6 @@ public interface SeatService {
 	public String makeSeatStr(String inputStr, int scheduleId);
 	
 	public List<String> getBookedSeatList(int scheduleId);
+	
+	public int getBookedSeatCnt(int scheduleId);
 }

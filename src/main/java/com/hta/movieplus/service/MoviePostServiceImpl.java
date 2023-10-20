@@ -24,9 +24,9 @@ public class MoviePostServiceImpl implements MoviePostService {
 	}
 
 	@Override
-	public List<Movie> getSeenMovieList(int member_NUM) {
+	public List<Movie> getSeenMovieList(String memberId) {
 		// TODO Auto-generated method stub
-		List<Movie> movieList = mapper.getSeenMovieList(member_NUM);
+		List<Movie> movieList = mapper.getSeenMovieList(memberId);
 
 		for (Movie movie : movieList) {
 			if (movie.getMovie_Poster().length() > 10) {

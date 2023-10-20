@@ -237,7 +237,7 @@ document.ready
 							<p class="tit">메가박스</p>
 							<p class="link">
 								<a
-									href="https://www.megabox.co.kr/support/notice/detail?artiNo=10966&amp;bbsNo=9"
+									href="#"
 									title="공지사항 상세보기"> <strong> [공지] </strong> [메가박스 앱] iOS 12
 									버전 지원중단 안내
 								</a>
@@ -246,7 +246,7 @@ document.ready
 							<p class="date">2023.09.19</p>
 
 							<p class="more">
-								<a href="https://www.megabox.co.kr/support/notice"
+								<a href="#"
 									title="전체공지 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
 							</p>
 						</div>

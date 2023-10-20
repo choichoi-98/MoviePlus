@@ -13,7 +13,7 @@ import com.hta.movieplus.domain.MoviePostVO;
 @Mapper
 public interface MoviePostMapper {
 
-	List<Movie> getSeenMovieList(int member_NUM);
+	List<Movie> getSeenMovieList(String memberId);
 
 	Movie getMovieByCode(String movieCode);
 

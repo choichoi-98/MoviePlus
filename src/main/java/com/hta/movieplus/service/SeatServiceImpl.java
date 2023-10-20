@@ -82,8 +82,6 @@ public class SeatServiceImpl implements SeatService {
 		int x = getX(indexList, seatStr);
 		int y = getY(seatStr);
 
-		logger.info(disabledSeatList.toString());
-
 		// x가 작을수록 seatxposition이 커져야함
 		// 20개일때 161, 8개일때 251 / 90
 
@@ -120,7 +118,7 @@ public class SeatServiceImpl implements SeatService {
 
 				}
 				sb.append("<button type='button' title='" + alps[i] + j + " (스탠다드/장애인석)' data-seat-num='" + alps[i] + j
-						+ "' selectionType='" + getSelectionType(blockIndex, blockLength) + "' blockIndex='"+blockIndex+"' blockLength='"+blockLength+"'" 
+						+ "' selectionType='" + getSelectionType(blockIndex, blockLength, x) + "' blockIndex='"+blockIndex+"' blockLength='"+blockLength+"'" 
 						+ " class='jq-tooltip seat-condition standard common' style='position: absolute; left: "
 						+ seat_x_position + "px; top: " + seat_y_position + "px; width: 20px;'>\r\n"
 						+ "<span class='num'>" + j
@@ -224,7 +222,15 @@ public class SeatServiceImpl implements SeatService {
 		return false;
 	}
 	
-	public String getSelectionType(int index, int length) {
+	public String getSelectionType(int index, int length, int x) {
+		if(length==0) {
+			if(index%2==0) {
+				return "normal";
+			}else {
+				return "non-solo";
+			}
+		}
+		
 		if(length <= 2) {
 			return "normal";
 		}
@@ -288,6 +294,19 @@ public class SeatServiceImpl implements SeatService {
 		}
 		
 		return resultList;
+	}
+	
+	public int getBookedSeatCnt(int scheduleId) {
+		List<KakaoPayVO> dataList = mapper.getBookedSeatList(scheduleId);
+		
+		int result = 0;
+		
+		for(KakaoPayVO data : dataList) {
+
+			result += data.getKPAY_SEAT_CNT();
+		}
+
+		return result;
 	}
 
 }

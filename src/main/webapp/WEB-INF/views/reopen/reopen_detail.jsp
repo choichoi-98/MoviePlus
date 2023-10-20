@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/reopenUser.js"></script>
 
 
 <title></title>
@@ -33,10 +34,10 @@
 
 			<!-- event-detail -->
 			<div class="event-detail">
-				<h2 class="tit">[재개봉] 해리포터</h2>
+				<h2 class="tit">[재개봉] ${reopenMovie.movie_Title}</h2>
 				<p class="event-detail-date">
-					<span>기간</span> <em>2023.09.27 ~ 2023.10.09</em> &nbsp; &nbsp; &nbsp; &nbsp;
-					<span>현재 청원 수 : </span>
+					<span>기간</span> <em>2023.09.27 ~ 2023.10.09</em>
+					<span style="margin-left: 20px">현재 청원 수 : ${reopenMovie.REOPEN_COUNT}</span>
 				</p>
 
 				<!--
@@ -56,13 +57,13 @@
 
 
 
-					<table border="0" cellpadding="0" cellspacing="0"
+					<table 
 						style="width: 1100px">
 						<tbody>
 							<tr>
 								<td><img alt="" border="0"
-									src="${pageContext.request.contextPath}/resources/image/reopen_temp_image.jpg"
-									style="width: 1100px" usemap="#Map"></td>
+									src="${reopenMovie.movie_Poster}"
+									style="width: 700px"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -89,10 +90,7 @@
 			<div class="inner-wrap">
 				<!-- event-button-type -->
 				<div class="event-button-type">
-					<button type="button" class="btn" id="btnInsertEvt_1_" data-no1="1"
-						data-no2="">재개봉 동의하기</button>
-					<input type="hidden" name="eventCponOrd" value="1"> <input
-						type="hidden" name="eventBrchOrd" value="">
+					<button id="reopen-admit-btn" data-movieCode="${reopenMovie.movie_Code}" type="button" class="btn" style="background:#792828">재개봉 동의하기</button>
 				</div>
 				<!--// event-button-type -->
 			</div>

@@ -20,6 +20,9 @@ public class Movie {
 	private String interest_Status;//보고싶어요
 	private int post_Count;		//무비 포스트 수
 	
+	//--
+	private int REOPEN_COUNT;
+	
 	
 	public int getPost_Count() {
 		return post_Count;
@@ -147,6 +150,12 @@ public class Movie {
 	}
 	public void setMovie_Still(String movie_Still) {
 		this.movie_Still = movie_Still;
+	}
+	public int getREOPEN_COUNT() {
+		return REOPEN_COUNT;
+	}
+	public void setREOPEN_COUNT(int rEOPEN_COUNT) {
+		REOPEN_COUNT = rEOPEN_COUNT;
 	}
 	
 	

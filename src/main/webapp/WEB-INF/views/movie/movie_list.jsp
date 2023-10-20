@@ -50,9 +50,9 @@ $(document).ready(function(){
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="https://www.megabox.co.kr/movie"
+					<span>Home</span> <a href="#"
 						title="영화 페이지로 이동">영화</a> <a
-						href="https://www.megabox.co.kr/movie" title="전체영화 페이지로 이동">전체영화</a>
+						href="#" title="전체영화 페이지로 이동">전체영화</a>
 				</div>
 
 
@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 				<div class="tab-list fixed">
 					<ul id="topMenu">
-						<li class="on"><a href="https://www.megabox.co.kr/movie"
+						<li class="on"><a href="#"
 							title="박스오피스 탭으로 이동">박스오피스</a></li>
 						<!--  <li><a href="https://www.megabox.co.kr/movie/comingsoon"
 							title="상영예정작 탭으로 이동">상영종료작</a></li>
@@ -126,8 +126,7 @@ $(document).ready(function(){
 										class="wrap movieBtn" data-no="${m.movie_Code}" title="${m.movie_Title} 상세보기">
 								<img
 									src="${fn:split(m.movie_Poster, '|')[0]}"
-									alt="${m.movie_Title}" class="poster" 
-									onerror="noImg(this)">
+									alt="${m.movie_Title}" class="poster">
 
 
 								<div class="movie-score">
@@ -191,7 +190,7 @@ $(document).ready(function(){
 												</c:if>
 								 </button>
 								<div class="case movieStat4" style="display: block">
-									<a href="https://www.megabox.co.kr/movie#"
+									<a href="${pageContext.request.contextPath}/booking?movieCode=${m.movie_Code}	"
 										class="button bokdBtn" data-no="${m.movie_Code}" 
 										title="영화 예매하기">예매</a>
 								</div>

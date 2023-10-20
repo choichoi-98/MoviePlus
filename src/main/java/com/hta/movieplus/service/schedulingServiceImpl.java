@@ -35,6 +35,7 @@ public class schedulingServiceImpl implements SchedulingService {
 		this.mapper = mapper;
 	}
 
+	// 예매 좌석 수정
 	@Override
 	public List<TheaterSchedule> getScheduleList(int theaterId, String todayDate) {
 		// TODO Auto-generated method stub
@@ -42,7 +43,15 @@ public class schedulingServiceImpl implements SchedulingService {
 
 		dataMap.put("theaterId", theaterId);
 		dataMap.put("todayDate", todayDate);
-		return mapper.getScheduleList(dataMap);
+
+		List<TheaterSchedule> list = mapper.getScheduleList(dataMap);
+
+		for (TheaterSchedule schedule : list) {
+			schedule.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(schedule.getTHEATER_ROOM_SEAT()));
+			schedule.setTHEATER_SCHEDULE_BOOKED_CNT(seatService.getBookedSeatCnt(schedule.getTHEATER_SCHEDULE_ID()));
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -142,11 +151,19 @@ public class schedulingServiceImpl implements SchedulingService {
 		return mapper.updateSchedule(schedule);
 	}
 
+//	예매된 좌석 추가
 	@Override
 	public List<TheaterSchedule> getMovieScheduleWithMovie(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
 
-		return mapper.getMovieScheduleWithMovie(dataMap);
+		List<TheaterSchedule> list = mapper.getMovieScheduleWithMovie(dataMap);
+
+		for (TheaterSchedule schedule : list) {
+			schedule.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(schedule.getTHEATER_ROOM_SEAT()));
+			schedule.setTHEATER_SCHEDULE_BOOKED_CNT(seatService.getBookedSeatCnt(schedule.getTHEATER_SCHEDULE_ID()));
+		}
+
+		return list;
 	}
 
 	@Override
@@ -206,8 +223,9 @@ public class schedulingServiceImpl implements SchedulingService {
 
 		for (TheaterSchedule schedule : list) {
 			schedule.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(schedule.getTHEATER_ROOM_SEAT()));
+			schedule.setTHEATER_SCHEDULE_BOOKED_CNT(seatService.getBookedSeatCnt(schedule.getTHEATER_SCHEDULE_ID()));
 		}
-		
+
 		return list;
 	}
 
@@ -256,6 +274,7 @@ public class schedulingServiceImpl implements SchedulingService {
 		return mapper.getTheaterRoomWithScheduleCnt(dataMap);
 	}
 
+	// 예매된 좌석 추가
 	@Override
 	public List<TheaterSchedule> getScheduleListByDateAndMovieCodeAndTheaterId(String movieCode, String date,
 			String theaterId) {
@@ -265,17 +284,23 @@ public class schedulingServiceImpl implements SchedulingService {
 		dataMap.put("date", date);
 		dataMap.put("theaterId", theaterId);
 
-		return mapper.getScheduleListByDateAndMovieCodeAndTheaterId(dataMap);
+		List<TheaterSchedule> list = mapper.getScheduleListByDateAndMovieCodeAndTheaterId(dataMap);
+
+		for (TheaterSchedule schedule : list) {
+			schedule.setTHEATER_ROOM_SEAT_CNT(seatService.getSeatCount(schedule.getTHEATER_ROOM_SEAT()));
+			schedule.setTHEATER_SCHEDULE_BOOKED_CNT(seatService.getBookedSeatCnt(schedule.getTHEATER_SCHEDULE_ID()));
+		}
+
+		return list;
 	}
 
 	@Override
 	public Movie getMovieDetailByCode(String movieCode) {
 		// TODO Auto-generated method stub
 		Movie movie = mapper.getMovieDetailByCode(movieCode);
-		if(movie.getMovie_Poster().length() >= 60) {
+		if (movie.getMovie_Poster().length() >= 60) {
 			movie.setMovie_Poster(movie.getMovie_Poster().substring(0, 60));
 		}
-		
 
 		movie.setGrade_data(getGradeData(movie.getMovie_Grade()));
 

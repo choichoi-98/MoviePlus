@@ -41,7 +41,11 @@ $(document).ready(function(){
 
     $('body').on('click', '.comment-delete-btn', function(e){
         e.preventDefault();
-        deleteComment($(this).attr('data-commNum'), $(this).attr('data-postNum'));
+
+        if(confirm('정말 삭제하시겠습니까?')){
+            deleteComment($(this).attr('data-commNum'), $(this).attr('data-postNum'));
+        }
+        
     })
 
     function resetComm(){
@@ -158,7 +162,10 @@ $(document).ready(function(){
     $('#modal-delete-btn').click(function(e){
         e.preventDefault();
 
-        deletePost($(this).attr('data-postNum'));
+        if(confirm('정말 삭제하시겠습니까?')){
+            deletePost($(this).attr('data-postNum'));
+        }
+        
     })
 
     $('#modal-like-btn').click(function() {
