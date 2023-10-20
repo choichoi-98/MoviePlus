@@ -49,7 +49,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>상영종료 영화 리스트</h2>
+						<h2>재개봉 영화 등록</h2>
 
 						<span class="main__title-stat"> </span>
 
@@ -76,7 +76,7 @@
 									<th>글 번 호</th>
 									<th>영화코드번호</th>
 									<th>영화제목</th>
-									<th style="display: flex; justify-content: center;">관 리</th>
+									<th style="display: flex; justify-content: center;">관 리 (등록 / 삭제)</th>
 								</tr>
 							</thead>
 
@@ -92,11 +92,14 @@
 											</div>
 										</td>
 										<td>
-											<div class="main__table-text">${endmovie.movie_Title}</div>
+											<div class="main__table-text">${endedmovie.movie_Title}</div>
 										</td>
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
+												<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
+												<i class="icon ion-ios-log-out"></i>
+												</a>
 												<a href="#modal-delete"
 													data-noticenum="${endmovie.movie_Code}"
 													class="main__table-btn main__table-btn--delete open-modal">
