@@ -43,7 +43,9 @@
 										<span class="cont-area">
 											<span class="login-alert-tooltip">
 												로그인이 필요한 서비스 입니다.<br>
-												<a id="moveLogin" href="https://www.megabox.co.kr/event/end#layer_login_common" class="btn-modal-open" w-data="850" h-data="484" title="로그인 바로가기">로그인 바로가기 <i class="iconset ico-arr-right-green"></i></a>
+												<a id="moveLogin" href="#" class="btn-modal-open" w-data="850" h-data="484" title="로그인 바로가기">로그인 바로가기 
+												<i class="iconset ico-arr-right-green"></i>
+												</a>
 											</span>
 										</span>
 									</span>
@@ -76,7 +78,7 @@
 				<ul>
 				 	<c:forEach var="event" items="${eventlist}" varStatus="loop">
 					<c:if test='${event.EVENT_STATUS == "END"}'>				 	
-					<li class="event-item">
+					<li  class="event-items">
 						<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}" data-no="12411" data-netfunnel="N" class="eventBtn" title="${event.EVENT_SUBJECT}">
 							
 							<p class="cate">${event.EVENT_TYPE}</p>
@@ -114,28 +116,32 @@
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 	
 <script>
-	$(function(){
-		var showitems = 3;
-		var visibleitems = showitems;
+$(document).ready(function(){
+
+		var showitems = 10;
+		var visibleitems = 10;
 		
-		$(".event-list.finish .event-item:lt(" + visibleitems + ")").show();
+		function toggleEventItems() {
+			$(".event-list.finish .event-items").hide();
+	        $(".event-list.finish .event-items:lt(" + visibleitems + ")").show();
+	        if (visibleitems >= $('.event-list.finish .event-items').length) {
+	            $('#morebtn').hide();
+	        } else {
+	            $('#morebtn').show();
+	        }
+	    } //toggleEventItems end
+		
+		toggleEventItems();
+		
 		
      	$('#morebtn').click(function(e){
      		e.preventDefault();
      		
      		visibleitems += showitems;
-     		
-     		//더보기 버튼 클릭시 추가 이벤트 표시
-     		$(".event-list.finish .event-item:lt(" + visibleitems + ")").show();
-     		
-     		//모든 아이템이 표시되었을 때 더보기 버튼 숨기기
-     		if(visibleitems >= $('.event-list.finish .event-item').length){
-     			$('#morebtn').hide();
-     		}
-     	})
-     	
-     	
-	}); //function end
+     		toggleEventItems();
+     		})
+	
+});	
 </script>	
 </body>
 </html>
