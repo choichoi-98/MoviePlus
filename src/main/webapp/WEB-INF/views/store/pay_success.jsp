@@ -41,7 +41,7 @@
 	<div>결제 회원ID: <span>${p.MEMBER_ID}</span></div>
     <div>결제 상품: <span>${p.PAY_NAME}</span></div>
  <!-- <em id="payNum" data-paynum="${p.PAY_NUM}"></em> --> 
-    <div>결제 총 금액: <span>${p.PAY_AMOUNT}</span></div> 
+    <div>결제 총 금액: <span>${p.PAY_AMOUNT}</span></div>
 </c:forEach>
 
 </body>

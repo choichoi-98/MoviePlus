@@ -6,7 +6,7 @@ public class KakaoPayVO {
 	private int THEATER_SCHEDULE_ID; 
 	private int KPAY_AMOUNT; // 총 금액
 	private int KPAY_SEAT_CNT; // 선택한 자리 갯수
-	private String KAPY_OCCUPIED_SEAT;
+	private String KPAY_OCCUPIED_SEAT;
 	private String MEMBER_ID;
 	private String pg_token;
 	
@@ -34,11 +34,11 @@ public class KakaoPayVO {
 	public void setKPAY_SEAT_CNT(int kPAY_SEAT_CNT) {
 		KPAY_SEAT_CNT = kPAY_SEAT_CNT;
 	}
-	public String getKAPY_OCCUPIED_SEAT() {
-		return KAPY_OCCUPIED_SEAT;
+	public String getKPAY_OCCUPIED_SEAT() {
+		return KPAY_OCCUPIED_SEAT;
 	}
-	public void setKAPY_OCCUPIED_SEAT(String kAPY_OCCUPIED_SEAT) {
-		KAPY_OCCUPIED_SEAT = kAPY_OCCUPIED_SEAT;
+	public void setKPAY_OCCUPIED_SEAT(String kPAY_OCCUPIED_SEAT) {
+		KPAY_OCCUPIED_SEAT = kPAY_OCCUPIED_SEAT;
 	}
 	public String getPg_token() {
 		return pg_token;
