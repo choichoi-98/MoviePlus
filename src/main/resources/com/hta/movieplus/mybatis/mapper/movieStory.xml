@@ -4,12 +4,10 @@
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.MovieStoryMapper">
 	
 	<select id="getMovieDibsListByMemberId" parameterType="String" resultType="movie">
-			SELECT *
-			FROM MOVIE
-			WHERE MOVIE_CODE IN ( SELECT MOVIE_DIBS_OBJECT
-									FROM MOVIE_DIBS
-									WHERE MEMBER_ID = #{memberId}
-									GROUP BY MOVIE_DIBS_OBJECT )
+		SELECT *
+		FROM MOVIE M
+		JOIN MOVIE_DIBS D ON M.MOVIE_CODE = D.MOVIE_DIBS_OBJECT
+		WHERE D.MEMBER_ID = #{memberId}
 	</select>
 	
 	<select id="getMoviePostListByMemberId" parameterType="String" resultType="moviePostVO">
@@ -19,11 +17,30 @@
 	</select>
 	
 	<select id="getMovieReviewListByMemberId" parameterType="String" resultType="movieReviewVO">
-		SELECT *
-		FROM MOVIE_REVIEW
-		WHERE MEMBER_ID = #{memberId}
+		SELECT MOVIE.*, R.MOVIE_REVIEW_NUM, R.MEMBER_ID, M.MEMBER_PROFILE, R.MOVIE_REVIEW_STAR, R.MOVIE_REVIEW_CONTENT, R.MOVIE_CODE, R.MOVIE_REVIEW_REG_DATE, MOVIE.MOVIE_TITLE, M.MEMBER_NAME,
+		 (SELECT COUNT(*)
+		  FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) AS movie_Review_like_cnt,
+		  COUNT(*) OVER () AS review_cnt
+		FROM MOVIE_REVIEW R
+		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID 
+		INNER JOIN MOVIE ON R.MOVIE_CODE = MOVIE.MOVIE_CODE
+		where m.member_id = #{memberId}
 	</select>
 	
+	<delete id="deleteDibs" parameterType="map">
+		DELETE 
+		FROM MOVIE_DIBS
+		WHERE MEMBER_ID = #{memberId}
+		AND MOVIE_DIBS_OBJECT = #{movieCode}
+	</delete>
 	
+	<select id="getScheduleListByMemberId" resultType="theaterSchedule" parameterType="String">
+		SELECT *
+		FROM THEATER_SCHEDULE TS
+		JOIN MOVIE M ON TS.MOVIE_CODE = M.MOVIE_CODE
+		JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+		JOIN THEATER_ROOM TR ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		WHERE TS.MOVIE_CODE = '20227410'
+	</select>
 	
 </mapper>

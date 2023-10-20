@@ -13,9 +13,6 @@
 	content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <link rel="shortcut icon"
 	href="https://www.megabox.co.kr/static/pc/images/favicon.ico">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/megabox.min.css"
-	media="all">
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>

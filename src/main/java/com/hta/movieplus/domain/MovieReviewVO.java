@@ -15,6 +15,8 @@ public class MovieReviewVO {
 	private String movie_Title;		//영화 제목
 	private String member_Name;		//멤버 이름
 	private int review_cnt;	// 댓글 갯수
+	//--
+	private String MOVIE_POSTER;
 	
 
 	
@@ -90,6 +92,12 @@ public class MovieReviewVO {
 	}
 	public void setMovie_Review_star(int movie_Review_star) {
 		this.movie_Review_star = movie_Review_star;
+	}
+	public String getMOVIE_POSTER() {
+		return MOVIE_POSTER;
+	}
+	public void setMOVIE_POSTER(String mOVIE_POSTER) {
+		MOVIE_POSTER = mOVIE_POSTER;
 	}
 	
 	

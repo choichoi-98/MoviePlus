@@ -1,6 +1,8 @@
 package com.hta.movieplus.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,29 +10,33 @@ import org.springframework.stereotype.Service;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.TheaterSchedule;
+import com.hta.movieplus.mybatis.mapper.MovieMapper;
 import com.hta.movieplus.mybatis.mapper.MovieStoryMapper;
 
 @Service
 public class MovieStoryServiceImpl implements MovieStoryService {
 
-	MovieStoryMapper mapper;
+	MovieStoryMapper movieStoryMapper;
+	MovieMapper movieMapper;
 	
 	@Autowired
-	public MovieStoryServiceImpl(MovieStoryMapper mapper) {
+	public MovieStoryServiceImpl(MovieStoryMapper movieStoryMapper, MovieMapper movieMapper) {
 		// TODO Auto-generated constructor stub
-		this.mapper = mapper;
+		this.movieStoryMapper = movieStoryMapper;
+		this.movieMapper = movieMapper;
 	}
 	
 	@Override
 	public List<MoviePostVO> getMoviePostList(String memberId) {
 		// TODO Auto-generated method stub
-		return mapper.getMoviePostListByMemberId(memberId);
+		return movieStoryMapper.getMoviePostListByMemberId(memberId);
 	}
 
 	@Override
 	public List<Movie> getMovieDibsList(String memberId) {
 		// TODO Auto-generated method stub
-		List<Movie> list = mapper.getMovieDibsListByMemberId(memberId);
+		List<Movie> list = movieStoryMapper.getMovieDibsListByMemberId(memberId);
 		
 		for (Movie movie : list) {
 			if (movie.getMovie_Poster().length() > 10) {
@@ -44,7 +50,46 @@ public class MovieStoryServiceImpl implements MovieStoryService {
 	@Override
 	public List<MovieReviewVO> getMovieReviewList(String memberId) {
 		// TODO Auto-generated method stub
-		return mapper.getMovieReviewListByMemberId(memberId);
+		List<MovieReviewVO> list = movieStoryMapper.getMovieReviewListByMemberId(memberId);
+		for (MovieReviewVO review : list) {
+			if (review.getMOVIE_POSTER().length() > 10) {
+				review.setMOVIE_POSTER(review.getMOVIE_POSTER().substring(0, 60));
+			}
+		}
+		
+		return list;
 	}
+
+	@Override
+	public List<TheaterSchedule> getScheduleList(String memberId) {
+		// TODO Auto-generated method stub
+		List<TheaterSchedule> list = movieStoryMapper.getScheduleListByMemberId(memberId);
+		for (TheaterSchedule schedule : list) {
+			if (schedule.getMOVIE_POSTER().length() > 10) {
+				schedule.setMOVIE_POSTER(schedule.getMOVIE_POSTER().substring(0, 60));
+			}
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public void deleteReview(String review_num) {
+		// TODO Auto-generated method stub
+		movieMapper.deleteMovieReview(review_num);
+		
+	}
+
+	@Override
+	public void deleteDibs(String movieCode, String member_ID) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("movieCode", movieCode);
+		map.put("memberId", member_ID);
+		movieStoryMapper.deleteDibs(map);
+	}
+
+	
 
 }

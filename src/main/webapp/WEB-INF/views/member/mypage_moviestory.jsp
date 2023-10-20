@@ -66,7 +66,8 @@
 			<div class="board-list-util myOne myMovieStory"
 				style="display: block;">
 				<p class="result-count">
-					<strong>총 <b class="font-gblue" id="myOneCnt">0</b> 건
+					<strong>총 <b class="font-gblue" id="myOneCnt">${ms_reviewCnt}</b>
+						건
 					</strong>
 				</p>
 			</div>
@@ -74,47 +75,42 @@
 
 			<div class="my-appraisal myOne myMovieStory" style="display: block;">
 				<ul id="myAppraisal">
-					<!-- <li class="no-result">등록된 한줄평이 없습니다.</li> -->
-					<li>
-						<p class="img posterImg" data-mno="01573800"
-							style="cursor: pointer">
-							<img
-								src="https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2019/08/2A0450-B477-4367-A065-85236F25C540.medium.jpg"
-								onerror="noImg(this)" alt="(자막) 토이 스토리 4">
-						</p>
-						<div class="cont">
-							<p class="tit">
-								<a href="javaScript:void(0)" title="한줄평 상세보기">(자막) 토이 스토리 4</a>
+					<c:if test="${ms_reviewCnt == 0}">
+						<li class="no-result">등록된 한줄평이 없습니다.</li>
+					</c:if>
+
+					<c:forEach var="ms_review" items="${ms_reviewList}">
+						<li>
+							<p class="img posterImg" data-mno="01573800"
+								style="cursor: pointer">
+								<img src="${ms_review.MOVIE_POSTER }" alt="${ms_review.movie_Title}">
 							</p>
-							<div class="rate">
-								<p class="num review">10</p>
-								<div class="case">
-									<p>스토리</p>
+							<div class="cont">
+								<p class="tit">
+									<a href="#" title="한줄평 상세보기">${ms_revite.movie_Title}</a>
+								</p>
+								<div class="rate">
+									<p class="num review">${ms_review.movie_Review_star}</p>
+								</div>
+								<p class="txt oneData">${ms_review.movie_Review_content}</p>
+								<div class="util">
+									<div class="left">
+										<button type="button" title="좋아요 수" class="like likeBtn">
+											<i class="iconset ico-like"></i>
+											${ms_review.movie_Review_like_cnt}
+										</button>
+										<p class="date">${ms_review.movie_Review_reg_date}</p>
+									</div>
+									<div class="right">
+										<span><button type="button"
+												class="btn del deleteBtn review-delete"
+												data-reviewnum="${ms_review.movie_Review_num}">삭제</button></span>
+									</div>
 								</div>
 							</div>
-							<p class="txt oneData">chlrhldml dudghk cncjsgkqslek.</p>
-							<div class="modify-area updateData" style="display: none;">
-								<textarea rows="5" cols="30" title="한줄평 수정 내용 입력"
-									class="input-textarea">chlrhldml dudghk cncjsgkqslek.</textarea>
-							</div>
-							<div class="util">
-								<div class="left">
-									<button type="button" title="좋아요 수" class="like likeBtn"
-										data-no="2475551" data-cd="PREV">
-										<i class="iconset ico-like"></i> 0
-									</button>
-									<p class="date">2 일전</p>
-								</div>
-								<div class="right">
-									<span><button type="button" id="updateRealCommentBtn"
-											class="btn modify updateBtn" data-no="2475551"
-											data-mno="01573800" data-cd="PREV">수정</button></span> <span><button
-											type="button" class="btn del deleteBtn" data-no="2475551"
-											data-mno="01573800" data-cd="PREV">삭제</button></span>
-								</div>
-							</div>
-						</div>
-					</li>
+						</li>
+
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -130,7 +126,7 @@
 			<div class="board-list-util mySeenMovie myMovieStory"
 				style="display: block;">
 				<p class="result-count">
-					<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b>
+					<strong>총 <b class="font-gblue" id="mySeenMovieCnt">${ms_scheduleCnt}</b>
 						건
 					</strong>
 				</p>
@@ -140,35 +136,39 @@
 			<div class="my-saw-movie mt10 mySeenMovie myMovieStory"
 				style="display: block;">
 				<ul id="mySawMovie">
-					<!-- <li class="no-result">관람 내역이 없습니다.</li> -->
-					<li>
-						<p class="img posterImg" data-mno="01671700"
-							style="cursor: pointer">
-							<img
-								src="https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2020/6F/7D3A85-E138-4D71-859F-2FF5A853BC32.medium.jpg"
-								alt="[S] 타오르는 여인의 초상">
-						</p>
-						<div class="cont">
-							<p class="tit">
-								<a href="javaScript:void(0)" title="[S] 타오르는 여인의 초상 상세보기">[S]
-									타오르는 여인의 초상</a>
+					<c:if test="${ms_scheduleCnt == 0}">
+						<li class="no-result">관람 내역이 없습니다.</li>
+					</c:if>
+					<c:forEach var="ms_schedule" items="${ms_scheduleList}">
+						<li>
+							<p class="img posterImg" data-mno="01671700"
+								style="cursor: pointer">
+								<img
+									src="${ms_schedule.MOVIE_POSTER}"
+									alt="${ms_schedule.MOVIE_TITLE}">
 							</p>
-							<div class="theater">
-								<p>동대문</p>
-								<p>8관</p>
-								<p>2020.01.24(금) 17:35 (5회차)</p>
+							<div class="cont">
+								<p class="tit">
+									<a href="#" title="${ms_schedule.MOVIE_TITLE}">
+										${ms_schedule.MOVIE_TITLE}</a>
+								</p>
+								<div class="theater">
+									<p>${ms_schedule.THEATER_NAME}</p>
+									<p>${ms_schedule.THEATER_ROOM_NAME }</p>
+									<p>${ms_schedule.THEATER_SCHEDULE_START} ~ ${ms_schedule.THEATER_SCHEDULE_END} </p>
+								</div>
 							</div>
-						</div>
-						<div class="btn-group">
-							<a href="#" class="btn review moveOneBtn" title="관람평쓰기"
-								data-no="01671700" data-at="N"><i class="iconset ico-pencil"></i>
-								관람평쓰기</a> <a href="#" class="btn post movePostBtn" title="포스트쓰기"
-								data-no="01671700" data-postno="null"><i
-								class="iconset ico-pencil"></i>포스트쓰기</a>
-							<button type="button" class="btn del deleteBtn"
-								data-no="81046932">삭제</button>
-						</div>
-					</li>
+							<div class="btn-group">
+								<a href="#" class="btn review moveOneBtn" title="관람평쓰기"
+									data-no="01671700" data-at="N"><i
+									class="iconset ico-pencil"></i> 관람평쓰기</a> <a href="#"
+									class="btn post movePostBtn" title="포스트쓰기" data-no="01671700"
+									data-postno="null"><i class="iconset ico-pencil"></i>포스트쓰기</a>
+								<button type="button" class="btn del deleteBtn"
+									data-no="81046932">삭제</button>
+							</div>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -192,6 +192,14 @@
 			<div class="movie-list myLikeMovie myMovieStory"
 				style="display: block;">
 				<ol class="list" id="movieList">
+
+					<c:if test="${ms_movieCnt == 0}">
+						<div class="no-my-movie-list myLikeMovie myMovieStory"
+							id="noDataDiv" style="display: block;">
+							<i class="iconset ico-movie-see"></i>
+							<p>보고싶은 영화를 담아주세요.</p>
+						</div>
+					</c:if>
 					<c:forEach var="ms_movie" items="${ms_movieList}">
 						<li tabindex="0" class="no-img">
 							<div class="movie-list-info">
@@ -210,10 +218,9 @@
 								</p>
 							</div>
 							<div class="btn-util">
-								<button type="button" class="button btn-like"
+								<button type="button" class="button btn-like delete-like-btn"
 									data-movieCode="${ms_movie.movie_Code}">
 									<i title="보고싶어 함" class="iconset ico-heart-toggle-gray on"></i>
-									<span>3.3k</span>
 								</button>
 								<div class="case movieStat4" style="">
 									<a

@@ -12,6 +12,7 @@ public class TheaterSchedule {
 	// ---------------------------
 	private String THEATER_ROOM_NAME;
 	private String MOVIE_TITLE;
+	private String MOVIE_POSTER;
 	private String THEATER_NAME;
 	private int ScheduleCnt;
 	private int bookingCnt;
@@ -111,6 +112,12 @@ public class TheaterSchedule {
 	}
 	public void setTHEATER_ROOM_SEAT(String tHEATER_ROOM_SEAT) {
 		THEATER_ROOM_SEAT = tHEATER_ROOM_SEAT;
+	}
+	public String getMOVIE_POSTER() {
+		return MOVIE_POSTER;
+	}
+	public void setMOVIE_POSTER(String mOVIE_POSTER) {
+		MOVIE_POSTER = mOVIE_POSTER;
 	}
 	
 	
