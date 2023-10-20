@@ -88,6 +88,7 @@
 			$("#yourMsg").show();
 		}
 	}
+	
 
 	function send() {
 		var uN = $("#userName").val();

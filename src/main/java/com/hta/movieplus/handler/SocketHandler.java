@@ -11,6 +11,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
+
 @Component  //SocketHandler 빈 등록
 public class SocketHandler extends TextWebSocketHandler{
 

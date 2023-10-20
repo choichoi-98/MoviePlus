@@ -14,6 +14,7 @@ import com.hta.movieplus.handler.SocketHandler;
    -WebSocketConfigurer 구현체
    
  */
+
 @Configuration 
 @EnableWebSocket //WebSocket 활성화
 public class WebSocketConfig implements WebSocketConfigurer{

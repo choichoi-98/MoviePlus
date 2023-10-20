@@ -40,6 +40,7 @@ public class MovieController {
 	
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
+    
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public ModelAndView movieList(ModelAndView mv,
     		@AuthenticationPrincipal Member member,
