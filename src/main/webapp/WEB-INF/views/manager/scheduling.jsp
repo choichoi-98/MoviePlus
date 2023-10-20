@@ -32,6 +32,10 @@
 #text-container > span {
 	margin: 5px;
 }
+
+.main__table tbody td:first-child .main__table-text {
+	min-width: 300px;
+}
 </style>
 
 <body>

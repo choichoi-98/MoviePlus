@@ -224,7 +224,7 @@ $(document).ready(function(){
                 xhr.setRequestHeader(header, token);
             },
             success: function (data) {
-				
+	
 				$('#scheduleListResult').empty();
 
 				if(data.length > 0){
@@ -250,7 +250,7 @@ $(document).ready(function(){
 							output += '<span class="time"><strong title="상영 시작">'+item.theater_SCHEDULE_START+'</strong><em title="상영 종료">~'+item.theater_SCHEDULE_END+'</em></span><span class="title">';
 							output += '<strong title="'+item.movie_TITLE+'">'+item.movie_TITLE+'</strong></span>';
 							output += '<div class="info"><span class="theater" title="극장">'+item.theater_NAME+'<br>'+item.theater_ROOM_NAME+'</span>';
-							output += '<span class="seat"><strong class="now"title="잔여 좌석">0</strong><span>/</span><em class="all" title="전체 좌석">'+item.theater_ROOM_SEAT_CNT+'</em></span></div>';
+							output += '<span class="seat"><strong class="now"title="잔여 좌석">'+item.theater_SCHEDULE_BOOKED_CNT+'</strong><span>/</span><em class="all" title="전체 좌석">'+item.theater_ROOM_SEAT_CNT+'</em></span></div>';
 							
 							$('#scheduleListResult').append(output);
 							$('#playScheduleNonList').css('display', 'none');
@@ -302,7 +302,7 @@ $(document).ready(function(){
 							output += '<span class="time"><strong title="상영 시작">'+item.theater_SCHEDULE_START+'</strong><em title="상영 종료">~'+item.theater_SCHEDULE_END+'</em></span><span class="title">';
 							output += '<strong title="'+item.movie_TITLE+'">'+item.movie_TITLE+'</strong></span>';
 							output += '<div class="info"><span class="theater" title="극장">'+item.theater_NAME+'<br>'+item.theater_ROOM_NAME+'</span>';
-							output += '<span class="seat"><strong class="now"title="잔여 좌석">1</strong><span>/</span><em class="all" title="전체 좌석">'+item.theater_ROOM_SEAT_CNT+'</em></span></div>';
+							output += '<span class="seat"><strong class="now"title="잔여 좌석">'+item.theater_SCHEDULE_BOOKED_CNT+'</strong><span>/</span><em class="all" title="전체 좌석">'+item.theater_ROOM_SEAT_CNT+'</em></span></div>';
 							
 							$('#scheduleListResult').append(output);
 							$('#playScheduleNonList').css('display', 'none');

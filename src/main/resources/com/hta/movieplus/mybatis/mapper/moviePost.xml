@@ -4,9 +4,14 @@
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.MoviePostMapper">
 	
 	<!-- 임시, 예매 기능 완료되면 수정 -->
-	<select id="getSeenMovieList" parameterType="int" resultType="movie">
-		SELECT * 
+	<select id="getSeenMovieList" parameterType="String" resultType="movie">
+		SELECT *
 		FROM MOVIE
+		WHERE MOVIE_CODE IN (	SELECT MOVIE_CODE
+								FROM THEATER_SCHEDULE 
+								WHERE THEATER_SCHEDULE_ID IN ( SELECT THEATER_SCHEDULE_ID
+																FROM KAKAO_PAY
+																WHERE MEMBER_ID = #{memberId} ) )
 	</select>
 	
 	<select id="getMovieByCode" parameterType="String" resultType="movie">

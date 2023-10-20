@@ -25,7 +25,7 @@
 	         <sec:authentication property="principal" var="pinfo"/>
 	</sec:authorize>
 		<!-- sidebar logo -->
-		<a href="#" class="sidebar__logo">
+		<a href="${pageContext.request.contextPath}" class="sidebar__logo">
 			<img src="${pageContext.request.contextPath}/resources/image/admin/admin_logo.png" alt="" style="width:100%;">
 		</a>
 		<!-- end sidebar logo -->
@@ -85,7 +85,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
+					<a href="${pageContext.request.contextPath}/admin/reopenlist" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
 				
 				

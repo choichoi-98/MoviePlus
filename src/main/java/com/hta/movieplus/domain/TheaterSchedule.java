@@ -15,9 +15,10 @@ public class TheaterSchedule {
 	private String MOVIE_POSTER;
 	private String THEATER_NAME;
 	private int ScheduleCnt;
-	private int bookingCnt;
 	private String THEATER_ROOM_SEAT;
 	private int THEATER_ROOM_SEAT_CNT;
+	// ---------------------------
+	private int THEATER_SCHEDULE_BOOKED_CNT;
 	
 	
 	
@@ -94,13 +95,6 @@ public class TheaterSchedule {
 	public void setScheduleCnt(int scheduleCnt) {
 		ScheduleCnt = scheduleCnt;
 	}
-	public int getBookingCnt() {
-		return bookingCnt;
-	}
-	public void setBookingCnt(int bookingCnt) {
-		this.bookingCnt = bookingCnt;
-	}
-
 	public int getTHEATER_ROOM_SEAT_CNT() {
 		return THEATER_ROOM_SEAT_CNT;
 	}
@@ -118,6 +112,12 @@ public class TheaterSchedule {
 	}
 	public void setMOVIE_POSTER(String mOVIE_POSTER) {
 		MOVIE_POSTER = mOVIE_POSTER;
+	}
+	public int getTHEATER_SCHEDULE_BOOKED_CNT() {
+		return THEATER_SCHEDULE_BOOKED_CNT;
+	}
+	public void setTHEATER_SCHEDULE_BOOKED_CNT(int tHEATER_SCHEDULE_BOOKED_CNT) {
+		THEATER_SCHEDULE_BOOKED_CNT = tHEATER_SCHEDULE_BOOKED_CNT;
 	}
 	
 	

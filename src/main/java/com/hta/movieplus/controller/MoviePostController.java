@@ -47,8 +47,9 @@ public class MoviePostController {
 	
 	@GetMapping("/selectMovie")
 	public String selectMovieView(Model model, @AuthenticationPrincipal Member member) {
-		List<Movie> movieList = moviePostService.getSeenMovieList(member.getMEMBER_NUM());
+		List<Movie> movieList = moviePostService.getSeenMovieList(member.getMEMBER_ID());
 		
+		model.addAttribute("mp_movieCnt", movieList.size());
 		model.addAttribute("mp_movieList", movieList);
 		return "moviepost/moviepost_selectMovie";
 		

@@ -66,7 +66,12 @@ public class MovieStoryServiceImpl implements MovieStoryService {
 	@Override
 	public List<TheaterSchedule> getScheduleList(String memberId) {
 		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberId", memberId);
+		
 		List<TheaterSchedule> list = movieStoryMapper.getScheduleListByMemberId(memberId);
+		
 		for (TheaterSchedule schedule : list) {
 			if (schedule.getMOVIE_POSTER().length() > 10) {
 				schedule.setMOVIE_POSTER(schedule.getMOVIE_POSTER().substring(0, 60));

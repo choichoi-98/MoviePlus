@@ -9,7 +9,7 @@ import com.hta.movieplus.domain.MoviePostVO;
 
 public interface MoviePostService {
 
-	List<Movie> getSeenMovieList(int member_NUM);
+	List<Movie> getSeenMovieList(String memberId);
 
 	Movie getMovieByCode(String movieCode);
 

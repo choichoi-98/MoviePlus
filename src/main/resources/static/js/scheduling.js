@@ -128,7 +128,7 @@ function getScheduleList() { // 스케줄 전체 목록
 						if(id==item.theater_ROOM_ID){
 							var output = '<tr class="table-schedule-item">';
 							output += '<td><div class="main__table-text"><a href="#">'+item.movie_TITLE+'</a></div></td>';
-							output += '<td><div class="main__table-text main__table-text--rate"><span>0/250</span></div></td>';
+							output += '<td><div class="main__table-text main__table-text--rate"><span>'+item.theater_SCHEDULE_BOOKED_CNT+'/'+item.theater_ROOM_SEAT_CNT+'</span></div></td>';
 							output += '<td><div class="main__table-text">'+item.theater_SCHEDULE_START+' ~ '+item.theater_SCHEDULE_END +'</div></td>';
 							output += '<td><div class="main__table-btns"><input type="hidden" id="selected-schedule-id" value='+item.theater_SCHEDULE_ID+'><input type="hidden" id="selected-schedule-id" value='+item.theater_R+'><a href="#modal-update" class="main__table-btn main__table-btn--edit open-modal"> <i class="icon ion-ios-create"></i></a>';
 							output += '<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal"><i class="icon ion-ios-trash"></i></a>';
