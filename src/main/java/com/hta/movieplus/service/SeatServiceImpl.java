@@ -276,7 +276,8 @@ public class SeatServiceImpl implements SeatService {
 		// TODO Auto-generated method stub
 		List<KakaoPayVO> list = mapper.getBookedSeatList(scheduleId);
 		
-		return list.stream().map(item -> item.getKPAY_OCCUPIED_SEAT()).collect(Collectors.toList());
+//		return list.stream().map(item -> item.getKPAY_OCCUPIED_SEAT()).collect(Collectors.toList());
+		return null;
 	}
 
 }
