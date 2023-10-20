@@ -185,7 +185,6 @@ public class StoreController {
 		@RequestParam("itemCode") int ITEM_CODE,
 		@RequestParam("itemCnt") int ITEM_CNT,
 		@AuthenticationPrincipal Member member,
-//      Requestpm로 memberId 불러오기
 		CartVO cartVO,
 		ModelAndView mv) {
 		cartVO.setITEM_CODE(ITEM_CODE);

@@ -33,6 +33,7 @@ $(function() {
         // 수량을 1 증가시키고 입력 요소에 반영
         quantity++;
         quantityInput.val(quantity);
+        updateTotalPrice();
     });
 
     // "수량감소" 버튼을 클릭할 때
@@ -41,18 +42,21 @@ $(function() {
             // 수량을 1 감소시키고 입력 요소에 반영
             quantity--;
             quantityInput.val(quantity);
+            updateTotalPrice();
         }
     });
-
+    
+    function updateTotalPrice() {
+        var itemPrice = parseFloat($('#prdtSumAmt').data('price'));
+        var totalPrice = quantity * itemPrice;
+        $('#prdtSumAmt').text(totalPrice);
+    }
 	
 	$(document).on('click', '#btnGift', function(e) {
 //	$('#btnGift').on('click', function(e) {
-	e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+	e.preventDefault(); // 기본 동작인 링크 이동을 막기
 		var itemCode = $('#prdtSumAmt').data('test');
-//		var memberId = 
-//		var itemCnt = $('#quantity').attr("value"); // 값을 가져오려면 attr("value")를 사용합니다.
 		var itemCnt = quantity; 
-		alert("itemCnt: " + itemCnt);
 		
 		$.ajax({
 		    url: "item",
@@ -190,7 +194,8 @@ $(function() {
 													<i class="iconset ico-plus"></i>
 												</button>
 												<div class="money">
-													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}">${selecteditem.ITEM_PRICE}</em> <span>원</span>
+													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
+													data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}</em> <span>원</span>
 												</div>
 											</div>
 										</div>
