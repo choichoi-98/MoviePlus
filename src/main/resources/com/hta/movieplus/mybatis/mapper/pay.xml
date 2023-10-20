@@ -15,14 +15,23 @@
     	UPDATE KAKAO_PAY
     	SET pg_token = #{pg_token}
     	WHERE pg_token IS NULL
-    	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) 
-    				   FROM KAKAO_PAY 
-    				   WHERE pg_token IS NULL)
+    	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) FROM KAKAO_PAY WHERE pg_token IS NULL)
+    	AND NOT EXISTS (SELECT 1 FROM KAKAO_PAY WHERE pg_token = #{pg_token})
 	</update>
+
 	
 	<select id="getAprBooking" resultType="KakaoPayVO">
 		select *
 		from KAKAO_PAY
+		where pg_token IS NOT NULL
+	</select>
+	
+	<select id="getAprBookings" resultType="BookingInfoDTO">
+		select * from KAKAO_PAY
+		inner join THEATER_SCHEDULE
+		on KAKAO_PAY.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID 
+		inner join MOVIE 
+		on MOVIE.MOVIE_CODE = THEATER_SCHEDULE.MOVIE_CODE
 		where pg_token IS NOT NULL
 	</select>
 </mapper>

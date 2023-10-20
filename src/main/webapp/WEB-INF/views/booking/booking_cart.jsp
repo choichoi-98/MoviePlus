@@ -26,8 +26,7 @@ $(function() {
     	var totalAmount = $('#Checker').data("amount");
     	var sid = $('#Checker').data("sid");
     	var cnt = $('#Checker').data("cnt");
-    	var OCseats = $('#Checker').data("seat").split(",");
-        alert(OCseats);
+    	var seatinfo = $('#Checker').data("seatinfo");
     	
         $.ajax({
             url: 'kakaopay',
@@ -35,7 +34,7 @@ $(function() {
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { "totalAmount": totalAmount,
             	    "sid": sid,
-            	    "OCseats": OCseats,
+            	    "seatinfo": seatinfo,
             	    "cnt": cnt},
             dataType: 'json',
             beforeSend: function(xhr) {
@@ -345,7 +344,7 @@ $(function() {
 										<!-- 추가금액 -->
 									</p>
 
-									<div class="money">0</div>
+									<div class="money">${seatInfo}</div>
 								</div>
 								<c:set var="totalPrice" value="${totalPrice + price - 0}"/>
 								<div class="pay">
@@ -357,7 +356,7 @@ $(function() {
 									<div class="money">
 										<em id="Checker" data-amount="${totalPrice}"
 										data-sid="${scheduleId}" data-cnt="${seatCnt}"
-										data-seat="${seat}">${totalPrice}</em> <span>원<!-- 원 --></span>
+										data-seatinfo="${seatInfo}">${totalPrice}</em> <span>원<!-- 원 --></span>
 									</div>
 								</div>
 								<div class="payment-thing">

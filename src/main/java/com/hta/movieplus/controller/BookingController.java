@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
+import com.hta.movieplus.domain.BookingInfoDTO;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.KakaoPayVO;
 import com.hta.movieplus.domain.Member;
@@ -115,6 +116,7 @@ public class BookingController {
 			String[] seat,
 			ModelAndView mv) {
 		
+		String seatInfo = String.join(",", seat); // 배열을 쉼표로 구분된 하나의 문자열로 변환
 		int seatCnt = seat.length;
 		
 		TheaterSchedule ts = schedulingService.getSchedule(scheduleId);
@@ -123,6 +125,7 @@ public class BookingController {
 		mv.setViewName("booking/booking_cart");
 		mv.addObject("scheduleId", scheduleId);
 		mv.addObject("price", price);
+		mv.addObject("seatInfo", seatInfo);
 		mv.addObject("seat", seat);
 		mv.addObject("seatCnt", seatCnt);
 		mv.addObject("movie", movie);
@@ -136,7 +139,7 @@ public class BookingController {
 		@RequestParam("totalAmount") int totalAmount,
 		@RequestParam("sid") int sid,
 		@AuthenticationPrincipal Member member,
-		@RequestParam("OCseats") String KAPY_OCCUPIED_SEAT,
+		@RequestParam("seatinfo") String KAPY_OCCUPIED_SEAT,
 		@RequestParam("cnt") int seatCnt) throws UnsupportedEncodingException {
 		
 		String MEMBER_ID = member.getMEMBER_ID();
@@ -200,12 +203,12 @@ public class BookingController {
 //			kakaopayService.clearCart();
 		}
 		
-		List<KakaoPayVO> BookingList = kakaopayService.getAprBooking();
-//		List<StorePayVO> paylist = storeService.getPayList();
+//		List<KakaoPayVO> BookingList = kakaopayService.getAprBooking();
+		List<BookingInfoDTO> BookingLists = kakaopayService.getAprBookings();
 		
 		mv.setViewName("booking/pay_success");
 //		mv.addObject("paylist", paylist);
-		mv.addObject("BookingList", BookingList);
+		mv.addObject("BookingList", BookingLists);
 		return mv;
 	}
 
