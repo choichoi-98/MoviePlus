@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.BookingInfoDTO;
 import com.hta.movieplus.domain.KakaoPayVO;
 import com.hta.movieplus.mybatis.mapper.KakaopayMapper;
 
@@ -31,6 +32,11 @@ public class KakaopayServiceImpl implements KakaopayService {
 	@Override
 	public List<KakaoPayVO> getAprBooking() {
 		return dao.getAprBooking() ;
+	}
+
+	@Override
+	public List<BookingInfoDTO> getAprBookings() {
+		return dao.getAprBookings();
 	}
 
 }

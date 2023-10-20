@@ -2,6 +2,7 @@ package com.hta.movieplus.service;
 
 import java.util.List;
 
+import com.hta.movieplus.domain.BookingInfoDTO;
 import com.hta.movieplus.domain.KakaoPayVO;
 
 public interface KakaopayService {
@@ -11,6 +12,8 @@ public interface KakaopayService {
 	public void insertPgToken(String pg_token);
 
 	public List<KakaoPayVO> getAprBooking();
+
+	public List<BookingInfoDTO> getAprBookings();
 
 
 }

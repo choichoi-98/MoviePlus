@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.hta.movieplus.domain.BookingInfoDTO;
 import com.hta.movieplus.domain.KakaoPayVO;
 
 /*
@@ -18,5 +19,7 @@ public interface KakaopayMapper {
 	public void insertPgToken(String pg_token);
 
 	public List<KakaoPayVO> getAprBooking();
+
+	public List<BookingInfoDTO> getAprBookings();
 	
 }

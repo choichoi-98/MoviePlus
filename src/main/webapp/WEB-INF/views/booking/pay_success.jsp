@@ -40,7 +40,11 @@
 	<div>예약 번호: <span>${b.KPAY_NUM}</span></div>
 	<div>예약자 ID: <span>${b.MEMBER_ID}</span></div>
     <div>예약 상품ID: <span>${b.THEATER_SCHEDULE_ID}</span></div>
-    <div>예약 좌석: <span></span></div>
+    <div>예약 영화제목: <span>${b.MOVIE_TITLE}</span></div>
+    <div>예약 영화ID: <span>${b.MOVIE_CODE}</span></div>
+    <div>예약 영화 상영시간: <span>${b.MOVIE_RUNTIME}</span></div>
+    <div>예약 영화장르: <span>${b.MOVIE_GENRE}</span></div>
+    <div>예약 좌석: <span>${b.KAPY_OCCUPIED_SEAT}</span></div>
     <div>예약 좌석수: <span>${b.KPAY_SEAT_CNT}</span></div>
     <div>결제 총 금액: <span>${b.KPAY_AMOUNT}</span></div> 
 </c:forEach>
