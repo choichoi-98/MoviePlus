@@ -139,12 +139,12 @@ public class BookingController {
 		@RequestParam("totalAmount") int totalAmount,
 		@RequestParam("sid") int sid,
 		@AuthenticationPrincipal Member member,
-		@RequestParam("seatinfo") String KAPY_OCCUPIED_SEAT,
+		@RequestParam("seatinfo") String KPAY_OCCUPIED_SEAT,
 		@RequestParam("cnt") int seatCnt) throws UnsupportedEncodingException {
 		
 		String MEMBER_ID = member.getMEMBER_ID();
 		
-		kakaopayService.payInsert(sid, totalAmount, KAPY_OCCUPIED_SEAT, seatCnt, MEMBER_ID);
+		kakaopayService.payInsert(sid, totalAmount, KPAY_OCCUPIED_SEAT, seatCnt, MEMBER_ID);
 		
 		TheaterSchedule ts = schedulingService.getSchedule(sid);
 		Movie movie = schedulingService.getMovieDetailByCode(ts.getMOVIE_CODE());

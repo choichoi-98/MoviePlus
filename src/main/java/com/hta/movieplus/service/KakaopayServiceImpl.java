@@ -20,8 +20,8 @@ public class KakaopayServiceImpl implements KakaopayService {
 	}
 
 	@Override
-	public void payInsert(int sid, int totalAmount, String KAPY_OCCUPIED_SEAT, int seatCnt, String MEMBER_ID) {
-		dao.payInsert(sid, totalAmount, KAPY_OCCUPIED_SEAT, seatCnt, MEMBER_ID);
+	public void payInsert(int sid, int totalAmount, String KPAY_OCCUPIED_SEAT, int seatCnt, String MEMBER_ID) {
+		dao.payInsert(sid, totalAmount, KPAY_OCCUPIED_SEAT, seatCnt, MEMBER_ID);
 	}
 
 	@Override
