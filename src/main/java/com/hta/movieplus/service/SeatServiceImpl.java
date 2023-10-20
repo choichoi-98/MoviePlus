@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 import org.apache.catalina.mapper.Mapper;
@@ -274,10 +275,19 @@ public class SeatServiceImpl implements SeatService {
 	@Override
 	public List<String> getBookedSeatList(int scheduleId) {
 		// TODO Auto-generated method stub
-		List<KakaoPayVO> list = mapper.getBookedSeatList(scheduleId);
+		List<KakaoPayVO> dataList = mapper.getBookedSeatList(scheduleId);
 		
-//		return list.stream().map(item -> item.getKPAY_OCCUPIED_SEAT()).collect(Collectors.toList());
-		return null;
+		List<String> resultList = new ArrayList<String>();
+		
+		for(KakaoPayVO data : dataList) {
+			StringTokenizer st = new StringTokenizer(data.getKPAY_OCCUPIED_SEAT(), ",");
+			
+			while(st.hasMoreTokens()) {
+				resultList.add(st.nextToken());
+			}
+		}
+		
+		return resultList;
 	}
 
 }
