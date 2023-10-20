@@ -140,7 +140,7 @@
 
 
 									<div class="col-12" style="display:flex; margin-left: 75%;">
-										<a href="admin/noticeList">
+										<a href="${pageContext.request.contextPath}/admin/noticelist">
 										<button type="button" class="form__btn" style="margin-right:20px;">뒤로</button>
 										</a>
 										<a href="admin/noticeDetail">
