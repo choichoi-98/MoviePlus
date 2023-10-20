@@ -55,7 +55,7 @@
 							 </div>
 						   </div><!-- form content end -->
 
-							<div class="col-12">
+							<div class="col-12" id="imgupload">
 								<label>
 									<span style="color:white;"> 
 									<c:if test = "${empty eventdata.EVENT_FILE}">
@@ -93,18 +93,7 @@
 <script>
 $(document).ready(function(){
    
-	$("#eventupfile").change(function(){
-		console.log($(this).val())		//c:\fakepath\upload.png
-		const inputfile = $(this).val().split('\\');
-		$('#filevalue').text(inputfile[inputfile.length - 1]);
-	});
-	
-	$("#eventthumbupfile").change(function(){
-		console.log($(this).val())		//c:\fakepath\upload.png
-		const inputfile = $(this).val().split('\\');
-		$('#thumbfilevalue').text(inputfile[inputfile.length - 1]);
-	});
-	
+
 	$("#cancelbtn").click(function(){
 		location.href = "/movieplus/admin/manageEvent";		
 	})
@@ -113,22 +102,18 @@ $(document).ready(function(){
 	
 		//마이페이지 - 프로필 이미지 파일 업로드 미리보기
 	$('#eventthumbupfile').change(function(upload){
-		check++;
-		const inputfile = $(this).val().split('\\');
-		const filename=inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
 		
-		console.log(filename);
+		const inputfile = $(this).val().split('\\');
+		const filename = inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
 		
 		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
 		if(pattern.test(filename)){
-			$('#eventthumbupfile').text(filename);
+			$('#thumbfilevalue').text(filename);
 			
 			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
-			
-		  reader.readAsDataURL(event.target.files[0]);
-			 
-		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
-			$('#thumbfilevalue + img').attr('src', this.result);  
+		 	reader.readAsDataURL(event.target.files[0]);
+		  	reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('#imgupload img').attr('src', this.result);  
 		  };
 		} else {
 			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
