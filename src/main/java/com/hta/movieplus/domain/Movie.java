@@ -4,10 +4,10 @@ public class Movie {
 	private String movie_Code;		//영화번호
     private String movie_Title;		//영화제목
     private String movie_Director;	//영화감독
-    private String movie_Poster;		//영화 포스터
+    private String movie_Poster = "";		//영화 포스터
     private String movie_Actors;		//출연배우
     private String movie_Genre;		//대표장르
-    private String movie_Runtime;	//상영시간
+    private String movie_Runtime = "120";	//상영시간
     private String movie_OpenDate;	//개봉일
     private String movie_Grade;		//상영등급
     private String movie_Plot;		//줄거리
@@ -16,7 +16,7 @@ public class Movie {
     private String movie_Screen; //상영상태(상영가능,상영예정,상영종로,상영중)
 	private String MOVIE_DIBS_OBJECT; //보고싶어요 한 영화
 	private int review_Count;	//댓글 수
-	private String movie_Still;
+	private String movie_Still = "";
 	private String interest_Status;//보고싶어요
 	private int post_Count;		//무비 포스트 수
 	
