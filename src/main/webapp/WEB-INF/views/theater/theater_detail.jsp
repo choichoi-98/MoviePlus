@@ -12,16 +12,17 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
-<script 
+<script
 	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/theater_detail_timeTable.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/theater_detail_timeTable.js"></script>
 
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
-	
+
 
 
 
@@ -399,17 +400,17 @@
 								<i class="iconset ico-cld-pre"></i> <em>이전</em>
 							</button>
 							<div class="date-list">
-					
+
 								<div class="date-area">
 									<div id="timetable-date-div" class="wrap"
 										style="position: relative; width: 2100px; border: none; left: -70px;">
 										<c:forEach var="date" items="${dateList}">
-											<button class="" type="button" data-selectedDate="${date.date}">
-											 <em
-													style="pointer-events: none;">${date.day}</em> <span
+											<button class="" type="button"
+												data-selectedDate="${date.date}">
+												<em style="pointer-events: none;">${date.day}</em> <span
 													class="day-kr"
 													style="pointer-events: none; display: inline-block">${date.week}</span>
-					
+
 											</button>
 										</c:forEach>
 									</div>
@@ -419,10 +420,10 @@
 								<i class="iconset ico-cld-next"></i> <em>다음</em>
 							</button>
 							<div class="bg-line">
-									<input type="hidden" name="datePicker" id="datePicker"
-										class="hasDatepicker" value="2023.09.27">
-									<button type="button" class="btn-calendar-large" title="달력보기">
-										달력보기</button>
+								<input type="hidden" name="datePicker" id="datePicker"
+									class="hasDatepicker" value="2023.09.27">
+								<button type="button" class="btn-calendar-large" title="달력보기">
+									달력보기</button>
 							</div>
 						</div>
 					</div>
@@ -437,7 +438,7 @@
 					</div>
 
 					<div id="theater-list-box" class="reserve theater-list-box">
-						
+
 
 					</div>
 
@@ -466,34 +467,23 @@
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="col">요일</th>
-											<th scope="col">상영시간</th>
+											<th scope="col">구분</th>
 											<th scope="col">일반</th>
-											<th scope="col">청소년</th>
+											<th scope="col">조조</th>
+											<th scope="col">심야</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<th scope="rowgroup" rowspan="2">월~목</th>
-											<td>조조 (06:00~)</td>
+											<td>청소년</td>
+											<td>13,000</td>
 											<td>10,000</td>
-											<td>8,000</td>
-										</tr>
-										<tr>
-											<td>일반 (10:01~)</td>
-											<td>14,000</td>
-											<td>12,000</td>
-										</tr>
-										<tr>
-											<th scope="rowgroup" rowspan="2">금~일<br>공휴일
-											</th>
-											<td>조조 (06:00~)</td>
 											<td>11,000</td>
-											<td>9,000</td>
 										</tr>
 										<tr>
-											<td>일반 (10:01~)</td>
+											<td>성인</td>
 											<td>15,000</td>
+											<td>12,000</td>
 											<td>13,000</td>
 										</tr>
 									</tbody>

@@ -85,7 +85,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>재개봉 관리</span></a>
+					<a href="${pageContext.request.contextPath}/admin/reopenlist" class="sidebar__nav-link"><span>재개봉 관리</span></a>
 				</li>
 				
 				
