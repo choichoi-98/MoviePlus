@@ -98,7 +98,7 @@
 					<div class="btn-group mt20">
 						<a href="#"
 							class="button large purple" id="moviePostInsert" title="등록"> 등록 </a> <a
-							href="${pageContext.request.contextPath}/moviepost/selectMovie"
+							onclick="history.back()"
 							class="button large" id="postCancelBtn" title="취소">취소</a>
 					</div>
 				</div>

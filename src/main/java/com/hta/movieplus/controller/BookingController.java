@@ -99,7 +99,7 @@ public class BookingController {
 		TheaterSchedule schedule = schedulingService.getSchedule(scheduleId);
 		Movie movie = schedulingService.getMovieDetailByCode(schedule.getMOVIE_CODE());
 		TheaterRoom room = theaterManagerService.getTheaterRoomById(schedule.getTHEATER_ROOM_ID());
-		String seat = seatService.makeSeatStr(room.getTHEATER_ROOM_SEAT());
+		String seat = seatService.makeSeatStr(room.getTHEATER_ROOM_SEAT(), scheduleId);
 		
 		mv.addObject("seat", seat);
 		mv.addObject("movie", movie);

@@ -62,5 +62,13 @@ public class MovieStoryController {
 		
 		return "redirect:/member/mypage/moviestory";
 	}
+	
+	@GetMapping("member/mypage/deletePost")
+	public String deletePost(int post_num) {
+		movieStoryService.deletePost(post_num);	
+		
+		return "redirect:/member/mypage/moviestory";	
+	}
+	
 
 }

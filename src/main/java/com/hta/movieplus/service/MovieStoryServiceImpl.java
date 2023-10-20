@@ -12,6 +12,7 @@ import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
 import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.mybatis.mapper.MovieMapper;
+import com.hta.movieplus.mybatis.mapper.MoviePostMapper;
 import com.hta.movieplus.mybatis.mapper.MovieStoryMapper;
 
 @Service
@@ -19,12 +20,14 @@ public class MovieStoryServiceImpl implements MovieStoryService {
 
 	MovieStoryMapper movieStoryMapper;
 	MovieMapper movieMapper;
+	MoviePostMapper postMapper;
 	
 	@Autowired
-	public MovieStoryServiceImpl(MovieStoryMapper movieStoryMapper, MovieMapper movieMapper) {
+	public MovieStoryServiceImpl(MovieStoryMapper movieStoryMapper, MovieMapper movieMapper, MoviePostMapper postMapper) {
 		// TODO Auto-generated constructor stub
 		this.movieStoryMapper = movieStoryMapper;
 		this.movieMapper = movieMapper;
+		this.postMapper = postMapper;
 	}
 	
 	@Override
@@ -88,6 +91,12 @@ public class MovieStoryServiceImpl implements MovieStoryService {
 		map.put("movieCode", movieCode);
 		map.put("memberId", member_ID);
 		movieStoryMapper.deleteDibs(map);
+	}
+
+	@Override
+	public void deletePost(int post_num) {
+		// TODO Auto-generated method stub
+		postMapper.deletePostById(post_num);
 	}
 
 	

@@ -12,7 +12,13 @@
 	
 	<select id="getMoviePostListByMemberId" parameterType="String" resultType="moviePostVO">
 		SELECT *
-		FROM MOVIEPOST
+		FROM MOVIEPOST MP
+		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		LEFT JOIN 
+		( SELECT MOVIEPOST_NUM, COUNT(*) AS moviepost_Like
+		FROM MOVIEPOST_LIKE
+		GROUP BY MOVIEPOST_NUM 
+		) L ON MP.MOVIEPOST_NUM = L.MOVIEPOST_NUM
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 	
