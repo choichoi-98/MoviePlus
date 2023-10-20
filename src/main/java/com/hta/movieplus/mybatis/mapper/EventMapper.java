@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.Event;
+import com.hta.movieplus.domain.EventApply;
 
 @Mapper
 public interface EventMapper {
@@ -42,6 +43,7 @@ public interface EventMapper {
 	public int updateEvent(Event event);
 
 	public void changeStatus(Map<String, Object> map);
+
 	
 }
 

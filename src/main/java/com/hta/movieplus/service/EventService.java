@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hta.movieplus.domain.Event;
+import com.hta.movieplus.domain.EventApply;
 
 public interface EventService {
 	
@@ -40,6 +41,8 @@ public interface EventService {
 	public void changeStatus(int num, String status);
 
 	public Map<String, Object> pagination(int page);
+
+
 
 
 	

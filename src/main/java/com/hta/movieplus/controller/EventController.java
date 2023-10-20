@@ -17,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hta.movieplus.domain.Event;
+import com.hta.movieplus.domain.EventApply;
 import com.hta.movieplus.service.EventService;
 
 @Controller
@@ -56,7 +58,7 @@ public class EventController {
 	@GetMapping("/event/test")
 	public String test() {
 		
-		return "event/event_winner";
+		return "event/event_viewform_copy";
 	}
 	
 	//이벤트 전체 페이지(메인)
@@ -283,7 +285,7 @@ public class EventController {
 	
 	//관리자 - 이벤트 수정프로세스
 	@PostMapping("/admin/modifyEventProcess")
-	public String modifyEventProcess(Event event, String check, 
+	public String modifyEventProcess(Event event, String concheck, String thumbcheck,
 							  HttpServletRequest request, RedirectAttributes rattr,
 							  Model model) throws Exception {
 		
@@ -291,11 +293,15 @@ public class EventController {
 		
 		MultipartFile uploadthumb = event.getUploadthumb();	//2)이벤트 썸네일 업로드
 		
-		if(check != null && check.equals("")) {
+		if(concheck != null && concheck.equals("")) {
 			logger.info("기존파일 그대로 사용");
-			event.setEVENTCONTENT_ORIGINAL(check);
-			event.setEVENTFILE_ORIGINAL(check);
-		} else {
+			event.setEVENTCONTENT_ORIGINAL(concheck);
+			
+		} else if(concheck != null && concheck.equals("")) {
+			logger.info("기존파일 그대로 사용");
+			event.setEVENTFILE_ORIGINAL(thumbcheck);
+		}
+		else {
 			
 			if(!uploadevent.isEmpty() && !uploadthumb.isEmpty()) {
 				logger.info("파일 추가/변경");
@@ -381,4 +387,7 @@ public class EventController {
 		
 		return "event/event_winner";
 	}
+	
+	
+	
 }

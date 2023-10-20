@@ -55,7 +55,7 @@
 						
 						<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
 						<li id="eventTab_CED03" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED03&#39;)"
+							href="${pageContext.request.contextPath}/event/reopen"
 							title="재개봉 탭으로 이동">재개봉</a></li>
 					</ul>
 				</div>	<!-- 탭 리스트 end -->

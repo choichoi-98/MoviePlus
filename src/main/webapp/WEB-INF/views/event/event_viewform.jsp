@@ -23,8 +23,9 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<div id="contents" class="location-fixed" style="padding-top:40px;">
+	<form id="eventform" action="" method="">
 	 <input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
 		<!-- event-detail -->
 		<div class="event-detail">
@@ -61,10 +62,9 @@
 			</map>
 					
 			</div>
-				
-
 			<!--// iframe 아닐 때  -->
-		</div>
+		</div> <!-- event detail end -->
+		</form>
     </div>
 </div><!-- container end -->
 

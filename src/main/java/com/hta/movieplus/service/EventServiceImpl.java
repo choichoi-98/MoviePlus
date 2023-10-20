@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.Event;
+import com.hta.movieplus.domain.EventApply;
 import com.hta.movieplus.mybatis.mapper.EventMapper;
 
 @Service
@@ -143,6 +144,7 @@ public class EventServiceImpl implements EventService{
 		
 		return pagemap;
 	}
+
 
 
 	

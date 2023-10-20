@@ -8,9 +8,9 @@ public class Event {
 	private int EVENT_NUM;				//이벤트 번호
 	private String EVENT_TYPE;			//이벤트 종류	(영화 | 극장 | 제휴/할인 | 시사회/무대인사)
 	private String EVENT_SUBJECT;		//이벤트 제목	 
-	private String EVENT_CONTENT;		//이벤트 내용
+	private String EVENT_CONTENT;		//이벤트 내용 사진
 	private DATE   EVENT_DATE;			//작성일자
-	private String EVENT_FILE;			//이벤트 업로드 파일(포스터)
+	private String EVENT_FILE;			//이벤트 썸네일 사진
 	private String EVENT_STARTDATE;		//이벤트 시작일
 	private String EVENT_ENDDATE;		//이벤트 종료일
 	private String EVENT_STATUS="PROGRESS"; //이벤트 상태(진행중(PROGRESS) | 종료(END))

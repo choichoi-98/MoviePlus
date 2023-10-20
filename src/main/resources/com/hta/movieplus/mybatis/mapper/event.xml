@@ -14,70 +14,79 @@
 			select nvl(max(EVENT_NUM),0)+1 from EVENT
 		</sql>
 	
-	<select id="getAllEventList" resultType="event">	<!-- 이벤트 전체 총 목록 -->
+	<!-- 이벤트 전체 총 목록 -->
+	<select id="getAllEventList" resultType="event">	
 		SELECT * 
 		FROM EVENT
 	</select>
 	
-	<select id="getMovieEventList" resultType="event">	<!-- 영화 이벤트 목록 -->
+	<!-- 영화 이벤트 목록 -->
+	<select id="getMovieEventList" resultType="event">	
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '영화'
-		
 	</select>
 	
-	<select id="getMovieEventListCount" resultType="int">	<!-- 영화 이벤트 목록 COUNT -->
+	<!-- 영화 이벤트 목록 COUNT -->
+	<select id="getMovieEventListCount" resultType="int">	
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = '영화'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
-	<select id="getTheaterEventList" resultType="event">	<!-- 극장 이벤트 목록 -->
+	<!-- 극장 이벤트 목록 -->
+	<select id="getTheaterEventList" resultType="event">	
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '극장'
 	</select>
 	
-	<select id="getTheaterEventListCount" resultType="int">	<!-- 극장 이벤트 목록 COUNT-->
+	<!-- 극장 이벤트 목록 COUNT-->
+	<select id="getTheaterEventListCount" resultType="int">	
 		SELECT COUNT(*)
 		FROM EVENT
 		WHERE EVENT_TYPE = '극장'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
-	<select id="getPromotionEventList" resultType="event"> 	<!-- 제휴/할인 이벤트 목록 -->
+	<!-- 제휴/할인 이벤트 목록 -->
+	<select id="getPromotionEventList" resultType="event"> 	
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '제휴/할인'
 	</select>
 	
-	<select id="getPromotionEventListCount" resultType="int"> 	<!-- 제휴/할인 이벤트 목록 Count -->
+	<!-- 제휴/할인 이벤트 목록 Count -->
+	<select id="getPromotionEventListCount" resultType="int"> 	
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = '제휴/할인'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
-	<select id="getCurtaincallEventList" resultType="event">	<!-- 시사회 이벤트 목록 -->
+	<!-- 시사회 이벤트 목록 -->
+	<select id="getCurtaincallEventList" resultType="event">	
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '시사회/무대인사'
 	</select>
 	
-	<select id="getCurtaincallEventListCount" resultType="int">	<!-- 시사회 이벤트 목록 Count -->
+	<!-- 시사회 이벤트 목록 Count -->
+	<select id="getCurtaincallEventListCount" resultType="int">	
 		SELECT COUNT(*) 
 		FROM EVENT
 		WHERE EVENT_TYPE = '시사회/무대인사'
 		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
-	<select id="getEventListCount" resultType="int">	<!-- 이벤트 전체 개수 -->
+	<!-- 이벤트 전체 개수 -->
+	<select id="getEventListCount" resultType="int">	
 		select count(*) 
 		from EVENT
 	</select>
 	
-	
+	<!-- 관리자 - 이벤트 리스트 -->
 	<select id="getEventList" parameterType="java.util.Map" resultType="event">
 		SELECT *
 		FROM (
@@ -91,18 +100,21 @@
 		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}	
 	</select>
 	
-	<select id="getDetailEvent" parameterType="int" resultType="event">		<!-- 이벤트 상세페이지 -->
+	<!-- 이벤트 상세페이지 -->
+	<select id="getDetailEvent" parameterType="int" resultType="event">		
 		SELECT *
 		FROM EVENT
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</select>
 
+	<!-- 관리자 - 이벤트 삭제  -->
 	<delete id="deleteEvent" parameterType="int">
 		DELETE
 		FROM EVENT
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</delete>
 	
+	<!-- 관리자 - 이벤트 수정 -->
 	<update id="updateEvent" parameterType="event">
 		update EVENT
 		set EVENT_TYPE = #{EVENT_TYPE},
@@ -114,6 +126,7 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</update>
 
+	<!-- 관리자 - 이벤트 상태 수정 -->
 	<update id="changeStatus" parameterType="map">
 		update EVENT
 		<choose>	
@@ -127,6 +140,7 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}	
 	</update>
 	
+
 	
 	
 </mapper>
