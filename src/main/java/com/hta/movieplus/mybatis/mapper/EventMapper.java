@@ -25,7 +25,7 @@ public interface EventMapper {
 	
 	public int getEventListCount();
 	
-	public List<Event> getEventList(HashMap<String, Integer> map);
+	public List<Event> getEventList(HashMap<String, Object> map);
 
 	public Event getDetailEvent(int num);
 	

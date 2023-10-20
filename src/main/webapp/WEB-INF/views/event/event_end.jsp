@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
@@ -18,9 +19,9 @@
 		<div class="inner-wrap">
 			<div class="location">
 				<span>Home</span>
-                <a href="https://www.megabox.co.kr/event" title="이벤트 메인 페이지로 이동">이벤트</a>
+                <a href="${pageContext.request.contextPath}/event" title="이벤트 메인 페이지로 이동">이벤트</a>
 				
-					<a href="https://www.megabox.co.kr/event/end" title="지난 이벤트 페이지로 이동">지난 이벤트</a>
+					<a href="${pageContext.request.contextPath}/event/end" title="지난 이벤트 페이지로 이동">지난 이벤트</a>
 			</div>
 
 		</div>
@@ -42,7 +43,9 @@
 										<span class="cont-area">
 											<span class="login-alert-tooltip">
 												로그인이 필요한 서비스 입니다.<br>
-												<a id="moveLogin" href="https://www.megabox.co.kr/event/end#layer_login_common" class="btn-modal-open" w-data="850" h-data="484" title="로그인 바로가기">로그인 바로가기 <i class="iconset ico-arr-right-green"></i></a>
+												<a id="moveLogin" href="#" class="btn-modal-open" w-data="850" h-data="484" title="로그인 바로가기">로그인 바로가기 
+												<i class="iconset ico-arr-right-green"></i>
+												</a>
 											</span>
 										</span>
 									</span>
@@ -71,49 +74,74 @@
 
 
 	<div class="inner-wrap">
-			<div class="event-list finish ">
-			
-                <input type="hidden" id="totCount" name="totCount" value="10714">
+			<div class="event-list finish">
 				<ul>
-				
-					<li>
-						<a href="https://www.megabox.co.kr/event/end#" data-no="12411" data-netfunnel="N" class="eventBtn" title="[대구이시아] 라운지 이용권 런칭! 상세보기">
+				 	<c:forEach var="event" items="${eventlist}" varStatus="loop">
+					<c:if test='${event.EVENT_STATUS == "END"}'>				 	
+					<li  class="event-items">
+						<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}" data-no="12411" data-netfunnel="N" class="eventBtn" title="${event.EVENT_SUBJECT}">
 							
-								<p class="cate">극장</p>
-							
+							<p class="cate">${event.EVENT_TYPE}</p>
 
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-							<p class="img"> <img src="./지난이벤트_files/IwOFR5fvobJmrVwYXm4M8cqjdwQj0LoO.jpg" alt="[대구이시아] 라운지 이용권 런칭!" onerror="noImg(this);"></p>
+							<p class="img"> 
+								<img src="${pageContext.request.contextPath}/upload${event.EVENT_FILE}" alt="${event.EVENT_SUBJECT}" onerror="noImg(this);">
+							</p>
 
 							<p class="tit">
-								[대구이시아] 라운지 이용권 런칭!
+								${event.EVENT_SUBJECT}
 							</p>
-
 							<p class="date">
-								2022.12.15 ~ 2023.12.31
+								${event.EVENT_STARTDATE} ~ ${event.EVENT_ENDDATE}
 							</p>
 						</a>
-                
 					</li>
+					</c:if>
+				  </c:forEach>	
 				</ul>
 			</div>
 		
 	</div>
 
 </div>
-
-
 		
 			<div class="btn-more v1" style="">
-				<button type="button" class="btn">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+				<button type="button" id="morebtn" class="btn">더보기 <i class="iconset ico-btn-more-arr"></i></button>
 			</div>
 		
 	</div>
 </div>
 <!--// container -->
 
-
-
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+	
+<script>
+$(document).ready(function(){
+
+		var showitems = 10;
+		var visibleitems = 10;
+		
+		function toggleEventItems() {
+			$(".event-list.finish .event-items").hide();
+	        $(".event-list.finish .event-items:lt(" + visibleitems + ")").show();
+	        if (visibleitems >= $('.event-list.finish .event-items').length) {
+	            $('#morebtn').hide();
+	        } else {
+	            $('#morebtn').show();
+	        }
+	    } //toggleEventItems end
+		
+		toggleEventItems();
+		
+		
+     	$('#morebtn').click(function(e){
+     		e.preventDefault();
+     		
+     		visibleitems += showitems;
+     		toggleEventItems();
+     		})
+	
+});	
+</script>	
 </body>
 </html>

@@ -20,8 +20,8 @@
 			<div class="inner-wrap">
 				<div class="location">
 					<span>Home</span> 
-					<a href="https://www.megabox.co.kr/event"	title="이벤트 메인 페이지로 이동">이벤트</a> 
-						<a href="#" title="진행중 이벤트 페이지로 이동">진행중 이벤트</a>
+					<a href="${pageContext.request.contextPath}/event"	title="이벤트 메인 페이지로 이동">이벤트</a> 
+					<a href="${pageContext.request.contextPath}/event" title="진행중 이벤트 페이지로 이동">진행중 이벤트</a>
 				</div>
 
 

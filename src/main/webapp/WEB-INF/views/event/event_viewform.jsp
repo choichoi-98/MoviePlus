@@ -14,17 +14,17 @@
 	
 	<div class="container" id="schdlContainer">
 
-	<div class="page-util fixed">
+	<div class="page-util">
 		<div class="inner-wrap">
 			<div class="location">
 				<span>Home</span>
-                    <a href="https://www.megabox.co.kr/event" title="진행중 이벤트 페이지로 이동">이벤트</a>
-				<a href="javascript:void(0)" title="이벤트 상세">이벤트 상세</a>
+                    <a href="${pageContext.request.contextPath}/event" title="진행중 이벤트 페이지로 이동">이벤트</a>
+					<a href="#" title="이벤트 상세">이벤트 상세</a>
 			</div>
 		</div>
 	</div>
 
-	<div id="contents" class="location-fixed">
+	<div id="contents" class="location-fixed" style="padding-top:40px;">
 	 <input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
 		<!-- event-detail -->
 		<div class="event-detail">

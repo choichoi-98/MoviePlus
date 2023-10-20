@@ -3,6 +3,7 @@ package com.hta.movieplus.controller;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,15 +38,8 @@ public class EventController {
 		this.eventservice = eventservice;
 	}
 	
-	@GetMapping("/event/test")
-	public String testevent() {
-		return "event/event_end";
-	}
-	
-	//이벤트 전체 페이지(메인)
-	@GetMapping("/event")
-	public ModelAndView eventmain(ModelAndView mv) throws Exception {
-		
+	//이벤트 타입별 전체 리스트를 불러오는 메서드
+	private void eventListAll(ModelAndView mv) {
 		List<Event> movieEventList = eventservice.getMovieEventList();
 		List<Event> theaterEventList = eventservice.getTheaterEventList();
 		List<Event> promotionEventList = eventservice.getPromotionEventList();
@@ -56,11 +49,36 @@ public class EventController {
 		mv.addObject("theaterEventList", theaterEventList);
 		mv.addObject("promotionEventList", promotionEventList);
 		mv.addObject("curtaincallEventList", curtaincallEventList);
+	}
+	
+	
+	//이벤트 테스트
+	@GetMapping("/event/test")
+	public String test() {
 		
+		return "event/event_winner";
+	}
+	
+	//이벤트 전체 페이지(메인)
+	@GetMapping("/event")
+	public ModelAndView eventmain(ModelAndView mv) throws Exception {
+		
+		eventListAll(mv);
 		mv.setViewName("event/event_main");
 		
 		return mv;
 	}
+	
+
+	@GetMapping("/event/end")
+	public ModelAndView endEvent(ModelAndView mv) {
+		List<Event> eventlist = eventservice.getAllEventList();
+		mv.addObject("eventlist", eventlist);
+		mv.setViewName("event/event_end");
+
+		return mv;
+	}
+	
 	
 	
 	//이벤트 영화 페이지
@@ -235,41 +253,23 @@ public class EventController {
 
 	//관리자 - 이벤트 리스트 페이지
 	@GetMapping("/admin/manageEvent")
-	public ModelAndView eventList(ModelAndView mv, @RequestParam(value = "page", defaultValue = "1", required = false) int page) {
+	public ModelAndView eventList(ModelAndView mv, 
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
-		int limit = 10;	//한 화면에 출력할 로우 갯수
 		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
-		logger.info("eventlistcount 수 : " + eventlistcount);
-
-		//총 페이지 수
-		int maxpage = (eventlistcount + limit - 1) / limit;
 		
-		//현재 페이지에 보여줄 시작 페이지 수
-		int startpage = ((page - 1)/10) * 10 + 1;
+		Map<String, Object> pagemap = eventservice.pagination(page);
+		List<Event> eventlist = eventservice.getEventList(page, (int) pagemap.get("limit"));
 		
-		//현재 페이지에 보여줄 마지막 페이지 수
-		int endpage = startpage + 10 - 1;
+		mv.setViewName("admin/manageEvent");
 		
-		if(endpage > maxpage) {
-			endpage = maxpage;
-		}
+		mv.addAllObjects(pagemap);
 		
-		
-		List<Event> eventlist = eventservice.getEventList(page, limit);
-		mv.addObject("page", page);
-		mv.addObject("maxpage",maxpage);
-		mv.addObject("startpage",startpage);		
-		mv.addObject("endpage",endpage);
 		mv.addObject("eventlistcount",eventlistcount);
 		mv.addObject("eventlist",eventlist);
-		mv.addObject("limit",limit);
-		mv.setViewName("admin/manageEvent");
 		
 		return mv;
 	}
-	
-	
-	
 	
 	
 	//관리자 - 이벤트 수정
@@ -370,20 +370,15 @@ public class EventController {
 		
 		Event event = eventservice.getDetailEvent(num);
 		
-//		if(event == null) {
-//			logger.info("상세보기 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "상세보기 실패입니다.");
-//		} else {
-//			logger.info("상세보기 성공");
-//			mv.setViewName("event/event_viewform");
-//			mv.addObject("eventdata", event);
-//		}
-		
 		mv.addObject("eventDetail", event);
 		mv.setViewName("event/event_viewform");
 		return mv;
 	}
 
+	//이벤트 당첨자발표 페이지
+	@GetMapping("/event/winner")
+	public String eventWinner() {
+		
+		return "event/event_winner";
+	}
 }

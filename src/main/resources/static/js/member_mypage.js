@@ -96,9 +96,10 @@ $(document).ready(function(){
 	
 	
 		
-	//마이페이지 - 프로필 이미지 등록버튼 클릭 
+	
 	let check = 0;
 	
+	//마이페이지 - 프로필 이미지 등록버튼 클릭 
 	$('#addProfileImgBtn').click(function(){
 		$('#upfile').click();
 	})
@@ -115,31 +116,7 @@ $(document).ready(function(){
 	
 	showprofilebtn();
 	
-	
-	
-	//마이페이지 - 프로필 이미지 파일 업로드 미리보기
-	$('#upfile').change(function(upload){
-		check++;
-		const inputfile = $(this).val().split('\\');
-		const filename=inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
 
-		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
-		if(pattern.test(filename)){
-			$('#upfile').text(filename);
-			
-			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
-			
-		  reader.readAsDataURL(event.target.files[0]);
-			 
-		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
-			$('#filevalue + img').attr('src', this.result);  
-		  };
-		} else {
-			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
-			$(this).val('')
-		}
-		
-	})
 	
 	//마이페이지 - 프로필 이미지 삭제
 	$('#deleteProfileImgBtn').click(function(){
@@ -167,6 +144,37 @@ $(document).ready(function(){
 		this.submit();
 		alert('회원정보가 수정되었습니다.');
 	})
+	
+		
+	
+	//마이페이지 - 프로필 이미지 파일 업로드 미리보기
+	$('#upfile').change(function(upload){
+		check++;
+		const inputfile = $(this).val().split('\\');
+		const filename = inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
+
+		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
+		if(pattern.test(filename)){
+			$('#filename').text(filename);
+			
+			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
+			
+		  reader.readAsDataURL(event.target.files[0]);
+			 
+		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('#filevalue + img').attr('src', this.result);  
+		  };
+		} else {
+			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
+			$(this).val('')
+		}
+		
+	})
+	
+	
+	
+	
+	
 	
 	$('#modifycancelBtn').click(function(){
 		location.href="/movieplus/member/mypage";	

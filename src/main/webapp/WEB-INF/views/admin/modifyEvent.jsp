@@ -33,10 +33,10 @@
 								
 								<div class="col-3">
 									<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="update_EVENT_TYPE" data-select2-id="rights" tabindex="-1" >
-												<option value="MOVIE" ${eventdata.EVENT_TYPE == 'MOVIE' ? 'selected' : ''}>영화</option>
-												<option value="THEATER" ${eventdata.EVENT_TYPE == 'THEATER' ? 'selected' : ''}>극장</option>
-												<option value="PROMOTION"  ${eventdata.EVENT_TYPE == 'PROMOTION' ? 'selected' : ''}>제휴/할인</option>
-												<option value="CURTAINCALL" ${eventdata.EVENT_TYPE == 'CURTAINCALL' ? 'selected' : ''}>시사회/무대인사</option>
+												<option value="영화" ${eventdata.EVENT_TYPE == '영화' ? 'selected' : ''}>영화</option>
+												<option value="극장" ${eventdata.EVENT_TYPE == '극장' ? 'selected' : ''}>극장</option>
+												<option value="제휴/할인"  ${eventdata.EVENT_TYPE == '제휴/할인' ? 'selected' : ''}>제휴/할인</option>
+												<option value="시사회/무대인사" ${eventdata.EVENT_TYPE == '시사회/무대인사' ? 'selected' : ''}>시사회/무대인사</option>
 									</select>
 								</div>
 								<input type="hidden" name="EVENT_NUM" value="${eventdata.EVENT_NUM}">
@@ -92,8 +92,6 @@
 	</main>
 <script>
 $(document).ready(function(){
-	
-	
 	
    
 	$("#eventupfile").change(function(){
