@@ -2,16 +2,23 @@ package com.hta.movieplus.service;
 
 import java.util.List;
 
-import com.hta.movieplus.domain.MovieDibsVO;
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.TheaterSchedule;
 
 public interface MovieStoryService {
 
-	List<MoviePostVO> getMoivePostList(String memberId);
+	List<MoviePostVO> getMoviePostList(String memberId);
 
-	List<MovieDibsVO> getMovieDibsList(String memberId);
+	List<Movie> getMovieDibsList(String memberId);
 
 	List<MovieReviewVO> getMovieReviewList(String memberId);
+
+	void deleteReview(String review_num);
+
+	void deleteDibs(String movieCode, String member_ID);
+
+	List<TheaterSchedule> getScheduleList(String memberId);
 
 }

@@ -49,8 +49,7 @@ public class MainController {
          
          if (member != null) { //로그인 한 경우
             String memberId =  member.getMEMBER_ID();
-                System.out.println(memberId);
-                logger.info("로그인 한 경우 메인"+memberId);
+              logger.info("로그인 한 경우 메인"+memberId);
               List<Movie> movieList = movieServiceImpl.getPlayingMovieLoginMain(memberId);
               mv.addObject("movieList", movieList);
               
