@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
@@ -71,26 +72,23 @@
 
 
 	<div class="inner-wrap">
-			<div class="event-list finish ">
-			
-                <input type="hidden" id="totCount" name="totCount" value="10714">
+			<div class="event-list finish">
 				<ul>
-				 	<c:forEach var="event" items="${eventlist}" varStatus="loop" >
+				 	<c:forEach var="event" items="${eventlist}" varStatus="loop">
 					<c:if test='${event.EVENT_STATUS == "END"}'>				 	
-					<li>
+					<li class="event-item">
 						<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}" data-no="12411" data-netfunnel="N" class="eventBtn" title="${event.EVENT_SUBJECT}">
 							
-								<p class="cate">${event.EVENT_TYPE}</p>
-							
+							<p class="cate">${event.EVENT_TYPE}</p>
 
 							<!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 							<p class="img"> 
-							<img src="${pageContext.request.contextPath}/upload${event.EVENT_FILE}" alt="${event.EVENT_SUBJECT}" onerror="noImg(this);"></p>
+								<img src="${pageContext.request.contextPath}/upload${event.EVENT_FILE}" alt="${event.EVENT_SUBJECT}" onerror="noImg(this);">
+							</p>
 
 							<p class="tit">
 								${event.EVENT_SUBJECT}
 							</p>
-
 							<p class="date">
 								${event.EVENT_STARTDATE} ~ ${event.EVENT_ENDDATE}
 							</p>
@@ -104,18 +102,40 @@
 	</div>
 
 </div>
-
 		
 			<div class="btn-more v1" style="">
-				<button type="button" class="btn">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+				<button type="button" id="morebtn" class="btn">더보기 <i class="iconset ico-btn-more-arr"></i></button>
 			</div>
 		
 	</div>
 </div>
 <!--// container -->
 
-
-
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+	
+<script>
+	$(function(){
+		var showitems = 3;
+		var visibleitems = showitems;
+		
+		$(".event-list.finish .event-item:lt(" + visibleitems + ")").show();
+		
+     	$('#morebtn').click(function(e){
+     		e.preventDefault();
+     		
+     		visibleitems += showitems;
+     		
+     		//더보기 버튼 클릭시 추가 이벤트 표시
+     		$(".event-list.finish .event-item:lt(" + visibleitems + ")").show();
+     		
+     		//모든 아이템이 표시되었을 때 더보기 버튼 숨기기
+     		if(visibleitems >= $('.event-list.finish .event-item').length){
+     			$('#morebtn').hide();
+     		}
+     	})
+     	
+     	
+	}); //function end
+</script>	
 </body>
 </html>

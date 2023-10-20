@@ -6,8 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
 <script
