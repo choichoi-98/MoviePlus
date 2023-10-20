@@ -46,8 +46,9 @@
                                       <c:if test="${!empty pinfo.MEMBER_PROFILE}">
                                      	 <img src="${pageContext.request.contextPath}/upload${pinfo.MEMBER_PROFILE}" alt="프로필 사진">
                                       </c:if>
-                                      <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" value="${pinfo.MEMBER_PROFILE}">
+                                      <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" value="">
                                       <span id="filevalue" style="display:none;">${pinfo.PROFILE_ORIGINAL}</span>
+                                  	  <input type="hidden" name="MEMBER_PROFILE" value="${pinfo.MEMBER_PROFILE}">
                                   </div>
 									 <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn" style="display:none;">이미지 삭제</button> 
