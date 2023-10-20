@@ -12,13 +12,13 @@
 
 <head>
 <meta charset="UTF-8">
-<title>재개봉 관리 리스트</title>
+<title>재개봉 영화등록</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
 	
 	
-	<script> /* 리스트에서 삭제기능 */
+	<script>
 		$(document).ready(function () {
 			var selected_delete_notice_num;
 
@@ -30,7 +30,7 @@
 				location.href = '/movieplus/admin/noticedelete?noticenum=' + selected_delete_notice_num;
 			})
 		})
-		/* 리스트 개수를 확인하는 기능 */
+		
 		  $(document).ready(function () {
         // 글의 개수를 가져오는 부분
         var total = ; // list2는 CUSTOMER_NOTICE_TYPE컬럼의 값이 string(전체)인 데이터의 수
@@ -49,7 +49,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>재개봉 영화 List</h2>
+						<h2>상영종료 영화 리스트</h2>
 
 						<span class="main__title-stat"> </span>
 
@@ -74,34 +74,31 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
-									<th>코 드 번 호</th>
-									<th>제 목</th>
+									<th>영화코드번호</th>
+									<th>영화제목</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
 							</thead>
 
 							<tbody>
-								<c:forEach var="m" items="${list2}" varStatus="loop">
+								<c:forEach var="endedmovie" items="${endedMovieList}" varStatus="loop">
 									<tr>
 										<td>
 											<div class="main__table-text">${loop.index + 1}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
 										</td>
 										<td>
 											<div class="main__table-text">
-												<a href="${pageContext.request.contextPath}/admin/gonoticemodify?noticemodify=${m.CUSTOMER_NOTICE_NUM}">${m.CUSTOMER_NOTICE_SUBJECT}</a>
+												<a>${endedmovie.movie_Code}</a>
 											</div>
 										</td>
 										<td>
-											<div class="main__table-text">${m.CUSTOMER_NOTICE_TYPE}</div>
-										</td>
-										<td>
-											<div class="main__table-text">${m.CUSTOMER_NOTICE_SYSDATE}</div>
+											<div class="main__table-text">${endmovie.movie_Title}</div>
 										</td>
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
 												<a href="#modal-delete"
-													data-noticenum="${m.CUSTOMER_NOTICE_NUM}"
+													data-noticenum="${endmovie.movie_Code}"
 													class="main__table-btn main__table-btn--delete open-modal">
 													<i class="icon ion-ios-trash"></i>
 												</a>
@@ -115,8 +112,8 @@
 					</div>
 				</div>
 				<!-- end comments -->
-				<a href="${pageContext.request.contextPath}/admin/goreopenwrite"
-					class="main__title-link">등록하기</a>
+				<a href="${pageContext.request.contextPath}/admin/reopenlist"
+					class="main__title-link">뒤로</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
