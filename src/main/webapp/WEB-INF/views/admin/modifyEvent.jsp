@@ -54,8 +54,9 @@
 								</div>
 							 </div>
 						   </div><!-- form content end -->
-
-							<div class="col-12">
+							
+							<!-- 썸네일 수정 EVENTFILE_ORIGINAL /uploadthumb  -->
+							<div class="col-12" id="thumbclass">
 								<label>
 									<span style="color:white;"> 
 									<c:if test = "${empty eventdata.EVENT_FILE}">
@@ -64,19 +65,21 @@
 									<c:if test = "${!empty eventdata.EVENT_FILE}">
 										<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
 									</c:if>
-									<input type="file" id="eventthumbupfile" name="uploadthumb" value="${eventdata.EVENT_FILE}" style="color:white;" />
+									<input type="file" id="eventthumbupfile" name="uploadthumb" style="color:white;" />
+									<input type="hidden"  name="EVENT_FILE" value="${eventdata.EVENT_FILE}" />
 									</span>
-									<span id="thumbfilevalue" style="display:none;"></span>
+									<span id="thumbfilevalue" style="display:none;">${eventdata.EVENTFILE_ORIGINAL}</span>
 								</label>
 							</div>	
 							
+							<!-- 내용 수정  EVENTCONTENT_ORIGINAL/ uploadevent -->
 							<div class="col-12">
 								<label>
 									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
 									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
-									
+									<input type="hidden" name="EVENT_CONTENT" value="${eventdata.EVENT_CONTENT}" />
 								</label>
-								<span id="filevalue" style="display:none;"></span>
+								<span id="filevalue" style="display:none;">${eventdata.EVENTCONTENT_ORIGINAL}</span>
                             </div>
 
 							<div class="col-12" >
@@ -93,52 +96,68 @@
 <script>
 $(document).ready(function(){
 	
-   
-	$("#eventupfile").change(function(){
-		console.log($(this).val())		//c:\fakepath\upload.png
-		const inputfile = $(this).val().split('\\');
-		$('#filevalue').text(inputfile[inputfile.length - 1]);
-	});
-	
-	$("#eventthumbupfile").change(function(){
-		console.log($(this).val())		//c:\fakepath\upload.png
-		const inputfile = $(this).val().split('\\');
-		$('#thumbfilevalue').text(inputfile[inputfile.length - 1]);
-	});
-	
 	$("#cancelbtn").click(function(){
 		location.href = "/movieplus/admin/manageEvent";		
 	})
 	
-	let check = 0;
+	let concheck = 0;
+	let thumbcheck = 0;
 	
-		//마이페이지 - 프로필 이미지 파일 업로드 미리보기
+	
+	//관리자페이지 - 이벤트 내용 업로드 수정
+	$('#eventupfile').change(function(event){
+		concheck++;
+		const inputfile = $(this).val().split('\\');
+		
+		$('#filevalue').text(inputfile[inputfile.length - 1]);
+	})
+	
+	
+	//관리자페이지 - 이벤트 썸네일 이미지 파일 업로드 미리보기, 수정
 	$('#eventthumbupfile').change(function(upload){
-		check++;
 		const inputfile = $(this).val().split('\\');
 		const filename=inputfile[inputfile.length - 1]; //inputfile.length - 1 = 2
 		
-		console.log(filename);
-		
 		const pattern = /(gif|jpg|jpeg|png)$/i; //i(ignore case)는 대소문자 무시를 의미
 		if(pattern.test(filename)){
-			$('#eventthumbupfile').text(filename);
+			
+			$('#thumbfilevalue').text(filename);
 			
 			const reader = new FileReader();	//파일을 읽기 위한 객체 생성
 			
 		  reader.readAsDataURL(event.target.files[0]);
 			 
 		  reader.onload = function(){	//읽기에 성공했을 때 실행되는 이벤트 핸들러
-			$('#thumbfilevalue + img').attr('src', this.result);  
+			$('#thumbclass img').attr('src', this.result);  
 		  };
 		} else {
 			alert('이미지 파일(gif,jpg,jpeg,png)이 아닌 경우는 무시됩니다.');
 			$(this).val('')
 		}
-		
+		thumbcheck++;
 	})
 	
-	$('form').submit(function(){
+	
+	
+	$('form').submit(function(e){
+		e.preventDefault();
+		
+		//썸네일 사진파일 변경하지 않은 경우
+		if(thumbcheck == 0 ){
+			const thumbvalue = $('#thumbfilevalue').text();
+			const html = "<input type='hidden' value='" + thumbvalue + "' name='thumbcheck'>";
+			$(this).append(html);
+		}
+		
+		//내용 사진파일 변경하지 않은 경우
+		if(concheck == 0){
+			const convalue = $('#filevalue').text();
+			const html = "<input type='hidden' value='" + convalue + "' name='concheck'>";
+			$(this).append(html);
+		} 
+		
+		this.submit();
+		
 		alert('이벤트가 수정되었습니다.');
 	})
    

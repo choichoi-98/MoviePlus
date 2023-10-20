@@ -283,7 +283,7 @@ public class EventController {
 	
 	//관리자 - 이벤트 수정프로세스
 	@PostMapping("/admin/modifyEventProcess")
-	public String modifyEventProcess(Event event, String check, 
+	public String modifyEventProcess(Event event, String concheck, String thumbcheck,
 							  HttpServletRequest request, RedirectAttributes rattr,
 							  Model model) throws Exception {
 		
@@ -291,11 +291,15 @@ public class EventController {
 		
 		MultipartFile uploadthumb = event.getUploadthumb();	//2)이벤트 썸네일 업로드
 		
-		if(check != null && check.equals("")) {
+		if(concheck != null && concheck.equals("")) {
 			logger.info("기존파일 그대로 사용");
-			event.setEVENTCONTENT_ORIGINAL(check);
-			event.setEVENTFILE_ORIGINAL(check);
-		} else {
+			event.setEVENTCONTENT_ORIGINAL(concheck);
+			
+		} else if(concheck != null && concheck.equals("")) {
+			logger.info("기존파일 그대로 사용");
+			event.setEVENTFILE_ORIGINAL(thumbcheck);
+		}
+		else {
 			
 			if(!uploadevent.isEmpty() && !uploadthumb.isEmpty()) {
 				logger.info("파일 추가/변경");
