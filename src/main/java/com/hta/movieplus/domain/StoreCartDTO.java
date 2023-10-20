@@ -7,6 +7,7 @@ public class StoreCartDTO {
 	private String ITEM_NAME;
 	private int ITEM_PRICE;
 	private int ITEM_CNT;
+	private String MEMBER_ID;
 	
 	public String getITEM_MENU() {
 		return ITEM_MENU;
@@ -38,5 +39,10 @@ public class StoreCartDTO {
 	public void setITEM_CNT(int iTEM_CNT) {
 		ITEM_CNT = iTEM_CNT;
 	}
-	
+	public String getMEMBER_ID() {
+		return MEMBER_ID;
+	}
+	public void setMEMBER_ID(String mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
+	}
 }

@@ -290,7 +290,7 @@ public class StoreController {
 //		List<StoreCartPayDTO> AprPayList = storeService.selectApproveds();
 		
 //		mv.setViewName("store/pay_success");
-		mv.setViewName("store/StorePay_success");
+		mv.setViewName("store/storePay_success");
 //		mv.addObject("paylist", paylist);
 		mv.addObject("AprPayList", AprPayList);
 		return mv;

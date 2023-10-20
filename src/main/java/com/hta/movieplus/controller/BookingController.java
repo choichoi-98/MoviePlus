@@ -55,8 +55,7 @@ public class BookingController {
 	SeatService seatService;
 	KakaopayService kakaopayService;
 	
-	 private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 	
 	@Autowired
 	public BookingController(SchedulingService schedulingService, TheaterService theaterService, TheaterManagerService theaterManagerService, SeatService seatService, KakaopayService kakaopayService) {
@@ -206,7 +205,7 @@ public class BookingController {
 //		List<KakaoPayVO> BookingList = kakaopayService.getAprBooking();
 		List<BookingInfoDTO> BookingLists = kakaopayService.getAprBookings();
 		
-		mv.setViewName("booking/pay_success");
+		mv.setViewName("booking/kakaoPay_success");
 //		mv.addObject("paylist", paylist);
 		mv.addObject("BookingList", BookingLists);
 		return mv;

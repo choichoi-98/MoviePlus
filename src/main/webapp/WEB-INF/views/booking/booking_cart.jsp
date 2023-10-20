@@ -139,7 +139,7 @@ $(function() {
 												<div class="item col-1">
 													<a
 														href="#"
-														w-data="600" h-data="550" class="btn-modal-open"
+														w-data="600" h-data="550" class=""
 														name="btn_pay_memp" id="btn_pay_memp" title="메가박스 멤버십 포인트">
 														<span class="txt">메가박스 멤버십 포인트 <!-- 메가박스 멤버십 포인트 --></span>
 													</a>
@@ -152,7 +152,7 @@ $(function() {
 												<div class="item col-1">
 													<a
 														href="#"
-														w-data="600" h-data="550" class="btn-modal-open"
+														w-data="600" h-data="550" class=""
 														name="btn_pay_dcoupon" id="btn_pay_dcoupon"
 														title="메가박스 할인쿠폰"> <span class="txt">메가박스 할인쿠폰
 															<!-- 메가박스 할인쿠폰 -->
@@ -177,7 +177,7 @@ $(function() {
 											<div class="coupon-box">
 												<div class="item col-1">
 													<a href="#"
-													   w-data="600" h-data="600" class="btn-modal-open"
+													   w-data="600" h-data="600" class=""
 													   name="btn_pay_mcoupon" id="btn_pay_mcoupon"
 													   title="메가박스 관람권"> <span class="txt">메가박스 관람권 <!-- 메가박스 관람권 --></span>
 													</a>
@@ -191,7 +191,7 @@ $(function() {
 												<div class="item col-1">
 													<a
 														href="#"
-														w-data="600" h-data="560" class="btn-modal-open"
+														w-data="600" h-data="560" class=""
 														name="btn_pay_scoupon" id="btn_pay_scoupon" title="스토어교환권">
 														<span class="txt">스토어교환권 <!-- 스토어교환권 --></span>
 													</a>
@@ -206,7 +206,7 @@ $(function() {
 												<div class="item col-1">
 													<a
 														href="#"
-														w-data="600" h-data="550" class="btn-modal-open"
+														w-data="600" h-data="550" class=""
 														name="btn_pay_mgfcard" id="btn_pay_mgfcard"
 														title="모바일 관람권"> <span class="txt">모바일 관람권 <!-- 모바일 상품권 --></span>
 													</a>
@@ -370,7 +370,7 @@ $(function() {
 									class="button" id="btn_booking_back" title="이전">이전 <!-- 이전 --></a>
 								<a
 									href="javascript:void(0);"
-									w-data="600" h-data="400" class="button active btn-modal-open"
+									w-data="600" h-data="400" class="button active "
 									id="btn_booking_pay"  title="결제">결제</a>
 									<!-- onclick="startPay()" -->
 							</div>

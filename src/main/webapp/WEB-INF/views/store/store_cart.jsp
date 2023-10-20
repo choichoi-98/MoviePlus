@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo" />
+</sec:authorize>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html>
@@ -143,6 +147,7 @@ $(function() {
 									<c:set var="cartItemNames" value="" />
 									<c:set var="totalPrice" value="0"/>
 									<c:forEach var="c" items="${cartlist}" varStatus="loop">
+										<c:if test="${pinfo.MEMBER_ID eq c.MEMBER_ID}">
 										<tr>
 											<td class="a-c">
 												<div class="goods-info">
@@ -189,6 +194,7 @@ $(function() {
         									</c:otherwise>
     									</c:choose>
 										<c:set var="totalPrice" value="${totalPrice + (c.ITEM_PRICE * c.ITEM_CNT)}"/>
+										</c:if>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -324,11 +330,11 @@ $(function() {
 								class="button large w170px" id="btn_store_back" title="취소">취소</a>
 
 							<a href="javascript:void(0);"
-								class="button purple large w170px btn-modal-open"
+								class="button purple large w170px "
 								id="btn-kakaopay" title="결제">결제</a>
 							<!-- <a
 								href="https://www.megabox.co.kr/store#"
-								class="button purple large w170px btn-modal-open"
+								class="button purple large w170px "
 								id="btn_store_pay" title="결제" style="display: none;"
 								w-data="600" h-data="400">결제</a> -->
 							<!--
