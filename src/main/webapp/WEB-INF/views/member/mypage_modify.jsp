@@ -40,7 +40,6 @@
                           <td>
                               <div class="profile-photo">
                                   <div class="profile-img">
-                                  	  <span id="filevalue" style="display:none;">${pinfo.MEMBER_PROFILE}</span>
                                   	  <c:if test="${empty pinfo.MEMBER_PROFILE}">
                                      	 <img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="프로필 사진">
                                       </c:if>
@@ -48,6 +47,7 @@
                                      	 <img src="${pageContext.request.contextPath}/upload${pinfo.MEMBER_PROFILE}" alt="프로필 사진">
                                       </c:if>
                                       <input type="file" id="upfile" name="uploadfile" accept=".jpg, .png" value="${pinfo.MEMBER_PROFILE}">
+                                      <span id="filevalue" style="display:none;">${pinfo.PROFILE_ORIGINAL}</span>
                                   </div>
 									 <button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>  
                                      <button type="button" class="button small gray-line" id="deleteProfileImgBtn" style="display:none;">이미지 삭제</button> 

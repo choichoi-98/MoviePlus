@@ -93,8 +93,6 @@
 <script>
 $(document).ready(function(){
 	
-	
-	
    
 	$("#eventupfile").change(function(){
 		console.log($(this).val())		//c:\fakepath\upload.png
