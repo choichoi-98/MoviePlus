@@ -10,4 +10,10 @@ import com.hta.movieplus.domain.Movie;
 public interface ReOpenMapper {
 
 	public List<Movie> getEndedMovieList();
+	
+	public void updateExpectReOpening(String xxx);
+	
+	public void updateExpectDate(String startday);
+	
+	public List<Movie> getExpectReOpening();
 }

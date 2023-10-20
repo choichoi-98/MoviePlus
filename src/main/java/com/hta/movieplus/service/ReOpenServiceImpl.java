@@ -15,7 +15,6 @@ public class ReOpenServiceImpl implements ReOpenService {
 	
 	@Autowired
 	public ReOpenServiceImpl(ReOpenMapper dao) {
-		// TODO Auto-generated constructor stub
 		this.dao = dao;
 	}
 
@@ -24,4 +23,15 @@ public class ReOpenServiceImpl implements ReOpenService {
 		return dao.getEndedMovieList();
 	}
 
+	@Override
+	public void updateExpectReOpening(String xxx) {
+		dao.updateExpectReOpening(xxx);
+	}
+
+	@Override
+	public List<Movie> getExpectReOpening() {
+		return dao.getExpectReOpening();
+	}
+
+	
 }

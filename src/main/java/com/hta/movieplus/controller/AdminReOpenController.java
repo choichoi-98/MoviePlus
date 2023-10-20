@@ -35,24 +35,27 @@ public class AdminReOpenController {
 		return "/admin/reOpenWrite";
 	}
 	
-	
-	
-	
-	
-	
-	
-	@PostMapping("/admin/reopenwrite")
-	public String goreopenwrite() {
-		return "/admin/reOpenList";
-	}
-	
-	
-	
-	
 	@GetMapping("/admin/reopenlist")
-	public String reopenList(Movie movielist) {
+	public String reopenList(Model model) {
+		List<Movie> ExpectReOpeningMovie = reopenservice.getExpectReOpening();
+		model.addAttribute("ExpectReOpeningMovie", ExpectReOpeningMovie);
 		return "/admin/reOpenList";
 	}
+	
+	
+	
+	
+	
+	@GetMapping("/admin/reopenwrite")
+	public String goreopenwrite() {
+		
+		return "/admin/reOpenList";
+	}
+	
+	
+	
+	
+	
 	
 	
 

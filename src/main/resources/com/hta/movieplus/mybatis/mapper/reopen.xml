@@ -10,5 +10,28 @@
 		WHERE MOVIE_SCREEN = '상영종료'
     </select>
     
+    <!-- 상영상태를 string 형태인 '재개봉예정'으로 변경-->
+    <update id="updateExpectReOpening" parameterType="String">
+    	UPDATE MOVIE
+    	SET
+    	MOVIE_SCREEN = '재개봉예정'
+    	where MOVIE_CODE = #{xxx}
+    	AND MOVIE_SCREEN = '상영종료'
+    </update>
+    
+    <!-- <insert id="updateExpectDate" parameterType="String">
+    	UPDATE EXPECT_REOPENING_MOVIE
+    	SET
+    	MOVIE_
+    </insert>
+    
+    <select id="getExpectReOpening" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+    	FROM MOVIE
+    	WHERE MOVIE_SCREEN = '재개봉예정'
+    	SELECT MOVIE_EXPECTOPEN, MOVIE_EXPECTCLOSE
+    	
+    	 -->
+    </select>
 </mapper>
     
