@@ -38,7 +38,7 @@
 </script>
 </head>
 <body>
-<div>전체 예매내역</div>
+<div>예매내역</div>
 <c:forEach var="b" items="${BookingList}">
 	<c:if test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 	<div>=================</div>

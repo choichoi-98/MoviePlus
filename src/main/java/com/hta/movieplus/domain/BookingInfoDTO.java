@@ -6,6 +6,7 @@ public class BookingInfoDTO {
 	
 	private int THEATER_SCHEDULE_ID; 
 	private int THEATER_ROOM_ID;
+	
 	private String MOVIE_CODE;
     private String MOVIE_TITLE;		
     private String MOVIE_DIRECTOR;	
@@ -16,7 +17,7 @@ public class BookingInfoDTO {
     private int MOVIE_STAR;			// 평점
 	
 	private int KPAY_AMOUNT; // 최종결제 금액
-	private int KPAY_SEAT_CNT; // 선택한 자리 갯수
+	private int KPAY_SEAT_CNT; // 선택한 자리 갯수 == 사람 수
 	private String KPAY_OCCUPIED_SEAT;
 	private String MEMBER_ID;
 	private String pg_token;
