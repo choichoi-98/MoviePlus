@@ -32,6 +32,5 @@
     	SELECT MOVIE_EXPECTOPEN, MOVIE_EXPECTCLOSE
     	
     	 -->
-    </select>
 </mapper>
     
