@@ -97,11 +97,13 @@
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
-												<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
-												<i class="icon ion-ios-log-out"></i>
+												<a href="#modal-status" data-noticenum="${endedmovie.movie_Code}" 
+													class="main__table-btn main__table-btn--banned open-modal">
+													<i class="icon ion-ios-create"></i>
 												</a>
+												
 												<a href="#modal-delete"
-													data-noticenum="${endmovie.movie_Code}"
+													data-noticenum="${endedmovie.movie_Code}"
 													class="main__table-btn main__table-btn--delete open-modal">
 													<i class="icon ion-ios-trash"></i>
 												</a>
@@ -140,11 +142,18 @@
 	</main>
 	<!-- end main content -->
 	<!-- modal status -->
-	<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
-		<div class="modal__btns"></div>
-	</div>
 	<!-- end modal status -->
+	<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
+		<h6 class="modal__title">재개봉 등록</h6>
 
+		<p class="modal__text">등록하시겠습니까?</p>
+
+		<div class="modal__btns">
+			<button class="modal__btn modal__btn--apply" type="button">등록</button>
+			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
+		</div>
+	</div>
+	
 	<!-- modal delete -->
 	<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
 		<h6 class="modal__title"></h6>
