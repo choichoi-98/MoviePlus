@@ -21,4 +21,6 @@ public interface MovieStoryService {
 
 	List<TheaterSchedule> getScheduleList(String memberId);
 
+	void deletePost(int post_num);
+
 }

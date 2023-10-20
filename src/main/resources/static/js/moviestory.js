@@ -15,10 +15,19 @@ $(document).ready(function(){
 		}	
 	})
 
+	$('.post-delete').click(function(){
+		if(confirm('정말 삭제하시겠습니까?')){
+			location.href="deletePost?post_num=" + $(this).attr('data-postnum');
+		}	
+	})
+
 	$('.delete-like-btn').click(function(){
 		if(confirm('정말 삭제하시겠습니까?')){
 			location.href="deleteDibs?movieCode=" + $(this).attr('data-movieCode');
 		}	
 	})
+
+
+	$('#first-tab').trigger("click");
 
 }) //ready end

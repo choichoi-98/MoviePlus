@@ -26,7 +26,7 @@
 
 		<div class="tab-block mb30">
 			<ul>
-				<li class=""><a href="#" class="btn" data-tab="tab-mp"
+				<li class=""><a id="first-tab" href="#" class="btn" data-tab="tab-mp"
 					title="무비포스트 탭으로 이동">무비포스트</a></li>
 				<li class=""><a href="#" class="btn" data-tab="tab-mc"
 					title="관람평 탭으로 이동">관람평</a></li>
@@ -45,15 +45,52 @@
 			<!-- movie-list-util -->
 			<div class="movie-list-util">
 				<p class="result-count  line32">
-					<strong>총 <b class="font-gblue" id="myMoviePostCnt">0</b>
+					<strong>총 <b class="font-gblue" id="myMoviePostCnt">${ms_postCnt}</b>
 						건
 					</strong>
 				</p>
 			</div>
 			<!--// movie-list-util -->
 
-			<div class="movie-post-list" id="moviePostList">
-				<div class="no-moviepost">등록된 무비포스트가 없습니다.</div>
+
+			<c:if test="${ms_postCnt == 0}">
+				<div class="movie-post-list" id="moviePostList">
+					<div class="no-moviepost">등록된 무비포스트가 없습니다.</div>
+				</div>
+			</c:if>
+			<div class="my-appraisal myOne myMovieStory" style="display: block;">
+				<ul id="myAppraisal">
+					<c:forEach var="ms_post" items="${ms_postList}">
+						<li style="min-height:0px;">
+							<p class="img posterImg" data-mno="01573800"
+								style="cursor: pointer">
+								<img src="${ms_post.moviepost_Still}"
+									alt="${ms_post.movie_Title}">
+							</p>
+							<div class="cont">
+								<p class="tit">
+									<a href="#" title="한줄평 상세보기">${ms_post.movie_Title}</a>
+								</p>
+
+								<p class="txt oneData">${ms_post.moviepost_Content}</p>
+								<div class="util">
+									<div class="left">
+										<button type="button" title="좋아요 수" class="like likeBtn">
+											<i class="iconset ico-like"></i> ${ms_post.moviepost_Like}
+										</button>
+										<p class="date">${ms_post.moviepost_Reg_date}</p>
+									</div>
+									<div class="right">
+										<span><button type="button"
+												class="btn del deleteBtn post-delete"
+												data-postnum="${ms_post.moviepost_Num}">삭제</button></span>
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</c:forEach>
+				</ul>
 			</div>
 		</div>
 		<!--// 나의 무비포스트 -->
@@ -83,11 +120,12 @@
 						<li>
 							<p class="img posterImg" data-mno="01573800"
 								style="cursor: pointer">
-								<img src="${ms_review.MOVIE_POSTER }" alt="${ms_review.movie_Title}">
+								<img src="${ms_review.MOVIE_POSTER }"
+									alt="${ms_review.movie_Title}">
 							</p>
 							<div class="cont">
 								<p class="tit">
-									<a href="#" title="한줄평 상세보기">${ms_revite.movie_Title}</a>
+									<a href="#" title="한줄평 상세보기">${ms_review.movie_Title}</a>
 								</p>
 								<div class="rate">
 									<p class="num review">${ms_review.movie_Review_star}</p>
@@ -143,8 +181,7 @@
 						<li>
 							<p class="img posterImg" data-mno="01671700"
 								style="cursor: pointer">
-								<img
-									src="${ms_schedule.MOVIE_POSTER}"
+								<img src="${ms_schedule.MOVIE_POSTER}"
 									alt="${ms_schedule.MOVIE_TITLE}">
 							</p>
 							<div class="cont">
@@ -155,13 +192,17 @@
 								<div class="theater">
 									<p>${ms_schedule.THEATER_NAME}</p>
 									<p>${ms_schedule.THEATER_ROOM_NAME }</p>
-									<p>${ms_schedule.THEATER_SCHEDULE_START} ~ ${ms_schedule.THEATER_SCHEDULE_END} </p>
+									<p>${ms_schedule.THEATER_SCHEDULE_START}~
+										${ms_schedule.THEATER_SCHEDULE_END}</p>
 								</div>
 							</div>
 							<div class="btn-group">
-								<a href="#" class="btn review moveOneBtn" title="관람평쓰기"
-									data-no="01671700" data-at="N"><i
-									class="iconset ico-pencil"></i> 관람평쓰기</a> <a href="#"
+								<a
+									href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${ms_schedule.MOVIE_CODE}"
+									class="btn review moveOneBtn" title="관람평쓰기"> <i
+									class="iconset ico-pencil"></i> 관람평쓰기
+								</a> <a
+									href="${pageContext.request.contextPath}/moviepost/write?movieCode=${ms_schedule.MOVIE_CODE}"
 									class="btn post movePostBtn" title="포스트쓰기" data-no="01671700"
 									data-postno="null"><i class="iconset ico-pencil"></i>포스트쓰기</a>
 								<button type="button" class="btn del deleteBtn"

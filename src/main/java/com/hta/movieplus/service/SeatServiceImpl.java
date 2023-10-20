@@ -6,13 +6,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.catalina.mapper.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.KakaoPayVO;
+import com.hta.movieplus.mybatis.mapper.SeatMapper;
+
 @Service
 public class SeatServiceImpl implements SeatService {
 
+	SeatMapper mapper;
+	
+	public SeatServiceImpl(SeatMapper mapper) {
+		// TODO Auto-generated constructor stub
+		this.mapper = mapper;
+	}
+	
 	private static final Logger logger = LoggerFactory.getLogger(SeatServiceImpl.class);
 
 	public static String[] alps = { "A", "B", "C", "D", "E", "D", "F", "G", "H", "J", "K", "L", "M" };
@@ -29,28 +40,14 @@ public class SeatServiceImpl implements SeatService {
 	}
 
 	@Override
-	public String makeSeatStr(String seatStr) {
+	public String makeSeatStr(String seatStr, int scheduleId) {
 		// TODO Auto-generated method stub
 		
 		int blockLength = 0;
 		int blockIndex = 1;
 
 		// 임시 예매된 좌석 리스트
-		List<String> bookedSeatListTemp = new ArrayList<String>();
-		bookedSeatListTemp.add("K13");
-		bookedSeatListTemp.add("B2");
-		bookedSeatListTemp.add("A7");
-		bookedSeatListTemp.add("C20");
-		bookedSeatListTemp.add("E11");
-		bookedSeatListTemp.add("G19");
-		bookedSeatListTemp.add("E10");
-		bookedSeatListTemp.add("A3");
-		bookedSeatListTemp.add("G10");
-		bookedSeatListTemp.add("H10");
-		bookedSeatListTemp.add("J9");
-		bookedSeatListTemp.add("J10");
-		bookedSeatListTemp.add("J11");
-		
+		List<String> bookedSeatListTemp = getBookedSeatList(scheduleId);
 
 		// 임시 예매된 좌석 리스트
 
@@ -272,6 +269,15 @@ public class SeatServiceImpl implements SeatService {
 
 			return firstPriority;
 		}
+	}
+
+	@Override
+	public List<String> getBookedSeatList(int scheduleId) {
+		// TODO Auto-generated method stub
+		List<KakaoPayVO> list = mapper.getBookedSeatList(scheduleId);
+		
+//		return list.stream().map(item -> item.getKPAY_OCCUPIED_SEAT()).collect(Collectors.toList());
+		return null;
 	}
 
 }
