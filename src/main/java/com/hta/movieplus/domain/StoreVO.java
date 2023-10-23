@@ -9,7 +9,7 @@ public class StoreVO {
 	private String ITEM_NAME;
 	private int ITEM_PRICE;
 	private String ITEM_FILE;
-	private int ITEM_DETAIL;
+	private String ITEM_DETAIL;
 	private MultipartFile uploaditemfile;
 	
 	public String getITEM_MENU() {
@@ -42,10 +42,10 @@ public class StoreVO {
 	public void setITEM_PRICE(int iTEM_PRICE) {
 		ITEM_PRICE = iTEM_PRICE;
 	}
-	public int getITEM_DETAIL() {
+	public String getITEM_DETAIL() {
 		return ITEM_DETAIL;
 	}
-	public void setITEM_DETAIL(int iTEM_DETAIL) {
+	public void setITEM_DETAIL(String iTEM_DETAIL) {
 		ITEM_DETAIL = iTEM_DETAIL;
 	}
 	public MultipartFile getUploaditemfile() {

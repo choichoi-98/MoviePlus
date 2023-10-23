@@ -17,7 +17,7 @@ public interface StoreService {
 	
 	public void deleteItem(int ITEM_CODE);
 	
-	public void delCartItem(int ITEM_CODE);
+	public void delCartItem(CartVO cartVO);
 	
 	public int getItemListCount();
 	
