@@ -39,7 +39,7 @@ public interface StoreMapper {
 
 	public List<StoreVO> getCartList();
 
-	public void delCartItem(int ITEM_CODE);
+	public void delCartItem(CartVO cartVO);
 
 	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID);
 	

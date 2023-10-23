@@ -72,7 +72,7 @@ $(document).ready(function() {
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" class="form__textarea" placeholder="상품 설명"></textarea>
+										<textarea id="text" class="form__textarea" placeholder="상품 설명" name="ITEM_DETAIL"></textarea>
 									</div>
 									
 									<div class="col-12 col-sm-6 col-lg-3">
@@ -81,6 +81,7 @@ $(document).ready(function() {
 											<option value="snack">snack</option>
 											<option value="voucher">voucher</option>
 											<option value="point">point</option>
+											<option value="coupon">coupon</option>
 										</select> 
 									</div> 
 									

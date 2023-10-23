@@ -57,6 +57,7 @@ $(function() {
     	
     	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
         const itemCode = row.find('.delbtn').data('code');  // 해당 행의 ITEM_CODE 값을 추출
+        alert('itemCode:' + itemCode);
         
         $.ajax({
             url: 'cart',
@@ -66,14 +67,13 @@ $(function() {
             dataType: 'json',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(header, token);
-                xhr.setRequestHeader("Accept-Charset", "UTF-8");
             },
             success: function(data) {
-//                alert("삭제 성공, itemCode: " + itemCode);
+                alert("삭제 성공, itemCode: " + itemCode);
                 window.location.reload();
             },
             error: function(error) {
-//                alert("삭제 실패, itemCode: " + itemCode);
+                alert("삭제 실패, itemCode: " + itemCode);
                 window.location.reload();
             }
         });
@@ -180,7 +180,8 @@ $(function() {
 												</div>
 											</td>
 											<td>
-											<a href="http://localhost:9000/movieplus/store/cart?ITEM_CODE=${c.ITEM_CODE}" 
+											<!-- http://localhost:9000/movieplus/store/cart?ITEM_CODE -->
+											<a href="#" 
 											   class="a-link delbtn" name="brchList" title="삭제" 
 											   data-code="${c.ITEM_CODE}">삭제</a>
 											</td>

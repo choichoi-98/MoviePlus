@@ -59,13 +59,6 @@ public class StoreController {
 		return "store/additem";
 	}
 	
-//	@RequestMapping("/admin/additem")
-//	public ModelAndView additem(StoreVO storeVO, ModelAndView mv) {
-//		mv.setViewName("store/additem");
-//		mv.addObject("StoreVO", storeVO);
-//		return mv;
-//	}
-	
 	@RequestMapping("/admin/additempro")
 	public String additempro(StoreVO storeVO) {
 		storeService.insertItem(storeVO);
@@ -213,9 +206,18 @@ public class StoreController {
 	
 	@PostMapping("/cart")
 	@ResponseBody
-	public void cart2(
-		@RequestParam("itemCode") int ITEM_CODE) {
-		storeService.delCartItem(ITEM_CODE);
+	public ModelAndView cart2(
+		@RequestParam("itemCode") int ITEM_CODE,
+		@AuthenticationPrincipal Member currentUser,
+		CartVO cartVO,
+		ModelAndView mv) {
+		cartVO.setITEM_CODE(ITEM_CODE);
+		String MEMBER_ID = currentUser.getMEMBER_ID();
+		cartVO.setMEMBER_ID(MEMBER_ID);
+		storeService.delCartItem(cartVO);
+		
+		mv.setViewName("store/store_cart");
+		return mv;
 	}
 	
 	@PostMapping("/kakaopay")

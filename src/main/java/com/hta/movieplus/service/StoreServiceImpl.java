@@ -41,11 +41,6 @@ public class StoreServiceImpl implements StoreService {
 	public void deleteItem(int ITEM_CODE) {
 		dao.deleteItem(ITEM_CODE);
 	}
-	
-	@Override
-	public void delCartItem(int ITEM_CODE) {
-		dao.delCartItem(ITEM_CODE);
-	}
 
 	@Override
 	public int getItemListCount() {
@@ -121,6 +116,11 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<StoreCartDTO> getCartLists() {
 		return dao.getCartLists();
+	}
+
+	@Override
+	public void delCartItem(CartVO cartVO) {
+		dao.delCartItem(cartVO);
 	}
 
 }

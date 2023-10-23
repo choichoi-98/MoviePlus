@@ -48,11 +48,11 @@ $(function() {
                 xhr.setRequestHeader(header, token);
             },
             success: function(response) {
-//                alert("삭제 성공, itemCode: " + itemCode);
+				alert("삭제 성공, itemCode: " + itemCode);
                 window.location.reload();
             },
             error: function(error) {
-//                alert("삭제 하는중 오류, itemCode: " + itemCode);
+  				alert("삭제 하는중 오류, itemCode: " + itemCode);
                 window.location.reload();
             }
         });
@@ -161,7 +161,7 @@ $(function() {
 											   id="forcode" data-code="${i.ITEM_CODE}">
 												<i class="icon ion-ios-create"></i>
 											</a>
-											<a href="#" id="deleteicon" class="main__table-btn main__table-btn--delete open-modal" >
+											<a href="#" id="deleteicon" class="main__table-btn main__table-btn--delete" >
 												<i class="icon ion-ios-trash"></i>
 											</a>
 										</div>
