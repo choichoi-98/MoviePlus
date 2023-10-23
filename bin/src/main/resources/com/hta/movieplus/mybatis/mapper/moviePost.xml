@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.MoviePostMapper">
+	
+	<!-- 임시, 예매 기능 완료되면 수정 -->
+	<select id="getSeenMovieList" parameterType="String" resultType="movie">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_CODE IN (	SELECT MOVIE_CODE
+								FROM THEATER_SCHEDULE 
+								WHERE THEATER_SCHEDULE_ID IN ( SELECT THEATER_SCHEDULE_ID
+																FROM KAKAO_PAY
+																WHERE MEMBER_ID = #{memberId} ) )
+	</select>
+	
+	<select id="getMovieByCode" parameterType="String" resultType="movie">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_CODE = #{movieCode}
+	</select>
+	
+	<insert id="insert" parameterType="moviePostVO">
+		INSERT INTO MOVIEPOST
+		VALUES ( MOVIEPOST_SEQ.NEXTVAL, #{movie_Code}, #{member_Id}, #{moviepost_Still}, #{moviepost_Content}, to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	
+	<select id="getMoviePostList" parameterType="map" resultType="moviePostVO">
+		
+		SELECT ROWNUM, T.*, L.LIKE_COUNT AS moviepost_Like, C.COMMENT_COUNT AS comment_Cnt
+		FROM (
+		    SELECT *
+		    FROM MOVIEPOST MP
+		    JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		    WHERE M.MOVIE_TITLE LIKE '%' || #{keyword} || '%'
+		    <choose>
+				<when test='option == "date"'>
+			ORDER BY MP.MOVIEPOST_NUM desc
+				</when>
+				<when test='option == "like"'>
+			ORDER BY MP.MOVIEPOST_LIKE DESC
+				</when>	
+			</choose>
+		) T
+		LEFT JOIN (
+		    SELECT MOVIEPOST_NUM, COUNT(*) AS LIKE_COUNT
+		    FROM MOVIEPOST_LIKE
+		    GROUP BY MOVIEPOST_NUM
+		) L ON T.MOVIEPOST_NUM = L.MOVIEPOST_NUM
+		LEFT JOIN (
+		    SELECT MOVIEPOST_NUM, COUNT(*) AS COMMENT_COUNT
+		    FROM MOVIEPOST_COMMENT
+		    GROUP BY MOVIEPOST_NUM
+		) C ON T.MOVIEPOST_NUM = C.MOVIEPOST_NUM
+		WHERE ROWNUM &lt;= #{index}
+		
+	</select>
+	
+	<select id="getPostDetail" parameterType="int" resultType="moviePostVO">
+		SELECT *
+		FROM MOVIEPOST MP
+		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		JOIN MEMBER MEM ON MP.MEMBER_ID = MEM.MEMBER_ID 
+		LEFT JOIN 
+		( SELECT MOVIEPOST_NUM, COUNT(*) AS moviepost_Like
+		FROM MOVIEPOST_LIKE
+		GROUP BY MOVIEPOST_NUM 
+		) L ON MP.MOVIEPOST_NUM = L.MOVIEPOST_NUM
+		LEFT JOIN 
+		( SELECT MOVIEPOST_NUM, COUNT(*) AS comment_Cnt
+		FROM MOVIEPOST_COMMENT
+		GROUP BY MOVIEPOST_NUM 
+		) C ON MP.MOVIEPOST_NUM = C.MOVIEPOST_NUM
+		WHERE MP.MOVIEPOST_NUM = #{postNum}
+	</select>
+	
+	<select id="getMovieWithPostCnt" resultType="movie">
+		SELECT M.*, NVL(MP.CNT, 0) post_Count
+		FROM MOVIE M
+		LEFT JOIN ( SELECT MOVIE_CODE, COUNT(*) CNT
+		FROM MOVIEPOST
+		GROUP BY MOVIE_CODE) MP
+		ON M.MOVIE_CODE = MP.MOVIE_CODE
+		ORDER BY post_Count desc
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIEPOST
+	</select>
+	
+	<select id="getMyPostCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM MOVIEPOST
+		WHERE MEMBER_ID = #{MEMBER_ID}
+	</select>
+	
+	<select id="checkLike" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM MOVIEPOST_LIKE
+		WHERE MEMBER_ID = #{MEMBER_ID}
+		AND MOVIEPOST_NUM = #{POST_NUM}
+	</select>
+	
+	<insert id="addLikeByPostNum" parameterType="map">
+		INSERT INTO MOVIEPOST_LIKE
+		VALUES (MOVIEPOST_LIKE_SEQ.NEXTVAL, #{MEMBER_ID}, #{POST_NUM})
+	</insert>
+	
+	<delete id="deleteLikeByPostNum" parameterType="map">
+		DELETE
+		FROM MOVIEPOST_LIKE
+		WHERE MOVIEPOST_NUM = #{POST_NUM}
+		AND MEMBER_ID = #{MEMBER_ID}
+	</delete>
+	
+	<insert id="insertComment" parameterType="moviePostCommentVO">
+		INSERT INTO MOVIEPOST_COMMENT
+		VALUES (MOVIEPOST_COMMENT_SEQ.NEXTVAL, #{MEMBER_ID}, #{MOVIEPOST_NUM}, #{MOVIEPOST_COMMENT_CONTENT}, SYSDATE)
+	</insert>
+	
+	<select id="getCommemtListByPostNum" resultType="moviePostCommentVO" parameterType="int">
+		SELECT *
+		FROM MOVIEPOST_COMMENT MC
+		JOIN MEMBER M ON MC.MEMBER_ID = M.MEMBER_ID
+		WHERE MOVIEPOST_NUM = #{postNum}
+	</select> 
+	
+	
+	<delete id="deleteCommentById" parameterType="int">
+		DELETE
+		FROM MOVIEPOST_COMMENT
+		WHERE MOVIEPOST_COMMENT_NUM = #{comment_num}
+	</delete>
+	
+	<delete id='deletePostById' parameterType="int">
+		DELETE
+		FROM MOVIEPOST
+		WHERE MOVIEPOST_NUM = #{postNum}
+	</delete>
+	
+	<select id='getMoviePostListByMovieCode' parameterType="String" resultType="moviePostVO">
+		SELECT *
+		FROM MOVIEPOST MP
+		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		WHERE MP.MOVIE_CODE = #{movieCode}
+		
+	</select>
+	
+	
+</mapper>

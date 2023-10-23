@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.EventMapper">
+
+	<insert id="insert_event" parameterType="event">
+		INSERT INTO EVENT
+		VALUES((<include refid="insert_EVENT_NUM" />), #{EVENT_TYPE}, 
+		#{EVENT_SUBJECT}, #{EVENT_CONTENT}, SYSDATE, #{EVENT_FILE}, 
+		#{EVENT_STARTDATE}, #{EVENT_ENDDATE},#{EVENT_STATUS}, #{EVENT_RESULTDATE}, NULL)
+	</insert>	
+	
+		<sql id="insert_EVENT_NUM">
+			select nvl(max(EVENT_NUM),0)+1 from EVENT
+		</sql>
+	
+	<!-- 이벤트 전체 총 목록 -->
+	<select id="getAllEventList" resultType="event">	
+		SELECT * 
+		FROM EVENT
+	</select>
+	
+	<!-- 영화 이벤트 목록 -->
+	<select id="getMovieEventList" resultType="event">	
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = '영화'
+	</select>
+	
+	<!-- 영화 이벤트 목록 COUNT -->
+	<select id="getMovieEventListCount" resultType="int">	
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = '영화'
+		AND EVENT_STATUS = 'PROGRESS'
+	</select>
+	
+	<!-- 극장 이벤트 목록 -->
+	<select id="getTheaterEventList" resultType="event">	
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = '극장'
+	</select>
+	
+	<!-- 극장 이벤트 목록 COUNT-->
+	<select id="getTheaterEventListCount" resultType="int">	
+		SELECT COUNT(*)
+		FROM EVENT
+		WHERE EVENT_TYPE = '극장'
+		AND EVENT_STATUS = 'PROGRESS'
+	</select>
+	
+	<!-- 제휴/할인 이벤트 목록 -->
+	<select id="getPromotionEventList" resultType="event"> 	
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = '제휴/할인'
+	</select>
+	
+	<!-- 제휴/할인 이벤트 목록 Count -->
+	<select id="getPromotionEventListCount" resultType="int"> 	
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = '제휴/할인'
+		AND EVENT_STATUS = 'PROGRESS'
+	</select>
+	
+	<!-- 시사회 이벤트 목록 -->
+	<select id="getCurtaincallEventList" resultType="event">	
+		SELECT * 
+		FROM EVENT
+		WHERE EVENT_TYPE = '시사회/무대인사'
+	</select>
+	
+	<!-- 시사회 이벤트 목록 Count -->
+	<select id="getCurtaincallEventListCount" resultType="int">	
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = '시사회/무대인사'
+		AND EVENT_STATUS = 'PROGRESS'
+	</select>
+	
+	<!-- 이벤트 전체 개수 -->
+	<select id="getEventListCount" resultType="int">	
+		select count(*) 
+		from EVENT
+	</select>
+	
+	<!-- 관리자 - 이벤트 리스트 -->
+	<select id="getEventList" parameterType="java.util.Map" resultType="event">
+		SELECT *
+		FROM (
+			  SELECT ROWNUM AS RNUM, EVENT.*
+			  FROM (
+				    SELECT *
+				    FROM EVENT
+				    ORDER BY EVENT_STATUS DESC, EVENT_DATE DESC
+				  ) EVENT
+			)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}	
+	</select>
+	
+	
+	<!-- 관리자 - 이벤트 발표 리스트 rownum 역순 -->
+	<select id="getEventListdesc" parameterType="java.util.Map" resultType="event">
+		SELECT *
+		FROM (
+			  SELECT ROWNUM AS RNUM, EVENT.*
+			  FROM (
+				    SELECT *
+				    FROM EVENT
+				    ORDER BY EVENT_RESULTDATE
+				  ) EVENT
+			ORDER BY EVENT_RESULTDATE DESC, RNUM DESC	  
+			)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<!-- 이벤트 상세페이지 -->
+	<select id="getDetailEvent" parameterType="int" resultType="event">		
+		SELECT *
+		FROM EVENT
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</select>
+
+	<!-- 관리자 - 이벤트 삭제  -->
+	<delete id="deleteEvent" parameterType="int">
+		DELETE
+		FROM EVENT
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</delete>
+	
+	<!-- 관리자 - 이벤트 수정 -->
+	<update id="updateEvent" parameterType="event">
+		update EVENT
+		set EVENT_TYPE = #{EVENT_TYPE},
+			EVENT_SUBJECT = #{EVENT_SUBJECT}, 
+			EVENT_CONTENT = #{EVENT_CONTENT}, 
+			EVENT_FILE = #{EVENT_FILE}, 
+			EVENT_STARTDATE = #{EVENT_STARTDATE}, 
+			EVENT_ENDDATE = #{EVENT_ENDDATE}
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</update>
+
+	<!-- 관리자 - 이벤트 상태 수정 -->
+	<update id="changeStatus" parameterType="map">
+		update EVENT
+		<choose>	
+			<when test='EVENT_STATUS == "END"'>
+				set EVENT_STATUS = 'PROGRESS'
+			</when>
+			<when test='EVENT_STATUS == "PROGRESS"'>
+				set EVENT_STATUS = 'END'
+			</when>
+		</choose>
+		WHERE EVENT_NUM = #{EVENT_NUM}	
+	</update>
+	
+
+	
+	
+</mapper>

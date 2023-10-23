@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.SchedulingMapper">
+	
+	<select id="getScheduleList" parameterType="map" resultType="theaterSchedule">
+		SELECT *
+		FROM THEATER_SCHEDULE TS
+		JOIN MOVIE M
+		ON TS.MOVIE_CODE = M.MOVIE_CODE
+		JOIN THEATER_ROOM TR 
+		ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		WHERE TS.THEATER_ROOM_ID IN ( SELECT THEATER_ROOM_ID
+									FROM THEATER_ROOM
+									WHERE THEATER_ID = #{theaterId} )
+		AND TS.THEATER_SCHEDULE_DATE = #{todayDate}
+		ORDER BY TS.THEATER_SCHEDULE_START
+	</select>
+	
+	<select id="getScheduleListByTheaterRoomId" parameterType="theaterSchedule" resultType="theaterSchedule">
+		SELECT *
+		FROM THEATER_SCHEDULE
+		WHERE THEATER_ROOM_ID = #{THEATER_ROOM_ID}
+		AND THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		ORDER BY THEATER_SCHEDULE_START 
+	</select>
+	
+	<select id="getOpenMovieList" resultType="movie">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+	</select>
+	
+	<insert id="addSchedule" parameterType="theaterSchedule">
+		INSERT INTO THEATER_SCHEDULE
+		VALUES (THEATER_SCHEDULE_SEQ.NEXTVAL, #{THEATER_ID}, #{THEATER_ROOM_ID}, #{THEATER_SCHEDULE_START},
+				#{THEATER_SCHEDULE_END}, #{THEATER_SCHEDULE_DATE}, #{MOVIE_CODE}, #{THEATER_SCHEDULE_TYPE}, #{THEATER_SCHEDULE_STATUS} )
+	</insert>
+	
+	<select id="getMovieByID" resultType="movie" parameterType="String">
+		SELECT * 
+		FROM MOVIE
+		WHERE MOVIE_CODE = #{MOVIE_CODE}
+	</select>
+	
+	<delete id="deleteScheduleById" parameterType="int">
+		DELETE
+		FROM THEATER_SCHEDULE
+		WHERE THEATER_SCHEDULE_ID = #{theaterId}
+	</delete>
+	
+	<select id="getScheduleById" resultType="theaterSchedule" parameterType="int">
+		SELECT TS.*, TR.THEATER_ROOM_NAME, M.MOVIE_TITLE, T.THEATER_NAME
+		FROM THEATER_SCHEDULE TS
+		JOIN THEATER_ROOM TR
+		ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		JOIN MOVIE M
+		ON TS.MOVIE_CODE = M.MOVIE_CODE
+		JOIN THEATER T
+		ON TS.THEATER_ID = T.THEATER_ID
+		WHERE TS.THEATER_SCHEDULE_ID = #{theaterId}
+	</select>
+	
+	<update id ="updateSchedule" parameterType="theaterSchedule">
+		UPDATE THEATER_SCHEDULE
+		SET MOVIE_CODE = #{MOVIE_CODE}, THEATER_SCHEDULE_TYPE = #{THEATER_SCHEDULE_TYPE}, THEATER_SCHEDULE_START = #{THEATER_SCHEDULE_START}
+		WHERE THEATER_SCHEDULE_ID = #{THEATER_SCHEDULE_ID}
+	</update>
+	
+	<select id="getMovieScheduleWithMovie" resultType="theaterSchedule" parameterType="map">
+		SELECT *
+		FROM THEATER_SCHEDULE TS
+		JOIN THEATER T
+		ON TS.THEATER_ID = T.THEATER_ID
+		JOIN THEATER_ROOM TR
+		ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		WHERE TS.MOVIE_CODE = #{movieCode}
+		AND TS.THEATER_SCHEDULE_DATE = #{date}
+		AND T.THEATER_LOCATION = #{location}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
+	</select>
+	
+	<select id="getTheaterWithMovie" resultType="theater" parameterType="map">
+		SELECT *
+		FROM THEATER
+		WHERE THEATER_ID IN ( SELECT ID
+								FROM
+								 ( SELECT TS.THEATER_ID ID, COUNT(*) AS SCHEDULE_COUNT
+								FROM THEATER_SCHEDULE TS
+								JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+								WHERE T.THEATER_LOCATION = #{location}
+								  AND TS.MOVIE_CODE = #{movieCode}
+								  AND TS.THEATER_SCHEDULE_DATE = #{date}
+								  AND TS.THEATER_SCHEDULE_STATUS = '상영'
+								GROUP BY TS.THEATER_ID ) 
+								 )
+		ORDER BY THEATER_CREATED_DATE
+	</select>
+
+
+	<select id="getTheaterRoomWithMovie" resultType="theaterRoom" parameterType="map">
+		SELECT *
+		FROM THEATER_ROOM
+		WHERE THEATER_ROOM_ID IN (SELECT ID
+					  FROM (SELECT TR.THEATER_ROOM_ID AS ID, COUNT(*)
+							FROM THEATER_SCHEDULE TS
+							JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+							JOIN THEATER_ROOM TR ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+							WHERE T.THEATER_LOCATION = #{location}
+							AND TS.MOVIE_CODE = #{movieCode}
+							AND TS.THEATER_SCHEDULE_DATE = #{date}
+							AND TS.THEATER_SCHEDULE_STATUS = '상영'
+							GROUP BY TR.THEATER_ROOM_ID
+							)
+						)
+		ORDER BY THEATER_ROOM_ID
+
+	</select>
+	
+	<select id="getMovieWithTheater" resultType="movie" parameterType="map">
+		SELECT *
+		FROM MOVIE
+		WHERE MOVIE_CODE IN ( SELECT ID
+					FROM ( SELECT MOVIE_CODE ID, COUNT(*)
+						FROM THEATER_SCHEDULE
+						WHERE THEATER_ID = #{theaterId}
+						AND THEATER_SCHEDULE_DATE = #{date}
+						AND THEATER_SCHEDULE_STATUS = '상영'
+						GROUP BY MOVIE_CODE )
+					)		
+	</select>
+	
+	<select id="getTheaterRoomWithTheater" resultType="theaterRoom" parameterType="map">
+		SELECT *
+		FROM THEATER_ROOM
+		WHERE THEATER_ROOM_ID IN ( SELECT ID
+					   FROM ( SELECT THEATER_ROOM_ID ID, COUNT(*)
+						FROM THEATER_SCHEDULE
+						WHERE THEATER_ID = #{theaterId}
+						AND THEATER_SCHEDULE_DATE = #{date}
+						AND THEATER_SCHEDULE_STATUS = '상영'
+						GROUP BY THEATER_ROOM_ID )
+					)
+		ORDER BY THEATER_ROOM_ID
+		
+		
+	</select>
+	
+	
+	<!-- 예매된 좌석 추가  -->
+	<select id="getScheduleWithTheater" resultType="theaterSchedule" parameterType="map">
+		SELECT *
+		FROM THEATER_SCHEDULE TS
+		JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+		JOIN THEATER_ROOM TR ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		JOIN MOVIE M ON TS.MOVIE_CODE = M.MOVIE_CODE
+		WHERE TS.THEATER_SCHEDULE_DATE = #{date}
+		AND TS.THEATER_ID = #{theaterId}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
+		ORDER BY TS.THEATER_SCHEDULE_END
+		
+	</select>
+		
+	<!-- STATUS 추가 -->
+	<select id="getOpenMovieListWithScheduleCnt" resultType="movie" parameterType="String">
+		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_DIRECTOR, M.MOVIE_POSTER, M.MOVIE_ACTORS, M.MOVIE_GENRE, M.MOVIE_RUNTIME,
+		M.MOVIE_OPENDATE, M.MOVIE_GRADE, M.MOVIE_PLOT, M.MOVIE_STAR, M.MOVIE_RELEASE, M.MOVIE_SCREEN, M.MOVIE_STILL, NVL(CNT_TABLE.CNT, 0) MOVIE_SCHEDULE_CNT
+		FROM MOVIE M
+		LEFT JOIN (SELECT *
+			FROM ( SELECT MOVIE_CODE, COUNT(*) AS CNT	
+					FROM THEATER_SCHEDULE
+					WHERE THEATER_SCHEDULE_DATE = #{date}
+					AND THEATER_SCHEDULE_STATUS = '상영'
+					GROUP BY MOVIE_CODE )) CNT_TABLE
+		ON M.MOVIE_CODE = CNT_TABLE.MOVIE_CODE
+		WHERE M.MOVIE_SCREEN = '상영중'
+	</select>
+	
+	<!-- STATUS 추가 -->
+	<select id="getTheaterRoomWithScheduleCnt" resultType="theaterRoom" parameterType="map">
+		SELECT *
+		FROM THEATER_ROOM TR
+		JOIN ( 
+			SELECT THEATER_ROOM_ID, COUNT(*)
+			FROM THEATER_SCHEDULE
+			WHERE THEATER_SCHEDULE_DATE = #{date}
+			AND MOVIE_CODE = #{movieCode}
+			AND THEATER_SCHEDULE_STATUS = '상영'			
+			GROUP BY THEATER_ROOM_ID        
+		      ) CNT
+		ON TR.THEATER_ROOM_ID = CNT.THEATER_ROOM_ID 
+	</select>	
+
+	<!-- 예매된 좌석 추가 -->
+	<select id="getScheduleListByDateAndMovieCodeAndTheaterId" resultType="theaterSchedule" parameterType="map">
+		SELECT *
+		FROM THEATER_SCHEDULE TS
+		JOIN THEATER T ON TS.THEATER_ID = T.THEATER_ID
+		JOIN THEATER_ROOM TR ON TS.THEATER_ROOM_ID = TR.THEATER_ROOM_ID
+		JOIN MOVIE M ON TS.MOVIE_CODE = M.MOVIE_CODE
+		WHERE TS.MOVIE_CODE = #{movieCode}
+		AND TS.THEATER_SCHEDULE_DATE = #{date}
+		AND TS.THEATER_ID = #{theaterId}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
+		ORDER BY TS.THEATER_SCHEDULE_START
+		
+	</select>
+	
+	<select id="getMovieDetailByCode" parameterType="String" resultType="movie">
+		SELECT * FROM MOVIE
+		WHERE movie_code = #{movie_Code}
+	</select>
+	
+	<select id="getMovieDibsList" parameterType="String" resultType="movieDibsVo">
+		SELECT *
+		FROM MOVIE_DIBS MD
+		JOIN MEMBER M ON MD.MEMBER_ID = M.MEMBER_ID
+		WHERE M.MEMBER_ID = #{name}
+	</select>
+	
+	<update id="changeScheduleStatus" parameterType="map">
+		UPDATE THEATER_SCHEDULE
+		SET THEATER_SCHEDULE_STATUS = '종료'
+		WHERE THEATER_SCHEDULE_DATE = #{date}
+		AND THEATER_SCHEDULE_START &lt;= #{time}
+		AND THEATER_SCHEDULE_STATUS = '상영'
+	</update>
+	
+</mapper>

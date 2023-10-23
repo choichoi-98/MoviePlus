@@ -26,8 +26,14 @@
 				selected_delete_notice_num = $(this).attr('data-noticenum');
 			})
 
+			/* $('#delete-model-ok').click(function() {
+				location.href = '/movieplus/admin/updatereopencancel?reopencancel' + selected_delete_notice_num;
+			}) */
+			
 			$('#delete-modal-ok').click(function() {
 				location.href = '/movieplus/admin/cancelreopen?cancelcode=' + selected_delete_notice_num;
+				
+				
 			})
 		})
 		

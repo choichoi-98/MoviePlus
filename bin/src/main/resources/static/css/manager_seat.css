@@ -1,0 +1,42 @@
+#seat-table button {
+	margin-left: 2px;
+}
+
+#seat-table>tbody>tr>td:nth-child(2)>button {
+	margin-left: 30px;
+}
+
+.seat {
+	display: inline-block;
+	border: 1px solid #999;
+	color: #999;
+	width: 32px;
+	height: 32px;
+}
+
+
+.seat-column-btn {
+	display: inline-block;
+	border: 1px solid #999;
+	width: 32px;
+	height: 32px;
+	pointer-events: none;
+	color: white;
+	background-color: gray;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+.selected {
+	background: orange;
+}
+
+.deleted {
+	visibility: hidden;
+}
+
+.seat-xy {
+	width: 50px;
+}

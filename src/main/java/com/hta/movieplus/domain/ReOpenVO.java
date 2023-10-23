@@ -5,7 +5,7 @@ public class ReOpenVO {
    private String MOVIE_CODE;  //영화코드
    private String REOPENING_STARTDATE; // 시작일
    private String REOPENING_ENDDATE; //종료일
-   private String MOVIE_TITLE; 
+   private String MOVIE_TITLE; //영화제목
    
    public String getMOVIE_EXPECT_NUM() {
 	return MOVIE_EXPECT_NUM;

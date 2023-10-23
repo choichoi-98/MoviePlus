@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- CustomerMapper 의 interface를 구현하는 부분이 여기가 맞는가? . mapper.뒤에 들어갈 부분은 파일명인 CustomerMapper 가 맞는가? -->
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.CustomerMapper"> 
+
+<!-- id값은 insertCustomerOneOnOneVO  (mapper 의 메서드)   parameterType은  CustomerOneOnOneVO (메서드의 파라미터의 타입)  파라미터 맨앞 소문자 -->
+	<insert id="insertCustomerOneOnOneVO" parameterType="customerOneOnOneVO">
+		INSERT INTO CUSTOMER_ONEONONE
+		VALUES((<include refid = "insertCustomerNum" />), #{CUSTOMER_SELECT_WHERE}, #{CUSTOMER_SELECT_REGION}, #{CUSTOMER_SELECT_CENEMA}, #{CUSTOMER_TYPE}, #{CUSTOMER_NAME}, #{CUSTOMER_EMAIL},
+		#{CUSTOMER_PHONNUM}, #{CUSTOMER_TITLE}, #{CUSTOMER_CONTENT}, #{CUSTOMER_PASSWARD}, #{CUSTOMER_ANSWERSITUATION}, SYSDATE) <!-- ?? 테이블의 개수와 순번이 매칭되는것인가? -->
+	</insert>
+	
+	<sql id="insertCustomerNum">
+		select nvl(max(CUSTOMER_NUM),0)+1 from CUSTOMER_ONEONONE   <!-- 해당부분에서 select를 사용하면 insert가 아니라서 데이터를 검색하는것인데.. 그럼 db에 값이 들어가나 -->
+	</sql>
+	
+	
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.ReOpenMapper">
+
+    <select id="getEndedMovieList" resultType="movie">
+      SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+      FROM MOVIE
+      WHERE MOVIE_SCREEN = '상영종료'
+    </select>
+    
+    <!-- INCREASE_MOVIE_EXPECT_NUM 시퀸스 사용 -->
+    <insert id="insertReOpenExpectMovieImformation" parameterType="String">
+      INSERT INTO EXPECT_REOPENING_MOVIE
+	  VALUES(INCREASE_MOVIE_EXPECT_NUM.NEXTVAL,
+	  #{movieCode}, sysdate, sysdate + 30)
+    </insert>
+    
+	<!-- 상영상태를 string 형태인 '재개봉예정'으로 변경-->
+    <update id="updateExpectReOpening" parameterType="String">
+       UPDATE MOVIE
+       SET
+       MOVIE_SCREEN = '재개봉예정'
+       where MOVIE_CODE = #{code}
+       AND MOVIE_SCREEN = '상영종료'
+    </update>
+    
+   <select id="getExpectMovieList" resultType="reOpenVO">
+   		SELECT *
+		FROM MOVIE A, EXPECT_REOPENING_MOVIE B
+		WHERE A.MOVIE_CODE = B.MOVIE_CODE
+   </select>
+   
+   <delete id="cancelReOpen" parameterType="String">
+   		DELETE FROM
+   		EXPECT_REOPENING_MOVIE
+   		WHERE MOVIE_CODE = #{DELETECODE}
+   </delete>
+    
+   
+    
+    
+    
+<!--     <insert id="updateSysdate" parameterType="String">
+       INSERT INTO EXPECT_REOPENING_MOVIE(MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE)
+      SELECT MOVIE_CODE, #{REOPENINGDATE}, #{REOPENINGENDDATE}
+      FROM MOVIE
+    </insert>
+    
+    <select id="getExpectReOpen" resultType="movie">
+       SELECT MOVIE_SCREEN
+       FROM MOVIE
+       WHERE MOVIE_SCREEN = "재개봉예정"
+    </select>
+    
+    <select id="getSysdate" resultType="ReopenVO">
+       SELECT MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE
+       FROM EXPECT_REOPENING_MOVIE
+    </select> -->
+   
+</mapper>
+    

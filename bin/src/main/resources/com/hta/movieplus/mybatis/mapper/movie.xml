@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.MovieMapper">
+
+	<!-- movie db 첫번째 ajax -->
+	<insert id="insert" parameterType="movie">
+		INSERT INTO MOVIE
+		(movie_Code, movie_Title, movie_Director, 
+		  movie_Genre, movie_OpenDate, movie_Release)
+		VALUES (#{movie_Code}, #{movie_Title}, #{movie_Director}
+		      ,#{movie_Genre}, #{movie_OpenDate} , #{movie_Release} )
+	</insert>
+	
+	<select id="select" resultType="movie">
+		SELECT * FROM MOVIE
+		WHERE movie_code = #{movie_Code}
+	</select>
+	
+	<select id="selectMovieCode" resultType="java.lang.String">
+		SELECT movie_code FROM MOVIE
+	</select>
+	
+	<!-- movie db 두번째 ajax update -->
+	<update id="updateActors">
+		UPDATE MOVIE
+		SET MOVIE_ACTORS = #{actors}
+		, MOVIE_RUNTIME = #{showTm}
+		, MOVIE_GRADE = #{watchGradeNm}
+		WHERE
+		movie_code = #{movieCd}
+	</update>
+	
+	<!-- movie db 세번째 ajax update -->
+	<update id="updatePoster">
+		UPDATE MOVIE
+		SET MOVIE_POSTER = #{posterUrl},
+		MOVIE_STILL = #{stillUrl},
+		MOVIE_PLOT = #{plotText}
+		WHERE
+		MOVIE_CODE = #{codeNo}
+	</update>
+
+	<select id="selectMovieTitle" resultType="movie">
+		SELECT movie_Code, movie_Title, movie_Director
+		FROM MOVIE
+	</select>
+	
+	
+	<select id="getMovieListAll" resultType="movie">
+		SELECT *
+		FROM MOVIE
+	</select>
+	
+	<select id="getListcount" resultType="int">
+		select count(*) from movie
+	</select>
+	
+	<select id="getMovieList" resultType="movie">
+		SELECT *
+		FROM (
+		    SELECT ROWNUM AS row_num, MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN
+		    FROM (
+		        SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_DIRECTOR, MOVIE_SCREEN, ROWNUM AS rnum
+		        FROM MOVIE
+		    )
+		    WHERE rnum &lt;= #{end}
+		)
+		WHERE row_num &gt;= #{start}
+
+
+    </select>
+    
+    <!-- 메인 로그인한 경우  -->
+    <select id="getPlayingMovieLoginMain" resultType="movie">
+		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+		       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+		       MD.MEMBER_ID,
+		       CASE
+		         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
+		         ELSE NULL
+		       END AS INTEREST_STATUS
+		FROM MOVIE M
+		LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		AND MD.MEMBER_ID = #{memberId}
+		WHERE M.MOVIE_SCREEN = '상영중'
+    </select>
+	
+	<!-- 메인 로그인 x 경우 -->
+	<select id="getPlayingMovieMain" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, 
+    		   MOVIE_STILL, MOVIE_PLOT, MOVIE_OPENDATE, MOVIE_GRADE
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+		
+    </select>
+
+    
+    <!--영화 목록-로그인한 경우 검색 0-->
+    <select id="getPlayingMovieLogin" resultType="movie">
+		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+		       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+		       MD.MEMBER_ID,
+		       CASE
+		         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
+		         ELSE NULL
+		       END AS INTEREST_STATUS
+		FROM MOVIE M
+		LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		AND MD.MEMBER_ID = #{memberId}
+		WHERE M.MOVIE_SCREEN = '상영중'
+		<include refid="search_"/>
+    </select>
+    
+    <!-- 영화 목록-로그인x 검색 -->
+     <select id="getPlayingMovieList" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, 
+    		   MOVIE_STILL, MOVIE_PLOT, MOVIE_OPENDATE, MOVIE_GRADE
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+		<include refid="search_"/>
+    </select>
+    
+    <sql id="search_">
+    	<if test='search_word != null and search_word != ""'>
+    		and
+    		MOVIE_TITLE like #{search_word}
+    	</if>
+    </sql>
+    
+    <!-- 관리자 - 상영 중 영화 목록 -->
+    <select id="getPlayingMovieListAdmin" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN, MOVIE_POSTER, 
+    		   MOVIE_STILL, MOVIE_PLOT, MOVIE_OPENDATE, MOVIE_GRADE
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영중'
+    </select>
+
+	<!-- 관리자 - 상영 종료 영화 목록 -->
+    <select id="getEndedMovieList" resultType="movie">
+    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영종료'
+    </select>
+
+	<!-- 관리자 - 상영 중으로 update -->
+	<update id="moviePlayUpdate" parameterType="java.lang.String">
+		UPDATE MOVIE
+		SET MOVIE_SCREEN = '상영중'
+		WHERE MOVIE_CODE = #{movieCode}
+	</update>
+
+	<!-- 관리자 - 상영 종료로 update -->
+	<update id="movieEndedUpdate" parameterType="java.lang.String">
+		UPDATE MOVIE
+		SET MOVIE_SCREEN = '상영종료'
+		WHERE MOVIE_CODE = #{movieCode}
+	</update>
+	
+	<!-- 유저 - 보고싶어요 영화 추가 -->
+	<insert id="addMovieDibs" parameterType="java.lang.String">
+	INSERT INTO MOVIE_DIBS
+	VALUES(movie_dibs_seq.nextval, #{memberId}, #{movieCode})
+	</insert>
+
+	<!-- 유저 - 보고싶어요 영화 삭제  -->
+	<delete id="deleteMovieDibs">
+	DELETE MOVIE_DIBS
+	WHERE MEMBER_ID = #{memberId}
+	AND MOVIE_DIBS_OBJECT = #{movieCode}
+	</delete>
+	
+	<!-- 로그인 x 영화 상세 정보 -->
+	<select id="getMovieDetail" parameterType="java.lang.String" resultType="movie">
+		SELECT M.MOVIE_TITLE, M.MOVIE_POSTER, M.MOVIE_GRADE, M.MOVIE_PLOT,
+ 				M.MOVIE_DIRECTOR, M.MOVIE_GENRE, M.MOVIE_RUNTIME,
+ 				M.MOVIE_OPENDATE, M.MOVIE_ACTORS, M.MOVIE_CODE,
+ 				(SELECT COUNT(*) FROM MOVIE_REVIEW MR WHERE MR.MOVIE_CODE = M.MOVIE_CODE) AS REVIEW_COUNT
+		FROM MOVIE M
+		WHERE MOVIE_CODE = #{movieCode} 
+	</select>
+	
+	<!-- 로그인 한 경우 영화 상세 정보 -->
+	<select id="getMovieDetailLogin" resultType="movie">
+		SELECT  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
+		       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
+		       M.MOVIE_DIRECTOR, M.MOVIE_ACTORS, M.MOVIE_GENRE, M.MOVIE_RUNTIME,
+		       MD.MEMBER_ID,
+		       CASE
+		         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
+		         ELSE NULL
+		       END AS INTEREST_STATUS,
+		       (SELECT COUNT(*)
+		        FROM MOVIE_REVIEW MR
+		        WHERE MR.MOVIE_CODE = M.MOVIE_CODE
+		       ) AS REVIEW_COUNT
+		FROM MOVIE M
+		LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
+		AND MD.MEMBER_ID = #{memberId}
+		WHERE M.MOVIE_CODE = #{movieCode}
+	</select>
+	
+	<!-- 관람평(댓글) select -->
+	<select id="getMovieReview" resultType="MovieReviewVO">
+		SELECT R.MOVIE_REVIEW_NUM, R.MEMBER_ID, M.MEMBER_PROFILE, R.MOVIE_REVIEW_STAR,
+		       R.MOVIE_REVIEW_CONTENT, R.MOVIE_CODE, R.MOVIE_REVIEW_REG_DATE,
+		       (SELECT COUNT(*) 
+		       	FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) 
+		       						AS MOVIE_REVIEW_LIKE_CNT,
+       		   (SELECT MOVIE_TITLE 
+       		    FROM MOVIE WHERE MOVIE_CODE = #{movieCode}) 
+       		   						AS MOVIE_TITLE   	
+		FROM MOVIE_REVIEW R
+		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+		WHERE R.MOVIE_CODE = #{movieCode}
+		ORDER BY MOVIE_REVIEW_LIKE_CNT DESC
+	</select>
+	
+	<!-- 관람평(댓글) 추가 -->
+	<insert id="addMovieReview">
+	INSERT INTO MOVIE_REVIEW
+		(MOVIE_REVIEW_NUM, MEMBER_ID, MOVIE_REVIEW_STAR, 
+		MOVIE_REVIEW_CONTENT, MOVIE_CODE, MOVIE_REVIEW_REG_DATE)
+	VALUES(movie_review_seq.nextval, #{memberId} , #{star} , 
+		#{reviewText}, #{movieCode}, sysdate)
+	</insert>
+	
+	<!-- 관람평(댓글) 수정 -->
+	<update id="updateMovieReview">
+	UPDATE MOVIE_REVIEW
+	SET MOVIE_REVIEW_CONTENT = #{reviewText},
+		MOVIE_REVIEW_STAR = #{star}
+	WHERE MOVIE_REVIEW_NUM = #{review_num}
+	</update>
+	
+	<!-- 관람평(댓글) 삭제 -->
+	<delete id="deleteMovieReview">
+	DELETE FROM MOVIE_REVIEW
+	WHERE MOVIE_REVIEW_NUM = #{review_num}
+	</delete>
+	
+	<!-- 관람평(댓글) 좋아요 추가 -->
+	<insert id="addMoviewReviewLike">	
+	INSERT INTO MOVIE_REVIEW_LIKE
+	VALUES(movie_review_like_seq.nextval,#{memberId},#{review_num})
+	</insert>
+	
+	<!-- 관람평(댓글) 좋아요 삭제 -->
+	<!-- 
+	DELETE FROM MOVIE_REVIEW_LIKE
+	WHERE MOVIE_REVIEW_LIKE_NUM = #{MOVIE_REVIEW_LIKE}
+	-->
+	
+	<!-- 관리자 - 관람평 관리 list -->
+	<select id="adminMovieReviewList" parameterType="java.util.Map"
+			resultType="MovieReviewVO">
+	select * from
+            (select rownum rnum, r.*	
+	    from
+		(
+		SELECT R.MOVIE_REVIEW_NUM, R.MEMBER_ID, M.MEMBER_PROFILE, R.MOVIE_REVIEW_STAR,
+		       R.MOVIE_REVIEW_CONTENT, R.MOVIE_CODE, R.MOVIE_REVIEW_REG_DATE, MOVIE.MOVIE_TITLE,
+		       M.MEMBER_NAME, 
+		       (SELECT COUNT(*) 
+		       	FROM MOVIE_REVIEW_LIKE L WHERE L.MOVIE_REVIEW_LIKE_OBJECT = R.MOVIE_REVIEW_NUM) 
+		       						AS MOVIE_REVIEW_LIKE_CNT,
+		       	 COUNT(*) OVER () AS review_cnt	
+		FROM MOVIE_REVIEW R
+		LEFT JOIN MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+		INNER JOIN MOVIE ON R.MOVIE_CODE = MOVIE.MOVIE_CODE) r
+		where rownum &lt; = #{end}
+	  )
+      where rnum &gt; = #{start} and rnum &lt; = #{end}
+
+	</select>
+	
+	<!-- 관리자 - 관람평 count -->
+	<select id="adminMovieReviewListCnt" resultType="int">
+		SELECT COUNT(*) 
+		FROM MOVIE_REVIEW
+	</select>
+	
+	<!-- 관리자 - 관람평 삭제 -->
+	<delete id="adminDeleteMovieReview">
+		delete from movie_review
+		where MOVIE_REVIEW_NUM = #{review_num}
+	</delete>
+	
+</mapper>
