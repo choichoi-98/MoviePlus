@@ -155,6 +155,18 @@ $(document).ready(function(){
 		getMovieScheduleWithMovie();
 	})
 
+	$('body').on('click', '.time-table-book', function(e){
+		e.preventDefault();
+        if($('#header-pinfo-memberId').val() == null){
+			$('#login-alert-modal').css('display', 'block');
+			$('.bg-modal').css('opacity', '1');
+			$('body').addClass('no-scroll');
+
+			return;
+		}
+		
+		location.href="/movieplus/booking/seat?scheduleId="+ $(this).attr('data-scheduleId');
+	})
 
 	function getMovieScheduleWithMovie(){
         $.ajax({
@@ -240,7 +252,7 @@ $(document).ready(function(){
 					var schedule_output = '<td class="">';
 					schedule_output += '<div class="td-ab">';
 					schedule_output += '<div class="txt-center">';
-					schedule_output += '<a href="/movieplus/booking/seat?scheduleId='+schedule.theater_SCHEDULE_ID+'" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
+					schedule_output += '<a href="#" data-scheduleId='+schedule.theater_SCHEDULE_ID+' class="time-table-book" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
 					schedule_output += '<p class="time">'+schedule.theater_SCHEDULE_START+'</p><p class="chair">'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p>';
 					schedule_output += '<div class="play-time"><p>'+schedule.theater_SCHEDULE_START+'~'+schedule.theater_SCHEDULE_END+'</p><p>'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p></div>';
 					schedule_output += '</a></div></div></td>';
@@ -308,7 +320,7 @@ $(document).ready(function(){
 					
 					var movie_output = '<div class="theater-list timeTable-theater-list" data-theater-index="'+movie.movie_Code+'">';
 					movie_output += '<div class="theater-tit"><p class="movie-grade age-'+movie_grade+'"></p>';
-					movie_output += '<p><a href="/movieplus/movie/movieDetail?movieCode='+movie.movie_Code+'" title="'+movie.movie_Title+' 상세보기">'+movie.movie_Title+'</a></p>';
+					movie_output += '<p><a href="/movieplus/movie/movieDetail?movieCode='+movie.movie_Code+'" class="time-table-book" title="'+movie.movie_Title+' 상세보기">'+movie.movie_Title+'</a></p>';
 					movie_output += '<p class="infomation"><span>'+movie.movie_Screen+'</span>/상영시간 '+movie.movie_Runtime+'분</p></div></div>';
 					
 					$('#theater-list-box').append(movie_output);
@@ -369,7 +381,7 @@ $(document).ready(function(){
 					var schedule_output = '<td class="">';
 					schedule_output += '<div class="td-ab">';
 					schedule_output += '<div class="txt-center">';
-					schedule_output += '<a href="/movieplus/booking/seat?scheduleId='+schedule.theater_SCHEDULE_ID+'" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
+					schedule_output += '<a href="#" data-scheduleId='+schedule.theater_SCHEDULE_ID+' class="time-table-book" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
 					schedule_output += '<p class="time">'+schedule.theater_SCHEDULE_START+'</p><p class="chair">'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p>';
 					schedule_output += '<div class="play-time"><p>'+schedule.theater_SCHEDULE_START+'~'+schedule.theater_SCHEDULE_END+'</p><p>'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p></div>';
 					schedule_output += '</a></div></div></td>';

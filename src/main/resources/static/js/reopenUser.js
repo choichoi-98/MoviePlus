@@ -5,6 +5,13 @@ $(document).ready(function(){
 
 
 	$('#reopen-admit-btn').click(function() {
+		if($('#header-pinfo-memberId').val() == null){
+			$('#login-alert-modal').css('display', 'block');
+			$('.bg-modal').css('opacity', '1');
+			$('body').addClass('no-scroll');
+			
+			return;
+		}
 		admitReopen($(this).attr('data-movieCode'));
 	})
 

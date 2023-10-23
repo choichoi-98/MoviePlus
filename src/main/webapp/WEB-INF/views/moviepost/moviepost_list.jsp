@@ -18,15 +18,15 @@
 
 <style>
 #modal-delete-btn {
-	background: #792828;  
-	padding: 4px 12px;  
-  	font-size: 12px;
+	background: #792828;
+	padding: 4px 12px;
+	font-size: 12px;
 	text-decoration: none;
 	color: white;
-	border: 1px solid rgba(0,0,0,0.21);
-	border-bottom: 4px solid rgba(0,0,0,0.21);
+	border: 1px solid rgba(0, 0, 0, 0.21);
+	border-bottom: 4px solid rgba(0, 0, 0, 0.21);
 	border-radius: 4px;
-	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 	margin: 5px;
 }
 </style>
@@ -57,7 +57,7 @@
 					<!-- post-lank -->
 					<ol class="post-lank">
 
-						<c:forEach begin="1" end="5" step="1" var="mp_movie"
+						<c:forEach begin="0" end="4" var="mp_movie"
 							items="${mp_movieList}" varStatus='status'>
 							<li><a href="#" class="top5Btn"
 								data-movieTitle="${mp_movie.movie_Title}"
@@ -81,19 +81,6 @@
 					</ol>
 					<!--// post-lank -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<!-- mypost-box -->
 					<div class="mypost-box">
 						<!-- 로그인 전 -->
@@ -101,7 +88,8 @@
 							<div class="before">
 								<div class="post-count">
 									<p class="tit">MY POST</p>
-									<a href="#" class="txt-login" title="로그인하기">로그인하기</a>
+									<a id="moviepost-login" href="#" class="txt-login"
+										title="로그인하기">로그인하기</a>
 								</div>
 							</div>
 						</sec:authorize>
@@ -117,7 +105,9 @@
 								<div class="txt-info">
 									<c:choose>
 										<c:when test="${myPostCnt > 0}">
-											<a href="${pageContext.request.contextPath}/member/mypage/moviestory" style="color: white;">내 글보기로 이동</a>
+											<a
+												href="${pageContext.request.contextPath}/member/mypage/moviestory"
+												style="color: white;">내 글보기로 이동</a>
 										</c:when>
 										<c:otherwise>
 											작성된 포스트가<br> 없습니다.
@@ -133,10 +123,21 @@
 					<!--// mypost-box -->
 
 					<!-- add-post -->
-					<div class="add-post">
-						<a href="${pageContext.request.contextPath}/moviepost/selectMovie"
-							class="button purple" title="무비포스트 작성" style="">무비포스트 작성</a>
-					</div>
+					<sec:authorize access="isAnonymous()">
+						<div class="add-post">
+							<a id="add-moviepost-none-login"
+								href="${pageContext.request.contextPath}/moviepost/selectMovie"
+								class="button purple" title="무비포스트 작성" style="">무비포스트 작성</a>
+						</div>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<div class="add-post">
+							<a id=""
+								href="${pageContext.request.contextPath}/moviepost/selectMovie"
+								class="button purple" title="무비포스트 작성" style="">무비포스트 작성</a>
+						</div>
+					</sec:authorize>
+
 					<!--// add-post -->
 				</div>
 			</div>
