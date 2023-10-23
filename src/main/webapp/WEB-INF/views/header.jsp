@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -31,6 +32,7 @@
 .modal-layer2 .wrap .layer-header {
 	background: #792828;
 }
+
 #gnb>ul>li>a:after {
 	background: #792828;
 }
@@ -165,13 +167,11 @@ button.button.purple:hover {
 											<!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
 											<a href="#" id="" title="네이버로 로그인 선택"><img
 												src="${pageContext.request.contextPath}/resources/image/social_login/ico-naver.png"
-												alt="네이버">
-											<!--네이버--> 네이버로 로그인<!--네이버로 로그인--></a> <a href="#"
-												title="카카오톡으로 로그인 선택"><img
+												alt="네이버"> <!--네이버--> 네이버로 로그인<!--네이버로 로그인--></a> <a
+												href="#" title="카카오톡으로 로그인 선택"><img
 												src="${pageContext.request.contextPath}/resources/image/social_login/ico-kakao.png"
-												alt="카카오톡">
-											<!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a> <a href="#"
-												title="구글로 로그인 선택"><img
+												alt="카카오톡"> <!--카카오톡--> 카카오톡으로 로그인<!--카카오톡으로 로그인--></a> <a
+												href="#" title="구글로 로그인 선택"><img
 												src="${pageContext.request.contextPath}/resources/image/social_login/ico-google.png"
 												alt="구글"> 구글로 로그인<!--페이코로 로그인--></a>
 										</div>
@@ -326,8 +326,11 @@ button.button.purple:hover {
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/event/"
 							title="진행중 이벤트">진행중 이벤트</a></li>
-						<li><a id="" href="${pageContext.request.contextPath}/event/end" title="지난 이벤트">지난 이벤트</a></li>
-						<li><a href="${pageContext.request.contextPath}/event/winner" title="당첨자발표">당첨자발표</a></li>
+						<li><a id=""
+							href="${pageContext.request.contextPath}/event/end"
+							title="지난 이벤트">지난 이벤트</a></li>
+						<li><a href="${pageContext.request.contextPath}/event/winner"
+							title="당첨자발표">당첨자발표</a></li>
 					</ul>
 				</div></li>
 			<li><a href="#" class="gnb-txt-store" title="스토어">스토어</a>
@@ -398,8 +401,10 @@ button.button.purple:hover {
 				<ul class="list-depth">
 					<li><a href="${pageContext.request.contextPath}/event/"
 						title="진행중 이벤트">진행중 이벤트</a></li>
-					<li><a href="${pageContext.request.contextPath}/event/end" title="지난 이벤트">지난 이벤트</a></li>
-					<li><a href="${pageContext.request.contextPath}/event/winner" title="당첨자발표">당첨자발표</a></li>
+					<li><a href="${pageContext.request.contextPath}/event/end"
+						title="지난 이벤트">지난 이벤트</a></li>
+					<li><a href="${pageContext.request.contextPath}/event/winner"
+						title="당첨자발표">당첨자발표</a></li>
 				</ul>
 			</div>
 
@@ -528,16 +533,38 @@ button.button.purple:hover {
 
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="pinfo" />
-				<input type="hidden" id="header-pinfo-memberId" value="${pinfo.MEMBER_ID}">
+				<input type="hidden" id="header-pinfo-memberId"
+					value="${pinfo.MEMBER_ID}">
 				<div class="login-after" style="display:;">
 					<!-- 로그인 이후 -->
 					<div class="inner">
 						<div class="box">
 							<div class="mbimg">
 								<!-- ** 멤버십등급 사진 변경하기** -->
-								<img
-									src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
-									alt="프로필 사진">
+								<c:choose>
+									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'WELCOME'}">
+										<img
+											src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
+											alt="프로필 사진">
+									</c:when>
+
+									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'VIP'}">
+										<img
+											src="${pageContext.request.contextPath}/resources/image/membership/member_VIP_2.png"
+											alt="프로필 사진">
+									</c:when>
+									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'VVIP'}">
+										<img
+											src="${pageContext.request.contextPath}/resources/image/membership/member_VVIP_2.png"
+											alt="프로필 사진">
+									</c:when>
+									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'MVIP'}">
+										<img
+											src="${pageContext.request.contextPath}/resources/image/membership/member_MVIP_2.png"
+											alt="프로필 사진">
+									</c:when>
+								</c:choose>
+
 							</div>
 							<div class="name">
 								<span>${pinfo.MEMBER_NAME}</span>님
