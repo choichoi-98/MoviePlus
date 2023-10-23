@@ -5,15 +5,24 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.ReOpenVO;
 
 @Mapper
 public interface ReOpenMapper {
 
 	public List<Movie> getEndedMovieList();
 	
-	public void updateExpectReOpening(String xxx);
+	public void insertReOpenExpectMovieImformation(String movieCode);
 	
-	public void updateExpectDate(String startday);
+	public void updateExpectReOpening(String code);
 	
-	public List<Movie> getExpectReOpening();
+	
+	
+	/*
+	 * 
+	 * 
+	 * public void updateExpectDate(String startday);
+	 * 
+	 * public List<Movie> getExpectReOpening();
+	 */
 }

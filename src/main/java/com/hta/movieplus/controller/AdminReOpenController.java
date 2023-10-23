@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.ReOpenVO;
 import com.hta.movieplus.service.MovieService;
 import com.hta.movieplus.service.ReOpenService;
 
@@ -22,35 +23,53 @@ public class AdminReOpenController {
 		this.reopenservice = reopenservice;
 	}
 	
+	
+	/* 상영종료된 영화의 리스트를 가져오면서 작성 페이지로 이동 */
 	@GetMapping("/admin/goreopenwrite")
 	public String getEndedMoive(Model model){
 		List<Movie> endedMoiveList = reopenservice.getEndedMovieList();
-		/*
-		 * for (Movie review : endedMoiveList) {
-		 * System.out.println("getMovie_Title ID: " + review.getMovie_Title());
-		 * System.out.println("getMovie_Director content: " +
-		 * review.getMovie_Director()); }
-		 */
 		model.addAttribute("endedMovieList",endedMoiveList);
 		return "/admin/reOpenWrite";
 	}
 	
-	@GetMapping("/admin/reopenlist")
-	public String reopenList(Model model) {
-		List<Movie> ExpectReOpeningMovie = reopenservice.getExpectReOpening();
-		model.addAttribute("ExpectReOpeningMovie", ExpectReOpeningMovie);
-		return "/admin/reOpenList";
+	/* 선택한 영화를 재개봉 예정 영화로 등록 sys.end day추가 / 영화코드추가*/
+	@PostMapping("/admin/reopenexpect") 
+	public String goreopenwrite(String movieCode) {
+		reopenservice.insertReOpenExpectMovieImformation(movieCode);
+		return "redirect:/admin/reOpenList";
+	}
+	
+	@GetMapping("/admin/reopenexpectlist")
+	public String reopenExpectlist(ReOpenVO reopen) {
+	return "/admin/reOpenList";
 	}
 	
 	
+}
 	
 	
 	
-	@GetMapping("/admin/reopenwrite")
-	public String goreopenwrite() {
-		
-		return "/admin/reOpenList";
-	}
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * @GetMapping("/admin/reopenlist") public String reopenList(Model model) {
+	 * List<Movie> ExpectReOpeningMovie = reopenservice.getExpectReOpening();
+	 * model.addAttribute("ExpectReOpeningMovie", ExpectReOpeningMovie); return
+	 * "/admin/reOpenList"; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	
 	
 	
@@ -64,4 +83,3 @@ public class AdminReOpenController {
 	 * movieServiceImpl.getEndedMovie(); return "admin/reOpenList"; }
 	 */
 
-}

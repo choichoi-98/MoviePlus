@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.ReOpenVO;
 import com.hta.movieplus.mybatis.mapper.ReOpenMapper;
 
 @Service
@@ -22,16 +23,24 @@ public class ReOpenServiceImpl implements ReOpenService {
 	public List<Movie> getEndedMovieList() {
 		return dao.getEndedMovieList();
 	}
-
+	
 	@Override
-	public void updateExpectReOpening(String xxx) {
-		dao.updateExpectReOpening(xxx);
+	public void insertReOpenExpectMovieImformation(String movieCode) {
+		dao.insertReOpenExpectMovieImformation(movieCode);
 	}
 
 	@Override
-	public List<Movie> getExpectReOpening() {
-		return dao.getExpectReOpening();
+	public void updateExpectReOpening(String code) {
+		dao.updateExpectReOpening(code);
 	}
 
+
+
+	  
+	/*
+	 * @Override public List<Movie> getExpectReOpening() { return
+	 * dao.getExpectReOpening(); }
+	 */
+	
 	
 }
