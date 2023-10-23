@@ -11,6 +11,10 @@
 	margin: 0; /* 마진을 0으로 설정 */
 	padding: 0; /* 패딩을 0으로 설정 */
 }
+/* 모달 초기 숨김 상태 */
+#myModal {
+	display: none;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,6 +86,27 @@ $(function() {
         }
     });
 });
+    
+    
+$(document).ready(function() {
+    // 앵커 클릭 이벤트 처리
+    $('a#btn_pay_mcoupon').click(function(e) {
+        e.preventDefault(); // 기본 앵커 동작을 막기
+
+        // 모달 열기
+        $('#layer_dcoupon').show();
+    });
+
+    // 모달 닫기 버튼 클릭 이벤트 처리
+    $('#btn_close_dcoupon').click(function() {
+        // 모달 닫기
+        $('#layer_dcoupon').hide();
+    });
+    $('#btn_close_modal_dcoupon').click(function() {
+        // 모달 닫기
+        $('#layer_dcoupon').hide();
+    });
+});    
 </script>
 
 </head>
@@ -141,7 +166,7 @@ $(function() {
 														href="#"
 														w-data="600" h-data="550" class=""
 														name="btn_pay_memp" id="btn_pay_memp" title="메가박스 멤버십 포인트">
-														<span class="txt">메가박스 멤버십 포인트 <!-- 메가박스 멤버십 포인트 --></span>
+														<span class="txt">무비플러스 포인트 <!-- 메가박스 멤버십 포인트 --></span>
 													</a>
 													<button type="button" class="btn-cancel"
 														id="btn_cancel_memp" method="memp">
@@ -154,7 +179,7 @@ $(function() {
 														href="#"
 														w-data="600" h-data="550" class=""
 														name="btn_pay_dcoupon" id="btn_pay_dcoupon"
-														title="메가박스 할인쿠폰"> <span class="txt">메가박스 할인쿠폰
+														title="메가박스 할인쿠폰"> <span class="txt">무비플러스 할인쿠폰
 															<!-- 메가박스 할인쿠폰 -->
 													</span> <em class="tooltip01 hidden" id="movieWonEm"></em>
 													</a>
@@ -179,7 +204,7 @@ $(function() {
 													<a href="#"
 													   w-data="600" h-data="600" class=""
 													   name="btn_pay_mcoupon" id="btn_pay_mcoupon"
-													   title="메가박스 관람권"> <span class="txt">메가박스 관람권 <!-- 메가박스 관람권 --></span>
+													   title="메가박스 관람권"> <span class="txt">무비플러스 관람권 <!-- 메가박스 관람권 --></span>
 													</a>
 
 													<button type="button" class="btn-cancel"
@@ -190,7 +215,7 @@ $(function() {
 												</div>
 												<div class="item col-1">
 													<a
-														href="#"
+														href="#myModal"
 														w-data="600" h-data="560" class=""
 														name="btn_pay_scoupon" id="btn_pay_scoupon" title="스토어교환권">
 														<span class="txt">스토어교환권 <!-- 스토어교환권 --></span>
@@ -198,21 +223,6 @@ $(function() {
 
 													<button type="button" class="btn-cancel"
 														id="btn_cancel_scoupon" method="scoupon">
-														취소
-														<!-- 취소 -->
-													</button>
-												</div>
-
-												<div class="item col-1">
-													<a
-														href="#"
-														w-data="600" h-data="550" class=""
-														name="btn_pay_mgfcard" id="btn_pay_mgfcard"
-														title="모바일 관람권"> <span class="txt">모바일 관람권 <!-- 모바일 상품권 --></span>
-													</a>
-
-													<button type="button" class="btn-cancel"
-														id="btn_cancel_mgfcard" method="mgfcard">
 														취소
 														<!-- 취소 -->
 													</button>
@@ -284,6 +294,7 @@ $(function() {
 
 					<!-- seat-result -->
 					<div class="seat-result">
+					
 						<div class="wrap">
 							<div class="tit-area type2">
 							<!--
@@ -344,7 +355,7 @@ $(function() {
 										<!-- 추가금액 -->
 									</p>
 
-									<div class="money">${seatInfo}</div>
+									<div class="money"></div>
 								</div>
 								<c:set var="totalPrice" value="${totalPrice + price - 0}"/>
 								<div class="pay">
@@ -383,5 +394,90 @@ $(function() {
 		</div>
 	</div>
 	<!--// container -->
+	
+	<section id="layer_dcoupon" class="modal-layer" style="z-index: 505;"><a href="#" class="focus">레이어로 포커스 이동 됨</a>
+	<div class="wrap" style="width: 600px; height: 550px; margin-left: -300px; margin-top: 0px; top: 80px;">
+		<header class="layer-header">
+			<h3 class="tit">메가박스 할인쿠폰<!-- 메가박스 할인쿠폰 --></h3>
+		</header>
+
+		<div class="layer-con" style="height: 465px;">
+			<div class="pop-tit">사용할 쿠폰을 선택해주세요.<!-- 사용할 쿠폰을 선택해주세요. --></div>
+
+			<div class="popup-gray mid-info-box mb20">
+				<div class="pop-search-area">
+					<p class="sh-txt reset mr08"><span class="label">쿠폰번호<!-- 쿠폰번호 --></span></p>
+
+					<div class="sh-input">
+						<input id="dcouponNo" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="10">
+					</div>
+
+					<div class="sh-btn gray">
+						<button type="button" class="button small gray" id="btn_coupon_search">쿠폰조회</button>
+				   <!-- <button type="button" class="button small gray" id="btn_reg_dcoupon">쿠폰등록</button> -->
+					</div>
+				</div>
+			</div>
+
+			<div class="table-wrap divide">
+				<table class="board-list line">
+					<caption>쿠폰명, 쿠폰번호, 유효기간, 사용 항목을 가진 메가박스 영화할인쿠폰 목록의 제목 표<!-- 쿠폰명, 쿠폰번호, 유효기간, 사용 항목을 가진 메가박스 영화할인쿠폰 목록의 제목 표 --></caption>
+					<colgroup>
+						<col>
+						<col style="width:115px;">
+						<col style="width:60px;">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">쿠폰명<!-- 쿠폰명 --></th>
+							<th scope="col">유효기간<!-- 유효기간 --></th>
+							<th scope="col">사용<!-- 사용 --></th>
+						</tr>
+					</thead>
+				</table>
+
+				<div class="scroll" style="min-height:171px; max-height:171px;">
+					<table class="board-list line" id="data_table">
+						<caption>쿠폰명, 쿠폰번호, 유효기간, 사용 항목을 가진 메가박스 영화할인쿠폰 목록의 내용 표<!-- 쿠폰명, 쿠폰번호, 유효기간, 사용 항목을 가진 메가박스 영화할인쿠폰 목록의 내용 표 --></caption>
+						<colgroup>
+							<col>
+							<col style="width:115px;">
+							<col style="width:60px;">
+						</colgroup>
+						<tbody>
+						<c:forEach var="c" items="${couponlist}">
+						<tr>	
+							<td class="a-l"></td>
+							<td>2023.10.10<br>~ 2023.11.19</td>	
+							<td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
+						</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="box-border v1 use-guide mt15">
+					<p class="tit">이용안내<!-- 이용안내 --></p>
+
+					<ul class="dot-list gray">
+						<li>사용 가능한 쿠폰만 노출됩니다.<!-- 사용 가능한 쿠폰만 노출됩니다. --></li>
+						<li>전체 쿠폰 목록은 나의 정보 &gt; 할인쿠폰에서 확인 가능합니다.<!-- 전체 쿠폰 목록은 나의 메가박스 > 할인쿠폰에서 확인 가능합니다. --></li>
+						<li>보유하신 쿠폰은 등록 후 이용하실 수 있습니다.<!-- 보유하신 쿠폰은 등록 후 이용하실 수 있습니다. --></li>
+						<li>카드사 제휴쿠폰은 타 쿠폰 및 제휴포인트와 중복 적용 불가합니다.<!-- 카드사 제휴쿠폰은 타 쿠폰 및 제휴포인트와 중복 적용 불가합니다.. --></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="btn-group-fixed">
+			<button type="button" class="button small close-layer" id="btn_close_dcoupon">닫기<!-- 닫기 --></button>
+			<button type="button" class="button small purple" id="btn_cancel_apply_dcoupon" style="display:none;">적용취소<!-- 적용취소 --></button>
+			<button type="button" class="button small purple" id="btn_apply_dcoupon">적용<!-- 적용 --></button>
+		</div>
+
+		<button type="button" class="btn-modal-close" id="btn_close_modal_dcoupon">레이어 닫기<!-- 레이어 닫기 --></button>
+	</div>
+</section>
+	
 </body>
 </html>

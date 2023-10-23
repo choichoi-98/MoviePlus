@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
@@ -121,6 +122,11 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void delCartItem(CartVO cartVO) {
 		dao.delCartItem(cartVO);
+	}
+
+	@Override
+	public List<CouponVO> getCouponList() {
+		return dao.getgetCouponList();
 	}
 
 }
