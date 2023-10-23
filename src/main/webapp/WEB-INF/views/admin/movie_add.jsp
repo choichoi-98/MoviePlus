@@ -13,7 +13,7 @@
 	var pauseImagePath="${pageContext.request.contextPath}/resources/image/movie/pause.png";
 	
 	function openPop(){
-		var popup = window.open('${pageContext.request.contextPath}/chat/chating',
+		var popup = window.open('${pageContext.request.contextPath}/chat/room',
 							'채팅팝업','width=700px,height=800px');
 	}
 </script>

@@ -36,6 +36,19 @@ $(document).ready(function(){
 		getMovieScheduleWithTheater();
 	})
 
+	$('body').on('click', '.time-table-book', function(e){
+		e.preventDefault();
+        if($('#header-pinfo-memberId').val() == null){
+			$('#login-alert-modal').css('display', 'block');
+			$('.bg-modal').css('opacity', '1');
+			$('body').addClass('no-scroll');
+
+			return;
+		}
+		
+		location.href="/movieplus/booking/seat?scheduleId="+ $(this).attr('data-scheduleId');
+	});
+	
 	//메뉴---
 
 	function getMovieScheduleWithTheater(){
@@ -143,7 +156,7 @@ $(document).ready(function(){
 					var schedule_output = '<td class="">';
 					schedule_output += '<div class="td-ab">';
 					schedule_output += '<div class="txt-center">';
-					schedule_output += '<a href="/movieplus/booking/" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
+					schedule_output += '<a href="#" class="time-table-book" data-scheduleId="'+schedule.theater_SCHEDULE_ID+'" title="영화예매하기"><div class="ico-box"><i class="iconset ico-'+jojosimya_icon+'"></i></div>';
 					schedule_output += '<p class="time">'+schedule.theater_SCHEDULE_START+'</p><p class="chair">'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p>';
 					schedule_output += '<div class="play-time"><p>'+schedule.theater_SCHEDULE_START+'~'+schedule.theater_SCHEDULE_END+'</p><p>'+(Number(schedule.theater_ROOM_SEAT_CNT)-Number(schedule.theater_SCHEDULE_BOOKED_CNT))+'석</p></div>';
 					schedule_output += '</a></div></div></td>';

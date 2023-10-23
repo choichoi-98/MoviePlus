@@ -196,11 +196,10 @@ public class StoreController {
 		CartVO cartVO,
 		CouponVO couponVO,
 		ModelAndView mv) {
-		
+		      
 //		List<StoreVO> cartlist = storeService.getCartList();
 //		List<CartVO> cartlist2 = storeService.getCartList2();
 		List<StoreCartDTO> cartlist = storeService.getCartLists();
-//		List<CouponVO> couponlist = storeService.getCouponList();
 		
 		mv.setViewName("store/store_cart");
 		mv.addObject("cartlist", cartlist);

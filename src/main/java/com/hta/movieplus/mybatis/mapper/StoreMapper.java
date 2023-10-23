@@ -56,6 +56,4 @@ public interface StoreMapper {
 
 	public List<StoreCartDTO> getCartLists();
 
-	public List<CouponVO> getgetCouponList();
-
 }

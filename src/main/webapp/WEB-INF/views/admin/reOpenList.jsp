@@ -76,32 +76,34 @@
 									<th>글 번 호</th>
 									<th>코 드 번 호</th>
 									<th>제 목</th>
+									<th>시 작 일</th>
+									<th>종 료 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
 							</thead>
 
 							<tbody>
-								<c:forEach var="m" items="${list2}" varStatus="loop">
+								<c:forEach var="expectmovie" items="${expectMovieList}" varStatus="loop">
 									<tr>
 										<td>
 											<div class="main__table-text">${loop.index + 1}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
 										</td>
 										<td>
-											<div class="main__table-text">
-												<a href="${pageContext.request.contextPath}/admin/gonoticemodify?noticemodify=${m.CUSTOMER_NOTICE_NUM}">${m.CUSTOMER_NOTICE_SUBJECT}</a>
-											</div>
+											<div class="main__table-text">${expectmovie.MOVIE_CODE}</div>
 										</td>
 										<td>
-											<div class="main__table-text">${m.CUSTOMER_NOTICE_TYPE}</div>
+											<div class="main__table-text">${expectmovie.MOVIE_TITLE}</div>
 										</td>
 										<td>
-											<div class="main__table-text">${m.CUSTOMER_NOTICE_SYSDATE}</div>
+											<div class="main__table-text">${expectmovie.REOPENING_STARTDATE}</div>
+										</td>
+										<td>
+											<div class="main__table-text">${expectmovie.REOPENING_ENDDATE}</div>
 										</td>
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
 												<a href="#modal-delete"
-													data-noticenum="${m.CUSTOMER_NOTICE_NUM}"
 													class="main__table-btn main__table-btn--delete open-modal">
 													<i class="icon ion-ios-trash"></i>
 												</a>
@@ -116,7 +118,7 @@
 				</div>
 				<!-- end comments -->
 				<a href="${pageContext.request.contextPath}/admin/goreopenwrite"
-					class="main__title-link">등록하기</a>
+					class="main__title-link">등록</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">

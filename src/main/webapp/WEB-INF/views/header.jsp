@@ -79,7 +79,7 @@ button.button.purple:hover {
 
 
 <section class="alert-popup"
-	style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 263px; left: 618px; width: 300px; opacity: 1; display: none;"
+	style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 35%; left: 43%; width: 300px; opacity: 1; display: none;"
 	id="login-alert-modal">
 	<div class="wrap">
 		<header class="layer-header">
@@ -542,7 +542,7 @@ button.button.purple:hover {
 							<div class="mbimg">
 								<!-- ** 멤버십등급 사진 변경하기** -->
 								<c:choose>
-									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'WELCOME'}">
+									<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'Welcome'}">
 										<img
 											src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
 											alt="프로필 사진">

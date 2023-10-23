@@ -105,7 +105,14 @@ $(document).ready(function(){
 		}
 	})
 	// 스케줄 선택
-	$('body').on('click', '#scheduleListResult li .btn', function() {
+	$('body').on('click', '#scheduleListResult li .btn', function(e) {
+		if($('#header-pinfo-memberId').val() == null){
+			$('#login-alert-modal').css('display', 'block');
+			$('.bg-modal').css('opacity', '1');
+			$('body').addClass('no-scroll');
+
+			return;
+		}
 		var scheduleId = $(this).parent().attr('data-scheduleId');	
 		
 		location.href="/movieplus/booking/seat?scheduleId=" + scheduleId;

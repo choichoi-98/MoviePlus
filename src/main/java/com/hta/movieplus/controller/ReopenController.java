@@ -28,6 +28,7 @@ public class ReopenController {
 	public String reopenView(Model model) {
 		List<Movie> movieList = reopenUserService.getReopenMovieList();
 
+		model.addAttribute("reopenMovieCnt", movieList.size());
 		model.addAttribute("reopenMovieList", movieList);
 		return "reopen/reopen_list";
 	}

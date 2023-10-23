@@ -37,8 +37,10 @@ public class SecurityConfig {
 
 		http.authorizeRequests()
 				.antMatchers("/resources/**/**").permitAll()
-				.antMatchers("/member/mypage").access("hasAnyRole('ROLE_USER','ROLE_MEMBER','ROLE_ADMIN')")
-				.antMatchers("/member/myinfo").access("hasAnyRole('ROLE_USER','ROLE_MEMBER','ROLE_ADMIN')")
+				.antMatchers("/member/mypage").access("hasAnyRole('ROLE_USER','ROLE_MEMBER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
+				.antMatchers("/member/myinfo").access("hasAnyRole('ROLE_USER','ROLE_MEMBER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
+				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/manager/**").access("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
 				.antMatchers("/**").permitAll();
 
 		http.formLogin().loginPage("/main")

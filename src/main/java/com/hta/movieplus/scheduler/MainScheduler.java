@@ -32,10 +32,9 @@ public class MainScheduler {
 	@Scheduled(cron = "0 * * * * *")
 	public void perMinute(){
 		LocalDateTime now = LocalDateTime.now();
-		logger.info("1분주기");
 		
 		int scheduleCnt = schedulingService.changeScheduleStatus(now);
-		logger.info("변경된 스케쥴 수 : " + scheduleCnt);
+//		logger.info("변경된 스케쥴 수 : " + scheduleCnt);
 	}
 	
 	// 자정

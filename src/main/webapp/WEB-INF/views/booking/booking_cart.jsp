@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
-<!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
-<html lang="ko">
+<html>
 <!--<![endif]-->
 <head>
 <style>
@@ -25,7 +24,7 @@ $(function() {
     let header = $("meta[name='_csrf_header']").attr("content");
     
     $(document).on('click', '#btn_booking_pay', function(e) {
-    	e.preventDefault(); // 기본 동작인 링크 이동을 막습니다.
+    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
 //    $('#btn_booking_pay').click(function() {
     	var totalAmount = $('#Checker').data("amount");
     	var sid = $('#Checker').data("sid");
@@ -50,12 +49,40 @@ $(function() {
                 window.open(box);
 //              alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
             },
-            error: function(error) {
-                alert(JSON.stringify(error, null, 2));
+            error:function(request,status,error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
     });
-	
+    	
+    $(document).on('click', '#btn_coupon_search', function(e) {
+    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
+    	
+    		var couponCode = $('#couponCode').val(); // 입력된 쿠폰 코드 가져오기
+            alert(couponCode);
+    		
+            if (couponCode) {
+            	$.ajax({
+                    url: "cart",
+                    method: 'POST',
+//                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: { "couponCode": couponCode },
+//                    dataType: "text",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function(response) {X 
+        				alert("조회 성공");
+                    },
+                    error: function(error) {
+          				alert("조회 실패");
+                    }
+                });
+            } else {
+                alert("쿠폰 코드를 입력해주세요.");
+            }
+    });	
+    	
     var couponOpen = false; // 초기 상태는 닫혀있음
     $('#grp_coupon').click(function()  {
         if (couponOpen) {
@@ -86,7 +113,7 @@ $(function() {
         }
     });
 });
-    
+
     
 $(document).ready(function() {
     // 앵커 클릭 이벤트 처리
@@ -107,6 +134,7 @@ $(document).ready(function() {
         $('#layer_dcoupon').hide();
     });
 });    
+
 </script>
 
 </head>
@@ -355,7 +383,7 @@ $(document).ready(function() {
 										<!-- 추가금액 -->
 									</p>
 
-									<div class="money"></div>
+									<div class="money">${coupon.COUPON_TYPE}</div>
 								</div>
 								<c:set var="totalPrice" value="${totalPrice + price - 0}"/>
 								<div class="pay">
@@ -409,7 +437,7 @@ $(document).ready(function() {
 					<p class="sh-txt reset mr08"><span class="label">쿠폰번호<!-- 쿠폰번호 --></span></p>
 
 					<div class="sh-input">
-						<input id="dcouponNo" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="10">
+						<input id="couponCode" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="10">
 					</div>
 
 					<div class="sh-btn gray">
@@ -445,13 +473,13 @@ $(document).ready(function() {
 							<col style="width:60px;">
 						</colgroup>
 						<tbody>
-						<c:forEach var="c" items="${couponlist}">
+						<c:forEach var="cp" items="${coupon}">
 						<tr>	
-							<td class="a-l"></td>
+							<td class="abc">${cp.COUPON_TYPE}</td>
 							<td>2023.10.10<br>~ 2023.11.19</td>	
 							<td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
 						</tr>
-						</c:forEach>
+						</c:forEach>	
 						</tbody>
 					</table>
 				</div>

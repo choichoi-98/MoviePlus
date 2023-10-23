@@ -34,4 +34,9 @@
 		on MOVIE.MOVIE_CODE = THEATER_SCHEDULE.MOVIE_CODE
 		where pg_token IS NOT NULL
 	</select>
+	
+	<select id="getCouponByCode" resultType="CouponVO">
+		select * from COUPON
+		where COUPON_CODE = #{COUPON_CODE}
+	</select>
 </mapper>

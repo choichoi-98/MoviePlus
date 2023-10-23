@@ -52,7 +52,8 @@
 
 	function wsOpen(){
 		console.log("웹소켓 연결 요청 - wsOpen()")
-		ws = new WebSocket("ws://"+ location.host +"/movieplus/chating");
+		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
+		ws = new WebSocket("ws://"+ location.host +"/movieplus/chating/"+ $("#roomNumber").val());
 		console.log(ws)
 		wsEvt();
 	}
@@ -67,27 +68,16 @@
 			var msg = data.data;
 			if(msg != null && msg.trim() != ''){
 				var d = JSON.parse(msg);
-			
 				if(d.type == "getId"){
-					
-					console.log("getId?" + d.type)
 					var si = d.sessionId != null ? d.sessionId : "";
-					console.log("if 문 전 sessionId : " + si)
 					if(si != ''){
 						$("#sessionId").val(si); 
-						
 					}
-					
 				}else if(d.type == "message"){
-					console.log("messge?" + d.type)
 					if(d.sessionId == $("#sessionId").val()){
-						
-						
 						$("#chating").append("<p class='me'>나 :" + d.msg + "</p>");	
 					}else{
-						console.log("메시지 메서드")
 						$("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
-					
 					}
 						
 				}else{
@@ -114,7 +104,7 @@
 		if(userName == null || userName.trim() == ""){
 			alert("사용자 이름을 입력해주세요.");
 			$("#userName").focus();
-		}else{ //사용자가 닉네임을 입력하면 웹소켓 연결 요청 보냄
+		}else{
 			wsOpen();
 			$("#yourName").hide();
 			$("#yourMsg").show();
@@ -135,8 +125,10 @@
 </script>
 <body>
 	<div id="container" class="container">
-		<h1>채팅</h1>
+		<h1>${roomName }의 채팅방</h1>
 		<input type="hidden" id="sessionId" value="">
+		<input type="hidden" id="roomNumber" value="${roomNumber}">
+		
 		<div id="chating" class="chating">
 		</div>
 		

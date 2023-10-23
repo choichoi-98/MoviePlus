@@ -27,7 +27,8 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	@Override // WebSocket 핸들러 등록하는 registerWebSocketHandlers 메서드
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		logger.info("registry 메서드");
-		registry.addHandler(socketHandler, "/chating/{roomNumber}").setAllowedOrigins("*");
+//		registry.addHandler(socketHandler, "/chating/{roomNumber}").setAllowedOrigins("*");
+		registry.addHandler(socketHandler, "/chating/{roomNumber}");
 		//setAllowedOrigins("*") - 모든 ip에서 접속가능
 		//엔드포인트 /chating
 		// -> ws://localhost:9000/chating 으로 요청 들어오면 통신 진행

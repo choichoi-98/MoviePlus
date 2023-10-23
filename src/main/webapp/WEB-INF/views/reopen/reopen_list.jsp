@@ -72,7 +72,7 @@
 
 
 					<p class="result-count">
-						<strong>전체 <b>22</b>건
+						<strong>전체 <b>${reopenMovieCnt}</b>건
 						</strong>
 					</p>
 
@@ -105,8 +105,8 @@
 
 										<p class="tit">[재개봉] ${reopen_movie.movie_Title}</p>
 
-										<p class="date">2023.09.27 ~ 2023.10.10</p>
-										<p class="date">현재 동의 수 : ${reopen_movie.REOPEN_COUNT}</p>
+										<p class="date">${reopen_movie.REOPENING_STARTDATE} ~ ${reopen_movie.REOPENING_ENDDATE}</p>
+										<p class="date">현재 동의 수 : <span style="font-weight:bold;">${reopen_movie.REOPEN_COUNT}</span></p>
 								</a></li>
 							</c:forEach>
 

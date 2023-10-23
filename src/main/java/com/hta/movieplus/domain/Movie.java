@@ -22,6 +22,8 @@ public class Movie {
 	
 	//--
 	private int REOPEN_COUNT;
+	private String REOPENING_STARTDATE;
+	private String REOPENING_ENDDATE;
 	
 	
 	public int getPost_Count() {
@@ -156,6 +158,18 @@ public class Movie {
 	}
 	public void setREOPEN_COUNT(int rEOPEN_COUNT) {
 		REOPEN_COUNT = rEOPEN_COUNT;
+	}
+	public String getREOPENING_ENDDATE() {
+		return REOPENING_ENDDATE;
+	}
+	public void setREOPENING_ENDDATE(String rEOPENING_ENDDATE) {
+		REOPENING_ENDDATE = rEOPENING_ENDDATE;
+	}
+	public String getREOPENING_STARTDATE() {
+		return REOPENING_STARTDATE;
+	}
+	public void setREOPENING_STARTDATE(String rEOPENING_STARTDATE) {
+		REOPENING_STARTDATE = rEOPENING_STARTDATE;
 	}
 	
 	
