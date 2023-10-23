@@ -4,6 +4,8 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 <meta charset="UTF-8">
 <title>Room</title>
 <style>
@@ -73,14 +75,19 @@
 </style>
 </head>
 <script type="text/javascript">
+
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	console.log("토큰 값" + token)
+	console.log("헤더 값" + header)
+
 	var ws;
 	window.onload = function(){
 		getRoom();
 		createRoom();
 	}
-
 	function getRoom(){
-		commonAjax('/getRoom', "", 'post', function(result){
+		commonAjax('/movieplus/chat/getRoom', "", 'post', function(result){
 			createChatingRoom(result);
 		});
 	}
@@ -89,7 +96,7 @@
 		$("#createRoom").click(function(){
 			var msg = {	roomName : $('#roomName').val()	};
 
-			commonAjax('/createRoom', msg, 'post', function(result){
+			commonAjax('/movieplus/chat/createRoom', msg, 'post', function(result){
 				createChatingRoom(result);
 			});
 
@@ -98,10 +105,11 @@
 	}
 
 	function goRoom(number, name){
-		location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
+		location.href="../chat/moveChating?roomName="+name+"&"+"roomNumber="+number;
 	}
 
 	function createChatingRoom(res){
+		console.log("createChatingRoom 의 파라미터 값 확인 : " + res)
 		if(res != null){
 			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
 			res.forEach(function(d, idx){
@@ -123,6 +131,10 @@
 			data: parameter,
 			type: type,
 			contentType : contentType!=null?contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+			beforeSend : function(xhr)
+			{ //데이터를 전송하기 전에 헤더에 csrf값을 설정
+				xhr.setRequestHeader(header, token);
+			},
 			success: function (res) {
 				calbak(res);
 			},

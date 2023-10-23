@@ -25,15 +25,14 @@ public class ChatController {
 	List<ChatRoomVO> roomList = new ArrayList<ChatRoomVO>();
 	static int roomNumber = 0;
 	
-	@RequestMapping("/chating")
-	public ModelAndView chatting(ModelAndView mv) {
-		
+	@RequestMapping("/chat")
+	public ModelAndView chat(ModelAndView mv) {
 		mv.setViewName("chat/chat");
-		logger.info("ChatController");
 		return mv;
 	}
 	
 	// 방 페이지
+	@RequestMapping("/room")
 	public ModelAndView room() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("chat/room");
@@ -44,13 +43,21 @@ public class ChatController {
 	@RequestMapping("/createRoom")
 	@ResponseBody
 	public List<ChatRoomVO> createRoom(@RequestParam HashMap<Object, Object> params){
+		
+		logger.info("=========컨트롤러: createRoom ============");
 		String roomName = (String) params.get("roomName");
+		logger.info("roomName = "+roomName);
 		if(roomName != null && !roomName.trim().equals("")) {
 			ChatRoomVO room = new ChatRoomVO();
 			room.setRoomNumber(++roomNumber);
 			room.setRoomName(roomName);
 			roomList.add(room);
 		}
+		
+		   for (ChatRoomVO room : roomList) {
+		        System.out.println("Room Number: " + room.getRoomNumber() + ", Room Name: " + room.getRoomName());
+		    }
+		
 		return roomList;
 	}
 	
@@ -58,11 +65,12 @@ public class ChatController {
 	@RequestMapping("/getRoom")
 	@ResponseBody
 	public List<ChatRoomVO> getRoom(@RequestParam HashMap<Object, Object> params){
+		logger.info("=========컨트롤러: getRoom ============");
 		return roomList;
 	}
 	
 	//채팅방
-	@RequestMapping("/movieChating")
+	@RequestMapping("/moveChating")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
