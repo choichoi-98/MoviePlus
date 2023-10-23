@@ -64,7 +64,6 @@
 									<th>극장 명</th>
 									<th>관리자 ID</th>
 									<th>지역</th>
-									<th>매출 순위</th>
 									<th>상영관 수</th>
 									<th>상태</th>
 									<th>생성 날짜</th>
@@ -87,9 +86,6 @@
 									</td>
 									<td>
 										<div class="main__table-text">${theater.THEATER_LOCATION}</div>
-									</td>
-									<td>
-										<div class="main__table-text">임시</div>
 									</td>
 									<td>
 										<div class="main__table-text">${theater.THEATER_ROOM_CNT}</div>
