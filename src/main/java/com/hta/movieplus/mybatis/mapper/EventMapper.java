@@ -44,6 +44,8 @@ public interface EventMapper {
 
 	public void changeStatus(Map<String, Object> map);
 
+	public List<Event> getEventListdesc(HashMap<String, Object> map);
+
 	
 }
 

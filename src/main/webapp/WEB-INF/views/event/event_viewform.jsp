@@ -62,9 +62,49 @@
 			</map>
 					
 			</div>
-			<!--// iframe 아닐 때  -->
 		</div> <!-- event detail end -->
+		
+		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1100px;">
+              <table class="board-list" >
+                  <caption>구분, 연동정보, 연결 항목을 가진 간편 로그인 계정연동 표</caption>
+                  <colgroup>
+                      <col style="width:130px;">
+                      <col>
+                      <col style="width:120px;">
+                  </colgroup>
+                  <thead>
+                      <tr>
+                          <th scope="col">영화관</th>
+                          <th scope="col">상영시간</th>
+                          <th scope="col">응모</th>
+                      </tr>
+                  </thead>
+                  <tbody id="lnkgInfoTbody">
+                      <tr>
+                          <th scope="row" class="a-c">코엑스</th>
+                                  <td class="a-l">연결된 계정정보가 없습니다.</td>
+                                  <td><button type="button" class="button small gray" style="background:#792828">신청하기</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+		
+		
+		
+			
+			<%-- <!-- 시사회/무대인사 이벤트 신청 inner-wrap -->
+			<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
+				<div class="inner-wrap">
+					<!-- event-button-type -->
+					<div class="event-button-type">
+						<button id="reopen-admit-btn" data-movieCode="${reopenMovie.movie_Code}" type="button" class="btn" style="background:#792828">신청하기</button>
+					</div>
+					<!--// event-button-type -->
+				</div>
+			<!--// 이벤트 신청 inner-wrap end -->
+			</c:if> --%>
 		</form>
+		
     </div>
 </div><!-- container end -->
 

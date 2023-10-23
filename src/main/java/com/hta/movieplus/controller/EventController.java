@@ -383,9 +383,22 @@ public class EventController {
 
 	//이벤트 당첨자발표 페이지
 	@GetMapping("/event/winner")
-	public String eventWinner() {
+	public ModelAndView eventWinner(ModelAndView mv, 
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
-		return "event/event_winner";
+		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
+		
+		Map<String, Object> pagemap = eventservice.pagination(page);
+		List<Event> eventlist = eventservice.getEventListdesc(page, (int) pagemap.get("limit"));
+		
+		mv.addAllObjects(pagemap);
+		mv.setViewName("event/event_winner");
+		
+		mv.addObject("eventlistcount",eventlistcount);
+		mv.addObject("eventlist",eventlist);
+		
+		
+		return mv;
 	}
 	
 	

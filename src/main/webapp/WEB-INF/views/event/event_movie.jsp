@@ -57,8 +57,8 @@
 							title="시사회/무대인사 탭으로 이동"><!-- href="javascript:fn_eventTabMove(&#39;CED04&#39;)"  -->시사회/무대인사</a></li>
 						
 						<!--  li id="eventTab_CED03"><a href="javascript:fn_chgEventTab('CED03')">메가Pick</a></li-->
-						<li id="eventTab_CED03" class=""><a
-							href="javascript:fn_eventTabMove(&#39;CED03&#39;)"
+						<li id="eventTab_CED03" class="">
+						<a href="${pageContext.request.contextPath}/event/reopen"
 							title="재개봉 탭으로 이동">재개봉</a></li>
 					</ul>
 				</div>

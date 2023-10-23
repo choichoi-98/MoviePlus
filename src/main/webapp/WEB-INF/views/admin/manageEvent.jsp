@@ -70,6 +70,7 @@
 									<th>이벤트 분류</th><!--(영화|극장|제휴할인|시사회/무대인사)  -->
 									<th>이벤트 제목</th>
 									<th>이벤트 기간</th>
+									<th>이벤트 발표일</th>
 									<th>상태</th><!-- (진행중/종료) -->
 									<th>관리</th>
 								</tr>
@@ -97,6 +98,9 @@
 									</td>
 									<td>
 										<div class="main__table-text">${event.EVENT_STARTDATE} - ${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
+									</td>
+									<td>
+										<div class="main__table-text">${event.EVENT_RESULTDATE}</div><!-- 이벤트 발표일 -->
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">${event.EVENT_STATUS}</div><!-- 이벤트 상태 -->

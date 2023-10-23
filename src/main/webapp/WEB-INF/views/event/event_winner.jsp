@@ -49,7 +49,8 @@
 					
 				</div>
 			</div>
-
+			
+			<c:if test="${eventlistcount > 0}">
 			<div class="board-list-util">
 				<p class="result-count"><strong>전체 648건</strong></p>
 
@@ -79,30 +80,25 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="event" items="${eventlist}">
 						<tr>
-							<td>648</td>	<!-- Rownum  -->
-							<td>영화</td>		<!-- 이벤트 타입 -->
+							<td>${event.RNUM}</td>	<!-- Rownum  -->
+							<td>${event.EVENT_TYPE}</td>		<!-- 이벤트 타입 -->
 							<th scope="row">
 								<a href="#" data-no="14078" data-netfunnel="N" class="eventBtn" title="">
-							[음반 증정 이벤트] 21세기 피아노의 거장 : 예프게니 키신</a>		<!-- 이벤트명 -->
+								${event.EVENT_SUBJECT}</a>		<!-- 이벤트명 -->
 							</th>
-							<td>2023.11.16</td>		<!-- 발표일 -->
-							<td><button type="button" class="button gray x-small w70px" disabled="disabled">준비중</button></td><!-- 당첨자발표 현황(준비중/결과확인) -->
+							<td>${event.EVENT_RESULTDATE}</td>		<!-- 발표일 -->
+							<td>
+								<button type="button" class="button gray x-small w70px" disabled="disabled">준비중</button>
+							</td><!-- 당첨자발표 현황(준비중/결과확인) -->
+							<!-- <a href="#" class="button x-small black-line w70px" title="당첨자발표 결과확인 상세보기">결과확인</a> -->
 						</tr>
-						<tr>
-							<td>647</td>
-							<td>시사회/무대인사</td>
-							<th scope="row">
-								<a href="https://www.megabox.co.kr/event/winner/list?currPage=1&amp;searchText=&amp;#" data-no="14162" data-netfunnel="N" class="eventBtn" title="&lt;익스펜더블4&gt; 메가박스 회원 시사회 상세보기">&lt;익스펜더블4&gt; 메가박스 회원 시사회</a>
-							</th>
-							<td>2023.10.16</td>
-							<td><a href="javascript:fn_moveDetail(14162)" class="button x-small black-line w70px" title="당첨자발표 결과확인 상세보기">결과확인</a>
-							</td>
-						</tr>	
+					</c:forEach>		
 					</tbody>
 				</table>
 			</div>
-
+			</c:if>
 			<!-- pagination -->
 			<nav class="pagination"><strong class="active">1</strong> <a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> <a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> <a title="4페이지보기" href="javascript:void(0)" pagenum="4">4</a> <a title="5페이지보기" href="javascript:void(0)" pagenum="5">5</a> <a title="6페이지보기" href="javascript:void(0)" pagenum="6">6</a> <a title="7페이지보기" href="javascript:void(0)" pagenum="7">7</a> <a title="8페이지보기" href="javascript:void(0)" pagenum="8">8</a> <a title="9페이지보기" href="javascript:void(0)" pagenum="9">9</a> <a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a> <a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a> <a title="마지막 페이지 보기" href="javascript:void(0)" class="control last" pagenum="65">last</a> </nav>
 			<!--// pagination -->
