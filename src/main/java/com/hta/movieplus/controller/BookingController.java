@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.BookingInfoDTO;
+import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.KakaoPayVO;
 import com.hta.movieplus.domain.Member;
@@ -111,11 +112,13 @@ public class BookingController {
 	@GetMapping("/cart")
 	public ModelAndView bookingCartView(
 			int scheduleId, 
-			int price, 
+			int price,
 			String[] seat,
 			ModelAndView mv) {
 		
-		String seatInfo = String.join(",", seat); // 배열을 쉼표로 구분된 하나의 문자열로 변환
+//		List<CouponVO> couponlist = kakaopayService.getCouponListByCode();
+		
+		String seatInfo = String.join(",", seat); // 배열 -> 쉼표로 구분된 문자열
 		int seatCnt = seat.length;
 		
 		TheaterSchedule ts = schedulingService.getSchedule(scheduleId);
@@ -129,6 +132,19 @@ public class BookingController {
 		mv.addObject("seatCnt", seatCnt);
 		mv.addObject("movie", movie);
 		mv.addObject("ts", ts);
+		return mv;
+	}
+	
+	@PostMapping("/cart")
+	@ResponseBody
+	public ModelAndView cart2(
+			@RequestParam("couponCode") String COUPON_CODE,
+//			CouponVO couponVO,
+			ModelAndView mv) {
+		List<CouponVO> coupon = kakaopayService.getCouponByCode(COUPON_CODE);
+		
+		mv.setViewName("booking/booking_cart");
+		mv.addObject("coupon", coupon);
 		return mv;
 	}
 	

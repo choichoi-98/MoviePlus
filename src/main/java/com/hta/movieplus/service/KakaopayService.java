@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import java.util.List;
 
 import com.hta.movieplus.domain.BookingInfoDTO;
+import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.KakaoPayVO;
 
 public interface KakaopayService {
@@ -14,6 +15,8 @@ public interface KakaopayService {
 	public List<KakaoPayVO> getAprBooking();
 
 	public List<BookingInfoDTO> getAprBookings();
+
+	public List<CouponVO> getCouponByCode(String COUPON_CODE);
 
 
 }

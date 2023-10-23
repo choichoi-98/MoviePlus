@@ -66,6 +66,10 @@
 		on STORE_ITEM.ITEM_CODE = STORE_CART.ITEM_CODE
 	</select>
 	
+	<select id="getCouponList" resultType="CouponVO">
+		select * from COUPON
+	</select>
+	
 	<select id="getCartLists" resultType="StoreCartDTO">
 		select * from STORE_ITEM
 		inner join STORE_CART

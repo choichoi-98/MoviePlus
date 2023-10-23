@@ -48,7 +48,5 @@ public interface StoreService {
 
 	public List<StoreCartDTO> getCartLists();
 
-	public List<CouponVO> getCouponList();
-
 
 }

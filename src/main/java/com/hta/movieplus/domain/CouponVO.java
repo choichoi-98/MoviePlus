@@ -1,5 +1,8 @@
 package com.hta.movieplus.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CouponVO {
 	
 	private int COUPON_NUM; // 쿠폰 번호(PK)
