@@ -46,7 +46,13 @@ public interface EventService {
 
 	public int getEventListCountStatus();
 
-	public Event update_eventResult();
+	public int update_eventResult(Event event);
+
+	public void insertEventApply(EventApply eventapply);
+
+	public int applycheck(String MEMBER_ID, String EVENT_NUM);
+
+	public List<EventApply> getEventwinnerList(int num);
 
 
 

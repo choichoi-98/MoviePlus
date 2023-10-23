@@ -171,7 +171,27 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}
 	</update>
 	
+	<!-- 이벤트 회원 신청 insert -->
+	<insert id="insertEventApply" parameterType="eventapply">
+		insert into EVENT_APPLY
+		VALUES(#{MEMBER_ID}, #{EVENT_NUM},#{EVENT_DRAW})
+	</insert>
 	
+	<!-- 이벤트 신청여부 확인 -->
+	<select id="applycheck" resultType="eventapply" parameterType="String">
+		select *
+		from EVENT_APPLY
+		WHERE MEMBER_ID = #{MEMBER_ID}
+		AND EVENT_NUM = #{EVENT_NUM}
+	</select>
+	
+	<!-- 이벤트 당첨자 리스트 EVENT_DRAW = 'Y' -->
+	<select id="getEventwinnerList" resultType="eventapply">
+		select * 
+		from EVENT_APPLY
+		where EVENT_DRAW = 'Y'
+		and EVENT_NUM = #{EVENT_NUM}
+	</select>
 	
 	
 </mapper>

@@ -163,9 +163,26 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public Event update_eventResult() {
-		return dao.update_eventResult();
+	public int update_eventResult(Event event) {
+		return dao.update_eventResult(event);
 	}
+
+	@Override
+	public void insertEventApply(EventApply eventapply) {
+		 dao.insertEventApply(eventapply);
+	}
+
+	@Override
+	public int applycheck(String MEMBER_ID, String EVENT_NUM) {
+		EventApply eventapply = dao.applycheck(MEMBER_ID, EVENT_NUM);
+		return (eventapply == null)? -1 : 1; //응모내역이 존재하는 경우 1, 존재하지 않는 경우 -1 출력  
+	}
+
+	@Override
+	public List<EventApply> getEventwinnerList(int num) {
+		return dao.getEventwinnerList(num);
+	}
+
 
 
 

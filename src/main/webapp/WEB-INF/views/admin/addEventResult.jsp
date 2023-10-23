@@ -24,7 +24,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/" class="form" method="post">
+					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/eventResultProcess" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 			
@@ -130,7 +130,7 @@ $(document).ready(function(){
 		
 		this.submit();
 		
-		alert('이벤트가 수정되었습니다.');
+		alert('이벤트 당첨자 발표가 등록되었습니다.');
 	})
    
 }) //ready end

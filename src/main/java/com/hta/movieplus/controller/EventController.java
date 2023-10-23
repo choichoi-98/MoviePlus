@@ -71,7 +71,8 @@ public class EventController {
 		return mv;
 	}
 	
-
+	
+	//지난 이벤트 페이지
 	@GetMapping("/event/end")
 	public ModelAndView endEvent(ModelAndView mv) {
 		
@@ -415,12 +416,57 @@ public class EventController {
 	}
 	
 	//관리자 - 이벤드 당첨 발표내용 추가 프로세스
-	//@GetMapping("/admin/eventResultProcess")
-	public ModelAndView eventResultProcess(@RequestParam(value = "num") int num, ModelAndView mv) {
-		Event event = eventservice.update_eventResult();
-		mv.addObject("eventdata", event);
-		mv.setViewName("admin/addEventResult");
-		return mv;
+	@PostMapping("/admin/eventResultProcess")
+	public String eventResultProcess(Event event, Model model, HttpServletRequest request) {
+		
+		int result = eventservice.update_eventResult(event);
+		
+		if(result == 1) {
+			model.addAttribute("eventresult", event);
+		} else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "정보 수정 실패");
+		}
+		return "redirect:/admin/manageEvent";
 	}
+	
+	//이벤트 당첨 뷰 페이지 detail 주소
+	@GetMapping("/event/winnerdetail")
+	public ModelAndView resultviewDetail(ModelAndView mv, 
+				HttpServletRequest request,
+				@RequestParam(value="num", required=false) int num) throws Exception{
+			
+			logger.info("EVENT_NUM : " + num);
+			
+			Event event = eventservice.getDetailEvent(num);
+			List<EventApply> eventapply = eventservice.getEventwinnerList(num);
+			
+			mv.addObject("eventlist", event);
+			mv.addObject("eventwinner", eventapply);
+			
+			mv.setViewName("event/event_resultform");
+			return mv;
+	}
+	
+	//이벤트 신청
+	@PostMapping("/event/apply")
+	public String eventApply(EventApply eventapply, Model model) {
+		eventservice.insertEventApply(eventapply);
+		model.addAttribute("eventapply", eventapply);
+		
+		return "redirect:/event";
+	}
+	
+	//이벤트 신청 중복확인 ajax
+	@ResponseBody
+	@PostMapping("/event/applycheck")
+	public int applycheck(@RequestParam("id") String MEMBER_ID, @RequestParam("eventNum") String EVENT_NUM) {
+		return eventservice.applycheck(MEMBER_ID, EVENT_NUM);
+	}
+	
+	
+	
+	
+	
 	
 }

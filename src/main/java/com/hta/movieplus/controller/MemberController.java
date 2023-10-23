@@ -66,9 +66,9 @@ public class MemberController {
 	}
 	
 	//test 폼 이동
-	//@GetMapping("/test")
+	@GetMapping("/test")
 	public String test() {
-		return "member/member_findpassreset";
+		return "member/mypage_event";
 	}
 	
 	//회원가입 폼 이동
