@@ -29,8 +29,12 @@
 			height: 500px;
 			overflow: auto;
 		}
-		.chating p{
-			color: #fff;
+		.chating .me{
+			color: #F6F6F6;
+			text-align: right;
+		}
+		.chating .others{
+			color: #FFE400;
 			text-align: left;
 		}
 		input{
@@ -63,16 +67,27 @@
 			var msg = data.data;
 			if(msg != null && msg.trim() != ''){
 				var d = JSON.parse(msg);
+			
 				if(d.type == "getId"){
+					
+					console.log("getId?" + d.type)
 					var si = d.sessionId != null ? d.sessionId : "";
+					console.log("if 문 전 sessionId : " + si)
 					if(si != ''){
 						$("#sessionId").val(si); 
+						
 					}
+					
 				}else if(d.type == "message"){
+					console.log("messge?" + d.type)
 					if(d.sessionId == $("#sessionId").val()){
+						
+						
 						$("#chating").append("<p class='me'>나 :" + d.msg + "</p>");	
 					}else{
+						console.log("메시지 메서드")
 						$("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+					
 					}
 						
 				}else{
@@ -121,6 +136,7 @@
 <body>
 	<div id="container" class="container">
 		<h1>채팅</h1>
+		<input type="hidden" id="sessionId" value="">
 		<div id="chating" class="chating">
 		</div>
 		
