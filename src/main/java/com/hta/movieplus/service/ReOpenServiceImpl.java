@@ -26,21 +26,19 @@ public class ReOpenServiceImpl implements ReOpenService {
 	
 	@Override
 	public void insertReOpenExpectMovieImformation(String movieCode) {
-		dao.insertReOpenExpectMovieImformation(movieCode);
+		
+		if(dao.insertReOpenExpectMovieImformation(movieCode) > 0) {
+			dao.updateExpectReOpening(movieCode);
+		}
 	}
 
 	@Override
-	public void updateExpectReOpening(String code) {
-		dao.updateExpectReOpening(code);
+	public List<ReOpenVO> getExpectMovieList() {
+		return dao.getExpectMovieList();
 	}
 
-
-
-	  
-	/*
-	 * @Override public List<Movie> getExpectReOpening() { return
-	 * dao.getExpectReOpening(); }
-	 */
-	
-	
+	@Override
+	public void cancelreopen(String cancelcode) {
+		dao.cancelReOpen(cancelcode);
+	}
 }

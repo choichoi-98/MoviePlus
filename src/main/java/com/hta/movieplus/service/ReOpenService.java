@@ -10,8 +10,10 @@ public interface ReOpenService {
 	public List<Movie> getEndedMovieList();
 	
 	public void insertReOpenExpectMovieImformation(String movieCode);
-	
-	public void updateExpectReOpening(String code);
+
+	public List<ReOpenVO> getExpectMovieList();
+
+	public void cancelreopen(String cancelcode);
 	
 	
 	
