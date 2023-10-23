@@ -3,34 +3,49 @@
 
 <mapper namespace="com.hta.movieplus.mybatis.mapper.ReOpenMapper">
 
-<!-- 관리자 - 상영 종료 영화 목록 -->
     <select id="getEndedMovieList" resultType="movie">
-    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
-		FROM MOVIE
-		WHERE MOVIE_SCREEN = '상영종료'
+      SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
+      FROM MOVIE
+      WHERE MOVIE_SCREEN = '상영종료'
     </select>
     
-    <!-- 상영상태를 string 형태인 '재개봉예정'으로 변경-->
-    <update id="updateExpectReOpening" parameterType="String">
-    	UPDATE MOVIE
-    	SET
-    	MOVIE_SCREEN = '재개봉예정'
-    	where MOVIE_CODE = #{xxx}
-    	AND MOVIE_SCREEN = '상영종료'
-    </update>
-    
-    <!-- <insert id="updateExpectDate" parameterType="String">
-    	UPDATE EXPECT_REOPENING_MOVIE
-    	SET
-    	MOVIE_
+    <insert id="insertReOpenExpectMovieImformation" parameterType="String">
+      INSERT INTO EXPECT_REOPENING_MOVIE
+	  VALUES(INCREASE_MOVIE_EXPECT_NUM.NEXTVAL,
+	  #{movieCode}, sysdate, syadate + 30);
     </insert>
     
-    <select id="getExpectReOpening" resultType="movie">
-    	SELECT MOVIE_CODE, MOVIE_TITLE, MOVIE_SCREEN
-    	FROM MOVIE
-    	WHERE MOVIE_SCREEN = '재개봉예정'
-    	SELECT MOVIE_EXPECTOPEN, MOVIE_EXPECTCLOSE
-    	
-    	 -->
+	<!-- 상영상태를 string 형태인 '재개봉예정'으로 변경-->
+    <update id="updateExpectReOpening" parameterType="String">
+       UPDATE MOVIE
+       SET
+       MOVIE_SCREEN = '재개봉예정'
+       where MOVIE_CODE = #{code}
+       AND MOVIE_SCREEN = '상영종료'
+    </update>
+    
+   <!--  <select id="" parameterType="">
+    	SELECT MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE
+    	FROM EXPECT_REOPENING_MOVIE
+    	WHERE MOVIE_EXPECT_NUM = #{MOVIENUM}
+    </select> -->
+    
+<!--     <insert id="updateSysdate" parameterType="String">
+       INSERT INTO EXPECT_REOPENING_MOVIE(MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE)
+      SELECT MOVIE_CODE, #{REOPENINGDATE}, #{REOPENINGENDDATE}
+      FROM MOVIE
+    </insert>
+    
+    <select id="getExpectReOpen" resultType="movie">
+       SELECT MOVIE_SCREEN
+       FROM MOVIE
+       WHERE MOVIE_SCREEN = "재개봉예정"
+    </select>
+    
+    <select id="getSysdate" resultType="ReopenVO">
+       SELECT MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE
+       FROM EXPECT_REOPENING_MOVIE
+    </select> -->
+   
 </mapper>
     

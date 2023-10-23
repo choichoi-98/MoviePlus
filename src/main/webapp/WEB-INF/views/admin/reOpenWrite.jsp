@@ -20,14 +20,14 @@
 	
 	<script>
 		$(document).ready(function () {
-			var selected_delete_notice_num;
+			var selected_movieCode;
 
-			$('.main__table-btn--delete').click(function() {
-				selected_delete_notice_num = $(this).attr('data-noticenum');
+			$('.main__table-btn--banned').click(function() {
+				selected_movieCode = $(this).attr('data-movieCode');
 			})
 
-			$('#delete-modal-ok').click(function() {
-				location.href = '/movieplus/admin/noticedelete?noticenum=' + selected_delete_notice_num;
+			$('#reopen_regist_btn').click(function() {
+				location.href = '/movieplus/admin/reopenExpect?movieCode=' + selected_movieCode;
 			})
 		})
 		
@@ -97,15 +97,9 @@
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
-												<a href="#modal-status" data-noticenum="${endedmovie.movie_Code}" 
+												<a href="#modal-status" data-movieCode="${endedmovie.movie_Code}" 
 													class="main__table-btn main__table-btn--banned open-modal">
 													<i class="icon ion-ios-create"></i>
-												</a>
-												
-												<a href="#modal-delete"
-													data-noticenum="${endedmovie.movie_Code}"
-													class="main__table-btn main__table-btn--delete open-modal">
-													<i class="icon ion-ios-trash"></i>
 												</a>
 											</div>
 										</td>
@@ -149,23 +143,11 @@
 		<p class="modal__text">등록하시겠습니까?</p>
 
 		<div class="modal__btns">
-			<button class="modal__btn modal__btn--apply" type="button">등록</button>
+			<button id="reopen_regist_btn" class="modal__btn modal__btn--apply" type="button">등록</button>
 			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 		</div>
 	</div>
 	
-	<!-- modal delete -->
-	<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-		<h6 class="modal__title"></h6>
-
-		<p class="modal__text">삭제하시겠습니까?</p>
-
-		<div class="modal__btns">
-			<button id="delete-modal-ok" class="modal__btn modal__btn--apply"
-				type="button">삭제</button>
-			<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
-		</div>
-	</div>
 
 </body>
 </html>

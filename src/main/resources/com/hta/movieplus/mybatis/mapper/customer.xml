@@ -15,4 +15,5 @@
 		select nvl(max(CUSTOMER_NUM),0)+1 from CUSTOMER_ONEONONE   <!-- 해당부분에서 select를 사용하면 insert가 아니라서 데이터를 검색하는것인데.. 그럼 db에 값이 들어가나 -->
 	</sql>
 	
+	
 </mapper>
