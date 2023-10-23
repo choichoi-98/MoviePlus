@@ -71,7 +71,7 @@ $(function() {
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader(header, token);
                     },
-                    success: function(response) {
+                    success: function(response) {X 
         				alert("조회 성공");
                     },
                     error: function(error) {
