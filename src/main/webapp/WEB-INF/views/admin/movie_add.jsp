@@ -11,6 +11,11 @@
 <script>
 	var playImagePath="${pageContext.request.contextPath}/resources/image/movie/play.png";
 	var pauseImagePath="${pageContext.request.contextPath}/resources/image/movie/pause.png";
+	
+	function openPop(){
+		var popup = window.open('${pageContext.request.contextPath}/chat/chating',
+							'채팅팝업','width=700px,height=800px');
+	}
 </script>
 <style>
 #modal-view > div{
@@ -18,6 +23,12 @@ width:100%;
 }
 #modal-view > div > div{
 width:100%;
+}
+#chatBtn{
+    height: 80px;
+    position: fixed;
+    bottom: 50px;
+    right: 75px;
 }
 </style>
 </head>
@@ -237,6 +248,14 @@ width:100%;
 					</div>
 				<!-- end modal view -->
 			</div>
+		</div>
+		
+		<!-- 채팅 open btn -->
+		<div>
+			<a herf="#none" onclick="openPop()">
+				<img id="chatBtn"
+				  src="${pageContext.request.contextPath}/resources/image/chat/wechat.png">
+			</a>
 		</div>
 	</main>
 </body>
