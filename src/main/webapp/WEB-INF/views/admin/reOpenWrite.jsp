@@ -27,19 +27,9 @@
 			})
 
 			$('#reopen_regist_btn').click(function() {
-				location.href = '/movieplus/admin/reopenExpect?movieCode=' + selected_movieCode;
+				location.href = '/movieplus/admin/reopenexpect?movieCode=' + selected_movieCode;
 			})
-		})
-		
-		  $(document).ready(function () {
-        // 글의 개수를 가져오는 부분
-        var total = ; // list2는 CUSTOMER_NOTICE_TYPE컬럼의 값이 string(전체)인 데이터의 수
-        // "글 개수"란 아래에 출력${list2.size()}
-        var countElement = document.createElement("span"); //변수설정 countElement는 HTML전체문서에서 SPAN요소를 추가함
-        countElement.textContent = "총 작성글 " + total + " 개" ; //
-        document.querySelector('.main__title-stat').appendChild(countElement);
-    });
-		
+		});
 	</script>
 
 	<!-- main content -->
@@ -111,7 +101,7 @@
 					</div>
 				</div>
 				<!-- end comments -->
-				<a href="${pageContext.request.contextPath}/admin/reopenlist"
+				<a href="${pageContext.request.contextPath}/admin/reopenexpectlist"
 					class="main__title-link">뒤로</a>
 				<!-- paginator -->
 				<div class="col-12">
