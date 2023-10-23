@@ -9,6 +9,7 @@ public class TheaterSchedule {
 	private String THEATER_SCHEDULE_DATE;
 	private String MOVIE_CODE;
 	private String THEATER_SCHEDULE_TYPE;
+	private String THEATER_SCHEDULE_STATUS = "상영";
 	// ---------------------------
 	private String THEATER_ROOM_NAME;
 	private String MOVIE_TITLE;
@@ -118,6 +119,12 @@ public class TheaterSchedule {
 	}
 	public void setTHEATER_SCHEDULE_BOOKED_CNT(int tHEATER_SCHEDULE_BOOKED_CNT) {
 		THEATER_SCHEDULE_BOOKED_CNT = tHEATER_SCHEDULE_BOOKED_CNT;
+	}
+	public String getTHEATER_SCHEDULE_STATUS() {
+		return THEATER_SCHEDULE_STATUS;
+	}
+	public void setTHEATER_SCHEDULE_STATUS(String tHEATER_SCHEDULE_STATUS) {
+		THEATER_SCHEDULE_STATUS = tHEATER_SCHEDULE_STATUS;
 	}
 	
 	

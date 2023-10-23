@@ -1,5 +1,6 @@
 package com.hta.movieplus.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -50,5 +51,7 @@ public interface SchedulingService {
 	Movie getMovieDetailByCode(String movieCode);
 
 	List<MovieDibsVO> getMovieDibsList(String name);
+
+	int changeScheduleStatus(LocalDateTime now);
 
 }

@@ -34,7 +34,7 @@
 	<insert id="addSchedule" parameterType="theaterSchedule">
 		INSERT INTO THEATER_SCHEDULE
 		VALUES (THEATER_SCHEDULE_SEQ.NEXTVAL, #{THEATER_ID}, #{THEATER_ROOM_ID}, #{THEATER_SCHEDULE_START},
-				#{THEATER_SCHEDULE_END}, #{THEATER_SCHEDULE_DATE}, #{MOVIE_CODE}, #{THEATER_SCHEDULE_TYPE})
+				#{THEATER_SCHEDULE_END}, #{THEATER_SCHEDULE_DATE}, #{MOVIE_CODE}, #{THEATER_SCHEDULE_TYPE}, #{THEATER_SCHEDULE_STATUS} )
 	</insert>
 	
 	<select id="getMovieByID" resultType="movie" parameterType="String">
@@ -77,6 +77,7 @@
 		WHERE TS.MOVIE_CODE = #{movieCode}
 		AND TS.THEATER_SCHEDULE_DATE = #{date}
 		AND T.THEATER_LOCATION = #{location}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
 	</select>
 	
 	<select id="getTheaterWithMovie" resultType="theater" parameterType="map">
@@ -90,6 +91,7 @@
 								WHERE T.THEATER_LOCATION = #{location}
 								  AND TS.MOVIE_CODE = #{movieCode}
 								  AND TS.THEATER_SCHEDULE_DATE = #{date}
+								  AND TS.THEATER_SCHEDULE_STATUS = '상영'
 								GROUP BY TS.THEATER_ID ) 
 								 )
 		ORDER BY THEATER_CREATED_DATE
@@ -107,6 +109,7 @@
 							WHERE T.THEATER_LOCATION = #{location}
 							AND TS.MOVIE_CODE = #{movieCode}
 							AND TS.THEATER_SCHEDULE_DATE = #{date}
+							AND TS.THEATER_SCHEDULE_STATUS = '상영'
 							GROUP BY TR.THEATER_ROOM_ID
 							)
 						)
@@ -122,6 +125,7 @@
 						FROM THEATER_SCHEDULE
 						WHERE THEATER_ID = #{theaterId}
 						AND THEATER_SCHEDULE_DATE = #{date}
+						AND THEATER_SCHEDULE_STATUS = '상영'
 						GROUP BY MOVIE_CODE )
 					)		
 	</select>
@@ -134,6 +138,7 @@
 						FROM THEATER_SCHEDULE
 						WHERE THEATER_ID = #{theaterId}
 						AND THEATER_SCHEDULE_DATE = #{date}
+						AND THEATER_SCHEDULE_STATUS = '상영'
 						GROUP BY THEATER_ROOM_ID )
 					)
 		ORDER BY THEATER_ROOM_ID
@@ -151,10 +156,12 @@
 		JOIN MOVIE M ON TS.MOVIE_CODE = M.MOVIE_CODE
 		WHERE TS.THEATER_SCHEDULE_DATE = #{date}
 		AND TS.THEATER_ID = #{theaterId}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
 		ORDER BY TS.THEATER_SCHEDULE_END
 		
 	</select>
 		
+	<!-- STATUS 추가 -->
 	<select id="getOpenMovieListWithScheduleCnt" resultType="movie" parameterType="String">
 		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_DIRECTOR, M.MOVIE_POSTER, M.MOVIE_ACTORS, M.MOVIE_GENRE, M.MOVIE_RUNTIME,
 		M.MOVIE_OPENDATE, M.MOVIE_GRADE, M.MOVIE_PLOT, M.MOVIE_STAR, M.MOVIE_RELEASE, M.MOVIE_SCREEN, M.MOVIE_STILL, NVL(CNT_TABLE.CNT, 0) MOVIE_SCHEDULE_CNT
@@ -163,12 +170,13 @@
 			FROM ( SELECT MOVIE_CODE, COUNT(*) AS CNT	
 					FROM THEATER_SCHEDULE
 					WHERE THEATER_SCHEDULE_DATE = #{date}
+					AND THEATER_SCHEDULE_STATUS = '상영'
 					GROUP BY MOVIE_CODE )) CNT_TABLE
 		ON M.MOVIE_CODE = CNT_TABLE.MOVIE_CODE
 		WHERE M.MOVIE_SCREEN = '상영중'
 	</select>
 	
-	
+	<!-- STATUS 추가 -->
 	<select id="getTheaterRoomWithScheduleCnt" resultType="theaterRoom" parameterType="map">
 		SELECT *
 		FROM THEATER_ROOM TR
@@ -177,6 +185,7 @@
 			FROM THEATER_SCHEDULE
 			WHERE THEATER_SCHEDULE_DATE = #{date}
 			AND MOVIE_CODE = #{movieCode}
+			AND THEATER_SCHEDULE_STATUS = '상영'			
 			GROUP BY THEATER_ROOM_ID        
 		      ) CNT
 		ON TR.THEATER_ROOM_ID = CNT.THEATER_ROOM_ID 
@@ -192,6 +201,7 @@
 		WHERE TS.MOVIE_CODE = #{movieCode}
 		AND TS.THEATER_SCHEDULE_DATE = #{date}
 		AND TS.THEATER_ID = #{theaterId}
+		AND TS.THEATER_SCHEDULE_STATUS = '상영'
 		ORDER BY TS.THEATER_SCHEDULE_START
 		
 	</select>
@@ -207,5 +217,13 @@
 		JOIN MEMBER M ON MD.MEMBER_ID = M.MEMBER_ID
 		WHERE M.MEMBER_ID = #{name}
 	</select>
+	
+	<update id="changeScheduleStatus" parameterType="map">
+		UPDATE THEATER_SCHEDULE
+		SET THEATER_SCHEDULE_STATUS = '종료'
+		WHERE THEATER_SCHEDULE_DATE = #{date}
+		AND THEATER_SCHEDULE_START &lt;= #{time}
+		AND THEATER_SCHEDULE_STATUS = '상영'
+	</update>
 	
 </mapper>

@@ -1,7 +1,9 @@
 package com.hta.movieplus.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -312,6 +314,23 @@ public class schedulingServiceImpl implements SchedulingService {
 		// TODO Auto-generated method stub
 
 		return mapper.getMovieDibsList(name);
+	}
+
+	@Override
+	public int changeScheduleStatus(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(now.getHour());
+		sb.append(":");
+		sb.append(now.getMinute());
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("date", date);
+		dataMap.put("time", sb.toString());
+		
+		return mapper.changeScheduleStatus(dataMap);
 	}
 
 }
