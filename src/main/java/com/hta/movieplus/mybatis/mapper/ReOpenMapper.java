@@ -19,11 +19,6 @@ public interface ReOpenMapper {
 	public List<ReOpenVO> getExpectMovieList();
 	
 	public int cancelReOpen(String cancelcode);
-	/*
-	 * 
-	 * 
-	 * public void updateExpectDate(String startday);
-	 * 
-	 * public List<Movie> getExpectReOpening();
-	 */
+	
+	public int updatereopencancel(String reopencancel);
 }
