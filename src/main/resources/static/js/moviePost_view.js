@@ -36,6 +36,10 @@ $(document).ready(function(){
 
     $('#btnPostRly').click(function(e){
         e.preventDefault();
+        if($('#header-pinfo-memberId').val() == null){
+			return;
+		}
+
         addComment($(this).attr('data-postnum'));
     });
 
@@ -169,6 +173,10 @@ $(document).ready(function(){
     })
 
     $('#modal-like-btn').click(function() {
+        if($('#header-pinfo-memberId').val() == null){
+			return;
+		}
+
         if($('#modal-like-icon').hasClass('on')){ // 이미 on일 경우
             deleteLike($('#modal-like-btn').attr('data-postnum'));
            
@@ -239,6 +247,19 @@ $(document).ready(function(){
         reset();
         keyword = $(this).attr('data-movieTitle');
         getMoviePostList(option);
+    })
+
+    $('#moviepost-login').click(function() {
+        $('#header-login-btn').trigger('click');
+    })
+
+    $('#add-moviepost-none-login').click(function(e){
+        e.preventDefault();
+
+        $('#login-alert-modal').css('display', 'block');
+        $('.bg-modal').css('opacity', '1');
+        $('body').addClass('no-scroll');
+        
     })
 
     function reset(){

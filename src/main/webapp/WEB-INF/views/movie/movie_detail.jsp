@@ -385,31 +385,25 @@
 						<div class="movie-post-list"
 							style="position: relative; height: 400px;">
 
-							<c:forEach var="moviepost" items="${moviePostList}" begin="1" end="4" varStatus="status">
+							<c:forEach var="moviepost" items="${moviePostList}" begin="0" end="3" varStatus="status">
 								<div class="grid-item"
-									style="position: absolute; left: ${290 * (status.index-1)}px; top: 0px;">
+									style="position: absolute; left: ${290 * (status.index)}px; top: 0px;">
 									<div class="wrap">
 										<div class="img">
-											<a
-												href="#"
-												title="무비포스트 상세보기" class="moviePostBtn"><img
-												src="${moviepost.moviepost_Still}"
-												onerror="noImg(this)" alt="${moviepost.movie_Title}"></a>
+											<a href="#" title="무비포스트 상세보기" class="moviePostBtn"><img
+												src="${moviepost.moviepost_Still}" onerror="noImg(this)"
+												alt="${moviepost.movie_Title}"></a>
 										</div>
 
 										<div class="cont">
 											<div class="writer">
 
-												<a
-													href="#"
-													title="무비포스트 페이지로 이동" class="moviePostId"
+												<a href="#" title="무비포스트 페이지로 이동" class="moviePostId"
 													data-id="1B9C8F3B-F75F-4081-85AE-352A45858E05">${moviepost.member_Id}</a>
 
 											</div>
 
-											<a
-												href="#"
-												title="무비포스트 상세보기" class="link moviePostBtn">
+											<a href="#" title="무비포스트 상세보기" class="link moviePostBtn">
 												<div class="label"></div>
 
 												<p class="tit">${moviepost.movie_Title}</p>
@@ -421,6 +415,18 @@
 									</div>
 								</div>
 							</c:forEach>
+
+							<c:if test="${fn:length(moviePostList) == 0}">
+								<div class="no-list" >
+									<h2 class="tit white small">아직 남겨진 무비포스트가 없어요!</h2>
+
+									<div class="box" style="height:300px">
+										<p>
+											아직 작성된 무비포스트가 없어요. 첫번째 무비포스트의 주인공이 되어보세요.<br>
+										</p>
+									</div>
+								</div>
+							</c:if>
 
 						</div>
 

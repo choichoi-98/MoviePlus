@@ -36,8 +36,8 @@
 			<div class="event-detail">
 				<h2 class="tit">[재개봉] ${reopenMovie.movie_Title}</h2>
 				<p class="event-detail-date">
-					<span>기간</span> <em>2023.09.27 ~ 2023.10.09</em>
-					<span style="margin-left: 20px">현재 청원 수 : ${reopenMovie.REOPEN_COUNT}</span>
+					<span>기간</span> <em>${reopenMovie.REOPENING_STARTDATE} ~ ${reopenMovie.REOPENING_ENDDATE}</em>
+					<span style="margin-left: 20px">현재 동의 수 : </span><span style="font-weight:bold; margin-left:2px">${reopenMovie.REOPEN_COUNT}</span>
 				</p>
 
 				<!--

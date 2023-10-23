@@ -32,7 +32,7 @@
 
 						<div class="mbimg">
 							<c:choose>
-								<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'WELCOME'}">
+								<c:when test="${pinfo.MEMBER_MEMBERSHIP == 'Welcome'}">
 									<img
 										src="${pageContext.request.contextPath}/resources/image/membership/member_WELCOME_2.png"
 										alt="프로필 사진">
