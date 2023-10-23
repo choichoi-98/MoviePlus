@@ -45,13 +45,18 @@
 											placeholder="이벤트 제목" required>
 								</div>
 									
-								<div class="col-3"><!-- 이벤트 시작일 -->
+								<div class="col-5"><!-- 이벤트 시작일 -->
 									<input type="text" name="EVENT_STARTDATE" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" maxlength="8" required>
 								</div>
 							
-								<div class="col-3"><!-- 이벤트 종료일 -->
+								<div class="col-5"><!-- 이벤트 종료일 -->
 									<input type="text" name="EVENT_ENDDATE" class="form__input" placeholder="이벤트 종료일" maxlength="8"  required>
 								</div>
+								
+								<div class="col-5"><!-- 이벤트 발표일 -->
+									<input type="text" name="EVENT_RESULTDATE" class="form__input" placeholder="이벤트 발표일" maxlength="8"  required>
+								</div>
+								
 							 </div>
 						   </div><!-- form content end -->
 

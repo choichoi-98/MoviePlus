@@ -42,6 +42,8 @@ public interface EventService {
 
 	public Map<String, Object> pagination(int page);
 
+	public List<Event> getEventListdesc(int page, int limit);
+
 
 
 

@@ -14,6 +14,8 @@ public class Event {
 	private String EVENT_STARTDATE;		//이벤트 시작일
 	private String EVENT_ENDDATE;		//이벤트 종료일
 	private String EVENT_STATUS="PROGRESS"; //이벤트 상태(진행중(PROGRESS) | 종료(END))
+	private String EVENT_RESULTDATE;	//이벤트 발표일
+	private String EVENT_RESULT;		//이벤트 당첨내용
 	private int RNUM;
 	
 	private MultipartFile uploadevent;		//이벤트 내용 사진 업로드시 사용(EVENT_CONTENT)
@@ -171,6 +173,26 @@ public class Event {
 
 	public void setUploadthumb(MultipartFile uploadthumb) {
 		this.uploadthumb = uploadthumb;
+	}
+
+
+	public String getEVENT_RESULT() {
+		return EVENT_RESULT;
+	}
+
+
+	public void setEVENT_RESULT(String eVENT_RESULT) {
+		EVENT_RESULT = eVENT_RESULT;
+	}
+
+
+	public String getEVENT_RESULTDATE() {
+		return EVENT_RESULTDATE;
+	}
+
+
+	public void setEVENT_RESULTDATE(String eVENT_RESULTDATE) {
+		EVENT_RESULTDATE = eVENT_RESULTDATE;
 	}
 	
 	

@@ -17,14 +17,14 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>이벤트 수정</h2>
+						<h2>이벤트 당첨자 발표 추가</h2>
 					</div>
 				</div>
 				<!-- end main title -->
 
 				<!-- form -->
 				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/modifyEventProcess" class="form" method="post">
+					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 			
@@ -32,7 +32,7 @@
 								<div class="row row--form">
 								
 								<div class="col-3">
-									<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="rights" data-select2-id="rights" tabindex="-1" >
+									<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="rights" data-select2-id="rights" tabindex="-1" readOnly >
 												<option value="영화" ${eventdata.EVENT_TYPE == '영화' ? 'selected' : ''}>영화</option>
 												<option value="극장" ${eventdata.EVENT_TYPE == '극장' ? 'selected' : ''}>극장</option>
 												<option value="제휴/할인"  ${eventdata.EVENT_TYPE == '제휴/할인' ? 'selected' : ''}>제휴/할인</option>
@@ -42,49 +42,17 @@
 								<input type="hidden" name="EVENT_NUM" value="${eventdata.EVENT_NUM}">
 								<div class="col-12">
 									<input type="text" name="EVENT_SUBJECT" class="form__input"
-										 placeholder="이벤트 제목" value="${eventdata.EVENT_SUBJECT}" required>
+										 placeholder="이벤트 제목" value="${eventdata.EVENT_SUBJECT}" readOnly>
 								</div>
 									
-								<div class="col-5"><!-- 이벤트 시작일 -->
-									<input type="text" name="EVENT_STARTDATE" value="${eventdata.EVENT_STARTDATE}" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" required>
+								<div class="col-12">
+									<input type="text" name="EVENT_SUBJECT" class="form__input"
+										 placeholder="이벤트 발표 내용" value="" required>
 								</div>
-							
-								<div class="col-5"><!-- 이벤트 종료일 -->
-									<input type="text" name="EVENT_ENDDATE" value="${eventdata.EVENT_ENDDATE}" class="form__input" placeholder="이벤트 종료일 " required>
-								</div>
-								
-								<div class="col-5"><!-- 이벤트 발표일 -->
-									<input type="text" name="EVENT_RESULTDATE" value="${eventdata.EVENT_RESULTDATE}" class="form__input" placeholder="이벤트 발표일" maxlength="8"  required>
-								</div>
+									
 							 </div>
 						   </div><!-- form content end -->
 							
-							<!-- 썸네일 수정 EVENTFILE_ORIGINAL /uploadthumb  -->
-							<div class="col-12" id="thumbclass">
-								<label>
-									<span style="color:white;"> 
-									<c:if test = "${empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<c:if test = "${!empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<input type="file" id="eventthumbupfile" name="uploadthumb" style="color:white;" />
-									<input type="hidden"  name="EVENT_FILE" value="${eventdata.EVENT_FILE}" />
-									</span>
-									<span id="thumbfilevalue" style="display:none;">${eventdata.EVENTFILE_ORIGINAL}</span>
-								</label>
-							</div>	
-							
-							<!-- 내용 수정  EVENTCONTENT_ORIGINAL/ uploadevent -->
-							<div class="col-12">
-								<label>
-									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
-									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
-									<input type="hidden" name="EVENT_CONTENT" value="${eventdata.EVENT_CONTENT}" />
-								</label>
-								<span id="filevalue" style="display:none;">${eventdata.EVENTCONTENT_ORIGINAL}</span>
-                            </div>
 
 							<div class="col-12" >
 								<button type="submit" class="form__btn" style="display:inline-block;">등록</button>

@@ -145,6 +145,18 @@ public class EventServiceImpl implements EventService{
 		return pagemap;
 	}
 
+	@Override
+	public List<Event> getEventListdesc(int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow+limit-1;
+		
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return dao.getEventListdesc(map);
+	}
+
 
 
 	
