@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.CartVO;
+import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
@@ -193,11 +194,13 @@ public class StoreController {
 	@GetMapping("/cart")
 	public ModelAndView cart(
 		CartVO cartVO,
+		CouponVO couponVO,
 		ModelAndView mv) {
 		
 //		List<StoreVO> cartlist = storeService.getCartList();
 //		List<CartVO> cartlist2 = storeService.getCartList2();
 		List<StoreCartDTO> cartlist = storeService.getCartLists();
+//		List<CouponVO> couponlist = storeService.getCouponList();
 		
 		mv.setViewName("store/store_cart");
 		mv.addObject("cartlist", cartlist);
