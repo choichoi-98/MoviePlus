@@ -31,7 +31,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.MailVO;
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MoviePostVO;
+import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.service.MemberService;
+import com.hta.movieplus.service.MovieStoryService;
 import com.hta.movieplus.service.TheaterService;
 import com.hta.movieplus.task.SendMail;
 
@@ -39,6 +44,7 @@ import com.hta.movieplus.task.SendMail;
 @RequestMapping(value="/member")
 public class MemberController {
 	
+	MovieStoryService movieStoryService;
 	TheaterService theaterService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -50,9 +56,10 @@ public class MemberController {
 	private MailVO mailVO;
 	
 	@Autowired
-	public MemberController(MemberService memberservice ,TheaterService theaterService, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
+	public MemberController(MemberService memberservice ,TheaterService theaterService, MovieStoryService movieStoryService, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
 		this.memberservice = memberservice;
 		this.theaterService = theaterService;
+		this.movieStoryService = movieStoryService;
 		this.passwordEncoder = passwordEncoder;
 		this.sendMail = sendMail;
 		this.mailVO = mailVO;
@@ -205,13 +212,24 @@ public class MemberController {
 	
 	//마이페이지 이동
 	@GetMapping("/mypage")
-	public ModelAndView mypage(ModelAndView mv, Principal principal) {
-		List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(principal.getName());
+	public String mypage(Model model, @AuthenticationPrincipal Member member) {
+		String memberId = member.getMEMBER_ID();
+		List<FavoriteTheater> favTheaterList = theaterService.getFavoriteTheaterListById(memberId);
 		
-		mv.addObject("favTheaterList", favTheaterList);
-		mv.setViewName("member/mypage_main");
+		//무비스토리
+		List<MoviePostVO> postList = movieStoryService.getMoviePostList(memberId);
+		List<TheaterSchedule> scheduleList = movieStoryService.getScheduleList(memberId);
+		List<Movie> movieList = movieStoryService.getMovieDibsList(memberId);
+		List<MovieReviewVO> reviewList = movieStoryService.getMovieReviewList(memberId);
+		model.addAttribute("ms_postCnt", postList.size());
+		model.addAttribute("ms_scheduleCnt", scheduleList.size());
+		model.addAttribute("ms_movieCnt", movieList.size());
+		model.addAttribute("ms_reviewCnt", reviewList.size());
+		//
 		
-		return mv;
+		model.addAttribute("favTheaterList", favTheaterList);
+		
+		return "member/mypage_main";
 	}
 
 	//마이페이지 - 개인정보수정 클릭시 비밀번호 확인페이지로 이동

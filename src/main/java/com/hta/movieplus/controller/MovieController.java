@@ -22,12 +22,16 @@ import com.hta.movieplus.api.RestApi.MovieDetailApi;
 import com.hta.movieplus.api.RestApi.MoviePosterApi;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.service.MoviePostService;
 import com.hta.movieplus.service.MovieServiceImpl;
 
 @Controller
 @RequestMapping(value = "/movie")
 public class MovieController {
+	
+	MoviePostService moviePostService;
 
 	@Autowired
 	private MovieServiceImpl movieServiceImpl;
@@ -40,6 +44,11 @@ public class MovieController {
 	
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
+    @Autowired
+    public MovieController(MoviePostService moviePostService) {
+		// TODO Auto-generated constructor stub
+    	this.moviePostService = moviePostService;
+	}
     
     @GetMapping("/movieListPage") //영화 > 전체 영화 list
     public ModelAndView movieList(ModelAndView mv,
@@ -170,6 +179,9 @@ public class MovieController {
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetail(movieCode);
     		mv.addObject("movieDetail", movieDetail);
     	}
+    	
+    	List<MoviePostVO> moviePostList = moviePostService.getMoviePostListByMovieCode(movieCode);
+    	mv.addObject("moviePostList", moviePostList);
     	
     	mv.setViewName("movie/movie_detail");
     	return mv;

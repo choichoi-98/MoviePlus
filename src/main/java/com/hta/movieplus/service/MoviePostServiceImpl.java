@@ -166,6 +166,12 @@ public class MoviePostServiceImpl implements MoviePostService {
 		// TODO Auto-generated method stub
 		return mapper.deletePostById(postNum);
 	}
+
+	@Override
+	public List<MoviePostVO> getMoviePostListByMovieCode(String movieCode) {
+		// TODO Auto-generated method stub
+		return mapper.getMoviePostListByMovieCode(movieCode);
+	}
 	
 
 

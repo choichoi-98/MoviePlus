@@ -117,7 +117,7 @@
 								<div class="txt-info">
 									<c:choose>
 										<c:when test="${myPostCnt > 0}">
-											<a href="#" style="color: white;">내 글보기로 이동</a>
+											<a href="${pageContext.request.contextPath}/member/mypage/moviestory" style="color: white;">내 글보기로 이동</a>
 										</c:when>
 										<c:otherwise>
 											작성된 포스트가<br> 없습니다.

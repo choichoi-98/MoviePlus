@@ -81,7 +81,7 @@
 		FROM MOVIEPOST
 		GROUP BY MOVIE_CODE) MP
 		ON M.MOVIE_CODE = MP.MOVIE_CODE
-		ORDER BY CNT
+		ORDER BY post_Count desc
 	</select>
 	
 	<select id="getTotalCount" resultType="int">
@@ -139,6 +139,13 @@
 		WHERE MOVIEPOST_NUM = #{postNum}
 	</delete>
 	
+	<select id='getMoviePostListByMovieCode' parameterType="String" resultType="moviePostVO">
+		SELECT *
+		FROM MOVIEPOST MP
+		JOIN MOVIE M ON MP.MOVIE_CODE = M.MOVIE_CODE
+		WHERE MP.MOVIE_CODE = #{movieCode}
+		
+	</select>
 	
 	
 </mapper>

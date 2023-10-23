@@ -43,4 +43,8 @@ public interface MoviePostMapper {
 
 	int deletePostById(int postNum);
 
+	List<MoviePostVO> getMoviePostListByMovieCode(String movieCode);
+	
+	
+
 }

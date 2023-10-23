@@ -40,4 +40,6 @@ public interface MoviePostService {
 	int deleteCommentByCommNum(int comment_num);
 
 	int deletePost(int postNum);
+
+	List<MoviePostVO> getMoviePostListByMovieCode(String movieCode);
 }

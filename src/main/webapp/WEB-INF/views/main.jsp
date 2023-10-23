@@ -246,7 +246,7 @@ document.ready
 							<p class="date">2023.09.19</p>
 
 							<p class="more">
-								<a href="#"
+								<a href="${pageContext.request.contextPath}/customer_service/notice"
 									title="전체공지 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
 							</p>
 						</div>

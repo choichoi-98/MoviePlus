@@ -57,13 +57,15 @@ public class TheaterController {
 		// 메뉴바 부분
 		List<TimeTableDate> dateList = schedulingService.getDateList();
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
+		Theater theater = theaterservice.getTheaterById(theaterId);
+		
 
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.addObject("dateList", dateList);
 		// 메뉴바 부분
 
-		
+		mv.addObject("theater", theater);
 		mv.addObject("ajax_theaterId", theaterId);
 		mv.setViewName("theater/theater_detail");
 

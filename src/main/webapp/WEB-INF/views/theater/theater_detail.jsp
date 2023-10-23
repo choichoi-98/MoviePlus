@@ -40,7 +40,8 @@
 		<!-- theater-detail-page -->
 		<div class="theater-detail-page">
 
-			<div class="bg-img" style=""></div>
+			<div class="bg-img"
+				style="background-image:url('${pageContext.request.contextPath}/resources/image/theater/theater_detail.jpg');"></div>
 			<div class="bg-pattern"></div>
 			<div class="bg-mask"></div>
 
@@ -72,7 +73,7 @@
 				</div>
 				<!--// theater-area-list -->
 
-				<p class="name">강남</p>
+				<p class="name">${theater.THEATER_NAME}</p>
 				<input type="hidden" id="ajax-theaterId" value="${ajax_theaterId}">
 				<div class="btn-util right">
 
@@ -121,8 +122,8 @@
 
 
 					<div class="theater-info-text mt40">
-						<p class="big">간단 소개(큰 글)</p>
-						<p>간단 소개(작은 글)</p>
+						<p class="big">${theater.THEATER_INTRO1}</p>
+						<p>${theater.THEATER_INTRO2}</p>
 					</div>
 
 
@@ -137,9 +138,16 @@
 						<p>
 							<i class="iconset ico-facility-theater"></i>일반상영관
 						</p>
-						<p>
-							<i class="iconset ico-facility-disabled"></i>장애인석
-						</p>
+						<c:if test="${theater.THEATER_SPECIAL_SEAT == 'CHECKED' }">
+							<p>
+								<i class="iconset ico-facility-special"></i>장애인석
+							</p>
+						</c:if>
+						<c:if test="${theater.THEATER_DISABLED_SEAT == 'CHECKED' }">
+							<p>
+								<i class="iconset ico-facility-disabled"></i>장애인석
+							</p>
+						</c:if>
 					</div>
 
 					<h2 class="tit small mt70">위치안내</h2>
@@ -184,8 +192,7 @@
 					</script>
 
 					<ul class="dot-list">
-						<li><span class="font-gblue">도로명주소 : </span> 서울특별시 서초구 서초대로
-							77길 3 (서초동) 아라타워 8층</li>
+						<li><span class="font-gblue">도로명주소 : </span> ${theater.THEATER_ADDRESS1} ${theater.THEATER_ADDRESS2}</li>
 
 					</ul>
 
@@ -210,17 +217,7 @@
 
 								<ul class="dot-list">
 
-									<li>주차 요금은 입차시간을 기준으로 합니다.</li>
-
-									<li>영화 관람 시 3시간 → 3,000원(3시간 초과 시 10분당 1,000원 부과, 초과비용 출차
-										시 정산)</li>
-
-									<li>건물 내 타 매장과 주차 할인 중복 적용 불가.</li>
-
-									<li>입차시 최대 3시간 30분까지 할인 가능(차량 1대에 주차 할인 적용 2회 이상 불가)</li>
-
-									<li>주차 공간이 협소하므로 가급적이면 대중교통을 이용 바랍니다. (지하철 2호선 강남역 출구 9번
-										출구)</li>
+									<li>${theater.THEATER_PARKING}</li>
 
 								</ul>
 							</div>

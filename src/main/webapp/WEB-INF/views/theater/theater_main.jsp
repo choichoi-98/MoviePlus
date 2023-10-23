@@ -99,7 +99,7 @@
 
 				<div class="tit-util mt70 mb15">
 					<h3 class="tit">극장 이벤트</h3>
-					<a href="#" class="more" title="극장 이벤트 더보기">더보기 <i
+					<a href="${pageContext.request.contextPath}/event/theater" class="more" title="극장 이벤트 더보기">더보기 <i
 						class="iconset ico-arr-right-gray"></i></a>
 				</div>
 
@@ -122,7 +122,7 @@
 
 				<div class="tit-util mt70 mb15">
 					<h3 class="tit">극장 공지사항</h3>
-					<a href="#" class="more" title="극장 공지사항 더보기">더보기 <i
+					<a href="${pageContext.request.contextPath}/customer_service/notice" class="more" title="극장 공지사항 더보기">더보기 <i
 						class="iconset ico-arr-right-gray"></i></a>
 				</div>
 
