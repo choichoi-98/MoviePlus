@@ -124,9 +124,4 @@ public class StoreServiceImpl implements StoreService {
 		dao.delCartItem(cartVO);
 	}
 
-	@Override
-	public List<CouponVO> getCouponList() {
-		return dao.getgetCouponList();
-	}
-
 }
