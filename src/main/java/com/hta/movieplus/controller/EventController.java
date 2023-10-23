@@ -74,8 +74,12 @@ public class EventController {
 
 	@GetMapping("/event/end")
 	public ModelAndView endEvent(ModelAndView mv) {
+		
 		List<Event> eventlist = eventservice.getAllEventList();
+		int eventListCountStatus = eventservice.getEventListCountStatus();
+		
 		mv.addObject("eventlist", eventlist);
+		mv.addObject("eventlistcount", eventListCountStatus);
 		mv.setViewName("event/event_end");
 
 		return mv;
@@ -401,6 +405,22 @@ public class EventController {
 		return mv;
 	}
 	
+	//관리자 - 이벤트 당첨 발표내용 추가
+	@GetMapping("/admin/eventResult")
+	public ModelAndView eventResult(@RequestParam(value = "num") int num, ModelAndView mv) {
+		Event event = eventservice.getDetailEvent(num);
+		mv.addObject("eventdata", event);
+		mv.setViewName("admin/addEventResult");
+		return mv;
+	}
 	
+	//관리자 - 이벤드 당첨 발표내용 추가 프로세스
+	//@GetMapping("/admin/eventResultProcess")
+	public ModelAndView eventResultProcess(@RequestParam(value = "num") int num, ModelAndView mv) {
+		Event event = eventservice.update_eventResult();
+		mv.addObject("eventdata", event);
+		mv.setViewName("admin/addEventResult");
+		return mv;
+	}
 	
 }

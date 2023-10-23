@@ -86,6 +86,14 @@
 		from EVENT
 	</select>
 	
+	<!-- 종료된 이벤트 전체 개수 -->
+	<select id="getEventListCountStatus" resultType="int">	
+		select count(*) 
+		from EVENT
+		WHERE EVENT_STATUS = 'END'
+	</select>
+	
+	
 	<!-- 관리자 - 이벤트 리스트 -->
 	<select id="getEventList" parameterType="java.util.Map" resultType="event">
 		SELECT *
@@ -156,7 +164,14 @@
 		WHERE EVENT_NUM = #{EVENT_NUM}	
 	</update>
 	
-
+	<!-- 관리자 - 이벤트 당첨결과 설명 추가 -->
+	<update id="update_eventResult"  parameterType="event">
+		update EVENT
+		set EVENT_RESULT = #{EVENT_RESULT}
+		WHERE EVENT_NUM = #{EVENT_NUM}
+	</update>
+	
+	
 	
 	
 </mapper>

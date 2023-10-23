@@ -157,6 +157,16 @@ public class EventServiceImpl implements EventService{
 		return dao.getEventListdesc(map);
 	}
 
+	@Override
+	public int getEventListCountStatus() {
+		return dao.getEventListCountStatus();
+	}
+
+	@Override
+	public Event update_eventResult() {
+		return dao.update_eventResult();
+	}
+
 
 
 	

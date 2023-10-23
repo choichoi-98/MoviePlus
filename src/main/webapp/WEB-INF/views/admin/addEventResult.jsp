@@ -46,8 +46,8 @@
 								</div>
 									
 								<div class="col-12">
-									<input type="text" name="EVENT_SUBJECT" class="form__input"
-										 placeholder="이벤트 발표 내용" value="" required>
+									<textarea id="text" name="EVENT_RESULT" class="form__textarea"
+										 placeholder="이벤트 발표 내용" required></textarea>
 								</div>
 									
 							 </div>

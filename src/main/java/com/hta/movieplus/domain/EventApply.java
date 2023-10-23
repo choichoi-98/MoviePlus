@@ -3,8 +3,8 @@ package com.hta.movieplus.domain;
 public class EventApply {
 	
 	private String MEMBER_ID; 					//회원 아이디
-	private int EVENT_NUM;							//이벤트번호
-	private String EVENT_DRAW;					//당첨 여부
+	private int EVENT_NUM;						//이벤트번호
+	private String EVENT_DRAW="N";				//당첨 여부(기본값 N / 당첨시 Y)
 	
 	public String getMEMBER_ID() {
 		return MEMBER_ID;

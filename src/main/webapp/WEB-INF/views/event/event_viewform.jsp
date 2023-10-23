@@ -25,8 +25,10 @@
 	</div>
 	
 	<div id="contents" class="location-fixed" style="padding-top:40px;">
-	<form id="eventform" action="" method="">
-	 <input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
+	<form id="eventform" action="" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
+		<input type="hidden" id="MEMBER_ID" value="${pinfo.MEMBER_ID}" name="MEMBER_ID">
 		<!-- event-detail -->
 		<div class="event-detail">
 			<h2 class="tit">
@@ -64,7 +66,9 @@
 			</div>
 		</div> <!-- event detail end -->
 		
-		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1100px;">
+		<!-- 이벤트 신청 -->
+		<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
+		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1000px;">
               <table class="board-list" >
                   <caption>구분, 연동정보, 연결 항목을 가진 간편 로그인 계정연동 표</caption>
                   <colgroup>
@@ -74,21 +78,23 @@
                   </colgroup>
                   <thead>
                       <tr>
-                          <th scope="col">영화관</th>
+                          <th scope="col">상영날짜</th>
                           <th scope="col">상영시간</th>
+                          <th scope="col">영화관</th>
                           <th scope="col">응모</th>
                       </tr>
                   </thead>
                   <tbody id="lnkgInfoTbody">
                       <tr>
-                          <th scope="row" class="a-c">코엑스</th>
-                                  <td class="a-l">연결된 계정정보가 없습니다.</td>
-                                  <td><button type="button" class="button small gray" style="background:#792828">신청하기</button></td>
+                          <th scope="row" class="a-c">상영날짜</th>
+                          <td class="a-c">영화관</td>
+                          <td class="a-c">영화관</td>
+                          <td><button type="button" class="button small gray" style="background:#792828">신청하기</button></td>
                       </tr>
                   </tbody>
               </table>
           </div>
-		
+		 </c:if>
 		
 		
 			

@@ -46,6 +46,10 @@ public interface EventMapper {
 
 	public List<Event> getEventListdesc(HashMap<String, Object> map);
 
+	public int getEventListCountStatus();
+
+	public Event update_eventResult();
+
 	
 }
 

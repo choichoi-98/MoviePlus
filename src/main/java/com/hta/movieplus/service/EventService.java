@@ -44,6 +44,10 @@ public interface EventService {
 
 	public List<Event> getEventListdesc(int page, int limit);
 
+	public int getEventListCountStatus();
+
+	public Event update_eventResult();
+
 
 
 
