@@ -115,6 +115,7 @@
 	function send() {
 		var option ={
 			type: "message",
+			roomNumber: $("#roomNumber").val(),
 			sessionId : $("#sessionId").val(),
 			userName : $("#userName").val(),
 			msg : $("#chatting").val()
