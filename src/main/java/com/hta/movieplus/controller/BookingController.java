@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -137,16 +138,30 @@ public class BookingController {
 	
 	@PostMapping("/cart")
 	@ResponseBody
-	public ModelAndView cart2(
-			@RequestParam("couponCode") String COUPON_CODE,
-//			CouponVO couponVO,
-			ModelAndView mv) {
-		List<CouponVO> coupon = kakaopayService.getCouponByCode(COUPON_CODE);
+	public String cart2(
+			@RequestParam("couponCode") String COUPON_CODE, 
+			Model model) {
+		System.out.println(COUPON_CODE);
 		
-		mv.setViewName("booking/booking_cart");
-		mv.addObject("coupon", coupon);
-		return mv;
+	    List<CouponVO> coupon = kakaopayService.getCouponByCode(COUPON_CODE);
+	    
+	    model.addAttribute("coupon", coupon);
+	    return "booking/booking_cart";
 	}
+	
+//	@PostMapping("/cart")
+//	@ResponseBody
+//	public ModelAndView cart2(
+//			@RequestParam("couponCode") String COUPON_CODE, 
+//			ModelAndView mv) {
+//		
+//	    List<CouponVO> coupon = kakaopayService.getCouponByCode(COUPON_CODE);
+//	    
+//	    mv.setViewName("booking/booking_cart");
+//	    mv.addObject("coupon", coupon);
+//	    return mv;
+//	}
+
 	
 	@PostMapping("/kakaopay")
 	@ResponseBody

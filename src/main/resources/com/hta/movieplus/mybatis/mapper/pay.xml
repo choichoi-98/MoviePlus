@@ -35,7 +35,7 @@
 		where pg_token IS NOT NULL
 	</select>
 	
-	<select id="getCouponByCode" resultType="CouponVO">
+	<select id="getCouponByCode" parameterType="CouponVO" resultType="CouponVO">
 		select * from COUPON
 		where COUPON_CODE = #{COUPON_CODE}
 	</select>

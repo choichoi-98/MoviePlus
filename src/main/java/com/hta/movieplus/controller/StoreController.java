@@ -116,7 +116,6 @@ public class StoreController {
 		return "store/modifyitem";
 	}
 	
-	
 	@GetMapping("")
 	public ModelAndView store(ModelAndView mv) {
 		List<StoreVO> ticketlist = storeService.getItemListByKind("ticket");

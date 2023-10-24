@@ -56,33 +56,34 @@ $(function() {
     });
     	
     $(document).on('click', '#btn_coupon_search', function(e) {
-    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
-    	
-    		var couponCode = $('#couponCode').val(); // 입력된 쿠폰 코드 가져오기
-            alert(couponCode);
-    		
-            if (couponCode) {
-            	$.ajax({
-                    url: "cart",
-                    method: 'POST',
-//                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: { "couponCode": couponCode },
-//                    dataType: "text",
-                    beforeSend: function(xhr) {
-                        xhr.setRequestHeader(header, token);
-                    },
-                    success: function(response) {X 
-        				alert("조회 성공");
-                    },
-                    error: function(error) {
-          				alert("조회 실패");
-                    }
-                });
-            } else {
-                alert("쿠폰 코드를 입력해주세요.");
-            }
-    });	
-    	
+        e.preventDefault();
+        
+        var couponCode = $('#couponCode').val();
+        alert(couponCode);
+
+        if (couponCode) {
+            $.ajax({
+                url: "cart",
+                method: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: { "couponCode": couponCode},
+                dataType: "text",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function(result) { 
+                    alert("조회 성공");
+                    // Handle the JSON response from the server
+                },
+                error: function(error) {
+                    alert("조회 실패");
+                }
+            });
+        } else {
+            alert("쿠폰 코드를 입력해주세요.");
+        }
+    });
+
     var couponOpen = false; // 초기 상태는 닫혀있음
     $('#grp_coupon').click(function()  {
         if (couponOpen) {
@@ -112,29 +113,30 @@ $(function() {
             ticketOpen = true;
         }
     });
-});
-
     
-$(document).ready(function() {
-    // 앵커 클릭 이벤트 처리
-    $('a#btn_pay_mcoupon').click(function(e) {
-        e.preventDefault(); // 기본 앵커 동작을 막기
+    $(document).ready(function() {
+        // 앵커 클릭 이벤트 처리
+        $('a#btn_pay_mcoupon').click(function(e) {
+            e.preventDefault(); // 기본 앵커 동작을 막기
 
-        // 모달 열기
-        $('#layer_dcoupon').show();
-    });
+            // 모달 열기
+            $('#layer_dcoupon').show();
+        });
 
-    // 모달 닫기 버튼 클릭 이벤트 처리
-    $('#btn_close_dcoupon').click(function() {
-        // 모달 닫기
-        $('#layer_dcoupon').hide();
+        // 모달 닫기 버튼 클릭 이벤트 처리
+        $('#btn_close_dcoupon').click(function() {
+            // 모달 닫기
+            $('#layer_dcoupon').hide();
+        });
+        $('#btn_close_modal_dcoupon').click(function() {
+            // 모달 닫기
+            $('#layer_dcoupon').hide();
+        });
     });
-    $('#btn_close_modal_dcoupon').click(function() {
-        // 모달 닫기
-        $('#layer_dcoupon').hide();
-    });
-});    
-
+    
+}); // func end
+    
+     
 </script>
 
 </head>
@@ -472,14 +474,15 @@ $(document).ready(function() {
 							<col style="width:115px;">
 							<col style="width:60px;">
 						</colgroup>
+						
 						<tbody>
-						<c:forEach var="cp" items="${coupon}">
-						<tr>	
-							<td class="abc">${cp.COUPON_TYPE}</td>
-							<td>2023.10.10<br>~ 2023.11.19</td>	
-							<td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
-						</tr>
-						</c:forEach>	
+							<c:forEach var="cp" items="${coupon}">
+							<tr>	
+								<td class="">${cp.COUPON_NUM}</td>
+								<td>2023.10.10<br>~ 2023.11.19</td>	
+								<td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
+							</tr>
+							</c:forEach>	
 						</tbody>
 					</table>
 				</div>
