@@ -20,6 +20,8 @@ public interface StoreService {
 	
 	public void delCartItem(CartVO cartVO);
 	
+	public void deletePaidItem(int pAY_NUM);
+	
 	public int getItemListCount();
 	
 	public List<StoreVO> getItemList(int page, int limit);
@@ -47,6 +49,5 @@ public interface StoreService {
 	public List<CartVO> getCartList2();
 
 	public List<StoreCartDTO> getCartLists();
-
 
 }

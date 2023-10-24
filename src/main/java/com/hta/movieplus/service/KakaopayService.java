@@ -16,7 +16,9 @@ public interface KakaopayService {
 
 	public List<BookingInfoDTO> getAprBookings();
 
-	public List<CouponVO> getCouponByCode(String COUPON_CODE);
+	public CouponVO getCouponByCode(String COUPON_CODE);
+
+	public void delPaidBook(int kPAY_NUM);
 
 
 }

@@ -1,9 +1,5 @@
 package com.hta.movieplus.domain;
 
-/**
- * @author jhlim
- *
- */
 public class StorePayVO {
 
 	private int PAY_NUM; // 카트 번호(PK)

@@ -41,8 +41,13 @@ public class KakaopayServiceImpl implements KakaopayService {
 	}
 
 	@Override
-	public List<CouponVO> getCouponByCode(String COUPON_CODE) {
+	public CouponVO getCouponByCode(String COUPON_CODE) {
 		return dao.getCouponByCode(COUPON_CODE);
+	}
+
+	@Override
+	public void delPaidBook(int KPAY_NUM) {
+		dao.delPaidBook(KPAY_NUM);
 	}
 
 }
