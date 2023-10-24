@@ -30,9 +30,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	//채팅방 생성
-	public Object createChatRoom(String subjectId, String objectId) {
-		// TODO Auto-generated method stub
-		return dao.createChatRoom(subjectId,objectId );
+	public void createChatRoom(String subjectId, String objectId) {
+		dao.createChatRoom(subjectId,objectId );
 	}
 	
 }
