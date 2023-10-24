@@ -74,7 +74,15 @@ public class schedulingServiceImpl implements SchedulingService {
 
 	@Override
 	public int addSchedule(TheaterSchedule schedule) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		if(LocalDate.now().equals(LocalDate.parse(schedule.getTHEATER_SCHEDULE_DATE()))){
+			if(LocalTime.now().isAfter(LocalTime.parse(schedule.getTHEATER_SCHEDULE_START()))) {
+				return -2;
+			}
+		}	
+
+		
+		
 		String endTime = calculateEndTime(schedule);
 		schedule.setTHEATER_SCHEDULE_END(endTime);
 

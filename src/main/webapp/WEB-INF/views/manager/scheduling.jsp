@@ -165,6 +165,8 @@
 					<div class="col-8">
 						<span class="modal-span-text">영화 시작 시간 : </span>
 						<input id="movie-start" class="add-modal-input" type="time" style="margin-left:10px;" />
+						<%-- <img src="${pageContext.request.contextPath}/resources/" --%>
+						
 					</div>
 	
 					<div class="col-12" style="margin-top: 20px"> 

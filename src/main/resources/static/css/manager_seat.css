@@ -10,16 +10,16 @@
 	display: inline-block;
 	border: 1px solid #999;
 	color: #999;
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 }
 
 
 .seat-column-btn {
 	display: inline-block;
 	border: 1px solid #999;
-	width: 32px;
-	height: 32px;
+	width: 24px;
+	height: 24px;
 	pointer-events: none;
 	color: white;
 	background-color: gray;
@@ -39,4 +39,21 @@
 
 .seat-xy {
 	width: 50px;
+}
+
+.seat-container {
+	border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+	margin: 5px;
+	width: 630px;
+}
+
+#btn-group {
+	display:flex;
+}
+
+#btn-group > .form__btn {
+	margin-right: 8px;
+
 }
