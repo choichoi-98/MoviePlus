@@ -231,8 +231,10 @@ function addSchedule() {
 			if(data > 0) {
 				getScheduleList();
 				$('.modal__btn--dismiss').click();
-			}else {
+			}else if(data == -1) {
 				$('#text-container').empty().append("<span style='color:red'>중복된 시간 설정입니다.</span>");
+			}else if(data == -2) {
+				$('#text-container').empty().append("<span style='color:red'>이미 지난 시간입니다.</span>");
 			}
 			
 		},

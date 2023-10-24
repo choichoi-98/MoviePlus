@@ -54,7 +54,7 @@
 						<div class="txt">
 							티켓, 매점 이용 시 등급에 따라<br>5 ~ 10% 포인트 적립!
 						</div>
-						<a href="#" class="button purple"
+						<a href="#" class="button purple focus-btn"
 							data-target="#pointSave" title="포인트 적립 상세보기">자세히보기</a>
 					</div>
 					<div class="item">
@@ -74,7 +74,7 @@
 						<div class="txt">
 							원하는 영화도 보고<br>팝콘도 구매할 수 있는 포인트!
 						</div>
-						<a href="#" class="button purple"
+						<a href="#" class="button purple focus-btn"
 							data-target="#pointUse" title="포인트 사용 상세보기">자세히보기</a>
 					</div>
 					<div class="item">
@@ -84,7 +84,7 @@
 						<div class="txt">
 							회원이라면 누구나<br>생일 축하 쿠폰을 드려요
 						</div>
-						<a href="#" class="button purple"
+						<a href="#" class="button purple focus-btn"
 							data-target="#birthDayCp" title="생일 축하 쿠폰 상세보기">자세히보기</a>
 					</div>
 					<div class="item">
@@ -95,7 +95,7 @@
 							VIP 회원을 위한<br>더 특별한 추가혜택!
 						</div>
 						<a href="#"
-							class="button purple" data-target="#vipLounge"
+							class="button purple focus-btn" data-target="#vipLounge"
 							title="VIP LOUNGE 상세보기">VIP LOUNGE 안내</a>
 					</div>
 					<div class="item">
@@ -106,7 +106,7 @@
 							멤버십 혜택에 추가로<br>스페셜 멤버십 혜택까지!
 						</div>
 						<a href="#"
-							class="button purple" title="스페셜 멤버십 상세보기">스페셜멤버십 안내</a>
+							class="button purple focus-btn" title="스페셜 멤버십 상세보기">스페셜멤버십 안내</a>
 					</div>
 				</div>
 
