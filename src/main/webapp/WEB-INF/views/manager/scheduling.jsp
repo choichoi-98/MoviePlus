@@ -24,12 +24,12 @@
 	margin-bottom: 50px;
 }
 
-.modal-span-text{
-	display:block;
-	color:#999;
+.modal-span-text {
+	display: block;
+	color: #999;
 }
 
-#text-container > span {
+#text-container>span {
 	margin: 5px;
 }
 
@@ -49,19 +49,28 @@
 		<div class="col-12">
 			<div class="main__title">
 				<h2>상영 스케줄 관리 - ${theater.THEATER_NAME}</h2>
-				<input type="hidden" id="input-theater-id" value="${theater.THEATER_ID}">
+				<input type="hidden" id="input-theater-id"
+					value="${theater.THEATER_ID}">
 				<div class="main__title-wrap">
 					<!-- filter sort -->
-					<input id="todayDateId" type="date" name="schedule-date"
-						value="${todayDate}" style="margin-right: 50px; width: 200px;" />
+					<a href="#" class="change-date-schedule" data-leftright="left"><img
+						src="${pageContext.request.contextPath}/resources/image/theater/schedule-angle-left.png"
+						style="margin-right: 10px;"></a> <input id="todayDateId"
+						type="date" name="schedule-date" value="${todayDate}"
+						style="width: 200px;" /> <a href="#" class="change-date-schedule" data-leftright="right">
+						<img
+						src="${pageContext.request.contextPath}/resources/image/theater/schedule-angle-right.png"
+						style="margin-left: 10px; margin-right: 50px;">
+					</a>
+
 					<div class="filter" id="filter__sort">
 						<span class="filter__item-label">조회</span>
 
 						<div class="filter__item-btn dropdown-toggle" role="navigation"
 							id="filter-sort" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">
-							<input id="selected-room-id" type="button" value="${theater.THEATER_NAME}">
-							<span></span>
+							<input id="selected-room-id" type="button"
+								value="${theater.THEATER_NAME}"> <span></span>
 						</div>
 
 						<ul class="filter__item-menu dropdown-menu scrollbar-dropdown"
@@ -93,11 +102,11 @@
 					${room.THEATER_ROOM_NAME} <a href="#modal-add"
 						class="main__table-btn main__table-btn--banned open-modal"> <i
 						class="icon ion-ios-film feature__icon"></i>
-					</a>
-					<input type="hidden" name="THEATER_ROOM_NAME" value="${room.THEATER_ROOM_NAME}">
-					<input type="hidden" value="${room.THEATER_ROOM_ID}">
+					</a> <input type="hidden" name="THEATER_ROOM_NAME"
+						value="${room.THEATER_ROOM_NAME}"> <input type="hidden"
+						value="${room.THEATER_ROOM_ID}">
 				</div>
-				
+
 				<table class="main__table">
 					<thead>
 						<tr>
@@ -130,64 +139,66 @@
 							<i class="icon ion-ios-trophy"></i> 상영 영화 목록
 						</h3>
 
-						<input class="modal-keyword" name="modal-keyword" type="text" placeholder="영화 검색" style="width: 50%" value="">
+						<input class="modal-keyword" name="modal-keyword" type="text"
+							placeholder="영화 검색" style="width: 50%" value="">
 					</div>
 
-					<div style="width:100%; height:100%; overflow-x:hidden; overflow-y:auto ">
-					<table class="main__table main__table--dash">
-						<thead>
-							<tr>
-								<th>영화코드</th>
-								<th>영화제목</th>
-							</tr>
-						</thead>
-						<tbody class="movieListAllTable">
-							<tr style="color: white;">
-								<td>상영 등록 가능한 영화가 없습니다.</td>
-							</tr>
-						</tbody>
-					</table>
+					<div
+						style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
+						<table class="main__table main__table--dash">
+							<thead>
+								<tr>
+									<th>영화코드</th>
+									<th>영화제목</th>
+								</tr>
+							</thead>
+							<tbody class="movieListAllTable">
+								<tr style="color: white;">
+									<td>상영 등록 가능한 영화가 없습니다.</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-				
+
 				<div class="col-6">
 					<div class="col-6">
-						<span class="modal-span-text">상영관 : </span>
-						<input id="modal-room-name" type="text" name="THEATER_ROOM_NAME" class="form__input add-modal-input"
-								placeholder="상영관" value="" readOnly>
+						<span class="modal-span-text">상영관 : </span> <input
+							id="modal-room-name" type="text" name="THEATER_ROOM_NAME"
+							class="form__input add-modal-input" placeholder="상영관" value=""
+							readOnly>
 					</div>
 					<div class="col-8">
-						<span class="modal-span-text">영화 명 : </span>
-						<input type="text" id="modal-movie-title" class="form__input add-modal-input"
-								placeholder="선택한 영화 이름" value="" readOnly>
-						<input type="hidden" id="modal-movie-code" class="modal-movie-code add-modal-input" value="">
+						<span class="modal-span-text">영화 명 : </span> <input type="text"
+							id="modal-movie-title" class="form__input add-modal-input"
+							placeholder="선택한 영화 이름" value="" readOnly> <input
+							type="hidden" id="modal-movie-code"
+							class="modal-movie-code add-modal-input" value="">
 					</div>
 					<div class="col-8">
-						<span class="modal-span-text">영화 시작 시간 : </span>
-						<input id="movie-start" class="add-modal-input" type="time" style="margin-left:10px;" />
-						<%-- <img src="${pageContext.request.contextPath}/resources/" --%>
-						
+						<span class="modal-span-text">영화 시작 시간 : </span> <input
+							id="movie-start" class="add-modal-input" type="time"
+							style="margin-left: 10px;" />
 					</div>
-	
-					<div class="col-12" style="margin-top: 20px"> 
+
+					<div class="col-12" style="margin-top: 20px">
 						<span class="modal-span-text">조조/심야 : </span>
-							<ul class="form__radio">
-								<li><input id="time-normal" type="radio"
-									class="time-sale-btn" name="jojosimya"
-									value="normal" checked> <label for="time-normal">일반</label></li>
-								<li><input id="time-jojo" type="radio"
-									class="time-sale-btn" name="jojosimya"
-									value="jojo"> <label for="time-jojo">조조</label></li>
-								<li><input id="time-simya" type="radio"
-									class="time-sale-btn" name="jojosimya"
-									value="simya"> <label for="time-simya">심야</label></li>
-							</ul>
-							
-							<div id="text-container">
-							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span>
-							<span class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span>
-							<span class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>
-							</div>
+						<ul class="form__radio">
+							<li><input id="time-normal" type="radio"
+								class="time-sale-btn" name="jojosimya" value="normal" checked>
+								<label for="time-normal">일반</label></li>
+							<li><input id="time-jojo" type="radio" class="time-sale-btn"
+								name="jojosimya" value="jojo"> <label for="time-jojo">조조</label></li>
+							<li><input id="time-simya" type="radio"
+								class="time-sale-btn" name="jojosimya" value="simya"> <label
+								for="time-simya">심야</label></li>
+						</ul>
+
+						<div id="text-container">
+							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span> <span
+								class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span> <span
+								class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -214,12 +225,12 @@
 				<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 			</div>
 		</div>
-	
+
 		<!-- end modal delete -->
-		
-		
+
+
 		<!-- 수정 모달 -->
-		
+
 		<div id="modal-update" class="zoom-anim-dialog mfp-hide modal"
 			style="width: 1000px; max-width: 1500px; height: 600px">
 			<h6 class="modal__title">스케줄 수정</h6>
@@ -230,63 +241,67 @@
 							<i class="icon ion-ios-trophy"></i> 상영 영화 목록
 						</h3>
 
-						<input class="modal-keyword" name="modal-keyword" type="text" placeholder="영화 검색" style="width: 50%" value="">
+						<input class="modal-keyword" name="modal-keyword" type="text"
+							placeholder="영화 검색" style="width: 50%" value="">
 					</div>
 
-					<div style="width:100%; height:100%; overflow-x:hidden; overflow-y:auto ">
-					<table class="main__table main__table--dash">
-						<thead>
-							<tr>
-								<th>영화코드</th>
-								<th>영화제목</th>
-							</tr>
-						</thead>
-						<tbody class="movieListAllTable">
-							<tr style="color: white;">
-								<td>상영 등록 가능한 영화가 없습니다.</td>
-							</tr>
-						</tbody>
-					</table>
+					<div
+						style="width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto">
+						<table class="main__table main__table--dash">
+							<thead>
+								<tr>
+									<th>영화코드</th>
+									<th>영화제목</th>
+								</tr>
+							</thead>
+							<tbody class="movieListAllTable">
+								<tr style="color: white;">
+									<td>상영 등록 가능한 영화가 없습니다.</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-				
+
 				<div class="col-6">
 					<div class="col-6">
-						<span class="modal-span-text">상영관 : </span>
-						<input id="update-modal-room-name" type="text" name="THEATER_ROOM_NAME" class="form__input"
-								placeholder="상영관" value="" readOnly>
+						<span class="modal-span-text">상영관 : </span> <input
+							id="update-modal-room-name" type="text" name="THEATER_ROOM_NAME"
+							class="form__input" placeholder="상영관" value="" readOnly>
 					</div>
 					<div class="col-8">
-						<span class="modal-span-text">영화 명 : </span>
-						<input type="text" id="update-modal-movie-title" class="form__input"
-								placeholder="선택한 영화 이름" value="" readOnly>
-						<input type="hidden" id="update-modal-movie-code" class="modal-movie-code" value="">
+						<span class="modal-span-text">영화 명 : </span> <input type="text"
+							id="update-modal-movie-title" class="form__input"
+							placeholder="선택한 영화 이름" value="" readOnly> <input
+							type="hidden" id="update-modal-movie-code"
+							class="modal-movie-code" value="">
 					</div>
 					<div class="col-12">
-						<span class="modal-span-text">영화 시작 시간 : </span>
-						<input id="update-movie-start" type="time" style="margin-left:10px;" readOnly/>
-						<span style="margin-left: 10px; color:#DB4455">시간은 수정 불가능합니다.</span>
+						<span class="modal-span-text">영화 시작 시간 : </span> <input
+							id="update-movie-start" type="time" style="margin-left: 10px;"
+							readOnly /> <span style="margin-left: 10px; color: #DB4455">시간은
+							수정 불가능합니다.</span>
 					</div>
-	
-					<div class="col-12" style="margin-top: 20px"> 
+
+					<div class="col-12" style="margin-top: 20px">
 						<span class="modal-span-text">조조/심야 : </span>
-							<ul class="form__radio">
-								<li><input id="update-time-normal" type="radio"
-									class="update-time-sale-btn" name="update-jojosimya"
-									value="normal"> <label for="update-time-normal">일반</label></li>
-								<li><input id="update-time-jojo" type="radio"
-									class="update-time-sale-btn" name="update-jojosimya"
-									value="jojo"> <label for="update-time-jojo">조조</label></li>
-								<li><input id="update-time-simya" type="radio"
-									class="update-time-sale-btn" name="update-jojosimya"
-									value="simya"> <label for="update-time-simya">심야</label></li>
-							</ul>
-							
-							<div id="update-text-container">
-							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span>
-							<span class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span>
-							<span class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>
-							</div>
+						<ul class="form__radio">
+							<li><input id="update-time-normal" type="radio"
+								class="update-time-sale-btn" name="update-jojosimya"
+								value="normal"> <label for="update-time-normal">일반</label></li>
+							<li><input id="update-time-jojo" type="radio"
+								class="update-time-sale-btn" name="update-jojosimya"
+								value="jojo"> <label for="update-time-jojo">조조</label></li>
+							<li><input id="update-time-simya" type="radio"
+								class="update-time-sale-btn" name="update-jojosimya"
+								value="simya"> <label for="update-time-simya">심야</label></li>
+						</ul>
+
+						<div id="update-text-container">
+							<span class="modal-span-text">일반 - 청소년:13,000 성인:15,000</span> <span
+								class="modal-span-text">조조 - 청소년:10,000 성인:12,000</span> <span
+								class="modal-span-text">심야 - 청소년:11,000 성인:13,000</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -299,7 +314,7 @@
 				<button class="modal__btn modal__btn--dismiss" type="button">취소</button>
 			</div>
 		</div>
-		
+
 		<!-- 수정 모달 -->
 
 	</main>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.hta.movieplus.mybatis.mapper.ManageMemberMapper">
+
+	<select id="getMemberList" parameterType="map"
+		resultType="member">
+		SELECT * FROM
+		( SELECT ROWNUM RNUM, MEMBER.*
+		FROM MEMBER
+		WHERE MEMBER_AUTH = 'ROLE_USER'
+		AND MEMBER_ID LIKE '%' || #{keyword} || '%'
+		AND ROWNUM &lt;= #{end}
+		)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+
+	<select id="getCountByMember" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		MEMBER
+		WHERE MEMBER_AUTH = 'ROLE_USER'
+	</select>
+
+	<delete id="deleteMemberById" parameterType="int">
+		DELETE
+		FROM MEMBER
+		WHERE MEMBER_NUM = #{memberNum}
+	</delete>
+
+</mapper>

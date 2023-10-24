@@ -54,7 +54,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>회원 관리</span></a>
+					<a href="${pageContext.request.contextPath}/admin/manageMember" class="sidebar__nav-link"><span>회원 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
@@ -66,7 +66,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>스토어 관리</span></a>
+					<a href="${pageContext.request.contextPath}/store/admin/itemlist" class="sidebar__nav-link"><span>스토어 관리</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">

@@ -23,6 +23,23 @@ $(document).ready(function(){
 		getScheduleList();
 	}) // 날짜 변경시마다 불러오기
 	
+	$('.change-date-schedule').click(function(e){
+		e.preventDefault();
+		
+
+
+		if($(this).attr('data-leftright') == 'left'){
+			var dateVal = new Date($('#todayDateId').val());
+			dateVal.setDate(dateVal.getDate() - 1);
+		}else if($(this).attr('data-leftright') == 'right'){
+			var dateVal = new Date($('#todayDateId').val());
+			dateVal.setDate(dateVal.getDate() + 1);
+		}
+
+		$('#todayDateId').val(dateVal.toISOString().split('T')[0]);
+		getScheduleList();
+
+	})
 
 	$('.filter-li-room').click(function() {
 		$('.room-container').css('display', 'none');

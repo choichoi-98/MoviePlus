@@ -41,6 +41,12 @@ public interface TheaterService {
 
 	public int getCountFavoriteTheater(String name);
 
+	public List<Theater> getTheaterListByLocation(String location);
+
+	public int updateFavoriteTheaterWithModal(int memberNum, int[] theaterId);
+
+	public int deleteFavoriteTheaterByMemberId(int member_NUM);
+
 	
 	
 
