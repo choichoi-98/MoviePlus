@@ -125,7 +125,7 @@
 				<a href="${pageContext.request.contextPath}/admin/addtheater" class="main__title-link">극장 추가</a>
 				<div class="col-12">
 					<div class="paginator-wrap">
-						<span>${theaterCount} 중 10개씩</span>
+						<span>${theaterCount} 중 10개</span>
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev" ${page <= 1 ? 'style="pointer-events: none;"' : ''}>

@@ -1,12 +1,14 @@
 package com.hta.movieplus.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Theater;
-import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.domain.TimeTableDate;
 import com.hta.movieplus.service.SchedulingService;
 import com.hta.movieplus.service.TheaterManagerService;
@@ -33,7 +35,8 @@ public class TheaterController {
 	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
 
 	@Autowired
-	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService, SchedulingService schedulingService) {
+	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService,
+			SchedulingService schedulingService) {
 		// TODO Auto-generated constructor stub
 		this.theaterservice = theaterService;
 		this.theaterManagerService = theaterManagerService;
@@ -58,7 +61,6 @@ public class TheaterController {
 		List<TimeTableDate> dateList = schedulingService.getDateList();
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
 		Theater theater = theaterservice.getTheaterById(theaterId);
-		
 
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
@@ -153,11 +155,31 @@ public class TheaterController {
 	// 자주 가는 영화관
 
 	@ResponseBody
+	@PostMapping("theater/getLocationList")
+	public List<String> getLocationList() {
+		List<String> locationList = new ArrayList<String>();
+		
+		for(TheaterLocationEnum loc : TheaterLocationEnum.values()) {
+			locationList.add(loc.getValue());
+			
+		}
+		
+		return locationList;
+	}
+
+	@ResponseBody
+	@PostMapping("theater/getTheaterListByLocation")
+	public List<Theater> getTheaterListByLocation(String location) {
+
+		return theaterservice.getTheaterListByLocation(location);
+	}
+
+	@ResponseBody
 	@PostMapping("theater/getFavoriteTheaterList")
 	public List<FavoriteTheater> getFavoriteTheaterList(Principal principal) {
 		List<FavoriteTheater> favList = null;
 		String userId = principal.getName();
-		
+
 		if (userId != null) {
 			favList = theaterservice.getFavoriteTheaterListById(userId);
 		}
@@ -178,7 +200,7 @@ public class TheaterController {
 	@ResponseBody
 	@PostMapping("theater/addFavoriteTheater")
 	public int addFavoriteTheater(Principal principal, int theaterId) {
-		
+
 		String userId = principal.getName();
 		return theaterservice.addFavoriteTheater(theaterId, userId);
 	}
@@ -189,6 +211,23 @@ public class TheaterController {
 
 		String userId = principal.getName();
 		return theaterservice.deleteFavoriteTheater(theaterId, userId);
+	}
+	
+	@ResponseBody
+	@PostMapping("theater/updateFavoriteTheaterWithModal")
+	public int updateFavoriteTheaterWithModal(@AuthenticationPrincipal Member member, int[] theaterId) {
+		if(theaterId == null) {
+			return theaterservice.deleteFavoriteTheaterByMemberId(member.getMEMBER_NUM());
+		}
+		
+		return theaterservice.updateFavoriteTheaterWithModal(member.getMEMBER_NUM(), theaterId);
+	}
+	
+	@ResponseBody
+	@PostMapping("theater/getFavoriteCount")
+	public int getFavoriteCount(@AuthenticationPrincipal Member member) {
+		
+		return theaterservice.getCountFavoriteTheater(member.getMEMBER_ID());
 	}
 
 }

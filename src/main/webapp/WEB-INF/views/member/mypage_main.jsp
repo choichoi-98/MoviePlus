@@ -13,6 +13,8 @@
 	src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/membership.js"></script>
+	<script
+	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 <title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
@@ -146,7 +148,7 @@
 						<div class="items theater" id="myFaverBrch">
 							<div class="tit-area">
 								<p class="tit">선호하는 극장</p>
-								<a href="#" class="more" title="선호극장 변경"><i
+								<a href="#" class="more fav-modal-on" title="선호극장 변경"><i
 									class="iconset ico-arr-right-gray">변경</i></a>
 							</div>
 
@@ -268,7 +270,7 @@
 					<div class="tit-util mt70">
 						<h2 class="tit small">나의 예매내역</h2>
 
-						<a href="#" class="more" title="나의 예매내역 더보기">더보기 <i
+						<a href="${pageContext.request.contextPath}/booking/success" class="more" title="나의 예매내역 더보기">더보기 <i
 							class="iconset ico-arr-right-gray"></i></a>
 					</div>
 
@@ -287,7 +289,7 @@
 					<div class="tit-util mt70">
 						<h2 class="tit small">나의 구매내역</h2>
 
-						<a href="#" class="more" title="나의 구매내역 더보기">더보기 <i
+						<a href="${pageContext.request.contextPath}/store/success" class="more" title="나의 구매내역 더보기">더보기 <i
 							class="iconset ico-arr-right-gray"></i></a>
 					</div>
 
@@ -353,7 +355,8 @@
 
 	</div>
 	</div>
-
+	
+	<jsp:include page="/WEB-INF/views/theater/favorite_theater_modal.jsp" />
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>

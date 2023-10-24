@@ -1,5 +1,6 @@
 package com.hta.movieplus.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -210,6 +211,47 @@ public class TheaterServiceImpl implements TheaterService {
 	public int getCountFavoriteTheater(String name) {
 		// TODO Auto-generated method stub
 		return mapper.getCountFavoriteTheater(name);
+	}
+
+	@Override
+	public List<Theater> getTheaterListByLocation(String location) {
+		// TODO Auto-generated method stub
+		return mapper.getTheaterListByLocation(location);
+	}
+
+
+	@Override
+	public int updateFavoriteTheaterWithModal(int memberNum, int[] theaterId) {
+		// TODO Auto-generated method stub
+		int deleteResult = mapper.deleteFavoriteTheaterById(memberNum);
+		int insertResult = 0;
+		
+		int result = 0;
+		
+		if(theaterId != null) {
+			for(int id : theaterId) {
+				FavoriteTheater temp = new FavoriteTheater();
+				temp.setTHEATER_ID(id);
+				temp.setMEMBER_NUM(memberNum);
+				
+				if(mapper.addFavoriteTheaterByVO(temp) > 0) {
+					insertResult++;	
+				}
+				
+				
+			}
+		}
+		
+		if(theaterId.length == insertResult) {
+			result = 1;
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteFavoriteTheaterByMemberId(int member_NUM) {
+		// TODO Auto-generated method stub
+		return mapper.deleteFavoriteTheaterById(member_NUM);
 	}
 
 }

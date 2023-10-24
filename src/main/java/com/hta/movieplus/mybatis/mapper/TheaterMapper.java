@@ -46,6 +46,14 @@ public interface TheaterMapper {
 
 	public int getCountFavoriteTheater(String name);
 
+	public List<Theater> getTheaterListByLocation(String location);
+
+	public int deleteFavoriteTheaterById(int memberNum);
+
+	public void addFavoriteTheaterWithList(List<FavoriteTheater> favList);
+
+	public int addFavoriteTheaterByVO(FavoriteTheater temp);
+
 
 	
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 
 
 <title></title>
@@ -75,23 +77,25 @@
 
 
 						<sec:authorize access="isAnonymous()">
-						<!-- 로그인 전 -->
-						<div>
-							<i class="iconset ico-favo-theater"></i> 나의 선호영화관 정보 <a href="#"
-								class="button small ml10" id="movelogin" title="로그인하기">로그인하기</a>
-						</div>
+							<!-- 로그인 전 -->
+							<div>
+								<i class="iconset ico-favo-theater"></i> 나의 선호영화관 정보 <a href="#"
+									class="button small ml10" id="movelogin" title="로그인하기">로그인하기</a>
+							</div>
 						</sec:authorize>
 
 						<sec:authorize access="isAuthenticated()">
-						<!-- 로그인 후 -->
-						<div>
-							<i class="iconset ico-favo-theater"></i> <span class="font-gblue">${pinfo.MEMBER_NAME}</span>님의
-							선호영화관
-							<ul id="fav-theater-list" class="theater-circle">
-							
-							</ul>
-	
-						</div>
+							<!-- 로그인 후 -->
+							<div>
+								<i class="iconset ico-favo-theater"></i> <span
+									class="font-gblue">${pinfo.MEMBER_NAME}</span>님의 선호영화관
+								<ul id="fav-theater-list" class="theater-circle">
+
+								</ul>
+								
+								<a href="#" class="button small float-r fav-modal-on" title="선호영화관 관리"> <i class="iconset ico-edit"></i> 선호영화관 관리</a>
+
+							</div>
 						</sec:authorize>
 					</div>
 				</div>
@@ -99,7 +103,8 @@
 
 				<div class="tit-util mt70 mb15">
 					<h3 class="tit">극장 이벤트</h3>
-					<a href="${pageContext.request.contextPath}/event/theater" class="more" title="극장 이벤트 더보기">더보기 <i
+					<a href="${pageContext.request.contextPath}/event/theater"
+						class="more" title="극장 이벤트 더보기">더보기 <i
 						class="iconset ico-arr-right-gray"></i></a>
 				</div>
 
@@ -113,7 +118,7 @@
 
 						<li><a href="#" class="eventBtn" data-no="12817"
 							data-netfunnel="N" title="[세종] 황금 연휴, 시크릿 쿠폰 상세보기"> <img
-								src="" alt="[세종] 황금 연휴, 시크릿 쿠폰" >
+								src="" alt="[세종] 황금 연휴, 시크릿 쿠폰">
 						</a></li>
 
 					</ul>
@@ -122,7 +127,9 @@
 
 				<div class="tit-util mt70 mb15">
 					<h3 class="tit">극장 공지사항</h3>
-					<a href="${pageContext.request.contextPath}/customer_service/notice" class="more" title="극장 공지사항 더보기">더보기 <i
+					<a
+						href="${pageContext.request.contextPath}/customer_service/notice"
+						class="more" title="극장 공지사항 더보기">더보기 <i
 						class="iconset ico-arr-right-gray"></i></a>
 				</div>
 
@@ -202,6 +209,7 @@
 		</div>
 	</div>
 
+	<jsp:include page="/WEB-INF/views/theater/favorite_theater_modal.jsp" />
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
