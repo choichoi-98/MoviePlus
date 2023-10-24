@@ -183,6 +183,22 @@ public class EventServiceImpl implements EventService{
 		return dao.getEventwinnerList(num);
 	}
 
+	@Override
+	public List<EventApply> getEventapplyList(int num) {
+		return dao.getEventapplyList(num);
+	}
+
+	@Override
+	public void updateEventDraw(String EVENT_DRAW, int EVENT_APPLY_NUM) {
+		dao.updateEventDraw(EVENT_DRAW, EVENT_APPLY_NUM);
+		
+	}
+
+	@Override
+	public List<EventApply> getmyEventlist(String MEMBER_ID) {
+		return dao.getmyEventlist(MEMBER_ID);
+	}
+
 
 
 

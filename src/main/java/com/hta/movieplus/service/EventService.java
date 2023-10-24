@@ -54,6 +54,12 @@ public interface EventService {
 
 	public List<EventApply> getEventwinnerList(int num);
 
+	public List<EventApply> getEventapplyList(int num);
+
+	public void updateEventDraw(String EVENT_DRAW, int EVENT_APPLY_NUM);
+
+	public List<EventApply> getmyEventlist(String MEMBER_ID);
+
 
 
 

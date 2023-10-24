@@ -66,7 +66,7 @@ public class MemberController {
 	}
 	
 	//test 폼 이동
-	@GetMapping("/test")
+	//@GetMapping("/test")
 	public String test() {
 		return "member/mypage_event";
 	}
