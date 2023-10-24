@@ -39,7 +39,11 @@ public class ReOpenServiceImpl implements ReOpenService {
 
 	@Override
 	public void cancelReOpen(String cancelcode) {
-		dao.cancelReOpen(cancelcode);
+		
+		if(dao.cancelReOpen(cancelcode) > 0) {
+			dao.updateReOpenCancel(cancelcode);
+		}
+		
 	}
 
 	/*

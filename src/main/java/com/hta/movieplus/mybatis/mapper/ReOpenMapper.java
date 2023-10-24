@@ -20,7 +20,6 @@ public interface ReOpenMapper {
 	
 	public int cancelReOpen(String cancelcode);
 	
-	/*
-	 * public int updateReOpenCancel(String reopencancel);
-	 */
+	public int updateReOpenCancel(String cancelcode);
+	 
 }

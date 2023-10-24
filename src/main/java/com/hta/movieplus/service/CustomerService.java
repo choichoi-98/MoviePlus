@@ -9,8 +9,8 @@ public interface CustomerService {
 
 	public void insertOneOnOne(CustomerOneOnOneVO oneonone);
 
-	/* public List<NoticeVO> getNoticeList(int noticeNum); */
+	public List<NoticeVO> getNoticeList();
 
-	/* public List<CustomerOneOnOneVO> selectOneOnOne(); */
+
 
 }

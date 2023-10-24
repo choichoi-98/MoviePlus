@@ -28,7 +28,7 @@ public class AdminNoticeController {
 		return "admin/noticeList";
 		/* 내가구한 객체를 페이지 사용할수 있게 (리턴) */
 	}
-
+	
 	@GetMapping("/admin/gonoticewrite")
 	public String goNoticeWrite() {
 		return "admin/addNotice";
@@ -53,24 +53,11 @@ public class AdminNoticeController {
 		return "redirect:/admin/noticelist";
 	}
 	
-	
-	
-	
-	
-	
-	
 	@PostMapping("admin/noticemodify")
 	public String noticeModify(NoticeVO modify) {
 		noticeService.noticeModify(modify);
 		return "redirect:/admin/noticelist";
+		
 	}
-	
-	/*
-	 * @PostMapping("admin/noticemodify") public int noticeModify(int moidfy) {
-	 * noticeService.noticeModify(int); return "redirect:/admin/noticeList; }
-	 */
-	
-
-
 	
 }

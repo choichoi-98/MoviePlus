@@ -37,12 +37,12 @@
    		WHERE MOVIE_CODE = #{DELETECODE}
    </delete>
    
-  <!--  <update id="updateReOpenCancel" parameterType="String">
+  <update id="updateReOpenCancel" parameterType="String">
    		UPDATE MOVIE
    		SET 
    		MOVIE_SCREEN = '상영종료'
-   		WHERE MOVIE_CODE = #{reopencancel}
-   </update> -->
+   		WHERE MOVIE_CODE = #{DELETECODE}
+   </update>
    
    <!-- <update id="">
    		두 테이블을 조인하면서 업데이트를 진행하는 업데이트문

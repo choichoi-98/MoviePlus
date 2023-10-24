@@ -43,14 +43,12 @@ public class CustomerController {
 		return "customer_service/customer_service_question";
 	}
 
-	/*
-	 * 공지사항페이지 이동
-	 * 
-	 * @GetMapping("/notice") public String notice(Model model) { List<NoticeVO>
-	 * NoticeNum = customerService.getNoticeList(NoticeNum);
-	 * model.addAttribute("NoticeNum", NoticeNum); return
-	 * "customer_service/customer_service_notice"; }
-	 */
+	/* 공지사항페이지 이동 */
+	@GetMapping("/notice") public String notice(Model model) { 
+		List<NoticeVO> NoticeNum = customerService.getNoticeList();
+		model.addAttribute("NoticeNum", NoticeNum); 
+		return "customer_service/customer_service_notice"; 
+	}
 
 	@GetMapping("/oneonone")
 	public ModelAndView oneOnOne(ModelAndView mv) {

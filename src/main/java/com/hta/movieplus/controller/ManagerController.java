@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.domain.TheaterRoom;
+import com.hta.movieplus.service.NoticeManagerService;
 import com.hta.movieplus.service.SeatService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
@@ -28,16 +30,18 @@ public class ManagerController {
 	TheaterManagerService theaterManagerService;
 	TheaterService theaterService;
 	SeatService seatService;
+	NoticeManagerService noticemanagerservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
 
 
 	@Autowired
-	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService, SeatService seatService) {
+	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService, SeatService seatService, NoticeManagerService noticemanagerservice) {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
 		this.theaterService = theaterService;
 		this.seatService = seatService;
+		this.noticemanagerservice = noticemanagerservice;
 	}
 	
 	@GetMapping("") 
@@ -128,5 +132,26 @@ public class ManagerController {
 		theaterManagerService.changeStatusRoomById(num, status);
 		return "redirect:/manager/manageroom";
 	}
-
+	
+	/* 극장별 공지사항 main 페이지 리스트로 이동 */
+	@GetMapping("/noticelist")
+	public String getNoticeList(Model model) {
+		String theaterId = model.asMap().get("theaterId").toString();
+		List<NoticeVO> noticelist = noticemanagerservice.getNoticeList(theaterId);
+		model.addAttribute("NoticeList", noticelist);
+		return "manager/managerNoticeList";
+	}
+	
+	/* 극장별 공지사항작성 페이지 이동 */
+	@GetMapping("/noticeregist")
+	public String goNoticeWrite() {
+		return "manager/managerNotice";
+	}
+	
+	/* 공지사항 등록 버튼 클릭 -> 데이터 넘기기 */
+	@PostMapping("/admin/insertnotice")
+	public String insertNotice(String managernotice) {
+		noticemanagerservice.insertNotice(managernotice);
+		return "redirect:/noticelist";
+	}
 }
