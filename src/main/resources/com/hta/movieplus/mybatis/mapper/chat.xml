@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.ChatMapper">
+	<!-- 친구 목록 -->
+	<select id="getManagerList" parameterType="String" resultType="member">
+		SELECT *
+		FROM member
+		WHERE member_id != #{memberId}
+		AND (member_auth = 'ROLE_MANAGER' OR member_auth = 'ROLE_ADMIN')
+	</select>	
+	
+	<!-- 채팅방 확인 -->
+	<select id="checkChatRoom" resultType="chatRoomVO">
+		SELECT *
+		FROM chat_room
+		WHERE 
+		  (chat_subject = #{subjectId} AND chat_object = #{objectId})
+		  OR
+		  (chat_subject = #{objectId} AND chat_object = #{subjectId})
+	</select>
+	
+	<!-- 채팅방 생성 -->
+	<insert id="createChatRoom">
+		INSERT INTO CHAT_ROOM
+		(CHAT_ROOM_NUM, CHAT_SUBJECT, CHAT_OBJECT)
+   	    VALUES((SELECT NVL(MAX(CHAT_ROOM_NUM), 0) + 1 FROM CHAT_ROOM), #{subjectId}, #{objectId})
+	</insert>
+	
+	<!-- chat_room_num 
+	<select id="max_sql" resultType="String">
+		SELECT NVL(MAX(CHAT_ROOM_NUM),0) + 1
+        FROM CHAT_ROOM
+	</select>-->
+</mapper>
