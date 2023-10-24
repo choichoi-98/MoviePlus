@@ -12,27 +12,24 @@
 
 <head>
 <meta charset="UTF-8">
-<title>재개봉 관리 리스트</title>
+<title>공지사항 목록</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
+	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp" />
 	
 	
-	<script> /* 리스트에서 삭제기능 */
+	<script>
 		$(document).ready(function () {
-			var selected_delete_expect_num;
+			var selected_manager_notice_num;
 
 			$('.main__table-btn--delete').click(function() {
-				selected_delete_expect_num = $(this).attr('data-expect-num');
+				selected_manager_notice_num = $(this).attr('data-managernoticenum');
 			})
-			
+
 			$('#delete-modal-ok').click(function() {
-				location.href = '/movieplus/admin/cancelreopen?cancelcode=' + selected_delete_expect_num;
-				
-				
+				location.href = '/movieplus/admin/noticedelete?noticenum=' + selected_manager_notice_num;
 			})
 		})
-		
 	</script>
 
 	<!-- main content -->
@@ -42,7 +39,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>재개봉 영화 List</h2>
+						<h2>공지사항 List</h2>
 
 						<span class="main__title-stat"> </span>
 
@@ -67,36 +64,33 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
-									<th>코 드 번 호</th>
 									<th>제 목</th>
-									<th>시 작 일</th>
-									<th>종 료 일</th>
+									<th>유 형</th>
+									<th>작 성 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
 							</thead>
 
 							<tbody>
-								<c:forEach var="expectmovie" items="${expectMovieList}" varStatus="loop">
+								<c:forEach var="noticelist" items="${NoticeList}" varStatus="loop">
 									<tr>
 										<td>
-											<div class="main__table-text">${loop.index + 1}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
+											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_NUM}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
 										</td>
 										<td>
-											<div class="main__table-text">${expectmovie.MOVIE_CODE}</div>
+											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_TYPE}</div>
 										</td>
 										<td>
-											<div class="main__table-text">${expectmovie.MOVIE_TITLE}</div>
+											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_SUBJECT}</div>
 										</td>
 										<td>
-											<div class="main__table-text">${expectmovie.REOPENING_STARTDATE}</div>
-										</td>
-										<td>
-											<div class="main__table-text">${expectmovie.REOPENING_ENDDATE}</div>
+											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_SYSDATE}</div>
 										</td>
 										<td>
 											<div class="main__table-btns"
 												style="display: flex; justify-content: center;">
-												<a href="#modal-delete" data-expect-num = "${expectmovie.MOVIE_CODE}"
+												<a href="#modal-delete"
+													data-managernoticenum="${noticelist.CUSTOMER_NOTICE_NUM}"
 													class="main__table-btn main__table-btn--delete open-modal">
 													<i class="icon ion-ios-trash"></i>
 												</a>
@@ -110,8 +104,8 @@
 					</div>
 				</div>
 				<!-- end comments -->
-				<a href="${pageContext.request.contextPath}/admin/goreopenwrite"
-					class="main__title-link">등록</a>
+				<a href="${pageContext.request.contextPath}/manager/noticeregist"
+					class="main__title-link">작성하기</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">

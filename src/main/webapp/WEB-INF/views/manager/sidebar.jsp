@@ -62,16 +62,15 @@
 				</li>
 
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>공지사항 등록</span></a>
+					<a href="${pageContext.request.contextPath}/manager/noticelist" class="sidebar__nav-link"><span>공지사항 등록</span></a>
 				</li>
 				
 				<li class="sidebar__nav-item">
 					<a href="#" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
 				</li>
-	
+		
 				<!-- end collapse -->
 
-				
 			</ul>
 		</div>
 		<!-- end sidebar nav -->

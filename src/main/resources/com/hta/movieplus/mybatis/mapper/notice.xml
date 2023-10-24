@@ -38,11 +38,10 @@
 		CUSTOMER_NOTICE_CONTENT = #{CUSTOMER_NOTICE_CONTENT}
 		WHERE CUSTOMER_NOTICE_NUM = #{CUSTOMER_NOTICE_NUM} <!-- 무엇을 바꿀것인지 -->
 	</update>
-	<!-- 
+	
 	<select id="getNoticeList" resultType="noticeVO">
 		SELECT CUSTOMER_NOTICE_TYPE, CUSTOMER_NOTICE_SUBJECT, CUSTOMER_NOTICE_SYSDATE
 		FROM CUTOMER_NOTICE
-		WHERE CUSTOMER_NOTICE_NUM = ${NoticeNum}
-	</select> --> 
+	</select>
 	
 </mapper>
