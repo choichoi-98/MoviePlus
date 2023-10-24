@@ -64,6 +64,7 @@ public interface EventMapper {
 
 	public int getCurtaincallEventListEndCount();
 
-	
+	public int geteventapplycount(int num);
+
 }
 

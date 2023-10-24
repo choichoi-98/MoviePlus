@@ -113,6 +113,7 @@ public class EventServiceImpl implements EventService{
 		
 		dao.changeStatus(map);
 	}
+	
 
 	@Override
 	public Map<String, Object> pagination(int page) {
@@ -205,6 +206,12 @@ public class EventServiceImpl implements EventService{
 		return dao.getCurtaincallEventListEndCount();
 	}
 
+	@Override
+	public int geteventapplycount(int num) {
+		return dao.geteventapplycount(num);
+	}
+
+	
 
 
 

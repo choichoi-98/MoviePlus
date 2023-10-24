@@ -62,6 +62,9 @@ public interface EventService {
 
 	public int getCurtaincallEventListEndCount();
 
+	public int geteventapplycount(int num);
+
+
 
 
 

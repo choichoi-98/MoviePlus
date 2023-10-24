@@ -369,6 +369,7 @@ public class EventController {
 		return "redirect:/admin/manageEvent";
 	}
 	
+	
 	//이벤트 내용 상세페이지(뷰 페이지)
 	@GetMapping("/event/eventview")
 	public String eventview() {
@@ -473,8 +474,12 @@ public class EventController {
 	//관리자 - 이벤트 당첨자 관리페이지 이동
 	@GetMapping("/admin/updateWinner")
 	public ModelAndView updateWinner(@RequestParam(value = "num") int num, ModelAndView mv) {
+		
 		List<EventApply> eventapply = eventservice.getEventapplyList(num);
+		int eventapplycount = eventservice.geteventapplycount(num);
+		
 		mv.addObject("eventapply", eventapply);
+		mv.addObject("eventapplycount", eventapplycount);
 		mv.setViewName("admin/manageEventWinner");
 		return mv;
 	}
@@ -512,7 +517,6 @@ public class EventController {
 			EventApply eventApply = eventapplylist.get(randomindex);
 	        eventservice.updateEventDraw(EVENT_DRAW, eventApply.getEVENT_APPLY_NUM());
 		}
-		
 		
 		return "redirect:/admin/manageEvent";
 	}

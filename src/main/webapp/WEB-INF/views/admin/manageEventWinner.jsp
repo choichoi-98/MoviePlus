@@ -12,7 +12,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/js/event_list.js"></script>
 
 	
 	<main class="main">
@@ -23,7 +22,7 @@
 					<div class="main__title">
 						<h2>이벤트 당첨자 관리</h2>
 
-						<span class="main__title-stat">총 <b>${eventlistcount}</b>건</span>
+						<span class="main__title-stat">총 <b>${eventapplycount}</b>건</span>
 
 						<div class="main__title-wrap">
 						 
@@ -69,7 +68,6 @@
 									<th>참여 아이디</th>
 									<th>상태</th><!-- (당첨/미당첨) -->
 									<th>이벤트 발표일</th>
-									<th>관리</th>
 								</tr>
 							</thead>
 							
@@ -101,24 +99,7 @@
 										<div class="main__table-text main__table-text--green">${event.EVENT_DRAW}</div><!-- 당첨 여부 -->
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_RESULTDATE}</div><!-- 이벤트 발표일 -->
-									</td>
-									<td>
-										<div class="main__table-btns">
-											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
-												<i class="icon ion-ios-log-out" title="이벤트 관리 페이지로 이동"></i>
-											</a>
-											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-												<i class="icon ion-ios-lock" title="상태 관리"></i>
-										 		<input type="hidden" id="eventstatus" name="EVENT_STATUS" value="">
-											</a>
-											<a href="${pageContext.request.contextPath}/admin/modifyEvent?num=${event.EVENT_NUM}" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
-												<i class="icon ion-ios-create" title="수정"></i>
-											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-												<i class="icon ion-ios-trash" title="삭제"></i>
-											</a>
-										</div>
+										<div class="main__table-text"><span class="resultdate">${event.EVENT_RESULTDATE}</span></div><!-- 이벤트 발표일 -->
 									</td>
 								</tr>
 								<input type="hidden" name="EVENT_NUM" id="EVENT_NUM" value="${event.EVENT_NUM}">
@@ -132,7 +113,7 @@
 			      	
 				</div>
 				<!-- end users -->
-				<a href="#" class="main__title-link" id="pickwinnerbtn">당첨자 추첨</a>
+				<a href="#" class="main__title-link" id="pickwinnerbtn" >당첨자 추첨</a>
 			</div>
 		</div>
 		
@@ -172,16 +153,33 @@
 			data : {"num" : num },
 			success : function(data){
 				$('#EVENT_NUM').val(data);
+				alert('당첨자 추첨이 완료되었습니다.');
 				location.reload();
 			},
 			error: function(){
 				console.log();
 			}
-			
 		})
 		
-		
 	})
+	
+	
+	//이벤트 발표일 형식 변경
+$('.resultdate').each(function() {
+	var result = $(this);
+	var resultdate = result.text();
+	var newresultdate = formatdate(resultdate);
+	
+	result.text(newresultdate);
+	
+	function formatdate(dateString) {
+		var year = dateString.substring(0, 4);
+	    var month = dateString.substring(4, 6);
+	    var day = dateString.substring(6, 8);
+	    
+		   return year + "." + month + "." + day;
+	}
+})
 
 
 
