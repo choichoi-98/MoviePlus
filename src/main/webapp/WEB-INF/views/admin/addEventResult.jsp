@@ -17,7 +17,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>이벤트 당첨자 발표 추가</h2>
+						<h2>이벤트 당첨자 발표 추가 및 수정</h2>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -47,7 +47,7 @@
 									
 								<div class="col-12">
 									<textarea id="text" name="EVENT_RESULT" class="form__textarea"
-										 placeholder="이벤트 발표 내용" required></textarea>
+										 placeholder="이벤트 발표 내용"  style="white-space: pre-wrap;" required>${eventdata.EVENT_RESULT}</textarea>
 								</div>
 									
 							 </div>
