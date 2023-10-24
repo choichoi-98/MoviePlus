@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.MemberMapper">
+	
+	<insert id="insert" parameterType="member">
+		INSERT INTO MEMBER
+		VALUES((<include refid="insert_Member_num" />), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL}, #{MEMBER_PHONENO}, #{MEMBER_BIRTH}, NULL, #{MEMBER_AUTH}, NULL, 'Welcome', 0)
+	</insert>	
+
+		<sql id="insert_Member_num">
+			select nvl(max(MEMBER_NUM),0)+1 from MEMBER
+		</sql>
+
+	<select id="isId" resultType="member" parameterType="String">
+		select *
+		from MEMBER 
+		where MEMBER_ID = #{MEMBER_ID}
+	</select>
+	
+	<select id="modifycheck" resultType="member" parameterType="String">
+		select *
+		from MEMBER
+		where MEMBER_ID = #{MEMBER_ID}
+		AND MEMBER_PASS = #{MEMBER_PASS}
+	</select>
+	
+	<select id="findId" resultType="member" parameterType="String">
+		select *
+		from MEMBER
+		WHERE MEMBER_NAME = #{MEMBER_NAME} 
+		AND MEMBER_BIRTH = #{MEMBER_BIRTH}
+		AND MEMBER_PHONENO = #{MEMBER_PHONENO}
+	</select>
+	
+	<select id="findPass" resultType="member" parameterType="String">
+		select *
+		from MEMBER
+		WHERE MEMBER_ID = #{MEMBER_ID} 
+		AND MEMBER_NAME = #{MEMBER_NAME}
+		AND MEMBER_EMAIL = #{MEMBER_EMAIL}
+	</select>
+	
+	<select id="memberinfo" parameterType="String" resultType="member">
+		select *
+		from MEMBER 
+		where MEMBER_ID = #{MEMBER_ID}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete MEMBER
+		where MEMBER_ID = #{MEMBER_ID}
+	</delete>
+	
+	<update id="update" parameterType="member">
+		update MEMBER
+		set    MEMBER_PHONENO = #{MEMBER_PHONENO} 
+		       , MEMBER_EMAIL = #{MEMBER_EMAIL}
+		       , MEMBER_PROFILE = #{MEMBER_PROFILE}
+		where  MEMBER_ID = #{MEMBER_ID}
+	</update>
+	
+	<update id="updatepass">
+		update MEMBER
+		set    MEMBER_PASS = #{MEMBER_PASS} 
+		where  MEMBER_ID = #{MEMBER_ID}
+	</update>
+	
+	
+	
+</mapper>

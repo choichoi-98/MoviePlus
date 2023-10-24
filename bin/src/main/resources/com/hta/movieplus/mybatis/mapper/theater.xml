@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.TheaterMapper">
+
+
+	
+	<insert id="addTheater" parameterType="theater">
+	    <selectKey keyProperty="THEATER_ID" resultType="int" order="BEFORE">
+            SELECT THEATER_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+		INSERT INTO THEATER 
+		VALUES (#{THEATER_ID}, #{THEATER_NAME}, #{THEATER_INTRO1}, #{THEATER_INTRO2}, #{THEATER_POST}, #{THEATER_ADDRESS1}, #{THEATER_ADDRESS2}, 
+				#{THEATER_LOCATION}, #{THEATER_PARKING}, #{THEATER_MANAGER_ID}, #{THEATER_STATUS}, #{THEATER_DISABLED_SEAT}, #{THEATER_SPECIAL_SEAT}, SYSDATE)
+	</insert>	
+	
+	<select id="getCountByTheater" resultType="int">
+		SELECT COUNT(*) 
+		FROM THEATER
+	</select>
+	
+	<select id="getTheaterList" parameterType="map" resultType="theater">
+	 	SELECT * FROM
+	 		( SELECT ROWNUM RNUM, THEATER.*
+	 		  FROM 
+	 		  		( SELECT T.*, TR.THEATER_ROOM_CNT
+						FROM THEATER T
+						LEFT JOIN (
+						    SELECT THEATER_ID, COUNT(*) AS THEATER_ROOM_CNT
+						    FROM THEATER_ROOM
+						    GROUP BY THEATER_ID
+						) TR ON T.THEATER_ID = TR.THEATER_ID
+						ORDER BY THEATER_CREATED_DATE desc ) THEATER
+	 		  WHERE ROWNUM &lt;= #{end} 
+	 		  )
+	 	WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+
+	<delete id="deleteTheaterById" parameterType="int">
+		DELETE 
+		FROM THEATER
+		WHERE THEATER_ID = #{num}
+	</delete>
+	
+	<select id="getTheaterById" resultType="theater">
+		SELECT *
+		FROM THEATER
+		WHERE THEATER_ID = #{num}
+	</select>
+	
+	<update id="changeStatusTheaterById" parameterType="map">
+		UPDATE THEATER
+		<choose>
+			<when test='status == "운영"'>
+				SET THEATER_STATUS = '대기'
+			</when>
+			<when test='status == "대기"'>
+				SET THEATER_STATUS = '운영'
+			</when>
+		</choose>
+		WHERE THEATER_ID = #{num}
+	</update>
+	
+	<update id="updateTheaterById" parameterType="theater">
+		UPDATE THEATER
+		SET THEATER_NAME = #{THEATER_NAME}, THEATER_INTRO1 =  #{THEATER_INTRO1}, THEATER_INTRO2 = #{THEATER_INTRO2},
+		THEATER_POST = #{THEATER_POST}, THEATER_ADDRESS1 = #{THEATER_ADDRESS1}, THEATER_ADDRESS2 = #{THEATER_ADDRESS2}, 
+		THEATER_LOCATION = #{THEATER_LOCATION}, THEATER_PARKING =  #{THEATER_PARKING}, THEATER_DISABLED_SEAT = #{THEATER_DISABLED_SEAT},
+		THEATER_SPECIAL_SEAT = #{THEATER_SPECIAL_SEAT}
+		WHERE THEATER_ID = #{THEATER_ID}
+	</update>
+
+	<select id="findManagerIdById" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{managerId}
+	</select>
+
+	<insert id="addTheaterManager" parameterType="manager">
+		INSERT INTO MEMBER
+		VALUES((select nvl(max(MEMBER_NUM),0)+1 from MEMBER), #{MEMBER_NAME}, #{MEMBER_ID}, #{MEMBER_PASS}, #{MEMBER_EMAIL},
+				#{MEMBER_PHONENO}, #{MEMBER_BIRTH}, #{MEMBER_PROFILE}, #{MEMBER_AUTH}, #{MEMBER_LOGINTYPE},
+				'MVIP', 24000)
+	</insert>
+	
+	<update id="resetManagerPasswordById" parameterType="map">
+		UPDATE MEMBER
+		SET MEMBER_PASS = #{RESET_PASSWORD}
+		WHERE MEMBER_ID = #{THEATER_MANAGER_ID}
+	</update>
+	
+	<delete id="deleteMemberById" parameterType="String">
+		DELETE
+		FROM MEMBER
+		WHERE MEMBER_ID = #{theater_MANAGER_ID}
+	</delete>
+	
+	<select id="getAllTheaterList" resultType="theater">
+		SELECT *
+		FROM THEATER
+	</select>
+	
+	<select id="getFavoriteTheaterListById" resultType="favoriteTheater">
+		SELECT *
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		JOIN THEATER T
+		ON FT.THEATER_ID = T.THEATER_ID
+		WHERE MEMBER_ID = #{name}
+	</select>
+
+	<select id="checkFavoriteTheater" resultType="int" parameterType="map">
+		SELECT COUNT(*)
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		WHERE FT.THEATER_ID = ${theaterId}
+		AND M.MEMBER_ID = #{userId} 
+	</select>
+	
+	<insert id="addFavoriteTheater" parameterType="map">
+		INSERT INTO FAVORITE_THEATER
+		VALUES(FAVORITE_THEATER_SEQ.NEXTVAL, ( SELECT MEMBER_NUM
+												FROM MEMBER
+												WHERE MEMBER_ID = #{userId} ), #{theaterId} )
+	</insert>
+	
+	<delete id="deleteFavoriteTheater" parameterType="map">
+		DELETE
+		FROM FAVORITE_THEATER
+		WHERE THEATER_ID = #{theaterId}
+		AND MEMBER_NUM = ( SELECT MEMBER_NUM
+							FROM MEMBER
+							WHERE MEMBER_ID = #{userId} )
+	</delete>
+	
+	<select id="getCountFavoriteTheater" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM FAVORITE_THEATER FT
+		JOIN MEMBER M
+		ON FT.MEMBER_NUM = M.MEMBER_NUM
+		WHERE M.MEMBER_ID = #{name}
+		
+	</select>
+
+</mapper>

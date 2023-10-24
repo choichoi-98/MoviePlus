@@ -1,5 +1,7 @@
 package com.hta.movieplus.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.CustomerOneOnOneVO;
+import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.service.CustomerService;
 
 @Controller
@@ -21,7 +24,7 @@ public class CustomerController {
 	/* 컨트롤러 서비스 연결부분 */
 	CustomerService customerService;
 
-	@Autowired /* 생성자에 의존성주입 초기화 이미 만들어진객체를 new없이 받음*/
+	@Autowired /* 생성자에 의존성주입 초기화 이미 만들어진객체를 new없이 받음 */
 	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
@@ -40,10 +43,14 @@ public class CustomerController {
 		return "customer_service/customer_service_question";
 	}
 
-	@GetMapping("/notice")
-	public String notice() {
-		return "customer_service/customer_service_notice";
-	}
+	/*
+	 * 공지사항페이지 이동
+	 * 
+	 * @GetMapping("/notice") public String notice(Model model) { List<NoticeVO>
+	 * NoticeNum = customerService.getNoticeList(NoticeNum);
+	 * model.addAttribute("NoticeNum", NoticeNum); return
+	 * "customer_service/customer_service_notice"; }
+	 */
 
 	@GetMapping("/oneonone")
 	public ModelAndView oneOnOne(ModelAndView mv) {
@@ -64,20 +71,20 @@ public class CustomerController {
 
 	@GetMapping("/myinjury")
 	public String myinjury(CustomerOneOnOneVO myinjury) {
-		
-	
+
 		/* customerService.insertOneOnOne(myinjury); */
-		return "customer_service/customer_service_myinjury"; //리턴이 없어도되나요? 안되는거같음..
+		return "customer_service/customer_service_myinjury"; // 리턴이 없어도되나요? 안되는거같음..
 	}
 
 	/* 1대1 문의 데이터 저장페이지 */
 	@PostMapping("/oneonone_process")
 	public String oneProcess(CustomerOneOnOneVO oneonone) {
-		
-		oneonone.setCUSTOMER_PHONNUM(oneonone.getCUSTOMER_PHONNUM1()+ oneonone.getCUSTOMER_PHONNUM2()+ oneonone.getCUSTOMER_PHONNUM3());
+
+		oneonone.setCUSTOMER_PHONNUM(
+				oneonone.getCUSTOMER_PHONNUM1() + oneonone.getCUSTOMER_PHONNUM2() + oneonone.getCUSTOMER_PHONNUM3());
 		customerService.insertOneOnOne(oneonone);
-		//데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요 
- 
+		// 데이터는 컨트롤러에 있는데 서비스에 있는 도구를 쓰는거에요
+
 		return "redirect:/customer_service";
 	}
 }

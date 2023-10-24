@@ -13,14 +13,12 @@ public interface ReOpenService {
 
 	public List<ReOpenVO> getExpectMovieList();
 
-	public void cancelreopen(String cancelcode);
+	public void cancelReOpen(String cancelcode);
+
+	/* public void updateReOpenCancel(String reopencancel); */
 	
 	
 	
 	
 	
-	
-	/*
-	 * public List<Movie> getExpectReOpening();
-	 */
 }

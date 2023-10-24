@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.hta.movieplus.mybatis.mapper.NoticeMapper"> 
+
+	<!-- DB에서 CUSTOMER_NOTICE_TYPE 컬럼에서 '전체' 값을 가진 #{string} 값을 찾음 -->
+	<select id="getNoticelist" resultType="noticeVO" parameterType="String">
+		SELECT * FROM CUSTOMER_NOTICE
+		where CUSTOMER_NOTICE_TYPE = #{string}
+	</select>
+
+	<insert id="noticeWrite" parameterType="noticeVO">
+		INSERT INTO CUSTOMER_NOTICE
+		VALUES((<include refid = "insertNoticeNum" />), #{CUSTOMER_NOTICE_TYPE}, #{CUSTOMER_NOTICE_REGION}, #{CUSTOMER_NOTICE_THEATER},
+		#{CUSTOMER_NOTICE_SUBJECT}, #{CUSTOMER_NOTICE_CONTENT}, SYSDATE)
+	</insert>
+	
+	<sql id="insertNoticeNum">
+		select nvl(max(CUSTOMER_NOTICE_NUM),0)+1 from CUSTOMER_NOTICE
+	</sql>
+	
+	<delete id="deleteNoticeVO" parameterType="int">
+		DELETE
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_NUM = #{noticenum}
+	</delete>
+	
+	<select id="getNoticeModify" resultType="noticeVO" parameterType="int">
+		SELECT * FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_NUM= #{getmodify}
+	</select>
+	
+	<update id="noticeModify" parameterType="noticeVO"> <!-- 직접만든도메인일때  -->
+		UPDATE
+		CUSTOMER_NOTICE 
+		SET
+		CUSTOMER_NOTICE_SUBJECT = #{CUSTOMER_NOTICE_SUBJECT}, <!-- NoticeVO 파라미터타입이 가진 값 -->
+		CUSTOMER_NOTICE_CONTENT = #{CUSTOMER_NOTICE_CONTENT}
+		WHERE CUSTOMER_NOTICE_NUM = #{CUSTOMER_NOTICE_NUM} <!-- 무엇을 바꿀것인지 -->
+	</update>
+	
+	
+</mapper>

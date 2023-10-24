@@ -36,29 +36,19 @@
    		EXPECT_REOPENING_MOVIE
    		WHERE MOVIE_CODE = #{DELETECODE}
    </delete>
-    
-    
-    
-    
-    
-    
-    
-<!--     <insert id="updateSysdate" parameterType="String">
-       INSERT INTO EXPECT_REOPENING_MOVIE(MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE)
-      SELECT MOVIE_CODE, #{REOPENINGDATE}, #{REOPENINGENDDATE}
-      FROM MOVIE
-    </insert>
-    
-    <select id="getExpectReOpen" resultType="movie">
-       SELECT MOVIE_SCREEN
-       FROM MOVIE
-       WHERE MOVIE_SCREEN = "재개봉예정"
-    </select>
-    
-    <select id="getSysdate" resultType="ReopenVO">
-       SELECT MOVIE_CODE, REOPENING_STARTDATE, REOPENING_ENDDATE
-       FROM EXPECT_REOPENING_MOVIE
-    </select> -->
    
+  <!--  <update id="updateReOpenCancel" parameterType="String">
+   		UPDATE MOVIE
+   		SET 
+   		MOVIE_SCREEN = '상영종료'
+   		WHERE MOVIE_CODE = #{reopencancel}
+   </update> -->
+   
+   <!-- <update id="">
+   		두 테이블을 조인하면서 업데이트를 진행하는 업데이트문
+   </update> -->
+    
+    
+    
 </mapper>
     

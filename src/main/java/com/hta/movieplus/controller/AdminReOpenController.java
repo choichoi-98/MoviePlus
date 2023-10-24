@@ -47,7 +47,14 @@ public class AdminReOpenController {
 	
 	@GetMapping("/admin/cancelreopen")
 	public String cancelReOpen(String cancelcode) {
-		reopenservice.cancelreopen(cancelcode);
-		return null;
+		reopenservice.cancelReOpen(cancelcode);
+		return "redirect:/admin/reopenexpectlist";
 	}
+	
+	/*
+	 * @GetMapping("/admin/updatereopencancel") public String
+	 * updateReOpenCancel(String reopencancel) {
+	 * reopenservice.updateReOpenCancel(reopencancel); return
+	 * "redirect:/admin/reopenexpectlist"; }
+	 */
 }

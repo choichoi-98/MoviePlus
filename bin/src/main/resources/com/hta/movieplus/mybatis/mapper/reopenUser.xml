@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.ReopenUserMapper">
+
+    <select id="getReopenMovieList" resultType="movie">
+		SELECT *
+		FROM MOVIE M
+		LEFT JOIN ( SELECT MOVIE_CODE, COUNT(*) REOPEN_COUNT
+			    FROM REOPENING_REQUEST
+			    GROUP BY MOVIE_CODE ) RR ON M.MOVIE_CODE = RR.MOVIE_CODE
+		JOIN EXPECT_REOPENING_MOVIE RM ON M.MOVIE_CODE = RM.MOVIE_CODE
+		WHERE M.MOVIE_SCREEN = '재개봉예정'
+    </select>
+    
+    <select id="findByMovieCode" resultType="movie" parameterType="String">
+		SELECT *
+		FROM MOVIE M
+		LEFT JOIN ( SELECT MOVIE_CODE, COUNT(*) REOPEN_COUNT
+			    FROM REOPENING_REQUEST
+			    GROUP BY MOVIE_CODE ) RR ON M.MOVIE_CODE = RR.MOVIE_CODE
+		JOIN EXPECT_REOPENING_MOVIE RM ON M.MOVIE_CODE = RM.MOVIE_CODE
+		WHERE M.MOVIE_CODE = #{movieCode}
+    </select>
+    
+    <select id="findByMap" resultType="int" parameterType="map">
+    	SELECT COUNT(*)
+    	FROM REOPENING_REQUEST
+    	WHERE MOVIE_CODE = #{movieCode}
+    	AND MEMBER_ID = #{memberId}
+    </select>
+    
+    <insert id="insert" parameterType="map">
+    	INSERT INTO REOPENING_REQUEST
+    	VALUES(REOPENING_REQUEST_SEQ.NEXTVAL, #{memberId}, #{movieCode})
+    </insert>
+</mapper>
+    
