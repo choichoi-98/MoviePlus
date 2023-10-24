@@ -396,7 +396,7 @@ public class EventController {
 	public ModelAndView eventWinner(ModelAndView mv, 
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
-		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
+		int eventlistcount = eventservice.getCurtaincallEventListEndCount();	//총 리스트 수
 		
 		Map<String, Object> pagemap = eventservice.pagination(page);
 		List<Event> eventlist = eventservice.getEventListdesc(page, (int) pagemap.get("limit"));

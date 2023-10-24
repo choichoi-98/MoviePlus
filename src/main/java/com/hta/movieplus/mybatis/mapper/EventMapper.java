@@ -62,6 +62,8 @@ public interface EventMapper {
 
 	public List<EventApply> getmyEventlist(String MEMBER_ID);
 
+	public int getCurtaincallEventListEndCount();
+
 	
 }
 

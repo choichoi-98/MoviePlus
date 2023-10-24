@@ -117,6 +117,8 @@
 			  FROM (
 				    SELECT *
 				    FROM EVENT
+				    WHERE EVENT_TYPE = '시사회/무대인사'
+				    AND EVENT_STATUS = 'END'
 				    ORDER BY EVENT_RESULTDATE
 				  ) EVENT
 			ORDER BY EVENT_RESULTDATE DESC, RNUM DESC	  
@@ -222,4 +224,11 @@
 		ORDER BY RNUM
 	</select>
 	
+	<!-- 시사회 이벤트 목록 Count -->
+	<select id="getCurtaincallEventListEndCount" resultType="int">	
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = '시사회/무대인사'
+		AND EVENT_STATUS = 'END'
+	</select>
 </mapper>
