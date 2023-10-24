@@ -147,6 +147,7 @@ public class EventServiceImpl implements EventService{
 
 	@Override
 	public List<Event> getEventListdesc(int page, int limit) {
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int startrow = (page-1) * limit + 1;
 		int endrow = startrow+limit-1;
@@ -181,6 +182,27 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public List<EventApply> getEventwinnerList(int num) {
 		return dao.getEventwinnerList(num);
+	}
+
+	@Override
+	public List<EventApply> getEventapplyList(int num) {
+		return dao.getEventapplyList(num);
+	}
+
+	@Override
+	public void updateEventDraw(String EVENT_DRAW, int EVENT_APPLY_NUM) {
+		dao.updateEventDraw(EVENT_DRAW, EVENT_APPLY_NUM);
+		
+	}
+
+	@Override
+	public List<EventApply> getmyEventlist(String MEMBER_ID) {
+		return dao.getmyEventlist(MEMBER_ID);
+	}
+
+	@Override
+	public int getCurtaincallEventListEndCount() {
+		return dao.getCurtaincallEventListEndCount();
 	}
 
 

@@ -1,10 +1,13 @@
 package com.hta.movieplus.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hta.movieplus.domain.Event;
 import com.hta.movieplus.domain.EventApply;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.service.EventService;
 
 @Controller
@@ -391,7 +396,7 @@ public class EventController {
 	public ModelAndView eventWinner(ModelAndView mv, 
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
 		
-		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
+		int eventlistcount = eventservice.getCurtaincallEventListEndCount();	//총 리스트 수
 		
 		Map<String, Object> pagemap = eventservice.pagination(page);
 		List<Event> eventlist = eventservice.getEventListdesc(page, (int) pagemap.get("limit"));
@@ -448,7 +453,7 @@ public class EventController {
 			return mv;
 	}
 	
-	//이벤트 신청
+	//회원 - 이벤트 신청
 	@PostMapping("/event/apply")
 	public String eventApply(EventApply eventapply, Model model) {
 		eventservice.insertEventApply(eventapply);
@@ -464,6 +469,68 @@ public class EventController {
 		return eventservice.applycheck(MEMBER_ID, EVENT_NUM);
 	}
 	
+	
+	//관리자 - 이벤트 당첨자 관리페이지 이동
+	@GetMapping("/admin/updateWinner")
+	public ModelAndView updateWinner(@RequestParam(value = "num") int num, ModelAndView mv) {
+		List<EventApply> eventapply = eventservice.getEventapplyList(num);
+		mv.addObject("eventapply", eventapply);
+		mv.setViewName("admin/manageEventWinner");
+		return mv;
+	}
+	
+	//관리자 - 이벤트 당첨자 선택
+	@ResponseBody
+	@GetMapping("/admin/pickWinner")
+	public String pickWinner(@RequestParam(value = "num") int num, 
+						 ModelAndView mv) throws Exception {
+		
+		List<EventApply> eventapplylist = eventservice.getEventapplyList(num);
+		logger.info("num 정보 = " + num);
+		
+		//이벤트 당첨 여부 업데이트할 랜덤 인덱스 목록
+		List<Integer> randomIndexlist = new ArrayList<>();
+		Random random = new Random();
+		
+		int winnercount = 2;
+		
+		//중복되지 않는 랜덤 인덱스 생성
+		while(randomIndexlist.size() < winnercount && randomIndexlist.size() < eventapplylist.size()) {
+			int randomindex; 
+			
+			do{
+				randomindex = random.nextInt(eventapplylist.size());
+			}
+			while(randomIndexlist.contains(randomindex));
+			
+			randomIndexlist.add(randomindex);
+		}
+		
+		String EVENT_DRAW = "Y";
+		
+		for(int randomindex : randomIndexlist) {
+			EventApply eventApply = eventapplylist.get(randomindex);
+	        eventservice.updateEventDraw(EVENT_DRAW, eventApply.getEVENT_APPLY_NUM());
+		}
+		
+		
+		return "redirect:/admin/manageEvent";
+	}
+	
+	
+	//마이페이지 - 나의 이벤트 응모내역
+	@GetMapping("/member/myevent")
+	public ModelAndView mypageEvent(@AuthenticationPrincipal Member member, 
+									ModelAndView mv) throws Exception{
+		String memberId = member.getMEMBER_ID();
+		List<EventApply> myEventlist = eventservice.getmyEventlist(memberId);	
+		
+		mv.addObject("myEventlist", myEventlist);
+		mv.setViewName("member/mypage_event");
+		
+		return mv;
+	}
+		
 	
 	
 	

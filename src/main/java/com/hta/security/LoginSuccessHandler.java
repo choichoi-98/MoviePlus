@@ -41,7 +41,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		 */
 		
 		
-//		session.removeAttribute("loginfail");
+		session.removeAttribute("loginfail");
 //		String url = request.getContextPath() +  "/main";
 		
 		String url = request.getHeader("Referer"); // Referer : 세션에 저장된 이전 주소

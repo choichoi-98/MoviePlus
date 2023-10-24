@@ -117,6 +117,8 @@
 			  FROM (
 				    SELECT *
 				    FROM EVENT
+				    WHERE EVENT_TYPE = '시사회/무대인사'
+				    AND EVENT_STATUS = 'END'
 				    ORDER BY EVENT_RESULTDATE
 				  ) EVENT
 			ORDER BY EVENT_RESULTDATE DESC, RNUM DESC	  
@@ -174,7 +176,7 @@
 	<!-- 이벤트 회원 신청 insert -->
 	<insert id="insertEventApply" parameterType="eventapply">
 		insert into EVENT_APPLY
-		VALUES(#{MEMBER_ID}, #{EVENT_NUM},#{EVENT_DRAW})
+		VALUES( (select nvl(max(EVENT_APPLY_NUM),0)+1 from EVENT_APPLY) , #{MEMBER_ID}, #{EVENT_NUM},#{EVENT_DRAW}, sysdate)
 	</insert>
 	
 	<!-- 이벤트 신청여부 확인 -->
@@ -193,5 +195,40 @@
 		and EVENT_NUM = #{EVENT_NUM}
 	</select>
 	
+	<!-- 관리자 - 이벤트별 신청자 전체 리스트 가져오기 -->
+	<select id="getEventapplyList" resultType="eventapply">
+		SELECT ROWNUM AS RNUM, EVENT_APPLY_NUM, EVENT_NUM, EVENT_TYPE, EVENT_SUBJECT, EVENT_RESULTDATE, MEMBER_ID, EVENT_DRAW, EVENT_APPLYDATE 
+		FROM (
+   				SELECT EVENT.EVENT_NUM,  EVENT.EVENT_TYPE, EVENT.EVENT_SUBJECT, EVENT.EVENT_RESULTDATE, 
+   					   EVENT_APPLY.EVENT_APPLY_NUM, EVENT_APPLY.MEMBER_ID, EVENT_APPLY.EVENT_DRAW, EVENT_APPLY.EVENT_APPLYDATE
+   				FROM EVENT
+    			INNER JOIN EVENT_APPLY ON EVENT.EVENT_NUM = EVENT_APPLY.EVENT_NUM
+    			WHERE EVENT.EVENT_NUM = #{EVENT_NUM}
+			)
+	</select>
 	
+	<!-- 관리자 - 이벤트 당첨자 랜덤하게 업데이트 -->
+	<update id="updateEventDraw">
+		update EVENT_APPLY
+		set EVENT_DRAW = #{EVENT_DRAW}
+		where EVENT_APPLY_NUM = #{EVENT_APPLY_NUM}
+	</update>
+	
+	<!-- 마이페이지 - 나의 응모 내역 -->
+	<select id="getmyEventlist" resultType="eventapply">
+		SELECT  ROWNUM AS RNUM, E.EVENT_TYPE, E.EVENT_SUBJECT, E.EVENT_NUM,
+			    EA.EVENT_APPLYDATE, EA.MEMBER_ID
+		FROM    MEMBER M JOIN  EVENT_APPLY EA ON M.MEMBER_ID = EA.MEMBER_ID
+		JOIN EVENT E ON EA.EVENT_NUM = E.EVENT_NUM
+		WHERE M.MEMBER_ID = #{MEMBER_ID}
+		ORDER BY RNUM
+	</select>
+	
+	<!-- 시사회 이벤트 목록 Count -->
+	<select id="getCurtaincallEventListEndCount" resultType="int">	
+		SELECT COUNT(*) 
+		FROM EVENT
+		WHERE EVENT_TYPE = '시사회/무대인사'
+		AND EVENT_STATUS = 'END'
+	</select>
 </mapper>
