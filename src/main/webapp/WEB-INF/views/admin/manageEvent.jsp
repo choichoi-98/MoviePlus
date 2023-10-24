@@ -108,7 +108,7 @@
 									<td>
 										<div class="main__table-btns">
 										 <input type="hidden" id="eventnum" name="EVENT_NUM" value="${event.EVENT_NUM}">
-											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
+											<a href="${pageContext.request.contextPath}/admin/eventResult?num=${event.EVENT_NUM}" class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-log-out" title="당첨자 관리"></i>
 											</a>
 											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">

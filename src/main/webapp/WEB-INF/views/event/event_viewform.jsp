@@ -25,8 +25,13 @@
 	</div>
 	
 	<div id="contents" class="location-fixed" style="padding-top:40px;">
-	<form id="eventform" action="" method="">
-	 <input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
+	<form id="eventapplyform" action="${pageContext.request.contextPath}/event/apply" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal" var="pinfo"/>
+			<input type="hidden" id="MEMBER_ID" value="${pinfo.MEMBER_ID}" name="MEMBER_ID">
+		</sec:authorize>
+		<input type="hidden" id="EVENT_NUM" value="${eventDetail.EVENT_NUM}" name="EVENT_NUM">
 		<!-- event-detail -->
 		<div class="event-detail">
 			<h2 class="tit">
@@ -39,13 +44,6 @@
 				</em>
 			</p>
 
-			<!--
-				가로가 100% 일때
-				<div class="event-html full">
-
-				가로가 1100px 일때
-				<div class="event-html">
-			-->
 				
 			<div class="event-html">
 						
@@ -64,7 +62,9 @@
 			</div>
 		</div> <!-- event detail end -->
 		
-		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1100px;">
+		<!-- 이벤트 신청 -->
+		<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
+		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1000px;">
               <table class="board-list" >
                   <caption>구분, 연동정보, 연결 항목을 가진 간편 로그인 계정연동 표</caption>
                   <colgroup>
@@ -74,22 +74,25 @@
                   </colgroup>
                   <thead>
                       <tr>
-                          <th scope="col">영화관</th>
+                          <th scope="col">상영날짜</th>
                           <th scope="col">상영시간</th>
+                          <th scope="col">영화관</th>
                           <th scope="col">응모</th>
                       </tr>
                   </thead>
                   <tbody id="lnkgInfoTbody">
                       <tr>
-                          <th scope="row" class="a-c">코엑스</th>
-                                  <td class="a-l">연결된 계정정보가 없습니다.</td>
-                                  <td><button type="button" class="button small gray" style="background:#792828">신청하기</button></td>
+                          <th scope="row" class="a-c">상영날짜</th>
+                          <td class="a-c">영화관</td>
+                          <td class="a-c">영화관</td>
+                          <td>
+                          	<button type="submit" class="button small gray" style="background:#792828">신청하기</button>
+                          </td>
                       </tr>
                   </tbody>
               </table>
           </div>
-		
-		
+		 </c:if>
 		
 			
 			<%-- <!-- 시사회/무대인사 이벤트 신청 inner-wrap -->
@@ -103,12 +106,60 @@
 				</div>
 			<!--// 이벤트 신청 inner-wrap end -->
 			</c:if> --%>
+		
 		</form>
 		
     </div>
 </div><!-- container end -->
 
-
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+	
+<script>
+
+$('#eventapplyform').submit(function(e){
+	e.preventDefault();
+	const id = $('#MEMBER_ID').val();
+	const eventNum = $('#EVENT_NUM').val();
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");	
+	
+	
+	if(!id){
+		alert('로그인 후 신청해주세요.');
+		return false;
+	}
+	
+	$.ajax({
+		type: "POST",
+		url : "applycheck",
+		data : {
+			"id" : id,
+			"eventNum" : eventNum
+		},
+		 beforeSend : function(xhr)
+	      {      //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+	         xhr.setRequestHeader(header, token);
+	      },
+		success : function(resp){
+			if(resp == 1){
+				alert('이미 신청한 이벤트입니다.');
+			} else {
+				document.getElementById('eventapplyform').submit();
+				alert('이벤트 신청이 완료되었습니다.');
+			}
+		}
+	});//ajax end
+	
+	
+	
+	
+	
+	
+	
+})
+
+
+
+</script>	
 </body>
 </html>

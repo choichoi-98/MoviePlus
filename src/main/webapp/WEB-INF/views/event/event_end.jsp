@@ -60,9 +60,8 @@
 		<div id="boardSearch" class="inner-wrap" style="">
 			
 				<div class="board-list-util mt0">
-
-				<p class="result-count"><strong>전체 <b>10,714</b>건</strong></p>
-
+				<p class="result-count"><strong>전체 <b>${eventlistcount}</b>건</strong></p>
+				
 				<div class="board-search">
 					<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text">
 					<button type="button" class="btn-search-input">검색</button>

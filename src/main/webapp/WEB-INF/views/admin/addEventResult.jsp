@@ -17,14 +17,14 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>이벤트 당첨자 발표 추가</h2>
+						<h2>이벤트 당첨자 발표 추가 및 수정</h2>
 					</div>
 				</div>
 				<!-- end main title -->
 
 				<!-- form -->
 				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/" class="form" method="post">
+					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/eventResultProcess" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 			
@@ -46,8 +46,8 @@
 								</div>
 									
 								<div class="col-12">
-									<input type="text" name="EVENT_SUBJECT" class="form__input"
-										 placeholder="이벤트 발표 내용" value="" required>
+									<textarea id="text" name="EVENT_RESULT" class="form__textarea"
+										 placeholder="이벤트 발표 내용"  style="white-space: pre-wrap;" required>${eventdata.EVENT_RESULT}</textarea>
 								</div>
 									
 							 </div>
@@ -130,7 +130,7 @@ $(document).ready(function(){
 		
 		this.submit();
 		
-		alert('이벤트가 수정되었습니다.');
+		alert('이벤트 당첨자 발표가 등록되었습니다.');
 	})
    
 }) //ready end

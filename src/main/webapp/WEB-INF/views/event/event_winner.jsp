@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePlus: 모두를 위한 영화관</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -42,11 +43,8 @@
 
 				<div class="right">
 						
-						
 							<!-- 로그인 후 -->
-							<a href="javascript:fn_mySbscDtlsListPage()" class="button" title="나의 이벤트 응모내역 페이지로 이동">나의 응모결과확인</a>
-						
-					
+							<a href="#" class="button" title="나의 이벤트 응모내역 페이지로 이동">나의 응모결과확인</a>
 				</div>
 			</div>
 			
@@ -85,14 +83,15 @@
 							<td>${event.RNUM}</td>	<!-- Rownum  -->
 							<td>${event.EVENT_TYPE}</td>		<!-- 이벤트 타입 -->
 							<th scope="row">
-								<a href="#" data-no="14078" data-netfunnel="N" class="eventBtn" title="">
+								<a href="${pageContext.request.contextPath}/event/detail?num=${event.EVENT_NUM}" data-no="14078" data-netfunnel="N" class="eventBtn" title="">
 								${event.EVENT_SUBJECT}</a>		<!-- 이벤트명 -->
 							</th>
-							<td>${event.EVENT_RESULTDATE}</td>		<!-- 발표일 -->
+							<td><span class="resultdate">${event.EVENT_RESULTDATE}</span></td>		<!-- 발표일 -->
+							<!-- 당첨자발표 현황(준비중/결과확인) -->
 							<td>
-								<button type="button" class="button gray x-small w70px" disabled="disabled">준비중</button>
-							</td><!-- 당첨자발표 현황(준비중/결과확인) -->
-							<!-- <a href="#" class="button x-small black-line w70px" title="당첨자발표 결과확인 상세보기">결과확인</a> -->
+								<!-- <button type="button" class="button gray x-small w70px" disabled="disabled">준비중</button>  -->
+							 <a href="${pageContext.request.contextPath}/event/winnerdetail?num=${event.EVENT_NUM}" class="button x-small black-line w70px" title="당첨자발표 결과확인 상세보기">결과확인</a> 
+							</td>
 						</tr>
 					</c:forEach>		
 					</tbody>
@@ -100,7 +99,12 @@
 			</div>
 			</c:if>
 			<!-- pagination -->
-			<nav class="pagination"><strong class="active">1</strong> <a title="2페이지보기" href="javascript:void(0)" pagenum="2">2</a> <a title="3페이지보기" href="javascript:void(0)" pagenum="3">3</a> <a title="4페이지보기" href="javascript:void(0)" pagenum="4">4</a> <a title="5페이지보기" href="javascript:void(0)" pagenum="5">5</a> <a title="6페이지보기" href="javascript:void(0)" pagenum="6">6</a> <a title="7페이지보기" href="javascript:void(0)" pagenum="7">7</a> <a title="8페이지보기" href="javascript:void(0)" pagenum="8">8</a> <a title="9페이지보기" href="javascript:void(0)" pagenum="9">9</a> <a title="10페이지보기" href="javascript:void(0)" pagenum="10">10</a> <a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a> <a title="마지막 페이지 보기" href="javascript:void(0)" class="control last" pagenum="65">last</a> </nav>
+			<nav class="pagination">
+			<strong class="active">1</strong> 
+				<a title="2페이지보기" href="winner?page=${page-1}" pagenum="2">2</a> 
+				<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a> 
+				<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last" pagenum="65">last</a> 
+			</nav>
 			<!--// pagination -->
 
 		</div>
@@ -111,5 +115,25 @@
 
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+
+<script>
+//날짜형식 변경
+$('.resultdate').each(function() {
+	var result = $(this);
+	var resultdate = result.text();
+	var newresultdate = formatdate(resultdate);
+	
+	result.text(newresultdate);
+	
+	function formatdate(dateString) {
+		var year = dateString.substring(0, 4);
+	    var month = dateString.substring(4, 6);
+	    var day = dateString.substring(6, 8);
+	    
+		   return year + "." + month + "." + day;
+	}
+})
+</script>		
+	
 </body>
 </html>

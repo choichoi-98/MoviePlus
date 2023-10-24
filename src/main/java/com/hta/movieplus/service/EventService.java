@@ -44,6 +44,16 @@ public interface EventService {
 
 	public List<Event> getEventListdesc(int page, int limit);
 
+	public int getEventListCountStatus();
+
+	public int update_eventResult(Event event);
+
+	public void insertEventApply(EventApply eventapply);
+
+	public int applycheck(String MEMBER_ID, String EVENT_NUM);
+
+	public List<EventApply> getEventwinnerList(int num);
+
 
 
 

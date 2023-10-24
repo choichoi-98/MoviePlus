@@ -46,6 +46,16 @@ public interface EventMapper {
 
 	public List<Event> getEventListdesc(HashMap<String, Object> map);
 
+	public int getEventListCountStatus();
+
+	public int update_eventResult(Event event);
+
+	public void insertEventApply(EventApply eventapply);
+
+	public EventApply applycheck(String MEMBER_ID, String EVENT_NUM);
+
+	public List<EventApply> getEventwinnerList(int num);
+
 	
 }
 
