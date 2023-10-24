@@ -124,4 +124,9 @@ public class StoreServiceImpl implements StoreService {
 		dao.delCartItem(cartVO);
 	}
 
+	@Override
+	public void deletePaidItem(int PAY_NUM) {
+		dao.deletePaidItem(PAY_NUM);
+	}
+
 }

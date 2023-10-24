@@ -43,16 +43,16 @@ $(function() {
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { "itemCode": itemCode },
-            dataType: "text",
+            dataType: "json",
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(header, token);
             },
             success: function(response) {
-				alert("삭제 성공, itemCode: " + itemCode);
+//				alert("삭제 성공, itemCode: " + itemCode);
                 window.location.reload();
             },
             error: function(error) {
-  				alert("삭제 하는중 오류, itemCode: " + itemCode);
+ // 				alert("삭제 하는중 오류, itemCode: " + itemCode);
                 window.location.reload();
             }
         });

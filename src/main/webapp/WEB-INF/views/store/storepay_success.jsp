@@ -23,37 +23,37 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
 <script>
-	/* $(function() {
-	 let token = $("meta[name='_csrf']").attr("content");
-	 let header = $("meta[name='_csrf_header']").attr("content");
-
-	 $(document).on('click', '.delbtn', function(e) {
-	 e.preventDefault(); // 기본 동작인 링크 이동을 막기
-	
-	 const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
-	 const itemCode = row.find('.delbtn').data('code');  // 해당 행의 ITEM_CODE 값을 추출
-	
-	 $.ajax({
-	 url: 'success',
-	 method: 'POST',
-	 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-	 data: { "itemCode": itemCode},
-	 dataType: 'json',
-	 beforeSend: function(xhr) {
-	 xhr.setRequestHeader(header, token);
-	 xhr.setRequestHeader("Accept-Charset", "UTF-8");
-	 },
-	 success: function(data) {
-	 //                alert("삭제 성공, itemCode: " + itemCode);
-	 window.location.reload();
-	 },
-	 error: function(error) {
-	 //                alert("삭제 실패, itemCode: " + itemCode);
-	 window.location.reload();
-	 }
-	 });
-	 });
-	 }); */
+$(function() {
+	let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+    
+    $(document).on('click', '.delbtn', function(e) {
+    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
+    	
+    	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
+        const payNum = row.find('.delbtn').data('paynum');  // 해당 행의 ITEM_CODE 값을 추출
+//        alert('payNum:' + payNum);
+        
+        $.ajax({
+            url: 'success',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: { "payNum": payNum},
+            dataType: 'json',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function(data) {
+ //               alert("삭제 성공, payNum: " + payNum);
+                window.location.reload();
+            },
+            error: function(error) {
+//                alert("삭제 실패, payNum: " + payNum);
+                window.location.reload();
+            }
+        });
+    });
+}); 
 </script>
 </head>
 <body>
@@ -116,7 +116,7 @@
 
 								<tbody>
 									<c:forEach var="p" items="${AprPayList}" varStatus="loop">
-										<c:if test="${pinfo.MEMBER_ID eq p.MEMBER_ID}">
+										<c:if test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 											<tr>
 												<td class="a-c">
 													<div class="goods-info">
@@ -151,7 +151,7 @@
 												<td><a
 													href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
 													class="a-link delbtn" name="brchList" title="삭제"
-													data-code="">취소</a></td>
+													data-paynum="${p.PAY_NUM}">취소</a></td>
 											</tr>
 										</c:if>
 									</c:forEach>

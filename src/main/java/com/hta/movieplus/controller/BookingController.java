@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.List;
 
+import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,8 @@ import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.BookingInfoDTO;
 import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.FavoriteTheater;
-import com.hta.movieplus.domain.KakaoPayVO;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
-import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.TheaterSchedule;
@@ -117,8 +116,6 @@ public class BookingController {
 			String[] seat,
 			ModelAndView mv) {
 		
-//		List<CouponVO> couponlist = kakaopayService.getCouponListByCode();
-		
 		String seatInfo = String.join(",", seat); // 배열 -> 쉼표로 구분된 문자열
 		int seatCnt = seat.length;
 		
@@ -138,15 +135,13 @@ public class BookingController {
 	
 	@PostMapping("/cart")
 	@ResponseBody
-	public String cart2(
-			@RequestParam("couponCode") String COUPON_CODE, 
+	public CouponVO cart2(
+			@RequestParam("couponCode") String COUPON_CODE,
 			Model model) {
-		System.out.println(COUPON_CODE);
-		
-	    List<CouponVO> coupon = kakaopayService.getCouponByCode(COUPON_CODE);
+	    CouponVO selectedcoupon = kakaopayService.getCouponByCode(COUPON_CODE);
 	    
-	    model.addAttribute("coupon", coupon);
-	    return "booking/booking_cart";
+	    model.addAttribute("selectedcoupon", selectedcoupon);
+	    return selectedcoupon;
 	}
 	
 //	@PostMapping("/cart")
@@ -240,6 +235,13 @@ public class BookingController {
 //		mv.addObject("paylist", paylist);
 		mv.addObject("BookingList", BookingLists);
 		return mv;
+	}
+	
+	@PostMapping("/success")
+	@ResponseBody
+	public void pay_success2(
+			@RequestParam("KpayNum") int KPAY_NUM) {
+		kakaopayService.delPaidBook(KPAY_NUM);
 	}
 
 }

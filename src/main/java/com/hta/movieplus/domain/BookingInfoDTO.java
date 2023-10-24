@@ -15,6 +15,7 @@ public class BookingInfoDTO {
     private String MOVIE_OPENDATE;	// 개봉일
     private String MOVIE_GRADE;		// 상영등급
     private int MOVIE_STAR;			// 평점
+    private String MOVIE_POSTER;
 	
 	private int KPAY_AMOUNT; // 최종결제 금액
 	private int KPAY_SEAT_CNT; // 선택한 자리 갯수 == 사람 수
@@ -117,6 +118,12 @@ public class BookingInfoDTO {
 	}
 	public void setMOVIE_STAR(int mOVIE_STAR) {
 		MOVIE_STAR = mOVIE_STAR;
+	}
+	public String getMOVIE_POSTER() {
+		return MOVIE_POSTER;
+	}
+	public void setMOVIE_POSTER(String mOVIE_POSTER) {
+		MOVIE_POSTER = mOVIE_POSTER;
 	}
 	
 }

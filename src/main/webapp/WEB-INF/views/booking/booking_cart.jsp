@@ -11,9 +11,9 @@
 	padding: 0; /* 패딩을 0으로 설정 */
 }
 /* 모달 초기 숨김 상태 */
-#myModal {
+/* #myModal {
 	display: none;
-}
+} */
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,13 +23,90 @@ $(function() {
 	let token = $("meta[name='_csrf']").attr("content");
     let header = $("meta[name='_csrf_header']").attr("content");
     
+    var searchedCoupons = []; // 이미 조회한 쿠폰 코드(배열)
+    var couponValue;
+
+    $(document).on('click', '#btn_coupon_search', function(e) {
+        e.preventDefault();
+        var couponCode = $('#couponCode').val();
+
+        if (couponCode) {
+            // 이미 조회한 쿠폰 코드인지 확인
+            if (searchedCoupons.includes(couponCode)) {
+                alert("해당 코드는 이미 조회되었습니다.");
+            } else {
+                $.ajax({
+                    url: "cart",
+                    method: 'POST',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: { "couponCode": couponCode },
+                    dataType: "json",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function(result) {
+                        var susCoupon = `<tr>
+                            <td>` + result.coupon_TYPE + `</td>
+                            <td>2023.10.20 ~ 2023.11.20</td>
+                            <td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
+                        </tr>`;
+                        couponValue = result.coupon_VALUE;
+                        $('#1coupon').append(susCoupon);
+                        // 이미 조회한 쿠폰 코드
+                        searchedCoupons.push(couponCode);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        } else {
+            alert("쿠폰 코드를 입력해주세요.");
+        }
+    });
+    
+    $(document).on('change', 'input[name="chkDcoupon"]', function() {
+    	var isChecked = $(this).prop("checked"); // true or false
+    	var discountElement = $('#discountPrice em')
+    	
+    	if(isChecked) {
+    		var discountAmount = totalDiscount();
+    		discountElement.text(discountAmount);
+    		
+    		var totalPrice = $('#Checker').data("amount");
+            var currentDiscount = parseInt(discountElement.text());
+            
+            var finalPrice = totalPrice - currentDiscount;
+            if(finalPrice < 0) {
+            	finalPrice = 0;
+            } else {
+            	finalPrice = totalPrice - currentDiscount;
+            }
+            
+            $('#Checker').attr('data-amount', finalPrice);
+            $('#Checker').text(finalPrice);
+    	} else {
+    		discountElement.text("0");
+    		
+    		// 최종값 업데이트 - totalPrice는 미리 계산한 값을 사용
+            var totalPrice = $('#Checker').data("amount");
+            $('#Checker').attr('data-amount', totalPrice);
+            $('#Checker').text(totalPrice);
+    	}
+    });
+    
+    function totalDiscount() {
+		return couponValue;
+	}
+    
     $(document).on('click', '#btn_booking_pay', function(e) {
     	e.preventDefault(); // 기본 동작인 링크 이동을 막기
 //    $('#btn_booking_pay').click(function() {
-    	var totalAmount = $('#Checker').data("amount");
+    	var totalAmount = $('#Checker').text();
     	var sid = $('#Checker').data("sid");
     	var cnt = $('#Checker').data("cnt");
     	var seatinfo = $('#Checker').data("seatinfo");
+//    	alert(totalAmount);
     	
         $.ajax({
             url: 'kakaopay',
@@ -54,35 +131,7 @@ $(function() {
             }
         });
     });
-    	
-    $(document).on('click', '#btn_coupon_search', function(e) {
-        e.preventDefault();
-        
-        var couponCode = $('#couponCode').val();
-        alert(couponCode);
 
-        if (couponCode) {
-            $.ajax({
-                url: "cart",
-                method: 'POST',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data: { "couponCode": couponCode},
-                dataType: "text",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader(header, token);
-                },
-                success: function(result) { 
-                    alert("조회 성공");
-                    // Handle the JSON response from the server
-                },
-                error: function(error) {
-                    alert("조회 실패");
-                }
-            });
-        } else {
-            alert("쿠폰 코드를 입력해주세요.");
-        }
-    });
 
     var couponOpen = false; // 초기 상태는 닫혀있음
     $('#grp_coupon').click(function()  {
@@ -127,15 +176,23 @@ $(function() {
         $('#btn_close_dcoupon').click(function() {
             // 모달 닫기
             $('#layer_dcoupon').hide();
+            $('#data_table tbody').empty();
+            searchedCoupons = []; // searchedCoupons 초기화
         });
         $('#btn_close_modal_dcoupon').click(function() {
             // 모달 닫기
             $('#layer_dcoupon').hide();
+            $('#data_table tbody').empty();
+            searchedCoupons = []; // searchedCoupons 초기화
+        });
+        $('#btn_apply_dcoupon').click(function() {
+            // 모달 닫기
+            $('#layer_dcoupon').hide();
+            $('#data_table tbody').empty();
+            searchedCoupons = []; // searchedCoupons 초기화
         });
     });
-    
 }); // func end
-    
      
 </script>
 
@@ -195,7 +252,7 @@ $(function() {
 													<a
 														href="#"
 														w-data="600" h-data="550" class=""
-														name="btn_pay_memp" id="btn_pay_memp" title="메가박스 멤버십 포인트">
+														name="btn_pay_memp" id="btn_pay_mcoupon" title="메가박스 멤버십 포인트">
 														<span class="txt">무비플러스 포인트 <!-- 메가박스 멤버십 포인트 --></span>
 													</a>
 													<button type="button" class="btn-cancel"
@@ -208,7 +265,7 @@ $(function() {
 													<a
 														href="#"
 														w-data="600" h-data="550" class=""
-														name="btn_pay_dcoupon" id="btn_pay_dcoupon"
+														name="btn_pay_dcoupon" id="btn_pay_mcoupon"
 														title="메가박스 할인쿠폰"> <span class="txt">무비플러스 할인쿠폰
 															<!-- 메가박스 할인쿠폰 -->
 													</span> <em class="tooltip01 hidden" id="movieWonEm"></em>
@@ -247,7 +304,7 @@ $(function() {
 													<a
 														href="#myModal"
 														w-data="600" h-data="560" class=""
-														name="btn_pay_scoupon" id="btn_pay_scoupon" title="스토어교환권">
+														name="btn_pay_scoupon" id="btn_pay_mcoupon" title="스토어교환권">
 														<span class="txt">스토어교환권 <!-- 스토어교환권 --></span>
 													</a>
 
@@ -259,8 +316,8 @@ $(function() {
 												</div>
 											</div>
 										</div>
-										<div class="pointtxt">기프티콘, 기프티쇼, 아이넘버, 도넛북, 스마트콘, 스마일콘,
-											G마켓 예매권은 [모바일 관람권]에서 사용하실 수 있습니다.</div></li>
+									<div class="pointtxt">기프티콘, 기프티쇼, 아이넘버, 도넛북, 스마트콘, 스마일콘,
+										G마켓 예매권은 [모바일 관람권]에서 사용하실 수 있습니다.</div></li>
 								</ul>
 							</div>
 						</div>
@@ -302,7 +359,6 @@ $(function() {
 									name="radio_payment" id="rdo_pay_settlebank" value="settlebank">
 									<label for="rdo_pay_settlebank">내통장결제</label>
 								</span>
-
 							</div>
 
 							<div class="select-payment-card">
@@ -324,17 +380,8 @@ $(function() {
 
 					<!-- seat-result -->
 					<div class="seat-result">
-					
 						<div class="wrap">
 							<div class="tit-area type2">
-							<!--
-							관람 등급 표시
-							<span class="movie-grade small age-all">전체 관람가</span>
-							<span class="movie-grade small age-12">12세 이상 관람가</span>
-							<span class="movie-grade small age-15">15세 이상 관람가</span>
-							<span class="movie-grade small age-19">청소년 관람 불가</span>
-							<span class="movie-grade small age-no">미정</span>
-							-->
 								<span class="movie-grade small age-${movie.grade_data}" id="admisClassNm"></span>
 
 								<p class="tit" id="movieNm">${movie.movie_Title}</p>
@@ -351,17 +398,6 @@ $(function() {
 									<div class="data">
 										<span class="tit">성인 <em>2</em></span><span class="price">${price}</span>
 									</div>
-									<!--
-							<div class="data">
-								<span class="tit">일반 <em>1</em></span>
-								<span class="price">20,000</span>
-							</div>
-
-							<div class="data">
-								<span class="tit">어린이 <em>2</em></span>
-								<span class="price">6,000</span>
-							</div>
-							-->
 							<c:set var="totalPrice" value="0"/>
 									<div class="all">
 										<span class="tit">금액 <!-- 금액 --></span> <span class="price"><em>${price}</em>
@@ -372,8 +408,8 @@ $(function() {
 								<div class="box discout-box">
 
 									<div class="all">
-										<span class="tit">할인적용 <!-- 할인적용 --></span> <span
-											class="price"><em>0</em> 원 <!-- 원 --></span>
+										<span class="tit">할인적용<!-- 할인적용 --></span> 
+										<span class="price" id="discountPrice"><em>0</em> 원 <!-- 원 --></span>
 									</div>
 								</div>
 							</div>
@@ -385,9 +421,9 @@ $(function() {
 										<!-- 추가금액 -->
 									</p>
 
-									<div class="money">${coupon.COUPON_TYPE}</div>
+									<div class="money"></div>
 								</div>
-								<c:set var="totalPrice" value="${totalPrice + price - 0}"/>
+								<c:set var="totalPrice" value="${totalPrice + price}"/>
 								<div class="pay">
 									<p class="tit">
 										최종결제금액
@@ -475,14 +511,7 @@ $(function() {
 							<col style="width:60px;">
 						</colgroup>
 						
-						<tbody>
-							<c:forEach var="cp" items="${coupon}">
-							<tr>	
-								<td class="">${cp.COUPON_NUM}</td>
-								<td>2023.10.10<br>~ 2023.11.19</td>	
-								<td><input type="checkbox" title="쿠폰 사용여부 체크" name="chkDcoupon" data-idx="0"></td>
-							</tr>
-							</c:forEach>	
+						<tbody id="1coupon">
 						</tbody>
 					</table>
 				</div>
@@ -509,6 +538,7 @@ $(function() {
 		<button type="button" class="btn-modal-close" id="btn_close_modal_dcoupon">레이어 닫기<!-- 레이어 닫기 --></button>
 	</div>
 </section>
-	
+
+<jsp:include page="/WEB-INF/views/footer.jsp" />	
 </body>
 </html>

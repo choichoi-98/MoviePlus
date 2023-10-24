@@ -207,7 +207,7 @@ public class StoreController {
 	
 	@PostMapping("/cart")
 	@ResponseBody
-	public ModelAndView cart2(
+	public void cart2(
 		@RequestParam("itemCode") int ITEM_CODE,
 		@AuthenticationPrincipal Member currentUser,
 		CartVO cartVO,
@@ -217,8 +217,8 @@ public class StoreController {
 		cartVO.setMEMBER_ID(MEMBER_ID);
 		storeService.delCartItem(cartVO);
 		
-		mv.setViewName("store/store_cart");
-		return mv;
+//		mv.setViewName("store/store_cart");
+//		return mv;
 	}
 	
 	@PostMapping("/kakaopay")
@@ -230,7 +230,12 @@ public class StoreController {
 		
 	    String[] CartItemList = cartItemNames.split(",");
 	    int Count = CartItemList.length - 1;
-	    String itemDisplay = CartItemList[0] + " 외 " + Count + "개";
+	    String itemDisplay;
+	    if (Count == 0) {
+	    	itemDisplay = CartItemList[0];
+	    } else {
+	    	itemDisplay = CartItemList[0] + " 외 " + Count + "개";
+	    }
 	    String itemDisplayEnc = URLEncoder.encode(itemDisplay, "UTF-8");
 	    String MEMBER_ID = member.getMEMBER_ID();
 	    
@@ -293,10 +298,17 @@ public class StoreController {
 //		List<StoreCartPayDTO> AprPayList = storeService.selectApproveds();
 		
 //		mv.setViewName("store/pay_success");
-		mv.setViewName("store/storePay_success");
+		mv.setViewName("store/storepay_success");
 //		mv.addObject("paylist", paylist);
 		mv.addObject("AprPayList", AprPayList);
 		return mv;
+	}
+	
+	@PostMapping("/success")
+	@ResponseBody
+	public void pay_success2(
+			@RequestParam("payNum") int PAY_NUM) {
+		storeService.deletePaidItem(PAY_NUM);
 	}
 
 }

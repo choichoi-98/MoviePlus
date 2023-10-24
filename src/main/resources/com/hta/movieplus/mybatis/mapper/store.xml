@@ -54,6 +54,7 @@
 		SELECT *
 		FROM STORE_PAY 
 		WHERE pg_token IS NOT NULL
+		ORDER BY PAY_NUM ASC
 	</select>
 	
 	<select id="getPayList" resultType="StorePayVO">
@@ -117,6 +118,12 @@
 		from STORE_CART
 		where ITEM_CODE = #{ITEM_CODE}
 		and MEMBER_ID = #{MEMBER_ID}
+	</delete>
+	
+	<delete id="deletePaidItem" parameterType="int">
+		delete 
+		from STORE_PAY
+		where PAY_NUM = #{PAY_NUM}
 	</delete>
 	
 	<delete id="clearCart">

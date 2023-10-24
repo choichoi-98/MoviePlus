@@ -33,10 +33,17 @@
 		inner join MOVIE 
 		on MOVIE.MOVIE_CODE = THEATER_SCHEDULE.MOVIE_CODE
 		where pg_token IS NOT NULL
+		ORDER BY KAKAO_PAY.KPAY_NUM ASC
 	</select>
 	
-	<select id="getCouponByCode" parameterType="CouponVO" resultType="CouponVO">
+	<select id="getCouponByCode" parameterType="String" resultType="CouponVO">
 		select * from COUPON
 		where COUPON_CODE = #{COUPON_CODE}
 	</select>
+	
+	<delete id="delPaidBook" parameterType="int">
+		delete 
+		from KAKAO_PAY
+		where KPAY_NUM = #{KPAY_NUM}
+	</delete>
 </mapper>

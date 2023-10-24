@@ -10,39 +10,35 @@ CREATE TABLE STORE_ITEM (
   	ITEM_ORIGINAL  varchar2(50) -- 첨부 파일명
 );
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (101, 'ticket','noraml2D', 5000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(101, 'ticket', 'Ticket Premium', 30000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (102, 'ticket','3D', 6000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(102, 'ticket', 'Movie Ticket VIP', 15000);
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (201, 'snack','sprite', 2500);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(103, 'ticket', 'Event Ticket', 25000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (202, 'snack','popcorn', 4500);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(201, 'snack', 'Popcorn Large', 8000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (203, 'snack','nacho', 3500);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(202, 'snack', 'Soda Medium', 5000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (301, 'voucher','5000v', 5000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(203, 'snack', 'Candy Bar', 3000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (302, 'voucher','10000v', 10000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(301, 'voucher', 'Shopping Voucher', 20000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (303, 'voucher','15000v', 15000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(302, 'voucher', 'Restaurant Voucher', 25000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (401, 'point','30000p', 30000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(303, 'voucher', 'Spa Voucher', 35000); 
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (402, 'point','10000p', 20000);
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(401, 'point', '1000 Points', 10000);
 
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (403, 'point','10000p', 10000);
-
-INSERT INTO STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE)
-VALUES (404, 'point','5000p', 5000);
-
+insert into store_item(item_code, item_menu, item_name, item_price)
+values(402, 'point', '5000 Points', 45000); 
