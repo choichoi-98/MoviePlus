@@ -31,6 +31,13 @@ public class ChatController {
 		return mv;
 	}
 	
+	//친구 목록
+	@RequestMapping("/friendList")
+	public ModelAndView friendList(ModelAndView mv) {
+		mv.setViewName("chat/friendList");
+		return mv;
+	}
+	
 	// 방 페이지
 	@RequestMapping("/room")
 	public ModelAndView room() {
@@ -46,7 +53,7 @@ public class ChatController {
 		
 		logger.info("=========컨트롤러: createRoom ============");
 		String roomName = (String) params.get("roomName");
-		logger.info("roomName = "+roomName);
+		logger.info("createRoom roomName = "+roomName);
 		if(roomName != null && !roomName.trim().equals("")) {
 			ChatRoomVO room = new ChatRoomVO();
 			room.setRoomNumber(++roomNumber);
@@ -73,10 +80,21 @@ public class ChatController {
 	@RequestMapping("/moveChating")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
+		String roomN = (String)params.get("roomNumber");
+		logger.info("moveChating roomN: " + roomN);
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
 		
-		List<ChatRoomVO> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
+//		List<ChatRoomVO> new_list 
+//			= roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
+		List<ChatRoomVO> new_list = new ArrayList<>();
+		for (ChatRoomVO room : roomList) {
+		    if (room.getRoomNumber() == roomNumber) {
+		        new_list.add(room);
+		    }
+		}
+
 		if(new_list != null && new_list.size() > 0) {
+			logger.info("=========if문 안===========================");
 			mv.addObject("roomName", params.get("roomName"));
 			mv.addObject("roomNumber", params.get("roomNumber"));
 			mv.setViewName("chat/chat");
