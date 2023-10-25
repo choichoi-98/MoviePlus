@@ -40,7 +40,7 @@ public interface EventService {
 
 	public void changeStatus(int num, String status);
 
-	public Map<String, Object> pagination(int page);
+	public Map<String, Object> pagination(int page, String option);
 
 	public List<Event> getEventListdesc(int page, int limit);
 

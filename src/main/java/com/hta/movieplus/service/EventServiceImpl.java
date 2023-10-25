@@ -116,14 +116,19 @@ public class EventServiceImpl implements EventService{
 	
 
 	@Override
-	public Map<String, Object> pagination(int page) {
-		
+	public Map<String, Object> pagination(int page, String option) {
+		int eventlistcount = 0;
 		Map<String, Object> pagemap = new HashMap<String,Object>();
 		
 		int limit = 10;	//한 화면에 출력할 로우 갯수
 		
-		int eventlistcount = getEventListCount();	//총 리스트 수
+		if(option.equals("admin")) {
+			eventlistcount = getEventListCount();	//총 리스트 수	
+		}else {
+			eventlistcount = getEventListCountEnd();
+		}
 
+		
 		//총 페이지 수
 		int maxpage = (eventlistcount + limit - 1) / limit;
 		
@@ -211,6 +216,10 @@ public class EventServiceImpl implements EventService{
 		return dao.getEventApplyCount(num);
 	}
 
+	public int getEventListCountEnd() { 
+		return dao.getEventListCountEnd();
+		
+	}
 	
 
 

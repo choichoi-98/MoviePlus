@@ -148,19 +148,25 @@
 	$('#pickwinnerbtn').click(function(){
 		const num = $('#EVENT_NUM').val();
 		
-		$.ajax({
-			url : "pickWinner",
-			data : {"num" : num },
-			success : function(data){
-				$('#EVENT_NUM').val(data);
-				alert('당첨자 추첨이 완료되었습니다.');
-				location.reload();
-			},
-			error: function(){
-				console.log();
-			}
-		})
-		
+		var winnerCount = prompt('당첨자 수를 입력해주세요');
+		if(prompt != '' && !isNaN(prompt)){
+			$.ajax({
+				url : "pickWinner",
+				data : {num : num,
+						winnerCount : winnerCount
+						},
+				success : function(data){
+					$('#EVENT_NUM').val(data);
+					alert('당첨자 추첨이 완료되었습니다.');
+					location.reload();
+				},
+				error: function(){
+					console.log();
+				}
+			})
+		}else{
+			alert('입력값을 제대로 입력해주세요.')
+		}
 	})
 	
 	

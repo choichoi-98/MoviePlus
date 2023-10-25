@@ -58,7 +58,6 @@
 								<li><a
 									href="${pageContext.request.contextPath}/member/modifyinfo"
 									title="개인정보 수정">개인정보 수정</a></li>
-								<li><a href="#" title="선택정보 수정">선택정보 수정</a></li>
 							</ul></li>
 					</ul>
 				</nav>

@@ -220,23 +220,22 @@
 					<div class="event-list mt15">
 
 						<ul>
+							<c:forEach var="reopen_movie" items="${reopenMovieList}" begin="0" end="3">
+								<li><a
+									href="${pageContext.request.contextPath}/event/reopen/detail?movieCode=${reopen_movie.movie_Code}"
+									class="eventBtn"
+									title="${reopen_movie.movie_Title} 상세보기">
+										<p class="img">
+											<img src="${reopen_movie.movie_Poster}"
+												alt="${reopen_movie.movie_Title}">
+										</p>
 
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14148" data-netfunnel="N" class="eventBtn"
-								title="[미니 시네마 무비칩 NO.4] 거미집 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/qBvplprRP9LBljXVlfpW2Ytpl8BwWD3i.jpg"
-											alt="[미니 시네마 무비칩 NO.4] 거미집" onerror="noImg(this);">
-									</p>
+										<p class="tit">[재개봉] ${reopen_movie.movie_Title}</p>
 
-									<p class="tit">[미니 시네마 무비칩 NO.4] 거미집</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.10</p>
-							</a></li>
-
-
-
-
+										<p class="date">${reopen_movie.REOPENING_STARTDATE} ~ ${reopen_movie.REOPENING_ENDDATE}</p>
+										<p class="date">현재 동의 수 : <span style="font-weight:bold;">${reopen_movie.REOPEN_COUNT}</span></p>
+								</a></li>
+							</c:forEach>
 						</ul>
 					</div> <!-- 재개봉 end -->
 					
