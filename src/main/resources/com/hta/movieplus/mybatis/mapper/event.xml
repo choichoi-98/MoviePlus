@@ -181,7 +181,7 @@
 	</insert>
 	
 	<!-- 이벤트 신청여부 확인 -->
-	<select id="applycheck" resultType="eventapply" parameterType="String">
+	<select id="applyCheck" resultType="eventapply" parameterType="String">
 		select *
 		from EVENT_APPLY
 		WHERE MEMBER_ID = #{MEMBER_ID}
@@ -189,7 +189,7 @@
 	</select>
 	
 	<!-- 이벤트 당첨자 리스트 EVENT_DRAW = 'Y' -->
-	<select id="getEventwinnerList" resultType="eventapply">
+	<select id="getEventWinnerList" resultType="eventapply">
 		select * 
 		from EVENT_APPLY
 		where EVENT_DRAW = 'Y'
@@ -197,7 +197,7 @@
 	</select>
 	
 	<!-- 관리자 - 이벤트별 신청자 전체 리스트 가져오기 -->
-	<select id="getEventapplyList" resultType="eventapply">
+	<select id="getEventApplyList" resultType="eventapply">
 		SELECT ROWNUM AS RNUM, EVENT_APPLY_NUM, EVENT_NUM, EVENT_TYPE, EVENT_SUBJECT, EVENT_RESULTDATE, MEMBER_ID, EVENT_DRAW, EVENT_APPLYDATE 
 		FROM (
    				SELECT EVENT.EVENT_NUM,  EVENT.EVENT_TYPE, EVENT.EVENT_SUBJECT, EVENT.EVENT_RESULTDATE, 
@@ -216,7 +216,7 @@
 	</update>
 	
 	<!-- 마이페이지 - 나의 응모 내역 -->
-	<select id="getmyEventlist" resultType="eventapply">
+	<select id="getMyEventlist" resultType="eventapply">
 		SELECT  ROWNUM AS RNUM, E.EVENT_TYPE, E.EVENT_SUBJECT, E.EVENT_NUM,
 			    EA.EVENT_APPLYDATE, EA.MEMBER_ID
 		FROM    MEMBER M JOIN  EVENT_APPLY EA ON M.MEMBER_ID = EA.MEMBER_ID
@@ -234,7 +234,7 @@
 	</select>
 	
 	<!-- 이벤트 신청자 수 카운트 -->
-	<select id="geteventapplycount" resultType="int">
+	<select id="getEventApplyCount" resultType="int">
 		select count(*)
 		from event_apply
 		where EVENT_NUM = #{EVENT_NUM}

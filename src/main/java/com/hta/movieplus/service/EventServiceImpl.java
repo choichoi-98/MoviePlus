@@ -175,19 +175,19 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int applycheck(String MEMBER_ID, String EVENT_NUM) {
-		EventApply eventapply = dao.applycheck(MEMBER_ID, EVENT_NUM);
+	public int applyCheck(String MEMBER_ID, String EVENT_NUM) {
+		EventApply eventapply = dao.applyCheck(MEMBER_ID, EVENT_NUM);
 		return (eventapply == null)? -1 : 1; //응모내역이 존재하는 경우 1, 존재하지 않는 경우 -1 출력  
 	}
 
 	@Override
-	public List<EventApply> getEventwinnerList(int num) {
-		return dao.getEventwinnerList(num);
+	public List<EventApply> getEventWinnerList(int num) {
+		return dao.getEventWinnerList(num);
 	}
 
 	@Override
-	public List<EventApply> getEventapplyList(int num) {
-		return dao.getEventapplyList(num);
+	public List<EventApply> getEventApplyList(int num) {
+		return dao.getEventApplyList(num);
 	}
 
 	@Override
@@ -197,8 +197,8 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<EventApply> getmyEventlist(String MEMBER_ID) {
-		return dao.getmyEventlist(MEMBER_ID);
+	public List<EventApply> getMyEventlist(String MEMBER_ID) {
+		return dao.getMyEventlist(MEMBER_ID);
 	}
 
 	@Override
@@ -207,8 +207,8 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public int geteventapplycount(int num) {
-		return dao.geteventapplycount(num);
+	public int getEventApplyCount(int num) {
+		return dao.getEventApplyCount(num);
 	}
 
 	

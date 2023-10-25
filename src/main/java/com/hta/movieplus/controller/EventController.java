@@ -445,7 +445,7 @@ public class EventController {
 			logger.info("EVENT_NUM : " + num);
 			
 			Event event = eventservice.getDetailEvent(num);
-			List<EventApply> eventapply = eventservice.getEventwinnerList(num);
+			List<EventApply> eventapply = eventservice.getEventWinnerList(num);
 			
 			mv.addObject("eventlist", event);
 			mv.addObject("eventwinner", eventapply);
@@ -467,7 +467,7 @@ public class EventController {
 	@ResponseBody
 	@PostMapping("/event/applycheck")
 	public int applycheck(@RequestParam("id") String MEMBER_ID, @RequestParam("eventNum") String EVENT_NUM) {
-		return eventservice.applycheck(MEMBER_ID, EVENT_NUM);
+		return eventservice.applyCheck(MEMBER_ID, EVENT_NUM);
 	}
 	
 	
@@ -475,8 +475,8 @@ public class EventController {
 	@GetMapping("/admin/updateWinner")
 	public ModelAndView updateWinner(@RequestParam(value = "num") int num, ModelAndView mv) {
 		
-		List<EventApply> eventapply = eventservice.getEventapplyList(num);
-		int eventapplycount = eventservice.geteventapplycount(num);
+		List<EventApply> eventapply = eventservice.getEventApplyList(num);
+		int eventapplycount = eventservice.getEventApplyCount(num);
 		
 		mv.addObject("eventapply", eventapply);
 		mv.addObject("eventapplycount", eventapplycount);
@@ -490,7 +490,7 @@ public class EventController {
 	public String pickWinner(@RequestParam(value = "num") int num, 
 						 ModelAndView mv) throws Exception {
 		
-		List<EventApply> eventapplylist = eventservice.getEventapplyList(num);
+		List<EventApply> eventapplylist = eventservice.getEventApplyList(num);
 		logger.info("num 정보 = " + num);
 		
 		//이벤트 당첨 여부 업데이트할 랜덤 인덱스 목록
@@ -527,7 +527,7 @@ public class EventController {
 	public ModelAndView mypageEvent(@AuthenticationPrincipal Member member, 
 									ModelAndView mv) throws Exception{
 		String memberId = member.getMEMBER_ID();
-		List<EventApply> myEventlist = eventservice.getmyEventlist(memberId);	
+		List<EventApply> myEventlist = eventservice.getMyEventlist(memberId);	
 		
 		mv.addObject("myEventlist", myEventlist);
 		mv.setViewName("member/mypage_event");

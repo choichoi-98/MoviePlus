@@ -52,19 +52,19 @@ public interface EventMapper {
 
 	public void insertEventApply(EventApply eventapply);
 
-	public EventApply applycheck(String MEMBER_ID, String EVENT_NUM);
+	public EventApply applyCheck(String MEMBER_ID, String EVENT_NUM);
 
-	public List<EventApply> getEventwinnerList(int num);
+	public List<EventApply> getEventWinnerList(int num);
 
-	public List<EventApply> getEventapplyList(int num);
+	public List<EventApply> getEventApplyList(int num);
 
 	public void updateEventDraw(String EVENT_DRAW, int EVENT_APPLY_NUM);
 
-	public List<EventApply> getmyEventlist(String MEMBER_ID);
+	public List<EventApply> getMyEventlist(String MEMBER_ID);
 
 	public int getCurtaincallEventListEndCount();
 
-	public int geteventapplycount(int num);
+	public int getEventApplyCount(int num);
 
 }
 
