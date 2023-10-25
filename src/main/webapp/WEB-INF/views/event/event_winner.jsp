@@ -106,7 +106,7 @@
 			</c:if>
 			<!-- pagination -->
 			<nav class="pagination">
-			<strong class="active">1</strong> 
+			<strong class="active" style="background-color:#792828; border-color:#792828;">1</strong> 
 				<a title="2페이지보기" href="winner?page=${page-1}" pagenum="2">2</a> 
 				<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a> 
 				<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last" pagenum="65">last</a> 

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePlus: 모두를 위한 영화관</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/event.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -140,7 +142,7 @@
 							</p>
 
 							<p class="date">
-								${eventpromotion.EVENT_STARTDATE} ~ ${eventpromotion.EVENT_ENDDATE}
+								<span class="startdate">${eventpromotion.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventpromotion.EVENT_ENDDATE}</span>
 							</p>
 						</a>
 					</li>

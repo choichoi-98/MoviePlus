@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePlus: 모두를 위한 영화관</title>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/event.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -103,7 +105,7 @@
 
 									<p class="tit">${eventmovie.EVENT_SUBJECT}</p>
 
-									<p class="date">${eventmovie.EVENT_STARTDATE} ~ ${eventmovie.EVENT_ENDDATE} </p>
+									<p class="date"><span class="startdate">${eventmovie.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventmovie.EVENT_ENDDATE}</span> </p>
 							</a>
 							</li>
 							</c:if>
@@ -138,7 +140,7 @@
 
 									<p class="tit">${eventtheater.EVENT_SUBJECT}</p>
 
-									<p class="date">${eventtheater.EVENT_STARTDATE} ~ ${eventtheater.EVENT_ENDDATE}</p>
+									<p class="date"><span class="startdate">${eventtheater.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventtheater.EVENT_ENDDATE}</span></p>
 								</a>
 							</li>
 							</c:if>
@@ -170,7 +172,7 @@
 
 									<p class="tit">${eventpromotion.EVENT_SUBJECT}</p>
 
-									<p class="date">${eventpromotion.EVENT_STARTDATE} ~ ${eventpromotion.EVENT_ENDDATE}</p>
+									<p class="date"><span class="startdate">${eventpromotion.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventpromotion.EVENT_ENDDATE}</span></p>
 							</a>
 							</li>
 							</c:if>
@@ -191,9 +193,10 @@
 
 					<div class="event-list mt15">
 						<ul>
-						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" begin="0" end="3">
+						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" >
 							<c:if test='${eventcurtaincall.EVENT_STATUS == "PROGRESS"}'>
-							<li><a href="${pageContext.request.contextPath}/event/detail?num=${eventcurtaincall.EVENT_NUM}"	data-no="14167" data-netfunnel="N" class="eventBtn"
+							<li>
+							<a href="${pageContext.request.contextPath}/event/detail?num=${eventcurtaincall.EVENT_NUM}"	data-no="14167" data-netfunnel="N" class="eventBtn"
 								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
 									<p class="img">
 										<img src="${pageContext.request.contextPath}/upload${eventcurtaincall.EVENT_FILE}"
@@ -202,8 +205,9 @@
 
 									<p class="tit">${eventcurtaincall.EVENT_SUBJECT}</p>
 
-									<p class="date">${eventcurtaincall.EVENT_STARTDATE} ~ ${eventcurtaincall.EVENT_ENDDATE}</p>
-							</a></li>
+									<p class="date"><span class="startdate">${eventcurtaincall.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventcurtaincall.EVENT_ENDDATE}</span></p>
+							</a>
+							</li>
 							</c:if>
 						    </c:forEach>
 						</ul>
@@ -299,5 +303,8 @@
 
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+
+	
+	
 </body>
 </html>

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/event.js"></script>
 <title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
@@ -91,7 +92,7 @@
 								${event.EVENT_SUBJECT}
 							</p>
 							<p class="date">
-								${event.EVENT_STARTDATE} ~ ${event.EVENT_ENDDATE}
+								<span class="startdate">${event.EVENT_STARTDATE}</span> ~ <span class="enddate">${event.EVENT_ENDDATE}</span>
 							</p>
 						</a>
 					</li>
