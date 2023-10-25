@@ -168,7 +168,10 @@ $(document).ready(function(){
 					
 				})
 
-				getMovieDIBS() // 영화 목록 추가 이후 보고싶은 영화
+				if($('#header-pinfo-memberId').val() != null){
+					getMovieDIBS() // 영화 목록 추가 이후 보고싶은 영화
+				}
+				
 
 				if($('#fast-movieCode').val() != 'none'){
 					$('.movie-timetable').each(function(index, item){

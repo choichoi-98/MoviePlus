@@ -5,8 +5,10 @@ $(document).ready(function(){
 
     var chkFavResult = false;
 
-
-    getFavoriteTheaterList();
+    if($('#header-pinfo-memberId').val() != null){
+        getFavoriteTheaterList();
+    }
+    
 
     $('.fav-modal-on').click(function(e){
         getLocationList();
