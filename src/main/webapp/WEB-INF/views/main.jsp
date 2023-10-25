@@ -234,6 +234,9 @@ document.ready
 					<!-- info-notice -->
 					<div class="info-notice">
 						<div class="wrap">
+						<c:forEach var="noticetype" items="NoticeType" begin="0" end="1">
+						
+						</c:forEach>
 							<p class="tit">메가박스</p>
 							<p class="link">
 								<a

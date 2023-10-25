@@ -109,6 +109,7 @@
 						document.getElementById("theaterSelect").setAttribute("disabled", "disabled");
 					}
 				</script>
+				
 				<form name="regFrm" method="post" action="oneonone_process">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<div class="table-wrap mt10">

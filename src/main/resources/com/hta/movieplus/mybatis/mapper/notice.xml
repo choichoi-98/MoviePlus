@@ -7,18 +7,15 @@
 	<select id="getNoticelist" resultType="noticeVO" parameterType="String">
 		SELECT * FROM CUSTOMER_NOTICE
 		where CUSTOMER_NOTICE_TYPE = #{string}
+		 
 	</select>
 
 	<insert id="noticeWrite" parameterType="noticeVO">
 		INSERT INTO CUSTOMER_NOTICE
-		VALUES((<include refid = "insertNoticeNum" />), #{CUSTOMER_NOTICE_TYPE}, #{CUSTOMER_NOTICE_REGION}, #{CUSTOMER_NOTICE_THEATER},
+		VALUES(numberup.NEXTVAL, #{CUSTOMER_NOTICE_TYPE}, #{CUSTOMER_NOTICE_REGION}, #{CUSTOMER_NOTICE_THEATER},
 		#{CUSTOMER_NOTICE_SUBJECT}, #{CUSTOMER_NOTICE_CONTENT}, SYSDATE)
 	</insert>
-	
-	<sql id="insertNoticeNum">
-		select nvl(max(CUSTOMER_NOTICE_NUM),0)+1 from CUSTOMER_NOTICE
-	</sql>
-	
+
 	<delete id="deleteNoticeVO" parameterType="int">
 		DELETE
 		FROM CUSTOMER_NOTICE

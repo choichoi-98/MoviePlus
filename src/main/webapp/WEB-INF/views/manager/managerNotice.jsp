@@ -34,7 +34,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="${pageContext.request.contextPath}/manager/noticelist" class="form" method="post">
+					<form action="${pageContext.request.contextPath}/manager/insertnotice" class="form" method="post">
 						<div class="row row--form">
 
 							<div class="col-12 col-md-8 form__content">

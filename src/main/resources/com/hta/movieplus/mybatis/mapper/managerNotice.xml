@@ -13,8 +13,8 @@
 	<!-- numberup 시퀸스사용 매니저의 공지사항을 작성함 -->
 	<insert	id="insertNotice" parameterType="NoticeVO">
 		INSERT INTO CUSTOMER_NOTICE
-		VALUES(numberup.NEXTVAL, theaterId, '서울', '강남', 
-		#{MANAGERNOTICETITLE}, #{MANAGERNOTICECONTENT}, SYSDATE)
+		VALUES(numberup.NEXTVAL, #{CUSTOMER_NOTICE_TYPE}, #{CUSTOMER_NOTICE_REGION}, #{CUSTOMER_NOTICE_THEATER}, 
+		#{CUSTOMER_NOTICE_SUBJECT}, #{CUSTOMER_NOTICE_CONTENT}, SYSDATE)
 		<!-- 세션에서 받아온 값 theaterId, 지역, 극장명 -->
 	</insert>
 	
