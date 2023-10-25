@@ -313,40 +313,7 @@
 				</div>
 
 				<!-- column -->
-				<div class="column mt70">
-					<!-- left -->
-					<div class="col left" id="mySbsc">
-						<div class="tit-util">
-							<h2 class="tit small">참여이벤트</h2>
-							<a href="#" class="more" title="참여이벤트 더보기">더보기 <i
-								class="iconset ico-arr-right-gray"></i></a>
-						</div>
-
-						<div class="brd-list">
-							<ul>
-								<li class="no-result">참여한 이벤트가 없습니다.</li>
-							</ul>
-						</div>
-					</div>
-					<!--// left -->
-
-					<!-- right -->
-					<div class="col right" id="myInq">
-						<div class="tit-util">
-							<h2 class="tit small">문의내역</h2>
-
-							<a href="#" class="more" title="문의내역 더보기">더보기 <i
-								class="iconset ico-arr-right-gray"></i></a>
-						</div>
-
-						<div class="brd-list">
-							<ul>
-								<li class="no-result">문의내역이 없습니다.</li>
-							</ul>
-						</div>
-					</div>
-					<!--// right -->
-				</div>
+				
 				<!--// column -->
 			</div>
 			<!--// my-megabox-main -->

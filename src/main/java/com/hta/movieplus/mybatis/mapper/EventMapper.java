@@ -66,5 +66,7 @@ public interface EventMapper {
 
 	public int getEventApplyCount(int num);
 
+	public int getEventListCountEnd();
+
 }
 

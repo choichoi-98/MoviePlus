@@ -14,14 +14,14 @@
 
 <!-- 컨텐츠 영역 -->
 
-<div id="contents" class="location-fixed">
+<div id="contents" class="location-fixed" style="padding-top:40px">
 	<h2 class="tit">포인트 이용내역</h2>
 
 	<!-- point-present-condition -->
 	<div class="point-present-condition">
 		<div class="tit-area">
 			<p class="tit">나의 포인트 정보
-				<a href="https://www.megabox.co.kr/mypage/point-list#layer_my_point_info" class="btn-modal-open" w-data="500" h-data="200"><i class="iconset ico-exclamation-gray">툴팁</i></a>
+				<a href="#" class=""><i class="iconset ico-exclamation-gray">툴팁</i></a>
 			</p>
 
 		</div>
@@ -44,7 +44,7 @@
 					</div>
 					<div class="oval">
 						<p class="tit">당월소멸예정
-							<a href="#" class="btn-modal-open" w-data="600" h-data="670" title="소멸예정 포인트 보기">
+							<a href="#" class="" title="소멸예정 포인트 보기">
 								<i class="iconset ico-circle-plus-small">툴팁</i>
 							</a>
 						</p>

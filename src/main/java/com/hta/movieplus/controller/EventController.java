@@ -3,11 +3,9 @@ package com.hta.movieplus.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hta.movieplus.domain.Event;
 import com.hta.movieplus.domain.EventApply;
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.service.EventService;
+import com.hta.movieplus.service.ReopenUserService;
 
 @Controller
 public class EventController {
@@ -39,10 +39,12 @@ public class EventController {
 	@Value("${my.savefolder}")
 	private String saveFolder;
 	private EventService eventservice;
+	private ReopenUserService reopenUserService;
 	
 	@Autowired
-	public EventController(EventService eventservice) {
+	public EventController(EventService eventservice, ReopenUserService reopenUserService) {
 		this.eventservice = eventservice;
+		this.reopenUserService = reopenUserService;
 	}
 	
 	//이벤트 타입별 전체 리스트를 불러오는 메서드
@@ -51,7 +53,9 @@ public class EventController {
 		List<Event> theaterEventList = eventservice.getTheaterEventList();
 		List<Event> promotionEventList = eventservice.getPromotionEventList();
 		List<Event> curtaincallEventList = eventservice.getCurtaincallEventList();
+		List<Movie> reopenMovieList = reopenUserService.getReopenMovieList();
 		
+		mv.addObject("reopenMovieList", reopenMovieList);
 		mv.addObject("movieEventList", movieEventList);
 		mv.addObject("theaterEventList", theaterEventList);
 		mv.addObject("promotionEventList", promotionEventList);
@@ -270,7 +274,9 @@ public class EventController {
 		
 		int eventlistcount = eventservice.getEventListCount();	//총 리스트 수
 		
-		Map<String, Object> pagemap = eventservice.pagination(page);
+		String option = "admin";
+		
+		Map<String, Object> pagemap = eventservice.pagination(page, option);
 		List<Event> eventlist = eventservice.getEventList(page, (int) pagemap.get("limit"));
 		
 		mv.setViewName("admin/manageEvent");
@@ -399,7 +405,10 @@ public class EventController {
 		
 		int eventlistcount = eventservice.getCurtaincallEventListEndCount();	//총 리스트 수
 		
-		Map<String, Object> pagemap = eventservice.pagination(page);
+		String option = "user";
+		
+		Map<String, Object> pagemap = eventservice.pagination(page, option);
+		
 		List<Event> eventlist = eventservice.getEventListdesc(page, (int) pagemap.get("limit"));
 		
 		mv.addAllObjects(pagemap);
@@ -428,6 +437,7 @@ public class EventController {
 		int result = eventservice.update_eventResult(event);
 		
 		if(result == 1) {
+			eventservice.changeStatus(event.getEVENT_NUM(), "PROGRESS");
 			model.addAttribute("eventresult", event);
 		} else {
 			model.addAttribute("url", request.getRequestURL());
@@ -487,7 +497,7 @@ public class EventController {
 	//관리자 - 이벤트 당첨자 선택
 	@ResponseBody
 	@GetMapping("/admin/pickWinner")
-	public String pickWinner(@RequestParam(value = "num") int num, 
+	public String pickWinner(@RequestParam(value = "num") int num, @RequestParam(value="winnerCount") int winnercount,
 						 ModelAndView mv) throws Exception {
 		
 		List<EventApply> eventapplylist = eventservice.getEventApplyList(num);
@@ -497,7 +507,6 @@ public class EventController {
 		List<Integer> randomIndexlist = new ArrayList<>();
 		Random random = new Random();
 		
-		int winnercount = 2;
 		
 		//중복되지 않는 랜덤 인덱스 생성
 		while(randomIndexlist.size() < winnercount && randomIndexlist.size() < eventapplylist.size()) {

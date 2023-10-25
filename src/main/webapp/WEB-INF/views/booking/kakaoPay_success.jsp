@@ -59,16 +59,9 @@ $(function() {
 <body>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<jsp:include page="/WEB-INF/views/mypage_sidebar.jsp" />
 	<!-- container -->
 	<div class="container">
-		<div class="page-util">
-			<div class="inner-wrap">
-				<div class="location">
-					<span>Home</span> <a href="#" title="스토어">내 페이지</a> <a href="#"
-						title="결제">예매/구매내역</a> <a href="#" title="결제">예매내역</a>
-				</div>
-			</div>
-		</div>
 		<div id="storePay">
 			<!--  ko_KR -->
 			<!-- contents -->
@@ -171,6 +164,9 @@ $(function() {
 			<!-- 레이어 : 구인증 -->
 			<!-- 레이어 : -->
 		</div>
+	</div>
+	
+	</div>
 	</div>
 	<!--// container -->
 	<jsp:include page="/WEB-INF/views/footer.jsp" />

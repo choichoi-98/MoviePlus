@@ -68,7 +68,7 @@
 									<span id="memberId">${eventwinner.MEMBER_ID}</span></span></span></span></span></span>
 								</td>
 								<td class="xl67" style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:none; padding-left:1px; padding-right:1px; padding-top:1px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:13px"><span style="color:black"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">
-									<span>${eventwinner.MEMBER_ID}</span></span></span></span></span></span>
+									<span>#</span></span></span></span></span></span>
 								</td>
 							</tr>
 							</c:forEach>
