@@ -20,8 +20,8 @@
 	<selectKey resultType="int" order="BEFORE" keyProperty="PAY_NUM">
 		select nvl(max(PAY_NUM), 0) + 1 from STORE_PAY
 	</selectKey>
-		insert into STORE_PAY(PAY_NUM, PAY_NAME, PAY_AMOUNT, MEMBER_ID)
-		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice}, #{MEMBER_ID})
+		insert into STORE_PAY(PAY_NUM, PAY_NAME, PAY_AMOUNT, MEMBER_ID, PAY_MENU)
+		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice}, #{MEMBER_ID}, #{cartItemMenus})
 	</insert>
 	
 	<update id="insertPgToken">
@@ -56,6 +56,12 @@
 		FROM STORE_PAY 
 		WHERE pg_token IS NOT NULL
 		ORDER BY PAY_NUM ASC
+	</select>
+	
+	<select id="getStoreCoupon" resultType="StorePayVO">
+		SELECT PAY_NUM
+		FROM STORE_PAY 
+		WHERE pg_token IS NOT NULL
 	</select>
 	
 	<select id="getPayList" resultType="StorePayVO">

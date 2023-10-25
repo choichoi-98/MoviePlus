@@ -85,8 +85,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID) {
-		dao.payInsert(itemDisplay, totalPrice, MEMBER_ID);
+	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID, String cartItemMenus) {
+		dao.payInsert(itemDisplay, totalPrice, MEMBER_ID, cartItemMenus);
 	}
 
 	@Override
@@ -127,6 +127,11 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void deletePaidItem(int PAY_NUM) {
 		dao.deletePaidItem(PAY_NUM);
+	}
+
+	@Override
+	public String getStoreCoupon() {
+		return dao.getStoreCoupon();
 	}
 
 }

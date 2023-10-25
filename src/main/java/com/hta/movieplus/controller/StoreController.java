@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,12 @@ public class StoreController {
 	private StoreService storeService;
 	private CartService cartService;
 	
+	@Value("${my.folder}")
+	private String folder;
+	
+	@Value("${my.filepath}")
+	private String filePath;
+	
 	@Autowired
 	public StoreController(StoreService storeService, CartService cartService) {
 		this.storeService = storeService;
@@ -68,18 +75,17 @@ public class StoreController {
 			StoreVO storeVO,
 			MultipartFile pic,
 			ModelAndView mv) throws Exception {
-		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\image\\store";
 		
 		UUID uuid = UUID.randomUUID();
 		
 		String fileName = uuid + "_" + pic.getOriginalFilename();
 		
-		File savePic = new File(projectPath, fileName);
+		File savePic = new File(folder, fileName);
 		
 		pic.transferTo(savePic);
 		
 		storeVO.setITEM_FILE(fileName);
-		storeVO.setITEM_PATH("/image/store/" + fileName);
+		storeVO.setITEM_PATH(filePath + fileName);
 		
 		storeService.insertItem(storeVO);
 		mv.setViewName("store/additem");
@@ -261,7 +267,10 @@ public class StoreController {
 	public String kakaopay2(
 	    @RequestParam("totalPrice") int totalPrice,
 	    @AuthenticationPrincipal Member member,
+	    @RequestParam("cartItemMenus") String cartItemMenus,
 	    @RequestParam("cartItemNames") String cartItemNames) throws UnsupportedEncodingException {
+		
+//		String[] CartItemMenu = cartItemMenus.split(",");
 		
 	    String[] CartItemList = cartItemNames.split(",");
 	    int Count = CartItemList.length - 1;
@@ -274,7 +283,7 @@ public class StoreController {
 	    String itemDisplayEnc = URLEncoder.encode(itemDisplay, "UTF-8");
 	    String MEMBER_ID = member.getMEMBER_ID();
 	    
-	    storeService.payInsert(itemDisplay, totalPrice, MEMBER_ID);
+	    storeService.payInsert(itemDisplay, totalPrice, MEMBER_ID, cartItemMenus);
 //	    int PAY_NUM = storeService.getThisPayNum();
 	    try {
 	        URL payadr = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -344,6 +353,15 @@ public class StoreController {
 	public void pay_success2(
 			@RequestParam("payNum") int PAY_NUM) {
 		storeService.deletePaidItem(PAY_NUM);
+	}
+	
+	@GetMapping("/coupon")
+	public ModelAndView coupon_ex(ModelAndView mv) {
+		List<StorePayVO> AprPayList = storeService.selectApproved();
+		
+		mv.setViewName("store/store_pay_coupon");
+		mv.addObject("AprPayList", AprPayList);
+		return mv;
 	}
 
 }

@@ -42,7 +42,7 @@ public interface StoreMapper {
 
 	public void delCartItem(CartVO cartVO);
 
-	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID);
+	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID, String cartItemMenus);
 	
 	public List<StorePayVO> getPayList();
 
@@ -57,5 +57,7 @@ public interface StoreMapper {
 	public List<StoreCartDTO> getCartLists();
 
 	public void deletePaidItem(int PAY_NUM);
+
+	public String getStoreCoupon();
 
 }

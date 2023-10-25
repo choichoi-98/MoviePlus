@@ -29,13 +29,15 @@ $(function() {
     $('#btn-kakaopay').click(function() {
         var totalPrice = $('#totPrdtAmtView').data('price');
         var cartItemNames = $('#totPrdtAmtView').data('name');
+        var cartItemMenus = $('#totPrdtAmtView').data('menu');
 		
         $.ajax({
             url: 'kakaopay',
             method: 'POST',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: { "totalPrice": totalPrice,
-            	    "cartItemNames": cartItemNames},
+            	    "cartItemNames": cartItemNames,
+            	    "cartItemMenus": cartItemMenus},
             dataType: 'json',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(header, token);
@@ -145,6 +147,7 @@ $(function() {
 
 								<tbody>
 									<c:set var="cartItemNames" value="" />
+									<c:set var="cartItemMenus" value="" />
 									<c:set var="totalPrice" value="0"/>
 									<c:forEach var="c" items="${cartlist}" varStatus="loop">
 										<c:if test="${pinfo.MEMBER_ID eq c.MEMBER_ID}">
@@ -189,9 +192,11 @@ $(function() {
 										<c:choose>
         									<c:when test="${!loop.last}"> <!-- 마지막 요소가 아닐 때만 쉼표 추가 -->
             									<c:set var="cartItemNames" value="${cartItemNames}${c.ITEM_NAME}, " />
+            									<c:set var="cartItemMenus" value="${cartItemMenus}${c.ITEM_MENU}, "/>
         									</c:when>
         									<c:otherwise>
             									<c:set var="cartItemNames" value="${cartItemNames}${c.ITEM_NAME}" />
+            									<c:set var="cartItemMenus" value="${cartItemMenus}${c.ITEM_MENU}"/>
         									</c:otherwise>
     									</c:choose>
 										<c:set var="totalPrice" value="${totalPrice + (c.ITEM_PRICE * c.ITEM_CNT)}"/>
@@ -212,7 +217,7 @@ $(function() {
 									<p class="txt">총 상품금액</p>
 									<p class="price">
 										<em id="totPrdtAmtView" data-price="${totalPrice}"
-										data-name="${cartItemNames}">${totalPrice}</em> <span>원</span>
+										data-name="${cartItemNames}" data-menu="${cartItemMenus}">${totalPrice}</em> <span>원</span>
 									</p>
 								</div>
 								

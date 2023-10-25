@@ -7,6 +7,7 @@ public class StorePayVO {
 	private int PAY_AMOUNT; // 금액
 	private String pg_token;
 	private String MEMBER_ID;
+	private String PAY_MENU;
 //	private String CART_APPROVED; // 결제 승인 여부
 
 	public int getPAY_NUM() {
@@ -39,5 +40,10 @@ public class StorePayVO {
 	public void setMEMBER_ID(String mEMBER_ID) {
 		MEMBER_ID = mEMBER_ID;
 	}
-	
+	public String getPAY_MENU() {
+		return PAY_MENU;
+	}
+	public void setPAY_MENU(String pAY_MENU) {
+		PAY_MENU = pAY_MENU;
+	}
 }

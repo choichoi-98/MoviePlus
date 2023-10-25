@@ -17,6 +17,8 @@
 	margin: 0; /* 마진을 0으로 설정 */
 	padding: 0; /* 패딩을 0으로 설정 */
 }
+
+.
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,7 +98,7 @@
 					<!-- store-payment -->
 					<div class="store-payment">
 						<h2 class="tit">구매내역</h2>
-						<div class="table-wrap">
+						<div class="table-wrap" style="width: 80%">
 							<table class="board-list">
 								<caption>주문상품정보 목록 표</caption>
 								<colgroup>
