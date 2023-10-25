@@ -20,5 +20,8 @@ public interface ChatMapper {
 	//채팅방 생성
 	void createChatRoom(String subjectId, String objectId);
 	
+	//1:1 채팅방 이름 설정
+	String findObjectName(String objectId);
+	
 	
 }

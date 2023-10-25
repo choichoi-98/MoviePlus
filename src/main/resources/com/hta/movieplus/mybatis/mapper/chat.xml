@@ -27,9 +27,10 @@
    	    VALUES((SELECT NVL(MAX(CHAT_ROOM_NUM), 0) + 1 FROM CHAT_ROOM), #{subjectId}, #{objectId})
 	</insert>
 	
-	<!-- chat_room_num 
-	<select id="max_sql" resultType="String">
-		SELECT NVL(MAX(CHAT_ROOM_NUM),0) + 1
-        FROM CHAT_ROOM
-	</select>-->
+	<!-- 채티방 이름 설정 -->
+	<select id="findObjectName" resultType="String">
+		SELECT MEMBER_NAME
+		FROM MEMBER
+		WHERE MEMBER_ID = #{objectId}
+	</select>
 </mapper>

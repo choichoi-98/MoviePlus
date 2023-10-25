@@ -9,130 +9,8 @@
 <meta charset="utf-8">
 <title>Chating</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-<style>
-		*{
-			margin:0;
-			padding:0;
-		}
-/* 		.container{ */
-/* 			width: 500px; */
-/* 			margin: 0 auto; */
-/* 			padding: 25px */
-/* 		} */
-/* 		.container h1{ */
-/* 			text-align: left; */
-/* 			padding: 5px 5px 5px 15px; */
-/* 			color: #FFBB00; */
-/* 			border-left: 3px solid #FFBB00; */
-/* 			margin-bottom: 20px; */
-/* 		} */
-		
-/* 		input{ */
-/* 			width: 330px; */
-/* 			height: 25px; */
-/* 		} */
- 		#yourMsg{ 
- 			display: block; 
- 		} 
-		/* =------------------------------------------------------------ */
-		#chatHeader{
-			width: 100%; 
-			clear: both; 
-			display: inline-block; 
-			height: 45px; 
-			line-height: 45px; 
-			background-color: #a9bdce; 
-			padding: 0px; 
-			padding-left: 10px; 
-			margin: 0px;
-		}
-		#MAIN_CONTENTS{
-			width: 100%; 
-			clear: both; 
-			display: inline-block; 
-			
-			background-color: #b2c7d9; 
-			padding: 0px; 
-			padding-left: 0px; 
-			margin: 0px; 
-			overflow-y: auto;
-		}
-		#textArea{
-			width: 100%; 
-			clear: both; 
-			display: inline-block; 
-			height: 50px; 
-			background-color: white; 
-			padding: 0px; 
-			padding-left: 0px; 
-			margin: 0px;
-		}
-		#inputP{
-			width: 90%; 
-			height: 100%; 
-			padding: 0px; 
-			margin: 0px; 
-			float: left;
-		}
-		input{
-			width: 100%; height: 100%; border: 2px solid black;
-		}
-		#sendP{
-			width: 10%;
-			height: 100%; 
-			background-color: yellow; 
-			padding: 0px; 
-			margin: 0px; 
-			float: left;
-		}
-		.divMy{
-			float: right;
-			padding-top: 3px; 
-			padding-bottom: 3px; 
-			padding-left: 8px; 
-			padding-right: 8px; 
-			background-color: #ffeb33; 
-			border-radius: 7px;
-			margin-right: 20px;
-			margin-top: 20px;
-		}
-		.clear{
-		  clear:both;
-		}
-		.divOther{
-			float: left;
-			padding-top: 3px; 
-			padding-bottom: 3px; 
-			padding-left: 8px; 
-			padding-right: 8px; 
-			background-color: white; 
-			border-radius: 7px;
-			margin-left: 20px;
-			margin-bottom: 10px;
-		}
-		img{
-			width: 33px; 
-			height: 33px;
-			margin-left:10px;
-		}
-		.chating{
-			background-color: #b2c7d9;
-			width: 100%;
-			height: 500px;
-			overflow: auto;
-		}
-		.chating .me{
-			color: black;
-			text-align: right;
-		}
-		.chating .others{
-			color: black;
-			text-align: left;
-		}
-		.fa-arrow-left{
-			font-size: 16px; color: black; margin-right: 5px; margin-left: 5px;
-		}
-	</style>
+<link href="${pageContext.request.contextPath}/resources/css/chatRoom.css" rel="stylesheet">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.1/mustache.min.js"></script>
 <script type="text/javascript">
 	var ws;
@@ -217,15 +95,19 @@
 		ws.send(JSON.stringify(option))
 		$('#chatting').val("");
 	}
+$(document).ready(function(){
 	document.getElementById("goBackButton").addEventListener("click", goBack);
-
+	function goBack() {
+	     window.history.back(); 
+	}
+});//$(document).ready(function(){
 </script>
 </head>
 <body style="height:100%; width:100%">
 	<div id="chatHeader" class="chatHeader">
 	<i class="fas fa-arrow-left"
 		id="goBackButton"></i>
-		<span id="spanChatName">${chatObject }의 채팅방</span>
+		<span id="spanChatName">${chatRoomName }</span>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${chatRoomNum}">
 		
@@ -239,7 +121,7 @@
 				<input id="chatting" placeholder="보내실 메시지를 입력하세요.">
 			</div>
 			<div id="sendP">
-			<button onclick="send()" id="sendBtn" style="background-color: yellow;width: 100%;">
+			<button onclick="send()" id="sendBtn" style="background-color: #ffeb33;width: 100%; height:53px;">
 			<i class="fas fa-angle-right"
 				style="font-size: 44px; color: #666666; vertical-align: middle; line-height: 44px; margin-top: 3px; margin-left: 10px;"></i>
 			</button>
