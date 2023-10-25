@@ -26,6 +26,7 @@
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '영화'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<!-- 영화 이벤트 목록 COUNT -->
@@ -41,6 +42,7 @@
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '극장'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<!-- 극장 이벤트 목록 COUNT-->
@@ -56,6 +58,7 @@
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '제휴/할인'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<!-- 제휴/할인 이벤트 목록 Count -->
@@ -71,6 +74,7 @@
 		SELECT * 
 		FROM EVENT
 		WHERE EVENT_TYPE = '시사회/무대인사'
+		AND EVENT_STATUS = 'PROGRESS'
 	</select>
 	
 	<!-- 시사회 이벤트 목록 Count -->
