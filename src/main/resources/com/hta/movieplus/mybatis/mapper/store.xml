@@ -4,8 +4,8 @@
 <mapper namespace="com.hta.movieplus.mybatis.mapper.StoreMapper">
 
 	<insert id="insertItem" parameterType="StoreVO">
-		insert into STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE, ITEM_DETAIL)
-		values(#{ITEM_CODE}, #{ITEM_MENU}, #{ITEM_NAME}, #{ITEM_PRICE}, #{ITEM_DETAIL})	
+		insert into STORE_ITEM(ITEM_CODE, ITEM_MENU, ITEM_NAME, ITEM_PRICE, ITEM_FILE, ITEM_PATH)
+		values(#{ITEM_CODE}, #{ITEM_MENU}, #{ITEM_NAME}, #{ITEM_PRICE}, #{ITEM_FILE}, #{ITEM_PATH})	
 	</insert>
 	
 	<insert id="cartInsert" parameterType="CartVO">
@@ -48,6 +48,7 @@
 				where rownum &lt; = #{end}	 
 				)
 		where rnum &gt;=#{start} and rnum &lt;=#{end}
+		ORDER BY ITEM_CODE ASC 
 	</select>
 	
 	<select id="selectApproved" resultType="StorePayVO">
@@ -84,6 +85,7 @@
 	<select id="getItemListByKind" parameterType="StoreVO" resultType="StoreVO">
 		select * from STORE_ITEM
 		where ITEM_MENU = #{ITEM_MENU}
+		order by ITEM_CODE asc
 	</select>
 	
 	<select id="get1item" parameterType="int" resultType="StoreVO">
@@ -103,7 +105,8 @@
 	
 	<update id="updateItem" parameterType="StoreVO">
 		UPDATE STORE_ITEM
-		SET ITEM_NAME = #{ITEM_NAME}, ITEM_PRICE = #{ITEM_PRICE}
+		SET ITEM_NAME = #{ITEM_NAME}, ITEM_PRICE = #{ITEM_PRICE}, 
+		ITEM_FILE = #{ITEM_FILE}, ITEM_PATH = #{ITEM_PATH}
 		WHERE ITEM_CODE = #{ITEM_CODE}
 	</update>
 	

@@ -42,9 +42,9 @@
 								<div class="row row--form">
 									<div class="col-12 col-sm-6 col-md-12">
 										<div class="form__img">
-											<label for="form__img-upload">상품 사진 (270 x 400)</label>
-											<input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
-											<img id="form__img" src="#" alt=" ">
+											<label for="form__img-upload"></label>
+											<input id="form__img-upload" name="pic" type="file" accept=".png, .jpg, .jpeg">
+											<img id="form__img" src="${pageContext.request.contextPath}/resources${get1item.ITEM_PATH}" alt="상품 사진 (270 x 400)">
 										</div>
 									</div>
 								</div>

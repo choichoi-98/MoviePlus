@@ -10,6 +10,25 @@ CREATE TABLE STORE_ITEM (
   	ITEM_ORIGINAL  varchar2(50) -- 첨부 파일명
 );
 
+
+ALTER TABLE STORE_ITEM
+DROP COLUMN ITEM_FILE;
+
+ALTER TABLE STORE_ITEM
+DROP COLUMN ITEM_ORIGINAL;
+
+ALTER TABLE STORE_ITEM
+MODIFY ITEM_NAME VARCHAR2(30);
+
+
+-- 그런 다음 새로운 두 열 추가
+ALTER TABLE STORE_ITEM
+ADD ITEM_FILE VARCHAR2(150);
+
+ALTER TABLE STORE_ITEM
+ADD ITEM_PATH VARCHAR2(300);
+
+
 insert into store_item(item_code, item_menu, item_name, item_price)
 values(101, 'ticket', 'Ticket Premium', 30000); 
 

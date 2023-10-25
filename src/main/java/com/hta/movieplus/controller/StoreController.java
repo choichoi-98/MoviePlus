@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.CartVO;
@@ -55,15 +57,33 @@ public class StoreController {
 		this.cartService = cartService;
 	}
 	
-	@RequestMapping("/admin/additem")
-	public String additem(StoreVO storeVO) {
-		return "store/additem";
+	@GetMapping("/admin/additem")
+	public ModelAndView additem(ModelAndView mv) {
+		mv.setViewName("store/additem");
+		return mv;
 	}
 	
-	@RequestMapping("/admin/additempro")
-	public String additempro(StoreVO storeVO) {
+	@PostMapping("/admin/additem")
+	public ModelAndView additempro(
+			StoreVO storeVO,
+			MultipartFile pic,
+			ModelAndView mv) throws Exception {
+		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\image\\store";
+		
+		UUID uuid = UUID.randomUUID();
+		
+		String fileName = uuid + "_" + pic.getOriginalFilename();
+		
+		File savePic = new File(projectPath, fileName);
+		
+		pic.transferTo(savePic);
+		
+		storeVO.setITEM_FILE(fileName);
+		storeVO.setITEM_PATH("/image/store/" + fileName);
+		
 		storeService.insertItem(storeVO);
-		return "store/additem";
+		mv.setViewName("store/additem");
+		return mv;
 	}
 	
 	@GetMapping("/admin/itemlist")
@@ -111,7 +131,22 @@ public class StoreController {
 	}
 	
 	@RequestMapping("/admin/modifyitempro")
-	public String modifyitempro(StoreVO storeVO) {
+	public String modifyitempro(
+			StoreVO storeVO,
+			MultipartFile pic) throws Exception {
+		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\image\\store";
+		
+		UUID uuid = UUID.randomUUID();
+		
+		String fileName = uuid + "_" + pic.getOriginalFilename();
+		
+		File savePic = new File(projectPath, fileName);
+		
+		pic.transferTo(savePic);
+		
+		storeVO.setITEM_FILE(fileName);
+		storeVO.setITEM_PATH("/image/store/" + fileName);
+		
 		storeService.updateItem(storeVO);
 		return "store/modifyitem";
 	}

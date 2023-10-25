@@ -68,7 +68,7 @@
 									<div class="label new">NEW</div>
 									<div class="img">
 										<img
-											src="./MEET PLAY SHARE, 메가박스_cp9_files/OLQpuZPJ5wuIR9BqZK4sDRKN0t2O3sWV_280.png"
+											src="${pageContext.request.contextPath}/resources${i.ITEM_PATH}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">
@@ -81,7 +81,7 @@
 										<div class="price">
 											<p class="original"></p>
 											<p class="sale">
-												<em>${i.ITEM_PRICE}</em> <span>원</span>
+												<em>${i.ITEM_PRICE}</em> <span>p</span>
 											</p>
 											<p class="ea"></p>
 										</div>

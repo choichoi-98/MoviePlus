@@ -65,7 +65,7 @@
 									<div class="label event">EVENT</div>
 									<div class="img">
 										<img
-											src="./MEET PLAY SHARE, 메가박스_files/akIeaYOCBjFLqxbO6lt4VOcAJ4YttCvM_280.jpg"
+											src="${pageContext.request.contextPath}/resources${i.ITEM_PATH}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">
