@@ -22,10 +22,18 @@ public class AdminController {
 		this.manageMemberService = manageMemberService;
 	}
 	
+	
+	
 	@GetMapping("/admin")
 	public String siteAdminMainView() {
 
 		return "admin/main";
+	}
+	
+	@GetMapping("/admin/test")
+	public String admintest() {
+		
+		return "/admin/adminstatistic";
 	}
 
 	@GetMapping("/admin/manageMember")
@@ -55,5 +63,6 @@ public class AdminController {
 		return "redirect:/admin/manageMember";
 	}
 
+	
 	
 }
