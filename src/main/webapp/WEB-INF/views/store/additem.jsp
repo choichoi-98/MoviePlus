@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#additem").click(function(e) {
+s    $("#additem").click(function(e) {
         e.preventDefault(); // 버튼의 기본 동작 X
         
         // 선택된 값을 가져오기
@@ -51,15 +51,16 @@ $(document).ready(function() {
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="additempro" method="get" enctype="multipart/form-data" class="form" name="additemform">
+					<form action="additem" method="post" enctype="multipart/form-data" class="form" name="additemform">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 							<div class="col-12 col-md-5 form__cover">
 								<div class="row row--form">
 									<div class="col-12 col-sm-6 col-md-12">
 										<div class="form__img">
 											<label for="form__img-upload">상품 사진 (270 x 400)</label>
-											<input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
-											<img id="form__img" src="#" alt=" ">
+											<input id="form__img-upload" name="pic" type="file" accept=".png, .jpg, .jpeg">
+											<img id="form__img" src="" alt="">
 										</div>
 									</div>
 								</div>
@@ -72,7 +73,7 @@ $(document).ready(function() {
 									</div>
 
 									<div class="col-12">
-										<textarea id="text" class="form__textarea" placeholder="상품 설명" name="ITEM_DETAIL"></textarea>
+										<textarea id="text" class="form__textarea" placeholder="상품 설명" name="ITEM_DETAIL" readonly></textarea>
 									</div>
 									
 									<div class="col-12 col-sm-6 col-lg-3">
@@ -90,7 +91,7 @@ $(document).ready(function() {
 									</div>
 									
 									<div class="col-12 col-sm-6 col-lg-3">
-										<input type="text" class="form__input" placeholder="수량">
+										<input type="text" class="form__input" placeholder="수량" readonly>
 									</div>
 
 									<div class="col-12 col-sm-6 col-lg-3">
@@ -100,7 +101,7 @@ $(document).ready(function() {
 									<div class="col-12">
 										<div class="form__gallery">
 											<label id="gallery1" for="form__gallery-upload">상품 사진 등록</label>
-											<input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
+											<input data-name="#gallery1" id="form__gallery-upload" name="pic2" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
 										</div>
 									</div>
 								</div>

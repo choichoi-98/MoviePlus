@@ -8,8 +8,9 @@ public class StoreVO {
 	private String ITEM_MENU;
 	private String ITEM_NAME;
 	private int ITEM_PRICE;
-	private String ITEM_FILE;
 	private String ITEM_DETAIL;
+	private String ITEM_FILE;
+	private String ITEM_PATH;
 	private MultipartFile uploaditemfile;
 	
 	public String getITEM_MENU() {
@@ -17,12 +18,6 @@ public class StoreVO {
 	}
 	public void setITEM_MENU(String iTEM_MENU) {
 		ITEM_MENU = iTEM_MENU;
-	}
-	public String getITEM_FILE() {
-		return ITEM_FILE;
-	}
-	public void setITEM_FILE(String iTEM_FILE) {
-		ITEM_FILE = iTEM_FILE;
 	}
 	public int getITEM_CODE() {
 		return ITEM_CODE;
@@ -54,5 +49,16 @@ public class StoreVO {
 	public void setUploaditemfile(MultipartFile uploaditemfile) {
 		this.uploaditemfile = uploaditemfile;
 	}
-	
+	public String getITEM_FILE() {
+		return ITEM_FILE;
+	}
+	public void setITEM_FILE(String iTEM_FILE) {
+		ITEM_FILE = iTEM_FILE;
+	}
+	public String getITEM_PATH() {
+		return ITEM_PATH;
+	}
+	public void setITEM_PATH(String iTEM_PATH) {
+		ITEM_PATH = iTEM_PATH;
+	}
 }

@@ -66,7 +66,7 @@
 									<div class="label event">BEST</div>
 									<div class="img">
 										<img
-											src="./MEET PLAY SHARE, 메가박스_cp5_files/ERDC5wGVMC0YZPIRUsuuaJuAGRyqeDjC_280.png"
+											src="${pageContext.request.contextPath}/resources${i.ITEM_PATH}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">

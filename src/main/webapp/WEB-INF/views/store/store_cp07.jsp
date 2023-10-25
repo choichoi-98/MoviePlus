@@ -66,7 +66,7 @@
 									<div class="label"></div>
 									<div class="img">
 										<img
-											src="./MEET PLAY SHARE, 메가박스_cp7_files/C2fUCqaNd6cdnAttzVXSwzOVdQDFT849_280.png"
+											src="${pageContext.request.contextPath}/resources${i.ITEM_PATH}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">
