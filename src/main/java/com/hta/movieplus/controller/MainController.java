@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
+import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.service.MovieServiceImpl;
+import com.hta.movieplus.service.NoticeService;
 
 
 @Controller
@@ -23,10 +25,12 @@ public class MainController {
    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
    
    private MovieServiceImpl movieServiceImpl;
+   private NoticeService noticeservice;
    
    @Autowired
-   public MainController(MovieServiceImpl movieServiceImpl) {
+   public MainController(MovieServiceImpl movieServiceImpl, NoticeService noticeservice) {
       this.movieServiceImpl = movieServiceImpl;
+      this.noticeservice = noticeservice;
    }
    
    
@@ -34,6 +38,12 @@ public class MainController {
       public ModelAndView Main( ModelAndView mv
                         , @AuthenticationPrincipal Member member, HttpSession session) throws Exception{
 
+		//---------------------------------------------------------------------------------
+	   	List<NoticeVO> noticetype = noticeservice.getNoticelist("전체");
+	   	mv.addObject("NoticeType", noticetype);
+	   	//---------------------------------------------------------------------------------
+	   	
+	   	
         if(session.getAttribute("loginfail")!= null ) {
            session.setAttribute("count", (int) session.getAttribute("count")+1);   
         }
@@ -43,9 +53,7 @@ public class MainController {
            if(count == 2) {
               session.removeAttribute("loginfail");
            }
-           logger.info(session.getAttribute("count").toString());
         }
-         logger.info("main");
          
          if (member != null) { //로그인 한 경우
             String memberId =  member.getMEMBER_ID();
@@ -60,6 +68,6 @@ public class MainController {
 
           return mv;
       }
-   
+   	
    
 }

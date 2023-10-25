@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,36 +101,21 @@
 								<tr>
 									<th scope="row"><label for="theater">극장</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										<div class="dropdown bootstrap-select small bs3"><select id="theater" class="small" title="지역선택" tabindex="-98"><option class="bs-title-option" value=""></option>
-											<option value="">지역선택</option>
-											
-												<option value="10">서울</option>
-											
-												<option value="30">경기</option>
-											
-												<option value="35">인천</option>
-											
-												<option value="45">대전/충청/세종</option>
-											
-												<option value="55">부산/대구/경상</option>
-											
-												<option value="65">광주/전라</option>
-											
-												<option value="70">강원</option>
-											
-												<option value="80">제주</option>
-											
-										</select><button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="theater" title="지역선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">지역선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
-										<div class="dropdown bootstrap-select disabled small ml07 bs3"><select name="brchNo" id="theater02" title="극장선택" class="small ml07" disabled="disabled" tabindex="-98"><option class="bs-title-option" value=""></option>
-											<option value="">극장선택</option>
-										</select><button type="button" class="btn dropdown-toggle disabled btn-default bs-placeholder" data-toggle="dropdown" role="button" data-id="theater02" tabindex="-1" aria-disabled="true" title="극장선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">극장선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
+									<select name="CUSTOMER_SELECT_REGION" id="regionSelect" size="1" style="width:90px; height:35px; border-radius:5px;">
+										<option value="">지역선택</option>
+										<c:forEach var="loc" items="${locationList}">
+											<option value="${loc.value}">${loc.value}</option>
+										</c:forEach>
+										</select>&nbsp;&nbsp;
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><label for="date">관람/대관일</label> <em class="font-orange">*</em></th>
 									<td colspan="3">
-										<input type="text" title="날짜 입력 : yyyy.mm.dd" name="lentDe" id="date" class="date-calendar hasDatepicker" disabled="disabled"><button type="button" class="ui-datepicker-trigger">날짜 선택</button>
-										<div class="dropdown bootstrap-select small ml07 bs3"><select name="lentTime" class="small ml07" title="시간선택" tabindex="-98"><option class="bs-title-option" value=""></option>
+										<input type="text" title="날짜 입력 : yyyy.mm.dd" name="lentDe" id="date" class="date-calendar hasDatepicker" disabled="disabled">
+										<button type="button" class="ui-datepicker-trigger">날짜 선택</button>
+										<div class="dropdown bootstrap-select small ml07 bs3">
+										<select name="lentTime" class="small ml07" title="시간선택" tabindex="-98"><option class="bs-title-option" value=""></option>
 											<option value="">시간선택</option>
 										<option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option></select><button type="button" class="btn dropdown-toggle btn-default bs-placeholder" data-toggle="dropdown" role="button" title="시간선택"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">시간선택</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
 									</td>

@@ -25,7 +25,6 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<NoticeVO> getNoticelist(String string) {
-		// TODO Auto-generated method stub
 		return dao.getNoticelist(string);
 	}
 	

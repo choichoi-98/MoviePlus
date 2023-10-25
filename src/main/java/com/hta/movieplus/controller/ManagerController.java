@@ -132,7 +132,7 @@ public class ManagerController {
 		theaterManagerService.changeStatusRoomById(num, status);
 		return "redirect:/manager/manageroom";
 	}
-	
+	//---------------------------------------------------------------------------------//
 	/* 극장별 공지사항 main 페이지 리스트로 이동 */
 	@GetMapping("/noticelist")
 	public String getNoticeList(Model model) {
@@ -149,10 +149,17 @@ public class ManagerController {
 	}
 	
 	/* 공지사항 등록 버튼 클릭 -> 데이터 넘기기 */
-	@PostMapping("/admin/insertnotice")
-	public String insertNotice(NoticeVO managernotice) {
+	@PostMapping("/insertnotice")
+	public String insertNotice(NoticeVO managernotice, Model model) {
+		String theaterId = model.asMap().get("theaterId").toString();
+		managernotice.setCUSTOMER_NOTICE_TYPE(theaterId);
+		
 		noticemanagerservice.insertNotice(managernotice);
-		return "redirect:/noticelist";
+		
+		logger.info(managernotice.toString());
+		
+		
+		return "redirect:/manager/noticelist";
 	}
 	
 }
