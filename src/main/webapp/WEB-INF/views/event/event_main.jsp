@@ -94,7 +94,6 @@
 					<div class="event-list mt15">
 						<ul>
 						<c:forEach var="eventmovie" items="${movieEventList}" varStatus="loop" begin="0" end="3">
-							<c:if test='${eventmovie.EVENT_STATUS == "PROGRESS"}'>
 							<li><a href="${pageContext.request.contextPath}/event/detail?num=${eventmovie.EVENT_NUM}"
 								data-no="14081" data-netfunnel="N" class="eventBtn"
 								title="${eventmovie.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -108,7 +107,6 @@
 									<p class="date"><span class="startdate">${eventmovie.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventmovie.EVENT_ENDDATE}</span> </p>
 							</a>
 							</li>
-							</c:if>
 						  </c:forEach>	
 						</ul>
 
@@ -128,7 +126,6 @@
 					<div class="event-list mt15">
 						<ul>
 						<c:forEach var="eventtheater" items="${theaterEventList}" varStatus="loop" begin="0" end="3">
-							<c:if test='${eventtheater.EVENT_STATUS == "PROGRESS"}'>
 							<li>
 								<a href="${pageContext.request.contextPath}/event/detail?num=${eventtheater.EVENT_NUM}"
 								data-no="13594" data-netfunnel="N" class="eventBtn"
@@ -143,7 +140,6 @@
 									<p class="date"><span class="startdate">${eventtheater.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventtheater.EVENT_ENDDATE}</span></p>
 								</a>
 							</li>
-							</c:if>
 							</c:forEach>
 						</ul>
 					</div>
@@ -161,7 +157,6 @@
 					<div class="event-list mt15">
 						<ul>
 						 <c:forEach var="eventpromotion" items="${promotionEventList}" varStatus="loop" begin="0" end="3">
-						  <c:if test='${eventpromotion.EVENT_STATUS == "PROGRESS"}'>
 							<li>
 							<a href="${pageContext.request.contextPath}/event/detail?num=${eventpromotion.EVENT_NUM}" data-no="14091" data-netfunnel="N" class="eventBtn"
 								title="${eventpromotion.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -175,7 +170,6 @@
 									<p class="date"><span class="startdate">${eventpromotion.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventpromotion.EVENT_ENDDATE}</span></p>
 							</a>
 							</li>
-							</c:if>
 						  </c:forEach>	
 						</ul>
 					</div>
@@ -193,8 +187,7 @@
 
 					<div class="event-list mt15">
 						<ul>
-						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop" >
-							<c:if test='${eventcurtaincall.EVENT_STATUS == "PROGRESS"}'>
+						  <c:forEach var="eventcurtaincall" items="${curtaincallEventList}" varStatus="loop"  begin="0" end="3">
 							<li>
 							<a href="${pageContext.request.contextPath}/event/detail?num=${eventcurtaincall.EVENT_NUM}"	data-no="14167" data-netfunnel="N" class="eventBtn"
 								title="${eventcurtaincall.EVENT_SUBJECT}"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
@@ -208,20 +201,17 @@
 									<p class="date"><span class="startdate">${eventcurtaincall.EVENT_STARTDATE}</span> ~ <span class="enddate">${eventcurtaincall.EVENT_ENDDATE}</span></p>
 							</a>
 							</li>
-							</c:if>
 						    </c:forEach>
 						</ul>
 					</div>
 					
 				
 				
-				
-				
 				<!-- ******* 재개봉 **********  -->
 					<div class="tit-util mt70">
 						<h3 class="tit">재개봉</h3>
 						<div class="right">
-							<a href="javascript:fn_chgEventTab(&#39;CED03&#39;)" title="더보기">더보기
+							<a href="${pageContext.request.contextPath}/event/reopen" title="더보기">더보기
 								<i class="iconset ico-arr-right-gray ml05"></i>
 							</a>
 						</div>
@@ -245,48 +235,7 @@
 							</a></li>
 
 
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14130" data-netfunnel="N" class="eventBtn"
-								title="[냥사원 추석선물세트] MEGA-DRAW🍀 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/Rc68zSpipRxRcmJD92NV2oNOUGZhferp.png"
-											alt="[냥사원 추석선물세트] MEGA-DRAW🍀" onerror="noImg(this);">
-									</p>
 
-									<p class="tit">[냥사원 추석선물세트] MEGA-DRAW🍀</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.09</p>
-							</a></li>
-
-
-
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14129" data-netfunnel="N" class="eventBtn"
-								title="[냥사원 추석선물세트] 만원의 행복💸 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/GFRbC0aYEs0pv5IFSJRdbdwJyIMiR2HB.png"
-											alt="[냥사원 추석선물세트] 만원의 행복💸" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">[냥사원 추석선물세트] 만원의 행복💸</p>
-
-									<p class="date">2023.09.27 ~ 2023.10.03</p>
-							</a></li>
-
-
-							<li><a href="https://www.megabox.co.kr/event#"
-								data-no="14131" data-netfunnel="N" class="eventBtn"
-								title="냥사원이 먹고 싶어서 만든 만춘쿠키🍪 상세보기"> <!--<p class="img"><img src="../../../static/pc/images/event/@img-event-list-megabox.jpg" alt="" /></p>-->
-									<p class="img">
-										<img src="./event_files/exewEGhKg35lsTwavoeUhuUP01e3BwFo.jpg"
-											alt="냥사원이 먹고 싶어서 만든 만춘쿠키🍪" onerror="noImg(this);">
-									</p>
-
-									<p class="tit">냥사원이 먹고 싶어서 만든 만춘쿠키🍪</p>
-
-									<p class="date">2023.09.22 ~ 2023.10.09</p>
-							</a></li>
 
 						</ul>
 					</div> <!-- 재개봉 end -->
