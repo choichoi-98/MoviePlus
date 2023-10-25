@@ -14,7 +14,7 @@
 	
 	function openPop(){
 		var popup = window.open('${pageContext.request.contextPath}/chat/friendList',
-							'채팅팝업','width=500, height=600');
+							'채팅팝업','width=672px, height=640px');
 							//chat/room
 							//chat/friendList
 	}

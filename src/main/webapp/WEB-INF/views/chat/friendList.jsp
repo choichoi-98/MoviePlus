@@ -15,7 +15,7 @@
 	rel="stylesheet">
 <style>
 .divFriendTr {
-	height: 33px;
+	height: 36px;
 	display: inline-block;
 	line-height: 33px;
 	vertical-align: middle;
@@ -25,6 +25,7 @@
 	margin: 0px;
 	width: calc(100% - 14px);
 	clear: both;
+    border-bottom: 1px solid #000; /* 하단 테두리 설정 */
 }
 
 .divChatTr {
@@ -74,18 +75,19 @@
 		<input type="hidden" value="${pinfo.MEMBER_ID}" id="loginId">
 	</sec:authorize>
 	<div
-		style="width: 500px; display: inline-block; height: 630px; padding: 0px; margin: 0px; position: relative; left: 0px; top: 0px;"
+		style="width: 100%; display: inline-block; height: 797px; padding: 0px; margin: 0px; position: relative; left: 0px; top: 0px;"
 		id="MAIN">
 		<div
-			style="width: 20%; display: inline-block; height: 100%; background-color: #ececed; padding: 0px; margin: 0px; padding-top: 10px; text-align: center; float: left;">
+			style="width: 20%; display: inline-block; height: 797px; background-color: #ececed; padding: 0px; margin: 0px; padding-top: 10px; text-align: center; float: left;">
 			<i class="fas fa-user" style="font-size: 28px; color: #909297;"></i>
 		</div>
 		<div
-			style="width: 76%; display: inline-block; height: 100%; background-color: #ffffff; padding: 0px; margin: 0px; padding-top: 10px; float: left;">
+			style="width: 80%; display: inline-block; height: 100%; background-color: #ffffff; padding: 0px; margin: 0px;  float: left;">
+			<!--  
 			<div
 				style="width: 100%; height: 30px; padding: 0px; margin: 0px; color: black; padding-left: 14px;">
 				친구</div>
-
+				-->
 			<div
 				style="width: 100%; height: calc(100% - 30px); padding: 0px; margin: 0px; margin-bottom: -30px; color: black; overflow-y: auto"
 				id="divMemberList">

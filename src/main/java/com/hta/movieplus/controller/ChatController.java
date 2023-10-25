@@ -57,6 +57,10 @@ public class ChatController {
 	public ModelAndView chatRoom(ModelAndView mv,
 				@AuthenticationPrincipal Member member,
 				@RequestParam("obejctId") String objectId) {
+		//채팅방 이름 상대로 설정하기
+		String ObjectName = chatServiceImpl.findObjectName(objectId);
+		mv.addObject("chatRoomName",ObjectName);
+		
 		//0. 두 사람과 관련된 방이 있는지 확인
 		if(member != null) {
 			String subjectId = member.getMEMBER_ID();

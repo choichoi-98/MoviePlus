@@ -34,4 +34,9 @@ public class ChatServiceImpl implements ChatService{
 		dao.createChatRoom(subjectId,objectId );
 	}
 	
+	//1:1 채팅방 이름 설정
+	public String findObjectName(String objectId) {
+		return dao.findObjectName(objectId);
+	}
+	
 }
