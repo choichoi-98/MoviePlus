@@ -34,7 +34,7 @@
 
 				<!-- form -->
 				<div class="col-12">
-					<form action="${pageContext.request.contextPath}/admin/noticewrite" class="form" method="post">
+					<form action="${pageContext.request.contextPath}/manager/noticelist" class="form" method="post">
 						<div class="row row--form">
 
 							<div class="col-12 col-md-8 form__content">
@@ -54,7 +54,6 @@
 								<button type="submit"class="form__btn">확인</button>
 							</div>
 						</div>
-						<input type="hidden" name="CUSTOMER_NOTICE_TYPE" class="form__input" value="전체"> <!-- 이건뭐지 -->
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
 				</div>

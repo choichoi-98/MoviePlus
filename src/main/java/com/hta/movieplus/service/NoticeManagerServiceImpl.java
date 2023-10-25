@@ -26,7 +26,7 @@ public class NoticeManagerServiceImpl implements NoticeManagerService {
 
 
 	@Override
-	public int insertNotice(String managernotice) {
+	public int insertNotice(NoticeVO managernotice) {
 		return dao.insertNotice(managernotice);
 	}
 

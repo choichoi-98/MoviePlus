@@ -150,8 +150,9 @@ public class ManagerController {
 	
 	/* 공지사항 등록 버튼 클릭 -> 데이터 넘기기 */
 	@PostMapping("/admin/insertnotice")
-	public String insertNotice(String managernotice) {
+	public String insertNotice(NoticeVO managernotice) {
 		noticemanagerservice.insertNotice(managernotice);
 		return "redirect:/noticelist";
 	}
+	
 }
