@@ -68,7 +68,7 @@ public class ChatController {
 				mv.addObject("chatRoomNum", check.get(0).getChat_Room_num());
 		        mv.addObject("chatSubject", check.get(0).getChat_Subject());
 		        mv.addObject("chatObject", check.get(0).getChat_Object());
-		        //mv.addObject("userName", subjectId);
+		        mv.addObject("userName", member.getMEMBER_NAME());
 			}else {//채팅방이 존재하지 않는 경우-채팅방 생성
 				logger.info("채팅방 생성");
 				//채팅방 생성 
@@ -80,7 +80,7 @@ public class ChatController {
 			        mv.addObject("chatRoomNum", chatRooms.get(0).getChat_Room_num());
 			        mv.addObject("chatSubject", chatRooms.get(0).getChat_Subject());
 			        mv.addObject("chatObject", chatRooms.get(0).getChat_Object());
-			       // mv.addObject("userName", subjectId);
+			        mv.addObject("userName", member.getMEMBER_NAME());
 			    }
 			}
 		}
