@@ -20,8 +20,11 @@ import com.hta.movieplus.constant.TheaterLocationEnum;
 import com.hta.movieplus.domain.FavoriteTheater;
 import com.hta.movieplus.domain.Manager;
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.domain.Theater;
 import com.hta.movieplus.domain.TimeTableDate;
+import com.hta.movieplus.service.NoticeManagerService;
+import com.hta.movieplus.service.NoticeService;
 import com.hta.movieplus.service.SchedulingService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
@@ -32,22 +35,28 @@ public class TheaterController {
 	private TheaterService theaterservice;
 	private TheaterManagerService theaterManagerService;
 	private SchedulingService schedulingService;
+	private NoticeService noticeservice;
+	private NoticeManagerService noticemanagerservice;
 	private static final Logger logger = LoggerFactory.getLogger(TheaterController.class);
 
 	@Autowired
 	public TheaterController(TheaterService theaterService, TheaterManagerService theaterManagerService,
-			SchedulingService schedulingService) {
+			SchedulingService schedulingService, NoticeService noticeservice, NoticeManagerService noticemanagerservice) {
 		// TODO Auto-generated constructor stub
 		this.theaterservice = theaterService;
 		this.theaterManagerService = theaterManagerService;
 		this.schedulingService = schedulingService;
+		this.noticeservice = noticeservice;
+		this.noticemanagerservice = noticemanagerservice;
 	}
 
 	@GetMapping("/theater")
 	public ModelAndView theaterMainView(ModelAndView mv) {
 
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
-
+		List<NoticeVO> noticelist = noticeservice.getNoticelistExceptEntire();
+		
+		mv.addObject("NoticeList", noticelist);
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
 		mv.setViewName("theater/theater_main");
@@ -61,6 +70,7 @@ public class TheaterController {
 		List<TimeTableDate> dateList = schedulingService.getDateList();
 		List<Theater> theaterList = theaterservice.getAllTheaterList();
 		Theater theater = theaterservice.getTheaterById(theaterId);
+		List<NoticeVO> noticelist = noticemanagerservice.getNoticeList(theaterId + "");
 
 		mv.addObject("theaterList", theaterList);
 		mv.addObject("locationList", TheaterLocationEnum.values());
@@ -71,6 +81,7 @@ public class TheaterController {
 		mv.addObject("ajax_theaterId", theaterId);
 		mv.setViewName("theater/theater_detail");
 
+		mv.addObject("NoticeList", noticelist);
 		return mv;
 	}
 

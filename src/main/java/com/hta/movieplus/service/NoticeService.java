@@ -14,10 +14,9 @@ public interface NoticeService {
 
 	public NoticeVO getNoticeModify(int getmodify);
 	
-	
-	
-	
 	public void noticeModify(NoticeVO modify); //진행
+	
+	public List<NoticeVO> getNoticelistExceptEntire();
 
 	/* public void noticeModify(int modify); */
 	
