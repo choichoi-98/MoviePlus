@@ -36,7 +36,7 @@ public interface StoreService {
 
 	public List<StoreVO> getCartList();
 	
-	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID);
+	public void payInsert(String itemDisplay, int totalPrice, String MEMBER_ID, String cartItemMenus);
 	
 	public List<StorePayVO> getPayList();
 
@@ -49,5 +49,7 @@ public interface StoreService {
 	public List<CartVO> getCartList2();
 
 	public List<StoreCartDTO> getCartLists();
+
+	public String getStoreCoupon();
 
 }

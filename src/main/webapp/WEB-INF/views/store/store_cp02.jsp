@@ -65,7 +65,7 @@
 									<div class="label event">EVENT</div>
 									<div class="img">
 										<img
-											src="${pageContext.request.contextPath}/resources${i.ITEM_PATH}"
+											src="${pageContext.request.contextPath}/resources/image/store/${i.ITEM_FILE}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">
