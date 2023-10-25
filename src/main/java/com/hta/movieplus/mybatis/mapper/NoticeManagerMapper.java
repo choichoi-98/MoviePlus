@@ -12,5 +12,5 @@ public interface NoticeManagerMapper {
 	/* 극장별 공지사항 리스트 불러오기 */
 	public List<NoticeVO> getManagerNoticeList(String theaterId);
 
-	public int insertNotice(String managernotice);
+	public int insertNotice(NoticeVO managernotice);
 }

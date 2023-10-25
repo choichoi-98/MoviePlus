@@ -57,6 +57,7 @@ public class CustomerController {
 		return mv;
 	}
 
+	/* 단체관람 및 대관문의 페이지로 이동. 지역값을 불러옴 */
 	@GetMapping("/group")
 	public String group() {
 		return "customer_service/customer_service_group";

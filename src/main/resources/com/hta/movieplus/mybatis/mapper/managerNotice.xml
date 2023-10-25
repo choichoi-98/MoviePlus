@@ -3,15 +3,19 @@
 
 <mapper	namespace="com.hta.movieplus.mybatis.mapper.NoticeManagerMapper"> 
 
-	<!-- numberup 시퀸스사용, 극장별 관리자 공지사항의 리스트를 가져옴 -->
+	<!-- 극장별 관리자 공지사항의 리스트를 가져옴 -->
 	<select id="getManagerNoticeList" parameterType="String" resultType="NoticeVO">
 		select *
 		from CUSTOMER_NOTICE
 		where CUSTOMER_NOTICE_TYPE = #{theaterId}
 	</select>
 	
-	<!-- <insert	id="insertNotice" parameterType="String">
+	<!-- numberup 시퀸스사용 매니저의 공지사항을 작성함 -->
+	<insert	id="insertNotice" parameterType="NoticeVO">
 		INSERT INTO CUSTOMER_NOTICE
-		VALUES()
-	</insert> -->
+		VALUES(numberup.NEXTVAL, theaterId, '서울', '강남', 
+		#{MANAGERNOTICETITLE}, #{MANAGERNOTICECONTENT}, SYSDATE)
+		<!-- 세션에서 받아온 값 theaterId, 지역, 극장명 -->
+	</insert>
+	
 </mapper>

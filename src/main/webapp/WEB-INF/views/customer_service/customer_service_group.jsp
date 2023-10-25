@@ -9,43 +9,37 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
-	 <div class="body-wrap">
-<div style="display:none;"><a id="loginPupupATag" href="https://megabox.co.kr/support/rent#layer_login_select" class="button active btn-modal-open" w-data="850" h-data="484"></a></div>
         
 	<div class="container has-lnb">
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
 					<span>Home</span>
-					<a href="https://megabox.co.kr/support" title="고객센터 페이지로 이동">고객센터</a>
-					<a href="https://megabox.co.kr/support/rent" title="단체관람 및 대관문의 페이지로 이동">단체관람 및 대관문의</a>
+					<a href="${pageContext.request.contextPath}/customer_service/" title="고객센터 페이지로 이동">고객센터</a>
+					<a href="${pageContext.request.contextPath}/customer_service/group" title="단체관람 및 대관문의 페이지로 이동">단체관람 및 대관문의</a>
 				</div>
 
 			</div>
 		</div>
 
+		<!-- sidebar 부분 -->
 		<div class="inner-wrap">
 			<div class="lnb-area addchat">
 				<nav id="lnb" class="ty2">
 					<p class="tit"><a href="https://megabox.co.kr/support" title="고객센터">고객센터</a></p>
 					<ul>
-						<li><a href="https://megabox.co.kr/support" title="고객센터 홈">고객센터 홈</a></li>
-						<li><a href="https://megabox.co.kr/support/faq" title="자주 묻는 질문">자주 묻는 질문</a></li>
-						<li><a href="https://megabox.co.kr/support/notice" title="공지사항">공지사항</a></li>
-						<li><a href="https://megabox.co.kr/support/inquiry" title="1:1문의">1:1문의</a></li>
-						<li class="on"><a href="https://megabox.co.kr/support/rent" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
-						<li><a href="https://megabox.co.kr/support/lost" title="분실물 문의">분실물 문의</a></li>
-						
-						<li><a href="https://megabox.co.kr/support/terms" title="이용약관">이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/lcinfo" title="위치기반서비스이용약관">위치기반서비스이용약관</a></li>
-						<li><a href="https://megabox.co.kr/support/privacy" title="개인정보처리방침">개인정보처리방침</a></li>
-						<li><a href="https://megabox.co.kr/support/screenrule" style="border-radius: 0 0 10px 10px;" title="스크린배정수에관한기준">스크린배정수에관한기준</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/" title="고객센터 홈">고객센터 홈</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/question" title="자주 묻는 질문">자주 묻는 질문</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/notice" title="공지사항">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/oneonone" title="1:1문의">1:1문의</a></li>
+						<li class="on"><a href="${pageContext.request.contextPath}/customer_service/group" title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/lostitem" title="분실물 문의">분실물 문의</a></li>
 					</ul>
 
 					<!-- 고객센터 메뉴일때만 출력 -->
 					<div class="left-customer-info">
 						<p class="tit">
-							메가박스 고객센터
+							MoviePlus 고객센터
 							<span>Dream center</span>
 						</p>
 						<p class="time"><i class="iconset ico-clock"></i> 10:00~19:00</p>
@@ -56,13 +50,13 @@
 			<!-- 게시판 내용입력부분 -->
 			<div id="contents" class="">
 				<h2 class="tit">단체관람 및 대관문의</h2>
-				<p class="reset">메가박스에서 단체 이벤트 또는 문화행사를 하고 싶으시다면 문의해주세요.</p>
+				<p class="reset">MoviePlus에서 단체 이벤트 또는 문화행사를 하고 싶으시다면 문의해주세요.</p>
 
 				<div class="agree-box">
 					<dl>
 						<dt>
 							<span class="bg-chk mr10">
-								<input type="checkbox" id="chk">
+								<input type="checkbox" id="chk" required title = "미동의 시 진행이 불가능 합니다.">
 								<label for="chk"><strong>개인정보 수집에 대한 동의</strong></label>
 							</span>
 
