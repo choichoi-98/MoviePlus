@@ -170,7 +170,6 @@ public class MovieController {
     				@RequestParam(value="movieCode", defaultValue="") String movieCode,
     				@AuthenticationPrincipal Member member
     		) {
-    	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
@@ -180,8 +179,12 @@ public class MovieController {
     		mv.addObject("movieDetail", movieDetail);
     	}
     	
+    	double avgScore = movieServiceImpl.getAvgReviewPoint(movieCode);
+    	mv.addObject("avgScore", avgScore);
+    	
     	List<MoviePostVO> moviePostList = moviePostService.getMoviePostListByMovieCode(movieCode);
     	mv.addObject("moviePostList", moviePostList);
+    	
     	
     	mv.setViewName("movie/movie_detail");
     	return mv;

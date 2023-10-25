@@ -87,11 +87,8 @@
 						<div class="score">
 							<p class="tit">관람 평점</p>
 							<div class="number gt" id="mainMegaScore">
-								<!--  <div class="number lt" id="mainMegaScore">
-					<p title="관람 전 점수" class="before"><em>0</em><span class="ir">점</span></p>
-					<p title="관람 후 점수" class="after"><em>8.7</em><span class="ir">점</span></p> -->
 								<p title="실관람 평점" class="before">
-									<em>8.7</em><span class="ir">점</span>
+									<em>${avgScore==0.0 ? '0' : avgScore}</em><span class="ir">점</span>
 								</p>
 							</div>
 						</div>

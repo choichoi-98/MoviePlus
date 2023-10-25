@@ -205,6 +205,27 @@ public class MovieServiceImpl implements MovieService{
 		// TODO Auto-generated method stub
 		return dao.adminDeleteMovieReview(review_num);
 	}
+
+	
+	//
+	
+	@Override
+	public double getAvgReviewPoint(String movieCode) {
+	    double total = 0.0;
+	    List<MovieReviewVO> reviewList = dao.getMovieReview(movieCode);
+
+	    for (MovieReviewVO review : reviewList) {
+	        total += review.getMovie_Review_star();
+	    }
+
+	    double avg = total / reviewList.size();
+
+	    // 소수점 첫째 자리에서 반올림
+	    avg = Math.round(avg * 10.0) / 10.0;
+	    
+	    return avg;
+	}
+
 	
 
 }
