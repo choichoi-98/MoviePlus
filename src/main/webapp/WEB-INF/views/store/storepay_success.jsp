@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="pinfo" />
@@ -23,52 +24,52 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
 <script>
-$(function() {
-	let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-    
-    $(document).on('click', '.delbtn', function(e) {
-    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
-    	
-    	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
-        const payNum = row.find('.delbtn').data('paynum');  // 해당 행의 ITEM_CODE 값을 추출
-//        alert('payNum:' + payNum);
-        
-        $.ajax({
-            url: 'success',
-            method: 'POST',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: { "payNum": payNum},
-            dataType: 'json',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader(header, token);
-            },
-            success: function(data) {
- //               alert("삭제 성공, payNum: " + payNum);
-                window.location.reload();
-            },
-            error: function(error) {
-//                alert("삭제 실패, payNum: " + payNum);
-                window.location.reload();
-            }
-        });
-    });
-}); 
+	$(function() {
+		let token = $("meta[name='_csrf']").attr("content");
+		let header = $("meta[name='_csrf_header']").attr("content");
+
+		$(document)
+				.on(
+						'click',
+						'.delbtn',
+						function(e) {
+							e.preventDefault(); // 기본 동작인 링크 이동을 막기
+
+							const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
+							const payNum = row.find('.delbtn').data('paynum'); // 해당 행의 ITEM_CODE 값을 추출
+							//        alert('payNum:' + payNum);
+
+							$
+									.ajax({
+										url : 'success',
+										method : 'POST',
+										contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+										data : {
+											"payNum" : payNum
+										},
+										dataType : 'json',
+										beforeSend : function(xhr) {
+											xhr.setRequestHeader(header, token);
+										},
+										success : function(data) {
+											//               alert("삭제 성공, payNum: " + payNum);
+											window.location.reload();
+										},
+										error : function(error) {
+											//                alert("삭제 실패, payNum: " + payNum);
+											window.location.reload();
+										}
+									});
+						});
+	});
 </script>
 </head>
 <body>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<jsp:include page="/WEB-INF/views/mypage_sidebar.jsp" />
 	<!-- container -->
 	<div class="container">
-		<div class="page-util">
-			<div class="inner-wrap">
-				<div class="location">
-					<span>Home</span> <a href="#" title="스토어">내 페이지</a> <a href="#"
-						title="결제">예매/구매내역</a> <a href="#" title="결제">구매내역</a>
-				</div>
-			</div>
-		</div>
 		<div id="storePay">
 			<!--  ko_KR -->
 			<!-- contents -->
@@ -116,7 +117,8 @@ $(function() {
 
 								<tbody>
 									<c:forEach var="p" items="${AprPayList}" varStatus="loop">
-										<c:if test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
+										<c:if
+											test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 											<tr>
 												<td class="a-c">
 													<div class="goods-info">
@@ -171,6 +173,9 @@ $(function() {
 			<!-- 레이어 : 구인증 -->
 			<!-- 레이어 : -->
 		</div>
+	</div>
+	
+	</div>
 	</div>
 	<!--// container -->
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
