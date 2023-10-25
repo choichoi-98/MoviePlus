@@ -65,17 +65,25 @@ public class ChatController {
 			
 			if(checkSize != 0) {//채팅방이 존재하는 경우
 				logger.info("채팅방 존재");
-				for(ChatRoomVO chatRoom : check) {
-					logger.info("chatRoomNum: " + chatRoom.getChat_Room_num());
-					logger.info("chatSubejct: " + chatRoom.getChat_Subject());
-					logger.info("chatObject: " + chatRoom.getChat_Object());
-				}
+				mv.addObject("chatRoomNum", check.get(0).getChat_Room_num());
+		        mv.addObject("chatSubject", check.get(0).getChat_Subject());
+		        mv.addObject("chatObject", check.get(0).getChat_Object());
+		        //mv.addObject("userName", subjectId);
 			}else {//채팅방이 존재하지 않는 경우-채팅방 생성
 				logger.info("채팅방 생성");
+				//채팅방 생성 
 			    chatServiceImpl.createChatRoom(subjectId, objectId);
+			    //생성한 채팅방 정보 다시 불러오기
+			    List<ChatRoomVO> chatRooms = chatServiceImpl.checkChatRoom(subjectId, objectId);
+			    if (chatRooms != null && !chatRooms.isEmpty()) {
+			        // 채팅방 정보를 ModelAndView에 추가
+			        mv.addObject("chatRoomNum", chatRooms.get(0).getChat_Room_num());
+			        mv.addObject("chatSubject", chatRooms.get(0).getChat_Subject());
+			        mv.addObject("chatObject", chatRooms.get(0).getChat_Object());
+			       // mv.addObject("userName", subjectId);
+			    }
 			}
 		}
-		
 		mv.setViewName("chat/chatroom");
 		return mv;
 	}

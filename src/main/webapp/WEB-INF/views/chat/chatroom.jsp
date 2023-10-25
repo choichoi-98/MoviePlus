@@ -7,57 +7,60 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="utf-8">
-<title>친구목록</title>
+<title>Chating</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <style>
-    .divFriendTr {
-        height: 33px;
-        display: inline-block;
-        line-height: 33px;
-        vertical-align: middle;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-left: 14px;
-        margin: 0px;
-        width: calc(100% - 14px);
-        clear: both;
-    }
-
-    .divChatTr {
-        min-height: 33px;
-        display: inline-block;
-        line-height: 33px;
-        vertical-align: middle;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-left: 10px;
-        margin: 0px;
-        width: calc(100% - 10px);
-        clear: both;
-        font-size: 13px;
-    }
-
-    .divChatTrMy {
-        min-height: 33px;
-        display: inline-block;
-        line-height: 33px;
-        vertical-align: middle;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-right: 30px;
-        margin: 0px;
-        width: calc(100% - 30px);
-        clear: both;
-        font-size: 13px;
-    }
-</style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.container{
+			width: 500px;
+			margin: 0 auto;
+			padding: 25px
+		}
+		.container h1{
+			text-align: left;
+			padding: 5px 5px 5px 15px;
+			color: #FFBB00;
+			border-left: 3px solid #FFBB00;
+			margin-bottom: 20px;
+		}
+		.chating{
+			background-color: #000;
+			width: 500px;
+			height: 500px;
+			overflow: auto;
+		}
+		.chating .me{
+			color: #F6F6F6;
+			text-align: right;
+		}
+		.chating .others{
+			color: #FFE400;
+			text-align: left;
+		}
+		input{
+			width: 330px;
+			height: 25px;
+		}
+		#yourMsg{
+			display: none;
+		}
+	</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.1/mustache.min.js"></script>
 <script type="text/javascript">
 	var ws;
-
+	
+	window.addEventListner("load",function(){
+		wsOpen();
+	})
+	
 	function wsOpen(){
 		console.log("웹소켓 연결 요청 - wsOpen()")
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
+		var roomNumber = $("#roomNumber").val();
+		console.log("wsOpen()-roomNumber = " + roomNumber);
 		ws = new WebSocket("ws://"+ location.host +"/movieplus/chating/"+ $("#roomNumber").val());
 		console.log(ws)
 		wsEvt();
@@ -130,47 +133,34 @@
 	}
 </script>
 </head>
-<body style="margin: 0px">
-<div
-	style="width: 100%; clear: both; display: inline-block; height: 45px; line-height: 45px; background-color: #a9bdce; padding: 0px; padding-left: 10px; margin: 0px;">
-	<i class="fas fa-arrow-left"
-		style="font-size: 16px; color: black; margin-right: 5px;"></i><span
-		id="spanChatName">슈퍼맨, 스파이더맨</span>
-</div>
-<div
-	style="width: 100%; clear: both; display: inline-block; height: calc(100% - 95px); background-color: #b2c7d9; padding: 0px; padding-left: 0px; margin: 0px; overflow-y: auto;"
-	id="MAIN_CONTENTS">
-	<div class="divChatTrMy">
-		<div style="float: right; width: 45%;"></div>
-		<div
-			style="width: 100%; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 8px; background-color: #ffeb33; border-radius: 7px;">안녕</div>
-	</div>
-
-	<div class="divChatTr">
-		<div style="float: left;">
-			<img src="/kakaoimg/kakaoicon.png" style="width: 33px; height: 33px;">
+<body>
+	<div id="container" class="container">
+		<h1>${chatObject }의 채팅방</h1>
+		<input type="hidden" id="sessionId" value="">
+		<input type="hidden" id="roomNumber" value="${chatRoomNum}">
+		
+		<div id="chating" class="chating">
 		</div>
-		<div style="float: left; margin-left: 7px; width: 45%">
-			<div>스파이더맨</div>
-			<div
-				style="width: 100%; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 8px; background-color: white; border-radius: 7px;">반가워</div>
-		</div>
-
-	</div>
-	<div
-		style="width: 100%; clear: both; display: inline-block; height: 50px; background-color: white; padding: 0px; padding-left: 0px; margin: 0px;">
-		<div
-			style="width: calc(100% - 50px); height: 100%; padding: 0px; margin: 0px; float: left;">
-			<textarea style="width: 100%; height: 100%; border: 0px;"
-				id="chat_message" name="chat_message"></textarea>
-		</div>
-		<div
-			style="width: 50px; height: 100%; background-color: yellow; padding: 0px; margin: 0px; float: left;">
-			<i class="fas fa-angle-right"
-				style="font-size: 44px; color: #666666; vertical-align: middle; line-height: 44px; margin-top: 3px; margin-left: 16px;"></i>
+		
+<!-- 		<div id="yourName"> -->
+<!-- 			<table class="inputTable"> -->
+<!-- 				<tr> -->
+<!-- 					<th>사용자명</th> -->
+<!-- 					<th><input type="text" name="userName" id="userName"></th> -->
+<!-- 					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th> -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
+		<div id="yourMsg">
+			<table class="inputTable">
+				<tr>
+					<th>메시지</th>
+					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
+					<th><button onclick="send()" id="sendBtn">보내기</button></th>
+				</tr>
+			</table>
+					<input type="hidden" id="userName" name="userName" value="${userName}">
 		</div>
 	</div>
-</div>
-<div style="width: 0%; height: 0px; padding: 0px; margin: 0px; position: relative; left: 0px; top: 0px;" id="BACKGROUND"></div>
 </body>
 </html>
