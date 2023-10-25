@@ -36,7 +36,7 @@
 				<div class="col-12">
 					<form action="modifyitempro" method="post" class="form" enctype="multipart/form-data"
 						  name="modifyitemform">
-					<input type="hidden" name="${_csrf.parameterName}" value = "${_csrf.token}">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row row--form">
 							<div class="col-12 col-md-5 form__cover">
 								<div class="row row--form">
