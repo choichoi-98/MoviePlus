@@ -68,7 +68,7 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-trophy"></i> Top items</h3>
+							<h3><i class="icon ion-ios-trophy"></i>예매율</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
