@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MoviePlus: 모두를 위한 영화관</title>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -63,7 +64,7 @@
 		</div> <!-- event detail end -->
 		
 		<!-- 이벤트 신청 -->
-		<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
+		<%-- <c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
 		<div class="table-wrap mb40" style=" margin: 0 auto; display: flex; justify-content: center; width:1000px;">
               <table class="board-list" >
                   <caption>구분, 연동정보, 연결 항목을 가진 간편 로그인 계정연동 표</caption>
@@ -92,20 +93,20 @@
                   </tbody>
               </table>
           </div>
-		 </c:if>
+		 </c:if> --%>
 		
 			
-			<%-- <!-- 시사회/무대인사 이벤트 신청 inner-wrap -->
+			 <!-- 시사회/무대인사 이벤트 신청 inner-wrap -->
 			<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
 				<div class="inner-wrap">
 					<!-- event-button-type -->
 					<div class="event-button-type">
-						<button id="reopen-admit-btn" data-movieCode="${reopenMovie.movie_Code}" type="button" class="btn" style="background:#792828">신청하기</button>
+						<button id="reopen-admit-btn" type="submit" class="btn" style="background:#792828">신청하기</button>
 					</div>
 					<!--// event-button-type -->
 				</div>
 			<!--// 이벤트 신청 inner-wrap end -->
-			</c:if> --%>
+			</c:if> -
 		
 		</form>
 		
@@ -126,6 +127,7 @@ $('#eventapplyform').submit(function(e){
 	
 	if(!id){
 		alert('로그인 후 신청해주세요.');
+		$('#header-login-btn').click();
 		return false;
 	}
 	
@@ -152,11 +154,29 @@ $('#eventapplyform').submit(function(e){
 	
 	
 	
-	
-	
-	
-	
 })
+
+//날짜형식 변경
+	var start = $('.startdate');
+	var end = $('.enddate');
+	var startdate = start.text();
+	var newstartdate = formatdate(startdate);
+	
+	var enddate = end.text();
+	var newenddate = formatdate(enddate);
+	
+	start.text(newstartdate);
+	end.text(newenddate);
+	
+	function formatdate(dateString) {
+		var year = dateString.substring(0, 4);
+	    var month = dateString.substring(4, 6);
+	    var day = dateString.substring(6, 8);
+	    
+		   return year + "." + month + "." + day;
+	}
+
+
 
 
 

@@ -100,7 +100,7 @@
 										<div class="main__table-text">${event.EVENT_STARTDATE} - ${event.EVENT_ENDDATE}</div><!-- 이벤트 기간 -->
 									</td>
 									<td>
-										<div class="main__table-text">${event.EVENT_RESULTDATE}</div><!-- 이벤트 발표일 -->
+										<div class="main__table-text"><span class="resultdate">${event.EVENT_RESULTDATE}</span></div><!-- 이벤트 발표일 -->
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--green">${event.EVENT_STATUS}</div><!-- 이벤트 상태 -->
@@ -194,6 +194,27 @@
 	</div>
 	<!-- end modal delete -->
 	</main>
+<script>
+//이벤트 발표일 형식 변경
+$('.resultdate').each(function() {
+	var result = $(this);
+	var resultdate = result.text();
+	var newresultdate = formatdate(resultdate);
+	
+	result.text(newresultdate);
+	
+	function formatdate(dateString) {
+		var year = dateString.substring(0, 4);
+	    var month = dateString.substring(4, 6);
+	    var day = dateString.substring(6, 8);
+	    
+		   return year + "." + month + "." + day;
+	}
+})
+
+
+</script>		
+	
 	
 </body>
 </html>

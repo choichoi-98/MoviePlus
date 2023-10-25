@@ -20,7 +20,7 @@
 			<div class="location">
 				<span>Home</span>
 	                <a href="${pageContext.request.contextPath}/event" title="이벤트 메인 페이지로 이동">이벤트</a>
-					<a href="https://www.megabox.co.kr/event/winner/list" title="당첨자발표 페이지로 이동">당첨자발표</a>
+					<a href="${pageContext.request.contextPath}/event/winner" title="당첨자발표 페이지로 이동">당첨자발표</a>
 			</div>
 
 		</div>
@@ -43,8 +43,14 @@
 
 				<div class="right">
 						
+							<sec:authorize access="isAnonymous()">
+							<a href="#" id="myeventbtn" class="button" title="나의 이벤트 응모내역 페이지로 이동">나의 응모결과확인</a>
+							</sec:authorize>
+							
 							<!-- 로그인 후 -->
-							<a href="#" class="button" title="나의 이벤트 응모내역 페이지로 이동">나의 응모결과확인</a>
+							<sec:authorize access="isAuthenticated()">
+							<a href="${pageContext.request.contextPath}/member/myevent" class="button" title="나의 이벤트 응모내역 페이지로 이동">나의 응모결과확인</a>
+							</sec:authorize>
 				</div>
 			</div>
 			
@@ -100,11 +106,12 @@
 			</c:if>
 			<!-- pagination -->
 			<nav class="pagination">
-			<strong class="active">1</strong> 
+			<strong class="active" style="background-color:#792828; border-color:#792828;">1</strong> 
 				<a title="2페이지보기" href="winner?page=${page-1}" pagenum="2">2</a> 
 				<a title="이후 10페이지 보기" href="javascript:void(0)" class="control next" pagenum="11">next</a> 
 				<a title="마지막 페이지 보기" href="javascript:void(0)" class="control last" pagenum="65">last</a> 
 			</nav>
+			
 			<!--// pagination -->
 
 		</div>
@@ -132,6 +139,12 @@ $('.resultdate').each(function() {
 	    
 		   return year + "." + month + "." + day;
 	}
+})
+
+//비회원 접근시 로그인 페이지로 이동
+$('#myeventbtn').click(function(e){
+	e.preventDefault();
+	$('#header-login-btn').click();
 })
 </script>		
 	
