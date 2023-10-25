@@ -32,4 +32,8 @@ public interface MovieService {
 	
 	public int deleteMovieDibs(String memberId, String movieCode);
 	
+	//
+	
+	public double getAvgReviewPoint(String movieCode);
+	
 }
