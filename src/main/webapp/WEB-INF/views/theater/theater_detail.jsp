@@ -12,7 +12,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/theater.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/theater_map.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/theater_map.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 
@@ -168,12 +169,6 @@
 
 					</ul>
 
-					<div class="location-map-btn mt15">
-						<div class="btn-group left">
-							<a href="#" id="find-way-btn" class="button purple" target="_blank" title="새창열림">실시간
-								길찾기</a>
-						</div>
-					</div>
 
 
 					<h3 class="tit small mt30">주차 안내</h3>
@@ -213,147 +208,30 @@
 
 
 					<div id="brchNoti">
-						<h2 class="tit small mt70">공지사항</h2>
+
+						<div class="tit-util">
+							<h2 class="tit small mt70" style="float:none;">공지사항</h2>
+							<a
+								href="${pageContext.request.contextPath}/customer_service/notice"
+								class="more" title="극장 공지사항 더보기">더보기 <i
+								class="iconset ico-arr-right-gray"></i></a>
+						</div>
 
 						<!-- accordion-list -->
-						<div class="accordion-list">
+						<div class="accordion-list" style="padding-bottom: 50px;">
 							<ul>
-								<li><div class="title ">
-										<a href="#" title="[강남] 8/9 영화관 상영재개 및 극장방문시 진입로 안내">
-											<div class="cont-tit">[강남] 8/9 영화관 상영재개 및 극장방문시 진입로 안내</div>
-											<p class="cont-admin">강남</p>
-											<p class="cont-date">2022.08.09</p>
+								<c:forEach var="noticelist" items="${NoticeList}" begin="0" end="4">
+								<li><div class="title">
+										<a href="#" title="[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT}">
+											<div class="cont-tit">[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT}</div>
+											<p class="cont-admin">${noticelist.CUSTOMER_NOTICE_THEATER}</p>
+											<p class="cont-date">${noticelist.CUSTOMER_NOTICE_SYSDATE}</p>
 										</a>
 									</div>
-									<div class="content" style="display: none">
-										안녕하세요.<br> 메가박스 강남지점입니다.&nbsp;<br> <br> 전일 정전으로
-										인한 복구작업이 완료되어<br> 8월 9일(화) 11시부터&nbsp;극장 재운영 일정이 확정되어
-										안내드립니다.<br> <br> 현재 건물 내 일부 E/V 고장으로 영화관 방문시 에스컬레이터
-										이용부탁드립니다.<br> 차량방문으로 주차장에서 극장 이동시에는<br> 별도 안내된 엘리베이터
-										1대로 이용가능합니다.<br> <br> 중단기간동안 이용에 불편을 드리게 된 점 다시 한 번
-										진심으로 사과드립니다.<br> 기다려 주신 고객님들께 고개 숙여 감사드리며,&nbsp;<br>
-										즐거운 영화관람 되실 수 있도록 더욱 노력하겠습니다.<br> <br> 감사합니다.&nbsp;
-									</div></li>
-								<li><div class="title ">
-										<a href="#" title="[강남] 8/8 정전으로 인한 상영중단 및 취소 안내">
-											<div class="cont-tit">[강남] 8/8 정전으로 인한 상영중단 및 취소 안내</div>
-											<p class="cont-admin">강남</p>
-											<p class="cont-date">2022.08.08</p>
-										</a>
-									</div>
-									<div class="content" style="display: none">
-										안녕하세요.<br> 메가박스 강남지점입니다.<br> &nbsp;<br> 2022년
-										8월 8일 급작스러운 폭우로 인하여 강남지역 일대 정전으로 영화상영이 중단되었습니다.<br>
-										익일(8/9) 1회차 영화까지 불가피하게 운영이 불가하오니 참고부탁드리며,<br> 빠른 복구작업을 통해
-										고객님들 불편을 최소화하겠습니다.<br> 일정 변동 사항이 있을 경우 별도 홈페이지 공지를 통해
-										안내드릴 수 있도록 하겠습니다.<br> <br> 즐거운 마음으로 저희 강남지점을 예매해
-										주셨으나,<br> 부득이한 사유로 인하여 영화관람을 하시지 못하게 되어 불편을 끼쳐 드린 점 사과
-										말씀드립니다.<br> <br> 금일 상영 중단된 상영관 및 이후 예매하신 예매 티켓을
-										일괄적으로 취소 진행하였습니다.<br> 익일 2~7관 1회차 예매 티켓 또한 일괄적으로 취소
-										진행하였습니다.&nbsp;<br> <br> 현장에서 현금&amp;상품권 결제하신 고객님의 경우<br>
-										메가박스 홈페이지 지점 1:1 문의글을 통해 문의주시면 관련 안내 드릴 수 있도록 하겠습니다.<br>
-										_______________________________________________________________________________________________________________<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 인터넷(모바일)예매 고객 : 일괄 취소<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 극장 內 카드 발권 고객 : 익일 일괄 취소<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 극장 內 현금 발권 고객 : 메가박스 고객센터 1:1 지점문의로
-										접수<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt; 티켓
-										미 소지 고객은 현장에서 발권 내역확인 후 안내진행<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;※ 현금 환불기간 :
-										~22.08.31<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;※
-										현장 매표소 티켓구매, 예매정보 불일치 고객의 경우 1:1 문의글을 통해 문의<br>
-										______________________________________________________________________________________________________________<br>
-										<br> 추후 문의사항은 홈페이지 &amp; 어플 내 1:1문의를 통해<br> 문의주시면
-										자세한 안내 도와드리겠습니다.<br> <br> 영화관람에 불편을 드려 다시 한번 더
-										사과말씀드립니다.<br> 더 나은 서비스로 보답해 드리는 강남지점이 되겠습니다.<br>
-										감사합니다.
-									</div></li>
-
-								<li><div class="title ">
-										<a href="#" title="[강남] 7월 9일 긴급점검으로 인한 운영중단 및  취소 안내 ">
-											<div class="cont-tit">[강남] 7월 9일 긴급점검으로 인한 운영중단 및 취소 안내
-											</div>
-											<p class="cont-admin">강남</p>
-											<p class="cont-date">2022.07.09</p>
-										</a>
-									</div>
-									<div class="content" style="display: none">
-										안녕하세요.<br> 메가박스 강남지점입니다.<br> &nbsp;<br> 2022년
-										07월 9일 건물내 이슈로 인한 긴급점검으로 금일 저녁 상영이 중단되었으며,<br> 7/11(월) 까지
-										불가피하게 운영이 불가하오니 참고부탁드리며,<br> 빠른 점검완료를 통해 고객님들 불편을
-										최소화하겠습니다.<br> 일정 변동 사항이 있을 경우 별도 홈페이지 공지를 통해 안내드릴 수 있도록
-										하겠습니다.<br> <br> 즐거운 마음으로 저희 강남지점을 예매해 주셨으나,<br>
-										부득이한 사유로 인하여 영화관람을 하시지 못하게 되어 불편을 끼쳐 드린 점 사과 말씀드립니다.<br>
-										<br> 금일 저녁 및 7/10~7/11일자의 예매하신 영화티켓은 익일 중으로 일괄적으로
-										취소예정입니다.<br> 현장에서 현금&amp;상품권 결제하신 고객님의 경우<br> 메가박스
-										홈페이지 지점 1:1 문의글을 통해 문의주시면 관련 안내 드릴 수 있도록 하겠습니다.<br>
-										________________________________________________________________________________________________________________<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 인터넷(모바일)예매 고객 : 익일 일괄 취소 예정<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 극장 內 카드 발권 고객 : 익일 일괄 취소 예정<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;- 극장 內 현금 발권 고객 : 메가박스 고객센터 1:1 지점문의로
-										접수<br> &nbsp; &nbsp; &nbsp; &nbsp;&gt; 티켓 미 소지 고객은 현장에서
-										발권 내역확인 후 안내진행<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;※ 현금 환불기간 :
-										~22.08.10<br> &nbsp; &nbsp; &nbsp; &nbsp;※ 현장 매표소 티켓구매,
-										예매정보 불일치 고객의 경우 1:1 문의글을 통해 문의<br>
-										______________________________________________________________________________________________________________<br>
-										<br> 추후 문의사항은 홈페이지 &amp; 어플 내 1:1문의를 통해<br> 문의주시면
-										자세한 안내 도와드리겠습니다.<br> <br> 영화관람에 불편을 드려 다시 한번 더
-										사과말씀드립니다.<br> 더 나은 서비스로 보답해 드리는 강남지점이 되겠습니다.<br>
-										감사합니다.
-									</div></li>
-								<li><div class="title ">
-										<a href="#" title="[강남] 영화 관람요금 변경 안내">
-											<div class="cont-tit">[강남] 영화 관람요금 변경 안내</div>
-											<p class="cont-admin">강남</p>
-											<p class="cont-date">2022.04.27</p>
-										</a>
-									</div>
-									<div class="content" style="display: none">
-										안녕하세요,&nbsp;메가박스&nbsp;강남지점입니다.<br>
-										아래와&nbsp;같이&nbsp;영화&nbsp;요금제가&nbsp;변경되오니,&nbsp;이용에&nbsp;참고&nbsp;부탁&nbsp;드립니다.<br>
-										<br>
-										1.&nbsp;적용&nbsp;일시&nbsp;:&nbsp;2022년&nbsp;5월&nbsp;2일(월)&nbsp;상영작부터<br>
-										2.&nbsp;주요&nbsp;사항&nbsp;:&nbsp;심야요금제&nbsp;폐지&nbsp;<br> <br>
-										자세한&nbsp;요금&nbsp;안내는&nbsp;5월&nbsp;2일&nbsp;월요일&nbsp;이후&nbsp;지점&nbsp;안내&nbsp;페이지를&nbsp;<br>
-										확인해주시기&nbsp;바랍니다.<br>
-										※&nbsp;확인&nbsp;방법&nbsp;:&nbsp;홈페이지&nbsp;&gt;&nbsp;극장&nbsp;&gt;&nbsp;지점&nbsp;&gt;&nbsp;관람료<br>
-										<br> 감사합니다.
-									</div></li>
-								<li><div class="title ">
-										<a href="#" title="[강남] 운영시간 임시 조정 안내">
-											<div class="cont-tit">[강남] 운영시간 임시 조정 안내</div>
-											<p class="cont-admin">강남</p>
-											<p class="cont-date">2020.04.03</p>
-										</a>
-									</div>
-									<div class="content" style="display: none">
-										안녕하세요.<br> 메가박스 강남지점입니다.<br> 코로나19 확산 예방에 동참하고자
-										운영시간이 임시 조정되오니<br> 홈페이지나 어플 상영시간표를 참고하시어 영화관 이용 부탁드립니다.<br>
-										<br> - 운영시간 조정 적용일 : 2020년 4월 1일(수) ~<br> &nbsp;(매표,
-										매점 운영시간 : 13시 30분 ~ 20시 30분)<br> <br> 지속적인 방역과 소독관리를
-										통해 안전한 관람 환경 조성에 최선을 다하겠습니다.<br> 감사합니다.
-									</div></li>
+								</c:forEach>
 							</ul>
 						</div>
-						<!--// accordion-list -->
-
-						<!-- pagination -->
-						<nav class="pagination">
-							<strong class="active">1</strong> <a title="2페이지보기"
-								href="javascript:void(0)" pagenum="2">2</a> <a title="3페이지보기"
-								href="javascript:void(0)" pagenum="3">3</a> <a title="4페이지보기"
-								href="javascript:void(0)" pagenum="4">4</a> <a title="5페이지보기"
-								href="javascript:void(0)" pagenum="5">5</a> <a title="6페이지보기"
-								href="javascript:void(0)" pagenum="6">6</a>
-						</nav>
-						<!--// pagination -->
 					</div>
-
-
-
-
-
-
 
 				</div>
 

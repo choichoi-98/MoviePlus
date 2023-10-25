@@ -49,6 +49,11 @@ public class NoticeServiceImpl implements NoticeService {
 		dao.noticeModify(modify);
 	}
 
+	@Override
+	public List<NoticeVO> getNoticelistExceptEntire() {
+		return dao.getNoticelistExceptEntire();
+	}
+
 	
 
 	

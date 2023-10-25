@@ -36,9 +36,9 @@
 		WHERE CUSTOMER_NOTICE_NUM = #{CUSTOMER_NOTICE_NUM} <!-- 무엇을 바꿀것인지 -->
 	</update>
 	
-	<select id="getNoticeList" resultType="noticeVO">
-		SELECT CUSTOMER_NOTICE_TYPE, CUSTOMER_NOTICE_SUBJECT, CUSTOMER_NOTICE_SYSDATE
-		FROM CUTOMER_NOTICE
+	<select id="getNoticelistExceptEntire" resultType="noticeVO">
+		SELECT * FROM CUSTOMER_NOTICE
+		where CUSTOMER_NOTICE_TYPE != '전체'
 	</select>
 	
 </mapper>

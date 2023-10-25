@@ -151,56 +151,16 @@
 							</tr>
 						</thead>
 						<tbody>
-
-
-
+							<c:forEach var="noticelist" items="${NoticeList}" begin="0" end="4">
 							<tr>
-								<td>광명소하</td>
-								<th scope="row"><a href="#" title="[광명소하] 리뉴얼 오픈 안내 상세보기">
-										[광명소하] 리뉴얼 오픈 안내 </a></th>
-								<td>경기</td>
-								<td>2023.09.19</td>
+								<td>${noticelist.CUSTOMER_NOTICE_THEATER}</td>
+								<th scope="row">
+								<a href="#" title= "${noticelist.CUSTOMER_NOTICE_SUBJECT}">
+										[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT} </a></th>
+								<td>${noticelist.CUSTOMER_NOTICE_REGION}</td>
+								<td>${noticelist.CUSTOMER_NOTICE_SYSDATE}</td>
 							</tr>
-
-							<tr>
-								<td>송파파크하비오</td>
-								<th scope="row"><a href="#"
-									title="[송파파크하비오] 9/19~9/22 운영시간 변경 안내 상세보기"> [송파파크하비오]
-										9/19~9/22 운영시간 변경 안내 </a></th>
-								<td>서울</td>
-								<td>2023.09.15</td>
-							</tr>
-
-							<tr>
-								<td>백석벨라시타</td>
-								<th scope="row"><a href="#"
-									title="[백석벨라시타]제 15회 DMZ국제다큐멘터리 영화제 개최 안내 상세보기"> [백석벨라시타]제
-										15회 DMZ국제다큐멘터리 영화제 개최 안내 </a></th>
-								<td>경기</td>
-								<td>2023.09.13</td>
-							</tr>
-
-							<tr>
-								<td>검단</td>
-								<th scope="row"><a href="#"
-									title="[검단] 우대요금 변경 안내 (9/15부터~) 상세보기"> [검단] 우대요금 변경 안내
-										(9/15부터~) </a></th>
-								<td>인천</td>
-								<td>2023.09.11</td>
-							</tr>
-
-							<tr>
-								<td>일산</td>
-								<th scope="row"><a href="#"
-									title="[일산] 임시 휴업 안내 (2023년 9월 7일 부터~) 상세보기"> [일산] 임시 휴업 안내
-										(2023년 9월 7일 부터~) </a></th>
-								<td>경기</td>
-								<td>2023.09.04</td>
-							</tr>
-
-
-
-
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

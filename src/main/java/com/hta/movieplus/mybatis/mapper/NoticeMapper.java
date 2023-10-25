@@ -17,11 +17,10 @@ public interface NoticeMapper {
 	
 	public void deleteNoticeVO(int noticenum); 
 	
-	
-	
-	
-	
 	public void noticeModify(NoticeVO modify);
+	
+	public List<NoticeVO> getNoticelistExceptEntire();
+	
 	
 	/* public void noticeModify(int modify); */
 }
