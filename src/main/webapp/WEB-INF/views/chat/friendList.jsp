@@ -93,8 +93,14 @@
 
 					<div class="divFriendTr">
 						<div style="float: left;">
-							<img src="/kakaoimg/kakaoicon.png"
+						<c:if test="${empty memberlist.MEMBER_PROFILE}">
+							<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png"
 								style="width: 33px; height: 33px;">
+						</c:if>
+						<c:if test="${!empty memberlist.MEMBER_PROFILE}">
+							<img src="${pageContext.request.contextPath}/resources/image/member/${memberlist.MEMBER_PROFILE}"
+								style="width: 33px; height: 33px;">
+						</c:if>
 						</div>
 						<div style="float: left; margin-left: 7px;" onclick="openChat('${memberlist.MEMBER_ID}');">
 							${memberlist.MEMBER_NAME } 

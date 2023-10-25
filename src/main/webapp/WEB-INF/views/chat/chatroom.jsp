@@ -51,7 +51,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.1/mustache.min.js"></script>
 <script type="text/javascript">
 	var ws;
-	wsOpen();
+	
+	window.addEventListner("load",function(){
+		wsOpen();
+	})
+	
 	function wsOpen(){
 		console.log("웹소켓 연결 요청 - wsOpen()")
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
@@ -138,15 +142,15 @@
 		<div id="chating" class="chating">
 		</div>
 		
-		<div id="yourName">
-			<table class="inputTable">
-				<tr>
-					<th>사용자명</th>
-					<th><input type="text" name="userName" id="userName"></th>
-					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
-				</tr>
-			</table>
-		</div>
+<!-- 		<div id="yourName"> -->
+<!-- 			<table class="inputTable"> -->
+<!-- 				<tr> -->
+<!-- 					<th>사용자명</th> -->
+<!-- 					<th><input type="text" name="userName" id="userName"></th> -->
+<!-- 					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th> -->
+<!-- 				</tr> -->
+<!-- 			</table> -->
+<!-- 		</div> -->
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
@@ -155,6 +159,7 @@
 					<th><button onclick="send()" id="sendBtn">보내기</button></th>
 				</tr>
 			</table>
+					<input type="hidden" id="userName" name="userName" value="${userName}">
 		</div>
 	</div>
 </body>
