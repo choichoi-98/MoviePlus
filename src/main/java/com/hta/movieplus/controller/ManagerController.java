@@ -153,13 +153,15 @@ public class ManagerController {
 	public String insertNotice(NoticeVO managernotice, Model model) {
 		String theaterId = model.asMap().get("theaterId").toString();
 		managernotice.setCUSTOMER_NOTICE_TYPE(theaterId);
-		
 		noticemanagerservice.insertNotice(managernotice);
-		
 		logger.info(managernotice.toString());
-		
-		
 		return "redirect:/manager/noticelist";
 	}
-	
+	// 공지사항 수정페이지로 이동하면서 데이터 가져옴
+	@GetMapping("gonoticemoidfy")
+		public String goManagerNoticeModify(String theaterId, Model model) {
+		List<NoticeVO> managernotice = noticemanagerservice.getNoticeList(theaterId);
+		model.addAttribute("ManagerNotice", managernotice);
+		return "/manager/managerNoticeModify";
+	}
 }

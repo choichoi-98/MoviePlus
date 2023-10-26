@@ -9,5 +9,5 @@ public interface NoticeManagerService {
 	public List<NoticeVO> getNoticeList(String theaterId);
 
 	public int insertNotice(NoticeVO managernotice);
-
+	
 }
