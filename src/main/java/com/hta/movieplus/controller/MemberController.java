@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,9 +33,11 @@ import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.service.MemberService;
 import com.hta.movieplus.service.MovieStoryService;
+import com.hta.movieplus.service.StoreService;
 import com.hta.movieplus.service.TheaterService;
 import com.hta.movieplus.task.SendMail;
 
@@ -46,6 +47,7 @@ public class MemberController {
 	
 	MovieStoryService movieStoryService;
 	TheaterService theaterService;
+	StoreService storeService;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Value("${my.savefolder}")
@@ -56,13 +58,14 @@ public class MemberController {
 	private MailVO mailVO;
 	
 	@Autowired
-	public MemberController(MemberService memberservice ,TheaterService theaterService, MovieStoryService movieStoryService, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO) {
+	public MemberController(MemberService memberservice ,TheaterService theaterService, MovieStoryService movieStoryService, PasswordEncoder passwordEncoder, SendMail sendMail, MailVO mailVO, StoreService storeService) {
 		this.memberservice = memberservice;
 		this.theaterService = theaterService;
 		this.movieStoryService = movieStoryService;
 		this.passwordEncoder = passwordEncoder;
 		this.sendMail = sendMail;
 		this.mailVO = mailVO;
+		this.storeService = storeService;
 	}
 	
 	//test 폼 이동
@@ -225,6 +228,16 @@ public class MemberController {
 		model.addAttribute("ms_scheduleCnt", scheduleList.size());
 		model.addAttribute("ms_movieCnt", movieList.size());
 		model.addAttribute("ms_reviewCnt", reviewList.size());
+		//
+		
+		//예매,결재내역
+		List<TheaterSchedule> bookedList = movieStoryService.getBookedList(memberId);
+		List<StorePayVO> storeList = movieStoryService.getStoreList(memberId);
+		model.addAttribute("bookedMovieList", bookedList);
+		model.addAttribute("boughtList", storeList);
+		
+		model.addAttribute("bookedMovieCnt", bookedList.size());
+		model.addAttribute("boughtListCnt", storeList.size());
 		//
 		
 		model.addAttribute("favTheaterList", favTheaterList);

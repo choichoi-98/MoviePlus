@@ -13,7 +13,7 @@
 	src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/membership.js"></script>
-	<script
+<script
 	src="${pageContext.request.contextPath}/resources/js/favorite_theater.js"></script>
 <title>MoviePlus: 모두를 위한 영화관</title>
 </head>
@@ -230,13 +230,16 @@
 							<h2 class="tit small">나의 무비스토리</h2>
 
 							<div class="right">
-								<a href="${pageContext.request.contextPath}/member/mypage/moviestory" class="more" title="나의 무비스토리 페이지로 이동"> <i
+								<a
+									href="${pageContext.request.contextPath}/member/mypage/moviestory"
+									class="more" title="나의 무비스토리 페이지로 이동"> <i
 									class="iconset ico-arr-right-gray">더보기</i></a>
 							</div>
 						</div>
 
 						<div class="box-border link-movie-story">
-							<a href="#" title="본 영화 탭으로 이동"> <em>${ms_scheduleCnt}</em> <span>본 영화</span>
+							<a href="#" title="본 영화 탭으로 이동"> <em>${ms_scheduleCnt}</em> <span>본
+									영화</span>
 							</a> <a href="#" title="관람평 탭으로 이동"> <em>${ms_reviewCnt}</em> <span>관람평</span>
 							</a> <a href="#" title="보고싶어 탭으로 이동"> <em>${ms_movieCnt}</em> <span>보고싶어</span>
 							</a> <a href="#" title="무비포스트 탭으로 이동"> <em>${ms_postCnt}</em> <span>무비포스트</span>
@@ -270,16 +273,38 @@
 					<div class="tit-util mt70">
 						<h2 class="tit small">나의 예매내역</h2>
 
-						<a href="${pageContext.request.contextPath}/booking/success" class="more" title="나의 예매내역 더보기">더보기 <i
+						<a href="${pageContext.request.contextPath}/booking/success"
+							class="more" title="나의 예매내역 더보기">더보기 <i
 							class="iconset ico-arr-right-gray"></i></a>
 					</div>
 
 					<!-- my-reserve-history -->
 					<div class="my-reserve-history">
 						<ul>
-							<li class="no-result">
-								<div class="no-history-reservation">예매 내역이 없습니다.</div>
-							</li>
+							<c:if test="${bookedMovieCnt == 0}">
+								<li class="no-result"><div class="no-history-reservation">예매
+										내역이 없습니다.</div></li>
+							</c:if>
+							<c:forEach var="bookedMovie" items="${bookedMovieList}" begin="0"
+								end="2">
+								<li>
+									<p class="img">
+										<img src="${bookedMovie.MOVIE_POSTER}"
+											alt="${bookedMovie.MOVIE_TITLE}">
+									</p>
+									<div class="cont">
+										<span>${bookedMovie.MOVIE_TITLE}</span>
+
+										<p class="theater">${bookedMovie.THEATER_NAME}/
+											${bookedMovie.THEATER_ROOM_NAME}</p>
+										<p class="date">${bookedMovie.THEATER_SCHEDULE_DATE}시작시간:
+											${bookedMovie.THEATER_SCHEDULE_START}</p>
+									</div>
+									<div class="util">
+										<button class="button small gray-line">예매취소</button>
+									</div>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 					<!--// my-reserve-history -->
@@ -289,7 +314,8 @@
 					<div class="tit-util mt70">
 						<h2 class="tit small">나의 구매내역</h2>
 
-						<a href="${pageContext.request.contextPath}/store/success" class="more" title="나의 구매내역 더보기">더보기 <i
+						<a href="${pageContext.request.contextPath}/store/success"
+							class="more" title="나의 구매내역 더보기">더보기 <i
 							class="iconset ico-arr-right-gray"></i></a>
 					</div>
 
@@ -304,16 +330,28 @@
 								<col style="width: 80px;">
 							</colgroup>
 							<tbody>
-								<tr>
-									<td colspan="6" class="a-c">구매내역이 없습니다.</td>
-								</tr>
+								<c:if test="${boughtListCnt == 0}">
+									<tr>
+										<td colspan="6" class="a-c">구매내역이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach var="storeItem" items="${boughtList}" begin="0"
+									end="3">
+									<tr>
+										<td>${storeItem.PAY_DATE}</td>
+										<th scope="row" colspan="2">${storeItem.PAY_NAME}</th>
+										<td class="a-r">${storeItem.PAY_AMOUNT}</td>
+										<td><button type="button"
+												class="button x-small gray-line">취소</button></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 
 				<!-- column -->
-				
+
 				<!--// column -->
 			</div>
 			<!--// my-megabox-main -->
@@ -322,7 +360,7 @@
 
 	</div>
 	</div>
-	
+
 	<jsp:include page="/WEB-INF/views/theater/favorite_theater_modal.jsp" />
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />

@@ -5,6 +5,7 @@ import java.util.List;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.TheaterSchedule;
 
 public interface MovieStoryService {
@@ -22,5 +23,9 @@ public interface MovieStoryService {
 	List<TheaterSchedule> getScheduleList(String memberId);
 
 	void deletePost(int post_num);
+
+	List<TheaterSchedule> getBookedList(String memberId);
+
+	List<StorePayVO> getStoreList(String memberId);
 
 }

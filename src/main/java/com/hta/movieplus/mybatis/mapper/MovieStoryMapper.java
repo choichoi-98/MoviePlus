@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.TheaterSchedule;
 
 @Mapper
@@ -22,5 +23,9 @@ public interface MovieStoryMapper {
 	void deleteDibs(Map<String, Object> map);
 
 	List<TheaterSchedule> getScheduleListByMemberId(String memberId);
+
+	List<TheaterSchedule> getBookedList(String memberId);
+
+	List<StorePayVO> getStoreList(String memberId);
 
 }
