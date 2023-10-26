@@ -26,5 +26,7 @@ public interface KakaopayMapper {
 	public CouponVO getCouponByCode(String COUPON_CODE);
 
 	public void delPaidBook(int KPAY_NUM);
+
+	public List<BookingInfoDTO> get1Booking(String pg_token);
 	
 }

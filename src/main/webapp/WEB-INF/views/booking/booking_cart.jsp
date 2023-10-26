@@ -475,7 +475,7 @@ $(function() {
 					<p class="sh-txt reset mr08"><span class="label">쿠폰번호<!-- 쿠폰번호 --></span></p>
 
 					<div class="sh-input">
-						<input id="couponCode" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="10">
+						<input id="couponCode" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="50">
 					</div>
 
 					<div class="sh-btn gray">

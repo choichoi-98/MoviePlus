@@ -24,6 +24,14 @@
 		values(#{PAY_NUM}, #{itemDisplay}, #{totalPrice}, #{MEMBER_ID}, #{cartItemMenus})
 	</insert>
 	
+	<insert id="createCoupon">
+	<selectKey resultType="int" order="BEFORE" keyProperty="COUPON_NUM">
+		select nvl(max(COUPON_NUM), 0) + 1 from COUPON
+	</selectKey>
+		insert into COUPON(COUPON_NUM, COUPON_CODE, PAY_NUM, COUPON_TYPE, COUPON_VALUE)
+		values(#{COUPON_NUM}, #{Code}, #{PAY_NUM}, #{COUPON_TYPE}, #{COUPON_VALUE})
+	</insert>
+	
 	<update id="insertPgToken">
     	UPDATE STORE_PAY
     	SET pg_token = #{pg_token},
@@ -59,6 +67,14 @@
 		ORDER BY PAY_NUM ASC
 	</select>
 	
+	<select id="getStoreCouponList" resultType="PayCouponDTO">
+		SELECT *
+		FROM STORE_PAY
+		LEFT JOIN COUPON
+		ON STORE_PAY.PAY_NUM = COUPON.PAY_NUM
+		WHERE STORE_PAY.pg_token IS NOT NULL
+	</select>
+	
 	<select id="getStoreCoupon" resultType="StorePayVO">
 		SELECT PAY_NUM
 		FROM STORE_PAY 
@@ -67,6 +83,11 @@
 	
 	<select id="getPayList" resultType="StorePayVO">
 		select * from STORE_PAY
+	</select>
+	
+	<select id="getPayMenuByNum" resultType="String">
+		select PAY_MENU from STORE_PAY
+		where PAY_NUM = #{PAY_NUM}
 	</select>
 	
 	<select id="getCartList" resultType="StoreVO">

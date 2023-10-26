@@ -50,4 +50,9 @@ public class KakaopayServiceImpl implements KakaopayService {
 		dao.delPaidBook(KPAY_NUM);
 	}
 
+	@Override
+	public List<BookingInfoDTO> get1Booking(String pg_token) {
+		return dao.get1Booking(pg_token);
+	}
+
 }

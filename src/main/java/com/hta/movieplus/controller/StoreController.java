@@ -39,6 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.CouponVO;
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.domain.PayCouponDTO;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
@@ -366,16 +367,41 @@ public class StoreController {
 	
 	@GetMapping("/coupon")
 	public ModelAndView coupon_ex(ModelAndView mv) {
-		List<StorePayVO> AprPayList = storeService.selectApproved();
+//		List<StorePayVO> AprPayList = storeService.selectApproved();
+		List<PayCouponDTO> couponList = storeService.getStoreCouponList();
 		
 		mv.setViewName("store/store_pay_coupon");
-		mv.addObject("AprPayList", AprPayList);
+//		mv.addObject("AprPayList", AprPayList);
+		mv.addObject("couponList", couponList);
 		return mv;
 	}
 	
 	@PostMapping("/coupon")
 	public void coupon(
-			@RequestParam("payNum") int PAY_NUM) {
-		storeService.createCoupon(PAY_NUM);
+			@RequestParam("payNum") int PAY_NUM,
+			StorePayVO storepayVO) {
+		UUID uuid = UUID.randomUUID();
+		String Code = "store" + uuid;
+		
+		String Menu = storeService.getPayMenuByNum(PAY_NUM);
+		
+		String[] Menus = Menu.split(",");
+		
+		String COUPON_TYPE;
+		int COUPON_VALUE;
+		
+		for (int i = 0; i < Menus.length; i++) {
+			String eachMenu = Menus[i];
+			
+			if(eachMenu.equals("ticket")) {
+				COUPON_TYPE = "스토어 티켓";
+				COUPON_VALUE = 12000;
+				storeService.createCoupon(PAY_NUM, Code, COUPON_TYPE, COUPON_VALUE);
+			} else if(eachMenu.equals("voucher")) {
+				COUPON_TYPE = "스토어 금액권";
+				COUPON_VALUE = 10000;
+				storeService.createCoupon(PAY_NUM, Code, COUPON_TYPE, COUPON_VALUE);
+			} 
+		}
 	}
 }

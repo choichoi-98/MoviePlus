@@ -2,9 +2,15 @@ package com.hta.movieplus.domain;
 
 public class BookingInfoDTO {
 
-	private int KPAY_NUM; // 카트 번호(PK)
+	private int KPAY_NUM; // 결제 번호(PK)
 	
 	private int THEATER_SCHEDULE_ID; 
+	private String THEATER_NAME;
+	private String THEATER_ROOM_NAME;
+	private String THEATER_SCHEDULE_DATE;
+	private String THEATER_SCHEDULE_START;
+	private String THEATER_SCHEDULE_END;
+	
 	private int THEATER_ROOM_ID;
 	
 	private String MOVIE_CODE;
@@ -124,6 +130,36 @@ public class BookingInfoDTO {
 	}
 	public void setMOVIE_POSTER(String mOVIE_POSTER) {
 		MOVIE_POSTER = mOVIE_POSTER;
+	}
+	public String getTHEATER_NAME() {
+		return THEATER_NAME;
+	}
+	public void setTHEATER_NAME(String tHEATER_NAME) {
+		THEATER_NAME = tHEATER_NAME;
+	}
+	public String getTHEATER_ROOM_NAME() {
+		return THEATER_ROOM_NAME;
+	}
+	public void setTHEATER_ROOM_NAME(String tHEATER_ROOM_NAME) {
+		THEATER_ROOM_NAME = tHEATER_ROOM_NAME;
+	}
+	public String getTHEATER_SCHEDULE_DATE() {
+		return THEATER_SCHEDULE_DATE;
+	}
+	public void setTHEATER_SCHEDULE_DATE(String tHEATER_SCHEDULE_DATE) {
+		THEATER_SCHEDULE_DATE = tHEATER_SCHEDULE_DATE;
+	}
+	public String getTHEATER_SCHEDULE_START() {
+		return THEATER_SCHEDULE_START;
+	}
+	public void setTHEATER_SCHEDULE_START(String tHEATER_SCHEDULE_START) {
+		THEATER_SCHEDULE_START = tHEATER_SCHEDULE_START;
+	}
+	public String getTHEATER_SCHEDULE_END() {
+		return THEATER_SCHEDULE_END;
+	}
+	public void setTHEATER_SCHEDULE_END(String tHEATER_SCHEDULE_END) {
+		THEATER_SCHEDULE_END = tHEATER_SCHEDULE_END;
 	}
 	
 }

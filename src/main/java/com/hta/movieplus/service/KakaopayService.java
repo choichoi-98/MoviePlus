@@ -20,5 +20,7 @@ public interface KakaopayService {
 
 	public void delPaidBook(int kPAY_NUM);
 
+	public List<BookingInfoDTO> get1Booking(String pg_token);
+
 
 }

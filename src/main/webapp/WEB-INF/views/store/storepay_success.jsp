@@ -120,7 +120,7 @@
 								<tbody>
 									<c:forEach var="p" items="${AprPayList}" varStatus="loop">
 										<c:if
-											test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
+											test="${pinfo.MEMBER_ID eq p.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 											<tr>
 												<td class="a-c">
 													<div class="goods-info">

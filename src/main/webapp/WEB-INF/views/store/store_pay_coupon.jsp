@@ -37,8 +37,8 @@
 							e.preventDefault(); // 기본 동작인 링크 이동을 막기
 
 							const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
-							const payNum = row.find('.regibtn').data('paynum'); // 해당 행의 ITEM_CODE 값을 추출
-							alert('payNum:' + payNum);
+							const payNum = row.find('.regibtn').data('paynum'); // 해당 행의 PAY_NUM 값을 추출
+//							alert('payNum:' + payNum);
 
 							$
 									.ajax({
@@ -53,11 +53,11 @@
 											xhr.setRequestHeader(header, token);
 										},
 										success : function(data) {
-											alert("등록 성공, payNum: " + payNum);
+//											alert("등록 성공, payNum: " + payNum);
 											window.location.reload();
 										},
 										error : function(error) {
-											alert("등록 실패, payNum: " + payNum);
+//											alert("등록 실패, payNum: " + payNum);
 											window.location.reload();
 										}
 									});
@@ -117,18 +117,19 @@
 								</thead>
 
 								<tbody>
-									<c:forEach var="p" items="${AprPayList}" varStatus="loop">
-										<c:if test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
+									<c:forEach var="p" items="${couponList}" varStatus="loop">
+										<c:if test="${pinfo.MEMBER_ID eq p.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 											<c:if test="${fn:contains(p.PAY_MENU, 'ticket') || fn:contains(p.PAY_MENU, 'voucher')}">
 											<tr>
 												<td class="a-c">
+												${p.PAY_DATE}
 												</td>
 												<th scope="row">
-													<div class="goods-info">
-														<p class="name">
-															<a href="javascript:fn_storeDetail();" title="일반관람권(2D)"></a>
+													<div class="">
+														<p class="">
+															<a href="javascript:fn_storeDetail();">${p.COUPON_CODE}</a>
 														</p>
-														<p class="bundle"></p>
+														<p class=""></p>
 													</div>
 
 													<div class="mt10">
@@ -139,19 +140,19 @@
 												<td>
 												<c:choose>
 													<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
-														<div class="goods-info">
-														<p class="name">
+														<div class="">
+														<p class="">
 															<a href="javascript:fn_storeDetail();">티켓</a>
 														</p>
-														<p class="bundle"></p>
+														<p class=""></p>
 														</div>
 													</c:when>
 													<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
-														<div class="goods-info">
-														<p class="name">
+														<div class="">
+														<p class="">
 															<a href="javascript:fn_storeDetail();">금액권</a>
 														</p>
-														<p class="bundle"></p>
+														<p class=""></p>
 														</div>
 													</c:when>
 													<c:otherwise>
@@ -180,9 +181,9 @@
 										</c:if>
 										</c:if>
 									</c:forEach>
-									<c:if test="${empty AprPayList}">
+									<c:if test="${empty couponList}">
 										<tr>
-											<td colspan="5">결제내역이 없습니다.</td>
+											<td colspan="5">등록할 쿠폰/할인권이 없습니다.</td>
 										</tr>
 									</c:if>
 								</tbody>
