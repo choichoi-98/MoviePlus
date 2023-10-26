@@ -297,11 +297,8 @@
 
 										<p class="theater">${bookedMovie.THEATER_NAME}/
 											${bookedMovie.THEATER_ROOM_NAME}</p>
-										<p class="date">${bookedMovie.THEATER_SCHEDULE_DATE}시작시간:
+										<p class="date">${bookedMovie.THEATER_SCHEDULE_DATE} &nbsp;&nbsp;시작시간:
 											${bookedMovie.THEATER_SCHEDULE_START}</p>
-									</div>
-									<div class="util">
-										<button class="button small gray-line">예매취소</button>
 									</div>
 								</li>
 							</c:forEach>
@@ -340,9 +337,7 @@
 									<tr>
 										<td>${storeItem.PAY_DATE}</td>
 										<th scope="row" colspan="2">${storeItem.PAY_NAME}</th>
-										<td class="a-r">${storeItem.PAY_AMOUNT}</td>
-										<td><button type="button"
-												class="button x-small gray-line">취소</button></td>
+										<td colspan="2" class="a-r">${storeItem.PAY_AMOUNT}원</td>
 									</tr>
 								</c:forEach>
 							</tbody>
