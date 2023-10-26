@@ -240,7 +240,7 @@ button.button.purple:hover {
 				href="${pageContext.request.contextPath}/benefit/membership"
 				title="멤버십">멤버십</a> <a
 				href="${pageContext.request.contextPath}/customer_service"
-				title="고객센터">고객센터</a>
+				title="공지사항">공지사항</a>
 		</div>
 
 		<div class="right-link">

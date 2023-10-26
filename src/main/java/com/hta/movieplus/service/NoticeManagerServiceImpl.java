@@ -39,4 +39,10 @@ public class NoticeManagerServiceImpl implements NoticeManagerService {
 	}
 
 
+	@Override
+	public NoticeVO getManagerNoticeModify(int managernoticenum) {
+		return dao.getManagerNoticeModify(managernoticenum);
+	}
+
+
 }

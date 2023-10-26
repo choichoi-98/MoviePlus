@@ -9,8 +9,9 @@ public interface CustomerService {
 
 	public void insertOneOnOne(CustomerOneOnOneVO oneonone);
 
-	public List<NoticeVO> getNoticeList();
+	public List<CustomerOneOnOneVO> getMyInjury(int member_NUM);
 
+	public CustomerOneOnOneVO getDetailByNum(int detailnum);
 
 
 }

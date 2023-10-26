@@ -13,8 +13,10 @@ public interface CustomerMapper {
 
 	public void insertCustomerOneOnOneVO(CustomerOneOnOneVO oneonone);
 
-	/* 공지사항 리스트불러오기 */
-	public List<NoticeVO> getNoticeList();
+	public List<CustomerOneOnOneVO> getMyInjury(int member_NUM);
+
+	public CustomerOneOnOneVO getDetailByNum(int detailnum);
+
 
 
 

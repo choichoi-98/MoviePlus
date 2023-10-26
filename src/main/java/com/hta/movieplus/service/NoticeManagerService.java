@@ -10,4 +10,6 @@ public interface NoticeManagerService {
 
 	public int insertNotice(NoticeVO managernotice);
 	
+	public NoticeVO getManagerNoticeModify(int managernoticenum);
+	
 }

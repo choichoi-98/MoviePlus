@@ -27,7 +27,7 @@
 			})
 
 			$('#delete-modal-ok').click(function() {
-				location.href = '/movieplus/admin/noticedelete?noticenum=' + selected_manager_notice_num;
+				location.href = '/movieplus/manager/noticedelete?noticenum=' + selected_manager_notice_num;
 			})
 		})
 	</script>
@@ -64,8 +64,8 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
-									<th>제 목</th>
 									<th>유 형</th>
+									<th>제 목</th>
 									<th>작 성 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
@@ -75,14 +75,14 @@
 								<c:forEach var="noticelist" items="${NoticeList}" varStatus="loop">
 									<tr>
 										<td>
-											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_NUM}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
+											<div class="main__table-text">1</div> <!-- 1부터 순차적으로 커지는 숫자 -->
 										</td>
 										<td>
 											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_TYPE}</div>
 										</td>
 										<td>
 											<div class="main__table-text">
-												<a href = "${pageContext.request.contextPath}/manager/gonoticemodify?theaterId=${noticelist.CUSTOMER_NOTICE_NUM}">${noticelist.CUSTOMER_NOTICE_SUBJECT}</a>
+												<a href = "${pageContext.request.contextPath}/manager/gonoticemodify?managernoticenum=${noticelist.CUSTOMER_NOTICE_NUM}">${noticelist.CUSTOMER_NOTICE_SUBJECT}</a>
 											</div>
 										</td>
 										<td>

@@ -30,6 +30,8 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public void noticeWrite(NoticeVO notice) {
+		notice.setCUSTOMER_NOTICE_THEATER("무비플러스");
+		notice.setCUSTOMER_NOTICE_REGION("무비플러스");
 		dao.noticeWrite(notice);
 	}
 	
@@ -52,6 +54,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public List<NoticeVO> getNoticelistExceptEntire() {
 		return dao.getNoticelistExceptEntire();
+	}
+
+	@Override
+	public List<NoticeVO> getTotalNoticeList() {
+		return dao.getTotalNoticeList();
 	}
 
 	
