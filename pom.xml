@@ -79,11 +79,11 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-		
+
 		<!-- 메일 인증번호 유효시간 저장 -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-redis</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 
 		<!-- 톰캣 -->
@@ -134,6 +134,12 @@
 			<artifactId>spring-websocket</artifactId>
 		</dependency>
 
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>-->
+
+
 		<!-- 영진위 api -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -152,14 +158,14 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+
 		<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-		
-	
+
+
 
 	</dependencies>
 

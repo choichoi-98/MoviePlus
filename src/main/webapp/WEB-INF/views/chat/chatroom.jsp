@@ -55,7 +55,13 @@
 				}else{
 					console.warn("unknown type!")
 				}
+			}else{
+				//파일 업로드한 경우 업로드한 파일 채팅방에 뿌리기
+				console.log()
+				var url = URL.createObjectURL(new Blob([msg]));
+				$("#chating").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
 			}
+			
 		}//ws.onmessage = function(data) {
 		
 			
@@ -71,17 +77,17 @@
 		});
 	}
 
-	function chatName(){
-		var userName = $("#userName").val();
-		if(userName == null || userName.trim() == ""){
-			alert("사용자 이름을 입력해주세요.");
-			$("#userName").focus();
-		}else{
-			wsOpen();
-			$("#yourName").hide();
-			$("#yourMsg").show();
-		}
-	}
+// 	function chatName(){
+// 		var userName = $("#userName").val();
+// 		if(userName == null || userName.trim() == ""){
+// 			alert("사용자 이름을 입력해주세요.");
+// 			$("#userName").focus();
+// 		}else{
+// 			wsOpen();
+// 			$("#yourName").hide();
+// 			$("#yourMsg").show();
+// 		}
+// 	}
 	
 
 	function send() {
@@ -95,6 +101,30 @@
 		ws.send(JSON.stringify(option))
 		$('#chatting').val("");
 	}
+	
+	//파일 전송
+	function fileSend(){
+		console.log("파일 전송 메서드 실행")
+		var file = document.querySelector("#fileUpload").files[0];
+		console.log("file = "+file)
+		var fileReader = new FileReader();
+		fileReader.onload = function() {
+			var param = {
+				type: "fileUpload",
+				file: file,
+				roomNumber: $("#roomNumber").val(),
+				sessionId : $("#sessionId").val(),
+				msg : $("#chatting").val(),
+				userName : $("#userName").val()
+			}
+			ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
+
+		    arrayBuffer = this.result;
+			ws.send(arrayBuffer); //파일 소켓 전송
+		};
+		fileReader.readAsArrayBuffer(file);
+	}
+	
 $(document).ready(function(){
 	document.getElementById("goBackButton").addEventListener("click", goBack);
 	function goBack() {
@@ -128,7 +158,11 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<input type="hidden" id="userName" name="userName" value="${userName}">
-
+		
+		<div id = "fileSendArea">
+			<input type="file" id="fileUpload">
+			<button onclick="fileSend()" id="sendFileBtn">파일보내기</button>
+		</div>
 	</div>
 </body>
 </html>
