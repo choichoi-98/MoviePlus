@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
 
@@ -27,8 +29,8 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>Unique views this month</span>
-						<p>5 678</p>
+						<span>당일 관객수</span>
+						<p>${daySeatCount}</p>
 						<i class="icon ion-ios-stats"></i>
 					</div>
 				</div>
@@ -80,83 +82,25 @@
 							<table class="main__table main__table--dash">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>TITLE</th>
-										<th>CATEGORY</th>
-										<th>RATING</th>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>예매율</th>
 									</tr>
 								</thead>
 								<tbody>
+								 	<c:forEach var="totallist" items="${totallist}" begin="0" end="4">
 									<tr>
 										<td>
-											<div class="main__table-text">321</div>
+											<div class="main__table-text">${totallist.RNUM}</div>
 										</td>
 										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+											<div class="main__table-text"><a href="#">${totallist.MOVIE_TITLE}</a></div>
 										</td>
 										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 9.2</div>
+											<div class="main__table-text">${totallist.ratio}</div>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">54</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Benched</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 9.1</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">670</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Whitney</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 9.0</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">241</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Blindspotting 2</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 8.9</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">22</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Blindspotting</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 8.9</div>
-										</td>
-									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

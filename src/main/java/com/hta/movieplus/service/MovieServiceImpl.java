@@ -225,6 +225,17 @@ public class MovieServiceImpl implements MovieService{
 	    
 	    return avg;
 	}
+	
+	//누적관객수
+	@Override
+	public int getTotalAudience(String movieCode) {
+		int total = 0;
+		total = dao.getTotalAudience(movieCode);
+		
+		return total;
+	}
+	
+	
 
 	
 

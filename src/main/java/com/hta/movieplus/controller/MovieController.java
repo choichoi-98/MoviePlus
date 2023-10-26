@@ -186,6 +186,7 @@ public class MovieController {
     	mv.addObject("moviePostList", moviePostList);
     	
     	
+    	
     	mv.setViewName("movie/movie_detail");
     	return mv;
     }
