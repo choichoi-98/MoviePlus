@@ -1,6 +1,6 @@
 package com.hta.movieplus.domain;
 
-public class StorePayVO {
+public class PayCouponDTO {
 
 	private int PAY_NUM; // 상품 번호
 	private String PAY_NAME; // 상품 이름
@@ -9,6 +9,7 @@ public class StorePayVO {
 	private String MEMBER_ID;
 	private String PAY_MENU;
 	private String PAY_DATE;
+	private String COUPON_CODE;
 //	private String CART_APPROVED; // 결제 승인 여부
 
 	public int getPAY_NUM() {
@@ -52,6 +53,12 @@ public class StorePayVO {
 	}
 	public void setPAY_DATE(String pAY_DATE) {
 		PAY_DATE = pAY_DATE;
+	}
+	public String getCOUPON_CODE() {
+		return COUPON_CODE;
+	}
+	public void setCOUPON_CODE(String cOUPON_CODE) {
+		COUPON_CODE = cOUPON_CODE;
 	}
 	
 }

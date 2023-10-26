@@ -16,7 +16,9 @@
     	SET pg_token = #{pg_token},
         KPAY_DATE = #{today}
     	WHERE pg_token IS NULL
-    	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) FROM KAKAO_PAY WHERE pg_token IS NULL)
+    	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) 
+    					FROM KAKAO_PAY 
+    					WHERE pg_token IS NULL)
     	AND NOT EXISTS (SELECT 1 FROM KAKAO_PAY WHERE pg_token = #{pg_token})
 	</update>
 
@@ -35,6 +37,18 @@
 		on MOVIE.MOVIE_CODE = THEATER_SCHEDULE.MOVIE_CODE
 		where pg_token IS NOT NULL
 		ORDER BY KAKAO_PAY.KPAY_NUM ASC
+	</select>
+	
+	<select id="get1Booking" resultType="BookingInfoDTO">
+		select * from KAKAO_PAY
+		
+		inner join THEATER_SCHEDULE
+		on KAKAO_PAY.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		inner join THEATER
+		on THEATER_SCHEDULE.THEATER_ID = THEATER.THEATER_ID
+		inner join MOVIE 
+		on MOVIE.MOVIE_CODE = THEATER_SCHEDULE.MOVIE_CODE
+		where pg_token = #{pg_token}
 	</select>
 	
 	<select id="getCouponByCode" parameterType="String" resultType="CouponVO">

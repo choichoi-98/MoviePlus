@@ -194,7 +194,7 @@ public class BookingController {
 	                + "&total_amount=" + totalAmount
 	                + "&vat_amount=0"
 	                + "&tax_free_amount=0"
-	                + "&approval_url=http://localhost:9000/movieplus/booking/success"
+	                + "&approval_url=http://localhost:9000/movieplus/booking/success1"
 	                + "&fail_url=http://localhost:9000/movieplus/booking/fail"
 	                + "&cancel_url=http://localhost:9000/movieplus/booking/";
 	        OutputStream sender = servercon.getOutputStream();
@@ -221,23 +221,19 @@ public class BookingController {
 	
 	@GetMapping("/success")
 	public ModelAndView pay_success(
-			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
+//			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
 			ModelAndView mv) {
-//		storeService.insertPgToken(PAY_NUM, pg_token);
-		Date currentDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String today = dateFormat.format(currentDate);
-		if (pg_token.equals("none")) {
-		} else {
-			kakaopayService.insertPgToken(pg_token, today);
-//			kakaopayService.clearCart();
-		}
+//		Date currentDate = new Date();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = dateFormat.format(currentDate);
+//		if (pg_token.equals("none")) {
+//		} else {
+//			kakaopayService.insertPgToken(pg_token, today);
+//		}
 		
-//		List<KakaoPayVO> BookingList = kakaopayService.getAprBooking();
 		List<BookingInfoDTO> BookingLists = kakaopayService.getAprBookings();
 		
 		mv.setViewName("booking/kakaoPay_success");
-//		mv.addObject("paylist", paylist);
 		mv.addObject("BookingList", BookingLists);
 		return mv;
 	}
@@ -247,6 +243,27 @@ public class BookingController {
 	public void pay_success2(
 			@RequestParam("KpayNum") int KPAY_NUM) {
 		kakaopayService.delPaidBook(KPAY_NUM);
+	}
+	
+	@GetMapping("/success1")
+	public ModelAndView pay_success3(
+			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
+			ModelAndView mv) {
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String today = dateFormat.format(currentDate);
+		
+		if (pg_token.equals("none")) {
+			mv.setViewName("booking/book_success");
+		} else {
+			kakaopayService.insertPgToken(pg_token, today);
+		}
+		
+		List<BookingInfoDTO> BookingList = kakaopayService.get1Booking(pg_token);
+		
+		mv.setViewName("booking/book_success");
+		mv.addObject("BookingList", BookingList);
+		return mv;
 	}
 
 }

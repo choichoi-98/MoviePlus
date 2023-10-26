@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.CouponVO;
+import com.hta.movieplus.domain.PayCouponDTO;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
@@ -59,5 +60,11 @@ public interface StoreMapper {
 	public void deletePaidItem(int PAY_NUM);
 
 	public String getStoreCoupon();
+
+	public void createCoupon(int PAY_NUM, String Code, String COUPON_TYPE, int COUPON_VALUE);
+
+	public String getPayMenuByNum(int PAY_NUM);
+
+	public List<PayCouponDTO> getStoreCouponList();
 
 }

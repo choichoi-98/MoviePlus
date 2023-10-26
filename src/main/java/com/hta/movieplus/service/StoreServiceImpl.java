@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hta.movieplus.domain.CartVO;
 import com.hta.movieplus.domain.CouponVO;
+import com.hta.movieplus.domain.PayCouponDTO;
 import com.hta.movieplus.domain.StoreCartDTO;
 import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.StoreVO;
@@ -135,9 +136,18 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void createCoupon(int pAY_NUM) {
-		
+	public void createCoupon(int PAY_NUM, String Code, String COUPON_TYPE, int COUPON_VALUE) {
+		dao.createCoupon(PAY_NUM, Code, COUPON_TYPE, COUPON_VALUE);
 	}
 
+	@Override
+	public String getPayMenuByNum(int PAY_NUM) {
+		return dao.getPayMenuByNum(PAY_NUM);
+	}
+
+	@Override
+	public List<PayCouponDTO> getStoreCouponList() {
+		return dao.getStoreCouponList();
+	}
 
 }
