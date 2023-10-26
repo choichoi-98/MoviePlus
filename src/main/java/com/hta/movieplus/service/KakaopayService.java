@@ -10,7 +10,7 @@ public interface KakaopayService {
 
 	public void payInsert(int sid, int totalAmount, String KPAY_OCCUPIED_SEAT, int seatCnt, String MEMBER_ID);
 
-	public void insertPgToken(String pg_token);
+	public void insertPgToken(String pg_token, String today);
 
 	public List<KakaoPayVO> getAprBooking();
 

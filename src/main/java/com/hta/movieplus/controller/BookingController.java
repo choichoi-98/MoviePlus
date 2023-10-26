@@ -11,6 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.aspectj.apache.bcel.classfile.Module.Require;
@@ -222,9 +224,12 @@ public class BookingController {
 			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
 			ModelAndView mv) {
 //		storeService.insertPgToken(PAY_NUM, pg_token);
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String today = dateFormat.format(currentDate);
 		if (pg_token.equals("none")) {
 		} else {
-			kakaopayService.insertPgToken(pg_token);
+			kakaopayService.insertPgToken(pg_token, today);
 //			kakaopayService.clearCart();
 		}
 		

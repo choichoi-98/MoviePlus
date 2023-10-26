@@ -40,7 +40,7 @@ public interface StoreService {
 	
 	public List<StorePayVO> getPayList();
 
-	public void insertPgToken(String pg_token);
+	public void insertPgToken(String pg_token, String today);
 
 	public List<StorePayVO> selectApproved();
 
@@ -51,5 +51,8 @@ public interface StoreService {
 	public List<StoreCartDTO> getCartLists();
 
 	public String getStoreCoupon();
+
+	public void createCoupon(int pAY_NUM);
+
 
 }

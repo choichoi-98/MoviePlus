@@ -9,6 +9,7 @@ public class KakaoPayVO {
 	private String KPAY_OCCUPIED_SEAT;
 	private String MEMBER_ID;
 	private String pg_token;
+	private String KPAY_DATE;
 	
 	public int getKPAY_NUM() {
 		return KPAY_NUM;
@@ -52,6 +53,11 @@ public class KakaoPayVO {
 	public void setMEMBER_ID(String mEMBER_ID) {
 		MEMBER_ID = mEMBER_ID;
 	}
-	
+	public String getKPAY_DATE() {
+		return KPAY_DATE;
+	}
+	public void setKPAY_DATE(String kPAY_DATE) {
+		KPAY_DATE = kPAY_DATE;
+	}
 	
 }

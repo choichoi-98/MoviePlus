@@ -26,7 +26,8 @@
 	
 	<update id="insertPgToken">
     	UPDATE STORE_PAY
-    	SET pg_token = #{pg_token}
+    	SET pg_token = #{pg_token},
+        PAY_DATE = #{today}
     	WHERE pg_token IS NULL
     	AND PAY_NUM = (SELECT MAX(PAY_NUM) 
     				   FROM STORE_PAY 

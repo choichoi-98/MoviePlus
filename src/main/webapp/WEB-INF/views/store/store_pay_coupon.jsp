@@ -96,7 +96,7 @@
 				<div class="inner-wrap">
 					<!-- store-payment -->
 					<div class="store-payment">
-						<h2 class="tit">쿠폰/관람권 등록</h2>
+						<h2 class="tit">쿠폰/할인권 등록</h2>
 						<div class="table-wrap" style="width: 80%">
 							<table class="board-list">
 								<caption>주문상품정보 목록 표</caption>
@@ -110,16 +110,15 @@
 								<thead>
 									<tr>
 										<th scope="colgroup" colspan="2">코드</th>
-										<th scope="col">결제내용</th>
-										<th scope="col">상세메뉴</th>
-										<th scope="col">쿠폰/관람권 등록</th>
+										<th scope="col">결제상품</th>
+										<th scope="col">금액</th>
+										<th scope="col">쿠폰/할인원 등록</th>
 									</tr>
 								</thead>
 
 								<tbody>
 									<c:forEach var="p" items="${AprPayList}" varStatus="loop">
-										<c:if
-											test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
+										<c:if test="${pinfo.MEMBER_ID eq b.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
 											<c:if test="${fn:contains(p.PAY_MENU, 'ticket') || fn:contains(p.PAY_MENU, 'voucher')}">
 											<tr>
 												<td class="a-c">
@@ -138,14 +137,41 @@
 													</div>
 												</th>
 												<td>
-													<div class="goods-info">
+												<c:choose>
+													<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
+														<div class="goods-info">
 														<p class="name">
-															<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">${p.PAY_NAME}</a>
+															<a href="javascript:fn_storeDetail();">티켓</a>
 														</p>
 														<p class="bundle"></p>
-													</div>
+														</div>
+													</c:when>
+													<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
+														<div class="goods-info">
+														<p class="name">
+															<a href="javascript:fn_storeDetail();">금액권</a>
+														</p>
+														<p class="bundle"></p>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="goods-info">
+														<p class="name">
+															<a href="javascript:fn_storeDetail();">${p.PAY_NAME}</a>
+														</p>
+														<p class="bundle"></p>
+														</div>
+													</c:otherwise>
+												</c:choose>
 												</td>
-												<td><em id="purcQtyView">${p.PAY_MENU}</em></td>
+												<c:choose>
+													<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
+														<td><em id="purcQtyView">12000</em><span>원</span></td>
+													</c:when>
+													<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
+														<td><em id="purcQtyView">10000</em><span>원</span></td>
+													</c:when>
+												</c:choose>	
 												<td><a
 													href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
 													class="a-link regibtn" name="brchList" title="삭제"

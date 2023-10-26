@@ -26,8 +26,8 @@ public class KakaopayServiceImpl implements KakaopayService {
 	}
 
 	@Override
-	public void insertPgToken(String pg_token) {
-		dao.insertPgToken(pg_token);
+	public void insertPgToken(String pg_token, String today) {
+		dao.insertPgToken(pg_token, today);
 	}
 
 	@Override
