@@ -293,7 +293,6 @@
 											alt="${bookedMovie.MOVIE_TITLE}">
 									</p>
 									<div class="cont">
-										<p class="pay">결제일시 : 2023.10.26 임시</p>
 										<span>${bookedMovie.MOVIE_TITLE}</span>
 
 										<p class="theater">${bookedMovie.THEATER_NAME}/
@@ -339,7 +338,7 @@
 								<c:forEach var="storeItem" items="${boughtList}" begin="0"
 									end="3">
 									<tr>
-										<td>2023.10.26 임시</td>
+										<td>${storeItem.PAY_DATE}</td>
 										<th scope="row" colspan="2">${storeItem.PAY_NAME}</th>
 										<td class="a-r">${storeItem.PAY_AMOUNT}</td>
 										<td><button type="button"
