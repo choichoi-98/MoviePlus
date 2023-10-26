@@ -95,8 +95,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public void insertPgToken(String pg_token) {
-		dao.insertPgToken(pg_token);
+	public void insertPgToken(String pg_token, String today) {
+		dao.insertPgToken(pg_token, today);
 	}
 
 	@Override
@@ -133,5 +133,11 @@ public class StoreServiceImpl implements StoreService {
 	public String getStoreCoupon() {
 		return dao.getStoreCoupon();
 	}
+
+	@Override
+	public void createCoupon(int pAY_NUM) {
+		
+	}
+
 
 }

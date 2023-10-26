@@ -59,7 +59,7 @@ $(function() {
     	
     	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
         const itemCode = row.find('.delbtn').data('code');  // 해당 행의 ITEM_CODE 값을 추출
-        alert('itemCode:' + itemCode);
+ //       alert('itemCode:' + itemCode);
         
         $.ajax({
             url: 'cart',
@@ -71,11 +71,11 @@ $(function() {
                 xhr.setRequestHeader(header, token);
             },
             success: function(data) {
-                alert("삭제 성공, itemCode: " + itemCode);
+//                alert("삭제 성공, itemCode: " + itemCode);
                 window.location.reload();
             },
             error: function(error) {
-                alert("삭제 실패, itemCode: " + itemCode);
+//                alert("삭제 실패, itemCode: " + itemCode);
                 window.location.reload();
             }
         });

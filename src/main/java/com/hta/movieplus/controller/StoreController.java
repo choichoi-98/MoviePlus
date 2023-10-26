@@ -13,7 +13,9 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -330,10 +332,17 @@ public class StoreController {
 			@RequestParam(value = "pg_token", required = false, defaultValue = "none") String pg_token,
 //			@RequestParam("PAY_NUM") int PAY_NUM,
 			ModelAndView mv) {
+		
+		Date currentDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String today = dateFormat.format(currentDate);
+
+
 //		storeService.insertPgToken(PAY_NUM, pg_token);
 		if (pg_token.equals("none")) {
 		} else {
-			storeService.insertPgToken(pg_token);
+			storeService.insertPgToken(pg_token, today);
+//			storeService.insertCompDate(today);
 			storeService.clearCart();
 		}
 		
@@ -363,5 +372,10 @@ public class StoreController {
 		mv.addObject("AprPayList", AprPayList);
 		return mv;
 	}
-
+	
+	@PostMapping("/coupon")
+	public void coupon(
+			@RequestParam("payNum") int PAY_NUM) {
+		storeService.createCoupon(PAY_NUM);
+	}
 }

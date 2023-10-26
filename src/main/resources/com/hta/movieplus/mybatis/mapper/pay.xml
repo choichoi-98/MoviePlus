@@ -13,7 +13,8 @@
 	
 	<update id="insertPgToken">
     	UPDATE KAKAO_PAY
-    	SET pg_token = #{pg_token}
+    	SET pg_token = #{pg_token},
+        KPAY_DATE = #{today}
     	WHERE pg_token IS NULL
     	AND KPAY_NUM = (SELECT MAX(KPAY_NUM) FROM KAKAO_PAY WHERE pg_token IS NULL)
     	AND NOT EXISTS (SELECT 1 FROM KAKAO_PAY WHERE pg_token = #{pg_token})

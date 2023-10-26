@@ -2,12 +2,13 @@ package com.hta.movieplus.domain;
 
 public class StorePayVO {
 
-	private int PAY_NUM; // 카트 번호(PK)
-	private String PAY_NAME; // 상품 코드(FK)
+	private int PAY_NUM; // 상품 번호
+	private String PAY_NAME; // 상품 이름
 	private int PAY_AMOUNT; // 금액
 	private String pg_token;
 	private String MEMBER_ID;
 	private String PAY_MENU;
+	private String PAY_DATE;
 //	private String CART_APPROVED; // 결제 승인 여부
 
 	public int getPAY_NUM() {
@@ -45,5 +46,11 @@ public class StorePayVO {
 	}
 	public void setPAY_MENU(String pAY_MENU) {
 		PAY_MENU = pAY_MENU;
+	}
+	public String getPAY_DATE() {
+		return PAY_DATE;
+	}
+	public void setPAY_DATE(String pAY_DATE) {
+		PAY_DATE = pAY_DATE;
 	}
 }

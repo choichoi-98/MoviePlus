@@ -46,7 +46,7 @@ public interface StoreMapper {
 	
 	public List<StorePayVO> getPayList();
 
-	public void insertPgToken(String pg_token);
+	public void insertPgToken(String pg_token, String today);
 
 	public List<StorePayVO> selectApproved();
 
