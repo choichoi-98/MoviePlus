@@ -38,7 +38,8 @@
 		ws.onmessage = function(data) {
 			//메시지를 받으면 동작
 			var msg = data.data;
-			if(msg != null && msg.trim() != ''){
+			if(msg!=null && msg.type != ''){
+				console.log("메시지를 받은 경우")
 				var d = JSON.parse(msg);
 				if(d.type == "getId"){
 					var si = d.sessionId != null ? d.sessionId : "";
@@ -52,14 +53,28 @@
 						$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "</div><div class='divOther'><p class='others'>" + d.msg + "</p></div><div class='clear'>");
 					}
 						
+				}else if(d.type = "imgurl"){
+					console.log("이미지.. 되려나?")
+					var url = URL.createObjectURL(new Blob([msg]));
+					if(d.sessionId == $("#sessionId").val()){
+					$("#chating").append("<div class='divMy'><img class='msgImg' src="+url+"></div><div class='clear'></div>");
+					}else{
+					$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "<div class='divOther'><img class='msgImg' src=" +url+ "></div><div class='clear'></div>");
+					}
 				}else{
 					console.warn("unknown type!")
 				}
 			}else{
+				console.log("파일 전송 받은 경우")
 				//파일 업로드한 경우 업로드한 파일 채팅방에 뿌리기
-				console.log()
+				//var f = JSON.parse(msg);//이거 안대,,,
+				console.log("msg메시지 받을 수 있나바,,야호!")
 				var url = URL.createObjectURL(new Blob([msg]));
-				$("#chating").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
+				//if(d.sessionId == $("#sessionId").val()){
+					$("#chating").append("<div class='divMy'><img class='msgImg' src="+url+"></div><div class='clear'></div>");
+				//}else{
+					//$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "<div class='divOther'><img class='msgImg' src=" +url+ "></div><div class='clear'></div>");
+				//}
 			}
 			
 		}//ws.onmessage = function(data) {
@@ -117,6 +132,8 @@
 				msg : $("#chatting").val(),
 				userName : $("#userName").val()
 			}
+			console.log("fileSend()에서 보내는 데이터: " + JSON.stringify(param))
+			
 			ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
 
 		    arrayBuffer = this.result;
