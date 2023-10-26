@@ -42,15 +42,11 @@
 					<ul>
 						<li class=""><a href="${pageContext.request.contextPath}/booking/success" title="예매/구매내역">예매내역</a></li>
 						<li class=""><a href="${pageContext.request.contextPath}/store/success" title="예매/구매내역">구매내역</a></li>
-						<li><a href="#" title="영화/스토어 관람권">영화/스토어 관람권</a>
-							<ul class="depth3">
-								<li><a href="#" title="영화관람권">영화관람권</a></li>
-								<li><a href="#" title="스토어 교환권">스토어 교환권</a></li>
-							</ul></li>
+						<li><a href="${pageContext.request.contextPath}/store/coupon" title="영화/스토어 관람권">영화/스토어 관람권</a></li>
 						<li><a href="${pageContext.request.contextPath}/member/mypage/membership" title="멤버십 포인트">멤버십 포인트</a></li>
 						<li><a href="${pageContext.request.contextPath}/member/mypage/moviestory" title="나의 무비스토리">나의 무비스토리</a></li>
 						<li><a href="${pageContext.request.contextPath}/member/myevent" title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
-						<li><a href="${pageContext.request.contextPath}/customer_service/myinjury" title="나의 문의내역">나의 문의내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/customer_service/myinjury" title="나의 문의">나의 문의</a></li>
 						<li><a href="${pageContext.request.contextPath}/member/modifyinfo" title="회원정보">개인정보 수정</a>
 					</ul>
 				</nav>
