@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-
 import com.hta.movieplus.handler.SocketHandler;
 /*
  * WebSocketConfig 클래스
@@ -33,5 +32,6 @@ public class WebSocketConfig implements WebSocketConfigurer{
 		//엔드포인트 /chating
 		// -> ws://localhost:9000/chating 으로 요청 들어오면 통신 진행
 	}
+	
 
 }
