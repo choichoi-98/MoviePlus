@@ -7,6 +7,7 @@
 		SELECT *
 		FROM KAKAO_PAY
 		WHERE THEATER_SCHEDULE_ID = #{scheduleId}
+		AND PG_TOKEN IS NOT NULL
 	</select>	
 	
 </mapper>

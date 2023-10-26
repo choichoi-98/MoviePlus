@@ -41,6 +41,8 @@ public class MainScheduler {
 	@Scheduled(cron = "0 0 0 * * *")
 	public void perDay(){
 		LocalDate now = LocalDate.now();
+
+		//PG_TOKEN NULL이고, 날짜가 전 날인것(결제중일때 초기화안되게)  DELETE
 		
 		logger.info("자정");
 	}

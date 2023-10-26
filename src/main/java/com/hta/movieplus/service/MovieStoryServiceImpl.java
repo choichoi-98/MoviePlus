@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.MoviePostVO;
 import com.hta.movieplus.domain.MovieReviewVO;
+import com.hta.movieplus.domain.StorePayVO;
 import com.hta.movieplus.domain.TheaterSchedule;
 import com.hta.movieplus.mybatis.mapper.MovieMapper;
 import com.hta.movieplus.mybatis.mapper.MoviePostMapper;
@@ -102,6 +104,29 @@ public class MovieStoryServiceImpl implements MovieStoryService {
 	public void deletePost(int post_num) {
 		// TODO Auto-generated method stub
 		postMapper.deletePostById(post_num);
+	}
+
+	@Override
+	public List<TheaterSchedule> getBookedList(String memberId) {
+		// TODO Auto-generated method stub
+		List<TheaterSchedule> list = movieStoryMapper.getBookedList(memberId);
+		
+		
+		for (TheaterSchedule schedule : list) {
+			if (schedule.getMOVIE_POSTER().length() > 10) {
+				schedule.setMOVIE_POSTER(schedule.getMOVIE_POSTER().substring(0, 60));
+			}
+		}
+		
+		
+		
+		return list.stream().filter(item -> item.getTHEATER_SCHEDULE_STATUS().equals("상영")).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<StorePayVO> getStoreList(String memberId) {
+		// TODO Auto-generated method stub
+		return movieStoryMapper.getStoreList(memberId);
 	}
 
 	
