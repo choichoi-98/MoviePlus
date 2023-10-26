@@ -5,9 +5,10 @@
 
 	<!-- DB에서 CUSTOMER_NOTICE_TYPE 컬럼에서 '전체' 값을 가진 #{string} 값을 찾음 -->
 	<select id="getNoticelist" resultType="noticeVO" parameterType="String">
-		SELECT * FROM CUSTOMER_NOTICE
+		SELECT * 
+		FROM CUSTOMER_NOTICE
 		where CUSTOMER_NOTICE_TYPE = #{string}
-		 
+		ORDER BY CUSTOMER_NOTICE_NUM DESC
 	</select>
 
 	<insert id="noticeWrite" parameterType="noticeVO">
@@ -25,6 +26,7 @@
 	<select id="getNoticeModify" resultType="noticeVO" parameterType="int">
 		SELECT * FROM CUSTOMER_NOTICE
 		WHERE CUSTOMER_NOTICE_NUM= #{getmodify}
+		ORDER BY CUSTOMER_NOTICE_NUM DESC
 	</select>
 	
 	<update id="noticeModify" parameterType="noticeVO"> <!-- 직접만든도메인일때  -->
@@ -39,6 +41,12 @@
 	<select id="getNoticelistExceptEntire" resultType="noticeVO">
 		SELECT * FROM CUSTOMER_NOTICE
 		where CUSTOMER_NOTICE_TYPE != '전체'
+		ORDER BY CUSTOMER_NOTICE_NUM DESC
 	</select>
 	
+	<select id="getTotalNoticeList" resultType="noticeVO">
+		SELECT *
+		FROM CUSTOMER_NOTICE
+		ORDER BY CUSTOMER_NOTICE_NUM DESC
+	</select>
 </mapper>

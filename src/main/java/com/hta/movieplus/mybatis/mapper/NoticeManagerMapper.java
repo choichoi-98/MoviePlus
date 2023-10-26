@@ -13,4 +13,6 @@ public interface NoticeManagerMapper {
 	public List<NoticeVO> getManagerNoticeList(String theaterId);
 
 	public int insertNotice(NoticeVO managernotice);
+
+	public NoticeVO getManagerNoticeModify(int managernoticenum);
 }

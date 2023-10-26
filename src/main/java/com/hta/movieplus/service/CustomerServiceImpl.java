@@ -25,10 +25,14 @@ public class CustomerServiceImpl implements CustomerService {
 		dao.insertCustomerOneOnOneVO(oneonone);
 	}
 
-	
-	@Override /* 공지사항불러오기 */
-	public List<NoticeVO> getNoticeList() {
-	return dao.getNoticeList(); 
+	@Override
+	public List<CustomerOneOnOneVO> getMyInjury(int member_NUM) {
+		return dao.getMyInjury(member_NUM);
+	}
+
+	@Override
+	public CustomerOneOnOneVO getDetailByNum(int detailnum) {
+		return dao.getDetailByNum(detailnum);
 	}
 	
 }

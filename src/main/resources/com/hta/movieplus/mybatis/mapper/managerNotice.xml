@@ -18,4 +18,10 @@
 		<!-- 세션에서 받아온 값 theaterId, 지역, 극장명 -->
 	</insert>
 	
+	<select id="getManagerNoticeModify" parameterType="int" resultType="noticeVO">
+		SELECT * 
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_NUM = #{managernoticenum}
+	</select>
+	
 </mapper>

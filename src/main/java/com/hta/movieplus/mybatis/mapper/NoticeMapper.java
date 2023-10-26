@@ -20,6 +20,8 @@ public interface NoticeMapper {
 	public void noticeModify(NoticeVO modify);
 	
 	public List<NoticeVO> getNoticelistExceptEntire();
+
+	public List<NoticeVO> getTotalNoticeList();
 	
 	
 	/* public void noticeModify(int modify); */

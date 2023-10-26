@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.service.NoticeManagerService;
+import com.hta.movieplus.service.NoticeService;
 import com.hta.movieplus.service.SeatService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
@@ -31,17 +32,19 @@ public class ManagerController {
 	TheaterService theaterService;
 	SeatService seatService;
 	NoticeManagerService noticemanagerservice;
+	NoticeService noticeService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
 
 
 	@Autowired
-	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService, SeatService seatService, NoticeManagerService noticemanagerservice) {
+	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService, SeatService seatService, NoticeManagerService noticemanagerservice, NoticeService noticeService) {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
 		this.theaterService = theaterService;
 		this.seatService = seatService;
 		this.noticemanagerservice = noticemanagerservice;
+		this.noticeService = noticeService;
 	}
 	
 	@GetMapping("") 
@@ -158,10 +161,22 @@ public class ManagerController {
 		return "redirect:/manager/noticelist";
 	}
 	// 공지사항 수정페이지로 이동하면서 데이터 가져옴
-	@GetMapping("gonoticemoidfy")
-		public String goManagerNoticeModify(String theaterId, Model model) {
-		List<NoticeVO> managernotice = noticemanagerservice.getNoticeList(theaterId);
+	@GetMapping("/gonoticemodify")
+		public String goManagerNoticeModify(int managernoticenum, Model model) {
+		NoticeVO managernotice = noticemanagerservice.getManagerNoticeModify(managernoticenum);
 		model.addAttribute("ManagerNotice", managernotice);
-		return "/manager/managerNoticeModify";
+		return "manager/managerNoticeModify";
+	}
+	
+	@PostMapping("/noticemodify")
+	public String noticeModify(NoticeVO modify) {
+		noticeService.noticeModify(modify);
+		return "redirect:/manager/noticelist";
+	}
+	
+	@GetMapping("/noticedelete")
+	public String noticedelete(int noticenum) {
+		noticeService.deleteNoticeVO(noticenum);
+		return "redirect:/manager/noticelist";
 	}
 }
