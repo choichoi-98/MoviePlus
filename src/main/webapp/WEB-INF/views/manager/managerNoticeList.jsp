@@ -81,7 +81,9 @@
 											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_TYPE}</div>
 										</td>
 										<td>
-											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_SUBJECT}</div>
+											<div class="main__table-text">
+												<a href = "${pageContext.request.contextPath}/manager/gonoticemodify?theaterId=${noticelist.CUSTOMER_NOTICE_NUM}">${noticelist.CUSTOMER_NOTICE_SUBJECT}</a>
+											</div>
 										</td>
 										<td>
 											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_SYSDATE}</div>

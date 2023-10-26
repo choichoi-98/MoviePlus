@@ -16,28 +16,19 @@
 				<nav id="lnb" class="ty2">
 
 					<p class="tit">
-						<a href="http://localhost:9000/movieplus/customer_service"
+						<a href="${pageContext.request.contextPath}/movieplus/customer_service"
 							title="고객센터">고객센터</a>
 					</p>
 					<ul>
 						<li class="on"><a
-							href="http://localhost:9000/movieplus/customer_service"
+							href="${pageContext.request.contextPath}/customer_service"
 							title="고객센터 홈">고객센터 홈</a></li>
 						<li><a
-							href="http://localhost:9000/movieplus/customer_service/question"
-							title="자주 묻는 질문">자주 묻는 질문</a></li>
-						<li><a
-							href="http://localhost:9000/movieplus/customer_service/notice"
+							href="${pageContext.request.contextPath}/customer_service/notice"
 							title="공지사항">공지사항</a></li>
 						<li><a
-							href="http://localhost:9000/movieplus/customer_service/oneonone"
+							href="${pageContext.request.contextPath}/customer_service/oneonone"
 							title="1:1문의">1:1문의</a></li>
-						<li><a
-							href="http://localhost:9000/movieplus/customer_service/group"
-							title="단체관람 및 대관문의">단체관람 및 대관문의</a></li>
-						<li><a
-							href="http://localhost:9000/movieplus/customer_service/lostitem"
-							title="분실물 문의">분실물 문의</a></li>
 					</ul>
 
 					<div class="left-customer-info">
