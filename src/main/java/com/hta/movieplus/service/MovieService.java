@@ -35,5 +35,7 @@ public interface MovieService {
 	//
 	
 	public double getAvgReviewPoint(String movieCode);
+
+	public int getTotalAudience(String movieCode);
 	
 }

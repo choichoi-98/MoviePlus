@@ -117,7 +117,7 @@
 								</span>
 							</div>
 							<p class="cont">
-								<em>895,690</em> 명
+								<em>${totalAudience}</em> 명
 							</p>
 						</div>
 

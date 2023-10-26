@@ -286,4 +286,6 @@
 		where MOVIE_REVIEW_NUM = #{review_num}
 	</delete>
 	
+	
+	
 </mapper>

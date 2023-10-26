@@ -11,7 +11,7 @@ WITH totalseatcount AS(
  and THEATER_SCHEDULE_DATE = '2023-10-24'
 ),
 movieseatcount AS(
- SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+ SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE
  FROM kakao_pay
  INNER JOIN THEATER_SCHEDULE
  ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
@@ -19,9 +19,13 @@ movieseatcount AS(
  ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
  WHERE kakao_pay.pg_token IS NOT NULL
  AND THEATER_SCHEDULE_DATE = '2023-10-24'
- AND MOVIE.MOVIE_CODE = '20219997'
  GROUP BY MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
 )
-select (movieseatcount.movieseat / totalseatcount.totalseat) * 100 AS ratio, movieseatcount.MOVIE_CODE, movieseatcount.MOVIE_TITLE
+select NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100,0) AS ratio, m.* 
 from totalseatcount, movieseatcount
+right join MOVIE m
+on movieseatcount.MOVIE_CODE = m.MOVIE_CODE
+ORDER BY ratio desc;
+
+
 

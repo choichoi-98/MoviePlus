@@ -87,6 +87,9 @@ public interface MovieMapper {
 	//관리자-관람평 삭제
 	public int adminDeleteMovieReview(int review_num);
 
+	//누적관객수 가져오기
+	public int getTotalAudience(String movieCode);
+
 
 
 }

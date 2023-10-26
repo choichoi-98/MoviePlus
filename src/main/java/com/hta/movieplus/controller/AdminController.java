@@ -1,33 +1,52 @@
 package com.hta.movieplus.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hta.movieplus.domain.Member;
-import com.hta.movieplus.domain.Theater;
+import com.hta.movieplus.domain.Total;
 import com.hta.movieplus.service.ManageMemberService;
+import com.hta.movieplus.service.TotalService;
 
 @Controller
 public class AdminController {
 	
-	ManageMemberService manageMemberService;
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
 	
-	public AdminController(ManageMemberService manageMemberService) {
-		// TODO Auto-generated constructor stub
+	ManageMemberService manageMemberService;
+	TotalService totalService;
+	
+	public AdminController(ManageMemberService manageMemberService, 
+							TotalService totalService) {
 		this.manageMemberService = manageMemberService;
+		this.totalService = totalService;
 	}
 	
 	
-	
+	//관리자페이지 - 대쉬보드
 	@GetMapping("/admin")
-	public String siteAdminMainView() {
-
-		return "admin/main";
+	public ModelAndView siteAdminMainView(String currentdate, ModelAndView mv) {
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		currentdate = currentdatetime.format(format);
+		
+		List<Total> totallist = totalService.dayReserveRate(currentdate);
+		int daySeatCount = totalService.daySeatCount(currentdate);
+		mv.addObject("totallist", totallist);
+		mv.addObject("daySeatCount", daySeatCount);
+		mv.setViewName("admin/main");
+		return mv;
 	}
 	
 	@GetMapping("/admin/test")
@@ -62,7 +81,8 @@ public class AdminController {
 		
 		return "redirect:/admin/manageMember";
 	}
-
+	
+	
 	
 	
 }
