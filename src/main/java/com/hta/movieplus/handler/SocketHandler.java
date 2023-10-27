@@ -62,6 +62,7 @@ public class SocketHandler extends TextWebSocketHandler{
 					//조건: 1:1채팅 방의 인원이 2보다 작을 경우
 					//db: message테이블에 저장
 					//-> 이때 여기서 세션리즈트에 존재하는 모든 Object 값을 세서 인원 수 구할 수 있을 듯. 
+					//
 					break;
 				}
 			}
