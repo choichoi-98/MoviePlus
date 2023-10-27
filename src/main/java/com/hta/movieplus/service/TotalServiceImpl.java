@@ -34,6 +34,26 @@ public class TotalServiceImpl implements TotalService {
 		return dao.daySeatCount(THEATER_SCHEDULE_DATE);
 	}
 
+	@Override
+	public int dayTicketSales(String THEATER_SCHEDULE_DATE) {
+		return dao.dayTicketSales(THEATER_SCHEDULE_DATE);
+	}
+
+	@Override
+	public int dayGoodsSales(String currentdate) {
+		return dao.dayGoodsSales(currentdate);
+	}
+
+	@Override
+	public int dayTotalSales(String currentdate) {
+		return dao.dayTotalSales(currentdate);
+	}
+
+	@Override
+	public List<Total> dayMovieseatCount(String THEATER_SCHEDULE_DATE) {
+		return dao.dayMovieseatCount(THEATER_SCHEDULE_DATE);
+	}
+
 
 	
 

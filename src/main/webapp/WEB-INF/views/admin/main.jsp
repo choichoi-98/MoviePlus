@@ -4,11 +4,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
-
-	
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MoviePlus</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
@@ -29,7 +27,7 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>당일 관객수</span>
+						<span>일일 총 관객수</span>
 						<p>${daySeatCount}</p>
 						<i class="icon ion-ios-stats"></i>
 					</div>
@@ -39,8 +37,8 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>Items added this month</span>
-						<p>172</p>
+						<span>일일 티켓 총 수익</span>
+						<p>${dayTicketSales}</p>
 						<i class="icon ion-ios-film"></i>
 					</div>
 				</div>
@@ -49,8 +47,8 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>New comments</span>
-						<p>2 573</p>
+						<span>일일 상품 총 수익</span>
+						<p>${dayGoodsSales}</p>
 						<i class="icon ion-ios-chatbubbles"></i>
 					</div>
 				</div>
@@ -59,8 +57,8 @@
 				<!-- stats -->
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
-						<span>New reviews</span>
-						<p>1 021</p>
+						<span>일일 티켓+상품 총 수익</span>
+						<p>${dayTotalSales}</p>
 						<i class="icon ion-ios-star-half"></i>
 					</div>
 				</div>
@@ -70,11 +68,11 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-trophy"></i>예매율</h3>
+							<h3><i class="icon ion-ios-trophy"></i>실시간 예매율</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="catalog.html">View All</a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/total">View All</a>
 							</div>
 						</div>
 
@@ -112,7 +110,7 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-film"></i> Latest items</h3>
+							<h3><i class="icon ion-ios-film"></i>당월 전체 영화 예매율</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
@@ -145,62 +143,6 @@
 											<div class="main__table-text main__table-text--green">Visible</div>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">25</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Benched</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">24</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Whitney</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">23</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Blindspotting 2</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">22</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Blindspotting</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">TV Show</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -212,7 +154,7 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-contacts"></i> Latest users</h3>
+							<h3><i class="icon ion-ios-contacts"></i>일일 좌석 판매율</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
@@ -224,10 +166,9 @@
 							<table class="main__table main__table--dash">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>FULL NAME</th>
-										<th>EMAIL</th>
-										<th>USERNAME</th>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>판매율</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -239,66 +180,7 @@
 											<div class="main__table-text"><a href="#">Brian Cranston</a></div>
 										</td>
 										<td>
-											<div class="main__table-text main__table-text--grey">bcxwz@email.com</div>
-										</td>
-										<td>
 											<div class="main__table-text">BrianXWZ</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">22</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Jesse Plemons</a></div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--grey">jess@email.com</div>
-										</td>
-										<td>
-											<div class="main__table-text">Jesse.P</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">21</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Matt Jones</a></div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--grey">matt@email.com</div>
-										</td>
-										<td>
-											<div class="main__table-text">Matty</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">20</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Tess Harper</a></div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--grey">harper@email.com</div>
-										</td>
-										<td>
-											<div class="main__table-text">Harper123</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">19</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Jonathan Banks</a></div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--grey">bank@email.com</div>
-										</td>
-										<td>
-											<div class="main__table-text">Jonathan</div>
 										</td>
 									</tr>
 								</tbody>
@@ -312,11 +194,11 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-star-half"></i> Latest reviews</h3>
+							<h3><i class="icon ion-ios-star-half"></i>일일 영화별 누적 관객수</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="reviews.html">View All</a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/totalcount">View All</a>
 							</div>
 						</div>
 
@@ -324,83 +206,25 @@
 							<table class="main__table main__table--dash">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>ITEM</th>
-										<th>AUTHOR</th>
-										<th>RATING</th>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>관객수</th>
 									</tr>
 								</thead>
 								<tbody>
+								 <c:forEach var="dayMovieseatCount" items="${dayMovieseatCount}" begin="0" end="4">
 									<tr>
 										<td>
-											<div class="main__table-text">51</div>
+											<div class="main__table-text">${dayMovieseatCount.RNUM}</div>
 										</td>
 										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+											<div class="main__table-text"><a href="#">${dayMovieseatCount.MOVIE_TITLE}</a></div>
 										</td>
 										<td>
-											<div class="main__table-text">Jonathan Banks</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 7.2</div>
+											<div class="main__table-text">${dayMovieseatCount.rate}</div>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">50</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Benched</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Charles Baker</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 6.3</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">49</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Whitney</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Matt Jones</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 8.4</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">48</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">Blindspotting</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Jesse Plemons</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 9.0</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="main__table-text">47</div>
-										</td>
-										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
-										</td>
-										<td>
-											<div class="main__table-text">Brian Cranston</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--rate"><i class="icon ion-ios-star"></i> 7.7</div>
-										</td>
-									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

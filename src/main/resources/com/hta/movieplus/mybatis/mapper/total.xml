@@ -4,7 +4,7 @@
 <mapper namespace="com.hta.movieplus.mybatis.mapper.TotalMapper">
 	
 	
-	<!-- 5) 일별 전체 영화 예매율 -->
+	<!-- 5) 일별 전체 영화 예매율* -->
 	<select id="dayReserveRate" parameterType="String" resultType="total">
 	 WITH totalseatcount AS(
 		 SELECT SUM(KPAY_SEAT_CNT) as totalseat
@@ -36,41 +36,7 @@
 		) sub
 	</select>
 	
-	
-	<!-- 2) 당일 영화별 관객수 -->
-	<select id="daySeatCount" parameterType="String" resultType="total" >	
-		WITH totalcount as(
-			SELECT TS.MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) as sumtotal
-			FROM THEATER_SCHEDULE TS
-			JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
-			WHERE KP.PG_TOKEN IS NOT NULL
-			AND TS.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
-			GROUP BY TS.MOVIE_CODE
-		)
-		select NVL(totalcount.sumtotal,0) AS ratio, m.* 
-		from totalcount
-		right join MOVIE m
-		on totalcount.MOVIE_CODE = m.MOVIE_CODE
-		ORDER BY ratio desc
-	</select>
-	
-	<!-- 영화별 누적 관객수 -->
-	<select id="dayMovieseatCount" resultType="total" >
-	  WITH totalcount as(
-			SELECT TS.MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) as sumtotal
-			FROM THEATER_SCHEDULE TS
-			JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
-			WHERE KP.PG_TOKEN IS NOT NULL
-			GROUP BY TS.MOVIE_CODE
-		)
-		select NVL(totalcount.sumtotal,0) AS ratio, m.* 
-		from totalcount
-		right join MOVIE m
-		on totalcount.MOVIE_CODE = m.MOVIE_CODE
-		ORDER BY ratio desc
-	</select>
-	
-	<!-- 1) 당일 티켓 총 수익 -->
+	<!-- 2) 당일 티켓 총 수익* -->
 	<select id="dayTicketSales" parameterType="String" resultType="int" >
 	WITH SUB AS(SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*
 		FROM kakao_pay
@@ -81,29 +47,54 @@
 		WHERE kakao_pay.pg_token IS NOT NULL
 		AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
 	)
-	SELECT SUM(KPAY_AMOUNT)
+	SELECT NVL(SUM(KPAY_AMOUNT),0)
 	FROM SUB
 	</select>
 	
-	<!-- 3) 당일 상품 총 수익 -->
+	<!-- 3) 당일 상품 총 수익* -->
 	<select id="dayGoodsSales" parameterType="String" resultType="int" >
-		select sum(PAY_AMOUNT)
+		select NVL(sum(PAY_AMOUNT),0)
 		from (select *
 			  from store_pay
 			  where pg_token is not null)
 		where pay_date = #{THEATER_SCHEDULE_DATE}
 	</select>
 	
+	
+	<!-- 8) 영화별 누적 관객수 -->
+	<select id="dayMovieseatCount" parameterType="String" resultType="total" >
+	 <![CDATA[
+	  WITH totalcount as(
+			SELECT TS.MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) as sumtotal
+			FROM THEATER_SCHEDULE TS
+			JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
+			WHERE KP.PG_TOKEN IS NOT NULL
+			AND TS.THEATER_SCHEDULE_DATE  <= #{THEATER_SCHEDULE_DATE}
+			GROUP BY TS.MOVIE_CODE
+		)
+		select ROWNUM AS RNUM, sub.*
+		from (	
+			select NVL(totalcount.sumtotal,0) AS rate, m.* 
+			from totalcount
+			right join MOVIE m
+			on totalcount.MOVIE_CODE = m.MOVIE_CODE
+			ORDER BY rate desc
+		) sub	
+	 ]]>	
+	</select>
+	
+	
 	<!-- 4) 당일 티켓 + 상품 총 수익 -->
 	<select id="dayTotalSales" parameterType="String" resultType="int" >
 		WITH GOODS AS(
         	select sum(PAY_AMOUNT) AS GOODSSALESTOTAL
-			from (select *
-			  from store_pay
-			  where pg_token is not null)
+			from (
+				select *
+			 	from store_pay
+			  	where pg_token is not null
+			 )
 			where pay_date = #{THEATER_SCHEDULE_DATE}
-     	   ),
-        
+     	 ),
         SUB AS(SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*
 			FROM kakao_pay
 			INNER JOIN THEATER_SCHEDULE
@@ -117,13 +108,15 @@
 			SELECT SUM(KPAY_AMOUNT) AS TICKETSALESTOTAL
 			FROM SUB
 		)
-		SELECT GOODS.GOODSSALESTOTAL + TICKETSALES.TICKETSALESTOTAL
-		FROM GOODS, SUB, TICKETSALES
+		SELECT NVL(GOODS.GOODSSALESTOTAL + TICKETSALES.TICKETSALESTOTAL, 0) AS rate
+		FROM GOODS, TICKETSALES
 	</select>
+	
+	
 	
 	<!-- 7)당일 좌석 판매율 -->
 	<select id="dayTicketSalesRate" parameterType="String" resultType="double" >
-		WITH countaudience AS(
+		WITH totalcount AS(
 			SELECT SUM(KPAY_SEAT_CNT) as totalseat  
 			 FROM kakao_pay
 			 INNER JOIN THEATER_SCHEDULE
@@ -152,28 +145,25 @@
 	        SELECT sum( distinct THEATER_ROOM_SEAT_CNT) as total_seat_count
 	        FROM SEATTOTAL
 	    )
-	    select ROUND((countaudience.totalseat / TotalSeatCount.total_seat_count) * 100 , 1)
-	    from countaudience, SEATTOTAL, TotalSeatCount 
+	    select ROUND((totalcount.totalseat / TotalSeatCount.total_seat_count) * 100 , 1)
+	    from totalcount, SEATTOTAL, TotalSeatCount 
 	</select>
 	
-	
-	<!-- 8)영화별 누적관객수 -->
-	<select id="movieTotalseat" parameterType="String" resultType="total" >
-	WITH totalcount as(
-		SELECT TS.MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) as sumtotal
-		FROM THEATER_SCHEDULE TS
-		JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
-		WHERE KP.PG_TOKEN IS NOT NULL
-		AND TS.THEATER_SCHEDULE_DATE =  #{THEATER_SCHEDULE_DATE} 
-		GROUP BY TS.MOVIE_CODE
-	)
-		select NVL(totalcount.sumtotal,0) AS ratio, m.* 
-		from totalcount
-		right join MOVIE m
-		on totalcount.MOVIE_CODE = m.MOVIE_CODE
-		ORDER BY ratio desc 
+	<!--1) 일일 무비플러스 총 관객 수 -->
+	<select id="daySeatCount" parameterType="String" resultType="int">
+		WITH TOTALSEAT AS(
+			SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*
+			FROM kakao_pay
+			INNER JOIN THEATER_SCHEDULE
+			ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+			INNER JOIN MOVIE
+			ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+			WHERE kakao_pay.pg_token IS NOT NULL
+			AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		)
+			    SELECT SUM(KPAY_SEAT_CNT) 
+			    FROM TOTALSEAT
 	</select>
-	
 	
 	
 	
