@@ -18,37 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
-    <!-- <script>
-        $(function() {
-            let token = $("meta[name='_csrf']").attr("content");
-            let header = $("meta[name='_csrf_header']").attr("content");
-
-            $(document).on('click', '.delbtn', function(e) {
-                e.preventDefault();
-                const row = $(this).closest('tr');
-                const payNum = row.find('.delbtn').data('paynum');
-
-                $.ajax({
-                    url: 'success',
-                    method: 'POST',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    data: {
-                        "payNum": payNum
-                    },
-                    dataType: 'json',
-                    beforeSend: function(xhr) {
-                        xhr.setRequestHeader(header, token);
-                    },
-                    success: function(data) {
-                        window.location.reload();
-                    },
-                    error: function(error) {
-                        window.location.reload();
-                    }
-                });
-            });
-        });
-    </script> -->
+    <script src="${pageContext.request.contextPath}/resources/js/storepay_success.js"></script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/header.jsp" />

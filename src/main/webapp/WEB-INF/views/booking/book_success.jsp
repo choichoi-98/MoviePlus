@@ -21,40 +21,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
-<script>
-$(function() {
-	let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-    
-    $(document).on('click', '.delbtn', function(e) {
-    	e.preventDefault(); // 기본 동작인 링크 이동을 막기
-    	
-    	const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
-        const KpayNum = row.find('.delbtn').data('kpaynum');  // 해당 행의 ITEM_CODE 값을 추출
-//        alert('KpayNum:' + KpayNum);
-        
-        $.ajax({
-            url: 'success',
-            method: 'POST',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: { "KpayNum": KpayNum},
-            dataType: 'json',
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader(header, token);
-            },
-            success: function(data) {
-//                alert("삭제 성공, KpayNum: " + KpayNum);
-                window.location.reload();
-            },
-            error: function(error) {
-//                alert("삭제 실패, KpayNum: " + KpayNum);
-                window.location.reload();
-            }
-        });
-    });
-}); 
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/book_success.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -62,10 +29,6 @@ $(function() {
     <div class="body-wrap">
       
 <!--  ko_KR -->
-        
-<!-- <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> -->
-        
 <!-- container -->
 <div class="container">
 	
@@ -107,9 +70,10 @@ $(function() {
 							<div class="movie-info-top">
 								<p class="tit">
 									<strong>예매가 완료되었습니다 <!-- 예매가 완료되었습니다 --><i>!</i></strong>
-									
-										<span class="righten"> <i class="iconset ico-circle-point"></i> 고객님의 상영익일 적립예정 포인트는 <!-- 고객님의 상영익일 적립예정 포인트는 --> <em>${BookingList[0].KPAY_AMOUNT/100}</em>입니다. <!-- 입니다. --></span>
-									
+										<span class="righten"> <i class="iconset ico-circle-point"></i> 
+											고객님의 상영익일 적립예정 포인트는 
+											<em>${BookingList[0].KPAY_AMOUNT/100.0}</em>입니다. 
+										</span>
 								</p>
 							</div>
 
@@ -134,7 +98,7 @@ $(function() {
 								<div class="movie-info-bottom">
 									<div class="add-send">
 										예매정보 추가 발송 <!-- 예매정보 추가 발송 -->
-										<a href="https://www.megabox.co.kr/booking/payment-successcomplete#tooltip01_01" class="tooltip hover" title="입력하신 번호로 예매정보를 추가발송합니다.">
+										<a href="" class="tooltip hover" title="입력하신 번호로 예매정보를 추가발송합니다.">
 											<span><i class="iconset ico-question-white">&nbsp;</i></span>
 											<div class="ir" id="tooltip01_01" data-width="220">
 												입력하신 번호로 예매정보를 추가발송합니다. <!-- 입력하신 번호로 예매정보를 추가발송합니다. -->
