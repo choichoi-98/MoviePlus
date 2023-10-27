@@ -11,5 +11,13 @@ public interface TotalService {
 
 	public int daySeatCount(String currentdate);
 
+	public int dayTicketSales(String currentdate);
+
+	public int dayGoodsSales(String currentdate);
+
+	public int dayTotalSales(String currentdate);
+
+	public List<Total> dayMovieseatCount(String currentdate);
+
 	
 }

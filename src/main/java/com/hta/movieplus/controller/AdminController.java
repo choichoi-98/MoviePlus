@@ -41,18 +41,50 @@ public class AdminController {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		currentdate = currentdatetime.format(format);
 		
-		List<Total> totallist = totalService.dayReserveRate(currentdate);
-		int daySeatCount = totalService.daySeatCount(currentdate);
+		List<Total> totallist = totalService.dayReserveRate(currentdate); //일일 예매율
+		int dayTicketSales = totalService.dayTicketSales(currentdate);	//일일 티켓 수익
+		int dayGoodsSales = totalService.dayGoodsSales(currentdate);	//일일 상품 수익
+		int dayTotalSales = totalService.dayTotalSales(currentdate);	//일일 티켓 + 상품 수익
+		int daySeatCount = totalService.daySeatCount(currentdate);		//일일 관객수
+		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(currentdate); //영화별 누적 관객수
+		
 		mv.addObject("totallist", totallist);
+		mv.addObject("dayTicketSales", dayTicketSales);
+		mv.addObject("dayGoodsSales", dayGoodsSales);
+		mv.addObject("dayTotalSales", dayTotalSales);
 		mv.addObject("daySeatCount", daySeatCount);
+		mv.addObject("dayMovieseatCount", dayMovieseatCount);
+		
 		mv.setViewName("admin/main");
 		return mv;
 	}
 	
-	@GetMapping("/admin/test")
-	public String admintest() {
+	@GetMapping("/admin/total")
+	public ModelAndView totallist(String currentdate, ModelAndView mv) {
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		currentdate = currentdatetime.format(format);
 		
-		return "/admin/adminstatistic";
+		List<Total> totallist = totalService.dayReserveRate(currentdate); //일일 예매율
+		mv.addObject("totallist", totallist);
+		
+		mv.setViewName("/admin/adminDayReserveRate");
+		return mv;
+		
+	}
+	
+	@GetMapping("/admin/totalcount")
+	public ModelAndView dayMovieseatCount(String currentdate, ModelAndView mv) {
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		currentdate = currentdatetime.format(format);
+		
+		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(currentdate); 
+		mv.addObject("dayMovieseatCount", dayMovieseatCount);
+		
+		mv.setViewName("/admin/adminDayMovieseatCount");
+		return mv;
+		
 	}
 
 	@GetMapping("/admin/manageMember")
