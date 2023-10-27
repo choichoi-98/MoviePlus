@@ -144,18 +144,16 @@
 										class="font-orange">*</em></th>
 									<td colspan="3"><select name="CUSTOMER_SELECT_REGION"
 										id="regionSelect" onchange="enableTheaterSelect();" size="1"
-										style="width: 90px; height: 35px; border-radius: 5px;">
+										style="width: 90px; height: 35px; border-radius: 5px;" required>
 											<option value="">지역선택</option>
 											<c:forEach var="loc" items="${locationList}">
 												<option value="${loc.value}">${loc.value}</option>
 											</c:forEach>
 
-
 									</select>&nbsp;&nbsp; <select name="CUSTOMER_SELECT_CENEMA"
 										id="theaterSelect" size="1"
 										style="width: 90px; height: 35px; border-radius: 5px;"
 										disabled>
-											<!-- ajax -->
 
 									</select></td>
 								</tr>

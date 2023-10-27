@@ -13,5 +13,6 @@ public interface CustomerService {
 
 	public CustomerOneOnOneVO getDetailByNum(int detailnum);
 
+	public int deletemyinjury(int deletenum);
 
 }

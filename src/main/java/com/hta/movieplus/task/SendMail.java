@@ -40,17 +40,17 @@ public class SendMail {
 			 * 전달된 MimeMessage를 채우는데 편리합니다.
 			 */
 			//두 번째 인자 true는 멀티 파트 메시지를 사용하겠다는 의미입니다.
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-			helper.setFrom(vo.getFrom());
-			helper.setTo(vo.getTo());
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8"); //메일서버이용
+			helper.setFrom(vo.getFrom());   // SET으로 보내는사람 메일주소 
+			helper.setTo(vo.getTo());		// 받는사람 메일주소 
 				
 			String subject = "[MoviePlus] 가입 이메일 인증번호"; 
 			String content = "고객님의 인증번호는 다음과 같습니다. [ " + vo.getVerifycode() + " ]";
 				
 			//1. 문자로만 전송하는 경우
 			//true는 html을 사용하겠다는 뜻입니다.
-			helper.setSubject(subject);
-			helper.setText(content, true);
+			helper.setSubject(subject);  // 메일 제목
+			helper.setText(content, true);  // 메일 내용 (값을받아서 쓰면됨)
 				
 			//2. 이미지를 내장해서 보내는 경우
 			//cid(content id)

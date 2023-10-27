@@ -82,9 +82,8 @@ public class MemberController {
 	
 	//회원가입 step1 인증메일 보내기
 	@GetMapping("/sendEmail")
-	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp, 
+	public void sendEmail(@RequestParam("email") String email, HttpServletResponse resp,   //@REQUESTPARAM 은 NAME값을 가져옴 JSP email 에 값을 넣음
 						  ModelAndView mv, HttpSession session) throws Exception {
-		
 		
 		session.setAttribute("MEMBER_EMAIL", email);
 		

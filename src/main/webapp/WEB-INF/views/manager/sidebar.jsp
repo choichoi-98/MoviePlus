@@ -66,7 +66,7 @@
 				</li>
 				
 				<li class="sidebar__nav-item">
-					<a href="#" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
+					<a href="${pageContext.request.contextPath}/manager/oneononelist" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
 				</li>
 		
 				<!-- end collapse -->

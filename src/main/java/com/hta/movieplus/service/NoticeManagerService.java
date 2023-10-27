@@ -2,6 +2,7 @@ package com.hta.movieplus.service;
 
 import java.util.List;
 
+import com.hta.movieplus.domain.CustomerOneOnOneVO;
 import com.hta.movieplus.domain.NoticeVO;
 
 public interface NoticeManagerService {
@@ -11,5 +12,4 @@ public interface NoticeManagerService {
 	public int insertNotice(NoticeVO managernotice);
 	
 	public NoticeVO getManagerNoticeModify(int managernoticenum);
-	
 }

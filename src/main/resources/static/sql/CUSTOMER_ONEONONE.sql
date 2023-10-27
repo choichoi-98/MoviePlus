@@ -11,5 +11,7 @@ create table CUSTOMER_ONEONONE(
 	CUSTOMER_CONTENT                     VARCHAR2(3000),              -- 내용
 	CUSTOMER_ANSWERSITUATION         VARCHAR2(10),                  -- 답변상태
 	CUSTOMER_REGISTRATIONDATE         VARCHAR2(30),                  -- 등록일
-	MEMBER_NUM                               NUMBER                         -- member 의 pk
+	MEMBER_NUM                               NUMBER,                         -- member 의 pk
 	);
+
+	
