@@ -13,7 +13,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
 	
-
 	<!-- container -->
 	<div class="container has-lnb">
 		<div class="page-util">
@@ -50,41 +49,31 @@
 
 				<p>
 					<span class="tit">문의유형</span>
-					<span class="txt">영화정보문의</span>
+					<span class="txt">${MyInjuryDetail.CUSTOMER_TYPE}</span>
 				</p>
 
 				<p>
 					<span class="tit">답변상태</span>
-					<span class="txt">
-						
-							
-							
-								<span class="txt">미답변</span>
-							
-						
-					</span>
+					<span class="txt">${MyInjuryDetail.CUSTOMER_ANSWERSITUATION}</span>
 				</p>
 				<div class="mt10">
 
-
-
-
-					<p><span class="txt">2023.10.26 17:20:42</span></p>
+					<p><span class="txt">${MyInjuryDetail.CUSTOMER_REGISTRATIONDATE}</span></p>
 				</div>
 			</div>
 
 			
 
 			<div class="cont">
-				<textarea rows="5" cols="30" readonly="" class="input-textarea view" style="border:none;" id="inqCn">ㅅㄷㄴㅅㄴㄷㅅㄴ</textarea>
+				<textarea rows="5" cols="30" readonly="" class="input-textarea view" style="border:none;" id="inqCn">${MyInjuryDetail.CUSTOMER_CONTENT}</textarea>
 			</div>
 			
 		</div>
 	</div>
 
 	<div class="btn-group pt40">
-		<a href="#" class="button large listBtn" title="목록">목록</a>
-		<a href="#" class="button large deleteBtn inq-delete" title="삭제">삭제</a>
+		<a href="${pageContext.request.contextPath}/customer_service/myinjury" class="button large listBtn" title="목록">목록</a>
+		<a href="${pageContext.request.contextPath}/customer_service/myinjurydelete?deletenum=${MyInjuryDetail.CUSTOMER_NUM}" class="button large deleteBtn inq-delete" title="삭제">삭제</a>
 	</div>
 	<!--// container -->
 

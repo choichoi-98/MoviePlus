@@ -12,8 +12,8 @@
 	</insert>
 	
 	<select id="getMyInjury" resultType="customerOneOnOneVO" parameterType="int">
-		SELECT * FROM 
-		CUSTOMER_ONEONONE
+		SELECT * 
+		FROM CUSTOMER_ONEONONE
 		WHERE MEMBER_NUM = #{member_NUM}
 	</select>
 	
@@ -22,4 +22,16 @@
 		CUSTOMER_ONEONONE
 		WHERE CUSTOMER_NUM = #{detailnum}
 	</select>
+	
+	<delete id="deletemyinjury" parameterType="int">
+		DELETE 
+		FROM CUSTOMER_ONEONONE
+		WHERE CUSTOMER_NUM = #{deletenum}
+	</delete>
+	
+	<!-- <select id="">
+		SELECT *
+		CUSTOMER_ONEONONE
+		WHERE CUSTOMER_NUM = #{선택한 소스의 요소의 값}
+	</select> -->
 </mapper>

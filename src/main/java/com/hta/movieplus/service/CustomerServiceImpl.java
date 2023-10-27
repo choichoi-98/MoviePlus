@@ -34,5 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerOneOnOneVO getDetailByNum(int detailnum) {
 		return dao.getDetailByNum(detailnum);
 	}
-	
+
+	@Override
+	public int deletemyinjury(int deletenum) {
+		return dao.deletemyinjury(deletenum);
+	}
 }

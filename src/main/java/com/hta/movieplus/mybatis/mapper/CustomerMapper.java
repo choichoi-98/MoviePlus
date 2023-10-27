@@ -17,6 +17,9 @@ public interface CustomerMapper {
 
 	public CustomerOneOnOneVO getDetailByNum(int detailnum);
 
+	public int deletemyinjury(int deletenum);
+
+
 
 
 
