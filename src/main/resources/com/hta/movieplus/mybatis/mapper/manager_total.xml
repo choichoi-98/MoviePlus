@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.ManagerTotalMapper">
+	
+	
+	<!-- 5) 일별 전체 영화 예매율* -->
+	<select id="dayReserveRate" parameterType="map" resultType="total">
+	 WITH totalseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as totalseat
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 and THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		 and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+		 and THEATER_SCHEDULE.THEATER_SCHEDULE_STATUS = '종료'
+	  ),
+	 movieseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		 and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+		 and THEATER_SCHEDULE.THEATER_SCHEDULE_STATUS = '종료'
+		 GROUP BY MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+	 ) 
+	 select ROWNUM AS RNUM, sub.*
+	 from (	select ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100,0),1) AS ratio, m.*
+			from totalseatcount, movieseatcount
+			right join MOVIE m
+			on movieseatcount.MOVIE_CODE = m.MOVIE_CODE
+			ORDER BY ratio desc
+		) sub
+	</select>
+	
+	<!-- 2) 당일 티켓 총 수익* -->
+	<select id="dayTicketSales" parameterType="map" resultType="int" >
+	WITH SUB AS(SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*
+		FROM kakao_pay
+		INNER JOIN THEATER_SCHEDULE
+		ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		INNER JOIN MOVIE
+		ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		WHERE kakao_pay.pg_token IS NOT NULL
+		AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+	)
+	SELECT NVL(SUM(KPAY_AMOUNT),0)
+	FROM SUB
+	</select>
+	
+	
+	<!-- 8) 영화별 누적 관객수 -->
+	<select id="dayMovieseatCount" parameterType="map" resultType="total" >
+	 <![CDATA[
+	  WITH totalcount as(
+			SELECT TS.MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) as sumtotal
+			FROM THEATER_SCHEDULE TS
+			JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
+			WHERE KP.PG_TOKEN IS NOT NULL
+			AND TS.THEATER_SCHEDULE_DATE  <= #{THEATER_SCHEDULE_DATE}
+			and TS.THEATER_ID = #{theaterId}
+			GROUP BY TS.MOVIE_CODE
+		)
+		select ROWNUM AS RNUM, sub.*
+		from (	
+			select NVL(totalcount.sumtotal,0) AS rate, m.* 
+			from totalcount
+			right join MOVIE m
+			on totalcount.MOVIE_CODE = m.MOVIE_CODE
+			ORDER BY rate desc
+		) sub	
+	 ]]>	
+	</select>
+	
+	<!-- 7)당일 좌석 판매율 -->
+	<select id="dayTicketSalesRate" parameterType="map" resultType="double" >
+		WITH totalcount AS(
+			SELECT SUM(KPAY_SEAT_CNT) as totalseat  
+			 FROM kakao_pay
+			 INNER JOIN THEATER_SCHEDULE
+			 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+			 INNER JOIN MOVIE
+			 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+			 WHERE kakao_pay.pg_token IS NOT NULL
+			 and THEATER_SCHEDULE_DATE =  #{THEATER_SCHEDULE_DATE}
+			 and THEATER_ID = #{theaterId}
+			 and MOVIE.MOVIE_CODE =  #{MOVIE_CODE} ), --관객수
+
+     SEATTOTAL AS(
+	    SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*, THEATER_ROOM.*
+	    FROM kakao_pay
+	    INNER JOIN THEATER_SCHEDULE
+	    ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID -- 결제내역, 상영스케줄 연결
+	    INNER JOIN MOVIE
+	    ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE   -- 상영스케줄, 영화정보 연결
+	    INNER JOIN THEATER_ROOM
+	    ON theater_room.theater_room_id = theater_schedule.theater_room_id
+	    WHERE kakao_pay.pg_token IS NOT NULL
+	    AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE =  #{THEATER_SCHEDULE_DATE} 
+	    and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+	    AND MOVIE.MOVIE_CODE =  #{MOVIE_CODE} 
+	  ),
+	    
+	    TotalSeatCount AS(
+	        SELECT sum( distinct THEATER_ROOM_SEAT_CNT) as total_seat_count
+	        FROM SEATTOTAL
+	    )
+	    select ROUND((totalcount.totalseat / TotalSeatCount.total_seat_count) * 100 , 1)
+	    from totalcount, SEATTOTAL, TotalSeatCount 
+	</select>
+	
+	<select id="daySeatCount" parameterType="map" resultType="int">
+		WITH TOTALSEAT AS(
+			SELECT KAKAO_PAY.*, THEATER_SCHEDULE.*
+			FROM kakao_pay
+			INNER JOIN THEATER_SCHEDULE
+			ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+			INNER JOIN MOVIE
+			ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+			WHERE kakao_pay.pg_token IS NOT NULL
+			AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+			and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+			and THEATER_SCHEDULE.THEATER_SCHEDULE_STATUS = '종료'
+		)
+			    SELECT NVL(SUM(KPAY_SEAT_CNT),0) 
+			    FROM TOTALSEAT
+	</select>
+	
+	<select id="monthReserveRate" parameterType="map" resultType="total">
+		<![CDATA[
+		WITH totalseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as totalseat
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 and THEATER_SCHEDULE_DATE >= TRUNC(SYSDATE, 'MM')
+         and THEATER_SCHEDULE_DATE <= #{THEATER_SCHEDULE_DATE}
+         and THEATER_SCHEDULE_STATUS = '종료'
+         and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+	  ),
+	   movieseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 and THEATER_SCHEDULE_DATE >= TRUNC(SYSDATE, 'MM')
+         and THEATER_SCHEDULE_DATE <= #{THEATER_SCHEDULE_DATE}
+         and THEATER_SCHEDULE_STATUS = '종료'
+         and THEATER_SCHEDULE.THEATER_ID = #{theaterId}
+		 GROUP BY MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+	  ) 
+	    select ROWNUM AS RNUM, sub.*
+		from (	select ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100,0),1) AS ratio, m.* 
+				from totalseatcount, movieseatcount
+				right join MOVIE m
+				on movieseatcount.MOVIE_CODE = m.MOVIE_CODE
+				ORDER BY ratio desc
+			) sub
+	
+	]]>
+	</select>
+	
+	<select id="daySeatRate" parameterType="map" resultType="total">
+	<![CDATA[
+	WITH BOOKEDCOUNT AS (
+    SELECT M.MOVIE_CODE AS MOVIE_CODE, SUM(KP.KPAY_SEAT_CNT) AS SUM
+    FROM KAKAO_PAY KP
+    JOIN THEATER_SCHEDULE TS ON TS.THEATER_SCHEDULE_ID = KP.THEATER_SCHEDULE_ID
+    JOIN MOVIE M ON M.MOVIE_CODE = TS.MOVIE_CODE
+    WHERE TS.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+    AND KP.PG_TOKEN IS NOT NULL
+    AND TS.THEATER_ID = #{theaterId}
+    GROUP BY M.MOVIE_CODE
+	),
+	TOTALCOUNT AS (
+	    SELECT M.MOVIE_CODE AS MOVIECODE, SUM(TR.THEATER_ROOM_SEAT_CNT) AS SUM
+	    FROM THEATER_ROOM TR
+	    JOIN THEATER_SCHEDULE TS ON TR.THEATER_ROOM_ID = TS.THEATER_ROOM_ID
+	    JOIN KAKAO_PAY KP ON KP.THEATER_SCHEDULE_ID = TS.THEATER_SCHEDULE_ID
+	    JOIN MOVIE M ON M.MOVIE_CODE = TS.MOVIE_CODE
+	    WHERE TS.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+	    AND TS.THEATER_ID = #{theaterId}
+	    AND KP.PG_TOKEN IS NOT NULL
+	    GROUP BY M.MOVIE_CODE
+	)
+	select ROWNUM AS RNUM, sub.*
+	from ( select ROUND(NVL((B.SUM / T.SUM) * 100, 0), 1) AS RATIO, M.*
+		FROM MOVIE M
+		LEFT JOIN BOOKEDCOUNT B ON M.MOVIE_CODE = B.MOVIE_CODE
+		LEFT JOIN TOTALCOUNT T ON M.MOVIE_CODE = T.MOVIECODE
+		ORDER BY RATIO DESC) sub
+	]]>
+	</select>
+	
+	
+	
+	
+</mapper>
