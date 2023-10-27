@@ -59,13 +59,14 @@ public class AdminController {
 		return mv;
 	}
 	
+	//실시간 예매율 페이지
 	@GetMapping("/admin/total")
 	public ModelAndView totallist(String currentdate, ModelAndView mv) {
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		currentdate = currentdatetime.format(format);
 		
-		List<Total> totallist = totalService.dayReserveRate(currentdate); //일일 예매율
+		List<Total> totallist = totalService.dayReserveRate(currentdate); 
 		mv.addObject("totallist", totallist);
 		
 		mv.setViewName("/admin/adminDayReserveRate");
@@ -73,6 +74,7 @@ public class AdminController {
 		
 	}
 	
+	//누적 관객수 페이지
 	@GetMapping("/admin/totalcount")
 	public ModelAndView dayMovieseatCount(String currentdate, ModelAndView mv) {
 		LocalDateTime currentdatetime = LocalDateTime.now();
@@ -84,8 +86,20 @@ public class AdminController {
 		
 		mv.setViewName("/admin/adminDayMovieseatCount");
 		return mv;
-		
 	}
+	
+	//월별 예매율 페이지
+	@GetMapping("/admin/monthtotalcount")
+	public ModelAndView monthReserveRate(String currentdate, ModelAndView mv) {
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		currentdate = currentdatetime.format(format);
+		
+		
+		mv.setViewName("/admin/adminMonthReserveRate");
+		return mv;
+	}
+	
 
 	@GetMapping("/admin/manageMember")
 	public String manageMemberView(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
