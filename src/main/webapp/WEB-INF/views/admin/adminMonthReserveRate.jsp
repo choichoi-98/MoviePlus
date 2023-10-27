@@ -65,25 +65,25 @@
 							</thead>
 
 							<tbody>
-							  <c:forEach var="total" items="${totallist}">
+							  <c:forEach var="month" items="${monthReserveRate}">
 								<tr>
 									<td>
-										<div class="main__table-text">${total.RNUM}</div>
+										<div class="main__table-text">${month.RNUM}</div>
 									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>${total.MOVIE_CODE}</h3>
+												<h3>${month.MOVIE_CODE}</h3>
 											</div>
 										</div>
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="#">${total.MOVIE_TITLE}</a>
+										<a href="#">${month.MOVIE_TITLE}</a>
 										</div>
 									</td>
 									<td>
-										<div class="main__table-text">${total.ratio}%</div>
+										<div class="main__table-text">${month.ratio}%</div>
 									</td>
 									<td>
 										<div class="main__table-btns">

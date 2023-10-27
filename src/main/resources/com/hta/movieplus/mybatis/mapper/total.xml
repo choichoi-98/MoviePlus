@@ -15,6 +15,7 @@
 		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
 		 WHERE kakao_pay.pg_token IS NOT NULL
 		 and THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		 and THEATER_SCHEDULE_STATUS = '종료'
 	  ),
 	 movieseatcount AS(
 		 SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
@@ -25,6 +26,7 @@
 		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
 		 WHERE kakao_pay.pg_token IS NOT NULL
 		 AND THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+		 and THEATER_SCHEDULE_STATUS = '종료'
 		 GROUP BY MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
 	 ) 
 	 select ROWNUM AS RNUM, sub.*
@@ -160,12 +162,50 @@
 			ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
 			WHERE kakao_pay.pg_token IS NOT NULL
 			AND THEATER_SCHEDULE.THEATER_SCHEDULE_DATE = #{THEATER_SCHEDULE_DATE}
+			and THEATER_SCHEDULE.THEATER_SCHEDULE_STATUS = '종료'
 		)
 			    SELECT NVL(SUM(KPAY_SEAT_CNT),0) 
 			    FROM TOTALSEAT
 	</select>
 	
+	<!-- 6) 이번달 영화 예매율 -->
+	<select id="monthReserveRate" parameterType="String" resultType="total">
+		<![CDATA[
+		WITH totalseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as totalseat
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 and THEATER_SCHEDULE_DATE >= TRUNC(SYSDATE, 'MM')
+         and THEATER_SCHEDULE_DATE <= #{THEATER_SCHEDULE_DATE}
+         and THEATER_SCHEDULE_STATUS = '종료'
+	  ),
+	   movieseatcount AS(
+		 SELECT SUM(KPAY_SEAT_CNT) as movieseat, MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+		 FROM kakao_pay
+		 INNER JOIN THEATER_SCHEDULE
+		 ON kakao_pay.THEATER_SCHEDULE_ID = THEATER_SCHEDULE.THEATER_SCHEDULE_ID
+		 INNER JOIN MOVIE
+		 ON THEATER_SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		 WHERE kakao_pay.pg_token IS NOT NULL
+		 and THEATER_SCHEDULE_DATE >= TRUNC(SYSDATE, 'MM')
+         and THEATER_SCHEDULE_DATE <= #{THEATER_SCHEDULE_DATE}
+         and THEATER_SCHEDULE_STATUS = '종료'
+		 GROUP BY MOVIE.MOVIE_CODE, MOVIE.MOVIE_TITLE
+	  ) 
+	    select ROWNUM AS RNUM, sub.*
+		from (	select ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100,0),1) AS ratio, m.* 
+				from totalseatcount, movieseatcount
+				right join MOVIE m
+				on movieseatcount.MOVIE_CODE = m.MOVIE_CODE
+				ORDER BY ratio desc
+			) sub
 	
+	]]>
+	</select>
 	
 	
 </mapper>

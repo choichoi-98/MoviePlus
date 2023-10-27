@@ -19,5 +19,7 @@ public interface TotalService {
 
 	public List<Total> dayMovieseatCount(String currentdate);
 
+	public List<Total> monthReserveRate(String currentdate);
+
 	
 }
