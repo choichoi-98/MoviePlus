@@ -6,3 +6,5 @@ CREATE TABLE chat_message (
     create_at TIMESTAMP,
     chat_room VARCHAR2(50)
 );
+
+CREATE SEQUENCE CHAT_MESSAGE_SEQ;

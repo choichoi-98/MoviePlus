@@ -45,4 +45,9 @@ public class ChatServiceImpl implements ChatService{
 		
 	}
 	
+	//채팅 메시지 저장
+	public int saveMessage(String chatFrom,  String content, String roomN) {
+		return dao.saveMessage(chatFrom, content, roomN);
+	}
+	
 }

@@ -39,4 +39,11 @@
 		SELECT * FROM CHAT_ROOM
 		WHERE CHAT_ROOM_NUM = #{roomN}
 	</select>
+	
+	<!-- 메시지 저장 -->
+	<insert id="saveMessage">
+		INSERT INTO CHAT_MESSAGE
+		(MESSAGE_ID, MESSAGE_FROM, CONTENT,CREATE_AT, CHAT_ROOM)
+		VALUES(CHAT_MESSAGE_SEQ.NEXTVAL,#{chatFrom},#{content}, CURRENT_TIMESTAMP, #{roomN})
+	</insert>
 </mapper>
