@@ -23,5 +23,8 @@ public interface ChatMapper {
 	//1:1 채팅방 이름 설정
 	String findObjectName(String objectId);
 	
+	//채팅방 정보 가져오기
+	List<ChatRoomVO> selectChatRoom(String roomN);
+	
 	
 }

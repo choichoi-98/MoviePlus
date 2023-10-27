@@ -39,4 +39,10 @@ public class ChatServiceImpl implements ChatService{
 		return dao.findObjectName(objectId);
 	}
 	
+	//char_room 관련한 정보 가져오기
+	public List<ChatRoomVO> selectChatRoom(String roomN) {
+		return dao.selectChatRoom(roomN);
+		
+	}
+	
 }
