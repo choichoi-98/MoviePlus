@@ -44,7 +44,7 @@
 										<div class="form__img">
 											<label for="form__img-upload"></label>
 											<input id="form__img-upload" name="pic" type="file" accept=".png, .jpg, .jpeg">
-											<img id="form__img" src="${pageContext.request.contextPath}/resources${get1item.ITEM_PATH}" alt="상품 사진 (270 x 400)">
+											<img id="form__img" src="${pageContext.request.contextPath}/resources/image/store/${get1item.ITEM_FILE}" alt="상품 사진 (270 x 400)">
 										</div>
 									</div>
 								</div>
@@ -81,12 +81,12 @@
 										<input type="text" class="form__input" value="${get1item.ITEM_CODE}" placeholder="상품코드" name="ITEM_CODE" readonly>
 									</div>
 
-									<div class="col-12">
+									<!-- <div class="col-12">
 										<div class="form__gallery">
 											<label id="gallery1" for="form__gallery-upload">상품 사진 등록</label>
 											<input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 

@@ -14,8 +14,6 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- 탭 클릭 시 이벤트 처리 -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="static/store_tabs.js"></script>
 </head>
@@ -63,7 +61,7 @@
 							<li class="sold-out">
 								<a href="">
 								<%-- <a href="item?ITEM_CODE=${i.ITEM_CODE}"> --%>
-									<div class="soldout">VIP 등급</div>
+									<div class="soldout">VIP ONLY</div>
 									<div class="label"></div>
 									<div class="img">
 										<img

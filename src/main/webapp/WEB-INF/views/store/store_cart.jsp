@@ -6,9 +6,7 @@
 	<sec:authentication property="principal" var="pinfo" />
 </sec:authorize>
 <!DOCTYPE html>
-<!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html>
-<!--<![endif]-->
 <head>
 <style>
 .container {

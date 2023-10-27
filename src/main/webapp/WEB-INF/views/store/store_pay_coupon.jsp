@@ -23,47 +23,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
-<!-- <script src="${pageContext.request.contextPath}/resources/js/store_kakaopay.js"></script> -->
-<script>
-	$(function() {
-		let token = $("meta[name='_csrf']").attr("content");
-		let header = $("meta[name='_csrf_header']").attr("content");
+<script src="${pageContext.request.contextPath}/resources/js/coupon.js"></script>
 
-		$(document)
-				.on(
-						'click',
-						'.regibtn',
-						function(e) {
-							e.preventDefault(); // 기본 동작인 링크 이동을 막기
-
-							const row = $(this).closest('tr'); // 클릭된 버튼의 부모 <tr> 요소를 찾기
-							const payNum = row.find('.regibtn').data('paynum'); // 해당 행의 PAY_NUM 값을 추출
-//							alert('payNum:' + payNum);
-
-							$
-									.ajax({
-										url : 'coupon',
-										method : 'POST',
-										contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-										data : {
-											"payNum" : payNum
-										},
-										dataType : 'json',
-										beforeSend : function(xhr) {
-											xhr.setRequestHeader(header, token);
-										},
-										success : function(data) {
-//											alert("등록 성공, payNum: " + payNum);
-											window.location.reload();
-										},
-										error : function(error) {
-//											alert("등록 실패, payNum: " + payNum);
-											window.location.reload();
-										}
-									});
-						});
-	});
-</script>
 </head>
 <body>
 	<!-- header -->
@@ -118,67 +79,65 @@
 
 								<tbody>
 									<c:forEach var="p" items="${couponList}" varStatus="loop">
-										<c:if test="${pinfo.MEMBER_ID eq p.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
-											<c:if test="${fn:contains(p.PAY_MENU, 'ticket') || fn:contains(p.PAY_MENU, 'voucher')}">
-											<tr>
-												<td class="a-c">
-												${p.PAY_DATE}
-												</td>
-												<th scope="row">
-													<div class="">
-														<p class="">
-															<a href="javascript:fn_storeDetail();">${p.COUPON_CODE}</a>
-														</p>
-														<p class=""></p>
-													</div>
+										<c:if
+											test="${pinfo.MEMBER_ID eq p.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
+											<c:if
+												test="${fn:contains(p.PAY_MENU, 'ticket') || fn:contains(p.PAY_MENU, 'voucher')}">
+												<tr>
+													<td class="a-c">${p.PAY_DATE}</td>
+													<th scope="row">
+														<div class="">
+															<p class="">
+																<a href="javascript:fn_storeDetail();">${p.COUPON_CODE}</a>
+															</p>
+															<p class=""></p>
+														</div>
 
-													<div class="mt10">
-														<span id="acptBrchView" class="font-gblue"></span> <em
-															id="acptBrchChoiValView"></em>
-													</div>
-												</th>
-												<td>
-												<c:choose>
-													<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
-														<div class="">
-														<p class="">
-															<a href="javascript:fn_storeDetail();">티켓</a>
-														</p>
-														<p class=""></p>
+														<div class="mt10">
+															<span id="acptBrchView" class="font-gblue"></span> <em
+																id="acptBrchChoiValView"></em>
 														</div>
-													</c:when>
-													<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
-														<div class="">
-														<p class="">
-															<a href="javascript:fn_storeDetail();">금액권</a>
-														</p>
-														<p class=""></p>
-														</div>
-													</c:when>
-													<c:otherwise>
-														<div class="goods-info">
-														<p class="name">
-															<a href="javascript:fn_storeDetail();">${p.PAY_NAME}</a>
-														</p>
-														<p class="bundle"></p>
-														</div>
-													</c:otherwise>
-												</c:choose>
-												</td>
-												<c:choose>
-													<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
-														<td><em id="purcQtyView">12000</em><span>원</span></td>
-													</c:when>
-													<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
-														<td><em id="purcQtyView">10000</em><span>원</span></td>
-													</c:when>
-												</c:choose>	
-												<td><a
-													href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
-													class="a-link regibtn" name="brchList" title="삭제"
-													data-paynum="${p.PAY_NUM}">등록</a></td>
-											</tr>
-										</c:if>
+													</th>
+													<td><c:choose>
+															<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
+																<div class="">
+																	<p class="">
+																		<a href="javascript:fn_storeDetail();">티켓</a>
+																	</p>
+																	<p class=""></p>
+																</div>
+															</c:when>
+															<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
+																<div class="">
+																	<p class="">
+																		<a href="javascript:fn_storeDetail();">금액권</a>
+																	</p>
+																	<p class=""></p>
+																</div>
+															</c:when>
+															<c:otherwise>
+																<div class="goods-info">
+																	<p class="name">
+																		<a href="javascript:fn_storeDetail();">${p.PAY_NAME}</a>
+																	</p>
+																	<p class="bundle"></p>
+																</div>
+															</c:otherwise>
+														</c:choose></td>
+													<c:choose>
+														<c:when test="${fn:contains(p.PAY_MENU, 'ticket')}">
+															<td><em id="purcQtyView">12000</em><span>원</span></td>
+														</c:when>
+														<c:when test="${fn:contains(p.PAY_MENU, 'voucher')}">
+															<td><em id="purcQtyView">10000</em><span>원</span></td>
+														</c:when>
+													</c:choose>
+													<td><a
+														href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
+														class="a-link regibtn" name="brchList" title="삭제"
+														data-paynum="${p.PAY_NUM}">등록</a></td>
+												</tr>
+											</c:if>
 										</c:if>
 									</c:forEach>
 									<c:if test="${empty couponList}">
