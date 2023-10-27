@@ -17,7 +17,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- 탭 클릭 시 이벤트 처리 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="static/store_tabs.js"></script>
 
 </head>
@@ -81,7 +81,7 @@
 										<div class="price">
 											<p class="original"></p>
 											<p class="sale">
-												<em>${i.ITEM_PRICE}</em> <span>p</span>
+												<em>${i.ITEM_PRICE}</em> <span>원</span>
 											</p>
 											<p class="ea"></p>
 										</div>
