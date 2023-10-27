@@ -58,17 +58,11 @@
 								<td class="xl69" style="background-color:#f8cbad; border-bottom:1px solid black; border-left:1px solid black; border-right:1px solid black; border-top:1px solid black; height:18px; padding-left:1px; padding-right:1px; padding-top:1px; text-align:center; vertical-align:middle; white-space:nowrap; width:99px"><span style="font-size:13px"><strong style="font-weight:700"><span style="color:black"><span style="font-style:normal"><span style="text-decoration:none">
 									<span>ID</span></span></span></span></strong></span>
 								</td>
-								<td class="xl69" style="background-color:#f8cbad; border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:1px solid black; padding-left:1px; padding-right:1px; padding-top:1px; text-align:center; vertical-align:middle; white-space:nowrap; width:186px"><span style="font-size:13px"><strong style="font-weight:700"><span style="color:black"><span style="font-style:normal"><span style="text-decoration:none">
-									<span>당첨극장</span></span></span></span></strong></span>
-								</td>
 							</tr>
 							<c:forEach var="eventwinner" items="${eventwinner}" varStatus="loop" >
 							<tr>
 								<td class="xl67" style="border-bottom:1px solid black; border-left:1px solid black; border-right:1px solid black; border-top:none; height:18px; padding-left:1px; padding-right:1px; padding-top:1px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:13px"><span style="color:black"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">
 									<span id="memberId">${eventwinner.MEMBER_ID}</span></span></span></span></span></span>
-								</td>
-								<td class="xl67" style="border-bottom:1px solid black; border-left:none; border-right:1px solid black; border-top:none; padding-left:1px; padding-right:1px; padding-top:1px; text-align:center; vertical-align:middle; white-space:nowrap"><span style="font-size:13px"><span style="color:black"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">
-									<span>#</span></span></span></span></span></span>
 								</td>
 							</tr>
 							</c:forEach>
