@@ -26,5 +26,9 @@ public interface ChatMapper {
 	//채팅방 정보 가져오기
 	List<ChatRoomVO> selectChatRoom(String roomN);
 	
+	//메시지 저장
+	int saveMessage(String chatFrom,  String content, String roomN);
+
+	
 	
 }

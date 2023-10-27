@@ -64,6 +64,7 @@ public class ChatController {
 		//0. 두 사람과 관련된 방이 있는지 확인
 		if(member != null) {
 			String subjectId = member.getMEMBER_ID();
+			logger.info("chat_from" + subjectId);
 			List<ChatRoomVO> check = chatServiceImpl.checkChatRoom(subjectId, objectId);
 			int checkSize = check.size();
 			
@@ -87,24 +88,27 @@ public class ChatController {
 			        mv.addObject("userName", member.getMEMBER_NAME());
 			    }
 			}
-		}
+			mv.addObject("chatFrom", subjectId);
+			
+		}//if(member != null) {
 		mv.setViewName("chat/chatroom");
 		return mv;
 	}
 	
 	//메시지 저장
 	@RequestMapping("/saveMessage")
-	public int saveMessage(@RequestParam("RoomNum") String roomN) {
-		//select로 roomN에 해당하는 chat_subject와 chat_object값 가져오기-해당 방의 참여자를 알기위함
-		List<ChatRoomVO> chatRoomInfo = chatServiceImpl.selectChatRoom(roomN);
-		for(ChatRoomVO room: chatRoomInfo) {
-			logger.info("chat_room_num = " + room.getChat_Room_num());
-			logger.info("chat_subject = " + room.getChat_Subject());
-			logger.info("chat_subject = " + room.getChat_Object());
-		}
-		return 0;
+	public void saveMessage(
+			@RequestParam("chatFrom") String chatFrom,
+			@RequestParam("content") String content,
+			@RequestParam("roomNum") String roomN
+			) {
+		chatServiceImpl.saveMessage(chatFrom,content,roomN);
 	}
 	
+	//메시지 list
+//	@RequestMapping("/showMessage")
+//	public List<>
+//	
 	// 방 페이지
 	@RequestMapping("/room")
 	public ModelAndView room() {
@@ -113,27 +117,7 @@ public class ChatController {
 		return mv;
 	}
 	
-	//방 생성
-//	@RequestMapping("/createRoom")
-//	@ResponseBody
-//	public List<ChatRoomVO> createRoom(@RequestParam HashMap<Object, Object> params){
-//		
-//		logger.info("=========컨트롤러: createRoom ============");
-//		String roomName = (String) params.get("roomName");
-//		logger.info("createRoom roomName = "+roomName);
-//		if(roomName != null && !roomName.trim().equals("")) {
-//			ChatRoomVO room = new ChatRoomVO();
-//			room.setRoomNumber(++roomNumber);
-//			room.setRoomName(roomName);
-//			roomList.add(room);
-//		}
-//		
-//		   for (ChatRoomVO room : roomList) {
-//		        System.out.println("Room Number: " + room.getRoomNumber() + ", Room Name: " + room.getRoomName());
-//		    }
-//		
-//		return roomList;
-//	}
+
 	
 	//방 정보 가져오기
 	@RequestMapping("/getRoom")
@@ -143,33 +127,7 @@ public class ChatController {
 		return roomList;
 	}
 	
-	//채팅방
-//	@RequestMapping("/moveChating")
-//	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
-//		ModelAndView mv = new ModelAndView();
-//		String roomN = (String)params.get("roomNumber");
-//		logger.info("moveChating roomN: " + roomN);
-//		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-//		
-////		List<ChatRoomVO> new_list 
-////			= roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
-//		List<ChatRoomVO> new_list = new ArrayList<>();
-//		for (ChatRoomVO room : roomList) {
-//		    if (room.getRoomNumber() == roomNumber) {
-//		        new_list.add(room);
-//		    }
-//		}
-//
-//		if(new_list != null && new_list.size() > 0) {
-//			logger.info("=========if문 안===========================");
-//			mv.addObject("roomName", params.get("roomName"));
-//			mv.addObject("roomNumber", params.get("roomNumber"));
-//			mv.setViewName("chat/chat");
-//		}else {
-//			mv.setViewName("chat/room");
-//		}
-//		return mv;
-//	}
+
 	
 }
 

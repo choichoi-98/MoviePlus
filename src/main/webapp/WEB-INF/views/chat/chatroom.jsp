@@ -53,28 +53,9 @@
 						$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "</div><div class='divOther'><p class='others'>" + d.msg + "</p></div><div class='clear'>");
 					}
 						
-				}else if(d.type = "imgurl"){
-					console.log("이미지.. 되려나?")
-					var url = URL.createObjectURL(new Blob([msg]));
-					if(d.sessionId == $("#sessionId").val()){
-					$("#chating").append("<div class='divMy'><img class='msgImg' src="+url+"></div><div class='clear'></div>");
-					}else{
-					$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "<div class='divOther'><img class='msgImg' src=" +url+ "></div><div class='clear'></div>");
-					}
 				}else{
 					console.warn("unknown type!")
 				}
-			}else{
-				console.log("파일 전송 받은 경우")
-				//파일 업로드한 경우 업로드한 파일 채팅방에 뿌리기
-				//var f = JSON.parse(msg);//이거 안대,,,
-				console.log("msg메시지 받을 수 있나바,,야호!")
-				var url = URL.createObjectURL(new Blob([msg]));
-				//if(d.sessionId == $("#sessionId").val()){
-					$("#chating").append("<div class='divMy'><img class='msgImg' src="+url+"></div><div class='clear'></div>");
-				//}else{
-					//$("#chating").append(" <div class='icon'><img src='${pageContext.request.contextPath}/resources/image/member/bg-profile.png'>" + d.userName + "<div class='divOther'><img class='msgImg' src=" +url+ "></div><div class='clear'></div>");
-				//}
 			}
 			
 		}//ws.onmessage = function(data) {
@@ -91,21 +72,10 @@
 			}
 		});
 	}
-
-// 	function chatName(){
-// 		var userName = $("#userName").val();
-// 		if(userName == null || userName.trim() == ""){
-// 			alert("사용자 이름을 입력해주세요.");
-// 			$("#userName").focus();
-// 		}else{
-// 			wsOpen();
-// 			$("#yourName").hide();
-// 			$("#yourMsg").show();
-// 		}
-// 	}
 	
-
+	//전송 메서드
 	function send() {
+		saveMassage();
 		var option ={
 			type: "message",
 			roomNumber: $("#roomNumber").val(),
@@ -117,31 +87,52 @@
 		$('#chatting').val("");
 	}
 	
-	//파일 전송
-	function fileSend(){
-		console.log("파일 전송 메서드 실행")
-		var file = document.querySelector("#fileUpload").files[0];
-		console.log("file = "+file)
-		var fileReader = new FileReader();
-		fileReader.onload = function() {
-			var param = {
-				type: "fileUpload",
-				file: file,
-				roomNumber: $("#roomNumber").val(),
-				sessionId : $("#sessionId").val(),
-				msg : $("#chatting").val(),
-				userName : $("#userName").val()
+	//message 내용 저장 메서드
+	function saveMassage(){
+		var chatFrom = $("#chatFrom").val();
+		var chatTo = $("#chatTo").val();
+		//var chatTo = document.getElementById("spanChatName").textContent;
+		var content = $("#chatting").val();
+		var roomNum = $("#roomNumber").val();
+		console.log("chatFrom=" + chatFrom + "/chatTo=" + chatTo + "/Content=" + content + "/roomN=" + roomNum)
+		$.ajax({
+			type: 'GET',
+			url : '../chat/saveMessage',
+			data: {
+				'chatFrom': chatFrom,
+				
+				'content': content,
+				'roomNum': roomNum
+			},
+			success: function(){
+				console.log("message 저장 성공")
+			},//success
+			error: function(){
+				console.log("message 저장 실패")
 			}
-			console.log("fileSend()에서 보내는 데이터: " + JSON.stringify(param))
 			
-			ws.send(JSON.stringify(param)); //파일 보내기전 메시지를 보내서 파일을 보냄을 명시한다.
+		});//ajax end
+	}//	function saveMassage(){
 
-		    arrayBuffer = this.result;
-			ws.send(arrayBuffer); //파일 소켓 전송
-		};
-		fileReader.readAsArrayBuffer(file);
+	function showMessage(){
+		$.ajax({
+			type: 'GET',
+			url : '../chat/showMessage',
+			data: {
+				'chatFrom': chatFrom,
+				
+				'content': content,
+				'roomNum': roomNum
+			},
+			success: function(){
+				console.log("message 저장 성공")
+			},//success
+			error: function(){
+				console.log("message 저장 실패")
+			}
+			
+		});
 	}
-	
 $(document).ready(function(){
 	document.getElementById("goBackButton").addEventListener("click", goBack);
 	function goBack() {
@@ -175,11 +166,11 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<input type="hidden" id="userName" name="userName" value="${userName}">
-		
-		<div id = "fileSendArea">
-			<input type="file" id="fileUpload">
-			<button onclick="fileSend()" id="sendFileBtn">파일보내기</button>
-		</div>
+		<input type="hidden" id="chatFrom" name="chatFrom" value="${chatFrom}">
+<!-- 		<div id = "fileSendArea"> -->
+<!-- 			<input type="file" id="fileUpload"> -->
+<!-- 			<button onclick="fileSend()" id="sendFileBtn">파일보내기</button> -->
+<!-- 		</div> -->
 	</div>
 </body>
 </html>
