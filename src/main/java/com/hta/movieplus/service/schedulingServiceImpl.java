@@ -328,15 +328,12 @@ public class schedulingServiceImpl implements SchedulingService {
 	public int changeScheduleStatus(LocalDateTime now) {
 		// TODO Auto-generated method stub
 		String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append(now.getHour());
-		sb.append(":");
-		sb.append(now.getMinute());
-		
+		String time = now.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("date", date);
-		dataMap.put("time", sb.toString());
+		dataMap.put("time", time);
 		
 		return mapper.changeScheduleStatus(dataMap);
 	}

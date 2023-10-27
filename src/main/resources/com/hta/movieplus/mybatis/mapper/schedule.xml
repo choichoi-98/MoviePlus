@@ -221,7 +221,7 @@
 	<update id="changeScheduleStatus" parameterType="map">
 		UPDATE THEATER_SCHEDULE
 		SET THEATER_SCHEDULE_STATUS = '종료'
-		WHERE THEATER_SCHEDULE_DATE = #{date}
+		WHERE THEATER_SCHEDULE_DATE &lt;= #{date}
 		AND THEATER_SCHEDULE_START &lt;= #{time}
 		AND THEATER_SCHEDULE_STATUS = '상영'
 	</update>
