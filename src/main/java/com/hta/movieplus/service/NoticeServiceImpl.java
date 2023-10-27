@@ -61,6 +61,12 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.getTotalNoticeList();
 	}
 
+	@Override
+	public NoticeVO getNoticeDetail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 	

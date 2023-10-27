@@ -50,6 +50,7 @@ public class CustomerController {
 		return "customer_service/customer_service_notice_total";
 	}
 	
+	//무비플러스 공지 정보만 가지고 오기
 	@GetMapping("/adminnotice")
 	public String adminNotice(Model model) {
 		List<NoticeVO> adminnotice = noticeservice.getNoticelist("전체");
@@ -57,12 +58,21 @@ public class CustomerController {
 		return "customer_service/customer_service_notice_admin";
 	}
 	
+	//지점공지 정보만 가지고 오기
 	@GetMapping("/regionnotice")
 	public String regionNotice(Model model) {
 		List<NoticeVO> regionnotice = noticeservice.getNoticelistExceptEntire();
 		model.addAttribute("RegionNotice", regionnotice);
 		return "customer_service/customer_service_notice_region";
 	}
+	
+	/*
+	 * //공지사항 detail 페이지 이동
+	 * 
+	 * @GetMapping("/gonoticedetail") public String goNoticeDetail(Model model) {
+	 * NoticeVO noticedetail = noticeservice.getNoticeDetail();
+	 * model.addAttribute("NoticeDetail", noticedetail); return ""; }
+	 */
 	
 	@GetMapping("/oneonone")
 	public ModelAndView oneOnOne(ModelAndView mv) {
@@ -105,5 +115,9 @@ public class CustomerController {
 		return "customer_service/customer_service_myinjury_detail";
 	}
 	
-	
+	@GetMapping("/myinjurydelete")
+	public String MyInjuryDelite(int deletenum) {
+		customerService.deletemyinjury(deletenum);
+		return "redirect:/customer_service/myinjury";
+	}
 }

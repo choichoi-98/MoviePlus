@@ -8,6 +8,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +18,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hta.movieplus.domain.CustomerOneOnOneVO;
+import com.hta.movieplus.domain.MailVO;
+import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.Total;
+import com.hta.movieplus.service.CustomerService;
 import com.hta.movieplus.service.ManagerTotalService;
 import com.hta.movieplus.service.NoticeManagerService;
 import com.hta.movieplus.service.NoticeService;
 import com.hta.movieplus.service.SeatService;
 import com.hta.movieplus.service.TheaterManagerService;
 import com.hta.movieplus.service.TheaterService;
+import com.hta.movieplus.task.SendMail;
 
 @Controller
 @RequestMapping(value = "/manager")
@@ -38,13 +44,16 @@ public class ManagerController {
 	NoticeManagerService noticemanagerservice;
 	NoticeService noticeService;
 	ManagerTotalService totalService;
+	CustomerService customerservice;
+	private SendMail sendMail;
+	private MailVO mailVO;
 
 	private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
 
 	@Autowired
 	public ManagerController(TheaterManagerService theaterManagerService, TheaterService theaterService,
 			SeatService seatService, NoticeManagerService noticemanagerservice, NoticeService noticeService,
-			ManagerTotalService totalService) {
+			ManagerTotalService totalService, CustomerService customerservice, SendMail sendMail, MailVO mailVO) {
 		// TODO Auto-generated constructor stub
 		this.theaterManagerService = theaterManagerService;
 		this.theaterService = theaterService;
@@ -52,6 +61,9 @@ public class ManagerController {
 		this.noticemanagerservice = noticemanagerservice;
 		this.noticeService = noticeService;
 		this.totalService = totalService;
+		this.customerservice = customerservice;
+		this.sendMail = sendMail;
+		this.mailVO = mailVO;
 	}
 
 	@GetMapping("")
@@ -252,5 +264,26 @@ public class ManagerController {
 	public String noticedelete(int noticenum) {
 		noticeService.deleteNoticeVO(noticenum);
 		return "redirect:/manager/noticelist";
+	}
+	// 리스트불러오기 oneonone
+	@GetMapping("/oneononelist")
+	public String goAnserList(@AuthenticationPrincipal Member member, Model model) {
+		List<CustomerOneOnOneVO> list = customerservice.getMyInjury(member.getMEMBER_NUM());
+		model.addAttribute("List", list);
+		return "manager/managerAnswerList";
+	}
+	
+	@GetMapping("/oneononeanswer")
+	public String goAnserWrite(int CUSTOMER_NUM, Model model) {
+		CustomerOneOnOneVO vo = customerservice.goAnserWrite(CUSTOMER_NUM);
+		model.addAttribute("VO", vo);
+		return "manager/managerAnswer";
+	}
+	@PostMapping("/managersendanswer")
+	public String managerSendAnswer(CustomerOneOnOneVO VO) {
+		mailVO.setContent(VO.getCUSTOMER_CONTENT());
+		mailVO.setTo(VO.getCUSTOMER_EMAIL());
+		sendMail.sendAnswer(mailVO);
+		return "redirect:/manager/oneononelist";
 	}
 }
