@@ -21,5 +21,5 @@ public interface CustomerMapper {
 
 	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM);
 
-
+	
 }

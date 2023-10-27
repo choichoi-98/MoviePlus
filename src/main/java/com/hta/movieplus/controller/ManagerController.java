@@ -284,6 +284,7 @@ public class ManagerController {
 		mailVO.setContent(VO.getCUSTOMER_CONTENT());
 		mailVO.setTo(VO.getCUSTOMER_EMAIL());
 		sendMail.sendAnswer(mailVO);
+		// 업데이트문 넣음
 		return "redirect:/manager/oneononelist";
 	}
 }

@@ -61,8 +61,8 @@
 									</div>
 
 									<div class="col-12" style="display:flex; margin-left: 75%;">
-										<a href="#"><button type="button" class="form__btn" style="margin-right:20px;">뒤로</button></a>
-										<button type="submit"class="form__btn">수정
+										<a href="oneononelist"><button type="button" class="form__btn" style="margin-right:20px;">뒤로</button></a>
+										<button type="submit"class="form__btn"> 답변
 
 											
 										</button>

@@ -64,7 +64,6 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
-									<th>유 형</th>
 									<th>제 목</th>
 									<th>작 성 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
@@ -76,9 +75,6 @@
 									<tr>
 										<td>
 											<div class="main__table-text">1</div> <!-- 1부터 순차적으로 커지는 숫자 -->
-										</td>
-										<td>
-											<div class="main__table-text">${noticelist.CUSTOMER_NOTICE_TYPE}</div>
 										</td>
 										<td>
 											<div class="main__table-text">
