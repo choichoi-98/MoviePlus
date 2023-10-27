@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,5 +11,226 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp"/>
+	
+	<main class="main">
+		<div class="container-fluid">
+			<div class="row row--grid">
+				<!-- main title -->
+				<div class="col-12">
+					<div class="main__title">
+						<h2>대쉬보드</h2>
+
+					</div>
+				</div>
+				<!-- end main title -->
+
+				<!-- stats -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="stats">
+						<span>일일 총 관객수</span>
+						<p>${daySeatCount}</p>
+						<i class="icon ion-ios-stats"></i>
+					</div>
+				</div>
+				
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="stats">
+						<span>어제 총 관객수</span>
+						<p>${yesterdaySeatCount}</p>
+						<i class="icon ion-ios-stats"></i>
+					</div>
+				</div>
+				<!-- end stats -->
+
+				<!-- stats -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="stats">
+						<span>일일 티켓 총 수익</span>
+						<p>${dayTicketSales}</p>
+						<i class="icon ion-ios-film"></i>
+					</div>
+				</div>
+				<!-- end stats -->
+
+				<!-- stats -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="stats">
+						<span>어제 티켓 총 수익</span>
+						<p>${yesterdayTicketSales}</p>
+						<i class="icon ion-ios-film"></i>
+					</div>
+				</div>
+				<!-- end stats -->
+
+				<!-- dashbox -->
+				<div class="col-12 col-xl-6">
+					<div class="dashbox">
+						<div class="dashbox__title">
+							<h3><i class="icon ion-ios-trophy"></i>실시간 예매율</h3>
+
+							<div class="dashbox__wrap">
+								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/manager/total">View All</a>
+							</div>
+						</div>
+
+						<div class="dashbox__table-wrap">
+							<table class="main__table main__table--dash">
+								<thead>
+									<tr>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>예매율</th>
+									</tr>
+								</thead>
+								<tbody>
+								 	<c:forEach var="totallist" items="${totallist}" begin="0" end="4">
+									<tr>
+										<td>
+											<div class="main__table-text">${totallist.RNUM}</div>
+										</td>
+										<td>
+											<div class="main__table-text"><a href="#">${totallist.MOVIE_TITLE}</a></div>
+										</td>
+										<td>
+											<div class="main__table-text">${totallist.ratio}</div>
+										</td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- end dashbox -->
+
+				<!-- dashbox -->
+				<div class="col-12 col-xl-6">
+					<div class="dashbox">
+						<div class="dashbox__title">
+							<h3><i class="icon ion-ios-film"></i>당월 전체 영화 예매율</h3>
+
+							<div class="dashbox__wrap">
+								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/monthtotalcount">View All</a>
+							</div>
+						</div>
+
+						<div class="dashbox__table-wrap">
+							<table class="main__table main__table--dash">
+								<thead>
+									<tr>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>예매율</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="month" items="${monthReserveRate}" begin="0" end="4">
+									<tr>
+										<td>
+											<div class="main__table-text">${month.RNUM}</div>
+										</td>
+										<td>
+											<div class="main__table-text"><a href="#">${month.MOVIE_TITLE}</a></div>
+										</td>
+										<td>
+											<div class="main__table-text">${month.ratio}</div>
+										</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- end dashbox -->
+
+				<!-- dashbox -->
+				<div class="col-12 col-xl-6">
+					<div class="dashbox">
+						<div class="dashbox__title">
+							<h3><i class="icon ion-ios-film"></i>일일 좌석 판매율</h3>
+
+							<div class="dashbox__wrap">
+								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/manager/seatrate">View All</a>
+							</div>
+						</div>
+
+						<div class="dashbox__table-wrap">
+							<table class="main__table main__table--dash">
+								<thead>
+									<tr>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>판매율</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="dayseatList" items="${daySeatRate}" begin="0" end="4">
+									<tr>
+										<td>
+											<div class="main__table-text">${dayseatList.RNUM}</div>
+										</td>
+										<td>
+											<div class="main__table-text"><a href="#">${dayseatList.MOVIE_TITLE}</a></div>
+										</td>
+										<td>
+											<div class="main__table-text">${dayseatList.ratio}</div>
+										</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- end dashbox -->
+
+				<!-- dashbox -->
+				<div class="col-12 col-xl-6">
+					<div class="dashbox">
+						<div class="dashbox__title">
+							<h3><i class="icon ion-ios-star-half"></i>영화별 누적 관객수</h3>
+
+							<div class="dashbox__wrap">
+								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/manager/totalcount">View All</a>
+							</div>
+						</div>
+
+						<div class="dashbox__table-wrap">
+							<table class="main__table main__table--dash">
+								<thead>
+									<tr>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>관객수</th>
+									</tr>
+								</thead>
+								<tbody>
+								 <c:forEach var="dayMovieseatCount" items="${dayMovieseatCount}" begin="0" end="4">
+									<tr>
+										<td>
+											<div class="main__table-text">${dayMovieseatCount.RNUM}</div>
+										</td>
+										<td>
+											<div class="main__table-text"><a href="#">${dayMovieseatCount.MOVIE_TITLE}</a></div>
+										</td>
+										<td>
+											<div class="main__table-text">${dayMovieseatCount.rate}</div>
+										</td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- end dashbox -->
+			</div>
+		</div>
+	</main>
 </body>
 </html>
