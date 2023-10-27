@@ -30,14 +30,6 @@
 			<div id="contents" class="location-fixed">
 	<h2 class="tit">나의 문의내역</h2>
 
-	<div class="tab-block mb20">
-		<ul>
-			<li class="on"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li>
-			<li><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관 문의내역</a></li>
-			<li><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li>
-		</ul>
-	</div>
-
 	<ul class="dot-list">
 		<li id="tabDesc">고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
 	</ul>
@@ -45,14 +37,14 @@
 	<div class="table-wrap mt20">
 		<div class="board-view">
 			<div class="tit-area">
-				<p class="tit">ㅅㄷㄴㅅ</p>
+				<p class="tit">${MyInjuryDetail.CUSTOMER_TITLE}</p>
 			</div>
 
 			<div class="info">
 				
 				<p>
 					<span class="tit">문의지점</span>
-					<span class="txt">서울 - 센터</span>
+					<span class="txt">${MyInjuryDetail.CUSTOMER_SELECT_REGION} ${MyInjuryDetail.CUSTOMER_SELECT_CENEMA}</span>
 				</p>
 				
 
