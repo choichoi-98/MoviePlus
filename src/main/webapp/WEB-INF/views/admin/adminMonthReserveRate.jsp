@@ -23,9 +23,9 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>누적관객수 순위</h2>
+						<h2>월별 영화 예매율</h2>
 
-						<span class="main__title-stat"> <b>${eventlistcount}</b></span>
+						<span class="main__title-stat"> <b></b></span>
 
 						<div class="main__title-wrap">
 						 
@@ -59,31 +59,31 @@
 									<th>순위</th>
 									<th>영화코드</th>
 									<th>영화명</th>
-									<th>관객수</th>
+									<th>예매율</th>
 									<th>관리</th>
 								</tr>
 							</thead>
 
 							<tbody>
-							  <c:forEach var="seatCount" items="${dayMovieseatCount}">
+							  <c:forEach var="total" items="${totallist}">
 								<tr>
 									<td>
-										<div class="main__table-text">${seatCount.RNUM}</div><!-- 이벤트 번호 -->
+										<div class="main__table-text">${total.RNUM}</div>
 									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>${seatCount.MOVIE_CODE}</h3><!-- 이벤트 분류 -->
+												<h3>${total.MOVIE_CODE}</h3>
 											</div>
 										</div>
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="#">${seatCount.MOVIE_TITLE}</a>
-										</div><!-- 이벤트 제목 / 클릭시 이벤트 뷰 페이지로 이동 -->
+										<a href="#">${total.MOVIE_TITLE}</a>
+										</div>
 									</td>
 									<td>
-										<div class="main__table-text">${seatCount.rate}</div><!-- 이벤트 기간 -->
+										<div class="main__table-text">${total.ratio}%</div>
 									</td>
 									<td>
 										<div class="main__table-btns">

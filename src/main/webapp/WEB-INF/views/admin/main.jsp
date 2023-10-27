@@ -114,7 +114,7 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="catalog.html">View All</a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/monthtotalcount">View All</a>
 							</div>
 						</div>
 
@@ -194,7 +194,7 @@
 				<div class="col-12 col-xl-6">
 					<div class="dashbox">
 						<div class="dashbox__title">
-							<h3><i class="icon ion-ios-star-half"></i>일일 영화별 누적 관객수</h3>
+							<h3><i class="icon ion-ios-star-half"></i>영화별 누적 관객수</h3>
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
