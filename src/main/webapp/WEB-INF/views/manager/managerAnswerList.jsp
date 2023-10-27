@@ -45,12 +45,6 @@
 
 						<div class="main__title-wrap">
 							<!-- search -->
-							<form action="#" class="main__title-form">
-								<input type="text" placeholder="검색">
-								<button type="button">
-									<i class="icon ion-ios-search"></i>
-								</button>
-							</form>
 							<!-- end search -->
 						</div>
 					</div>
@@ -68,7 +62,6 @@
 									<th>제 목</th>
 									<th>답변상태</th>
 									<th>등록일</th>
-									<th style="display: flex; justify-content: center;">관 리</th>
 								</tr>
 							</thead>
 
@@ -92,16 +85,6 @@
 										<td>
 											<div class="main__table-text">${m.CUSTOMER_REGISTRATIONDATE}</div>
 										</td>
-										<td>
-											<div class="main__table-btns"
-												style="display: flex; justify-content: center;">
-												<a href="#modal-delete"
-													data-noticenum="${m.CUSTOMER_NUM}"
-													class="main__table-btn main__table-btn--delete open-modal">
-													<i class="icon ion-ios-trash"></i>
-												</a>
-											</div>
-										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -109,9 +92,6 @@
 						</table>
 					</div>
 				</div>
-				<!-- end comments -->
-				<a href="${pageContext.request.contextPath}/manager/oneononeanswer"
-					class="main__title-link">작성하기</a>
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">

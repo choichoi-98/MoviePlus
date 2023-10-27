@@ -138,15 +138,17 @@ public class SendMail {
 				helper.setTo(vo.getTo()); // 받는사람 메일주소
 
 				String subject = "[MoviePlus] 문의내역 답변입니다.";
-
+				String pluscontent = "안녕하세요 MoviePlus 입니다.<br>고객님께서 문의하신 내용에 대하여<br> 답변드립니다.<br>";
+						
+				
 				helper.setSubject(subject); // 메일 제목
-				helper.setText(vo.getContent(), true); // 메일 내용 (값을받아서 쓰면됨)
+				helper.setText(pluscontent + vo.getContent(), true); // 메일 내용 (값을받아서 쓰면됨)
 
 			}
 		}; 
 
 		mailSender.send(mp); // 메일 전송합니다.
-		logger.info("회원가입 인증번호 전송했습니다.");
+		logger.info("답변 전송이 완료되었습니다.");
 
 	}
 

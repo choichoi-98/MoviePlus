@@ -64,7 +64,7 @@
 							<thead>
 								<tr>
 									<th>글 번 호</th>
-									<th>제 목</th>
+									<th style="min-width:300px;">제 목</th>
 									<th>유 형</th>
 									<th>작 성 일</th>
 									<th style="display: flex; justify-content: center;">관 리</th>
@@ -111,17 +111,30 @@
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
+						<span>${noticeCount}개 중 10개</span>
 
 						<ul class="paginator">
-							<li class="paginator__item paginator__item--prev"><a
-								href="#"><i class="icon ion-ios-arrow-back"></i></a></li>
-							<li class="paginator__item"><a href="#">1</a></li>
-							<li class="paginator__item paginator__item--active"><a
-								href="#">2</a></li>
-							<li class="paginator__item"><a href="#">3</a></li>
-							<li class="paginator__item"><a href="#">4</a></li>
-							<li class="paginator__item paginator__item--next"><a
-								href="#"><i class="icon ion-ios-arrow-forward"></i></a></li>
+							<li class="paginator__item paginator__item--prev"
+								${page <= 1 ? 'style="pointer-events: none;"' : ''}><a
+								href="noticelist?page=${page-1}"><i
+									class="icon ion-ios-arrow-back"></i></a></li>
+
+							<c:forEach var="a" begin="${startpage}" end="${endpage}">
+								<c:if test="${a == page }">
+									<li class="paginator__item paginator__item--active"><a
+										href="#">${a }</a></li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="paginator__item"><a
+										href="noticelist?page=${a }">${a}</a></li>
+								</c:if>
+							</c:forEach>
+
+							<li class="paginator__item paginator__item--next"
+								${page >= maxpage ? 'style="pointer-events: none;"' : ''}>
+								<a href="noticelist?page=${page+1}"><i
+									class="icon ion-ios-arrow-forward"></i></a>
+							</li>
 						</ul>
 					</div>
 				</div>

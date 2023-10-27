@@ -49,4 +49,22 @@
 		FROM CUSTOMER_NOTICE
 		ORDER BY CUSTOMER_NOTICE_NUM DESC
 	</select>
+	
+	<select id="getCountByNotice" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_TYPE = '전체'
+	</select>
+	
+	<select id='getNoticelistPagination' parameterType="map" resultType="noticeVO">
+		SELECT * 
+		FROM
+			( SELECT ROWNUM RNUM, CUSTOMER_NOTICE.*
+				FROM CUSTOMER_NOTICE
+				WHERE CUSTOMER_NOTICE_TYPE = '전체' 
+				AND ROWNUM &lt;= #{end} <!-- &lt;는 <  -->
+				ORDER BY CUSTOMER_NOTICE_SYSDATE desc
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
 </mapper>

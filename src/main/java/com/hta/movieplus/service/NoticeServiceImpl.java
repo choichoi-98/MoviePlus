@@ -4,7 +4,9 @@
 
 package com.hta.movieplus.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +68,53 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public int getCountByNotice() {
+		// TODO Auto-generated method stub
+		return dao.getCountByNotice();
+	}
+	
+	@Override
+	public Map<String, Object> pagination(int page) {
+		// TODO Auto-generated method stub
+		Map<String, Object> paginationDataMap = new HashMap<String, Object>();
 
+		int limit = 1; // 한 페이지에 보여줄 갯수
+
+		int listcount = getCountByNotice(); // 공지사항의 개수
+
+		int maxpage = (listcount + limit - 1) / limit; // 페이지의 갯수
+
+		int startpage = ((page - 1) / 6) * 6 + 1; // 페이지 시작값
+
+		int endpage = startpage + 6 - 1; // 페이지 마지막값
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		paginationDataMap.put("page", page);
+		paginationDataMap.put("maxpage", maxpage);
+		paginationDataMap.put("startpage", startpage);
+		paginationDataMap.put("endpage", endpage);
+		paginationDataMap.put("limit", limit);
+		return paginationDataMap;
+	}
+
+	@Override
+	public List<NoticeVO> getNoticelistPagination(int page, int limit) {
+		// TODO Auto-generated method stub
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+
+		Map<String, Object> dataMap = new HashMap<>();
+
+		dataMap.put("start", startrow);
+		dataMap.put("end", endrow);
+
+		return dao.getNoticelistPagination(dataMap);
+	}
 	
 
 	

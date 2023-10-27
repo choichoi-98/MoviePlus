@@ -1,6 +1,7 @@
 package com.hta.movieplus.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hta.movieplus.domain.NoticeVO;
 
@@ -22,7 +23,11 @@ public interface NoticeService {
 
 	public NoticeVO getNoticeDetail();
 	
+	public Map<String, Object> pagination(int page);
 	
+	public int getCountByNotice();
+
+	public List<NoticeVO> getNoticelistPagination(int page, int i);
 	
 
 	
