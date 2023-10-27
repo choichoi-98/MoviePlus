@@ -16,7 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- 탭 클릭 시 이벤트 처리 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="static/store_tabs.js"></script>
 </head>
 <body>
@@ -60,9 +60,10 @@
 					<div class="store-list mt30">
 						<c:forEach var="i" items="${pointlist}">
 						<ul class="list">
-							<li class="">
-								<a href="item?ITEM_CODE=${i.ITEM_CODE}">
-									<div class="soldout">SOLD OUT</div>
+							<li class="sold-out">
+								<a href="">
+								<%-- <a href="item?ITEM_CODE=${i.ITEM_CODE}"> --%>
+									<div class="soldout">VIP 등급</div>
 									<div class="label"></div>
 									<div class="img">
 										<img

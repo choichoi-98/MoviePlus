@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +18,7 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 	
 <script>
 	$(function() {
@@ -57,13 +62,30 @@ $(function() {
             }
         });
     });
-}); 
+});
+	
+ 	$(function() {
+	    // 페이지 번호 클릭 이벤트 처리
+	    document.querySelectorAll('.paginator__item a').forEach(function(pageLink) {
+	        pageLink.addEventListener('click', function(event) {
+	            // event.preventDefault(); // 주석 처리: 클릭 시 주소가 변경되도록 하려면 주석 처리
+
+	            // 현재 활성화된 페이지 번호에서 paginator__item--active 클래스 제거
+	            document.querySelector('.paginator__item.paginator__item--active').classList.remove('paginator__item--active');
+
+	            // 클릭한 페이지 번호에 paginator__item--active 클래스 추가
+	            this.parentNode.classList.add('paginator__item--active');
+	        });
+	    });
+	}); 
+
 </script>
 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
 	<!-- main content -->
+	<c:if test="${pinfo.MEMBER_ID=='admin'}">
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row">
@@ -184,8 +206,9 @@ $(function() {
 							<li class="paginator__item paginator__item--prev">
 								<a href="#"><i class="icon ion-ios-arrow-back"></i></a>
 							</li>
-							<li class="paginator__item paginator__item--active"><a href="#">1</a></li>
-							<li class="paginator__item"><a href="#">2</a></li>
+							<!-- <li class="paginator__item paginator__item--active"><a href="?page=1">1</a></li> -->
+							<li class="paginator__item "><a href="?page=1">1</a></li>
+							<li class="paginator__item "><a href="?page=2">2</a></li>
 							<li class="paginator__item paginator__item--next">
 								<a href="#"><i class="icon ion-ios-arrow-forward"></i></a>
 							</li>
@@ -196,6 +219,7 @@ $(function() {
 			</div>
 		</div>
 	</main>
+	</c:if>
 	<!-- end main content -->
 
 	<!-- modal status -->

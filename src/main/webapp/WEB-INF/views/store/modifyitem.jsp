@@ -12,7 +12,7 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 
 </head>
 <body>

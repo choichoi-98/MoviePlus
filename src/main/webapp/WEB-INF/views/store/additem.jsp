@@ -12,10 +12,10 @@
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
 
 	<title></title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script>
 $(document).ready(function() {
-s    $("#additem").click(function(e) {
+    $("#additem").click(function(e) {
         e.preventDefault(); // 버튼의 기본 동작 X
         
         // 선택된 값을 가져오기
@@ -98,12 +98,12 @@ s    $("#additem").click(function(e) {
 										<input type="text" class="form__input" placeholder="상품 코드" name="ITEM_CODE">
 									</div>
 
-									<div class="col-12">
+									<!-- <div class="col-12">
 										<div class="form__gallery">
 											<label id="gallery1" for="form__gallery-upload">상품 사진 등록</label>
 											<input data-name="#gallery1" id="form__gallery-upload" name="pic2" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 
