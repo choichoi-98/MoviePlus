@@ -21,7 +21,7 @@
 			<div class="inner-wrap">
 				<div class="location">
 					<span>Home</span> <a href="#" title="혜택 메인 페이지로 이동">혜택</a> <a
-						href="#" title="멤버십안내 페이지로 이동">메가박스 멤버십</a> <a href="#"
+						href="#" title="멤버십안내 페이지로 이동">무비플러스 멤버십</a> <a href="#"
 						title="VIP LOUNGE 페이지로 이동">VIP LOUNGE</a>
 				</div>
 
@@ -33,7 +33,7 @@
 		<!-- contents -->
 		<div id="contents">
 			<div class="inner-wrap">
-				<h2 class="tit">메가박스 멤버십</h2>
+				<h2 class="tit">무비플러스 멤버십</h2>
 
 				<div class="tab-list">
 					<ul id="membership-tab-ul">
@@ -50,9 +50,9 @@
 				<sec:authorize access="isAnonymous()">
 					<div class="benefit-vip-lounge2 logout">
 						<div class="title">
-							MEGABOX <span>VIP</span>
+							MOVIEPLUS <span>VIP</span>
 						</div>
-						<div class="subtext">메가박스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 메가박스
+						<div class="subtext">무비플러스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 무비플러스
 							등급을 확인하세요.</div>
 						<a href="#" id="membership-login" class="btn">로그인</a>
 					</div>
@@ -284,7 +284,7 @@
 						<div class="title">5년 VIP 쿠폰</div>
 						<div class="sText">5년 연속 VIP 혜택 영화 관람 쿠폰 2매 증정!</div>
 						<div class="mText">
-							지난 VIP 등급 이력은 로그인 후 ‘ 나의 메가박스 &gt; 지난 등급 조회 ’에서 확인 가능합니다.<br>
+							지난 VIP 등급 이력은 로그인 후 ‘ 나의 무비플러스 &gt; 지난 등급 조회 ’에서 확인 가능합니다.<br>
 							5년 VIP 쿠폰은 2023년 3월말 순차적으로 지급됩니다.<br> 5년 VIP 쿠폰의 세부 사항은 쿠폰
 							발급 후, 쿠폰 내 유의 사항을 참고해 주세요.
 						</div>
@@ -384,12 +384,12 @@
 							<div class="layer-joins-membership-request">
 								<div class="tit-box">
 									<div class="tit">
-										<span class="font-purple">MEGABOX</span> <i
+										<span class="font-purple">MOVIEPLUS</span> <i
 											class="iconset ico-x-big"></i> <span class="font-gblue">중앙멤버십</span>
 									</div>
 
 									<p class="txt">
-										항상 메가박스를 사랑해주시는 VIP 고객님들을 위하여 메가박스와 중앙멤버십이 만나 VIP 멤버십 혜택을
+										항상 무비플러스를 사랑해주시는 VIP 고객님들을 위하여 무비플러스와 중앙멤버십이 만나 VIP 멤버십 혜택을
 										강화하였습니다.<br> VIP 고객님들을 위한 더욱 풍요롭고 다양한 할인 혜택을 만나보세요.
 									</p>
 								</div>
@@ -429,7 +429,7 @@
 														<td><i class="iconset ico-benefit-jm-sale"></i>
 
 															<p>
-																메가박스 최대<br>9,000원 할인
+																무비플러스 최대<br>9,000원 할인
 															</p></td>
 														<td><i class="iconset ico-plus-gray-big">더하기</i></td>
 														<td><i class="iconset ico-benefit-jm-health-chk"></i>
@@ -472,9 +472,9 @@
 									<div class="text-cont">
 										<div class="scroll" tabindex="0">
 											<p>
-												(주)메가박스중앙이 제공하는 중앙 멤버십 혜택을 받을 경우 혜택 제공을 위하여 관련한 정보는<br>
+												(주)무비플러스중앙이 제공하는 중앙 멤버십 혜택을 받을 경우 혜택 제공을 위하여 관련한 정보는<br>
 												필요한 범위 내에서 아래와 같이 제공됩니다.<br> <br> 1. 개인정보 제공 동의<br>
-												메가박스는 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 이용자의 개인정보에 있어<br>
+												무비플러스는 정보통신망 이용촉진 및 정보보호 등에 관한 법률에 따라 이용자의 개인정보에 있어<br>
 												아래와 같이 알리고 동의를 받아 중앙멤버십 서비스 제공자에 제공합니다.<br> <br>
 												2. 개인정보 제공 받는 자<br> (주)중앙일보, 중앙일보 M&amp;P(주)<br> <br>
 												3. 개인정보 이용 목적<br> 중앙멤버십 서비스 이용에 따른 본인 식별 및 혜택 제공, 고객 응대<br>
@@ -515,7 +515,7 @@
 						<div class="mText">
 							VIP 회원 대상 교보문고 &amp; 핫트랙스 10% 할인 쿠폰을 드립니다. (오프라인 / 1만원 이상 결제 시 사용
 							가능)<br> VIP 회원 중 마케팅 정보 수신 동의 회원 대상에 한하여 제공됩니다.<br> 할인
-							쿠폰은 매월 초 메가박스APP으로 자동 발급됩니다. (나의 메가박스&gt; 제휴쿠폰)<br> 할인 쿠폰 사용
+							쿠폰은 매월 초 무비플러스APP으로 자동 발급됩니다. (나의 무비플러스&gt; 제휴쿠폰)<br> 할인 쿠폰 사용
 							전 쿠폰 내 유의 사항을 반드시 확인 바랍니다.<br> 제휴 혜택은 사정에 따라 내용이 변경되거나 종료될 수
 							있습니다.
 						</div>
