@@ -29,9 +29,9 @@
 		WHERE CUSTOMER_NUM = #{deletenum}
 	</delete>
 	
-	<!-- <select id="">
+	<select id="goAnserWrite" resultType="customerOneOnOneVO">
 		SELECT *
-		CUSTOMER_ONEONONE
-		WHERE CUSTOMER_NUM = #{선택한 소스의 요소의 값}
-	</select> -->
+		FROM CUSTOMER_ONEONONE
+		WHERE CUSTOMER_NUM = #{CUSTOM_NUM}
+	</select>
 </mapper>

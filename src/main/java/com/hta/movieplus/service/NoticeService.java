@@ -19,6 +19,8 @@ public interface NoticeService {
 	public List<NoticeVO> getNoticelistExceptEntire();
 
 	public List<NoticeVO> getTotalNoticeList();
+
+	public NoticeVO getNoticeDetail();
 	
 	
 	

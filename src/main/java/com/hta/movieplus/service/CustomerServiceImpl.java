@@ -39,4 +39,9 @@ public class CustomerServiceImpl implements CustomerService {
 	public int deletemyinjury(int deletenum) {
 		return dao.deletemyinjury(deletenum);
 	}
+
+	@Override
+	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM) {
+		return dao.goAnserWrite(cUSTOMER_NUM);
+	}
 }
