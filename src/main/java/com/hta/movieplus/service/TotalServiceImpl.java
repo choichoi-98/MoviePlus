@@ -54,6 +54,11 @@ public class TotalServiceImpl implements TotalService {
 		return dao.dayMovieseatCount(THEATER_SCHEDULE_DATE);
 	}
 
+	@Override
+	public List<Total> monthReserveRate(String currentdate) {
+		return dao.monthReserveRate(currentdate);
+	}
+
 
 	
 

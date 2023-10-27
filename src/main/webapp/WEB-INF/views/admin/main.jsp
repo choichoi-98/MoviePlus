@@ -122,27 +122,25 @@
 							<table class="main__table main__table--dash">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>TITLE</th>
-										<th>CATEGORY</th>
-										<th>STATUS</th>
+										<th>순위</th>
+										<th>영화명</th>
+										<th>예매율</th>
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="month" items="${monthReserveRate}" begin="0" end="4">
 									<tr>
 										<td>
-											<div class="main__table-text">26</div>
+											<div class="main__table-text">${month.RNUM}</div>
 										</td>
 										<td>
-											<div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+											<div class="main__table-text"><a href="#">${month.MOVIE_TITLE}</a></div>
 										</td>
 										<td>
-											<div class="main__table-text">Movie</div>
-										</td>
-										<td>
-											<div class="main__table-text main__table-text--green">Visible</div>
+											<div class="main__table-text">${month.ratio}</div>
 										</td>
 									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
 						</div>

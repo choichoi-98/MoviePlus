@@ -42,6 +42,7 @@ public class AdminController {
 		currentdate = currentdatetime.format(format);
 		
 		List<Total> totallist = totalService.dayReserveRate(currentdate); //일일 예매율
+		List<Total> monthReserveRate = totalService.monthReserveRate(currentdate); 	//이번달 예매율
 		int dayTicketSales = totalService.dayTicketSales(currentdate);	//일일 티켓 수익
 		int dayGoodsSales = totalService.dayGoodsSales(currentdate);	//일일 상품 수익
 		int dayTotalSales = totalService.dayTotalSales(currentdate);	//일일 티켓 + 상품 수익
@@ -54,6 +55,7 @@ public class AdminController {
 		mv.addObject("dayTotalSales", dayTotalSales);
 		mv.addObject("daySeatCount", daySeatCount);
 		mv.addObject("dayMovieseatCount", dayMovieseatCount);
+		mv.addObject("monthReserveRate", monthReserveRate);
 		
 		mv.setViewName("admin/main");
 		return mv;
@@ -88,13 +90,15 @@ public class AdminController {
 		return mv;
 	}
 	
-	//월별 예매율 페이지
+	//이번달 예매율 페이지
 	@GetMapping("/admin/monthtotalcount")
 	public ModelAndView monthReserveRate(String currentdate, ModelAndView mv) {
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		currentdate = currentdatetime.format(format);
 		
+		List<Total> monthReserveRate = totalService.monthReserveRate(currentdate); 
+		mv.addObject("monthReserveRate", monthReserveRate);
 		
 		mv.setViewName("/admin/adminMonthReserveRate");
 		return mv;
