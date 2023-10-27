@@ -92,6 +92,19 @@ public class ChatController {
 		return mv;
 	}
 	
+	//메시지 저장
+	@RequestMapping("/saveMessage")
+	public int saveMessage(@RequestParam("RoomNum") String roomN) {
+		//select로 roomN에 해당하는 chat_subject와 chat_object값 가져오기-해당 방의 참여자를 알기위함
+		List<ChatRoomVO> chatRoomInfo = chatServiceImpl.selectChatRoom(roomN);
+		for(ChatRoomVO room: chatRoomInfo) {
+			logger.info("chat_room_num = " + room.getChat_Room_num());
+			logger.info("chat_subject = " + room.getChat_Subject());
+			logger.info("chat_subject = " + room.getChat_Object());
+		}
+		return 0;
+	}
+	
 	// 방 페이지
 	@RequestMapping("/room")
 	public ModelAndView room() {

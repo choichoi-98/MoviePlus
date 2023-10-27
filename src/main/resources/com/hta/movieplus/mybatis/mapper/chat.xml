@@ -33,4 +33,10 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = #{objectId}
 	</select>
+	
+	<!-- 메시지 저장: chat_room에 관련된 정보 가져오기 -->
+	<select id="selectChatRoom" resultType="chatRoomVO">
+		SELECT * FROM CHAT_ROOM
+		WHERE CHAT_ROOM_NUM = #{roomN}
+	</select>
 </mapper>
