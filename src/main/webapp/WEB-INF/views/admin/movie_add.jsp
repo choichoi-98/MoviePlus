@@ -13,7 +13,7 @@
 	var pauseImagePath="${pageContext.request.contextPath}/resources/image/movie/pause.png";
 	
 	function openPop(){
-		var popup = window.open('${pageContext.request.contextPath}/chat/friendList',
+		var popup = window.open('${pageContext.request.contextPath}/chat/chatList',
 							'채팅팝업','width=672px, height=640px');
 							//chat/room
 							//chat/friendList

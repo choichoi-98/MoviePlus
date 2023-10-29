@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.hta.movieplus.domain.ChatMessageVO;
 import com.hta.movieplus.domain.ChatRoomVO;
 import com.hta.movieplus.domain.Member;
 
@@ -28,6 +29,12 @@ public interface ChatMapper {
 	
 	//메시지 저장
 	int saveMessage(String chatFrom,  String content, String roomN);
+
+	//메시지 불러오기 
+	List<ChatMessageVO> getMessageList(String roomN);
+
+	//채팅방 목록 불러오기 + 최근 대화 
+	List<ChatRoomVO> getChatRoomList(String memberId);
 
 	
 	

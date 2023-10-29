@@ -1,6 +1,7 @@
 package com.hta.movieplus.domain;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ChatMessageVO {
     private Long message_id;
@@ -8,6 +9,19 @@ public class ChatMessageVO {
     private String content;
     private Timestamp create_at;
     private String chat_room;
+    
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(create_at); // 날짜를 문자열로 변환
+    }
+
+    public String getTime() {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        return timeFormat.format(create_at); // 시간을 문자열로 변환
+    }
+    
+    
+    
 	public Long getMessage_id() {
 		return message_id;
 	}
