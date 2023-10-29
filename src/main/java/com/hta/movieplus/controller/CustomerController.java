@@ -104,7 +104,6 @@ public class CustomerController {
 	@ResponseBody
 	@PostMapping("/getTheaterListAjax")
 	public List<Theater> getTheaterListAjax(String location){
-		
 		return theaterservice.getTheaterListByLocation(location);
 	}
 	
@@ -119,5 +118,13 @@ public class CustomerController {
 	public String MyInjuryDelite(int deletenum) {
 		customerService.deletemyinjury(deletenum);
 		return "redirect:/customer_service/myinjury";
+	}
+	
+	//공지사항 detail
+	@GetMapping("/getnoticedetail")
+	public String getNoticeDetail(int noticedetailnum, Model model) {
+		NoticeVO getnoticedetail = noticeservice.getNoticeDetail(noticedetailnum);
+		model.addAttribute("getNoticeDetail", getnoticedetail);
+		return "customer_service/customer_service_notice_detail";
 	}
 }

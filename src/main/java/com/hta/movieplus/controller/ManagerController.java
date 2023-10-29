@@ -279,12 +279,14 @@ public class ManagerController {
 		model.addAttribute("VO", vo);
 		return "manager/managerAnswer";
 	}
+
+	/* 값 메일로 보내주면서 동시에 대기에서 완료로 변경 */
 	@PostMapping("/managersendanswer")
 	public String managerSendAnswer(CustomerOneOnOneVO VO) {
 		mailVO.setContent(VO.getCUSTOMER_CONTENT());
 		mailVO.setTo(VO.getCUSTOMER_EMAIL());
 		sendMail.sendAnswer(mailVO);
-		// 업데이트문 넣음
+		//업데이트문
 		return "redirect:/manager/oneononelist";
 	}
 }

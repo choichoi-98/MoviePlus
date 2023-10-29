@@ -115,6 +115,11 @@ public class NoticeServiceImpl implements NoticeService {
 
 		return dao.getNoticelistPagination(dataMap);
 	}
+
+	@Override
+	public NoticeVO getNoticeDetail(int noticedetailnum) {
+		return dao.getNoticeDetail(noticedetailnum);
+	}
 	
 
 	

@@ -65,7 +65,8 @@
 						<tr>
 							<td>페이지네이션</td>
 							<td>${notice.CUSTOMER_NOTICE_THEATER}</td>
-							<td>${notice.CUSTOMER_NOTICE_SUBJECT}</td>
+							<td><a href ="${pageContext.request.contextPath}/customer_service/getnoticedetail?noticedetailnum=${notice.CUSTOMER_NOTICE_NUM}">
+							${notice.CUSTOMER_NOTICE_SUBJECT}</td>
 							<td>${notice.CUSTOMER_NOTICE_REGION}</td>
 							<td>${notice.CUSTOMER_NOTICE_SYSDATE}</td>
 						</tr>

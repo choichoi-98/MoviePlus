@@ -16,5 +16,5 @@ public interface CustomerService {
 	public int deletemyinjury(int deletenum);
 
 	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM);
-
+	
 }
