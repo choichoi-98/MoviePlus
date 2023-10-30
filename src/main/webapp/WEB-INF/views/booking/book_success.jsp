@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="pinfo" />
 </sec:authorize>
@@ -58,8 +59,8 @@
 					<div class="reserve-ininfomation-box">
 						<div class="movie-poster-area">
 							<p>
-								티켓 예매번호 <!-- 티켓 예매번호 -->
-								<span class="roboto">${BookingList[0].KPAY_NUM}</span>
+								티켓 예매코드 <!-- 티켓 예매번호 -->
+								<span class="roboto">mplus${BookingList[0].KPAY_NUM}</span>
 							</p>
 							<img src="${fn:split(BookingList[0].MOVIE_POSTER, '|')[0]}"
 								 alt="${BookingList[0].MOVIE_TITLE}" onerror="noImg(this);">
@@ -71,8 +72,9 @@
 								<p class="tit">
 									<strong>예매가 완료되었습니다 <!-- 예매가 완료되었습니다 --><i>!</i></strong>
 										<span class="righten"> <i class="iconset ico-circle-point"></i> 
-											고객님의 상영익일 적립예정 포인트는 
-											<em>${BookingList[0].KPAY_AMOUNT/100.0}</em>입니다. 
+										고객님의 상영익일 적립예정 포인트는 
+										<em><fmt:formatNumber value="${BookingList[0].KPAY_AMOUNT/100}" type="number" pattern="###,###" />P
+										</em>입니다. 
 										</span>
 								</p>
 							</div>

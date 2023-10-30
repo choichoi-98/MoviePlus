@@ -135,7 +135,8 @@
 													<td><a
 														href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
 														class="a-link regibtn" name="brchList" title="삭제"
-														data-paynum="${p.PAY_NUM}">등록</a></td>
+														data-paynum="${p.PAY_NUM}">등록</a>
+													</td>
 												</tr>
 											</c:if>
 										</c:if>

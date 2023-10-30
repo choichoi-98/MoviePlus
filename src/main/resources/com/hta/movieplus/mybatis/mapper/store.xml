@@ -73,6 +73,7 @@
 		LEFT JOIN COUPON
 		ON STORE_PAY.PAY_NUM = COUPON.PAY_NUM
 		WHERE STORE_PAY.pg_token IS NOT NULL
+		ORDER BY COUPON_NUM DESC
 	</select>
 	
 	<select id="getStoreCoupon" resultType="StorePayVO">
