@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hta.movieplus.mybatis.mapper.NoticePaginationMapper">
+	
+	<select id="getNoticeListCountByOption" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOMER_NOTICE
+		<choose>
+			<when test="option == '무비플러스'">
+		WHERE CUSTOMER_NOTICE_TYPE = '전체'
+			</when>
+			<when test="option == '지점'">
+		WHERE CUSTOMER_NOTICE_TYPE != '전체'	
+			</when>
+			<otherwise>
+		WHERE CUSTOMER_NOTICE_TYPE IS NOT NULL		
+			</otherwise>
+		</choose>
+		AND CUSTOMER_NOTICE_THEATER LIKE '%' || #{keyword} || '%'
+	</select> 	
+	
+	<select id="getNoticeList" parameterType="map" resultType="noticeVO">
+		SELECT * 
+		FROM ( SELECT ROWNUM RNUM, CUSTOMER_NOTICE.*
+				FROM CUSTOMER_NOTICE
+		<choose>
+			<when test="option == '무비플러스'">
+		WHERE CUSTOMER_NOTICE_TYPE = '전체'
+			</when>
+			<when test="option == '지점'">
+		WHERE CUSTOMER_NOTICE_TYPE != '전체'	
+			</when>			
+			<otherwise>
+		WHERE CUSTOMER_NOTICE_TYPE IS NOT NULL		
+			</otherwise>
+		</choose>
+				AND CUSTOMER_NOTICE_THEATER LIKE '%' || #{keyword} || '%'
+				AND ROWNUM &lt;= #{end}
+				ORDER BY CUSTOMER_NOTICE_NUM desc
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	
+	
+</mapper>

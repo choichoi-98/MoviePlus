@@ -79,6 +79,16 @@ public class ManagerTotalServiceImpl implements ManagerTotalService {
 		return mapper.daySeatRate(dataMap);
 	}
 
+	@Override
+	public List<Total> monthEachReserveRate(int theaterId, String month) {
+		// TODO Auto-generated method stub
+		Map<String, Object> dataMap = new HashMap<>();
+		dataMap.put("theaterId", theaterId);
+		dataMap.put("month", month);
+		
+	   return mapper.monthEachReserveRate(dataMap);
+	}
+
 	
 	
 }

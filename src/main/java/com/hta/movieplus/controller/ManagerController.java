@@ -166,6 +166,24 @@ public class ManagerController {
 		mv.setViewName("manager/manageRoom");
 		return mv;
 	}
+	
+	@GetMapping("/monthtotalcount")
+	public String monthReserveRate(@RequestParam(value="month" ,required=false, defaultValue="0") String month, Model model) {
+		int theaterId = (int) model.asMap().get("theaterId");
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String currentdate = currentdatetime.format(format);
+		
+		if(month.equals("1") ||month.equals("2")) {
+			List<Total> monthEachReserveRate = totalService.monthEachReserveRate(theaterId, month);
+			model.addAttribute("monthReserveRate", monthEachReserveRate);
+		} else {
+			List<Total> monthReserveRate = totalService.monthReserveRate(theaterId, currentdate); 
+			model.addAttribute("monthReserveRate", monthReserveRate);
+		}
+		
+		return "/manager/managerMonthReserveRate";
+	}
 
 	@GetMapping("/addroom")
 	public ModelAndView addRoomView(ModelAndView mv, Model model) {

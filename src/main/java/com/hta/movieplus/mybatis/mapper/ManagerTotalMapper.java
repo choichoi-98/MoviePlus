@@ -21,5 +21,7 @@ public interface ManagerTotalMapper {
 	public List<Total> monthReserveRate(Map<String, Object> dataMap);
 
 	public List<Total> daySeatRate(Map<String, Object> dataMap);
+
+	public List<Total> monthEachReserveRate(Map<String, Object> dataMap);
 	
 }

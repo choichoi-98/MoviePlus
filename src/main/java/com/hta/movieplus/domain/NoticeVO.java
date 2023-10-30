@@ -9,6 +9,8 @@ public class NoticeVO {
 	private String CUSTOMER_NOTICE_CONTENT; // 내용
 	private String CUSTOMER_NOTICE_SYSDATE; // 등록일
 	
+	private int RNUM;
+	
 	public int getCUSTOMER_NOTICE_NUM() {
 		return CUSTOMER_NOTICE_NUM;
 	}
@@ -58,6 +60,12 @@ public class NoticeVO {
 				+ CUSTOMER_NOTICE_THEATER + ", CUSTOMER_NOTICE_SUBJECT=" + CUSTOMER_NOTICE_SUBJECT
 				+ ", CUSTOMER_NOTICE_CONTENT=" + CUSTOMER_NOTICE_CONTENT + ", CUSTOMER_NOTICE_SYSDATE="
 				+ CUSTOMER_NOTICE_SYSDATE + "]";
+	}
+	public int getRNUM() {
+		return RNUM;
+	}
+	public void setRNUM(int rNUM) {
+		RNUM = rNUM;
 	}
 
 	

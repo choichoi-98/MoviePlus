@@ -17,5 +17,7 @@ public interface ManagerTotalService {
 	public List<Total> monthReserveRate(int theaterId, String currentdate);
 
 	public List<Total> daySeatRate(int theaterId, String THEATER_SCHEDULE_DATE);
+
+	public List<Total> monthEachReserveRate(int theaterId, String month);
 	
 }
