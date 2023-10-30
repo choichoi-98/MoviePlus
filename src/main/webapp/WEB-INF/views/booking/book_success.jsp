@@ -21,7 +21,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/book_success.js"></script>
 </head>
 <body>
@@ -121,7 +121,7 @@
 				<!--// reserve-finish -->
 
 				<div class="btn-group pt30">
-					<a href="#" class="button large" w-data="600" h-data="600" id="btn_ticket_print" title="교환권출력">교환권출력 <!-- 교환권출력 --></a>
+					<a href="" class="button large" w-data="600" h-data="600" id="btn_ticket_print" title="교환권출력">교환권출력 <!-- 교환권출력 --></a>
 																				
 							<a href="#" class="button large" id="btn_bill_print" title="영수증출력" style="display: none;">영수증출력 <!-- 영수증출력 --></a>
 							<a href="success" class="button purple large" title="예매내역 페이지로 이동">예매내역 <!-- 예매내역 --></a>

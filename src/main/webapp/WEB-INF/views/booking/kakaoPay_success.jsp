@@ -20,7 +20,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/kakaopay_success.js"></script>
 </head>
 <body>
@@ -70,7 +70,7 @@
 										<th scope="colgroup" colspan="2">상품명</th>
 										<th scope="col">결제금액</th>
 										<th scope="col">선택 좌석</th>
-										<th scope="col">구매취소</th>
+										<th scope="col">예매취소</th>
 									</tr>
 								</thead>
 
