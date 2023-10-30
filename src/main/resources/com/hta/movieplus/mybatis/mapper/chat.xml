@@ -49,10 +49,11 @@
 	
 	<!-- 메시지 목록 가져오기 -->
 	<select id="getMessageList" resultType="ChatMessageVO">
-	    SELECT  CHAT_ROOM, MESSAGE_FROM, CREATE_AT, CONTENT
-		FROM CHAT_MESSAGE
-		WHERE CHAT_ROOM = #{roomN}
-		ORDER BY create_at
+		SELECT CM.CHAT_ROOM, CM.MESSAGE_FROM, CM.CREATE_AT, CM.CONTENT, M.MEMBER_NAME
+		FROM CHAT_MESSAGE CM
+		JOIN MEMBER M ON CM.MESSAGE_FROM = M.MEMBER_ID
+		WHERE CM.CHAT_ROOM = #{roomN}
+		ORDER BY CM.CREATE_AT
 	</select>
 	
 	<!-- 채팅방 + 최근 대화 -->

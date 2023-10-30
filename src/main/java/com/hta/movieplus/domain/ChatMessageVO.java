@@ -9,8 +9,19 @@ public class ChatMessageVO {
     private String content;
     private Timestamp create_at;
     private String chat_room;
+    private String member_name; //보낸 사람 이름
     
-    public String getDate() {
+    
+    
+    public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+	public String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(create_at); // 날짜를 문자열로 변환
     }

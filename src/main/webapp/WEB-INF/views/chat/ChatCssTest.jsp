@@ -17,24 +17,25 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="${pageContext.request.contextPath}/resources/css/chatCssTest.css" rel="stylesheet">
-  <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-  crossorigin="anonymous"
-></script>
+ 
 
 <script>
 $(document).ready(function() {
   let token = $("meta[name='_csrf']").attr("content");
   let header = $("meta[name='_csrf_header']").attr("content");
+  console.log("토큰 " + token)
+  console.log("헤더 " + header)
   var today = new Date(); // 현재 날짜와 시간
-
-    processChatListDates();
+  
+  
+ processChatListDates();
 
 function processChatListDates() {
-    $('.chat_list').each(function() {
+console.log("시간 설정 메서드 ")
+  $("body").on("click", ".chat_list", function() {
         var $container = $(this);
         var chatListDate = new Date($container.find('.chat_date').text());
+        console.log("날짜 " + chatListDate)
         var chatListTime = $container.find('.time').val();
         console.log("시간" + chatListTime)
 
@@ -65,7 +66,7 @@ function isYesterday(date1, date2) {
 }
 
 //채팅방 열기 
-$(".chat_list").click(function(){
+$("body").on("click",".chat_list",function(){
   var memberId = $(this).find(".memberId").val();
   console.log("memberId = "+memberId)
   $.ajax({
@@ -121,20 +122,23 @@ $(".chat_list").click(function(){
 			},
 			success: function(message){
         $(".msg_history").empty();
+        
+        
 				var previousDate = null;
 				console.log("message 불러오기 성공")
 				$(message).each(function(index,message){
+          console.log("객체 내용: ", message)
 					console.log("날짜" + message.date);
 					var date = new Date(message.date);
 					
 					if (previousDate === null || !isSameDay(date, previousDate)) {
 							// 이전 날짜가 없거나 현재 날짜와 다른 경우에만 <div class="date"> 추가
 							if (isYesterday(date, today)) {
-									$("#chating").append("<div class='date'>------(어제)-------</div>");
+									$(".msg_history").append("<div class='date'>------(어제)-------</div>");
 							} else if (isSameDay(date, today)){
-								$("#chating").append("<div class='date'>------(오늘)-------</div>");
+								$(".msg_history").append("<div class='date'>------(오늘)-------</div>");
 							} else {
-									$("#chating").append("<div class='date'>------" + message.date + "-------</div>");
+									$(".msg_history").append("<div class='date'>------" + message.date + "-------</div>");
 							}
 					}
 					
@@ -146,21 +150,20 @@ $(".chat_list").click(function(){
 						$(".msg_history").append('<div class="outgoing_msg"> ' +
               '<div class="sent_msg"> ' +
               '<p>' + message.content + '</p>' +
-              '<span class="time_date">' + message.time + '</span> ' +
+              '<span class="time_date">' + message.time + ' | ' + message.date + '</span> ' +
               '</div>' +
               '</div>');
 						$(".msg_history").append("<input type='hidden' id='date' value='" + message.date + "'</input>");
 					}else{
-            console.log("보낸사람:"+message.message_from)
             
 						$(".msg_history").append('<div class="incoming_msg"> ' +
             '<div class="incoming_msg_img"> ' +
-            '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> ' +
-            + message.message_from +'</div>' +
+            '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> ' 
+            + message.member_name  +'</div>' +
             '<div class="received_msg">' +
             '<div class="received_withd_msg">' +
             '<p>' + message.content + '</p>' +
-            '<span class="time_date">' + message.time + '</span>' +
+            '<span class="time_date">' + message.time + ' | ' + message.date + '</span>' +
             '</div>' +
             '</div>' +
             '</div>');
@@ -299,7 +302,8 @@ $(".chat_list").click(function(){
 	}//	function saveMassage(){
 
   //-----------친구(연락처) 목록------------------
- $("#friendBtn").click(function(){
+ $("#friendList").click(function(){
+  console.log("친구 목록 function")
     $.ajax({
       type:'POST',
       url:'../chat/friendList',
@@ -307,19 +311,24 @@ $(".chat_list").click(function(){
         { //데이터를 전송하기 전에 헤더에 csrf값을 설정
          xhr.setRequestHeader(header, token);
         },
-      success:function(memberList){
-        var ul = $("ul.dropdown-menu"); // 이미 존재하는 ul 요소 가져오기
-        
-        $(memberList).each(function(index, member){
-             $(".dropdown-menu").append('<li><div class="chat_people">' +
-              '<div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>' +
-              '<div class="chat_ib" onclick="openChat(' + member.MEMBER_ID + ');">' +
-              '<h5>' + member.MEMBER_NAME + '</h5>' +
-              '<input type="hidden" value="' + member.MEMBER_ID + '">' +
+        success: function (memberList) {
+          console.log(memberList)
+          $(".inbox_chat").empty();
+          $(memberList).each(function (index, member) {
+            var chatItem = '<div class="chat_list active_chat">' +
+              '<div class="chat_people">' +
+              '<div class="chat_img">' +
+              '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">' +
               '</div>' +
-              '</div></li>');
-        });
-      },
+              '<div class="chat_ib">' +
+              '<h5>' + member.member_NAME + '</h5>' +
+              '<input type="hidden" value="' + member.member_ID + '">' +
+              '</div>' +
+              '</div>' +
+              '</div>';
+            $(".inbox_chat").append(chatItem);
+          });
+        },
       error: function(){
         console.log("친구 목록 불러오기 실패")
       }
@@ -327,6 +336,49 @@ $(".chat_list").click(function(){
 
   });//$("#friendBtn").click(function(){*/
   //친구(연락처) 목록
+
+
+  //------------대화 목록-------------------
+  $("#chatList").click(function(){
+      chatList();
+  });
+
+  function chatList() {
+    console.log("대화목록 function")
+  $.ajax({
+    type: 'POST',
+    url: '../chat/chatListAjax',
+    beforeSend: function (xhr) {
+      // 데이터를 전송하기 전에 헤더에 csrf값을 설정
+      xhr.setRequestHeader(header, token);
+    },
+    success: function (chatList) {
+      console.log(chatList)
+      processChatListDates();
+      $(".inbox_chat").empty();
+      $(chatList).each(function (index,cl) {
+        var chatItem = '<div class="chat_list active_chat">' +
+          '<div class="chat_people">' +
+          '<div class="chat_img">' +
+          '<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">' +
+          '</div>' +
+          '<div class="chat_ib">' +
+          '<h5>' + cl.member_name + '<span class="chat_date">' + cl.date + '</span></h5>' +
+          '<p>' + cl.content + '</p>' +
+          '<input class="time" type="hidden" value="' + cl.time + '">' +
+          '<input class="memberId" type="hidden" value="' + cl.relative_id + '">' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+        $(".inbox_chat").append(chatItem);
+      });
+    },
+    error: function () {
+      console.log("친구 목록 불러오기 실패");
+    }
+  });
+};//functino chatList() {
+
 
 });//$(document).ready(function() {
 var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
@@ -345,17 +397,8 @@ var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
     <div class="inbox_people">
       <div class="headind_srch">
           <div class="recent_heading">
-            <h4 style="display: inline-block">Recent</h4>
-            <h4 style="display: inline-block">
-              <div class="btn-group dropend">
-                <button id="friendBtn" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" >
-                  연락처
-                </button>
-                <ul class="dropdown-menu" style="position:sticky; position: -webkit-sticky; top: 0;">
-                  
-                </ul>
-              </div>
-            </h4>
+            <h4 id="chatList" style="display: inline-block">대화목록</h4>
+            <h4 id="friendList" style="display: inline-block">연락처</h4>
           </div>
           <div class="srch_bar">
             <div class="stylish-input-group">
@@ -379,7 +422,7 @@ var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
             </div>
           </div>
         </div>
-        </c:forEach>
+        </c:forEach> 
       </div>
     </div>
   

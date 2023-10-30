@@ -48,6 +48,7 @@ public class ChatController {
 	    
 	    if (member != null) {
 	        String memberId = member.getMEMBER_ID();
+	        logger.info("멤버 아이디 :" + memberId);
 	        memberList = chatServiceImpl.getManagerList(memberId);
 	    }
 
@@ -166,6 +167,7 @@ public class ChatController {
 		   logger.info(message.getContent());
 		   logger.info(message.getCreate_at() + "");
 		   logger.info(message.getDate() + "");
+		   logger.info("보낸 사람 이름 : " + message.getMember_name() );
         }
 		
 		return messageList;
@@ -187,10 +189,31 @@ public class ChatController {
 			        .collect(Collectors.toList());
 			mv.addObject("chatList",filteredChatList);
 		}
-//		mv.setViewName("chat/chatList");
+
 		mv.setViewName("chat/ChatCssTest");
 		return mv;
 	}
+	
+
+	//채팅 목록 ajax
+	@RequestMapping("/chatListAjax")
+	@ResponseBody
+	public List<ChatRoomVO> chatListAjax(@AuthenticationPrincipal Member member) {
+	    List<ChatRoomVO> chatList = new ArrayList<>();
+
+	    if (member != null) {
+	        String memberId = member.getMEMBER_ID();
+	        logger.info("friendList의 memberId = " + memberId);
+	        chatList = chatServiceImpl.getChatRoomList(memberId);
+	    }
+
+	    List<ChatRoomVO> filteredChatList = chatList.stream()
+	            .filter(chat -> chat.getContent() != null)
+	            .collect(Collectors.toList());
+
+	    return filteredChatList;
+	}
+
 	
 	// 방 페이지
 	@RequestMapping("/room")
