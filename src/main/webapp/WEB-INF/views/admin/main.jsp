@@ -18,8 +18,6 @@
 				<div class="col-12">
 					<div class="main__title">
 						<h2>대쉬보드</h2>
-
-						<a href="#" class="main__title-link">add item</a>
 					</div>
 				</div>
 				<!-- end main title -->
@@ -156,7 +154,7 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="users.html">View All</a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/ticketSalesRate">View All</a>
 							</div>
 						</div>
 
@@ -170,17 +168,19 @@
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="TicketSalesRate" items="${dayTicketSalesRate}" begin="0" end="4">
 									<tr>
 										<td>
-											<div class="main__table-text">23</div>
+											<div class="main__table-text">${TicketSalesRate.RNUM}</div>
 										</td>
 										<td>
-											<div class="main__table-text"><a href="#">Brian Cranston</a></div>
+											<div class="main__table-text"><a href="#">${TicketSalesRate.MOVIE_TITLE}</a></div>
 										</td>
 										<td>
-											<div class="main__table-text">BrianXWZ</div>
+											<div class="main__table-text">${TicketSalesRate.ratio}</div>
 										</td>
 									</tr>
+								</c:forEach>	
 								</tbody>
 							</table>
 						</div>

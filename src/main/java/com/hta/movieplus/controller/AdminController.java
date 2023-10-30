@@ -43,19 +43,21 @@ public class AdminController {
 		
 		List<Total> totallist = totalService.dayReserveRate(currentdate); //일일 예매율
 		List<Total> monthReserveRate = totalService.monthReserveRate(currentdate); 	//이번달 예매율
+		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(currentdate); //영화별 누적 관객수
+		List<Total> dayTicketSalesRate = totalService.dayTicketSalesRate(currentdate); //영화별 좌석 판매율
 		int dayTicketSales = totalService.dayTicketSales(currentdate);	//일일 티켓 수익
 		int dayGoodsSales = totalService.dayGoodsSales(currentdate);	//일일 상품 수익
 		int dayTotalSales = totalService.dayTotalSales(currentdate);	//일일 티켓 + 상품 수익
 		int daySeatCount = totalService.daySeatCount(currentdate);		//일일 관객수
-		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(currentdate); //영화별 누적 관객수
 		
 		mv.addObject("totallist", totallist);
+		mv.addObject("monthReserveRate", monthReserveRate);
+		mv.addObject("dayMovieseatCount", dayMovieseatCount);
+		mv.addObject("dayTicketSalesRate", dayTicketSalesRate);
 		mv.addObject("dayTicketSales", dayTicketSales);
 		mv.addObject("dayGoodsSales", dayGoodsSales);
 		mv.addObject("dayTotalSales", dayTotalSales);
 		mv.addObject("daySeatCount", daySeatCount);
-		mv.addObject("dayMovieseatCount", dayMovieseatCount);
-		mv.addObject("monthReserveRate", monthReserveRate);
 		
 		mv.setViewName("admin/main");
 		return mv;
@@ -92,15 +94,34 @@ public class AdminController {
 	
 	//이번달 예매율 페이지
 	@GetMapping("/admin/monthtotalcount")
-	public ModelAndView monthReserveRate(String currentdate, ModelAndView mv) {
+	public ModelAndView monthReserveRate(@RequestParam(value="month" ,required=false, defaultValue="0") String month, ModelAndView mv) {
+		LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String currentdate = currentdatetime.format(format);
+		
+		if(month.equals("1") ||month.equals("2")) {
+			List<Total> monthEachReserveRate = totalService.monthEachReserveRate(month);
+			mv.addObject("monthReserveRate", monthEachReserveRate);
+		} else {
+			List<Total> monthReserveRate = totalService.monthReserveRate(currentdate); 
+			mv.addObject("monthReserveRate", monthReserveRate);
+		}
+		
+		mv.setViewName("/admin/adminMonthReserveRate");
+		return mv;
+	}
+	
+	//좌석 판매율 페이지
+	@GetMapping("/admin/ticketSalesRate")
+	public ModelAndView dayTicketSalesRate(String currentdate, ModelAndView mv) {
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		currentdate = currentdatetime.format(format);
 		
-		List<Total> monthReserveRate = totalService.monthReserveRate(currentdate); 
-		mv.addObject("monthReserveRate", monthReserveRate);
+		List<Total> dayTicketSalesRate = totalService.dayTicketSalesRate(currentdate); 
+		mv.addObject("dayTicketSalesRate", dayTicketSalesRate);
 		
-		mv.setViewName("/admin/adminMonthReserveRate");
+		mv.setViewName("/admin/adminDayTicketSalesRate");
 		return mv;
 	}
 	

@@ -21,5 +21,9 @@ public interface TotalService {
 
 	public List<Total> monthReserveRate(String currentdate);
 
+	public List<Total> dayTicketSalesRate(String currentdate);
+
+	public List<Total> monthEachReserveRate(String month);
+
 	
 }

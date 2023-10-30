@@ -40,13 +40,13 @@ public class TotalServiceImpl implements TotalService {
 	}
 
 	@Override
-	public int dayGoodsSales(String currentdate) {
-		return dao.dayGoodsSales(currentdate);
+	public int dayGoodsSales(String THEATER_SCHEDULE_DATE) {
+		return dao.dayGoodsSales(THEATER_SCHEDULE_DATE);
 	}
 
 	@Override
-	public int dayTotalSales(String currentdate) {
-		return dao.dayTotalSales(currentdate);
+	public int dayTotalSales(String THEATER_SCHEDULE_DATE) {
+		return dao.dayTotalSales(THEATER_SCHEDULE_DATE);
 	}
 
 	@Override
@@ -55,8 +55,18 @@ public class TotalServiceImpl implements TotalService {
 	}
 
 	@Override
-	public List<Total> monthReserveRate(String currentdate) {
-		return dao.monthReserveRate(currentdate);
+	public List<Total> monthReserveRate(String THEATER_SCHEDULE_DATE) {
+		return dao.monthReserveRate(THEATER_SCHEDULE_DATE);
+	}
+
+	@Override
+	public List<Total> dayTicketSalesRate(String THEATER_SCHEDULE_DATE) {
+		return dao.dayTicketSalesRate(THEATER_SCHEDULE_DATE);
+	}
+
+	@Override
+	public List<Total> monthEachReserveRate(String month) {
+		return dao.monthEachReserveRate(month);
 	}
 
 
