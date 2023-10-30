@@ -79,7 +79,7 @@
 								<c:forEach var="expectmovie" items="${expectMovieList}" varStatus="loop">
 									<tr>
 										<td>
-											<div class="main__table-text">${loop.index + 1}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
+											<div class="main__table-text">${expectmovie.RNUM}</div> <!-- 1부터 순차적으로 커지는 숫자 -->
 										</td>
 										<td>
 											<div class="main__table-text">${expectmovie.MOVIE_CODE}</div>
@@ -115,17 +115,30 @@
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
+						<span>${reopenCount}개 중 10개</span>
 
 						<ul class="paginator">
-							<li class="paginator__item paginator__item--prev"><a
-								href="#"><i class="icon ion-ios-arrow-back"></i></a></li>
-							<li class="paginator__item"><a href="#">1</a></li>
-							<li class="paginator__item paginator__item--active"><a
-								href="#">2</a></li>
-							<li class="paginator__item"><a href="#">3</a></li>
-							<li class="paginator__item"><a href="#">4</a></li>
-							<li class="paginator__item paginator__item--next"><a
-								href="#"><i class="icon ion-ios-arrow-forward"></i></a></li>
+							<li class="paginator__item paginator__item--prev"
+								${page <= 1 ? 'style="pointer-events: none;"' : ''}>
+								<a href="reopenexpectlist?page=${page-1}">
+								<i class="icon ion-ios-arrow-back"></i></a></li>
+
+							<c:forEach var="a" begin="${startpage}" end="${endpage}">
+								<c:if test="${a == page }">
+									<li class="paginator__item paginator__item--active"><a
+										href="#">${a }</a></li>
+								</c:if>
+								<c:if test="${a != page }">
+									<li class="paginator__item"><a
+										href="reopenexpectlist?page=${a }">${a}</a></li>
+								</c:if>
+							</c:forEach>
+
+							<li class="paginator__item paginator__item--next"
+								${page >= maxpage ? 'style="pointer-events: none;"' : ''}>
+								<a href="reopenexpectlist?page=${page+1}"><i
+									class="icon ion-ios-arrow-forward"></i></a>
+							</li>
 						</ul>
 					</div>
 				</div>

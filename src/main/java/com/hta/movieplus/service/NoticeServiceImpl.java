@@ -80,7 +80,7 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		Map<String, Object> paginationDataMap = new HashMap<String, Object>();
 
-		int limit = 1; // 한 페이지에 보여줄 갯수
+		int limit = 10; // 한 페이지에 보여줄 갯수
 
 		int listcount = getCountByNotice(); // 공지사항의 개수
 

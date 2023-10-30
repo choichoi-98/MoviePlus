@@ -108,6 +108,7 @@
 				<!-- end comments -->
 				<a href="${pageContext.request.contextPath}/admin/gonoticewrite"
 					class="main__title-link">작성하기</a>
+				
 				<!-- paginator -->
 				<div class="col-12">
 					<div class="paginator-wrap">
@@ -115,9 +116,9 @@
 
 						<ul class="paginator">
 							<li class="paginator__item paginator__item--prev"
-								${page <= 1 ? 'style="pointer-events: none;"' : ''}><a
-								href="noticelist?page=${page-1}"><i
-									class="icon ion-ios-arrow-back"></i></a></li>
+								${page <= 1 ? 'style="pointer-events: none;"' : ''}>
+								<a href="noticelist?page=${page-1}">
+								<i class="icon ion-ios-arrow-back"></i></a></li>
 
 							<c:forEach var="a" begin="${startpage}" end="${endpage}">
 								<c:if test="${a == page }">

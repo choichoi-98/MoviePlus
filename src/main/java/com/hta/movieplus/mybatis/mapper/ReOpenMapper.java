@@ -1,6 +1,7 @@
 package com.hta.movieplus.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,5 +22,13 @@ public interface ReOpenMapper {
 	public int cancelReOpen(String cancelcode);
 	
 	public int updateReOpenCancel(String cancelcode);
+
+	public List<ReOpenVO> getReopenlistPagination(Map<String, Object> dataMap);
+
+	public int getCountByReopen();
+
+	public int getCountByEndMovieList();
+
+	public List<Movie> getEndMovieListPagination(Map<String, Object> dataMap);
 	 
 }

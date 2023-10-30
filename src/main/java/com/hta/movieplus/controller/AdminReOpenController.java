@@ -1,6 +1,7 @@
 package com.hta.movieplus.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,16 @@ public class AdminReOpenController {
 
 	/* 상영종료된 영화의 리스트를 가져오면서 작성 페이지로 이동 */
 	@GetMapping("/admin/goreopenwrite")
-	public String getEndedMoive(Model model) {
-		List<Movie> endedMoiveList = reopenservice.getEndedMovieList();
-		model.addAttribute("endedMovieList", endedMoiveList);
+	public String getEndedMoive(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			Model model) {
+		Map<String, Object> paginationDataMap = reopenservice.pagination(page, "상영종료");
+		List<Movie> list = reopenservice.getEndMovieListPagination(page, (int) paginationDataMap.get("limit"));
+		int reopencount = reopenservice.getCountByEndMovieList();
+		
+		model.addAllAttributes(paginationDataMap);
+		
+		model.addAttribute("EndMovieCount", reopencount);
+		model.addAttribute("EndMovieList", list);
 		return "/admin/reOpenWrite";
 	}
 
@@ -39,9 +47,16 @@ public class AdminReOpenController {
 	}
 
 	@GetMapping("/admin/reopenexpectlist")
-	public String reopenExpectlist(Model model) {
-		List<ReOpenVO> expectmovielist= reopenservice.getExpectMovieList();
-		model.addAttribute("expectMovieList", expectmovielist);
+	public String reopenExpectlist(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			Model model) {
+		Map<String, Object> paginationDataMap = reopenservice.pagination(page, "재개봉");
+		List<ReOpenVO> list = reopenservice.getReopenlistPagination(page, (int) paginationDataMap.get("limit"));
+		int reopencount = reopenservice.getCountByReopen();
+		
+		model.addAllAttributes(paginationDataMap);
+		
+		model.addAttribute("reopenCount", reopencount);
+		model.addAttribute("expectMovieList", list);
 		return "/admin/reOpenList";
 	}
 	
@@ -50,4 +65,6 @@ public class AdminReOpenController {
 		reopenservice.cancelReOpen(cancelcode);
 		return "redirect:/admin/reopenexpectlist";
 	}
+	
+	
 }
