@@ -11,6 +11,13 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<script>
+	$(document).ready(function() {
+		$('#searchBtn').click(function() {
+			location.href = 'customer_service?keyword=' + $('#searchTxt').val();
+		})
+	})
+	</script>
 
 	<div class="container has-lnb">
 		<div class="page-util">
@@ -22,7 +29,7 @@
 		</div>
 
 
-		<div id="contents" class="" style="padding-left: 250px;">
+		<div id="contents" class="" style="margin-left:22%; float:none;">
 			<h2 class="tit">공지사항</h2>
 
 			<div class="tab-block mb30" style="width: 70%">
@@ -47,6 +54,19 @@
 
 				</ul>
 			</div>
+			<div class="board-list-util" style="text-align: right; width: 70%">
+				<p class="result-count">
+					<strong>전체 <em class="font-gblue">${listCount}</em>건
+					</strong>
+				</p>
+
+				<div class="board-search">
+					<input type="text" id="searchTxt" title="극장명을 입력해 주세요."
+						placeholder="극장명을 입력해 주세요." class="input-text" value=""
+						maxlength="15">
+					<button type="button" id="searchBtn" class="btn-search-input">검색</button>
+				</div>
+			</div>
 
 			<div class="table-wrap" style="width: 70%;">
 				<table class="board-list">
@@ -68,7 +88,7 @@
 					<tbody>
 						<c:forEach var ="notice" items="${TotalNoticeList}">
 						<tr>
-							<td>페이지네이션</td>
+							<td>${notice.RNUM}</td>
 							<td>${notice.CUSTOMER_NOTICE_THEATER}</td>
 							<td><a href ="${pageContext.request.contextPath}/customer_service/getnoticedetail?noticedetailnum=${notice.CUSTOMER_NOTICE_NUM}">
 							${notice.CUSTOMER_NOTICE_SUBJECT}<a/></td>
@@ -81,29 +101,32 @@
 			</div>
 
 			<!-- pagination -->
-			<nav class="pagination">
-				<strong class="active">1</strong> <a title="2페이지보기"
-					href="javascript:void(0)" pagenum="2">2</a> <a title="3페이지보기"
-					href="javascript:void(0)" pagenum="3">3</a> <a title="4페이지보기"
-					href="javascript:void(0)" pagenum="4">4</a> <a title="5페이지보기"
-					href="javascript:void(0)" pagenum="5">5</a> <a title="6페이지보기"
-					href="javascript:void(0)" pagenum="6">6</a> <a title="7페이지보기"
-					href="javascript:void(0)" pagenum="7">7</a> <a title="8페이지보기"
-					href="javascript:void(0)" pagenum="8">8</a> <a title="9페이지보기"
-					href="javascript:void(0)" pagenum="9">9</a> <a title="10페이지보기"
-					href="javascript:void(0)" pagenum="10">10</a> <a
-					title="이후 10페이지 보기" href="javascript:void(0)" class="control next"
-					pagenum="11">next</a> <a title="마지막 페이지 보기"
-					href="javascript:void(0)" class="control last" pagenum="551">last</a>
-			</nav>
+			<nav class="pagination" style="float:left; margin-left:25%">
+					<a title="처음 페이지 보기" href="customer_service?page=1&keyword=${keyword}"
+						class="control first">first</a> <a title="이전 페이지 보기"
+						href="customer_service?page=${page-1}&keyword=${keyword}" class="control prev"
+						${page <= 1 ? 'style="pointer-events: none;"' : ''}></a>
+
+					<c:forEach var="a" begin="${startpage}" end="${endpage}">
+						<c:if test="${a == page }">
+							<strong class="active">${a}</strong>
+						</c:if>
+						<c:if test="${a != page }">
+							<a title="${a} 페이지보기" href="customer_service?page=${a}&keyword=${keyword}">${a}</a>
+						</c:if>
+					</c:forEach>
+
+					<a title="이후 페이지 보기" href="customer_service?page=${page+1}&keyword=${keyword}"
+						class="control next"
+						${page >= maxpage ? 'style="pointer-events: none;"' : ''}>next</a>
+
+					<a title="마지막 페이지 보기" href="customer_service?page=${maxpage}&keyword=${keyword}"
+						class="control last">last</a>
+				</nav>
 			<!--// pagination -->
 		</div>
 	</div>
 
-	<div class="normalStyle"
-		style="display: none; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; text-indent: -9999px; width: 100%; height: 100%; z-index: 100;">닫기</div>
-	<div class="alertStyle"
-		style="display: none; position: fixed; top: 0px; left: 0px; background: #000; opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
 </body>
 </html>
 

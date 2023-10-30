@@ -112,7 +112,7 @@
 
 							<div class="dashbox__wrap">
 								<a class="dashbox__refresh" href="#"><i class="icon ion-ios-refresh"></i></a>
-								<a class="dashbox__more" href="${pageContext.request.contextPath}/admin/monthtotalcount">View All</a>
+								<a class="dashbox__more" href="${pageContext.request.contextPath}/manager/monthtotalcount">View All</a>
 							</div>
 						</div>
 
