@@ -1,5 +1,7 @@
 package com.hta.movieplus.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.NoticeVO;
+import com.hta.movieplus.domain.Total;
 import com.hta.movieplus.service.MovieServiceImpl;
 import com.hta.movieplus.service.NoticeService;
+import com.hta.movieplus.service.TotalService;
 
 
 @Controller
@@ -44,6 +48,13 @@ public class MainController {
 	   	//---------------------------------------------------------------------------------
 	   	
 	   	
+	   	//영화 예매율 순위 날짜 -----------------------------------------------------
+	   	LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String currentdate = currentdatetime.format(format);
+	   	//--------------------------------------------------------------------
+	   	
+	   	
         if(session.getAttribute("loginfail")!= null ) {
            session.setAttribute("count", (int) session.getAttribute("count")+1);   
         }
@@ -58,16 +69,18 @@ public class MainController {
          if (member != null) { //로그인 한 경우
             String memberId =  member.getMEMBER_ID();
               logger.info("로그인 한 경우 메인"+memberId);
-              List<Movie> movieList = movieServiceImpl.getPlayingMovieLoginMain(memberId);
+              List<Movie> movieList = movieServiceImpl.getPlayingMovieLoginMain(memberId, currentdate);
               mv.addObject("movieList", movieList);
               
           } else {
-              List<Movie> movieList = movieServiceImpl.getPlayingMovieMain();
+              List<Movie> movieList = movieServiceImpl.getPlayingMovieMain(currentdate);
               mv.addObject("movieList", movieList);
           }
 
           return mv;
       }
+   
+	
    	
    
 }

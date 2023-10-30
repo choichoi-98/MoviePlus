@@ -19,6 +19,9 @@ public class Movie {
 	private String movie_Still = "";
 	private String interest_Status;//보고싶어요
 	private int post_Count;		//무비 포스트 수
+	private String THEATER_SCHEDULE_DATE;
+	private int ratio;
+	private int RNUM;
 	
 	//--
 	private int REOPEN_COUNT;
@@ -170,6 +173,24 @@ public class Movie {
 	}
 	public void setREOPENING_STARTDATE(String rEOPENING_STARTDATE) {
 		REOPENING_STARTDATE = rEOPENING_STARTDATE;
+	}
+	public String getTHEATER_SCHEDULE_DATE() {
+		return THEATER_SCHEDULE_DATE;
+	}
+	public void setTHEATER_SCHEDULE_DATE(String tHEATER_SCHEDULE_DATE) {
+		THEATER_SCHEDULE_DATE = tHEATER_SCHEDULE_DATE;
+	}
+	public int getRatio() {
+		return ratio;
+	}
+	public void setRatio(int ratio) {
+		this.ratio = ratio;
+	}
+	public int getRNUM() {
+		return RNUM;
+	}
+	public void setRNUM(int rNUM) {
+		RNUM = rNUM;
 	}
 	
 	

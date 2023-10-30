@@ -1,9 +1,8 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
@@ -482,7 +481,7 @@ button.button.purple:hover {
 	<!--// 레이어 : 사이트맵 -->
 
 	<!-- 레이어 : 검색 -->
-	<div id="layer_header_search" class="header-layer layer-header-search">
+	<div id="layer_header_search" class="header-layer layer-header-search"  style="background-color: #792828">
 		<!-- "header-layer layer-header-search target on" -->
 		<div class="wrap">
 			<a href="" class="link-acc" title="검색 레이어 입니다.">검색 레이어 입니다.</a>
@@ -495,16 +494,17 @@ button.button.purple:hover {
 
 			<div class="rank-cont">
 				<p class="img">
-					<img src="" alt="1등인 영화 이미지">
+					<img id="moviePoster" alt="1등인 영화 이미지">
 				</p>
 
 				<div class="list">
 					<ol>
-						<li><em>1</em> <a href="#" title="영화1 상세보기">영화1</a></li>
-						<li><em>2</em> <a href="#" title="영화2 상세보기">영화2</a></li>
-						<li><em>3</em> <a href="#" title="영화3 상세보기">영화3</a></li>
-						<li><em>4</em> <a href="#" title="영화4 상세보기">영화4</a></li>
-						<li><em>5</em> <a href="#" title="영화5 상세보기">영화5</a></li>
+					<c:forEach var="m" items="${movieList}" begin="0" end="4" varStatus="loop">
+						<li class="movie-item" data-poster="${fn:split(m.movie_Poster, '|')[0]}">
+							<em>${m.RNUM}</em> 
+							<a href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${m.movie_Code}" title="영화1 상세보기">${m.movie_Title}</a>
+						</li>
+					</c:forEach>
 					</ol>
 				</div>
 			</div>

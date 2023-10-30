@@ -82,8 +82,7 @@ document.ready
 								<!-- 각 map 별 첫번째 li 에 first클래스 추가 -->
 
 								<!-- 각 map 별 첫번째 li 에 first클래스 추가 -->
-								<c:forEach var="m" items="${movieList}" begin="0" end="3"
-									varStatus="loop">
+								<c:forEach var="m" items="${movieList}" begin="0" end="3" varStatus="loop">
 									<li name="li_boxoRankList" class="first"
 										style="border-right-width: 50px‒; padding-right: 0px; border-right-width: 50px; margin-right: 30px;">
 										<a href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${m.movie_Code}"
@@ -115,12 +114,12 @@ document.ready
 												<c:if test="${empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png"
-														style="width: 15px">
+														style="width: 15px; margin-top:10px; margin-bottom:10px;">
 												</c:if>
 												<c:if test="${!empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_full.png"
-														style="width: 15px">
+														style="width: 15px; margin-top:10px; margin-bottom:10px;">
 												</c:if>
 											</button>
 											<div class="case">
@@ -130,7 +129,7 @@ document.ready
 											</div>
 										</div>
 									</li>
-								</c:forEach>
+								</c:forEach>	
 
 								<!-- 박스오피스 종료 -->
 							</ol>
