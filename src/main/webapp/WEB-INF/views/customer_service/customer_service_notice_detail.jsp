@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="inner-wrap">
-			<div id="contents" class="location-fixed">
+			<div id="contents" class="location-fixed" style="float:none; width:100%;">
 				<h2 class="tit">공지사항</h2>
 
 				<ul class="dot-list">
@@ -42,7 +42,7 @@
 						<div class="info">
 
 							<p>
-								<span class="tit">공지지점</span> <span class="txt">${getNoticeDetail.CUSTOMER_NOTICE_REGION}</span>
+								<span class="tit">공지지점</span> <span class="txt">${getNoticeDetail.CUSTOMER_NOTICE_THEATER}</span>
 							</p>
 							<div class="mt10">
 								<p>

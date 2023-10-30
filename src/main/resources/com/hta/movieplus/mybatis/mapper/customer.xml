@@ -34,4 +34,11 @@
 		FROM CUSTOMER_ONEONONE
 		WHERE CUSTOMER_NUM = #{CUSTOM_NUM}
 	</select>
+	
+	<update id="updateOneonone" parameterType="int">
+		UPDATE CUSTOMER_ONEONONE
+		SET
+		CUSTOMER_ANSWERSITUATION = '완료'
+		WHERE CUSTOMER_NUM = #{num}
+	</update>
 </mapper>

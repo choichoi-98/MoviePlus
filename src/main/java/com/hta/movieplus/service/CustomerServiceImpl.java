@@ -44,4 +44,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM) {
 		return dao.goAnserWrite(cUSTOMER_NUM);
 	}
+
+	@Override
+	public void updateOneonone(CustomerOneOnOneVO vO) {
+		int num = vO.getCUSTOMER_NUM();
+		dao.updateOneonone(num);
+		// 방법 2개
+		// 1. VO에다가 아까 한거처럼 set을해서 대기를 답변완료로 바꾼 vo를 통채로 mapper로 보내서 하는거
+		// 2. VO에 있는 pk만 뽑아내서 pk만 mapper로 보내서 하는 방법
+	}
 }

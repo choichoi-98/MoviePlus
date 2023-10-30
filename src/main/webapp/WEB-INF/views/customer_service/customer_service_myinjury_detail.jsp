@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="inner-wrap">
-			<div id="contents" class="location-fixed">
+			<div id="contents" class="location-fixed" style="float:none; width:100%;">
 	<h2 class="tit">나의 문의내역</h2>
 
 	<ul class="dot-list">

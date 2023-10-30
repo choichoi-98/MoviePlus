@@ -66,14 +66,6 @@ public class CustomerController {
 		return "customer_service/customer_service_notice_region";
 	}
 	
-	/*
-	 * //공지사항 detail 페이지 이동
-	 * 
-	 * @GetMapping("/gonoticedetail") public String goNoticeDetail(Model model) {
-	 * NoticeVO noticedetail = noticeservice.getNoticeDetail();
-	 * model.addAttribute("NoticeDetail", noticedetail); return ""; }
-	 */
-	
 	@GetMapping("/oneonone")
 	public ModelAndView oneOnOne(ModelAndView mv) {
 		mv.addObject("locationList", TheaterLocationEnum.values());

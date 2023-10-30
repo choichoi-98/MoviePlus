@@ -21,5 +21,6 @@ public interface CustomerMapper {
 
 	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM);
 
-	
+	public int updateOneonone(int num);
+
 }

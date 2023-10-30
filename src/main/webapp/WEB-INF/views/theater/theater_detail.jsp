@@ -192,27 +192,12 @@
 
 					</div>
 
-
-
-					<h2 class="tit small mt70">이벤트</h2>
-
-					<div class="event-box">
-						<ul>
-
-							<li>
-								<div style="width: 535px; height: 250px; background: gray;"></div>
-							</li>
-
-						</ul>
-					</div>
-
-
 					<div id="brchNoti">
 
 						<div class="tit-util">
 							<h2 class="tit small mt70" style="float:none;">공지사항</h2>
 							<a
-								href="${pageContext.request.contextPath}/customer_service/notice"
+								href="${pageContext.request.contextPath}/customer_service/regionnotice"
 								class="more" title="극장 공지사항 더보기">더보기 <i
 								class="iconset ico-arr-right-gray"></i></a>
 						</div>
@@ -222,7 +207,7 @@
 							<ul>
 								<c:forEach var="noticelist" items="${NoticeList}" begin="0" end="4">
 								<li><div class="title">
-										<a href="#" title="[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT}">
+										<a href="${pageContext.request.contextPath}/customer_service/getnoticedetail?noticedetailnum=${noticelist.CUSTOMER_NOTICE_NUM}" title="[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT}">
 											<div class="cont-tit">[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT}</div>
 											<p class="cont-admin">${noticelist.CUSTOMER_NOTICE_THEATER}</p>
 											<p class="cont-date">${noticelist.CUSTOMER_NOTICE_SYSDATE}</p>
