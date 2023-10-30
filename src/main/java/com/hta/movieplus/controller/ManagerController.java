@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hta.movieplus.domain.CustomerOneOnOneVO;
 import com.hta.movieplus.domain.MailVO;
 import com.hta.movieplus.domain.Member;
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.NoticeVO;
 import com.hta.movieplus.domain.TheaterRoom;
 import com.hta.movieplus.domain.Total;
@@ -241,11 +243,26 @@ public class ManagerController {
 	// ---------------------------------------------------------------------------------//
 	/* 극장별 공지사항 main 페이지 리스트로 이동 */
 	@GetMapping("/noticelist")
-	public String getNoticeList(Model model) {
+	public String getNoticeList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			Model model) {
 		String theaterId = model.asMap().get("theaterId").toString();
+		Map<String, Object> paginationDataMap = noticeService.theaterpagination(theaterId, page);
+		List<NoticeVO> list = noticeService.getTheaterNoticeListPagination(page, theaterId, (int) paginationDataMap.get("limit"));
+		int noticecount = noticeService.getTheaterNoticeList(theaterId);
+		
+		
+		model.addAllAttributes(paginationDataMap);
+		
+		model.addAttribute("NoticeCount", noticecount);
+		model.addAttribute("NoticeList", list);
+		return "manager/managerNoticeList";
+		
+		/*
+		
 		List<NoticeVO> noticelist = noticemanagerservice.getNoticeList(theaterId);
 		model.addAttribute("NoticeList", noticelist);
 		return "manager/managerNoticeList";
+		*/
 	}
 
 	/* 극장별 공지사항작성 페이지 이동 */
@@ -286,9 +303,18 @@ public class ManagerController {
 
 	// 리스트불러오기 oneonone
 	@GetMapping("/oneononelist")
-	public String goAnserList(@AuthenticationPrincipal Member member, Model model) {
-		List<CustomerOneOnOneVO> list = customerservice.getMyInjury(member.getMEMBER_NUM());
-		model.addAttribute("List", list);
+	public String goAnserList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			Model model) {
+		String theaterId = model.asMap().get("theaterId").toString();
+		Map<String, Object> paginationDataMap = customerservice.pagination(theaterId, page);
+		List<NoticeVO> list = customerservice.getListPagination(page, theaterId, (int) paginationDataMap.get("limit"));
+		int noticecount = customerservice.getCountList(theaterId);
+		
+		
+		model.addAllAttributes(paginationDataMap);
+		
+		model.addAttribute("oneononeCount", noticecount);
+		model.addAttribute("oneononeList", list);
 		return "manager/managerAnswerList";
 	}
 	

@@ -73,4 +73,23 @@
 		FROM CUSTOMER_NOTICE
 		WHERE CUSTOMER_NOTICE_NUM = ${noticedetailnum}
 	</select>
+	
+	<select id='getTheaterNoticelistPagination' parameterType="map" resultType="noticeVO">
+		SELECT * 
+		FROM
+			( SELECT ROWNUM RNUM, CUSTOMER_NOTICE.*
+				FROM CUSTOMER_NOTICE
+				WHERE CUSTOMER_NOTICE_TYPE = #{theaterId}
+				AND ROWNUM &lt;= #{end} <!-- &lt;는 <  -->
+				ORDER BY CUSTOMER_NOTICE_NUM desc
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id="getTheatherNoticeList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_TYPE = #{theaterId}
+	</select>
+	
 </mapper>

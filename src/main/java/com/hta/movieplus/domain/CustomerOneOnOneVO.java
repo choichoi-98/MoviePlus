@@ -16,6 +16,7 @@ public class CustomerOneOnOneVO {
 	private String CUSTOMER_ANSWERSITUATION = "대기"; // 답변 상태 대기/완료
 	private String CUSTOMER_REGISTRATIONDATE;
 	private int MEMBER_NUM;
+	private int RNUM;
 	
 	public int getCUSTOMER_NUM() {
 		return CUSTOMER_NUM;
@@ -106,6 +107,12 @@ public class CustomerOneOnOneVO {
 	}
 	public void setMEMBER_NUM(int mEMBER_NUM) {
 		MEMBER_NUM = mEMBER_NUM;
+	}
+	public int getRNUM() {
+		return RNUM;
+	}
+	public void setRNUM(int rNUM) {
+		RNUM = rNUM;
 	}
 
 

@@ -23,4 +23,8 @@ public interface CustomerMapper {
 
 	public int updateOneonone(int num);
 
+	public List<NoticeVO> getListPagination(Map<String, Object> dataMap);
+
+	public int getCountList(String theaterId);
+
 }

@@ -41,4 +41,23 @@
 		CUSTOMER_ANSWERSITUATION = '완료'
 		WHERE CUSTOMER_NUM = #{num}
 	</update>
+	
+	<select id='getListPagination' parameterType="map" resultType="customerOneOnOneVO">
+		SELECT * 
+		FROM
+			( SELECT ROWNUM RNUM, CUSTOMER_ONEONONE.*
+				FROM CUSTOMER_ONEONONE
+				WHERE CUSTOMER_SELECT_CENEMA = #{theaterName}
+				AND ROWNUM &lt;= #{end} <!-- &lt;는 <  -->
+				ORDER BY CUSTOMER_NUM desc
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id="getCountList" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM CUSTOMER_ONEONONE
+		WHERE CUSTOMER_SELECT_CENEMA = #{theaterName}
+	</select>
+	
 </mapper>
