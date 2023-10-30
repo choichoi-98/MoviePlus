@@ -17,4 +17,7 @@ public interface CustomerService {
 
 	public CustomerOneOnOneVO goAnserWrite(int cUSTOMER_NUM);
 
+	public void updateOneonone(CustomerOneOnOneVO vO);
+	
+	
 }

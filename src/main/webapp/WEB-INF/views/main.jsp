@@ -234,16 +234,16 @@ document.ready
 					<!-- info-notice -->
 					<div class="info-notice">
 						<div class="wrap">
-						<c:forEach var="noticetype" items="${NoticeType}" begin="0" end="1">
+						<c:forEach var="noticetype" items="${NoticeType}" begin="0" end="0">
 						<p class="tit">MoviePlus</p>
 						<p class="link">
-						<a href="#" title="공지사항 상세보기"> <strong> [공지] </strong> ${noticetype.CUSTOMER_NOTICE_SUBJECT}
+						<a href="${pageContext.request.contextPath}/customer_service/getnoticedetail?noticedetailnum=${noticetype.CUSTOMER_NOTICE_NUM}" title="공지사항 상세보기"> <strong> [공지] </strong> ${noticetype.CUSTOMER_NOTICE_SUBJECT}
 						</a>
 						</p>
-						<p class="date">2023.09.19</p>
+						<p class="date">${noticetype.CUSTOMER_NOTICE_SYSDATE}</p>
 						</c:forEach>
 							<p class="more">
-								<a href="${pageContext.request.contextPath}/customer_service/notice"
+								<a href="${pageContext.request.contextPath}/customer_service/adminnotice"
 									title="전체공지 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
 							</p>
 						</div>

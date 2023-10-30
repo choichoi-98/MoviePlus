@@ -138,7 +138,7 @@ public class SendMail {
 				helper.setTo(vo.getTo()); // 받는사람 메일주소
 
 				String subject = "[MoviePlus] 문의내역 답변입니다.";
-				String pluscontent = "안녕하세요 MoviePlus 입니다.<br>고객님께서 문의하신 내용에 대하여<br> 답변드립니다.<br>";
+				String pluscontent = "안녕하세요 MoviePlus 입니다.<br>고객님께서 문의하신 내용에 대하여<br> 답변드립니다.<br><br>";
 						
 				
 				helper.setSubject(subject); // 메일 제목

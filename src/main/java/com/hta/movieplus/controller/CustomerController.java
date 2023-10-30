@@ -66,14 +66,6 @@ public class CustomerController {
 		return "customer_service/customer_service_notice_region";
 	}
 	
-	/*
-	 * //공지사항 detail 페이지 이동
-	 * 
-	 * @GetMapping("/gonoticedetail") public String goNoticeDetail(Model model) {
-	 * NoticeVO noticedetail = noticeservice.getNoticeDetail();
-	 * model.addAttribute("NoticeDetail", noticedetail); return ""; }
-	 */
-	
 	@GetMapping("/oneonone")
 	public ModelAndView oneOnOne(ModelAndView mv) {
 		mv.addObject("locationList", TheaterLocationEnum.values());
@@ -104,7 +96,6 @@ public class CustomerController {
 	@ResponseBody
 	@PostMapping("/getTheaterListAjax")
 	public List<Theater> getTheaterListAjax(String location){
-		
 		return theaterservice.getTheaterListByLocation(location);
 	}
 	
@@ -119,5 +110,13 @@ public class CustomerController {
 	public String MyInjuryDelite(int deletenum) {
 		customerService.deletemyinjury(deletenum);
 		return "redirect:/customer_service/myinjury";
+	}
+	
+	//공지사항 detail
+	@GetMapping("/getnoticedetail")
+	public String getNoticeDetail(int noticedetailnum, Model model) {
+		NoticeVO getnoticedetail = noticeservice.getNoticeDetail(noticedetailnum);
+		model.addAttribute("getNoticeDetail", getnoticedetail);
+		return "customer_service/customer_service_notice_detail";
 	}
 }

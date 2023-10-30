@@ -177,7 +177,7 @@
 									</td>
 									<th scope="row"><label for="qnaRpstEmail">이메일</label> 
 									<em class="font-orange">*</em></th>
-									<td><input type="text" name="CUSTOMER_EMAIL"
+									<td><input type="email" name="CUSTOMER_EMAIL"
 										id="qnaRpstEmail" class="input-text" value="" maxlength="50"
 										required></td>
 								</tr>

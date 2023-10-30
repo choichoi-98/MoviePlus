@@ -27,7 +27,7 @@ public interface NoticeMapper {
 	public int getCountByNotice();
 
 	public List<NoticeVO> getNoticelistPagination(Map<String, Object> dataMap);
+
+	public NoticeVO getNoticeDetail(int noticedetailnum);
 	
-	
-	/* public void noticeModify(int modify); */
 }

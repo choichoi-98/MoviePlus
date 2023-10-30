@@ -28,6 +28,8 @@ public interface NoticeService {
 	public int getCountByNotice();
 
 	public List<NoticeVO> getNoticelistPagination(int page, int i);
+
+	public NoticeVO getNoticeDetail(int noticedetailnum);
 	
 
 	

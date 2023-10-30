@@ -67,4 +67,10 @@
 				)
 		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
 	</select>
+	
+	<select id="getNoticeDetail" parameterType="int" resultType="noticeVO">
+		SELECT * 
+		FROM CUSTOMER_NOTICE
+		WHERE CUSTOMER_NOTICE_NUM = ${noticedetailnum}
+	</select>
 </mapper>

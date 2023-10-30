@@ -90,7 +90,7 @@ public class ManagerController {
 
 		logger.info(currentdate + "/" + theaterId);
 		List<Total> totallist = totalService.dayReserveRate(theaterId, currentdate); // 일일 예매율
-		List<Total> monthReserveRate = totalService.monthReserveRate(theaterId, currentdate); 	//이번달 예매율
+		List<Total> monthReserveRate = totalService.monthReserveRate(theaterId, currentdate); // 이번달 예매율
 		int dayTicketSales = totalService.dayTicketSales(theaterId, currentdate); // 일일 티켓 수익
 		int yesterdayTicketSales = totalService.dayTicketSales(theaterId, yesterday); // 어제 티켓 수익
 		int daySeatCount = totalService.daySeatCount(theaterId, currentdate); // 일일 관객수
@@ -111,7 +111,7 @@ public class ManagerController {
 		mv.setViewName("manager/main");
 		return mv;
 	}
-	
+
 	@GetMapping("/total")
 	public String totallist(Model model) {
 		int theaterId = (int) model.asMap().get("theaterId");
@@ -119,14 +119,14 @@ public class ManagerController {
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String currentdate = currentdatetime.format(format);
-		
+
 		List<Total> totallist = totalService.dayReserveRate(theaterId, currentdate); // 일일 예매율
 		model.addAttribute("totallist", totallist);
-		
+
 		return "manager/managerDaySeatRate";
-		
+
 	}
-	
+
 	@GetMapping("/seatrate")
 	public String seatRate(Model model) {
 		int theaterId = (int) model.asMap().get("theaterId");
@@ -134,24 +134,24 @@ public class ManagerController {
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String currentdate = currentdatetime.format(format);
-		
+
 		List<Total> daySeatList = totalService.daySeatRate(theaterId, currentdate); // 일일 예매율
 		model.addAttribute("daySeatList", daySeatList);
-		
+
 		return "manager/managerDaySeatRate";
-		
+
 	}
-	
+
 	@GetMapping("/totalcount")
 	public String dayMovieseatCount(Model model) {
 		int theaterId = (int) model.asMap().get("theaterId");
 		LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String currentdate = currentdatetime.format(format);
-		
-		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(theaterId, currentdate); 
+
+		List<Total> dayMovieseatCount = totalService.dayMovieseatCount(theaterId, currentdate);
 		model.addAttribute("dayMovieseatCount", dayMovieseatCount);
-		
+
 		return "/manager/managerDayMovieseatCount";
 	}
 
@@ -253,7 +253,7 @@ public class ManagerController {
 		model.addAttribute("ManagerNotice", managernotice);
 		return "manager/managerNoticeModify";
 	}
-
+	
 	@PostMapping("/noticemodify")
 	public String noticeModify(NoticeVO modify) {
 		noticeService.noticeModify(modify);
@@ -265,6 +265,7 @@ public class ManagerController {
 		noticeService.deleteNoticeVO(noticenum);
 		return "redirect:/manager/noticelist";
 	}
+
 	// 리스트불러오기 oneonone
 	@GetMapping("/oneononelist")
 	public String goAnserList(@AuthenticationPrincipal Member member, Model model) {
@@ -279,12 +280,15 @@ public class ManagerController {
 		model.addAttribute("VO", vo);
 		return "manager/managerAnswer";
 	}
+
+	// 값 메일로 보내주면서 동시에 대기에서 완료로 변경
 	@PostMapping("/managersendanswer")
 	public String managerSendAnswer(CustomerOneOnOneVO VO) {
 		mailVO.setContent(VO.getCUSTOMER_CONTENT());
 		mailVO.setTo(VO.getCUSTOMER_EMAIL());
-		sendMail.sendAnswer(mailVO);
-		// 업데이트문 넣음
+		sendMail.sendAnswer(mailVO); 
+		customerservice.updateOneonone(VO);
 		return "redirect:/manager/oneononelist";
 	}
+
 }

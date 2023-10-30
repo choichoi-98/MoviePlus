@@ -100,35 +100,10 @@
 					</div>
 				</div>
 
-
-				<div class="tit-util mt70 mb15">
-					<h3 class="tit">극장 이벤트</h3>
-					<a href="${pageContext.request.contextPath}/event/theater"
-						class="more" title="극장 이벤트 더보기">더보기 <i
-						class="iconset ico-arr-right-gray"></i></a>
-				</div>
-
-				<div class="event-box">
-					<ul>
-
-						<li><a href="#" class="eventBtn" data-no="14058"
-							data-netfunnel="N" title="[대구경북지역] 대구경북 추석 감사제! 상세보기"> <img
-								src="" alt="[대구경북지역] 대구경북 추석 감사제!">
-						</a></li>
-
-						<li><a href="#" class="eventBtn" data-no="12817"
-							data-netfunnel="N" title="[세종] 황금 연휴, 시크릿 쿠폰 상세보기"> <img
-								src="" alt="[세종] 황금 연휴, 시크릿 쿠폰">
-						</a></li>
-
-					</ul>
-				</div>
-
-
 				<div class="tit-util mt70 mb15">
 					<h3 class="tit">극장 공지사항</h3>
 					<a
-						href="${pageContext.request.contextPath}/customer_service/notice"
+						href="${pageContext.request.contextPath}/customer_service/regionnotice"
 						class="more" title="극장 공지사항 더보기">더보기 <i
 						class="iconset ico-arr-right-gray"></i></a>
 				</div>
@@ -155,7 +130,7 @@
 							<tr>
 								<td>${noticelist.CUSTOMER_NOTICE_THEATER}</td>
 								<th scope="row">
-								<a href="#" title= "${noticelist.CUSTOMER_NOTICE_SUBJECT}">
+								<a href="${pageContext.request.contextPath}/customer_service/getnoticedetail?noticedetailnum=${noticelist.CUSTOMER_NOTICE_NUM}" title= "${noticelist.CUSTOMER_NOTICE_SUBJECT}">
 										[${noticelist.CUSTOMER_NOTICE_THEATER}] ${noticelist.CUSTOMER_NOTICE_SUBJECT} </a></th>
 								<td>${noticelist.CUSTOMER_NOTICE_REGION}</td>
 								<td>${noticelist.CUSTOMER_NOTICE_SYSDATE}</td>

@@ -76,7 +76,7 @@
 										</td>
 										<td>
 											<div class="main__table-text">
-												<a href="oneononeanswer?CUSTOMER_NUM=${m.CUSTOMER_NUM}">${m.CUSTOMER_TITLE}</a>
+												<a href="oneononeanswer?CUSTOMER_NUM=${m.CUSTOMER_NUM}" ${m.CUSTOMER_ANSWERSITUATION == '완료' ? 'style="pointer-events:none;"' : ''}>${m.CUSTOMER_TITLE}</a>
 											</div>
 										</td>
 										<td>
