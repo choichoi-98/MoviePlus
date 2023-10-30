@@ -49,9 +49,9 @@ public interface MovieMapper {
 
 	public int deleteMovieDibs(String memberId, String movieCode);
 
-	public List<Movie> getPlayingMovieMain();
+	public List<Movie> getPlayingMovieMain(String THEATER_SCHEDULE_DATE);
 
-	public List<Movie> getPlayingMovieLoginMain(String memberId);
+	public List<Movie> getPlayingMovieLoginMain(String memberId, String THEATER_SCHEDULE_DATE);
 	
 	//로그인 o 영화 상세
 	public List<Movie> getMovieDetailLogin(String memberId, String movieCode);

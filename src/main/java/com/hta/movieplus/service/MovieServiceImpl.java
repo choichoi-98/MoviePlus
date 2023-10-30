@@ -59,13 +59,13 @@ public class MovieServiceImpl implements MovieService{
 	
 
 	//메인-로그인한 경우
-	public List<Movie> getPlayingMovieLoginMain(String memberId) {
-		return dao.getPlayingMovieLoginMain(memberId);
+	public List<Movie> getPlayingMovieLoginMain(String memberId, String date) {
+		return dao.getPlayingMovieLoginMain(memberId, date);
 	}
 	
 	//메인-로그인 x
-	public List<Movie> getPlayingMovieMain() {
-		return dao.getPlayingMovieMain();
+	public List<Movie> getPlayingMovieMain(String currentdate) {
+		return dao.getPlayingMovieMain(currentdate);
 	}
 
 	//영화 목록 - 로그인x, 검색

@@ -167,7 +167,8 @@ public class MovieController {
 	
     @GetMapping("/movieDetail")
     public ModelAndView movieDetail(ModelAndView mv,
-    				@RequestParam(value="movieCode", defaultValue="") String movieCode,
+    				@RequestParam(value="movieCode", defaultValue="") String movieCode, 
+    				@RequestParam(value="ratio", defaultValue="0") int ratio, 
     				@AuthenticationPrincipal Member member
     		) {
     	if(member != null) {

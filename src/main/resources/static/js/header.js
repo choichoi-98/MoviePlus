@@ -150,8 +150,13 @@ $(document).ready(function(){
 		closeAlertPopup();
 	})
 	
-	
-	
-	
-	
+	$(".movie-item").each(function(){
+	 	 const row = $(this).closest('li'); // 클릭된 버튼의 부모 <tr> 요소를 찾습니다.
+         const poster = row.find('.movie-item').data('poster');
+		$(this).hover(
+		 function(){
+			$('#moviePoster').attr('src', poster);
+		  }
+		)	
+	})
 });
