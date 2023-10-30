@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hta.movieplus.domain.ChatMessageVO;
 import com.hta.movieplus.domain.ChatRoomVO;
 import com.hta.movieplus.domain.Member;
 import com.hta.movieplus.mybatis.mapper.ChatMapper;
@@ -48,6 +49,18 @@ public class ChatServiceImpl implements ChatService{
 	//채팅 메시지 저장
 	public int saveMessage(String chatFrom,  String content, String roomN) {
 		return dao.saveMessage(chatFrom, content, roomN);
+	}
+
+	//채팅 메시지 불러오기 
+	public List<ChatMessageVO> getMessageList(String roomN) {
+		// TODO Auto-generated method stub
+		return dao.getMessageList(roomN);
+	}
+
+	//채팅방 목록 불러오기 + 최근 대화 
+	public List<ChatRoomVO> getChatRoomList(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.getChatRoomList(memberId);
 	}
 	
 }

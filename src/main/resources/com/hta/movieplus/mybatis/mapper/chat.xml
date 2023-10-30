@@ -46,4 +46,41 @@
 		(MESSAGE_ID, MESSAGE_FROM, CONTENT,CREATE_AT, CHAT_ROOM)
 		VALUES(CHAT_MESSAGE_SEQ.NEXTVAL,#{chatFrom},#{content}, CURRENT_TIMESTAMP, #{roomN})
 	</insert>
+	
+	<!-- 메시지 목록 가져오기 -->
+	<select id="getMessageList" resultType="ChatMessageVO">
+		SELECT CM.CHAT_ROOM, CM.MESSAGE_FROM, CM.CREATE_AT, CM.CONTENT, M.MEMBER_NAME
+		FROM CHAT_MESSAGE CM
+		JOIN MEMBER M ON CM.MESSAGE_FROM = M.MEMBER_ID
+		WHERE CM.CHAT_ROOM = #{roomN}
+		ORDER BY CM.CREATE_AT
+	</select>
+	
+	<!-- 채팅방 + 최근 대화 -->
+	<select id="getChatRoomList" resultType="ChatRoomVO">
+		SELECT cr.chat_room_num, 
+		       CASE 
+		           WHEN cr.chat_subject = #{memberId} THEN cr.chat_object
+		           ELSE cr.chat_subject
+		       END AS relative_id,
+		       m.member_name,
+		       cm.message_from, cm.create_at, cm.content
+		FROM chat_room cr
+		LEFT JOIN (
+		    SELECT chat_room, message_from, create_at, content
+		    FROM chat_message cm1
+		    WHERE cm1.create_at = (
+		        SELECT MAX(cm2.create_at)
+		        FROM chat_message cm2
+		        WHERE cm2.chat_room = cm1.chat_room
+		    )
+		) cm ON cr.chat_room_num = cm.chat_room
+		LEFT JOIN member m ON
+		    (cr.chat_subject = #{memberId} AND cr.chat_object = m.member_id)
+		    OR (cr.chat_subject = m.member_id AND cr.chat_object = #{memberId})
+		WHERE (cr.chat_object = #{memberId} OR cr.chat_subject = #{memberId})
+		  AND ((cr.chat_subject = #{memberId} AND cr.chat_object != #{memberId})
+		       OR (cr.chat_subject != #{memberId} AND cr.chat_object = #{memberId}))
+		ORDER BY cm.create_at DESC
+	</select>
 </mapper>

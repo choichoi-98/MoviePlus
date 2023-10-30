@@ -1,0 +1,41 @@
+.divFriendTr {
+	height: 36px;
+	display: inline-block;
+	line-height: 33px;
+	vertical-align: middle;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 14px;
+	margin: 0px;
+	width: calc(100% - 14px);
+	clear: both;
+    border-bottom: 1px solid #000; /* 하단 테두리 설정 */
+}
+
+.divChatTr {
+	min-height: 33px;
+	display: inline-block;
+	line-height: 33px;
+	vertical-align: middle;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-left: 10px;
+	margin: 0px;
+	width: calc(100% - 10px);
+	clear: both;
+	font-size: 13px;
+}
+
+.divChatTrMy {
+	min-height: 33px;
+	display: inline-block;
+	line-height: 33px;
+	vertical-align: middle;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	padding-right: 30px;
+	margin: 0px;
+	width: calc(100% - 30px);
+	clear: both;
+	font-size: 13px;
+}
