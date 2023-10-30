@@ -22,6 +22,7 @@ $(function() {
             success: function(data) {
                 var box = data.next_redirect_pc_url;
                 window.open(box);
+                window.close(this);
 //              alert("상품: "+ cartItemNames + " 총 가격: " + totalPrice);
             },
             error: function(error) {

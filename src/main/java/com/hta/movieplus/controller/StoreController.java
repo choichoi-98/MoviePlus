@@ -338,7 +338,6 @@ public class StoreController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String today = dateFormat.format(currentDate);
 
-
 //		storeService.insertPgToken(PAY_NUM, pg_token);
 		if (pg_token.equals("none")) {
 		} else {

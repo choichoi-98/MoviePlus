@@ -17,9 +17,8 @@
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/booking_cart.js"></script>
-
 </head>
 <body>
 	<!-- header -->
@@ -54,7 +53,7 @@
 							</h3>
 							<div class="right">
 								<button type="button" class="button gray-line small"
-									id="btn_booking_init">
+									id="btn_booking_init" onClick="window.location.reload()">
 									<i class="iconset ico-reset-small"></i>초기화
 									<!-- 초기화 -->
 								</button>
@@ -67,7 +66,7 @@
 									<li id="movieWonLi" class=""><a
 										href="#"
 										class="tit" id="grp_coupon" name="grp_mega_dc"
-										title="메가박스 포인트/쿠폰"> 쿠폰/할인권
+										title="메가박스 포인트/쿠폰"> 쿠폰/포인트
 										<i class="iconset ico-btn-more-arr"></i>
 									</a>
 										<div id="mega_point" class="cont-down">
@@ -76,8 +75,8 @@
 													<a
 														href="#"
 														w-data="600" h-data="550" class=""
-														name="btn_pay_memp" id="btn_pay_mcoupon" title="메가박스 멤버십 포인트">
-														<span class="txt">무비플러스 포인트 <!-- 메가박스 멤버십 포인트 --></span>
+														name="btn_pay_memp" id="btn_pay_mcoupon" title="무비플러스 포인트">
+														<span class="txt">무비플러스 포인트</span>
 													</a>
 													<button type="button" class="btn-cancel"
 														id="btn_cancel_memp" method="memp">
@@ -90,7 +89,7 @@
 														href="#"
 														w-data="600" h-data="550" class=""
 														name="btn_pay_dcoupon" id="btn_pay_mcoupon"
-														title="메가박스 할인쿠폰"> <span class="txt">무비플러스 할인쿠폰
+														title="무비플러스 할인쿠폰"> <span class="txt">무비플러스 쿠폰
 															<!-- 메가박스 할인쿠폰 -->
 													</span> <em class="tooltip01 hidden" id="movieWonEm"></em>
 													</a>
@@ -106,7 +105,7 @@
 									<li id="movieWonLi2" class=""> <!-- class="praddbox" -->
 									<a  href="#"
 										class="tit" id="grp_ticket" name="grp_mega_dc"
-										title="관람권"> 관람권 
+										title="관람권"> 할인/관람권
 										<i class="iconset ico-btn-more-arr"></i>
 									</a>
 										<div id="mobile_coupon" class="cont-down">
@@ -114,8 +113,8 @@
 												<div class="item col-1">
 													<a href="#"
 													   w-data="600" h-data="600" class=""
-													   name="btn_pay_mcoupon" id="btn_pay_mcoupon"
-													   title="메가박스 관람권"> <span class="txt">무비플러스 관람권 <!-- 메가박스 관람권 --></span>
+													   name="btn_pay_mcoupon" id="btn_pay_mcoupon" title="메가박스 관람권"> 
+													   <span class="txt">스토어교환권</span>
 													</a>
 
 													<button type="button" class="btn-cancel"
@@ -125,12 +124,12 @@
 													</button>
 												</div>
 												<div class="item col-1">
-													<a
+													<!-- <a
 														href="#myModal"
 														w-data="600" h-data="560" class=""
 														name="btn_pay_scoupon" id="btn_pay_mcoupon" title="스토어교환권">
-														<span class="txt">스토어교환권 <!-- 스토어교환권 --></span>
-													</a>
+														<span class="txt">스토어교환권</span>
+													</a> -->
 
 													<button type="button" class="btn-cancel"
 														id="btn_cancel_scoupon" method="scoupon">
@@ -141,7 +140,8 @@
 											</div>
 										</div>
 									<div class="pointtxt">기프티콘, 기프티쇼, 아이넘버, 도넛북, 스마트콘, 스마일콘,
-										G마켓 예매권은 [모바일 관람권]에서 사용하실 수 있습니다.</div></li>
+										G마켓 예매권은 [모바일 관람권]에서 사용하실 수 있습니다.</div>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -288,7 +288,7 @@
 	<section id="layer_dcoupon" class="modal-layer" style="z-index: 505;"><a href="#" class="focus">레이어로 포커스 이동 됨</a>
 	<div class="wrap" style="width: 600px; height: 550px; margin-left: -300px; margin-top: 0px; top: 80px;">
 		<header class="layer-header">
-			<h3 class="tit">메가박스 할인쿠폰<!-- 메가박스 할인쿠폰 --></h3>
+			<h3 class="tit">메가플러스 할인쿠폰<!-- 메가박스 할인쿠폰 --></h3>
 		</header>
 
 		<div class="layer-con" style="height: 465px;">
@@ -299,7 +299,8 @@
 					<p class="sh-txt reset mr08"><span class="label">쿠폰번호<!-- 쿠폰번호 --></span></p>
 
 					<div class="sh-input">
-						<input id="couponCode" type="text" title="쿠폰 코드 입력" placeholder="" class="input-text" style="width:250px;" maxlength="50">
+						<input id="couponCode" type="text" title="쿠폰 코드 입력" placeholder="" 
+							   class="input-text" style="width:250px;" maxlength="50" onchange="noSpaceForm(this);">
 					</div>
 
 					<div class="sh-btn gray">
