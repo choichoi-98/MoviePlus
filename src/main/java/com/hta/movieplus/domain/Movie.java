@@ -21,6 +21,7 @@ public class Movie {
 	private int post_Count;		//무비 포스트 수
 	private String THEATER_SCHEDULE_DATE;
 	private int ratio;
+	private int rate;
 	private int RNUM;
 	
 	//--
@@ -191,6 +192,12 @@ public class Movie {
 	}
 	public void setRNUM(int rNUM) {
 		RNUM = rNUM;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 	
 	

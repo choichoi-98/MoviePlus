@@ -150,13 +150,43 @@ $(document).ready(function(){
 		closeAlertPopup();
 	})
 	
-	$(".movie-item").each(function(){
-	 	 const row = $(this).closest('li'); // 클릭된 버튼의 부모 <tr> 요소를 찾습니다.
-         const poster = row.find('.movie-item').data('poster');
-		$(this).hover(
-		 function(){
-			$('#moviePoster').attr('src', poster);
-		  }
-		)	
+	/*
+	const poster = $(".movie-item").eq(0).attr('data-poster');
+	$('#moviePoster').prop('src', poster);
+
+	
+	$(".movie-item").hover(function(){
+         const poster = $(this).attr('data-poster');
+         
+			$('#moviePoster').prop('src', poster);
 	})
+	
+	$(".movie-item").eq(0).trigger("hover");
+	*/
+	
+	// 페이지 로드 시 실행할 초기 코드
+	function setInitialPoster() {
+	    const poster = $(".movie-item").eq(0).attr('data-poster');
+	    $('#moviePoster').prop('src', poster);
+	}
+	
+	// 마우스 오버 이벤트 핸들러
+	function handleMouseOver() {
+	    const poster = $(this).attr('data-poster');
+	    $('#moviePoster').prop('src', poster);
+	}
+	
+	// 문서가 로드될 때 초기 포스터 설정
+	$(document).ready(function() {
+	    setInitialPoster();
+	    
+	    // 마우스 오버 이벤트를 모든 .movie-item 요소에 연결
+	    $(".movie-item").hover(handleMouseOver);
+	});
+	
+	// 클릭 이벤트로 초기 포스터 설정 (모든 .movie-item 요소에 적용)
+	$(".movie-item").click(function() {
+	    setInitialPoster();
+	});
+	
 });

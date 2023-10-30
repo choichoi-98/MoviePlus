@@ -171,7 +171,7 @@ $(document).ready(function(){
 								<p title="${m.movie_Title}" class="tit">${m.movie_Title}</p>
 							</div>
 							<div class="rate-date">
-								<span class="rate">예매율 22.8%</span> <span class="date">개봉일
+								<span class="rate">예매율 ${m.ratio}%</span> <span class="date">개봉일
 									${m.movie_OpenDate}</span>
 							</div>
 							
@@ -181,12 +181,12 @@ $(document).ready(function(){
 												<c:if test="${empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png"
-														style="width: 15px">
+														style="width: 15px; margin-top:10px; margin-bottom:10px;">
 												</c:if>
 												<c:if test="${!empty m.interest_Status }">
 													<img class="dibs_img"
 														src="${pageContext.request.contextPath}/resources/image/movie/heart_full.png"
-														style="width: 15px">
+														style="width: 15px; margin-top:10px; margin-bottom:10px;">
 												</c:if>
 								 </button>
 								<div class="case movieStat4" style="display: block">
