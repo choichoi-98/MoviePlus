@@ -185,8 +185,16 @@ public class ChatController {
 			List<ChatRoomVO> chatList = chatServiceImpl.getChatRoomList(memberId);
 			
 			List<ChatRoomVO> filteredChatList = chatList.stream()
-			        .filter(chat -> chat.getContent() != null)
-			        .collect(Collectors.toList());
+				    .filter(chat -> chat.getContent() != null)
+				    .collect(Collectors.toList());
+
+				for (ChatRoomVO chatRoom : filteredChatList) {
+				    logger.info("ChatRoomID: " + chatRoom.getChat_Room_num());
+				    logger.info("MessageFrom: " + chatRoom.getMessage_from());
+				    logger.info("CreateAt: " + chatRoom.getDate());
+				    logger.info("Content: " + chatRoom.getContent());
+				}
+
 			mv.addObject("chatList",filteredChatList);
 		}
 
@@ -200,7 +208,7 @@ public class ChatController {
 	@ResponseBody
 	public List<ChatRoomVO> chatListAjax(@AuthenticationPrincipal Member member) {
 	    List<ChatRoomVO> chatList = new ArrayList<>();
-
+	    logger.info("여기는 chatListAjax");
 	    if (member != null) {
 	        String memberId = member.getMEMBER_ID();
 	        logger.info("friendList의 memberId = " + memberId);

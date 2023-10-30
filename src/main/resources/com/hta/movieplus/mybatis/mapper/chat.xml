@@ -24,7 +24,7 @@
 	<insert id="createChatRoom" parameterType="map">
 		INSERT INTO CHAT_ROOM
 		(CHAT_ROOM_NUM, CHAT_SUBJECT, CHAT_OBJECT)
-   	    VALUES((SELECT NVL(MAX(CHAT_ROOM_NUM), 0) + 1 FROM CHAT_ROOM), #{subjectId}, #{objectId})
+   	    VALUES((SELECT NVL(MAX(to_number(CHAT_ROOM_NUM)), 0) + 1 FROM CHAT_ROOM), #{subjectId}, #{objectId})
 	</insert>
 	
 	<!-- 채티방 이름 설정 -->

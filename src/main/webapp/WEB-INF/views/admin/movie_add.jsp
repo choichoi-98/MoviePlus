@@ -253,12 +253,12 @@ width:100%;
 		</div>
 		
 		<!-- 채팅 open btn -->
-		<div>
+		<!-- <div>
 			<a herf="#none" onclick="openPop()">
 				<img id="chatBtn"
 				  src="${pageContext.request.contextPath}/resources/image/chat/wechat.png">
 			</a>
-		</div>
+		</div> -->
 	</main>
 </body>
 </html>

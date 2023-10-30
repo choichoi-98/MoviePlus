@@ -13,10 +13,17 @@
 
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
-	
-	
+
 <head>
 <meta charset="UTF-8">
+<script>
+		function openPop(){
+		var popup = window.open('${pageContext.request.contextPath}/chat/chatList',
+							'채팅팝업','width=672px, height=640px');
+							//chat/room
+							//chat/friendList
+	}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -83,6 +90,10 @@
 				
 				<li class="sidebar__nav-item">
 					<a href="${pageContext.request.contextPath}/admin/reopenexpectlist" class="sidebar__nav-link"><span>재개봉 관리</span></a>
+				</li>
+
+				<li class="sidebar__nav-item">
+					<a a herf="#none" onclick="openPop()" class="sidebar__nav-link"><span style="color: white;">채팅</span></a>
 				</li>
 				
 				
