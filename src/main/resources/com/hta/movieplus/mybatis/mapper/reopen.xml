@@ -44,11 +44,38 @@
    		WHERE MOVIE_CODE = #{DELETECODE}
    </update>
    
-   <!-- <update id="">
-   		두 테이블을 조인하면서 업데이트를 진행하는 업데이트문
-   </update> -->
+    <select id="getCountByReopen" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '재개봉예정'
+	</select>
+	
+	<select id='getReopenlistPagination' parameterType="map" resultType="reOpenVO">
+		SELECT * 
+		FROM
+			( 	SELECT ROWNUM RNUM, A.*, B.REOPENING_STARTDATE, B.REOPENING_ENDDATE
+				FROM MOVIE A, EXPECT_REOPENING_MOVIE B
+				WHERE A.MOVIE_CODE = B.MOVIE_CODE
+				AND ROWNUM &lt;= #{end} <!-- &lt;는 <  -->
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
+	
+	<select id='getEndMovieListPagination' parameterType="map" resultType="movie">
+		SELECT * 
+		FROM
+			( 	SELECT ROWNUM RNUM, MOVIE.*
+    			FROM MOVIE
+     			WHERE MOVIE_SCREEN = '상영종료'
+				AND ROWNUM &lt;= #{end} <!-- &lt;는 <  -->
+				)
+		WHERE RNUM &gt;= #{start} AND RNUM &lt;= #{end}
+	</select>
     
-    
-    
+     <select id="getCountByEndMovieList" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIE
+		WHERE MOVIE_SCREEN = '상영종료'
+	</select>
 </mapper>
     
