@@ -47,10 +47,27 @@ public class SendMail {
 				String subject = "[MoviePlus] 가입 이메일 인증번호";
 				String content = "고객님의 인증번호는 다음과 같습니다. [ " + vo.getVerifycode() + " ]";
 
+				
+				String content2 = "<div class=''><div class='aHl'></div><div id=':n7' tabindex='-1'></div>";
+				content2 += "<div id=':mw' class='ii gt' jslog='20277; u014N:xr6bB; 1:WyIjdGhyZWFkLWY6MTc4MDA4NTc3MDEzNjYwMjc3OSIsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsW11d; 4:WyIjbXNnLWY6MTc4MDA4NTc3MDEzNjYwMjc3OSIsbnVsbCxbXSxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxbXSxbXSxbXSxudWxsLG51bGwsbnVsbCxudWxsLFtdXQ..'>";
+				content2 +=  "<div id=':mv' class='a3s aiL ' style='margin-left: 50px; margin-top: 50px;'>";
+				content2 +=  "<table border='0' cellpadding='0' cellspacing='0' style='font-family:Malgun Gothic,dotum,verdana,serif;border:1px solid #dde1e5;background-color:#ffffff' width='620'>";
+				content2 +=  "<tbody><tr><td style='padding-left:59px;font-family:Malgun Gothic,dotum,verdana,serif'>";
+				content2 +=  "<table border='0' cellpadding='0' cellspacing='0' style='width:500px;padding-top:60px; padding-bottom:50px'>";
+				content2 +=  "<tbody><tr><td style='padding-top:25px;font:bold 32px Malgun Gothic,dotum,verdana,serif;color:#17191d;letter-spacing:-1.5px'>MoviePlus<br>인증번호 안내</td>";
+				content2 +=  "</tr><tr><td style='padding:20px 0 30px;font:14px Malgun Gothic,dotum,verdana,serif;color:#4a4e57;letter-spacing:-0.7px;line-height:1.71'><span style='color:#4a4e57'>안녕하세요,<br>";
+				content2 +=  "저희 <strong>MoviePlus</strong>를 이용해 주셔서 감사드립니다.<br>회원가입 인증번호를 알려드립니다.<br><br></span>";
+				content2 +=  "<span style='color:red; font-size:25px'>[ "; 
+				content2 +=  vo.getVerifycode();
+				content2 +=  " ]</span><br>홈페이지에서 인증번호를 입력하여 주세요.</td></tr></tbody></table></td></tr></tbody></table>";
+				content2 +=  "<div style='display:none'></div></div><div class='yj6qo'></div><div class='yj6qo'></div>";
+				content2 +=  "</div><div id=':nb' class='ii gt' style='display:none'><div id=':nc' class='a3s aiL '></div>";
+				content2 +=  "</div><div class='hi'></div><div class='WhmR8e' data-hash='0'></div></div>";
+					
 				// 1. 문자로만 전송하는 경우
 				// true는 html을 사용하겠다는 뜻입니다.
 				helper.setSubject(subject); // 메일 제목
-				helper.setText(content, true); // 메일 내용 (값을받아서 쓰면됨)
+				helper.setText(content2, true); // 메일 내용 (값을받아서 쓰면됨)
 
 				// 2. 이미지를 내장해서 보내는 경우
 				// cid(content id)
@@ -60,7 +77,7 @@ public class SendMail {
 				// FileSystemResource file = new FileSystemResource(new File(sendfile));
 				// addInline메서드의 첫번째 매개변수에는 cid(content id)를 지정합니다.
 				// helper.addInline("Home", file);
-
+				
 				// 3.파일을 첨부해서 보내는 경우
 				// 첫번째 인자 : 첨부될 파일의 이름입니다.
 				// 두번째 인자 : 첨부파일

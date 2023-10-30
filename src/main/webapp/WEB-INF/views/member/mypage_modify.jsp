@@ -217,35 +217,6 @@
               </table>
           </div>
 
-          <h3 class="tit">스페셜 멤버십 가입내역</h3>
-
-          <div class="table-wrap mb40">
-
-              <!-- 가입된 스페셜멤버십이 있는 경우 -->
-              <table class="board-form">
-                  <caption>가입정보, 스페셜 멤버십 이용동의 안내 순서로 보여줍니다.</caption>
-                  <colgroup>
-                      <col style="width:180px;">
-                      <col>
-                  </colgroup>
-                  <tbody>
-                      <!-- 가입 내역이 없는 경우 -->
-                      <tr>
-                          <th scope="row">가입정보</th>
-
-                                  <td>
-                                      <div class="clearfix">
-                                          <p class="float-l reset lh32">가입된 스페셜 멤버십이 없습니다.</p>
-                                          <div class="float-r">
-                                              <a href="https://www.megabox.co.kr/curation/specialcontent" class="button small gray" title="스페셜 멤버십 가입 안내">스페셜 멤버십 가입 안내</a>
-                                          </div>
-                                      </div>
-                                  </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-
           <div class="btn-group mt40">
               <button type="button" class="button large" id="modifycancelBtn" >취소</button>
               <button type="submit" class="button purple large" id="updateBtn">등록</button>

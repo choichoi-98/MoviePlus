@@ -22,5 +22,9 @@ public interface TotalMapper {
 	public List<Total> dayMovieseatCount(String THEATER_SCHEDULE_DATE);
 
 	public List<Total> monthReserveRate(String THEATER_SCHEDULE_DATE);
+
+	public List<Total> dayTicketSalesRate(String THEATER_SCHEDULE_DATE);
+
+	public List<Total> monthEachReserveRate(String interval);
 	
 }

@@ -97,7 +97,7 @@
 		
 			
 			 <!-- 시사회/무대인사 이벤트 신청 inner-wrap -->
-			<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사"}'>
+			<c:if test='${eventDetail.EVENT_TYPE == "시사회/무대인사" && eventDetail.EVENT_STATUS != "END" }' >
 				<div class="inner-wrap">
 					<!-- event-button-type -->
 					<div class="event-button-type">

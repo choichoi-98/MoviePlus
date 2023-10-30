@@ -3,6 +3,7 @@ package com.hta.movieplus.domain;
 public class Total {
 	
 	private double ratio;
+	private String interval;
 	private int RNUM;
 	private int rate;
 	private int THEATER_SCHEDULE_ID;
@@ -382,6 +383,12 @@ public class Total {
 	}
 	public void setRate(int rate) {
 		this.rate = rate;
+	}
+	public String getInterval() {
+		return interval;
+	}
+	public void setInterval(String interval) {
+		this.interval = interval;
 	}
 	
 	

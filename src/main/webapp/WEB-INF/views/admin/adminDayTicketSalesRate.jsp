@@ -6,20 +6,24 @@
 <html>
 <meta name="_csrf" content="${_csrf.token}">
 <meta name="_csrf_header" content="${_csrf.headerName}">
+	
+	
 <head>	
 <meta charset="UTF-8">
 <title>MoviePlus</title>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
 
+	
 	<main class="main">
 		<div class="container-fluid">
 			<div class="row">
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>월별 영화 예매율</h2>
+						<h2>좌석 판매율</h2>
 
 						<span class="main__title-stat"> <b></b></span>
 
@@ -27,17 +31,17 @@
 						 
 							<!-- filter sort -->
 							<div class="filter" id="filter__sort">
-								<span class="filter__item-label">보기</span>
+								<span class="filter__item-label">정렬 순서</span>
 
 								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<input type="button" value="당월">
+									<input type="button" value="생성 순">
 									<span></span>
 								</div>
 
 								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-									<li class="monthselect" data-month='0'>당월</li>
-									<li class="monthselect" data-month='1'>1개월전</li>
-									<li class="monthselect" data-month='2'>2개월전</li>
+									<li>마감 임박순</li>
+									<li>최신순</li>
+									<li>탭 별</li>
 								</ul>
 							</div>
 							<!-- end filter sort -->
@@ -61,38 +65,38 @@
 							</thead>
 
 							<tbody>
-							  <c:forEach var="month" items="${monthReserveRate}">
+							  <c:forEach var="TicketSalesRate" items="${dayTicketSalesRate}" >
 								<tr>
 									<td>
-										<div class="main__table-text">${month.RNUM}</div>
+										<div class="main__table-text">${TicketSalesRate.RNUM}</div>
 									</td>
 									<td>
 										<div class="main__user">
 											<div class="main__meta">
-												<h3>${month.MOVIE_CODE}</h3>
+												<h3>${TicketSalesRate.MOVIE_CODE}</h3>
 											</div>
 										</div>
 									</td>
 									<td>
 										<div class="main__table-text">
-										<a href="#">${month.MOVIE_TITLE}</a>
+										<a href="#">${TicketSalesRate.MOVIE_TITLE}</a>
 										</div>
 									</td>
 									<td>
-										<div class="main__table-text">${month.ratio}%</div>
+										<div class="main__table-text">${TicketSalesRate.ratio}%</div>
 									</td>
 									<td>
 										<div class="main__table-btns">
-											<a href="" class="main__table-btn main__table-btn move-to-manager-menu">
+											<a href="#" class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-log-out" title=""></i>
 											</a>
-											<a href=""  class="main__table-btn main__table-btn move-to-manager-menu">
+											<a href="#"  class="main__table-btn main__table-btn move-to-manager-menu">
 												<i class="icon ion-ios-eye" title=""></i>
 											</a>
-											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+											<a href="#" class="main__table-btn main__table-btn--banned open-modal">
 												<i class="icon ion-ios-lock" title=""></i>
 											</a>
-											<a href="" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
+											<a href="#" id="event-modify-btn" class="main__table-btn main__table-btn--edit">
 												<i class="icon ion-ios-create" title=""></i>
 											</a>
 											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
@@ -153,12 +157,6 @@ $('.resultdate').each(function() {
 		   return year + "." + month + "." + day;
 	}
 })
-
-$('.monthselect').on("click", function() {
-	
-	var month = 'monthtotalcount?month=' + $(this).attr('data-month');
-	location.href = month;
-});
 
 
 </script>		
