@@ -153,7 +153,7 @@
                                   <div class="change-phone-num-area">
                                       <div class="position">
                                           <label for="chPhone" class="label">변경할 이메일</label>
-                                          <input type="text" name="MEMBER_EMAIL" value="${pinfo.MEMBER_EMAIL}" id="chEmail" class="input-text w180px" placeholder="&#39;@&#39;포함하여 입력해 주세요" title="변경할 이메일 입력" style="width:220px; !important" >
+                                          <input type="text" name="MEMBER_EMAIL" value="${pinfo.MEMBER_EMAIL}" id="chEmail" class="input-text w220px" placeholder="&#39;@&#39;포함하여 입력해 주세요" title="변경할 이메일 입력" style="width:220px; !important" >
                                           <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
                                       	  <input type="hidden" class="verifycode" id="chverifycode" name="chverifycode" />
                                       </div>
@@ -162,10 +162,7 @@
                                           <label for="chkNum" class="label">인증번호 입력</label>
 										
                                           <div class="chk-num small">
-                                              <div class="line">
-                                                  <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="6">
-                                                  <div class="time-limit" id="timeLimit">3:00</div>
-                                              </div>
+                                                  <input type="text" id="chkNum" class="input-text w220px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="6">
                                           </div>
                                           <button type="button" class="button small gray-line" id="chgBtn">인증번호 확인</button>
                                       </div>
@@ -207,11 +204,6 @@
                           <th scope="row" class="a-c">네이버</th>
                                   <td class="a-l">연결된 계정정보가 없습니다.</td>
                                   <td><button type="button" class="button small gray" lnkgty="NAVER" connty="conn">연동</button></td>
-                      </tr>
-                      <tr>
-                          <th scope="row" class="a-c">카카오</th>
-                                  <td class="a-l">연결된 계정정보가 없습니다.</td>
-                                  <td><button type="button" class="button small gray" lnkgty="KAKAO" connty="conn">연동</button></td>
                       </tr>
                   </tbody>
               </table>

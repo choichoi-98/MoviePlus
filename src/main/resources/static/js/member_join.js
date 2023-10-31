@@ -21,6 +21,7 @@ $(document).ready(function(){
 					$("#verifycode").val(data);
 					alert('인증번호가 발송되었습니다.');
 					$("#JoinVerifyNo").removeAttr("disabled");  //인증번호 입력칸 disabled 해제
+					$("#schPwdtimer").css('background-color','#FFFFFF');  //인증번호 입력칸 disabled 해제
 					$("#MEMBER_EMAIL").val(email);
 				  }, 
 				error : function(){

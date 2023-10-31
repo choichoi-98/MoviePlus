@@ -19,83 +19,105 @@
 					<div class="main__title">
 						<h2>이벤트 수정</h2>
 					</div>
-				</div>
+				</div><!-- col-12 -->
 				<!-- end main title -->
 
 				<!-- form -->
-				<div class="col-12">
+				<div class="table-wrap mt10" style="color:white; margin-left:20px; width:900px">
 					<form enctype="multipart/form-data" id="eventupdate" action="${pageContext.request.contextPath}/admin/modifyEventProcess" class="form" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<div class="row row--form">
-			
-							<div class="col-12 col-md-7 form__content">
+						<input type="hidden" name="EVENT_NUM" value="${eventdata.EVENT_NUM}">
 								<div class="row row--form">
-								
-								<div class="col-3">
-									<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="rights" data-select2-id="rights" tabindex="-1" >
+								<table class="board-form va-m">
+									<colgroup>
+										<col style="width:150px;">
+										<col>
+										<col style="width:150px;">
+										<col>
+									</colgroup>
+									<tbody>
+										<tr>
+										<th scope="row">이벤트 종류</th>
+										<td colspan="3">
+											<select class="js-example-basic-single" value="${eventdata.EVENT_TYPE}" name="EVENT_TYPE" id="rights" data-select2-id="rights" tabindex="-1" >
 												<option value="영화" ${eventdata.EVENT_TYPE == '영화' ? 'selected' : ''}>영화</option>
 												<option value="극장" ${eventdata.EVENT_TYPE == '극장' ? 'selected' : ''}>극장</option>
 												<option value="제휴/할인"  ${eventdata.EVENT_TYPE == '제휴/할인' ? 'selected' : ''}>제휴/할인</option>
 												<option value="시사회/무대인사" ${eventdata.EVENT_TYPE == '시사회/무대인사' ? 'selected' : ''}>시사회/무대인사</option>
-									</select>
-								</div>
-								<input type="hidden" name="EVENT_NUM" value="${eventdata.EVENT_NUM}">
-								<div class="col-12">
-									<input type="text" name="EVENT_SUBJECT" class="form__input"
-										 placeholder="이벤트 제목" value="${eventdata.EVENT_SUBJECT}" required>
-								</div>
-									
-								<div class="col-5"><!-- 이벤트 시작일 -->
-									<input type="text" name="EVENT_STARTDATE" value="${eventdata.EVENT_STARTDATE}" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" required>
-								</div>
-							
-								<div class="col-5"><!-- 이벤트 종료일 -->
-									<input type="text" name="EVENT_ENDDATE" value="${eventdata.EVENT_ENDDATE}" class="form__input" placeholder="이벤트 종료일 " required>
-								</div>
-								
-								<div class="col-5"><!-- 이벤트 발표일 -->
-									<input type="text" name="EVENT_RESULTDATE" value="${eventdata.EVENT_RESULTDATE}" class="form__input" placeholder="이벤트 발표일" maxlength="8"  required>
-								</div>
-							 </div>
-						   </div><!-- form content end -->
-							
-							<!-- 썸네일 수정 EVENTFILE_ORIGINAL /uploadthumb  -->
-							<div class="col-12" id="thumbclass">
-								<label>
-									<span style="color:white;"> 
-									<c:if test = "${empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<c:if test = "${!empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<input type="file" id="eventthumbupfile" name="uploadthumb" style="color:white;" />
-									<input type="hidden"  name="EVENT_FILE" value="${eventdata.EVENT_FILE}" />
-									</span>
-									<span id="thumbfilevalue" style="display:none;">${eventdata.EVENTFILE_ORIGINAL}</span>
-								</label>
-							</div>	
-							
+											</select>
+										</td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="ask-type">이벤트 제목</label></th>
+											<td colspan="3">
+											<input type="text" name="EVENT_SUBJECT" class="form__input"
+												 placeholder="이벤트 제목" value="${eventdata.EVENT_SUBJECT}" required>
+											</td>	 
+										</tr>
+										<tr>
+											<th scope="row"><label for="EVENT_STARTDATE">이벤트 시작일</label></th>
+											<td>
+											<!-- 이벤트 시작일 -->
+											<input type="text" name="EVENT_STARTDATE" value="${eventdata.EVENT_STARTDATE}" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" required>
+											</td>
+											<th scope="row" style="text-align:center"><label for="EVENT_ENDDATE">이벤트 종료일</label></th>
+											<td>
+											<input type="text" name="EVENT_ENDDATE" value="${eventdata.EVENT_ENDDATE}" class="form__input" placeholder="이벤트 종료일 " required>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row"><label for="hpNum1">이벤트 발표일</label></th>
+											<td colspan="3">
+											<input type="text" name="EVENT_RESULTDATE" value="${eventdata.EVENT_RESULTDATE}" class="form__input" placeholder="이벤트 발표일" maxlength="8"  required>
+											</td>
+										</tr>
+							<tr>
+									<th scope="row"><label for="qnaCustInqTitle">썸네일</label></th>
+									<td colspan="3">							
+									<!-- 썸네일 수정 EVENTFILE_ORIGINAL /uploadthumb  -->
+									<div class="col-12" id="thumbclass">
+										<label>
+											<span style="color:white;"> 
+											<c:if test = "${empty eventdata.EVENT_FILE}">
+												<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="썸네일" style="width: 50px;">
+											</c:if>
+											<c:if test = "${!empty eventdata.EVENT_FILE}">
+												<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
+											</c:if>
+											<input type="file" id="eventthumbupfile" name="uploadthumb" style="color:white;" />
+											<input type="hidden"  name="EVENT_FILE" value="${eventdata.EVENT_FILE}" />
+											</span>
+											<span id="thumbfilevalue" style="display:none;">${eventdata.EVENTFILE_ORIGINAL}</span>
+										</label>
+									</div>
+									</td>
+							</tr>			
+							<tr>
+								<th scope="row"><label for="textarea">내용</label></th>
 							<!-- 내용 수정  EVENTCONTENT_ORIGINAL/ uploadevent -->
-							<div class="col-12">
-								<label>
-									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
-									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
-									<input type="hidden" name="EVENT_CONTENT" value="${eventdata.EVENT_CONTENT}" />
-								</label>
-								<span id="filevalue" style="display:none;">${eventdata.EVENTCONTENT_ORIGINAL}</span>
-                            </div>
-
-							<div class="col-12" >
-								<button type="submit" class="form__btn" style="display:inline-block;">등록</button>
-								<button type="button" id="cancelbtn" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
-							</div>
-					  </div>
+								<td colspan="3">
+								<div class="col-12">
+									<label>
+										<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
+										<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
+										<input type="hidden" name="EVENT_CONTENT" value="${eventdata.EVENT_CONTENT}" />
+									</label>
+									<span id="filevalue" style="display:none;">${eventdata.EVENTCONTENT_ORIGINAL}</span>
+	                            </div>
+	                            </td>
+	                            </tr>
+	                            </tbody>
+	                            </table>
+	                        </div><!-- row row--form -->
+						</div><!-- table-wrap mt10 -->
+	
+								<div class="col-12" >
+									<button type="submit" class="form__btn" style="display:inline-block;">등록</button>
+									<button type="button" id="cancelbtn" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
+								</div>
 					</form>
-				</div>
-				<!-- end form -->
-			</div>
-		</div>
+			</div><!-- row -->
+		</div><!-- container-fluid -->
 	</main>
 <script>
 $(document).ready(function(){

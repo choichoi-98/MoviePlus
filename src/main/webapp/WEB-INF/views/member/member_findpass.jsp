@@ -75,6 +75,7 @@
 									<div class="chk-num">
 										<div class="line">
 											<input maxlength="6" type="text" id="findpassVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
+											<div class="time-limit" id="schPwdtimer" style="background-color:#f7f8f9"></div>
 										</div>
 									</div>
 

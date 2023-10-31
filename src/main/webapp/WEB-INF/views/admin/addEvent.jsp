@@ -23,74 +23,93 @@
 				<!-- end main title -->
 
 				<!-- form -->
-				<div class="col-12">
-					<form enctype="multipart/form-data" id="eventadd" action="${pageContext.request.contextPath}/admin/eventInsert" class="form" method="post">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<div class="row row--form">
-			
-							<div class="col-12 col-md-7 form__content">
-								<div class="row row--form">
-								
-								<div class="col-3">
-									<select name="EVENT_TYPE" class="js-example-basic-single" id="rights" data-select2-id="rights" tabindex="-1" aria-hidden="true">
+				<div class="table-wrap mt10" style="color:white; margin-left:20px; width:900px">
+				<form enctype="multipart/form-data" id="eventadd" action="${pageContext.request.contextPath}/admin/eventInsert" class="form" method="post" style="width:880px;">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
+						<table class="board-form va-m">
+							<colgroup>
+								<col style="width:150px;">
+								<col>
+								<col style="width:150px;">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">이벤트 종류</th>
+									<td colspan="3">
+										<select name="EVENT_TYPE" class="js-example-basic-single" id="rights" data-select2-id="rights" tabindex="-1" aria-hidden="true">
 												<option value="영화">영화</option>
 												<option value="극장">극장</option>
 												<option value="제휴/할인">제휴/할인</option>
 												<option value="시사회/무대인사">시사회/무대인사</option>
 									</select>
-								</div>
-							
-								<div class="col-12">
-									<input type="text" name="EVENT_SUBJECT" class="form__input"
-											placeholder="이벤트 제목" required>
-								</div>
-									
-								<div class="col-5"><!-- 이벤트 시작일 -->
-									<input type="text" name="EVENT_STARTDATE" class="form__input" placeholder="이벤트 시작일 (yyyymmdd)" maxlength="8" required>
-								</div>
-							
-								<div class="col-5"><!-- 이벤트 종료일 -->
-									<input type="text" name="EVENT_ENDDATE" class="form__input" placeholder="이벤트 종료일" maxlength="8"  required>
-								</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><label for="ask-type">이벤트 제목</label></th>
+									<td colspan="3">
+										<input type="text" name="EVENT_SUBJECT" class="form__input"
+											placeholder="이벤트 제목을 입력해주세요." required>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><label for="EVENT_STARTDATE">이벤트 시작일</label></th>
+									<td>
+										<input type="text" name="EVENT_STARTDATE" class="form__input" placeholder="yyyymmdd" maxlength="8" required>
+										
+									</td>
+									<th scope="row" style="text-align:center"><label for="EVENT_ENDDATE">이벤트 종료일</label></th>
+									<td>
+										<input type="text" name="EVENT_ENDDATE" class="form__input" placeholder="" maxlength="8"  required>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><label for="hpNum1">이벤트 발표일</label></th>
+									<td colspan="3">
+										<input type="text" name="EVENT_RESULTDATE" class="form__input" placeholder="" maxlength="8"  required>
+									</td>
+								</tr>
 								
-								<div class="col-5"><!-- 이벤트 발표일 -->
-									<input type="text" name="EVENT_RESULTDATE" class="form__input" placeholder="이벤트 발표일" maxlength="8"  required>
-								</div>
-								
-							 </div>
-						   </div><!-- form content end -->
-
-							<div class="col-12" id="imgupload">
-								<label>
-									<span style="color:white;"> 
-									<c:if test = "${empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/resources/image/member/bg-profile.png" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<c:if test = "${!empty eventdata.EVENT_FILE}">
-										<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 50px;">
-									</c:if>
-									<input type="file" id="eventthumbupfile" name="uploadthumb" value="${eventdata.EVENT_FILE}" style="color:white;" />
-									</span>
-									<span id="thumbfilevalue" style="display:none;"></span>
-								</label>
-							</div>	
-							
-							<div class="col-12">
-								<label>
-									<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
-									<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
-									
-								</label>
-								<span id="filevalue" style="display:none;"></span>
-                            </div>
-
+								<tr>
+									<th scope="row"><label for="qnaCustInqTitle">썸네일</label></th>
+									<td colspan="3">
+									<div id="imgupload">
+										<label>
+										<span style="color:white;"> 
+										<c:if test = "${empty eventdata.EVENT_FILE}">
+											<img src="${pageContext.request.contextPath}/resources/image/admin/event.png" alt="썸네일" style="width: 30px;">
+										</c:if>
+										<c:if test = "${!empty eventdata.EVENT_FILE}">
+											<img src="${pageContext.request.contextPath}/upload${eventdata.EVENT_FILE}" alt="썸네일" style="width: 30px;">
+										</c:if>
+										<input type="file" id="eventthumbupfile" name="uploadthumb" value="${eventdata.EVENT_FILE}" style="color:white; " />
+										</span>
+										<span id="thumbfilevalue" style="display:none;"></span>
+										</label>
+									</div>	
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><label for="textarea">내용</label></th>
+									<td colspan="3">
+										<label>
+											<img src="${pageContext.request.contextPath}/resources/image/admin/fileadd.png" style="width: 30px;">
+											<input type="file" id="eventupfile" name="uploadevent" value="" style="color:white;" multiple />
+										</label>
+									<span id="filevalue" style="display:none;"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</div> 
+						
 							<div class="col-12" >
 								<button type="submit" class="form__btn" style="display:inline-block;">등록</button>
 								<button type="button" id="cancelbtn" class="form__btn" style="display:inline-block; margin-left:10px;">취소</button>
 							</div>
-					  </div>
-					</form>
-				</div>
+						</form>	
+						
+				
 				<!-- end form -->
 			</div>
 		</div>
