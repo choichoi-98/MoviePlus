@@ -2,7 +2,7 @@
 
 <style>
 #footer .footer-bottom .ci {
-background-image:url(${pageContext.request.contextPath}/resources/image/header-logo.png);
+background-image:url(${pageContext.request.contextPath}/resources/image/footerlogo.png);
 background-size:cover;}
 </style>
 <title>MoviePlus: 모두를 위한 영화관</title>
@@ -29,11 +29,11 @@ background-size:cover;}
     <!-- footer-bottom -->
     <div class="footer-bottom">
         <div class="inner-wrap">
-            <div class="ci">MEGABOX : Life Theater</div>
+            <div class="ci">MoviePlus: 모두를 위한 영화관</div>
 
             <div class="footer-info">
                 <div>
-                    <address>서울특별시 강남구 어디로 100, 10층 (가나동1가, 무비플러스)</address>
+                    <address>서울특별시 강남구 강남로 100, 10층 (가나동1가, 무비플러스)</address>
                     <p>ARS 1234-5678</p>
                 </div>
                 <p>대표자명 가나다</p>

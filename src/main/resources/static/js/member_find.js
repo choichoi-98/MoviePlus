@@ -82,6 +82,7 @@ $(document).ready(function(){
 						$('#findpassVerifyNo').removeAttr("disabled");	//인증번호 입력창 활성화
 						$('#btnCheckVerify').removeAttr("disabled");	//인증번호 입력창 활성화
 						$('#btnCheckVerify').removeClass("disabled");	//인증번호 입력창 활성화
+						$("#schPwdtimer").css('background-color','#FFFFFF');
 					}, 
 				error : function(){
 	           	 	console.log();

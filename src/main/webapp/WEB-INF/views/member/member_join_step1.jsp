@@ -85,8 +85,7 @@
 												<div class="line">
 													<input autocomplete="off" maxlength="6" type="text" id="JoinVerifyNo" class="input-text w180px" title="인증번호 입력" disabled="disabled"><!--인증번호 입력-->
 		
-													<div class="time-limit" id="schPwdtimer">
-														10:00
+													<div class="time-limit" id="schPwdtimer" style="background-color:#f7f8f9">
 													</div>
 												</div>
 											</div>
