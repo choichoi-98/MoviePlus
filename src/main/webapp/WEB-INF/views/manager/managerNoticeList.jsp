@@ -12,7 +12,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp" />

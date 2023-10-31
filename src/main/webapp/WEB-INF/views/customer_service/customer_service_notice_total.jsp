@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항&nbsp;(전체)</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 <body>

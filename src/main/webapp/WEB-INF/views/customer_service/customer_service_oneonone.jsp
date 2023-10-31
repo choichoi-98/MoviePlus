@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의문의&nbsp;(1:1 문의)</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 
