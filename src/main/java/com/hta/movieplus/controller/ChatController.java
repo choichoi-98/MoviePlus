@@ -188,12 +188,12 @@ public class ChatController {
 				    .filter(chat -> chat.getContent() != null)
 				    .collect(Collectors.toList());
 
-				for (ChatRoomVO chatRoom : filteredChatList) {
-				    logger.info("ChatRoomID: " + chatRoom.getChat_Room_num());
-				    logger.info("MessageFrom: " + chatRoom.getMessage_from());
-				    logger.info("CreateAt: " + chatRoom.getDate());
-				    logger.info("Content: " + chatRoom.getContent());
-				}
+//				for (ChatRoomVO chatRoom : filteredChatList) {
+//				    logger.info("ChatRoomID: " + chatRoom.getChat_Room_num());
+//				    logger.info("MessageFrom: " + chatRoom.getMessage_from());
+//				    logger.info("CreateAt: " + chatRoom.getDate());
+//				    logger.info("Content: " + chatRoom.getContent());
+//				}
 
 			mv.addObject("chatList",filteredChatList);
 		}
