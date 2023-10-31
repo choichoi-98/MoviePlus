@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authorize access="isAuthenticated()">
          <sec:authentication property="principal" var="pinfo"/>
@@ -136,7 +137,11 @@
 												</button>
 												<div class="money">
 													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
-													data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}</em> <span>원</span>
+														data-price="${selecteditem.ITEM_PRICE}">
+														<fmt:formatNumber value="${selecteditem.ITEM_PRICE}" type="currency"/>
+													</em>
+													<%-- <em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
+													data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}</em> <span>원</span> --%>
 												</div>
 											</div>
 										</div>

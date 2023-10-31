@@ -24,7 +24,7 @@
 <script>
 	$(function() {
 		var itemlistcount = ${itemlistcount};
-		if (itemlistcount == 10) {
+		if (itemlistcount >= 10) {
 			var per1page = 10;
 		} else {
 			var per1page = itemlistcount % 10;
@@ -113,7 +113,9 @@
 												<div class="main__table-text main__table-text--rate">${i.ITEM_MENU}</div>
 											</td>
 											<td>
-												<div class="main__table-text">${i.ITEM_PRICE}</div>
+												<div class="main__table-text">
+													<fmt:formatNumber value="${i.ITEM_PRICE}" type="currency"/>
+												</div>
 											</td>
 											<td>
 												<div class="main__table-text">-</div>
