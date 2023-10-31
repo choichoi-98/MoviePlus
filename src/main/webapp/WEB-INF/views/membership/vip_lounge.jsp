@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
@@ -49,12 +49,12 @@
 
 				<sec:authorize access="isAnonymous()">
 					<div class="benefit-vip-lounge2 logout">
-						<div class="title">
+						<div class="title" style="color: #792828;">
 							MOVIEPLUS <span>VIP</span>
 						</div>
-						<div class="subtext">무비플러스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 무비플러스
+						<div class="subtext" style="color: black;">무비플러스의 더 많은 혜택을 누릴 수 있는 방법! 로그인 후 무비플러스
 							등급을 확인하세요.</div>
-						<a href="#" id="membership-login" class="btn">로그인</a>
+						<a href="#" id="membership-login" class="btn" style="color: #792828; border:1px solid #792828">로그인</a>
 					</div>
 				</sec:authorize>
 				<!-- 로그인 전 -->
@@ -281,7 +281,7 @@
 								alt="5년 VIP 쿠폰">
 						</div>
 						<div class="number">혜택 01</div>
-						<div class="title">5년 VIP 쿠폰</div>
+						<div class="title" style="color:#792828">5년 VIP 쿠폰</div>
 						<div class="sText">5년 연속 VIP 혜택 영화 관람 쿠폰 2매 증정!</div>
 						<div class="mText">
 							지난 VIP 등급 이력은 로그인 후 ‘ 나의 무비플러스 &gt; 지난 등급 조회 ’에서 확인 가능합니다.<br>
@@ -298,7 +298,7 @@
 								alt="VIP 미션 이벤트">
 						</div>
 						<div class="number">혜택 02</div>
-						<div class="title">VIP 미션 이벤트</div>
+						<div class="title"  style="color:#792828">VIP 미션 이벤트</div>
 						<div class="sText">
 							매월 서로 다른 영화 5회 이상 관람 시<br>영화 &amp; 콤보 할인, 무료관람권 증정!
 						</div>
@@ -310,7 +310,7 @@
 
 						<div class="linkArea">
 							<a href="#" id="btnVipMission" class="btn" w-data="600"
-								h-data="800" title="VIP미션 이벤트 보기">VIP 스탬프 미션 보러가기</a>
+								title="VIP미션 이벤트 보기">VIP 스탬프 미션 보러가기</a>
 						</div>
 						<!-- //로그인 후 -->
 
@@ -332,7 +332,7 @@
 								alt="VIP DAY">
 						</div>
 						<div class="number">혜택 03</div>
-						<div class="title">VIP DAY</div>
+						<div class="title"  style="color:#792828">VIP DAY</div>
 						<div class="sText">기본 포인트에 VIP &amp; VIP DAY 포인트 까지!</div>
 						<div class="mText">
 							VIP 회원은 영화 관람 시, “기본 적립 포인트”만큼 추가 적립을 받을 수 있습니다.<br> 수요일 영화
@@ -350,7 +350,7 @@
 								alt="중앙멤버십 혜택">
 						</div>
 						<div class="number">혜택 04</div>
-						<div class="title">중앙멤버십 혜택</div>
+						<div class="title"  style="color:#792828">중앙멤버십 혜택</div>
 						<div class="sText">리조트 할인, CU 모바일 상품권 등 다양한 혜택!</div>
 						>
 
@@ -383,7 +383,7 @@
 							<!-- layer-joins-membership-request -->
 							<div class="layer-joins-membership-request">
 								<div class="tit-box">
-									<div class="tit">
+									<div class="tit"  style="color:#792828">
 										<span class="font-purple">MOVIEPLUS</span> <i
 											class="iconset ico-x-big"></i> <span class="font-gblue">중앙멤버십</span>
 									</div>
@@ -396,7 +396,7 @@
 
 								<!-- box-chk -->
 								<div class="box-chk mt30">
-									<div class="tit">
+									<div class="tit" >
 										<span class="bg-chk"> <input type="checkbox"
 											id="jggMembershipChk_1" value=""> <label
 											for="jggMembershipChk_1"><span>중앙멤버십 혜택 신청</span> <em
@@ -510,7 +510,7 @@
 								alt="VIP CULTURE EVENT">
 						</div>
 						<div class="number">혜택 05</div>
-						<div class="title">VIP CULTURE EVENT</div>
+						<div class="title" style="color: #792828">VIP CULTURE EVENT</div>
 						<div class="sText">교보문고 &amp; 핫트랙스 10% 할인쿠폰 증정!</div>
 						<div class="mText">
 							VIP 회원 대상 교보문고 &amp; 핫트랙스 10% 할인 쿠폰을 드립니다. (오프라인 / 1만원 이상 결제 시 사용

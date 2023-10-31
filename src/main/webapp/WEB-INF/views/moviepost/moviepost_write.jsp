@@ -15,7 +15,7 @@
 	src="${pageContext.request.contextPath}/resources/js/moviePost.js"></script>
 
 
-<title></title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 <body>
@@ -40,7 +40,7 @@
 			<input type="hidden" id="hidden-movieCode" value="${mp_movie.movie_Code}">
 			<!-- inner-wrap -->
 			<div class="inner-wrap">
-				<h3 class="tit">무비포스트 작성</h3>
+				<h3 class="tit" style="color:#792828">무비포스트 작성</h3>
 
 				<div class="movie-post-step02 selectMovie" style="">
 					<div class="user-post-top">
@@ -69,7 +69,7 @@
 							<div class="layout-wrap">
 								<div class="post-wrap" id="postLayer" style="height: 100%;">
 
-									<div class="select on" style="height: 100%;">
+									<div class="select on" style="height: 100%; background-color:white;">
 										<div class="post-layer add-post layer-type-01">
 											<div class="post-bg" data-no="1011697">
 												<img id="form-stillcut" src="" alt="">

@@ -24,7 +24,7 @@
 							//chat/friendList
 	}
 </script>
-<title>Insert title here</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<div class="sidebar">
