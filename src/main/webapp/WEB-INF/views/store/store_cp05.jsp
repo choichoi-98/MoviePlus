@@ -67,7 +67,7 @@
 									<div class="label event">BEST</div>
 									<div class="img">
 										<img
-											src="${pageContext.request.contextPath}/resources/image/store/${i.ITEM_FILE}"
+											src="${i.ITEM_PATH}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">

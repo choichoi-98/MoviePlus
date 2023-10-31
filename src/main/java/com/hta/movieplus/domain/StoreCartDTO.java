@@ -9,6 +9,7 @@ public class StoreCartDTO {
 	private int ITEM_CNT;
 	private String MEMBER_ID;
 	private String ITEM_FILE;
+	private String ITEM_PATH;
 	
 	public String getITEM_MENU() {
 		return ITEM_MENU;
@@ -51,6 +52,12 @@ public class StoreCartDTO {
 	}
 	public void setITEM_FILE(String iTEM_FILE) {
 		ITEM_FILE = iTEM_FILE;
+	}
+	public String getITEM_PATH() {
+		return ITEM_PATH;
+	}
+	public void setITEM_PATH(String iTEM_PATH) {
+		ITEM_PATH = iTEM_PATH;
 	}
 	
 }
