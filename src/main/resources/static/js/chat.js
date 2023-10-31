@@ -176,6 +176,7 @@ function isYesterday(date1, date2) {
             '</div>' +
             '</div>');
             $(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+            chatList();
 					}
 						
 				}else{
@@ -191,11 +192,11 @@ function isYesterday(date1, date2) {
 			console.log("WebSocket 연결 실패:", error);
 		};
 		
-	$(".msg_send_btn").off("click").on("click", function() {
+	$(".msg_send_btn").off("click").on("click", function(event) {
 	     var message = $("#chating").val().trim();
 		    console.log("message" + message)
 			if(message === ""){
-				alert("메시지를 입력해주세요");
+				alert("메시지를 입력해주세요-click");
 			}else{
 				
 	        send();
@@ -209,7 +210,7 @@ function isYesterday(date1, date2) {
 	        var message = $("#chating").val().trim();
 		    console.log("message" + message)
 			if(message === ""){
-				alert("메시지를 입력해주세요");
+				alert("메시지를 입력해주세요-keyup");
 			}else{
 	        send();
 			}
