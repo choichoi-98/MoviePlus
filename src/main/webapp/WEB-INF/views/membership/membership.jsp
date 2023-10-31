@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
+
+
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
@@ -38,14 +40,13 @@
 				</div>
 
 				<div class="membershipCard">
-					<div class="tt">
+					<div class="tt" style="color: #792828;">
 						MOVIEPLUS<span>MEMBERSHIP</span>
 					</div>
-					<div class="tx">무비플러스 멤버십 회원에게만 제공되는 혜택</div>
-					<img src="${pageContext.request.contextPath}/resources/image/membership/card_img.png" alt="맴버쉽 카드">
+					<div class="tx" style="color: black; margin-bottom: 100px">무비플러스 멤버십 회원에게만 제공되는 혜택</div>
 				</div>
 
-				<h3 class="tit3">무비플러스 멤버십 혜택</h3>
+				<h3 class="tit3" style="color: #792828;">무비플러스 멤버십 혜택</h3>
 				<div class="membershipBenefit" id="membershipBenefit">
 					<div class="item">
 						<img src="${pageContext.request.contextPath}/resources/image/membership/ico_benefit_img01.png"
@@ -288,5 +289,13 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+	
+	
 </body>
+
+<style>
+.tit3 {
+	color: #792828
+}
+</style>
 </html>

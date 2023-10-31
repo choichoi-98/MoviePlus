@@ -149,7 +149,8 @@
 		const num = $('#EVENT_NUM').val();
 		
 		var winnerCount = prompt('당첨자 수를 입력해주세요');
-		if(prompt != '' && !isNaN(prompt)){
+		if(!isNaN(winnerCount)){
+			
 			$.ajax({
 				url : "pickWinner",
 				data : {num : num,

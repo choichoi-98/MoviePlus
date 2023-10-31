@@ -39,11 +39,11 @@
         <div id="contents">
             <!-- inner-wrap -->
             <div class="inner-wrap">
-                <h3 class="tit">무비포스트 작성</h3>
+                <h3 class="tit" style="color:#792828">무비포스트 작성</h3>
                 <div class="user-post-top movieList">
                     <p class="tit">무비포스트로 등록하실 영화를 선택해주세요!</p>
-                    <div class="right">
-                        등록가능한 영화 <strong class="font-gblue"><span id="totMovieCnt">${mp_movieCnt}</span></strong> 건
+                    <div class="right" >
+                        등록가능한 영화 <strong class="font-gblue"><span id="totMovieCnt" style="color:#792828">${mp_movieCnt}</span></strong> 건
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@
 background-image:url(${pageContext.request.contextPath}/resources/image/header-logo.png);
 background-size:cover;}
 </style>
-
+<title>MoviePlus: 모두를 위한 영화관</title>
 <footer id="footer">
     <!-- footer-top -->
     <div class="footer-top">

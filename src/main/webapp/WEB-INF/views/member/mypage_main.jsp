@@ -238,11 +238,11 @@
 						</div>
 
 						<div class="box-border link-movie-story">
-							<a href="#" title="본 영화 탭으로 이동"> <em>${ms_scheduleCnt}</em> <span>본
+							<a href="#" title="본 영화 탭으로 이동"> <em style="color:black;">${ms_scheduleCnt}</em> <span>본
 									영화</span>
-							</a> <a href="#" title="관람평 탭으로 이동"> <em>${ms_reviewCnt}</em> <span>관람평</span>
-							</a> <a href="#" title="보고싶어 탭으로 이동"> <em>${ms_movieCnt}</em> <span>보고싶어</span>
-							</a> <a href="#" title="무비포스트 탭으로 이동"> <em>${ms_postCnt}</em> <span>무비포스트</span>
+							</a> <a href="#" title="관람평 탭으로 이동"> <em style="color:black;">${ms_reviewCnt}</em> <span>관람평</span>
+							</a> <a href="#" title="보고싶어 탭으로 이동"> <em style="color:black;">${ms_movieCnt}</em> <span>보고싶어</span>
+							</a> <a href="#" title="무비포스트 탭으로 이동"> <em style="color:black;">${ms_postCnt}</em> <span>무비포스트</span>
 							</a>
 						</div>
 					</div>
@@ -260,8 +260,8 @@
 
 						<div class="box-border favor-see">
 							<ul class="dot-list gray">
-								<li><span class="font-gblue mr10">내 선호장르</span></li>
-								<li><span class="font-gblue mr10">내 선호시간</span></li>
+								<li><span class="font-gblue mr10" style="color:black!important;">내 선호장르</span></li>
+								<li><span class="font-gblue mr10" style="color:black!important;">내 선호시간</span></li>
 							</ul>
 						</div>
 					</div>
