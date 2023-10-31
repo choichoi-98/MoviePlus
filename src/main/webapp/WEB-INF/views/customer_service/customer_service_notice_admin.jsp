@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항&nbsp;(공통)</title>
 
 </head>
 <body>
@@ -16,7 +16,7 @@
 		<div class="page-util">
 			<div class="inner-wrap">
 				<div class="location">
-					<span>Home</span> <a href="/customer_service" title="고객센터 페이지로 이동">고객센터</a>
+					<span>Home</span> <a href="/customer_service" title="고객센터 페이지로 이동">공지사항</a>
 				</div>
 			</div>
 		</div>

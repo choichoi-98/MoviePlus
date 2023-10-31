@@ -29,5 +29,9 @@ public interface NoticeMapper {
 	public List<NoticeVO> getNoticelistPagination(Map<String, Object> dataMap);
 
 	public NoticeVO getNoticeDetail(int noticedetailnum);
+
+	public List<NoticeVO> getTheaterNoticelistPagination(Map<String, Object> dataMap);
+
+	public int getTheatherNoticeList(String theaterId);
 	
 }

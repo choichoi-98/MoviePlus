@@ -3,6 +3,7 @@ package com.hta.movieplus.service;
 import java.util.List;
 import java.util.Map;
 
+import com.hta.movieplus.domain.Movie;
 import com.hta.movieplus.domain.NoticeVO;
 
 public interface NoticeService {
@@ -30,6 +31,13 @@ public interface NoticeService {
 	public List<NoticeVO> getNoticelistPagination(int page, int i);
 
 	public NoticeVO getNoticeDetail(int noticedetailnum);
+
+	public Map<String, Object> theaterpagination(String theaterId, int page);
+
+	public List<NoticeVO> getTheaterNoticeListPagination(int page, String theaterId, int i);
+
+	public int getTheaterNoticeList(String theaterId);
+
 	
 
 	

@@ -120,6 +120,52 @@ public class NoticeServiceImpl implements NoticeService {
 	public NoticeVO getNoticeDetail(int noticedetailnum) {
 		return dao.getNoticeDetail(noticedetailnum);
 	}
+
+	@Override
+	public Map<String, Object> theaterpagination(String theaterId ,int page) {
+		Map<String, Object> paginationDataMap = new HashMap<String, Object>();
+
+		int limit = 10; // 한 페이지에 보여줄 갯수
+
+		int listcount = getTheaterNoticeList(theaterId); // 공지사항의 개수
+
+		int maxpage = (listcount + limit - 1) / limit; // 페이지의 갯수
+
+		int startpage = ((page - 1) / 6) * 6 + 1; // 페이지 시작값
+
+		int endpage = startpage + 6 - 1; // 페이지 마지막값
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		paginationDataMap.put("page", page);
+		paginationDataMap.put("maxpage", maxpage);
+		paginationDataMap.put("startpage", startpage);
+		paginationDataMap.put("endpage", endpage);
+		paginationDataMap.put("limit", limit);
+		return paginationDataMap;
+	}
+
+	@Override
+	public List<NoticeVO> getTheaterNoticeListPagination(int page, String theaterId, int limit) {
+		int startrow = (page - 1) * limit + 1;
+		int endrow = startrow + limit - 1;
+
+		Map<String, Object> dataMap = new HashMap<>();
+
+		dataMap.put("start", startrow);
+		dataMap.put("end", endrow);
+		dataMap.put("theaterId", theaterId);
+		
+		return dao.getTheaterNoticelistPagination(dataMap);
+	}
+
+	@Override
+	public int getTheaterNoticeList(String theaterId) {
+		// TODO Auto-generated method stub
+		return dao.getTheatherNoticeList(theaterId);
+	}
 	
 
 	

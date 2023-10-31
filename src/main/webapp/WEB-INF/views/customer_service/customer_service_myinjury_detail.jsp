@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 문의내역&nbsp;(세부)</title>
 
 </head>
 
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
-	
+
 	<!-- container -->
 	<div class="container has-lnb">
 		<div class="page-util">
@@ -26,71 +26,64 @@
 		</div>
 
 		<div class="inner-wrap">
-			<div id="contents" class="location-fixed" style="float:none; width:100%;">
-	<h2 class="tit">나의 문의내역</h2>
+			<div id="contents" class="location-fixed"
+				style="float: none; width: 100%;">
+				<h2 class="tit">나의 문의내역</h2>
 
-	<ul class="dot-list">
-		<li id="tabDesc">고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
-	</ul>
+				<ul class="dot-list">
+					<li id="tabDesc">고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+				</ul>
 
-	<div class="table-wrap mt20">
-		<div class="board-view">
-			<div class="tit-area">
-				<p class="tit">${MyInjuryDetail.CUSTOMER_TITLE}</p>
-			</div>
+				<div class="table-wrap mt20">
+					<div class="board-view">
+						<div class="tit-area">
+							<p class="tit">${MyInjuryDetail.CUSTOMER_TITLE}</p>
+						</div>
 
-			<div class="info">
-				
-				<p>
-					<span class="tit">문의지점</span>
-					<span class="txt">${MyInjuryDetail.CUSTOMER_SELECT_REGION} ${MyInjuryDetail.CUSTOMER_SELECT_CENEMA}</span>
-				</p>
-				
+						<div class="info">
 
-				<p>
-					<span class="tit">문의유형</span>
-					<span class="txt">${MyInjuryDetail.CUSTOMER_TYPE}</span>
-				</p>
+							<p>
+								<span class="tit">문의지점</span> <span class="txt">${MyInjuryDetail.CUSTOMER_SELECT_REGION}
+									${MyInjuryDetail.CUSTOMER_SELECT_CENEMA}</span>
+							</p>
 
-				<p>
-					<span class="tit">답변상태</span>
-					<span class="txt">${MyInjuryDetail.CUSTOMER_ANSWERSITUATION}</span>
-				</p>
-				<div class="mt10">
 
-					<p><span class="txt">${MyInjuryDetail.CUSTOMER_REGISTRATIONDATE}</span></p>
+							<p>
+								<span class="tit">문의유형</span> <span class="txt">${MyInjuryDetail.CUSTOMER_TYPE}</span>
+							</p>
+
+							<p>
+								<span class="tit">답변상태</span> <span class="txt">${MyInjuryDetail.CUSTOMER_ANSWERSITUATION}</span>
+							</p>
+							<div class="mt10">
+
+								<p>
+									<span class="txt">${MyInjuryDetail.CUSTOMER_REGISTRATIONDATE}</span>
+								</p>
+							</div>
+						</div>
+
+
+
+						<div class="cont">
+							<textarea rows="5" cols="30" readonly=""
+								class="input-textarea view" style="border: none;" id="inqCn">${MyInjuryDetail.CUSTOMER_CONTENT}</textarea>
+						</div>
+
+					</div>
 				</div>
-			</div>
 
-			
-
-			<div class="cont">
-				<textarea rows="5" cols="30" readonly="" class="input-textarea view" style="border:none;" id="inqCn">${MyInjuryDetail.CUSTOMER_CONTENT}</textarea>
+				<div class="btn-group pt40">
+					<a
+						href="${pageContext.request.contextPath}/customer_service/myinjury"
+						class="button large listBtn" title="목록">목록</a> <a
+						href="${pageContext.request.contextPath}/customer_service/myinjurydelete?deletenum=${MyInjuryDetail.CUSTOMER_NUM}"
+						class="button large deleteBtn inq-delete" title="삭제">삭제</a>
+				</div>
+				<!--// container -->
 			</div>
-			
 		</div>
 	</div>
-
-	<div class="btn-group pt40">
-		<a href="${pageContext.request.contextPath}/customer_service/myinjury" class="button large listBtn" title="목록">목록</a>
-		<a href="${pageContext.request.contextPath}/customer_service/myinjurydelete?deletenum=${MyInjuryDetail.CUSTOMER_NUM}" class="button large deleteBtn inq-delete" title="삭제">삭제</a>
-	</div>
-	<!--// container -->
-
-
-	<div class="quick-area">
-		<a href="https://megabox.co.kr/support/inquiry" class="btn-go-top"
-			title="top">top</a>
-	</div>
-
-	<form id="mainForm"></form>
-
-	<div class="normalStyle"
-		style="display: none; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; text-indent: -9999px; width: 100%; height: 100%; z-index: 100;">닫기</div>
-	<div class="alertStyle"
-		style="display: none; position: fixed; top: 0px; left: 0px; background: #000; opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
-</body>
-</html>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>
