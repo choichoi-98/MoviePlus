@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/member_mypage.js"></script>
-<title>MoviePlus: 모두를 위한 영화관 </title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 <script>

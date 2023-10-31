@@ -10,10 +10,9 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/booking_timetable.js"></script>
 	
-<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
-	
 
-<title></title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 <body>
