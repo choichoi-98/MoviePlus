@@ -74,6 +74,42 @@ button.button.purple:hover {
 	border: 1px solid black;
 	color: black;
 }
+
+#header {
+	border-bottom: 1px solid #792828
+}
+
+.tab-list>ul:after{
+	background-color: #792828;
+}
+
+.tab-list>ul>li.on{
+	background-color: #792828;
+	border: 1px solid #792828;;
+    border-bottom: 0;
+}
+
+.tab-list>ul>li.on>a:active, .tab-list>ul>li.on>a:focus, .tab-list>ul>li.on>a:hover, .tab-list>ul>li.on>a:visited {
+	color : #792828;
+}
+
+.button.purple {
+	background: #792828;
+}
+
+.button.purple:hover {
+	background: #792828;
+}
+
+.pagination .active {
+	background-color: #792828;
+    border-color: #792828;
+}
+
+
+.reserve.theater-list-box .theater-list .theater-type-box .theater-time .time-list-table tbody tr td .td-ab:hover .play-time {
+	background-color: #792828;
+}
 </style>
 
 
@@ -413,9 +449,9 @@ button.button.purple:hover {
 				<ul class="list-depth">
 					<li><a href="${pageContext.request.contextPath}/store"
 						title="메가티켓">메가티켓</a></li>
-					<li><a href="${pageContext.request.contextPath}/store_cp05"
+					<li><a href="${pageContext.request.contextPath}/store/cp05"
 						title="팝콘/음료/굿즈">팝콘/음료/금액권</a></li>
-					<li><a href="${pageContext.request.contextPath}/store_cp07"
+					<li><a href="${pageContext.request.contextPath}/store/cp07"
 						title="포인트몰">포인트몰</a></li>
 				</ul>
 			</div>
