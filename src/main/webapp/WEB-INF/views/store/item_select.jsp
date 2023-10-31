@@ -74,7 +74,7 @@
 								<div class="img">
 									<p>
 										<img
-											src="${pageContext.request.contextPath}/resources/image/store/${selecteditem.ITEM_FILE}"
+											src="${selecteditem.ITEM_PATH}"
 											alt="${selecteditem.ITEM_NAME}" onerror="noImg(this);">
 									</p>
 								</div>
