@@ -343,7 +343,7 @@
 													<div class="wrap loginTagClick">
 														로그인이 필요한 서비스 입니다.<br> <a
 															href="javaScript:fn_viewLoginPopup(&#39;default&#39;,&#39;pc&#39;);"
-															class="font-green" title="로그인 바로가기">로그인 바로가기 <i
+															class="font-green" title="로그인 바로가기" style="color:#792828">로그인 바로가기 <i
 															class="iconset ico-arr-right-green"></i></a>
 														<button type="button" class="btn-close-tooltip">툴팁
 															닫기</button>
@@ -482,7 +482,7 @@
 												<button type="button" class="btn right score-10">10</button>
 											</div>
 										</div>
-										<div class="num">
+										<div class="num" style="color:#792828">
 											<em>0</em> <span>점</span>
 										</div>
 									</div>

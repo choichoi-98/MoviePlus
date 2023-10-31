@@ -140,19 +140,25 @@ $(document).ready(function(){
 	//step3 비밀번호 pattern 검사 & 비밀번호 일치 확인
 	let checkpass = false; 					//비밀번호 일치 확인여부
 	
-	/*
+	
 	$('#MEMBER_PASS').keyup(function(){		//비밀번호 pattern 검사
 		//const pattern = /^[A-Za-z0-9!@#%+=\-?_]$/;
 		//const pattern = /^(?=.*[A-Za-z])(?=.*\d|.*[!@#%+=\-?_])[A-Za-z\d!@#%+=\-?_]$/;
+		const pattern = /^(?=.*[A-Za-z])(?=.*(\d|[!@#%+=\-?_]))[A-Za-z\d!@#%+=\-?_]+$/;
+
+		//const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#%+=\\\-?_])[A-Za-z\d!@#%+=\\\-?_]+$/;
 		const pass = $('#MEMBER_PASS').val();
 		
 		if(!pattern.test(pass)){
-			$('#JoinInfoRegLoginPwd-error-text').html("비밀번호를 형식에 맞게 입력해주세요.");
+			$('#JoinInfoRegLoginPwd-error-text').html("비밀번호를 형식에 맞게 입력해주세요.")
+												.css('display', 'block');
 			checkpass = false;
-			return;
+		} else {
+			$('#JoinInfoRegLoginPwd-error-text').css('display', 'none');
+			checkpass = true;
 		}
 	})//비밀번호 pattern 검사
-	*/
+	
 	
 	$('#MEMBER_PASS_Confirm').keyup(function(){	//비밀번호 확인 일치 검사 & 비밀번호 확인 pattern 검사
 		//const pattern = /^[A-Za-z0-9!@#%+=\-?_]$/;

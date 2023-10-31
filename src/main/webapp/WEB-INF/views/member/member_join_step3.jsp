@@ -99,7 +99,7 @@
 								<td>
 									<input name="MEMBER_PASS" id="MEMBER_PASS" type="password" placeholder="영문,숫자,특수기호 중 2가지 이상 조합" class="input-text w260px" required><!--영문,숫자,특수기호 중 2가지 이상 조합-->
 									<span class="tooltiptext">비밀번호 설정 시 사용가능한 특수문자는 ! @ # % + = \ - ? _ 입니다.</span>
-									<div id="JoinInfoRegLoginPwd-error-text" class="alert"></div>
+									<div id="JoinInfoRegLoginPwd-error-text" class="alert" ></div>
 								</td>
 							</tr>
 							<tr>
@@ -122,7 +122,7 @@
 						</tbody>
 					</table>
 					<div class="btn-member-bottom">
-						<button id="btnJoinInfoRegButton" type="submit" class="button purple large disabled">회원가입<!--회원가입--></button>
+						<button id="btnJoinInfoRegButton" type="submit" class="button purple large" style="background-color:#792828">회원가입<!--회원가입--></button>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
