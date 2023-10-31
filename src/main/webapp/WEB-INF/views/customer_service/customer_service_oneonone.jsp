@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의문의&nbsp;(1:1 문의)</title>
 
 </head>
-
 
 <body>
 	<jsp:include page="/WEB-INF/views/header.jsp" />
@@ -238,21 +237,6 @@
 		</div>
 	</div>
 	<!--// container -->
-
-
-	<div class="quick-area">
-		<a href="https://megabox.co.kr/support/inquiry" class="btn-go-top"
-			title="top">top</a>
-	</div>
-
-	<form id="mainForm"></form>
-
-	<div class="normalStyle"
-		style="display: none; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; text-indent: -9999px; width: 100%; height: 100%; z-index: 100;">닫기</div>
-	<div class="alertStyle"
-		style="display: none; position: fixed; top: 0px; left: 0px; background: #000; opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
-</body>
-</html>
 <jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

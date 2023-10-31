@@ -310,11 +310,11 @@ public class ManagerController {
 		List<NoticeVO> list = customerservice.getListPagination(page, theaterId, (int) paginationDataMap.get("limit"));
 		int noticecount = customerservice.getCountList(theaterId);
 		
-		
 		model.addAllAttributes(paginationDataMap);
 		
 		model.addAttribute("oneononeCount", noticecount);
 		model.addAttribute("oneononeList", list);
+		
 		return "manager/managerAnswerList";
 	}
 	

@@ -26,7 +26,8 @@
 		</div>
 
 		<div class="inner-wrap">
-			<div id="contents" class="location-fixed" style="float:none; width:100%;">
+			<div id="contents" class="location-fixed"
+				style="float: none; width: 100%;">
 				<h2 class="tit">공지사항</h2>
 
 				<ul class="dot-list">
@@ -46,14 +47,15 @@
 							</p>
 							<div class="mt10">
 								<p>
-									<span class="txt">등록일 ${getNoticeDetail.CUSTOMER_NOTICE_SYSDATE}</span>
+									<span class="txt">등록일
+										${getNoticeDetail.CUSTOMER_NOTICE_SYSDATE}</span>
 								</p>
 							</div>
 						</div>
 
 						<div class="cont">
-							<textarea rows="5" cols="30" readonly class="input-textarea view" 
-							style="border: none;" id="inqCn">${getNoticeDetail.CUSTOMER_NOTICE_CONTENT}</textarea>
+							<textarea rows="5" cols="30" readonly class="input-textarea view"
+								style="border: none;" id="inqCn">${getNoticeDetail.CUSTOMER_NOTICE_CONTENT}</textarea>
 						</div>
 
 					</div>
@@ -61,24 +63,12 @@
 
 				<div class="btn-group pt40">
 					<a href="${pageContext.request.contextPath}/customer_service"
-						class="button large listBtn" title="목록">목록</a> 
+						class="button large listBtn" title="목록">목록</a>
 				</div>
 				<!--// container -->
-
-
-				<div class="quick-area">
-					<a href="https://megabox.co.kr/support/inquiry" class="btn-go-top"
-						title="top">top</a>
-				</div>
-
-				<form id="mainForm"></form>
-
-				<div class="normalStyle"
-					style="display: none; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; text-indent: -9999px; width: 100%; height: 100%; z-index: 100;">닫기</div>
-				<div class="alertStyle"
-					style="display: none; position: fixed; top: 0px; left: 0px; background: #000; opacity: 0.7; width: 100%; height: 100%; z-index: 5005;"></div>
-</body>
-</html>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
+			</div>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 </body>
 </html>
