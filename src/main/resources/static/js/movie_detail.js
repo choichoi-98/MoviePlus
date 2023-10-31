@@ -450,5 +450,9 @@ $("body").on("click", ".oneLikeBtn", function(e){
 	}
 });//$("body").on("click", ".oneLikeBtn", function(e){
 
+//예매율 저장
+var ratio = $('#movieRatio').text();
+console.log("예매율 " + ratio)
+$('#charByPoint').text(ratio);
 
 });//$(document).ready(function(){

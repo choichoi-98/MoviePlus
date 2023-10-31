@@ -6,12 +6,14 @@ $(document).ready(function() {
    	console.log(header);
 
    	movieListAll();
-    console.log("첫번째: movieListAll()");
 	movieListPlaying();
-    console.log("첫번째: movieListPlaying()");
 	movieListEnded();
-    console.log("첫번째: movieListEnded()");
 	
+	movieAllCount();//전체 영화 갯수 
+	
+	moviePlayingCount(); //상영 중인 영화 갯수 
+	
+	movieEndedCount();// 상영 종료 영화 갯수 
    	
    	
    	function movieListAll(){
@@ -265,6 +267,12 @@ $(document).ready(function() {
              console.log("moviePlayUpdate : movieListEnded()");
             console.log("movieUpdate 성공");
             
+            	movieAllCount();//전체 영화 갯수 
+				
+				moviePlayingCount(); //상영 중인 영화 갯수 
+				
+				movieEndedCount();
+            
         },
         error: function() {
             // AJAX 요청 실패 시 처리
@@ -305,6 +313,11 @@ $(document).ready(function() {
             movieListEnded();
              console.log("movieEndedUpdate : movieListEnded()");
             
+                movieAllCount();//전체 영화 갯수 
+				
+				moviePlayingCount(); //상영 중인 영화 갯수 
+				
+				movieEndedCount();
             // response에서 서버로부터 받은 데이터를 처리
         },
         error: function() {
@@ -403,7 +416,60 @@ $.ajax({
     error: function() {
         console.log("영화 목록 가져오기 실패");
     }
-});//$.ajax({
+});//$.ajax(
 }
+
+//------------영화 count --------------------
+//전체 영화
+function movieAllCount(){
+	$.ajax({
+		url:'../movie/movieAllCount',
+		type:'GET',
+		success:function(data){
+			console.log("불러오기 성공 ")
+			var movieAllCount = data
+			console.log(movieAllCount)
+			$('#movieAllCount').text(movieAllCount);
+			
+		},
+		error:function(){
+			console.log("movieListCount 실패 ")
+		}
+	})//$.ajax({
 	
+}//movieAllCount
+
+//상영 중인 영화
+function moviePlayingCount(){
+	$.ajax({
+		url:'../movie/moviePlayingCount',
+		type:'GET',
+		success:function(data){
+			console.log("moivePlayingCount성공 ")
+		    var moviePlayingCount = data;
+		    console.log(moviePlayingCount)
+		    $('#moviePlayingCount').text(moviePlayingCount)
+		},
+		error:function(){
+			console.log("moviePlayingCount 실패 ")
+		}
+	})
+}
+
+//상영 종료 영화 
+function movieEndedCount(){
+	$.ajax({
+		url:'../movie/movieEndedCount',
+		type:'GET',
+		success:function(data){
+			console.log("movieEndedCount성공 ")
+		    var movieEndedCount = data;
+		    console.log(movieEndedCount)
+		    $('#movieEndedCount').text(movieEndedCount)
+		},
+		error:function(){
+			console.log("moviePlayingCount 실패 ")
+		}
+	})
+}
 }); // $(document).ready

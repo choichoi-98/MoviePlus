@@ -498,6 +498,26 @@
 	 ]]>	
 	</select>
 	
+	<!-- 전체 영화 갯수 -->
+	<select id="getMovieAllCount" resultType="int">
+		select count(*) AS allCount
+		from movie
+	</select>
+	
+	<!-- 상영 중인 영화 갯수 -->
+	<select id="moviePlayingCount" resultType="int">
+		select count(*) as playingCount
+		from movie
+		where movie_screen = '상영중'
+		
+	</select>
+
+	<!-- 상영 종료 영화 갯수 -->
+	<select id="movieEndedCount" resultType="int">
+		select count(*) as endedCount
+		from movie
+		where movie_screen = '상영종료'
+	</select>
 	
 	
 </mapper>

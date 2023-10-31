@@ -93,6 +93,15 @@ public interface MovieMapper {
 	public List<Movie> getMovieCodeTotal(String THEATER_SCHEDULE_DATE, String movieCode);
 
 	public List<Movie> getViewerCount(String THEATER_SCHEDULE_DATE, String movieCode);
+	
+	//전체 영화 갯수 
+	public int getMovieAllCount();
+
+	//상영 중인 영화 갯수 
+	public int moviePlayingCount();
+
+	//상영 종료 영화 갯수 
+	public int movieEndedCount();
 
 
 

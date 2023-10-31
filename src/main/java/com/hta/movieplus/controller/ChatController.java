@@ -93,50 +93,6 @@ public class ChatController {
 	    return response;
 	}
 
-//	@ResponseBody
-//	@RequestMapping("/chatRoom")//createRoom
-//	public ModelAndView chatRoom(ModelAndView mv,
-//			@AuthenticationPrincipal Member member,
-//			@RequestParam("obejctId") String objectId) {
-//		//채팅방 이름 상대로 설정하기
-//		String ObjectName = chatServiceImpl.findObjectName(objectId);
-//		mv.addObject("chatRoomName",ObjectName);
-//		
-//		//0. 두 사람과 관련된 방이 있는지 확인
-//		if(member != null) {
-//			String subjectId = member.getMEMBER_ID();
-//			logger.info("chat_from" + subjectId);
-//			List<ChatRoomVO> check = chatServiceImpl.checkChatRoom(subjectId, objectId);
-//			int checkSize = check.size();
-//			
-//			if(checkSize != 0) {//채팅방이 존재하는 경우
-//				logger.info("채팅방 존재");
-//				mv.addObject("chatRoomNum", check.get(0).getChat_Room_num());
-//				logger.info("채팅방 번호" + check.get(0).getChat_Room_num());
-//				mv.addObject("chatSubject", check.get(0).getChat_Subject());
-//				mv.addObject("chatObject", check.get(0).getChat_Object());
-//				mv.addObject("userName", member.getMEMBER_NAME());
-//			}else {//채팅방이 존재하지 않는 경우-채팅방 생성
-//				logger.info("채팅방 생성");
-//				//채팅방 생성 
-//				chatServiceImpl.createChatRoom(subjectId, objectId);
-//				//생성한 채팅방 정보 다시 불러오기
-//				List<ChatRoomVO> chatRooms = chatServiceImpl.checkChatRoom(subjectId, objectId);
-//				if (chatRooms != null && !chatRooms.isEmpty()) {
-//					// 채팅방 정보를 ModelAndView에 추가
-//					mv.addObject("chatRoomNum", chatRooms.get(0).getChat_Room_num());
-//					logger.info("채팅방 번호" + chatRooms.get(0).getChat_Room_num());
-//					mv.addObject("chatSubject", chatRooms.get(0).getChat_Subject());
-//					mv.addObject("chatObject", chatRooms.get(0).getChat_Object());
-//					mv.addObject("userName", member.getMEMBER_NAME());
-//				}
-//			}
-//			mv.addObject("chatFrom", subjectId);
-//			
-//		}//if(member != null) {
-//		mv.setViewName("chat/chatroom");
-//		return mv;
-//	}
 	
 	//메시지 저장
 	@ResponseBody

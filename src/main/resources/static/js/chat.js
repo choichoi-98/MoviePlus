@@ -192,21 +192,12 @@ function isYesterday(date1, date2) {
 			console.log("WebSocket 연결 실패:", error);
 		};
 		
-	$(".msg_send_btn").off("click").on("click", function(event) {
-	     var message = $("#chating").val().trim();
-		    console.log("message" + message)
-			if(message === ""){
-				alert("메시지를 입력해주세요-click");
-			}else{
-				
-	        send();
-			}
-	    event.stopPropagation(); 
-	});
+
 	
 	// 입력란에서 Enter 키 눌림 이벤트 처리
-	$("#chating").off("keyup").on("keyup", function(event) {
-	    if (event.key === "Enter") {
+	// enter 키 눌림 이벤트를 한정시키는 게 아니라 전체 document에서 일어나게 
+	$(window).on("keypress", function(event) {
+	    if (event.which === 13) {
 	        var message = $("#chating").val().trim();
 		    console.log("message" + message)
 			if(message === ""){
@@ -214,14 +205,15 @@ function isYesterday(date1, date2) {
 			}else{
 	        send();
 			}
-	        event.stopPropagation(); 
+	        return false;
 	    }
 	});
 
 	}//function wsEvt() {
+		
   //전송 메서드
   function send() {
-	var message = $("#chating").val().trim();
+	//var message = $("#chating").val().trim();
     
 		saveMassage();
 		var option ={
