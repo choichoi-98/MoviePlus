@@ -15,7 +15,7 @@
 	src="${pageContext.request.contextPath}/resources/js/moviePost.js"></script>
 
 
-<title></title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 <body>
