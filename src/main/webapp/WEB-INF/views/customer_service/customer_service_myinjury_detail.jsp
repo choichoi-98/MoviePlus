@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 문의내역&nbsp;(세부)</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 
@@ -67,7 +67,7 @@
 
 						<div class="cont">
 							<textarea rows="5" cols="30" readonly=""
-								class="input-textarea view" style="border: none;" id="inqCn">${MyInjuryDetail.CUSTOMER_CONTENT}</textarea>
+								class="input-textarea view" style="border: none; font-size:20px; line-height:1.5em;" id="inqCn">${MyInjuryDetail.CUSTOMER_CONTENT}</textarea>
 						</div>
 
 					</div>

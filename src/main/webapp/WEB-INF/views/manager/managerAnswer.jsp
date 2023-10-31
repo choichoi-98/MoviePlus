@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/ionicons.min.css">
 	<link rel="stylesheet" href="css/admin.css">
 
-<title>Insert title here</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/manager/sidebar.jsp" />

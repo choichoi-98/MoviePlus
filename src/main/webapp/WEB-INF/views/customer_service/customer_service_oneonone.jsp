@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의문의&nbsp;(1:1 문의)</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 
@@ -217,11 +217,6 @@
 												placeholder="문의 내용을 작성해주세요 &#10;답변은 메일로도 전달됩니다. 메일주소를 확인해주세요."
 												name="CUSTOMER_CONTENT" rows="5" cols="30" title="내용입력"
 												class="input-textarea" required></textarea>
-											<div class="util">
-												<p class="count">
-													<span id="textareaCnt">0</span> / 2000
-												</p>
-											</div>
 										</div>
 									</td>
 								</tr>

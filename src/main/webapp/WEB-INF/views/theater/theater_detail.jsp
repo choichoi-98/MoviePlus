@@ -121,22 +121,15 @@
 				</ul>
 			</div>
 
-			<div id="theater-detail-tab-div" class="tab-cont-wrap">
+			<div id="theater-detail-tab-div" class="tab-cont-wrap" style="margin-bottom:10px">
 				<div id="tab01" class="tab-cont on">
-
-
-
 
 					<div class="theater-info-text mt40">
 						<p class="big">${theater.THEATER_INTRO1}</p>
 						<p>${theater.THEATER_INTRO2}</p>
 					</div>
 
-
-
 					<h2 class="tit small mt70">시설안내</h2>
-
-
 
 					<h3 class="tit small">보유시설</h3>
 
@@ -324,12 +317,12 @@
 						</div>
 
 					</div>
-					<span style="color: #503396"> <span style="font-size: 22px">요금제</span>
+					<span style="color: #792828"> <span style="font-size: 22px">요금제</span>
 					</span> <br> <br> • <span style="color: #01738b">청소년 요금</span>&nbsp;
 					만7세~ 만18세 : 초등학생~고등학생(학생증, 교복, 청소년증, 의료보험증, 주민등록 등/초본, 그 외 청소년 확인
 					가능 서류)<br> • 48개월 미만의 경우 증빙원(예 : 의료보험증, 주민등록 초/등본 등) 지참 시에만 무료
 					관람 가능<br> <br> <br> <span style="font-size: 22px"><span
-						style="color: #503396">우대적용</span></span><br> <br> • <span
+						style="color: #792828">우대적용</span></span><br> <br> • <span
 						style="color: #01738b">국가유공자</span>&nbsp; 현장에서 국가유공자증을 소지한 본인 외 동반
 					1인까지 적용<br> • <span style="color: #01738b">장애인</span>&nbsp;
 					현장에서 복지카드를 소지한 장애인[중증 (1급~3급)까지 동반 1인까지 적용 / 경증(4급~6급)은 본인에 한함]<br>

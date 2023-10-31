@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 </head>
 
@@ -55,7 +55,7 @@
 
 						<div class="cont">
 							<textarea rows="5" cols="30" readonly class="input-textarea view"
-								style="border: none;" id="inqCn">${getNoticeDetail.CUSTOMER_NOTICE_CONTENT}</textarea>
+								style="border: none; font-size:20px; line-height:1.5em;" id="inqCn">${getNoticeDetail.CUSTOMER_NOTICE_CONTENT}</textarea>
 						</div>
 
 					</div>

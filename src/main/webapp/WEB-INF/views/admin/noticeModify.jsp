@@ -17,7 +17,7 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>공지사항 수정</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />

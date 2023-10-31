@@ -12,7 +12,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>재개봉 영화등록</title>
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp" />
@@ -39,7 +39,7 @@
 				<!-- main title -->
 				<div class="col-12">
 					<div class="main__title">
-						<h2>재개봉 영화 등록</h2>
+						<h2>상영종료영화 list</h2>
 
 						<span class="main__title-stat"> </span>
 
@@ -66,7 +66,7 @@
 									<th>글 번 호</th>
 									<th>영화코드번호</th>
 									<th>영화제목</th>
-									<th style="display: flex; justify-content: center;">관 리 (등록 / 삭제)</th>
+									<th style="display: flex; justify-content: center;">재개봉 예정등록</th>
 								</tr>
 							</thead>
 
