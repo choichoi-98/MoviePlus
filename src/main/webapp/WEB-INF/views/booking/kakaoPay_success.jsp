@@ -11,6 +11,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -104,14 +105,14 @@
 												</th>
 												<td>
 													<div class="goods-info">
-														<em id="prdtSumAmtView" class="price">${b.KPAY_AMOUNT}</em>원
+														<em id="prdtSumAmtView" class="price" style="color: black">${b.KPAY_AMOUNT}</em>원
 													</div>
 												</td>
 												<td><em id="purcQtyView">${b.KPAY_OCCUPIED_SEAT}</em></td>
 												<td><a
 													href="http://localhost:9000/movieplus/store/cart?ITEM_CODE="
 													class="a-link delbtn" name="brchList" title="삭제"
-													data-kpaynum="${b.KPAY_NUM}">취소</a></td>
+													style="color: #792828" data-kpaynum="${b.KPAY_NUM}">취소</a></td>
 											</tr>
 										</c:if>
 									</c:forEach>

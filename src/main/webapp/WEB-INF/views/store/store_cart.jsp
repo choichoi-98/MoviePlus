@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -62,7 +63,7 @@
 					<div class="store-payment">
 						<h2 class="tit">결제</h2>
 
-						<h3 class="tit">주문상품정보</h3>
+						<h3 class="tit" style="color: black">주문상품정보</h3>
 
 						<div class="table-wrap">
 							<table class="board-list">
@@ -116,16 +117,16 @@
 											</th>
 											<td><em id="purcQtyView">${c.ITEM_CNT}</em></td>
 											<td>
-												<div class="goods-info">
-													<em id="prdtSumAmtView" class="price"><fmt:formatNumber value="${c.ITEM_PRICE * c.ITEM_CNT}" type="currency"/></em>
+												<div class="goods-info" >
+													<em id="prdtSumAmtView" class="price" style="color: black"><fmt:formatNumber value="${c.ITEM_PRICE * c.ITEM_CNT}" type="currency"/></em>
 													<%-- <em id="prdtSumAmtView" class="price">${c.ITEM_PRICE * c.ITEM_CNT}</em><span>원</span> --%>
 												</div>
 											</td>
 											<td>
 											<!-- http://localhost:9000/movieplus/store/cart?ITEM_CODE -->
 											<a href="#" 
-											   class="a-link delbtn" name="brchList" title="삭제" 
-											   data-code="${c.ITEM_CODE}">삭제</a>
+											   class="a-link delbtn" name="brchList" title="삭제"  
+											   style="color: #792828" data-code="${c.ITEM_CODE}">삭제</a>
 											</td>
 										</tr>
 										<c:choose>
@@ -148,7 +149,7 @@
 						<!-- 결제수단 포인트 끝 -->
 						<!-- 포인트 영역 -->
 						<!-- 포인트 영역 끝 -->
-						<h3 class="tit mt40">최종결제</h3>
+						<h3 class="tit mt40" style="color: black">최종결제</h3>
 						<!-- payment-final -->
 						<div class="payment-final">
 							<div class="calc">
@@ -172,7 +173,7 @@
 								<div class="cell real">
 									<p class="txt">최종 결제금액</p>
 									<p class="price">
-										<em id="lstPayAmtView">${totalPrice}</em> <span>원</span>
+										<em id="lstPayAmtView" style="color: #FFF">${totalPrice}</em> <span>원</span>
 									</p>
 								</div>
 							</div>
@@ -272,11 +273,11 @@
 						<!-- 20220802 페이즈 약관동의 추가 end -->
 						<div class="btn-group pt40">
 							<a href="cp05"
-								class="button large w170px" id="btn_store_back" title="취소">취소</a>
+								class="button large w170px" id="btn_store_back" title="취소" style="color: black">취소</a>
 
 							<a href="javascript:void(0);"
 								class="button purple large w170px "
-								id="btn-kakaopay" title="결제">결제</a>
+								id="btn-kakaopay" title="결제" style="background: #792828">결제</a>
 							<!-- <a
 								href="https://www.megabox.co.kr/store#"
 								class="button purple large w170px "

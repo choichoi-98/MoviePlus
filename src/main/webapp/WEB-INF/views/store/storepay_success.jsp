@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
     <style>
         .container {
             margin: 0;
@@ -88,12 +89,12 @@
                                                 </th>
                                                 <td>
                                                     <div class="goods-info">
-                                                        <em id="prdtSumAmtView" class="price">${p.PAY_AMOUNT}</em>원
+                                                        <em id="prdtSumAmtView" class="price" style="color: black">${p.PAY_AMOUNT}</em>원
                                                     </div>
                                                 </td>
                                                 <td><em id="purcQtyView">결제완료</em></td>
                                                 <td>
-                                                    <a href="http://localhost:9000/movieplus/store/cart?ITEM_CODE=" class="a-link delbtn" name="brchList" title="삭제" data-paynum="${p.PAY_NUM}">취소</a>
+                                                    <a href="http://localhost:9000/movieplus/store/cart?ITEM_CODE=" class="a-link delbtn" style="color: #792828" name="brchList" title="삭제" data-paynum="${p.PAY_NUM}">취소</a>
                                                 </td>
                                             </tr>
                                         </c:if>

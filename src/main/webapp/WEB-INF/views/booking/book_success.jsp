@@ -12,6 +12,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -51,7 +52,7 @@
 		<div class="inner-wrap">
 			<!-- quick-reserve -->
 			<div class="quick-reserve">
-				<h2 class="tit purple">예매완료 <!-- 예매완료 --></h2>
+				<h2 class="tit" style="color: black">예매완료 <!-- 예매완료 --></h2>
 				<%-- <c:forEach var="b" items="${BookingList}" varStatus="loop"> --%>
 				<!-- reserve-finish -->
 				<div class="reserve-finish">
@@ -89,7 +90,7 @@
 									<li><span>좌석번호 <!-- 좌석번호 --></span> ${BookingList[0].KPAY_OCCUPIED_SEAT}</li>
 									<li>
 										<span>결제정보 <!-- 결제정보 --></span>
-										<strong class="roboto">${BookingList[0].KPAY_AMOUNT}</strong> 원 <!-- 원 --><br>
+										<strong class="roboto" style="color: #fff">${BookingList[0].KPAY_AMOUNT}</strong> 원 <!-- 원 --><br>
 										<em></em>
 									</li>
 								</ul>
@@ -121,10 +122,10 @@
 				<!--// reserve-finish -->
 
 				<div class="btn-group pt30">
-					<a href="" class="button large" w-data="600" h-data="600" id="btn_ticket_print" title="교환권출력">교환권출력 <!-- 교환권출력 --></a>
+					<a href="" class="button large" w-data="600" h-data="600" id="btn_ticket_print" title="교환권출력" style="color: black">교환권출력 <!-- 교환권출력 --></a>
 																				
 							<a href="#" class="button large" id="btn_bill_print" title="영수증출력" style="display: none;">영수증출력 <!-- 영수증출력 --></a>
-							<a href="success" class="button purple large" title="예매내역 페이지로 이동">예매내역 <!-- 예매내역 --></a>
+							<a href="success" class="button purple large" title="예매내역 페이지로 이동" style="background: #792828">예매내역 <!-- 예매내역 --></a>
 				</div>
 					<div class="box-border v1 mt10">
 						<ul class="dot-list gray">
@@ -141,7 +142,7 @@
 									주차안내 <!-- 주차안내 -->
 									<ul class="dash-list">
 											<li>매표소에 당일 영화 티켓 인증 후, 차량 번호 할인 등록. 3시간 -&gt; 3,000원 (지하 3층 정산소에서 결제)</li>
-											<li>주차 공간이 협소하므로 가급적이면 대중교통을 이용 바랍니다. (지하철 2호선 강남역 출구 9번 출구)</li>
+											<li>주차 공간이 협소하므로 가급적이면 대중교통을 이용 바랍니다.</li>
 									</ul>
 								</li>
 						</ul>

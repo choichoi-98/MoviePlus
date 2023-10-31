@@ -2,6 +2,7 @@ $(document).ready(function() {
     $("#additem").click(function(e) {
         e.preventDefault(); // 버튼의 기본 동작 X
         
+        alert('상품이 등록되었습니다.');
         // 선택된 값을 가져오기
         var selectedValue = $("#quality").val();
         

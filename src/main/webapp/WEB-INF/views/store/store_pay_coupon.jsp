@@ -12,6 +12,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */

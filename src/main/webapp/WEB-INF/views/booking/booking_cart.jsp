@@ -5,6 +5,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -256,7 +257,7 @@
 
 									<div class="money">
 										<em id="Checker" data-amount="${totalPrice}"
-										data-sid="${scheduleId}" data-cnt="${seatCnt}"
+										data-sid="${scheduleId}" data-cnt="${seatCnt}" style="color: #FFF"
 										data-seatinfo="${seatInfo}">${totalPrice}</em> <span>원<!-- 원 --></span>
 									</div>
 								</div>
@@ -288,7 +289,7 @@
 	<section id="layer_dcoupon" class="modal-layer" style="z-index: 505;"><a href="#" class="focus">레이어로 포커스 이동 됨</a>
 	<div class="wrap" style="width: 600px; height: 550px; margin-left: -300px; margin-top: 0px; top: 80px;">
 		<header class="layer-header">
-			<h3 class="tit">메가플러스 할인쿠폰<!-- 메가박스 할인쿠폰 --></h3>
+			<h3 class="tit">메가플러스 쿠폰<!-- 메가박스 할인쿠폰 --></h3>
 		</header>
 
 		<div class="layer-con" style="height: 465px;">
