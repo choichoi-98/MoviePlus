@@ -196,6 +196,7 @@ button.button.purple:hover {
 												title="회원가입 선택">회원가입<!--회원가입--></a>
 										</div>
 
+										
 										<div class="sns-login">
 											<!-- <a href="javaScript:void(0)" lnkgTy="FACEBOOK" title="페이스북으로 로그인 선택"><img src="../../../static/pc/images/member/ico-facebook.png"  alt="페이스북">페이스북으로 로그인</a>-->
 											<a href="#" id="" title="네이버로 로그인 선택"><img
@@ -213,7 +214,7 @@ button.button.purple:hover {
 							</div>
 							<div class="col right">
 								<div class="login-ad" id=""
-									style="background-color: rgb(111, 111, 111); width: 380px; height: 380px;"></div>
+									style="width: 380px; height: 380px;"><img src="${pageContext.request.contextPath}/resources/image/login_temp.jpg"></div>
 							</div>
 						</div>
 						<!--// col-wrap -->
