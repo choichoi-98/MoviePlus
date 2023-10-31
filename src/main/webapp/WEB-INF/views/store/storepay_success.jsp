@@ -65,7 +65,7 @@
                                     <c:forEach var="p" items="${AprPayList}" varStatus="loop">
                                         <c:if test="${pinfo.MEMBER_ID eq p.MEMBER_ID or pinfo.MEMBER_ID=='admin'}">
                                             <tr>
-                                                <td class="a-c">
+                                                <td class="a-c">${p.PAY_DATE}
                                                     <!-- <div class="goods-info">
                                                         <p class="img">
                                                             <a href="javascript:fn_storeDetail();" title="일반관람권(2D)">

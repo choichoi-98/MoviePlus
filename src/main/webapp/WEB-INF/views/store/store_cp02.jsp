@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <html>
@@ -76,9 +77,11 @@
 										</div>
 
 										<div class="price">
-											<p class="original">${i.ITEM_PRICE + 4500}</p>
+											<p class="original">
+											<fmt:formatNumber value="${i.ITEM_PRICE*1.5}" type="currency"/>
+										</p>
 											<p class="sale">
-												<em>${i.ITEM_PRICE}</em> <span>원</span>
+												<em><fmt:formatNumber value="${i.ITEM_PRICE}" type="currency"/></em>
 											</p>
 											<p class="ea"></p>
 										</div>
