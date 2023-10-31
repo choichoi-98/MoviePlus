@@ -26,9 +26,9 @@ public interface MovieMapper {
 	public List<Movie> getMovieListAll();
 
 	//일반
-	public List<Movie> getPlayingMovieList(String search_word);
+	public List<Movie> getPlayingMovieList(String search_word, String THEATER_SCHEDULE_DATE);
 	//일반
-	public List<Movie> getPlayingMovieLogin(String memberId, String search_word);
+	public List<Movie> getPlayingMovieLogin(String memberId, String search_word, String THEATER_SCHEDULE_DATE);
 
 	//관리자
 	public List<Movie> getPlayingMovieListAdmin();
@@ -89,6 +89,11 @@ public interface MovieMapper {
 
 	//누적관객수 가져오기
 	public int getTotalAudience(String movieCode);
+
+	public List<Movie> getMovieCodeTotal(String THEATER_SCHEDULE_DATE, String movieCode);
+
+	public List<Movie> getViewerCount(String THEATER_SCHEDULE_DATE, String movieCode);
+
 
 
 

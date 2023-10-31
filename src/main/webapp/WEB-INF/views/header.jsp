@@ -426,13 +426,13 @@ button.button.purple:hover {
 
 					<li><a href="${pageContext.request.contextPath}/member/mypage">나의
 							무비플러스 홈</a></li>
-					<li><a href="#">예매/구매내역</a></li>
-					<li><a href="#">할인/제휴쿠폰</a></li>
-					<li><a href="#">멤버십포인트</a></li>
-					<li><a href="#">나의 무비스토리</a></li>
-					<li><a href="#">나의 이벤트 응모내역</a></li>
-					<li><a href="#">나의 문의내역</a></li>
-					<li><a href="#">회원정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/booking/success">예매/구매내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/store/coupon">할인/제휴쿠폰</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/mypage/membership">멤버십포인트</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/mypage/moviestory">나의 무비스토리</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/myevent">나의 이벤트 응모내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/customer_service/myinjury">나의 문의내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/modifyinfo">회원정보</a></li>
 
 
 
@@ -502,7 +502,7 @@ button.button.purple:hover {
 					<c:forEach var="m" items="${movieList}" begin="0" end="4" varStatus="loop">
 						<li class="movie-item" data-poster="${fn:split(m.movie_Poster, '|')[0]}">
 							<em>${m.RNUM}</em> 
-							<a href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${m.movie_Code}" title="영화1 상세보기">${m.movie_Title}</a>
+							<a href="${pageContext.request.contextPath}/movie/movieDetail?movieCode=${m.movie_Code}" title="${m.movie_Title} 상세보기">${m.movie_Title}</a>
 						</li>
 					</c:forEach>
 					</ol>

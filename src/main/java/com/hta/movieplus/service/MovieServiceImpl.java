@@ -69,13 +69,13 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	//영화 목록 - 로그인x, 검색
-	public List<Movie> getPlayingMovie(String search_word) {
-		return dao.getPlayingMovieList(search_word);
+	public List<Movie> getPlayingMovie(String search_word, String currentdate) {
+		return dao.getPlayingMovieList(search_word, currentdate);
 	}
 
 	//영화 목록-로그인 한 경우 검색
-	public List<Movie> getPlayingMovieLogin(String memberId, String search_word) {
-		return dao.getPlayingMovieLogin(memberId, search_word);
+	public List<Movie> getPlayingMovieLogin(String memberId, String search_word, String currentdate) {
+		return dao.getPlayingMovieLogin(memberId, search_word, currentdate);
 	}
 
 	//관리자 - 상영 중 영화 목록
@@ -233,6 +233,14 @@ public class MovieServiceImpl implements MovieService{
 		total = dao.getTotalAudience(movieCode);
 		
 		return total;
+	}
+
+	public List<Movie> getMovieCodeTotal(String currentdate, String movieCode) {
+		return dao.getMovieCodeTotal(currentdate, movieCode);
+	}
+
+	public List<Movie> getViewerCount(String currentdate, String movieCode) {
+		return dao.getViewerCount(currentdate,movieCode);
 	}
 	
 	

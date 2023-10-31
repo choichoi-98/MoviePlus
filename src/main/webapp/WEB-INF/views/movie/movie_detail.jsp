@@ -46,6 +46,8 @@
 
 
 		<c:forEach var="m" items="${movieDetail }">
+		<c:forEach var="t" items="${totallist}">
+		<c:forEach var="c" items="${viewerCount}">
 			<input type="hidden" id="movieCode" value="${m.movie_Code}"
 				name="movieCode">
 			<!-- movie-detail -->
@@ -69,12 +71,12 @@
 							<c:if test="${empty m.interest_Status }">
 								<img class="dibs_img"
 									src="${pageContext.request.contextPath}/resources/image/movie/heart_empty.png"
-									style="width: 15px">
+									style="width: 15px; margin-top:10px; margin-bottom:10px;">
 							</c:if>
 							<c:if test="${!empty m.interest_Status }">
 								<img class="dibs_img"
 									src="${pageContext.request.contextPath}/resources/image/movie/heart_full.png"
-									style="width: 15px">
+									style="width: 15px; margin-top:10px; margin-bottom:10px;">
 							</c:if>
 						</button>
 
@@ -88,16 +90,15 @@
 							<p class="tit">관람 평점</p>
 							<div class="number gt" id="mainMegaScore">
 								<p title="실관람 평점" class="before">
-									<em>${avgScore==0.0 ? '0' : avgScore}</em><span class="ir">점</span>
+									<em style="color:#c98b8b">${avgScore==0.0 ? '0' : avgScore}</em><span class="ir">점</span>
 								</p>
 							</div>
 						</div>
 						<div class="rate">
 							<p class="tit">예매율</p>
-
-							<p class="cont">
-								<em>1</em>위 (19.3%)
-							</p>
+						            <p class="cont">
+						                <em>${t.ratio}%</em>
+						            </p>
 						</div>
 						<div class="audience ">
 							<div class="tit ">
@@ -117,7 +118,7 @@
 								</span>
 							</div>
 							<p class="cont">
-								<em>${totalAudience}</em> 명
+								<em>${c.rate}</em> 명
 							</p>
 						</div>
 
@@ -157,7 +158,7 @@
 							<a
 								href="${pageContext.request.contextPath}/booking?movieCode=${m.movie_Code}"
 								class="btn reserve" title="영화 예매하기"
-								style="width: 100%; border-radius: 5px; cursor: pointer;">예매
+								style="width: 100%; border-radius: 5px; cursor: pointer; background-color:#792928">예매
 							</a>
 
 						</div>
@@ -171,12 +172,9 @@
 			<div id="contentData">
 
 				<div class="inner-wrap">
-					<div class="tab-list fixed">
-						<ul>
-							<li class="on"><a href="#" title="주요정보 탭으로 이동">주요정보</a></li>
+						<ul >
 
 						</ul>
-					</div>
 
 					<div class="movie-summary infoContent" id="info">
 
@@ -216,7 +214,7 @@
 						<div class="col">
 							<dl>
 								<dt>관람포인트</dt>
-								<dd id="charByPoint">배우·스토리</dd>
+								<dd id="charByPoint" style="color:#792828">배우·스토리</dd>
 							</dl>
 
 							<div class="graph" style="position: relative; bottom: 29px;">
@@ -263,8 +261,8 @@
 							<div class="score equal"
 								style="position: relative; bottom: 15px;">
 								<div class="middle">
-									<div class="circle">
-										<em>8.7</em><span class="ir">점</span>
+									<div class="circle" style="background-color:#792828">
+										<em>${avgScore==0.0 ? '0' : avgScore}</em><span class="ir">점</span>
 									</div>
 								</div>
 							</div>
@@ -273,15 +271,15 @@
 							<dl>
 								<dt>예매율</dt>
 								<dd class="font-roboto regular">
-									<span id="rkTag">19.3%</span>
+									<span id="rkTag" style="color:#792828">${t.ratio}%</span>
 								</dd>
 							</dl>
 						</div>
 
 						<div class="col">
 							<dl>
-								<dt>누적관객수</dt>
-								<dd class="font-roboto regular">895,690</dd>
+								<dt >누적관객수</dt>
+								<dd class="font-roboto regular" style="color:#792828">${c.rate}</dd>
 							</dl>
 
 							<div class="graph">
@@ -300,8 +298,8 @@
 
 					<!-- 한줄평 있을 때 -->
 					<div class="tit-util mt70 mb15 oneContent">
-						<h2 class="tit small">
-							${m.movie_Title}에 대한 <span id="count" class="font-gblue">${m.review_Count}</span>개의
+						<h2 class="tit small" style="color:black">
+							${m.movie_Title} 에 대한 <span id="count" class="font-gblue">${m.review_Count}</span>개의
 							이야기가 있어요!
 						</h2>
 					</div>
@@ -326,7 +324,7 @@
 									<div class="story-box">
 										<div class="story-wrap">
 											<div class="story-cont">
-												<span class="font-gblue">${m.movie_Title}</span> 재미있게 보셨나요?
+												<span class="font-gblue" >${m.movie_Title}</span> 재미있게 보셨나요?
 												영화의 어떤 점이 좋았는지 이야기해주세요.
 											</div>
 
@@ -345,7 +343,7 @@
 													<div class="wrap loginTagClick">
 														로그인이 필요한 서비스 입니다.<br> <a
 															href="javaScript:fn_viewLoginPopup(&#39;default&#39;,&#39;pc&#39;);"
-															class="font-green" title="로그인 바로가기">로그인 바로가기 <i
+															class="font-green" title="로그인 바로가기" style="color:#792828">로그인 바로가기 <i
 															class="iconset ico-arr-right-green"></i></a>
 														<button type="button" class="btn-close-tooltip">툴팁
 															닫기</button>
@@ -484,7 +482,7 @@
 												<button type="button" class="btn right score-10">10</button>
 											</div>
 										</div>
-										<div class="num">
+										<div class="num" style="color:#792828">
 											<em>0</em> <span>점</span>
 										</div>
 									</div>
@@ -700,6 +698,8 @@
 	</div>
 	<!--// container -->
 	<!-- 		</div> -->
+	</c:forEach>
+	</c:forEach>
 	</c:forEach>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />

@@ -1,5 +1,7 @@
 package com.hta.movieplus.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,14 +57,19 @@ public class MovieController {
     		@AuthenticationPrincipal Member member,
     				@RequestParam(value="search_word", defaultValue="", required=false) String search_word) throws Exception {
     	
+    	LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String currentdate = currentdatetime.format(format);
+		//String currentdate = "2023-10-27";
+    	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
-    		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId,search_word);
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovieLogin(memberId,search_word, currentdate);
     		mv.addObject("movieList",movieList);
     		mv.addObject("search_word", search_word);
     		
     	} else {
-    		List<Movie> movieList = movieServiceImpl.getPlayingMovie(search_word);
+    		List<Movie> movieList = movieServiceImpl.getPlayingMovie(search_word, currentdate);
     		mv.addObject("movieList",movieList);
     		mv.addObject("search_word", search_word);
     	}
@@ -168,16 +175,22 @@ public class MovieController {
     @GetMapping("/movieDetail")
     public ModelAndView movieDetail(ModelAndView mv,
     				@RequestParam(value="movieCode", defaultValue="") String movieCode, 
-    				@RequestParam(value="ratio", defaultValue="0") int ratio, 
     				@AuthenticationPrincipal Member member
     		) {
+    	
+    	LocalDateTime currentdatetime = LocalDateTime.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String currentdate = currentdatetime.format(format);
+    	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetailLogin(memberId, movieCode);
     		mv.addObject("movieDetail", movieDetail);
     	} else {
     		List<Movie> movieDetail = movieServiceImpl.getMovieDetail(movieCode);
+    		
     		mv.addObject("movieDetail", movieDetail);
+    		
     	}
     	
     	double avgScore = movieServiceImpl.getAvgReviewPoint(movieCode);
@@ -186,7 +199,11 @@ public class MovieController {
     	List<MoviePostVO> moviePostList = moviePostService.getMoviePostListByMovieCode(movieCode);
     	mv.addObject("moviePostList", moviePostList);
     	
+    	List<Movie> totallist = movieServiceImpl.getMovieCodeTotal(currentdate, movieCode);
+    	mv.addObject("totallist", totallist);
     	
+    	List<Movie> viewerCount = movieServiceImpl.getViewerCount(currentdate, movieCode);
+    	mv.addObject("viewerCount", viewerCount);
     	
     	mv.setViewName("movie/movie_detail");
     	return mv;
