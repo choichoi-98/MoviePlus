@@ -259,7 +259,7 @@ document.ready
 							</div>
 
 							<div class="cell">
-								<a href="${pageContext.request.contextPath}/customer_service/question"
+								<a href="#"
 									title="자주 묻는 질문 페이지로 이동"> <i class="iconset ico-main-faq"></i>
 									<span>자주 묻는 질문</span>
 								</a>
@@ -273,7 +273,7 @@ document.ready
 							</div>
 
 							<div class="cell">
-								<a href="${pageContext.request.contextPath}/customer_service/group"
+								<a href="#"
 									title="단체/대관문의 페이지로 이동"> <i class="iconset ico-main-group"></i>
 									<span>단체/대관문의</span>
 								</a>

@@ -54,7 +54,7 @@ width:100%;
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
 						<span>전체 영화 목록</span>
-						<p>5 678</p>
+						<p id="movieAllCount"></p>
 						<i class="icon ion-ios-stats"></i>
 					</div>
 				</div>
@@ -64,7 +64,7 @@ width:100%;
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
 						<span>상영 중인 영화</span>
-						<p>172</p>
+						<p id="moviePlayingCount"></p></p>
 						<i class="icon ion-ios-film"></i>
 					</div>
 				</div>
@@ -74,7 +74,7 @@ width:100%;
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="stats">
 						<span>상영 종료 영화</span>
-						<p>1 021</p>
+						<p id="movieEndedCount"></p>
 						<i class="icon ion-ios-star-half"></i>
 					</div>
 				</div>

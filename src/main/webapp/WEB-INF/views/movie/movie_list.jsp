@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 	<!-- container -->
 	<div class="container">
-		<div class="page-util">
+		<div class="page-util" style="margin-top: 91px;">
 			<div class="inner-wrap">
 				<div class="location">
 					<span>Home</span> <a href="#"
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		</div>
 
 		<!-- contents -->
-		<div id="contents" style="padding-top: 100px;">
+		<div id="contents">
 			<!-- inner-wrap -->
 			<div class="inner-wrap">
 				<h2 class="tit">전체영화</h2>

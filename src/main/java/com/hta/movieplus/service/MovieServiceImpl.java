@@ -51,7 +51,7 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 
-	@Override
+	@Override //전체 영화 목록 list x
 	public List<Movie> getMovieListAll() {
 		return dao.getMovieListAll();
 	}
@@ -89,10 +89,12 @@ public class MovieServiceImpl implements MovieService{
 		return dao.getUpcomingMovieList();
 	}
 
+	//상영 종료 영화 목록 
 	public List<Movie> getEndedMovie() {
 		return dao.getEndedMovieList();
 	}
-
+	
+	//전체 영화 갯수, 페이지 네이션 
 	public int getListCount() {
 		return dao.getListcount();
 	}
@@ -108,20 +110,24 @@ public class MovieServiceImpl implements MovieService{
 	    
 		return dao.getMovieList(map);
 	}
-
+	
+	//상영 중으로 update 
 	public int moviePlayUpdate(String movieCode) {
 		System.out.println(movieCode);
 		return dao.moviePlayUpdate(movieCode);
 	}
 
+	//상영 종료로 update 
 	public int movieEndedUpdate(String movieCode) {
 		return dao.movieEndedUpdate(movieCode);
 	}
-
+	
+	// 보고 싶어요 추가 
 	public int addMovieDibs(String memberId, String movieCode) {
 		return dao.addMovieDibs(memberId, movieCode);
 	}
-
+	
+	//보고 싶어요 삭제 
 	public int deleteMovieDibs(String memberId, String movieCode) {
 		return dao.deleteMovieDibs(memberId, movieCode);
 	}
@@ -176,11 +182,6 @@ public class MovieServiceImpl implements MovieService{
 		return dao.deleteMovieReviewLike(memberId, review_num);
 	}
 
-	//관리자 - 관람평 list
-//	public List<MovieReviewVO> getAdminMovieReviewList(String search_word) {
-//		// TODO Auto-generated method stub
-//		return dao.adminMovieReviewList(search_word);
-//	}
 	
 	//관리자 - 관람평 갯수
 	public int getAdminMovieReviewCnt() {
@@ -207,8 +208,8 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	
-	//
 	
+	//영화 평점 
 	@Override
 	public double getAvgReviewPoint(String movieCode) {
 	    double total = 0.0;
@@ -234,13 +235,33 @@ public class MovieServiceImpl implements MovieService{
 		
 		return total;
 	}
-
+	
+	// 전체 영화 movieCode? 
 	public List<Movie> getMovieCodeTotal(String currentdate, String movieCode) {
 		return dao.getMovieCodeTotal(currentdate, movieCode);
 	}
-
+	
+	// 관객 수 
 	public List<Movie> getViewerCount(String currentdate, String movieCode) {
 		return dao.getViewerCount(currentdate,movieCode);
+	}
+	
+	//전체 영화 갯수 
+	public int getMovieAllCount() {
+		// TODO Auto-generated method stub
+		return dao.getMovieAllCount();
+	}
+
+	//상영 중인 영화 갯수 
+	public int moviePlayingCount() {
+		// TODO Auto-generated method stub
+		return dao.moviePlayingCount();
+	}
+
+	//상영 종료 영화 갯수 
+	public int movieEndedCount() {
+		// TODO Auto-generated method stub
+		return dao.movieEndedCount();
 	}
 	
 	

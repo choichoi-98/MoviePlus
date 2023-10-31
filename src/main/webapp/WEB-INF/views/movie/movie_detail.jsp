@@ -97,7 +97,7 @@
 						<div class="rate">
 							<p class="tit">예매율</p>
 						            <p class="cont">
-						                <em>${t.ratio}%</em>
+						                <em id="movieRatio">${t.ratio}%</em>
 						            </p>
 						</div>
 						<div class="audience ">
@@ -213,26 +213,17 @@
 					<div class="movie-graph infoContent">
 						<div class="col">
 							<dl>
-								<dt>관람포인트</dt>
-								<dd id="charByPoint" style="color:#792828">배우·스토리</dd>
-							</dl>
-
-							<div class="graph" style="position: relative; bottom: 29px;">
-								<div class="chartjs-size-monitor">
-									<div class="chartjs-size-monitor-expand">
-										<div class=""></div>
-									</div>
-									<div class="chartjs-size-monitor-shrink">
-										<div class=""></div>
+								<dt>예매율</dt>
+								<!-- <dd id="charByPoint" style="color:#792828"></dd> -->
+								<div class="score equal"
+								style="position: relative; bottom: 15px;">
+								<div class="middle">
+									<div class="circle" style="background-color:#792828">
+										<em id="charByPoint"></em><span class="ir">점</span>
 									</div>
 								</div>
-								<canvas id="chartByStart"
-									style="width: 216px; height: 216px; display: block;"
-									width="216" height="216" class="chartjs-render-monitor"></canvas>
-								<img
-									src="./(30일) 주요정보 _ 영화 _ MEET PLAY SHARE, 메가박스_files/no-graph01.jpg"
-									alt="기대포인트 결과 없음" style="display: none;">
-							</div>
+							</dl>
+							
 						</div>
 
 						<div class="col" id="subMegaScore">
@@ -268,28 +259,24 @@
 							</div>
 
 
-							<dl>
-								<dt>예매율</dt>
-								<dd class="font-roboto regular">
-									<span id="rkTag" style="color:#792828">${t.ratio}%</span>
-								</dd>
-							</dl>
+							
 						</div>
 
 						<div class="col">
 							<dl>
 								<dt >누적관객수</dt>
-								<dd class="font-roboto regular" style="color:#792828">${c.rate}</dd>
-							</dl>
-
-							<div class="graph">
-								<canvas id="chartByLine"
-									style="width: 220px; height: 205px; display: block;"
-									width="220" height="205"></canvas>
-								<img
-									src="./(30일) 주요정보 _ 영화 _ MEET PLAY SHARE, 메가박스_files/no-graph04.jpg"
-									alt="일자별 관객수 결과 없음" style="display: none;">
+								<!-- <dd class="font-roboto regular" style="color:#792828">${c.rate}</dd> -->
+								
+								<div class="score equal"
+								style="position: relative; bottom: 15px;">
+								<div class="middle">
+									<div class="circle" style="background-color:#792828">
+										<em>${c.rate}</em><span class="ir">점</span>
+									</div>
+								</div>
 							</div>
+							</dl>
+							
 						</div>
 					</div>
 					<!--// movie-graph -->
@@ -299,7 +286,7 @@
 					<!-- 한줄평 있을 때 -->
 					<div class="tit-util mt70 mb15 oneContent">
 						<h2 class="tit small" style="color:black">
-							${m.movie_Title} 에 대한 <span id="count" class="font-gblue">${m.review_Count}</span>개의
+							${m.movie_Title} 에 대한 <span id="count" style="color:#792828">${m.review_Count}</span>개의
 							이야기가 있어요!
 						</h2>
 					</div>
@@ -313,10 +300,10 @@
 									<div class="user-prof">
 										<div class="prof-img">
 											<img
-												src="./(30일) 주요정보 _ 영화 _ MEET PLAY SHARE, 메가박스_files/ico-mega-profile.png"
-												alt="MEGABOX">
+												src="${pageContext.request.contextPath}/image/admin/moviePlusprofile.png"
+												alt="MOVIEPLUS">
 										</div>
-										<p class="user-id">MEGABOX</p>
+										<p class="user-id">MOVIEPLUS</p>
 									</div>
 									<!-- // 프로필영역 -->
 
@@ -324,7 +311,7 @@
 									<div class="story-box">
 										<div class="story-wrap">
 											<div class="story-cont">
-												<span class="font-gblue" >${m.movie_Title}</span> 재미있게 보셨나요?
+												<span style="color:#792828">${m.movie_Title}</span> 재미있게 보셨나요?
 												영화의 어떤 점이 좋았는지 이야기해주세요.
 											</div>
 

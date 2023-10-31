@@ -41,9 +41,6 @@ public class MovieController {
 	@Autowired
 	private MovieDetailApi movieDetailApi;
 	
-	@Autowired
-	private MoviePosterApi moviePosterApi;
-	
     private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
 	
     @Autowired
@@ -208,7 +205,33 @@ public class MovieController {
     	mv.setViewName("movie/movie_detail");
     	return mv;
     }
-	
+    
+    //전체 영화 갯수
+    @ResponseBody
+    @RequestMapping(value="/movieAllCount")
+    public int movieListCount() {
+    	
+		return movieServiceImpl.getMovieAllCount();
+    	
+    }
+    
+    //상영 중인 영화 갯수
+    @ResponseBody
+    @RequestMapping(value="/moviePlayingCount")
+    public int moviePlayingCount() {
+    	
+		return movieServiceImpl.moviePlayingCount();
+    	
+    }
+    
+    //상영 종료 영화 갯수 
+    @ResponseBody
+    @RequestMapping(value="/movieEndedCount")
+    public int movieEndedCount() {
+    	
+		return movieServiceImpl.movieEndedCount();
+    	
+    }
 	
 	//관람평(댓글) 화면 표시
 	@ResponseBody
