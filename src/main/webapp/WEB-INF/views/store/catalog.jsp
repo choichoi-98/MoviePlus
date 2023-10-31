@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -68,12 +69,12 @@
 								<!-- end filter sort -->
 
 								<!-- search -->
-								<form action="#" class="main__title-form">
+								<!-- <form action="#" class="main__title-form">
 									<input type="text" placeholder="상품 검색">
 									<button type="button">
 										<i class="icon ion-ios-search"></i>
 									</button>
-								</form>
+								</form> -->
 								<!-- end search -->
 							</div>
 						</div>

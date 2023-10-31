@@ -10,6 +10,7 @@
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <!--<![endif]-->
 <html>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <head>
 <style>
 .container {
@@ -89,7 +90,7 @@
 										<div class="cont">
 											<a
 												href="#"
-												class="a-link" name="brchList">사용가능극장</a>
+												class="a-link" name="brchList" style="color: #792828">사용가능극장</a>
 										</div>
 									</div>
 									<div class="line">
@@ -137,8 +138,7 @@
 												</button>
 												<div class="money">
 													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
-														data-price="${selecteditem.ITEM_PRICE}">
-														<fmt:formatNumber value="${selecteditem.ITEM_PRICE}" type="currency"/>
+														data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}
 													</em>
 													<%-- <em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
 													data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}</em> <span>원</span> --%>
@@ -150,10 +150,11 @@
 								<div class="btn-group">
 									<a href="#" id="btnGift" class="button large" 
    									 w-data="500" h-data="410" title="장바구니" 
+   									 style="color: black"
    									 data-test="${selecteditem.ITEM_CODE}">장바구니
 									</a> 
 									<a href="cart" id="btnPurc" class="button purple large" 
-									   w-data="500" h-data="410" title="구매">구매
+									   w-data="500" h-data="410" title="구매" style="background: #792828">구매
 									</a>
 								</div>
 							</div>

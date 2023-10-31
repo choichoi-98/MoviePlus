@@ -7,6 +7,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 <style>
 .container {
 	margin: 0; /* 마진을 0으로 설정 */
@@ -80,7 +81,7 @@
 											<p class="original">
 											<fmt:formatNumber value="${i.ITEM_PRICE*1.5}" type="currency"/>
 										</p>
-											<p class="sale">
+											<p class="sale" style="color: black">
 												<em><fmt:formatNumber value="${i.ITEM_PRICE}" type="currency"/></em>
 											</p>
 											<p class="ea"></p>

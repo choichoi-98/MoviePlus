@@ -7,6 +7,7 @@
 <html>
 <!--<![endif]-->
 <head>
+<title>MoviePlus: 모두를 위한 영화관</title>
 	<meta charset="utf-8">
 <style>
 .container {
@@ -80,7 +81,7 @@
 										</div>
 										<div class="price">
 											<p class="original"></p>
-											<p class="sale">
+											<p class="sale" style="color: black">
 												<em><fmt:formatNumber value="${i.ITEM_PRICE}" type="currency"/></em>
 											</p>
 											<p class="ea"></p>
