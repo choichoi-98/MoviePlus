@@ -10,6 +10,7 @@
 <!-- saved from url=(0046)https://www.megabox.co.kr/store?prdtClCd=CPC02 -->
 <!--<![endif]-->
 <html>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
 <title>MoviePlus: 모두를 위한 영화관</title>
 <head>
 <style>

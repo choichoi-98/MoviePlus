@@ -6,7 +6,8 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>MoviePlus</title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 

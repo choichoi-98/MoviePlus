@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
 <title>MoviePlus: 모두를 위한 영화관</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

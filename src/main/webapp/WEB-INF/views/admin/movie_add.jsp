@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MOVIEPLUS:관리자</title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/movie_add.js"></script>
 <script>

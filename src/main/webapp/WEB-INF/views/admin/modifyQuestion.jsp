@@ -17,7 +17,8 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>공지사항 상세</title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<div class="sidebar">

@@ -17,7 +17,6 @@
 	
 <head>
 <meta charset="UTF-8">
-<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">

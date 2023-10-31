@@ -7,7 +7,8 @@
 	
 <head>	
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/image/favico.png" type="image/x-icon">
+<title>MoviePlus: 모두를 위한 영화관</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/sidebar.jsp"/>
