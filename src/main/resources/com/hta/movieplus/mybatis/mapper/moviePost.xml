@@ -116,7 +116,7 @@
 	
 	<insert id="insertComment" parameterType="moviePostCommentVO">
 		INSERT INTO MOVIEPOST_COMMENT
-		VALUES (MOVIEPOST_COMMENT_SEQ.NEXTVAL, #{MEMBER_ID}, #{MOVIEPOST_NUM}, #{MOVIEPOST_COMMENT_CONTENT}, SYSDATE)
+		VALUES (MOVIEPOST_COMMENT_SEQ.NEXTVAL, #{MEMBER_ID}, #{MOVIEPOST_NUM}, #{MOVIEPOST_COMMENT_CONTENT}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	</insert>
 	
 	<select id="getCommemtListByPostNum" resultType="moviePostCommentVO" parameterType="int">
