@@ -301,7 +301,7 @@
 									<div class="user-prof">
 										<div class="prof-img">
 											<img
-												src="${pageContext.request.contextPath}/image/admin/moviePlusprofile.png"
+												src="${pageContext.request.contextPath}/resources/image/admin/moviePlusProfile.png"
 												alt="MOVIEPLUS">
 										</div>
 										<p class="user-id">MOVIEPLUS</p>
