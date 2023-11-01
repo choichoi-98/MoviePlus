@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 	
-	@Value("${my.savefolder}")
+	@Value("${my.savepath}")
 	private String saveFolder;
 	
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS
