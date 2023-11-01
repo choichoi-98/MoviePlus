@@ -137,7 +137,8 @@ $(document).ready(function() {
         	success: function(response){
         		//데이터 테이블에 삽입
         		var table = $('#movieListAllTableModal');
-        		$(response.movieList).each(function(index, movie){
+        	    console.log("무비리스트 모달 ")
+        		$(response).each(function(index, movie){
         		 var row = $('<tr>');
         		 row.css('color','white');
                  row.append($('<td>').text(movie.movie_Code));

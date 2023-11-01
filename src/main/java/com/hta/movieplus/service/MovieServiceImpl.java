@@ -100,15 +100,10 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 
-	public List<Movie> getMovieListByPage(int page, int pageSize) {
+	public List<Movie> getMovieListByPage() {
 		
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-	    int startrow = (page - 1) * pageSize + 1;
-	    int endrow = startrow + pageSize - 1;
-	    map.put("start", startrow);
-	    map.put("end", endrow);
-	    
-		return dao.getMovieList(map);
+		
+		return dao.getMovieListAll();
 	}
 	
 	//상영 중으로 update 
@@ -262,6 +257,12 @@ public class MovieServiceImpl implements MovieService{
 	public int movieEndedCount() {
 		// TODO Auto-generated method stub
 		return dao.movieEndedCount();
+	}
+
+	@Override
+	public List<Movie> getMovieListByPage(int page, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
