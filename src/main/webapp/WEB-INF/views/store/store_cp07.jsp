@@ -68,7 +68,7 @@
 									<div class="label"></div>
 									<div class="img">
 										<img
-											src="${i.ITEM_PATH}"
+											src="${pageContext.request.contextPath}/upload/${i.ITEM_FILE}"
 											alt="" onerror="noImg(this);">
 									</div>
 									<div class="info">
