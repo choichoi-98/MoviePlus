@@ -12,6 +12,7 @@ public class ChatRoomVO {
 	private String content;
 	private String member_name;
 	private String relative_id;//상대 id
+	private String member_profile;
 	
     public String getMember_name() {
 		return member_name;
@@ -75,6 +76,14 @@ public class ChatRoomVO {
 	}
 	public void setChat_Object(String chat_Object) {
 		this.chat_Object = chat_Object;
+	}
+
+	public String getMember_profile() {
+		return member_profile;
+	}
+
+	public void setMember_profile(String member_profile) {
+		this.member_profile = member_profile;
 	}
 	
 	

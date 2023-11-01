@@ -10,7 +10,8 @@ public class ChatMessageVO {
     private Timestamp create_at;
     private String chat_room;
     private String member_name; //보낸 사람 이름
-    
+	private String member_profile;
+
     
     
     public String getMember_name() {
@@ -62,6 +63,14 @@ public class ChatMessageVO {
 	}
 	public void setChat_room(String chat_room) {
 		this.chat_room = chat_room;
+	}
+
+	public String getMember_profile() {
+		return member_profile;
+	}
+
+	public void setMember_profile(String member_profile) {
+		this.member_profile = member_profile;
 	}
     
     
