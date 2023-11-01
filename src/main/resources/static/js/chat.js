@@ -108,7 +108,7 @@ function isYesterday(date1, date2) {
             
 						$(".msg_history").append('<div class="incoming_msg"> ' +
             '<div class="incoming_msg_img"> ' +
-            ' <img src="`+contextPath+`/upload`+item.member_PROFILE+`" alt=""> ' 
+            ' <img src="' +contextPath+ '/upload' +message.member_PROFILE+'" alt=""> ' 
             + message.member_name  +'</div>' +
             '<div class="received_msg">' +
             '<div class="received_withd_msg">' +
@@ -170,7 +170,7 @@ function isYesterday(date1, date2) {
 					}else{
               $(".msg_history").append('<div class="incoming_msg"> ' +
             '<div class="incoming_msg_img"> ' +
-            ' <img src="`+contextPath+`/upload`+item.member_PROFILE+`" alt="">' +
+            ' <img src="'+contextPath+'/upload'+item.member_PROFILE+'" alt="">' +
             d.userName + '</div>' +
             '<div class="received_msg">' +
             '<div class="received_withd_msg">' +
@@ -286,7 +286,7 @@ function isYesterday(date1, date2) {
             var chatItem = '<div class="chat_list friendList">' +
               '<div class="chat_people">' +
               '<div class="chat_img">' +
-              ' <img src="`+contextPath+`/upload`+item.member_PROFILE+`" alt="">' +
+              ' <img src="'+contextPath+'/upload'+member.member_PROFILE+'" alt="">' +
               '</div>' +
               '<div class="chat_ib">' +
               '<h5>' + member.member_NAME + '</h5>' +
@@ -328,7 +328,7 @@ function isYesterday(date1, date2) {
 		  console.log("chatList cl = "+cl)
           var $container = $('<div class="chat_list chatList" data-chat_roomNum ='+ cl.chat_Room_num+'></div>');
           var $chatPeople = $('<div class="chat_people"></div>');
-          var $chatImg = $('<div class="chat_img"> <img src="`+contextPath+`/upload`+item.member_PROFILE+`" alt=""></div>');
+          var $chatImg = $('<div class="chat_img"> <img src="'+contextPath+'/upload'+cl.member_PROFILE+'" alt=""></div>');
           var $chatIb = $('<div class="chat_ib"></div>');
           var $h5 = $('<h5></h5>');
           var $chatDate = $('<span class="chat_date"></span>');
