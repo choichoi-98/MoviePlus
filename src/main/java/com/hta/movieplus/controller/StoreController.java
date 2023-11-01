@@ -303,9 +303,9 @@ public class StoreController {
 	                + "&total_amount=" + totalPrice
 	                + "&vat_amount=0"
 	                + "&tax_free_amount=0"
-	                + "&approval_url=http://localhost:9000/movieplus/store/success"
-	                + "&fail_url=http://localhost:9000/movieplus/store/fail"
-	                + "&cancel_url=http://localhost:9000/movieplus/store/cart";
+	                + "&approval_url=http://3.36.154.190:9000/movieplus/store/success"
+	                + "&fail_url=http://3.36.154.190:9000/movieplus/store/fail"
+	                + "&cancel_url=http://3.36.154.190:9000/movieplus/store/cart";
 	        OutputStream sender = servercon.getOutputStream();
 	        DataOutputStream datatsf = new DataOutputStream(sender);
 	        datatsf.writeBytes(parameters);

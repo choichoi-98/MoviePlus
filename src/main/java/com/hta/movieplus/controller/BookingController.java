@@ -194,9 +194,9 @@ public class BookingController {
 	                + "&total_amount=" + totalAmount
 	                + "&vat_amount=0"
 	                + "&tax_free_amount=0"
-	                + "&approval_url=http://localhost:9000/movieplus/booking/success1"
-	                + "&fail_url=http://localhost:9000/movieplus/booking/fail"
-	                + "&cancel_url=http://localhost:9000/movieplus/booking/";
+	                + "&approval_url=http://3.36.154.190:9000/movieplus/booking/success1"
+	                + "&fail_url=http://3.36.154.190:9000/movieplus/booking/fail"
+	                + "&cancel_url=http://3.36.154.190:9000/movieplus/booking/";
 	        OutputStream sender = servercon.getOutputStream();
 	        DataOutputStream datatsf = new DataOutputStream(sender);
 	        datatsf.writeBytes(parameters);
