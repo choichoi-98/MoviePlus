@@ -46,7 +46,7 @@
 										<div class="form__img">
 											<label for="form__img-upload"></label>
 											<input id="form__img-upload" name="pic" type="file" accept=".png, .jpg, .jpeg">
-											<img id="form__img" src="${get1item.ITEM_PATH}" alt="상품 사진 (270 x 400)">
+											<img id="form__img" src="${pageContext.request.contextPath}/upload/${i.ITEM_FILE}" alt="상품 사진 (270 x 400)">
 										</div>
 									</div>
 								</div>
