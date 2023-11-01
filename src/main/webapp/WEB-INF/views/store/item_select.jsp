@@ -140,7 +140,7 @@
 												<div class="money">
 													<em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
 														data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}
-													</em>
+													</em><span>원</span>
 													<%-- <em id="prdtSumAmt" data-test="${selecteditem.ITEM_CODE}"
 													data-price="${selecteditem.ITEM_PRICE}">${selecteditem.ITEM_PRICE}</em> <span>원</span> --%>
 												</div>
@@ -196,6 +196,7 @@
 			<!--// contents -->
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/footer.jsp" />
 	<!--// container -->
 </body>
 </html>
