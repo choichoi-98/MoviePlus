@@ -97,7 +97,7 @@
 													<p class="img">
 														<a href="javascript:fn_storeDetail();" title="일반관람권(2D)">
 															<img
-															src="${pageContext.request.contextPath}/upload/${i.ITEM_FILE}"
+															src="${pageContext.request.contextPath}/upload/${c.ITEM_FILE}"
 															alt="" onerror="noImg(this);">
 														</a>
 													</p>
