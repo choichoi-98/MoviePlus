@@ -82,7 +82,7 @@
 					</ul>
 					<div class="btn-group right">
 						<a
-							href="http://localhost:9000/movieplus/customer_service/myinjury"
+							href="${pageContext.request.contextPath}/customer_service/myinjury"
 							class="button purple" id="myQnaBtn" title="나의 문의내역 페이지로 이동">나의
 							문의내역</a>
 						<!-- btn-layer-open -->
