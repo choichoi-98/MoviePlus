@@ -50,7 +50,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-12" style="display:flex; margin-left: 65%;">
+							<div class="col-12" style="display:flex; margin-left: 60%;">
 								<a href="${pageContext.request.contextPath}/manager/noticelist"><button type="button" class="form__btn" style="margin-right:20px;">취소</button></a>
 								<button type="submit"class="form__btn">확인</button>
 							</div>
