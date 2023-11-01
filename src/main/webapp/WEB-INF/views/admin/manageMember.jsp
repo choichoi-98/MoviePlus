@@ -46,7 +46,6 @@
 								<th>이메일</th>
 								<th>멤버쉽</th>
 								<th>포인트</th>
-								<th>로그인 타입</th>
 								<th>관리</th>
 							</tr>
 						</thead>
@@ -72,9 +71,6 @@
 									</td>
 									<td>
 										<div class="main__table-text">${membermanage.MEMBER_POINT}</div>
-									</td>
-									<td>
-										<div class="main__table-text">로그인타입</div>
 									</td>
 									<td>
 										<div class="main__table-btns">
