@@ -115,7 +115,10 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping("/showMessage")
 	public List<ChatMessageVO> showMessage(
-			@RequestParam("roomNum") String roomN){
+			@RequestParam("roomNum") String roomN,
+			@AuthenticationPrincipal Member member){
+		
+		String memebrProfile = member.getMEMBER_PROFILE();
 		
 		List<ChatMessageVO> messageList = chatServiceImpl.getMessageList(roomN);
 		for (ChatMessageVO message : messageList) {

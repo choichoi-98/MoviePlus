@@ -49,7 +49,7 @@
 	
 	<!-- 메시지 목록 가져오기 -->
 	<select id="getMessageList" resultType="ChatMessageVO">
-		SELECT CM.CHAT_ROOM, CM.MESSAGE_FROM, CM.CREATE_AT, CM.CONTENT, M.MEMBER_NAME
+		SELECT CM.CHAT_ROOM, CM.MESSAGE_FROM, CM.CREATE_AT, CM.CONTENT, M.MEMBER_NAME, M.MEMBER_PROFILE
 		FROM CHAT_MESSAGE CM
 		JOIN MEMBER M ON CM.MESSAGE_FROM = M.MEMBER_ID
 		WHERE CM.CHAT_ROOM = #{roomN}
@@ -64,6 +64,7 @@
 		           ELSE cr.chat_subject
 		       END AS relative_id,
 		       m.member_name,
+		       m.member_profile,
 		       cm.message_from, cm.create_at, cm.content
 		FROM chat_room cr
 		LEFT JOIN (
