@@ -216,7 +216,7 @@
 									<div class="user-info">
 										<p class="photo">
 											<img id="modal-profile"
-												src="/static/pc/images/common/bg/bg-noimage-notmain.png"
+												src="${pageContext.request.contextPath}/upload${pinfo.MEMBER_PROFILE}"
 												alt="님의 무비포스트">
 										</p>
 

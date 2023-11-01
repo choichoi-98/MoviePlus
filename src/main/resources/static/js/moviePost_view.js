@@ -1,5 +1,9 @@
 $(document).ready(function(){
     
+    const pathname = "/" + window.location.pathname.split("/")[1];
+    const origin = window.location.origin;
+
+    const contextPath = origin + pathname;
 	// csrf
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
@@ -138,7 +142,7 @@ $(document).ready(function(){
                     comment_output = '';
                     comment_output += `<div class="comment-box">
                                          <div class="user-photo">
-                                            <img src="`+item.member_PROFILE+`" alt="">
+                                            <img src="`+contextPath+`/upload`+item.member_PROFILE+`" alt="">
                                          </div>
                                          <div class="user-comment">
                                          <p class="mb20">`+item.member_ID+`</p>

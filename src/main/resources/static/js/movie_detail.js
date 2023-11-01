@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+	const pathname = "/" + window.location.pathname.split("/")[1];
+	const origin = window.location.origin;
+
+	const contextPath = origin + pathname;
+
 	let token = $("meta[name='_csrf']").attr("content");
    	let header = $("meta[name='_csrf_header']").attr("content");
 	movieReviewList();
@@ -84,7 +89,7 @@ console.log("movieReviewList 메서드입니다.");
     <div class="story-area">
         <div class="user-prof">
             <div class="prof-img">
-                <img src="${review.MEMBER_PROFILE}" alt="프로필 사진" title="프로필 사진" onerror="noImg(this, 'human')">
+                <img src="`+contextPath+`/upload${review.member_PROFILE}" alt="프로필 사진" title="프로필 사진" onerror="noImg(this, 'human')">
             </div>
             <p class="user-id">${review.member_Id}</p>
         </div>

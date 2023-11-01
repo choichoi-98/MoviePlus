@@ -55,10 +55,10 @@ public class StoreController {
 	private StoreService storeService;
 	private CartService cartService;
 	
-	@Value("${my.folder}")
+	@Value("${my.savefolder}")
 	private String folder;
 	
-	@Value("${my.filepath}")
+	@Value("${my.savepath}")
 	private String filePath;
 	
 	@Autowired
