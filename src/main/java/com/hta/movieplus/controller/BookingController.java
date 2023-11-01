@@ -159,7 +159,6 @@ public class BookingController {
 //	    return mv;
 //	}
 
-	
 	@PostMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(

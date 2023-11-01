@@ -74,7 +74,7 @@
 								<div class="img">
 									<p>
 										<img
-											src="${pageContext.request.contextPath}/upload/${i.ITEM_FILE}"
+											src="${pageContext.request.contextPath}/upload/${selecteditem.ITEM_FILE}"
 											alt="${selecteditem.ITEM_NAME}" onerror="noImg(this);">
 									</p>
 								</div>
