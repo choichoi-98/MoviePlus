@@ -47,7 +47,7 @@ public class MovieListApi {
 			HttpEntity<?> entity = new HttpEntity<>(header);
 			String url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
 
-			for (int page = 1; page <= 3; page++) {
+			for (int page = 1; page <= 15; page++) {
 
 				UriComponents uri = UriComponentsBuilder.fromHttpUrl(url + "?"
 						+ "key=1f350fefe347ef77d02d8539b0583cd6&itemPerPage=100&openStartDt=2023&curPage=" + page)

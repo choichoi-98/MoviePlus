@@ -108,7 +108,7 @@ public class MovieController {
 
 	@ResponseBody
 	@RequestMapping(value="/movieListAllModal")
-	public Map<String, Object> getMovieListAll
+	public List<Movie> getMovieListAll
 						(@RequestParam(name = "page", defaultValue = "1") int page
 	                    ) {
 	    Map<String, Object> response = new HashMap<>();
@@ -116,28 +116,28 @@ public class MovieController {
 	    int limit = 100;
 	    
 	    // 전체 영화 목록을 가져오는 대신, 해당 페이지의 데이터만 가져오도록 서비스 계층 호출
-	    List<Movie> movieList = movieServiceImpl.getMovieListByPage(page, limit);
+	    List<Movie> movieList = movieServiceImpl.getMovieListByPage();
 	    logger.info("무비리스트모달:"+movieList.size() + "");
 	    // 전체 영화 개수
-	    int listcount = movieServiceImpl.getListCount();
+//	    int listcount = movieServiceImpl.getListCount();
+//
+//	    int maxpage = (listcount + limit - 1) / limit;
+//	    int startpage = ((page - 1) / 100) * 100 + 1;
+//	    int endpage = startpage + 100 - 1;
+//	    if (endpage > maxpage)
+//	         endpage = maxpage;
+//	    System.out.println("startpage="+startpage);
+//	    System.out.println("endpage="+endpage);
+//
+//	    response.put("movieList", movieList);
+//	    response.put("page", page);
+//	    response.put("maxpage", maxpage);
+//	    response.put("startpage", startpage);
+//	    response.put("endpage", endpage);
+//	    response.put("listcount", listcount);
+//	    response.put("limit", limit);
 
-	    int maxpage = (listcount + limit - 1) / limit;
-	    int startpage = ((page - 1) / 100) * 100 + 1;
-	    int endpage = startpage + 100 - 1;
-	    if (endpage > maxpage)
-	         endpage = maxpage;
-	    System.out.println("startpage="+startpage);
-	    System.out.println("endpage="+endpage);
-
-	    response.put("movieList", movieList);
-	    response.put("page", page);
-	    response.put("maxpage", maxpage);
-	    response.put("startpage", startpage);
-	    response.put("endpage", endpage);
-	    response.put("listcount", listcount);
-	    response.put("limit", limit);
-
-	    return response;
+	    return movieList;
 	}
 
 	@ResponseBody
