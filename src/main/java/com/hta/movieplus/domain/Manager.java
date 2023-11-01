@@ -10,7 +10,6 @@ public class Manager {
 	private String MEMBER_BIRTH = "1912.12.12";				//생년월일
 	private String MEMBER_PROFILE;				//프로필 사진
 	private String MEMBER_AUTH="ROLE_MANAGER";		//권한(ROLE_USER, ROLE_ADMIN)
-	private String MEMBER_LOGINTYPE;			//로그인타입(일반로그인, 소셜로그인)
 	private String MEMBER_MEMBERSHIP;			//멤버등급
 	private int    MEMBER_POINT;				//적립 포인트
 	
@@ -67,12 +66,6 @@ public class Manager {
 	}
 	public void setMEMBER_AUTH(String mEMBER_AUTH) {
 		MEMBER_AUTH = mEMBER_AUTH;
-	}
-	public String getMEMBER_LOGINTYPE() {
-		return MEMBER_LOGINTYPE;
-	}
-	public void setMEMBER_LOGINTYPE(String mEMBER_LOGINTYPE) {
-		MEMBER_LOGINTYPE = mEMBER_LOGINTYPE;
 	}
 	public String getMEMBER_MEMBERSHIP() {
 		return MEMBER_MEMBERSHIP;
