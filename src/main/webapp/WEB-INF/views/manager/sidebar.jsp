@@ -17,6 +17,14 @@
 	
 <head>
 <meta charset="UTF-8">
+<script>
+		function openPop(){
+		var popup = window.open('${pageContext.request.contextPath}/chat/chatList',
+							'채팅팝업','width=672px, height=640px');
+							//chat/room
+							//chat/friendList
+	}
+</script>
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
@@ -66,6 +74,10 @@
 				
 				<li class="sidebar__nav-item">
 					<a href="${pageContext.request.contextPath}/manager/oneononelist" class="sidebar__nav-link"><span>1:1문의 답변</span></a>
+				</li>
+				
+				<li class="sidebar__nav-item">
+					<a a herf="#none" onclick="openPop()" class="sidebar__nav-link"><span style="color: white;">채팅</span></a>
 				</li>
 		
 				<!-- end collapse -->
