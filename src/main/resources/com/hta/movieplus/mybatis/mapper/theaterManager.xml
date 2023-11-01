@@ -12,7 +12,7 @@
 	<insert id="addTheaterRoom" parameterType="theaterRoom">
 		INSERT INTO THEATER_ROOM
 		VALUES(THEATER_ROOM_SEQ.NEXTVAL, #{THEATER_ROOM_NAME}, #{THEATER_ROOM_SEAT},  #{THEATER_ROOM_SEAT_CNT}, 
-		#{THEATER_ROOM_STATUS}, SYSDATE, #{THEATER_ID})
+		#{THEATER_ROOM_STATUS}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{THEATER_ID})
 	</insert>
 		
 	<select id="getRoomList" resultType="theaterRoom" parameterType="int" >

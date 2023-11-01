@@ -8,7 +8,7 @@
 	<insert id="insertCustomerOneOnOneVO" parameterType="customerOneOnOneVO">
 		INSERT INTO CUSTOMER_ONEONONE
 		VALUES(numberup.NEXTVAL, #{CUSTOMER_SELECT_REGION}, #{CUSTOMER_SELECT_CENEMA}, #{CUSTOMER_TYPE}, #{CUSTOMER_NAME}, #{CUSTOMER_EMAIL},
-		#{CUSTOMER_PHONNUM}, #{CUSTOMER_TITLE}, #{CUSTOMER_CONTENT}, #{CUSTOMER_ANSWERSITUATION}, SYSDATE, #{MEMBER_NUM}) <!-- ?? 테이블의 개수와 순번이 매칭되는것인가? -->
+		#{CUSTOMER_PHONNUM}, #{CUSTOMER_TITLE}, #{CUSTOMER_CONTENT}, #{CUSTOMER_ANSWERSITUATION}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{MEMBER_NUM}) <!-- ?? 테이블의 개수와 순번이 매칭되는것인가? -->
 	</insert>
 	
 	<select id="getMyInjury" resultType="customerOneOnOneVO" parameterType="int">
