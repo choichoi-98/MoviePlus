@@ -25,7 +25,7 @@
                 <li>개인정보 처리방침에 따라 당첨자 발표일로 부터 6개월간 당첨자 발표내역을 확인할 수 있습니다. </li>
             </ul>
             <div class="board-list-util mt0">
-                <p class="result-count"><strong>전체 (1건)</strong></p>
+                <p class="result-count"><strong>전체</strong></p>
 
                 <div class="board-search">
                     <input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." class="input-text">
