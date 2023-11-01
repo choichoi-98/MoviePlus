@@ -46,7 +46,7 @@
         <div class="chat_list chatList" data-chat_roomNum ="${chatList.chat_Room_num}">
           <div class="chat_people">
             <div class="chat_img"> 
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
+              <img src="${pageContext.request.contextPath}/upload${pinfo.MEMBER_PROFILE}" alt="sunil"> 
             </div>
             <div class="chat_ib">
               <h5>${chatList.member_name} <span class="chat_date">${chatList.date}</span></h5>
