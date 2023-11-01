@@ -93,7 +93,7 @@
         WHEN MD.MEMBER_ID IS NOT NULL THEN '관심있음'
         ELSE NULL
     END AS INTEREST_STATUS,
-    T.ratio, ROWNUM AS RNUM
+    T.ratio, ROW_NUMBER() OVER (ORDER BY T.ratio DESC) AS RNUM
 	FROM MOVIE M
 	LEFT JOIN MOVIE_DIBS MD ON M.MOVIE_CODE = MD.MOVIE_DIBS_OBJECT
 	AND MD.MEMBER_ID = #{memberId}
@@ -167,7 +167,7 @@
 		)
 		SELECT M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER, 
 		    M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
-		    T.ratio, ROWNUM AS RNUM
+		    T.ratio, ROW_NUMBER() OVER (ORDER BY T.ratio DESC) AS RNUM
 		FROM MOVIE M
 		LEFT JOIN (
 		    SELECT ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100,0),1) AS ratio, m.MOVIE_CODE
@@ -215,7 +215,7 @@
 		    AND TS.THEATER_SCHEDULE_STATUS = '종료'
 		  GROUP BY M.MOVIE_CODE, M.MOVIE_TITLE
 		)
-		SELECT ROWNUM AS RNUM, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,
+		SELECT ROW_NUMBER() OVER (ORDER BY ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) DESC) AS RNUM, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,
 		  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN, M.MOVIE_POSTER,
 		  M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE,
 		  MD.MEMBER_ID,
@@ -257,7 +257,7 @@
 			    AND TS.THEATER_SCHEDULE_STATUS = '종료'
 			  GROUP BY M.MOVIE_CODE, M.MOVIE_TITLE
 			)
-			SELECT ROWNUM AS RNUM, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+			SELECT ROW_NUMBER() OVER (ORDER BY ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) DESC) AS RNUM,, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
 					       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE
 			FROM MOVIE M
 			LEFT JOIN movieseatcount ON M.MOVIE_CODE = movieseatcount.MOVIE_CODE

@@ -110,6 +110,14 @@ button.button.purple:hover {
 }
 </style>
 
+<script>
+$(function() {
+    $("#btnHeaderSearch").click(function() {
+        $("#headersearchForm").submit();
+    });
+});
+
+</script>
 
 <section class="alert-popup"
 	style="position: fixed; padding-top: 45px; background: rgb(255, 255, 255); z-index: 5006; top: 35%; left: 43%; width: 300px; opacity: 1; display: none;"
@@ -545,9 +553,11 @@ button.button.purple:hover {
 			</div>
 
 			<div class="header-search-area">
+			<form action="${pageContext.request.contextPath}/movie/movieListPage" method="get" id="headersearchForm">
 				<input type="text" id="headerMovieName" title="영화명을 검색해 주세요"
-					placeholder="영화를 검색하세요" class="input-text">
+					 name="search_word" placeholder="영화를 검색하세요" class="input-text">
 				<button type="button" id="btnHeaderSearch" class="btn-search">검색</button>
+			</form>
 			</div>
 		</div>
 

@@ -57,7 +57,6 @@ public class MovieController {
     	LocalDateTime currentdatetime = LocalDateTime.now();
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String currentdate = currentdatetime.format(format);
-		//String currentdate = "2023-10-27";
     	
     	if(member != null) {
     		String memberId =  member.getMEMBER_ID();
