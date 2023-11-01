@@ -257,7 +257,7 @@
 			    AND TS.THEATER_SCHEDULE_STATUS = '종료'
 			  GROUP BY M.MOVIE_CODE, M.MOVIE_TITLE
 			)
-			SELECT ROW_NUMBER() OVER (ORDER BY ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) DESC) AS RNUM,, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
+			SELECT ROW_NUMBER() OVER (ORDER BY ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) DESC) AS RNUM, ROUND(NVL((movieseatcount.movieseat / totalseatcount.totalseat) * 100, 0), 1) AS ratio,  M.MOVIE_CODE, M.MOVIE_TITLE, M.MOVIE_SCREEN,  M.MOVIE_POSTER,   
 					       M.MOVIE_STILL, M.MOVIE_PLOT, M.MOVIE_OPENDATE, M.MOVIE_GRADE
 			FROM MOVIE M
 			LEFT JOIN movieseatcount ON M.MOVIE_CODE = movieseatcount.MOVIE_CODE

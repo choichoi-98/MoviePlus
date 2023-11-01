@@ -107,7 +107,7 @@ function isYesterday(date1, date2) {
 					}else{
             
 						$(".msg_history").append('<div class="incoming_msg"> ' +
-            '<div class="incoming_msg_img"> ' + '</div>' +
+            '<div class="incoming_msg_img"> ' + message.member_name + '</div>' +
             '<div class="received_msg">' +
             '<div class="received_withd_msg">' +
             '<p>' + message.content + '</p>' +
