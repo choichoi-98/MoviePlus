@@ -363,7 +363,7 @@
 		(MOVIE_REVIEW_NUM, MEMBER_ID, MOVIE_REVIEW_STAR, 
 		MOVIE_REVIEW_CONTENT, MOVIE_CODE, MOVIE_REVIEW_REG_DATE)
 	VALUES(movie_review_seq.nextval, #{memberId} , #{star} , 
-		#{reviewText}, #{movieCode}, sysdate)
+		#{reviewText}, #{movieCode}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	</insert>
 	
 	<!-- 관람평(댓글) 수정 -->
