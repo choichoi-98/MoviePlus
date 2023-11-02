@@ -221,8 +221,8 @@
 	<update id="changeScheduleStatus" parameterType="map">
 		UPDATE THEATER_SCHEDULE
 		SET THEATER_SCHEDULE_STATUS = '종료'
-		WHERE THEATER_SCHEDULE_DATE &lt;= #{date}
-		AND THEATER_SCHEDULE_START &lt;= #{time}
+		WHERE TO_DATE(THEATER_SCHEDULE_DATE, 'YYYY-MM-DD') &lt;= TO_DATE(#{date}, 'YYYY-MM-DD')
+		AND TO_DATE(THEATER_SCHEDULE_DATE, 'YYYY-MM-DD') &lt;= TO_DATE(#{time}, 'YYYY-MM-DD')
 		AND THEATER_SCHEDULE_STATUS = '상영'
 	</update>
 	
