@@ -140,7 +140,7 @@
 						</p>
 						<c:if test="${theater.THEATER_SPECIAL_SEAT == 'CHECKED' }">
 							<p>
-								<i class="iconset ico-facility-special"></i>장애인석
+								<i class="iconset ico-facility-special"></i>스페셜석
 							</p>
 						</c:if>
 						<c:if test="${theater.THEATER_DISABLED_SEAT == 'CHECKED' }">
