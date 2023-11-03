@@ -218,12 +218,11 @@
 		WHERE M.MEMBER_ID = #{name}
 	</select>
 	
-	<update id="changeScheduleStatus" parameterType="map">
+	<update id="changeScheduleStatus">
 		UPDATE THEATER_SCHEDULE
 		SET THEATER_SCHEDULE_STATUS = '종료'
-		WHERE TO_DATE(THEATER_SCHEDULE_DATE, 'YYYY-MM-DD') &lt;= TO_DATE(#{date}, 'YYYY-MM-DD')
-		AND THEATER_SCHEDULE_START &lt;= #{time}
+		WHERE TO_DATE(THEATER_SCHEDULE_DATE || ' ' ||THEATER_SCHEDULE_START, 'YYYY-MM-DD HH24:MI:SS') &lt;= SYSDATE
 		AND THEATER_SCHEDULE_STATUS = '상영'
 	</update>
-	
+
 </mapper>

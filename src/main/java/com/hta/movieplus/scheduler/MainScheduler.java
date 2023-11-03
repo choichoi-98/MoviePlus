@@ -2,6 +2,8 @@ package com.hta.movieplus.scheduler;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +36,8 @@ public class MainScheduler {
 		LocalDateTime now = LocalDateTime.now();
 		
 		int scheduleCnt = schedulingService.changeScheduleStatus(now);
-//		logger.info("변경된 스케쥴 수 : " + scheduleCnt);
+		//logger.info("변경된 스케쥴 수 : " + scheduleCnt);
+
 	}
 	
 	// 자정

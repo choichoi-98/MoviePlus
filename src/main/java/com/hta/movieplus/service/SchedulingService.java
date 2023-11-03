@@ -53,5 +53,5 @@ public interface SchedulingService {
 	List<MovieDibsVO> getMovieDibsList(String name);
 
 	int changeScheduleStatus(LocalDateTime now);
-
+	
 }

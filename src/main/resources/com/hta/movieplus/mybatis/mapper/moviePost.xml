@@ -38,7 +38,7 @@
 			ORDER BY MP.MOVIEPOST_NUM desc
 				</when>
 				<when test='option == "like"'>
-			ORDER BY MP.MOVIEPOST_LIKE DESC
+			ORDER BY K.MOVIEPOST_LIKE DESC
 				</when>	
 			</choose>
 		) T

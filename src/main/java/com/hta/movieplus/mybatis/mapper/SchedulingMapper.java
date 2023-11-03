@@ -52,7 +52,7 @@ public interface SchedulingMapper {
 
 	List<MovieDibsVO> getMovieDibsList(String name);
 
-	int changeScheduleStatus(Map<String, Object> dataMap);
+	int changeScheduleStatus();
 
 
 }
