@@ -195,6 +195,9 @@ function isYesterday(date1, date2) {
 		
 
 	
+
+	}//function wsEvt() {
+
 	// 입력란에서 Enter 키 눌림 이벤트 처리
 	// enter 키 눌림 이벤트를 한정시키는 게 아니라 전체 document에서 일어나게 
 	$(window).on("keypress", function(event) {
@@ -209,8 +212,7 @@ function isYesterday(date1, date2) {
 	        return false;
 	    }
 	});
-
-	}//function wsEvt() {
+	
 		
   //전송 메서드
   function send() {
