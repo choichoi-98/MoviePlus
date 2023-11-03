@@ -198,7 +198,7 @@
 		insert into
 		EVENT_APPLY
 		VALUES( (select nvl(max(EVENT_APPLY_NUM),0)+1 from
-		EVENT_APPLY) , #{MEMBER_ID}, #{EVENT_NUM},#{EVENT_DRAW}, SYSDATE)
+		EVENT_APPLY) , #{MEMBER_ID}, #{EVENT_NUM},#{EVENT_DRAW}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 	</insert>
 
 	<!-- 이벤트 신청여부 확인 -->
