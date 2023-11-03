@@ -1,7 +1,7 @@
 package com.hta.movieplus.constant;
 
 public enum TheaterLocationEnum {
-	SEOUL("서울"), GYEONGGI("경기"), INCHEON("인천"), DAECHUNGSAE("대전/충청/세종"), BUDAEGYEONG("부산/대전/경상"),
+	SEOUL("서울"), GYEONGGI("경기"), INCHEON("인천"), DAECHUNGSAE("대전/충청/세종"), BUDAEGYEONG("부산/대구/경상"),
 	GWANGJUN("광주/전라"), GANGWON("강원"), JEJU("제주");
 	
 

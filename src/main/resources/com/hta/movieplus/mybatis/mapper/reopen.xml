@@ -13,7 +13,7 @@
     <insert id="insertReOpenExpectMovieImformation" parameterType="String">
       INSERT INTO EXPECT_REOPENING_MOVIE
 	  VALUES(INCREASE_MOVIE_EXPECT_NUM.NEXTVAL,
-	  #{movieCode}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(SYSDATE, 'YYYY-MM-DD') + 30)
+	  #{movieCode}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(SYSDATE  + 30, 'YYYY-MM-DD'))
     </insert>
     
 	<!-- 상영상태를 string 형태인 '재개봉예정'으로 변경-->

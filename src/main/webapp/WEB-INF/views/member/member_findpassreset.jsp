@@ -18,7 +18,10 @@
     <div class="body-wrap">
 
 	<div class="member-wrap">
-		<h1 class="ci"><a href="/movieplus/main" title="메인 페이지로 이동">MoviePlus</a></h1>
+		<h1 style="text-align:center;padding-bottom:30px;">
+			<a href="/movieplus/main" title="메인 페이지로 이동"><img src="${pageContext.request.contextPath}/image/header-logo.png" style="width: 140px; height: 47px;">
+			</a>
+		</h1>
 
 		<!-- col-wrap -->
 		<div class="col-wrap">

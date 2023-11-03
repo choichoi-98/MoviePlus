@@ -335,7 +335,9 @@ public class schedulingServiceImpl implements SchedulingService {
 		dataMap.put("date", date);
 		dataMap.put("time", time);
 		
-		return mapper.changeScheduleStatus(dataMap);
+		return mapper.changeScheduleStatus();
 	}
+
+
 
 }

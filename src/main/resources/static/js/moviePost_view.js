@@ -397,7 +397,7 @@ $(document).ready(function(){
             success: function (data) {
                $('#modal-movie-title').text(data.movie_Title);
                $('#modal-still').prop('src', data.moviepost_Still);
-               $('#modal-profile').prop('src', data.member_PROFILE).prop('alt', data.member_Id+'님의 무비포스트')
+               $('#modal-profile').prop('src', contextPath+'/upload'+data.member_PROFILE).prop('alt', data.member_Id+'님의 무비포스트')
                $('#modal-user-id').text(data.member_Id);
                $('#modal-date').text(data.moviepost_Reg_date);
                $('#modal-content').text(data.moviepost_Content);
