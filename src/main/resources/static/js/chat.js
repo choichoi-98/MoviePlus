@@ -11,6 +11,8 @@ const origin = window.location.origin;
 
 const contextPath = origin + pathname;
 
+let ws = 'undefined';
+
 function processChatListDates() {
 console.log("시간 설정 메서드 ")
 $('.chat_list').each(function() {
@@ -50,6 +52,9 @@ function isYesterday(date1, date2) {
   //웹소켓 연결 open메서드
   function wsOpen(RoomNum, chatFrom){
     console.log("웹소켓 연결 요청 - wsOpen()")
+    if(ws != 'undefined'){
+		ws.close();
+	}
     ws = new WebSocket("ws://"+ location.host +"/movieplus/chating/"+ RoomNum);
     wsEvt();
     showMessage(RoomNum,chatFrom);
@@ -197,7 +202,7 @@ function isYesterday(date1, date2) {
 	
 
 	}//function wsEvt() {
-
+		
 	// 입력란에서 Enter 키 눌림 이벤트 처리
 	// enter 키 눌림 이벤트를 한정시키는 게 아니라 전체 document에서 일어나게 
 	$(window).on("keypress", function(event) {
@@ -212,7 +217,6 @@ function isYesterday(date1, date2) {
 	        return false;
 	    }
 	});
-	
 		
   //전송 메서드
   function send() {
@@ -375,7 +379,10 @@ function isYesterday(date1, date2) {
   //채팅방 열기 
 
 $("body").on("click",".chat_list",function(){
-	if ($(this).hasClass("friendList")) {//친구 목록 
+	
+	
+	if ($(this).hasClass("friendList")) {//친구 목록 (연락처)
+	
         // friendList 클래스가 있는 경우의 처리
         // 이곳에 friendList 클릭 이벤트 처리를 추가합니다.
             $(".chat_list").removeClass("active_chat");
