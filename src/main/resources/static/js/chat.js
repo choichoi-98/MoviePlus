@@ -212,6 +212,7 @@ function isYesterday(date1, date2) {
 	        return false;
 	    }
 	});
+	
 		
   //전송 메서드
   function send() {
